@@ -1,0 +1,3010 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal Pendidikan Pancasila (PKN) SMP Kelas VII Semester 1</title>
+<style>
+  :root {
+    --primary: #b91c1c;
+    --primary-dark: #991b1b;
+    --primary-light: #fef2f2;
+    --accent: #1d4ed8;
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #cbd5e1;
+    --success: #15803d;
+    --success-bg: #dcfce7;
+    --danger: #b91c1c;
+    --danger-bg: #fee2e2;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* Header Bar */
+  .topbar {
+    background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+    color: #ffffff;
+    padding: 16px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .topbar-title h1 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+
+  .topbar-title p {
+    font-size: 0.82rem;
+    opacity: 0.9;
+  }
+
+  .progress-pill {
+    background: rgba(255,255,255,0.18);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  /* Main Layout: Soal Kiri + Navigasi Samping Tetap (Fixed/Sticky) */
+  .main-container {
+    max-width: 1280px;
+    margin: 20px auto;
+    padding: 0 16px 60px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .questions-column {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Sidebar Navigasi Tetap */
+  .sidebar-column {
+    width: 310px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 84px;
+    max-height: calc(100vh - 104px);
+    overflow-y: auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  }
+
+  .sidebar-header {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .dot-empty { background: #f8fafc; border: 1px solid #94a3b8; }
+  .dot-done { background: #2563eb; }
+  .dot-correct { background: #16a34a; }
+  .dot-wrong { background: #dc2626; }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .nav-btn {
+    height: 36px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #334155;
+    border-radius: 7px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .nav-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .nav-btn.answered {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #1d4ed8;
+  }
+
+  .nav-btn.result-correct {
+    background: #16a34a !important;
+    color: #ffffff !important;
+    border-color: #15803d !important;
+  }
+
+  .nav-btn.result-wrong {
+    background: #dc2626 !important;
+    color: #ffffff !important;
+    border-color: #b91c1c !important;
+  }
+
+  .btn-submit-side {
+    width: 100%;
+    padding: 11px;
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 9px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-submit-side:hover {
+    background: var(--primary-dark);
+  }
+
+  /* Kartu Soal */
+  .question-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+    scroll-margin-top: 86px;
+  }
+
+  .q-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .q-number {
+    background: var(--primary);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+
+  .q-bab {
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+
+  .q-text {
+    font-size: 0.98rem;
+    color: #0f172a;
+    margin-bottom: 14px;
+  }
+
+  .q-illustration {
+    margin: 12px 0 16px 0;
+    text-align: center;
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .option-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    background: #ffffff;
+  }
+
+  .option-item:hover {
+    border-color: #93c5fd;
+    background: #f8fafc;
+  }
+
+  .option-item input[type="radio"] {
+    display: none;
+  }
+
+  .opt-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .option-item.selected {
+    border-color: #2563eb;
+    background: #eff6ff;
+  }
+
+  .option-item.selected .opt-badge {
+    background: #2563eb;
+    color: #ffffff;
+  }
+
+  /* Styling setelah Submit */
+  .option-item.opt-correct {
+    border-color: #16a34a !important;
+    background: #f0fdf4 !important;
+  }
+
+  .option-item.opt-correct .opt-badge {
+    background: #16a34a !important;
+    color: #ffffff !important;
+  }
+
+  .option-item.opt-wrong {
+    border-color: #dc2626 !important;
+    background: #fef2f2 !important;
+  }
+
+  .option-item.opt-wrong .opt-badge {
+    background: #dc2626 !important;
+    color: #ffffff !important;
+  }
+
+  .opt-text {
+    font-size: 0.94rem;
+    color: #1e293b;
+  }
+
+  /* Kotak Pembahasan */
+  .explanation-box {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: #f8fafc;
+    border-left: 4px solid #64748b;
+    font-size: 0.9rem;
+  }
+
+  .explanation-box.exp-right {
+    background: #f0fdf4;
+    border-left-color: #16a34a;
+  }
+
+  .explanation-box.exp-wrong {
+    background: #fef2f2;
+    border-left-color: #dc2626;
+  }
+
+  .exp-status {
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-size: 0.92rem;
+  }
+
+  .exp-right .exp-status { color: #15803d; }
+  .exp-wrong .exp-status { color: #b91c1c; }
+
+  .exp-key {
+    color: #0f172a;
+    margin-bottom: 6px;
+  }
+
+  .exp-text {
+    color: #334155;
+  }
+
+  /* Panel Submit & Hasil Skor di Akhir Soal */
+  .submit-footer-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 24px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  }
+
+  .btn-submit-main {
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(185, 28, 28, 0.25);
+    transition: background 0.2s;
+  }
+
+  .btn-submit-main:hover {
+    background: var(--primary-dark);
+  }
+
+  .btn-reset {
+    background: #334155;
+    color: #ffffff;
+    border: none;
+    padding: 11px 24px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border-radius: 9px;
+    cursor: pointer;
+    margin-top: 14px;
+  }
+
+  .score-panel {
+    display: none;
+    margin-top: 18px;
+    padding: 22px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+    border: 2px solid #93c5fd;
+  }
+
+  .score-big {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.1;
+    margin: 8px 0;
+  }
+
+  .score-stats {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .stat-box {
+    padding: 10px 18px;
+    border-radius: 9px;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+
+  .stat-benar { background: var(--success-bg); color: var(--success); }
+  .stat-salah { background: var(--danger-bg); color: var(--danger); }
+  .stat-kosong { background: #e2e8f0; color: #334155; }
+
+  /* Responsif Mobile */
+  @media (max-width: 900px) {
+    .main-container {
+      flex-direction: column-reverse;
+    }
+    .sidebar-column {
+      width: 100%;
+      position: sticky;
+      top: 66px;
+      max-height: 185px;
+      z-index: 90;
+    }
+    .nav-grid {
+      grid-template-columns: repeat(10, 1fr);
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-title">
+    <h1>Latihan Soal Pendidikan Pancasila (PKN) – SMP Kelas VII Semester 1</h1>
+    <p>Kurikulum Merdeka • 50 Soal Pilihan Ganda (Sejarah Pancasila, Nilai Pancasila, Norma &amp; UUD NRI 1945)</p>
+  </div>
+  <div class="progress-pill" id="progress-text">Terjawab: 0 / 50</div>
+</header>
+
+<div class="main-container">
+  <!-- Kolom Utama Soal -->
+  <main class="questions-column" id="quiz-form">
+    
+    <article class="question-card" id="question-1" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 1</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Pada masa sejarah awal sebelum abad ke-3 Masehi, nilai ketuhanan masyarakat Nusantara telah tampak melalui penggunaan sarana upacara keagamaan berupa nekara (gong perunggu) yang ditemukan mulai dari Sumatra hingga Alor. Fakta sejarah ini membuktikan bahwa ....</p>
+            
+            <div class="options-list" id="options-1">
+                
+        <label class="option-item" id="opt-label-1-0" data-q="1" data-opt="0">
+            <input type="radio" name="q1" value="0" onchange="selectOption(1, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Pancasila merupakan hasil tiruan dari sistem pemerintahan kerajaan-kerajaan di luar negeri</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-1-1" data-q="1" data-opt="1">
+            <input type="radio" name="q1" value="1" onchange="selectOption(1, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">upacara keagamaan masyarakat praaksara berasal dari kebudayaan Jepang dan Belanda</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-1-2" data-q="1" data-opt="2">
+            <input type="radio" name="q1" value="2" onchange="selectOption(1, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">nilai ketuhanan baru dikenal bangsa Indonesia setelah masuknya bangsa Eropa ke Nusantara</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-1-3" data-q="1" data-opt="3">
+            <input type="radio" name="q1" value="3" onchange="selectOption(1, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">nilai-nilai Pancasila digali dari budaya dan kehidupan bangsa Indonesia sendiri sejak dahulu</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-1" style="display:none;">
+            <div class="exp-status" id="exp-status-1"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Para ahli menegaskan bahwa nilai-nilai Pancasila digali dari bumi Indonesia sendiri karena jauh sebelum merdeka—sejak masa praaksara, kerajaan Nusantara, hingga kebangkitan nasional—nilai ketuhanan, kemanusiaan, persatuan, kerakyatan, dan keadilan sosial sudah hidup dalam masyarakat.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-2" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 2</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Pada akhir tahun 1944, posisi Jepang dalam Perang Asia Timur Raya semakin terdesak oleh pasukan Sekutu. Untuk menarik simpati dan bantuan rakyat Indonesia, Jepang membentuk Badan Penyelidik Usaha-Usaha Persiapan Kemerdekaan (BPUPK) pada tanggal 1 Maret 1945 yang dalam bahasa Jepang disebut ....</p>
+            
+            <div class="options-list" id="options-2">
+                
+        <label class="option-item" id="opt-label-2-0" data-q="2" data-opt="0">
+            <input type="radio" name="q2" value="0" onchange="selectOption(2, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Chuo Sangi-In</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-2-1" data-q="2" data-opt="1">
+            <input type="radio" name="q2" value="1" onchange="selectOption(2, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Jawa Hokokai</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-2-2" data-q="2" data-opt="2">
+            <input type="radio" name="q2" value="2" onchange="selectOption(2, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Dokuritsu Zyunbi Tyoosakai</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-2-3" data-q="2" data-opt="3">
+            <input type="radio" name="q2" value="3" onchange="selectOption(2, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Dokuritsu Zyunbi Iinkai</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-2" style="display:none;">
+            <div class="exp-status" id="exp-status-2"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> BPUPK dalam bahasa Jepang disebut Dokuritsu Zyunbi Tyoosakai (dibentuk 1 Maret 1945 dan dilantik 29 April 1945), sedangkan Dokuritsu Zyunbi Iinkai adalah nama Jepang untuk PPKI.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-3" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 3</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan gambar gedung bersejarah tempat dilaksanakannya sidang pertama dan kedua BPUPK berikut ini!<br>Pada masa pendudukan Jepang, gedung di Jalan Pejambon No. 6 Jakarta tersebut dikenal dengan nama ....</p>
+            <div class="q-illustration">
+<svg viewBox="0 0 350 195" width="100%" style="max-width:360px; border-radius:12px; background:#f8fafc; border:1px solid #cbd5e1; padding:8px;">
+  <rect width="350" height="195" fill="#fffbeb" rx="10"/>
+  <!-- Gedung Chuo Sangi-in / Gedung Pancasila -->
+  <polygon points="175,20 55,60 295,60" fill="#d97706"/>
+  <rect x="65" y="60" width="220" height="14" fill="#fef3c7" stroke="#b45309"/>
+  <text x="175" y="70" font-family="sans-serif" font-size="9" font-weight="bold" fill="#78350f" text-anchor="middle">GEDUNG PANCASILA (CHUO SANGI-IN)</text>
+  <!-- Pilar -->
+  <rect x="80" y="74" width="14" height="75" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="122" y="74" width="14" height="75" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="168" y="74" width="14" height="75" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="214" y="74" width="14" height="75" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="256" y="74" width="14" height="75" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="55" y="149" width="240" height="14" fill="#92400e"/>
+  <text x="175" y="182" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Tempat Sidang Pertama BPUPK (29 Mei – 1 Juni 1945)</text>
+</svg>
+</div>
+            <div class="options-list" id="options-3">
+                
+        <label class="option-item" id="opt-label-3-0" data-q="3" data-opt="0">
+            <input type="radio" name="q3" value="0" onchange="selectOption(3, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Gedung Chuo Sangi-In</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-3-1" data-q="3" data-opt="1">
+            <input type="radio" name="q3" value="1" onchange="selectOption(3, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Gedung Kramat 106</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-3-2" data-q="3" data-opt="2">
+            <input type="radio" name="q3" value="2" onchange="selectOption(3, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Gedung Menteng 31</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-3-3" data-q="3" data-opt="3">
+            <input type="radio" name="q3" value="3" onchange="selectOption(3, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Hotel Des Indes</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-3" style="display:none;">
+            <div class="exp-status" id="exp-status-3"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Sidang pertama BPUPK (29 Mei – 1 Juni 1945) dan sidang kedua (10 – 17 Juli 1945) dilaksanakan di Gedung Chuo Sangi-In di Jalan Pejambon No. 6 Jakarta, yang kini dikenal dengan nama Gedung Pancasila.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-4" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 4</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Dalam sidang pertama BPUPK tanggal 29 Mei 1945, ketua BPUPK mengajukan pertanyaan pokok kepada seluruh peserta sidang mengenai 'Apakah dasar negara yang akan dipergunakan jika Indonesia merdeka?'. Tokoh yang menjabat sebagai ketua BPUPK tersebut adalah ....</p>
+            
+            <div class="options-list" id="options-4">
+                
+        <label class="option-item" id="opt-label-4-0" data-q="4" data-opt="0">
+            <input type="radio" name="q4" value="0" onchange="selectOption(4, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Drs. Mohammad Hatta</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-4-1" data-q="4" data-opt="1">
+            <input type="radio" name="q4" value="1" onchange="selectOption(4, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Ir. Sukarno</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-4-2" data-q="4" data-opt="2">
+            <input type="radio" name="q4" value="2" onchange="selectOption(4, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Raden Pandji Soeroso</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-4-3" data-q="4" data-opt="3">
+            <input type="radio" name="q4" value="3" onchange="selectOption(4, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">dr. K.R.T. Radjiman Wedyodiningrat</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-4" style="display:none;">
+            <div class="exp-status" id="exp-status-4"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> dr. K.R.T. Radjiman Wedyodiningrat diangkat sebagai Ketua BPUPK, didampingi oleh Raden Pandji Soeroso (Indonesia) dan Ichibangase Yosio (Jepang) sebagai wakil ketua.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-5" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 5</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Pada tanggal 1 Juni 1945, Ir. Sukarno menyampaikan pidato bersejarah yang mengusulkan lima prinsip dasar negara dan menamainya 'Pancasila' atas petunjuk seorang teman ahli bahasa. Berdasarkan Keputusan Presiden Nomor 24 Tahun 2016, tanggal 1 Juni diperingati bangsa Indonesia sebagai ....</p>
+            
+            <div class="options-list" id="options-5">
+                
+        <label class="option-item" id="opt-label-5-0" data-q="5" data-opt="0">
+            <input type="radio" name="q5" value="0" onchange="selectOption(5, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Hari Kebangkitan Nasional</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-5-1" data-q="5" data-opt="1">
+            <input type="radio" name="q5" value="1" onchange="selectOption(5, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Hari Kesaktian Pancasila</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-5-2" data-q="5" data-opt="2">
+            <input type="radio" name="q5" value="2" onchange="selectOption(5, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Hari Konstitusi Nasional</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-5-3" data-q="5" data-opt="3">
+            <input type="radio" name="q5" value="3" onchange="selectOption(5, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Hari Lahir Pancasila</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-5" style="display:none;">
+            <div class="exp-status" id="exp-status-5"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Sesuai Keputusan Presiden Nomor 24 Tahun 2016, tanggal 1 Juni ditetapkan sebagai Hari Lahir Pancasila karena pada 1 Juni 1945 Ir. Sukarno pertama kali memperkenalkan nama dan konsep Pancasila sebagai dasar negara dalam sidang BPUPK.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-6" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 6</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Urutan lima asas dasar negara yang diusulkan oleh Ir. Sukarno dalam pidatonya pada tanggal 1 Juni 1945 adalah ....</p>
+            
+            <div class="options-list" id="options-6">
+                
+        <label class="option-item" id="opt-label-6-0" data-q="6" data-opt="0">
+            <input type="radio" name="q6" value="0" onchange="selectOption(6, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Peri Kebangsaan; Peri Kemanusiaan; Peri Ketuhanan; Peri Kerakyatan; Kesejahteraan Rakyat</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-6-1" data-q="6" data-opt="1">
+            <input type="radio" name="q6" value="1" onchange="selectOption(6, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Ketuhanan Yang Maha Esa; Kemanusiaan yang Adil dan Beradab; Persatuan Indonesia; Kerakyatan; Keadilan Sosial</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-6-2" data-q="6" data-opt="2">
+            <input type="radio" name="q6" value="2" onchange="selectOption(6, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Persatuan; Kekeluargaan; Keseimbangan Lahir dan Batin; Musyawarah; Keadilan Rakyat</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-6-3" data-q="6" data-opt="3">
+            <input type="radio" name="q6" value="3" onchange="selectOption(6, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Kebangsaan Indonesia; Internasionalisme atau Perikemanusiaan; Mufakat atau Demokrasi; Kesejahteraan Sosial; Ketuhanan Yang Maha Esa</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-6" style="display:none;">
+            <div class="exp-status" id="exp-status-6"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Dalam pidato 1 Juni 1945, Ir. Sukarno mengusulkan urutan: (1) Kebangsaan Indonesia, (2) Internasionalisme atau Perikemanusiaan, (3) Mufakat atau Demokrasi, (4) Kesejahteraan Sosial, dan (5) Ketuhanan Yang Maha Esa.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-7" data-ans="1">
+        <div class="q-header">
+            <span class="q-number">Soal 7</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Setelah sidang pertama BPUPK berakhir, dibentuk Panitia Kecil beranggotakan delapan orang yang kemudian disempurnakan menjadi Panitia Sembilan. Tujuan utama perubahan dari Panitia Delapan menjadi Panitia Sembilan adalah ....</p>
+            
+            <div class="options-list" id="options-7">
+                
+        <label class="option-item" id="opt-label-7-0" data-q="7" data-opt="0">
+            <input type="radio" name="q7" value="0" onchange="selectOption(7, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">menyusun daftar nama menteri yang akan membantu presiden setelah proklamasi kemerdekaan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-7-1" data-q="7" data-opt="1">
+            <input type="radio" name="q7" value="1" onchange="selectOption(7, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">menghadirkan komposisi yang seimbang antara golongan nasionalis kebangsaan dan golongan Islam</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-7-2" data-q="7" data-opt="2">
+            <input type="radio" name="q7" value="2" onchange="selectOption(7, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">mempercepat penyerahan kekuasaan dari tentara Sekutu kepada pemerintah Jepang di Jakarta</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-7-3" data-q="7" data-opt="3">
+            <input type="radio" name="q7" value="3" onchange="selectOption(7, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">menggantikan seluruh anggota BPUPK yang dianggap tidak setuju dengan kemerdekaan Indonesia</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-7" style="display:none;">
+            <div class="exp-status" id="exp-status-7"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: B</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Panitia Sembilan dibentuk agar komposisi keanggotaan merepresentasikan dinamika sidang BPUPK secara seimbang, yakni 4 tokoh golongan kebangsaan/nasionalis religius dan 4 tokoh golongan Islam nasionalis, dengan Ir. Sukarno sebagai ketua sekaligus penengah.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-8" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 8</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Pada tanggal 22 Juni 1945, Panitia Sembilan berhasil menyepakati rancangan mukadimah (pembukaan) hukum dasar yang di dalamnya memuat rumusan lima sila Pancasila. Naskah kesepakatan tersebut oleh Mr. Muhammad Yamin dinamai ....</p>
+            
+            <div class="options-list" id="options-8">
+                
+        <label class="option-item" id="opt-label-8-0" data-q="8" data-opt="0">
+            <input type="radio" name="q8" value="0" onchange="selectOption(8, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Piagam Jakarta (Jakarta Charter)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-8-1" data-q="8" data-opt="1">
+            <input type="radio" name="q8" value="1" onchange="selectOption(8, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Dasasila Bandung</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-8-2" data-q="8" data-opt="2">
+            <input type="radio" name="q8" value="2" onchange="selectOption(8, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Teks Proklamasi</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-8-3" data-q="8" data-opt="3">
+            <input type="radio" name="q8" value="3" onchange="selectOption(8, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Piagam Madinah</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-8" style="display:none;">
+            <div class="exp-status" id="exp-status-8"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Rancangan preambul hasil sidang Panitia Sembilan pada 22 Juni 1945 disebut 'Mukadimah' oleh Ir. Sukarno, 'Gentlemen's Agreement' oleh Soekiman, dan 'Piagam Jakarta' (Jakarta Charter) oleh Mr. Muhammad Yamin.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-9" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 9</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan nama-nama tokoh pendiri bangsa berikut ini!<br>1) Ir. Sukarno<br>2) Drs. Mohammad Hatta<br>3) Prof. Mr. Dr. Soepomo<br>4) Mr. A.A. Maramis<br>5) H. Agus Salim<br>Tokoh yang BUKAN merupakan anggota Panitia Sembilan ditunjukkan oleh nomor ....</p>
+            
+            <div class="options-list" id="options-9">
+                
+        <label class="option-item" id="opt-label-9-0" data-q="9" data-opt="0">
+            <input type="radio" name="q9" value="0" onchange="selectOption(9, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">5</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-9-1" data-q="9" data-opt="1">
+            <input type="radio" name="q9" value="1" onchange="selectOption(9, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">1</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-9-2" data-q="9" data-opt="2">
+            <input type="radio" name="q9" value="2" onchange="selectOption(9, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">3</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-9-3" data-q="9" data-opt="3">
+            <input type="radio" name="q9" value="3" onchange="selectOption(9, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">4</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-9" style="display:none;">
+            <div class="exp-status" id="exp-status-9"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Anggota Panitia Sembilan terdiri atas Ir. Sukarno, Drs. Moh. Hatta, Mr. Achmad Soebardjo, Mr. Moh. Yamin, K.H. Wachid Hasyim, Abdul Kahar Muzakir, Abikoesno Tjokrosoejoso, H. Agus Salim, dan Mr. A.A. Maramis. Prof. Soepomo bukan anggota Panitia Sembilan.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-10" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 10</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Pada tanggal 16 Agustus 1945 dini hari, golongan muda dari perkumpulan 'Menteng 31' (seperti Soekarni, Wikana, dan Chaerul Saleh) membawa Ir. Sukarno dan Drs. Mohammad Hatta ke Rengasdengklok. Alasan utama terjadinya peristiwa Rengasdengklok adalah ....</p>
+            
+            <div class="options-list" id="options-10">
+                
+        <label class="option-item" id="opt-label-10-0" data-q="10" data-opt="0">
+            <input type="radio" name="q10" value="0" onchange="selectOption(10, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">golongan muda mendesak agar proklamasi segera dilaksanakan tanpa campur tangan PPKI bentukan Jepang</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-10-1" data-q="10" data-opt="1">
+            <input type="radio" name="q10" value="1" onchange="selectOption(10, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">golongan tua ingin menunda kemerdekaan Indonesia hingga tahun depan menunggu bantuan Sekutu</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-10-2" data-q="10" data-opt="2">
+            <input type="radio" name="q10" value="2" onchange="selectOption(10, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Ir. Sukarno dan Drs. Mohammad Hatta menolak menjadi Presiden dan Wakil Presiden Republik Indonesia</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-10-3" data-q="10" data-opt="3">
+            <input type="radio" name="q10" value="3" onchange="selectOption(10, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">tentara Jepang berencana menangkap seluruh anggota Panitia Sembilan di kediaman Laksamana Maeda</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-10" style="display:none;">
+            <div class="exp-status" id="exp-status-10"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Golongan muda menginginkan proklamasi kemerdekaan segera dikumandangkan oleh kekuatan bangsa Indonesia sendiri tanpa melalui rapat PPKI, agar kemerdekaan Indonesia tidak dicap sebagai pemberian atau hadiah dari Jepang.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-11" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 11</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Penyusunan naskah teks Proklamasi Kemerdekaan Indonesia dilakukan pada malam tanggal 16 Agustus 1945 di rumah Laksamana Maeda di Jalan Imam Bonjol No. 1 Jakarta. Tokoh yang mengusulkan agar naskah Proklamasi cukup ditandatangani oleh Ir. Sukarno dan Drs. Mohammad Hatta atas nama bangsa Indonesia adalah ....</p>
+            
+            <div class="options-list" id="options-11">
+                
+        <label class="option-item" id="opt-label-11-0" data-q="11" data-opt="0">
+            <input type="radio" name="q11" value="0" onchange="selectOption(11, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Latief Hendradiningrat</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-11-1" data-q="11" data-opt="1">
+            <input type="radio" name="q11" value="1" onchange="selectOption(11, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Sayuti Melik</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-11-2" data-q="11" data-opt="2">
+            <input type="radio" name="q11" value="2" onchange="selectOption(11, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Soekarni</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-11-3" data-q="11" data-opt="3">
+            <input type="radio" name="q11" value="3" onchange="selectOption(11, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Mr. Achmad Soebardjo</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-11" style="display:none;">
+            <div class="exp-status" id="exp-status-11"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Semula Drs. Mohammad Hatta mengusulkan agar semua yang hadir menandatangani naskah proklamasi, namun Soekarni mengusulkan cukup dua orang saja yakni Ir. Sukarno dan Drs. Mohammad Hatta atas nama bangsa Indonesia, dan usulan itu disetujui semua yang hadir.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-12" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 12</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Sehari setelah Proklamasi Kemerdekaan, tepatnya tanggal 18 Agustus 1945 sebelum sidang PPKI dimulai, Drs. Mohammad Hatta mengajak Ki Bagus Hadikusumo, K.H. Wahid Hasyim, Mr. Kasman Singodimedjo, dan Mr. Teuku Mohammad Hasan bermusyawarah untuk mengubah sila pertama Piagam Jakarta menjadi 'Ketuhanan Yang Maha Esa'. Sikap para pendiri bangsa tersebut mencerminkan keteladanan berupa ....</p>
+            
+            <div class="options-list" id="options-12">
+                
+        <label class="option-item" id="opt-label-12-0" data-q="12" data-opt="0">
+            <input type="radio" name="q12" value="0" onchange="selectOption(12, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">rela berkorban dan mengutamakan persatuan serta keutuhan bangsa di atas kepentingan golongan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-12-1" data-q="12" data-opt="1">
+            <input type="radio" name="q12" value="1" onchange="selectOption(12, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">keinginan untuk menghapus nilai-nilai keagamaan dalam penyelenggaraan pemerintahan Indonesia</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-12-2" data-q="12" data-opt="2">
+            <input type="radio" name="q12" value="2" onchange="selectOption(12, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">sikap mudah menyerah terhadap tekanan dari pihak penjajah agar segera diakui kedaulatannya</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-12-3" data-q="12" data-opt="3">
+            <input type="radio" name="q12" value="3" onchange="selectOption(12, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">ketidaktegasan dalam mempertahankan hasil kesepakatan yang sudah dibuat oleh Panitia Sembilan</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-12" style="display:none;">
+            <div class="exp-status" id="exp-status-12"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Perubahan tujuh kata pada sila pertama Piagam Jakarta menjadi 'Ketuhanan Yang Maha Esa' menunjukkan kebesaran jiwa, toleransi, dan semangat rela berkorban para tokoh Islam demi menjaga persatuan dan keutuhan NKRI.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-13" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 13</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Berikut ini merupakan keputusan penting yang dihasilkan dalam sidang PPKI pada tanggal 18 Agustus 1945, KECUALI ....</p>
+            
+            <div class="options-list" id="options-13">
+                
+        <label class="option-item" id="opt-label-13-0" data-q="13" data-opt="0">
+            <input type="radio" name="q13" value="0" onchange="selectOption(13, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">membentuk sebuah Komite Nasional untuk membantu tugas Presiden sebelum MPR/DPR terbentuk</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-13-1" data-q="13" data-opt="1">
+            <input type="radio" name="q13" value="1" onchange="selectOption(13, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">mengesahkan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-13-2" data-q="13" data-opt="2">
+            <input type="radio" name="q13" value="2" onchange="selectOption(13, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">memilih dan menetapkan Ir. Sukarno sebagai Presiden dan Drs. Mohammad Hatta sebagai Wakil Presiden</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-13-3" data-q="13" data-opt="3">
+            <input type="radio" name="q13" value="3" onchange="selectOption(13, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">membentuk Badan Keamanan Rakyat (BKR) dan membagi wilayah Indonesia menjadi 8 provinsi</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-13" style="display:none;">
+            <div class="exp-status" id="exp-status-13"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Sidang PPKI tanggal 18 Agustus 1945 menghasilkan 3 keputusan utama: (1) mengesahkan UUD NRI Tahun 1945, (2) menetapkan Sukarno dan Hatta sebagai Presiden dan Wakil Presiden, dan (3) membentuk Komite Nasional. Pembentukan BKR dan 8 provinsi dilakukan pada sidang berikutnya.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-14" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 14</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Rumusan resmi dan sah Pancasila sebagai dasar negara Republik Indonesia tercantum di dalam ....</p>
+            
+            <div class="options-list" id="options-14">
+                
+        <label class="option-item" id="opt-label-14-0" data-q="14" data-opt="0">
+            <input type="radio" name="q14" value="0" onchange="selectOption(14, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Naskah Piagam Jakarta tanggal 22 Juni 1945</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-14-1" data-q="14" data-opt="1">
+            <input type="radio" name="q14" value="1" onchange="selectOption(14, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Teks Proklamasi Kemerdekaan 17 Agustus 1945</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-14-2" data-q="14" data-opt="2">
+            <input type="radio" name="q14" value="2" onchange="selectOption(14, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Pembukaan UUD NRI Tahun 1945 alinea keempat</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-14-3" data-q="14" data-opt="3">
+            <input type="radio" name="q14" value="3" onchange="selectOption(14, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Batang Tubuh UUD NRI Tahun 1945 Pasal 1 ayat (1)</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-14" style="display:none;">
+            <div class="exp-status" id="exp-status-14"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Rumusan final Pancasila yang sah secara konstitusional ditetapkan oleh PPKI pada 18 Agustus 1945 dan tercantum dalam Pembukaan UUD NRI Tahun 1945 alinea keempat.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-15" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 15</span>
+            <span class="q-bab">Bab 1: Sejarah Kelahiran Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Dalam merancang lambang negara Garuda Pancasila pada tahun 1949, pemerintah membentuk Panitia Lencana Negara yang dikoordinatori oleh Sultan Hamid II dan diketuai oleh Muhammad Yamin. Bulu mahkota atau jambul di kepala burung Garuda Pancasila terinspirasi dari burung khas Indonesia, yaitu ....</p>
+            
+            <div class="options-list" id="options-15">
+                
+        <label class="option-item" id="opt-label-15-0" data-q="15" data-opt="0">
+            <input type="radio" name="q15" value="0" onchange="selectOption(15, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Jalak Bali</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-15-1" data-q="15" data-opt="1">
+            <input type="radio" name="q15" value="1" onchange="selectOption(15, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Cenderawasih Kuning</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-15-2" data-q="15" data-opt="2">
+            <input type="radio" name="q15" value="2" onchange="selectOption(15, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Elang Jawa (Nisaetus bartelsi)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-15-3" data-q="15" data-opt="3">
+            <input type="radio" name="q15" value="3" onchange="selectOption(15, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Merak Hijau</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-15" style="display:none;">
+            <div class="exp-status" id="exp-status-15"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Berdasarkan materi Bab I (Rev 1.0), jambul atau bulu mahkota pada kepala burung Garuda Pancasila terinspirasi dari burung Elang Jawa (Nisaetus bartelsi) atas arahan Ir. Sukarno kepada pelukis istana.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-16" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 16</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan gambar perisai Pancasila berikut ini!<br>Pada bagian tengah perisai terdapat simbol bintang berwarna emas dengan latar belakang hitam. Sikap dalam kehidupan sehari-hari yang sesuai dengan makna simbol tersebut adalah ....</p>
+            <div class="q-illustration">
+<svg viewBox="0 0 320 200" width="100%" style="max-width:340px; border-radius:12px; background:#f8fafc; border:1px solid #cbd5e1; padding:8px;">
+  <rect width="320" height="200" fill="#fefce8" rx="10"/>
+  <!-- Perisai Pancasila -->
+  <path d="M160 22 L225 42 L225 110 C225 150 160 180 160 180 C160 180 95 150 95 110 L95 42 Z" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
+  <!-- Kiri Atas: Kepala Banteng (Merah) -->
+  <path d="M97 44 L160 32 L160 100 L97 100 Z" fill="#dc2626"/>
+  <path d="M115 62 C110 50 118 46 122 56 M145 62 C150 50 142 46 138 56" stroke="#fff" stroke-width="3" fill="none"/>
+  <ellipse cx="130" cy="72" rx="13" ry="11" fill="#1e293b"/>
+  <!-- Kanan Atas: Pohon Beringin (Putih) -->
+  <path d="M160 32 L223 44 L223 100 L160 100 Z" fill="#ffffff"/>
+  <rect x="187" y="75" width="6" height="18" fill="#78350f"/>
+  <ellipse cx="190" cy="63" rx="22" ry="14" fill="#16a34a"/>
+  <!-- Kiri Bawah: Padi & Kapas (Putih) -->
+  <path d="M97 100 L160 100 L160 177 C130 162 97 138 97 100 Z" fill="#ffffff"/>
+  <path d="M115 145 Q110 120 125 108" stroke="#eab308" stroke-width="3" fill="none"/>
+  <path d="M145 145 Q150 120 135 108" stroke="#16a34a" stroke-width="3" fill="none"/>
+  <circle cx="143" cy="115" r="4" fill="#e2e8f0" stroke="#16a34a" stroke-width="1.5"/>
+  <circle cx="147" cy="126" r="4" fill="#e2e8f0" stroke="#16a34a" stroke-width="1.5"/>
+  <!-- Kanan Bawah: Rantai (Merah) -->
+  <path d="M160 100 L223 100 C223 138 190 162 160 177 Z" fill="#dc2626"/>
+  <circle cx="182" cy="120" r="7" fill="none" stroke="#facc15" stroke-width="3"/>
+  <rect x="190" y="123" width="12" height="12" fill="none" stroke="#facc15" stroke-width="3"/>
+  <circle cx="182" cy="138" r="7" fill="none" stroke="#facc15" stroke-width="3"/>
+  <!-- Garis Khatulistiwa -->
+  <line x1="95" y1="100" x2="225" y2="100" stroke="#1e293b" stroke-width="4"/>
+  <!-- Tengah: Bintang Emas (Hitam) -->
+  <path d="M160 72 L185 82 L185 114 L160 128 L135 114 L135 82 Z" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+  <polygon points="160,82 164,94 177,94 167,102 171,114 160,106 149,114 153,102 143,94 156,94" fill="#facc15"/>
+  <text x="160" y="194" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Perisai Lima Lambang Sila Pancasila</text>
+</svg>
+</div>
+            <div class="options-list" id="options-16">
+                
+        <label class="option-item" id="opt-label-16-0" data-q="16" data-opt="0">
+            <input type="radio" name="q16" value="0" onchange="selectOption(16, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">mengutamakan musyawarah untuk mencapai mufakat saat memilih ketua kelas di sekolah</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-16-1" data-q="16" data-opt="1">
+            <input type="radio" name="q16" value="1" onchange="selectOption(16, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">menggunakan produk-produk buatan dalam negeri sebagai wujud cinta tanah air</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-16-2" data-q="16" data-opt="2">
+            <input type="radio" name="q16" value="2" onchange="selectOption(16, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">mengikuti kegiatan kerja bakti membersihkan selokan lingkungan bersama warga sekitar</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-16-3" data-q="16" data-opt="3">
+            <input type="radio" name="q16" value="3" onchange="selectOption(16, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">menjalankan ibadah sesuai agama masing-masing serta menghormati teman yang berbeda keyakinan</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-16" style="display:none;">
+            <div class="exp-status" id="exp-status-16"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Bintang emas melambangkan Sila Pertama 'Ketuhanan Yang Maha Esa', yang mengajarkan keimanan, ketakwaan, serta sikap toleransi dan saling menghormati antarumat beragama.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-17" data-ans="1">
+        <div class="q-header">
+            <span class="q-number">Soal 17</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Negara Indonesia menjamin kemerdekaan tiap-tiap penduduk untuk memeluk agamanya masing-masing dan untuk beribadat menurut agamanya dan kepercayaannya itu. Jaminan konstitusional ini sejalan dengan sila pertama Pancasila dan ditegaskan dalam UUD NRI Tahun 1945 Pasal ....</p>
+            
+            <div class="options-list" id="options-17">
+                
+        <label class="option-item" id="opt-label-17-0" data-q="17" data-opt="0">
+            <input type="radio" name="q17" value="0" onchange="selectOption(17, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Pasal 33 ayat (1)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-17-1" data-q="17" data-opt="1">
+            <input type="radio" name="q17" value="1" onchange="selectOption(17, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Pasal 29 ayat (1) dan (2)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-17-2" data-q="17" data-opt="2">
+            <input type="radio" name="q17" value="2" onchange="selectOption(17, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Pasal 28A</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-17-3" data-q="17" data-opt="3">
+            <input type="radio" name="q17" value="3" onchange="selectOption(17, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Pasal 31 ayat (1)</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-17" style="display:none;">
+            <div class="exp-status" id="exp-status-17"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: B</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Pasal 29 ayat (1) UUD NRI Tahun 1945 menegaskan bahwa 'Negara berdasar atas Ketuhanan Yang Maha Esa', dan ayat (2) menjamin kemerdekaan tiap-tiap penduduk untuk memeluk agama dan beribadat menurut agama dan kepercayaannya.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-18" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 18</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Di Kabupaten Mimika, Papua, puluhan pemuda lintas agama (Katolik, Protestan, Hindu, dan Buddha) ikut membantu mengamankan pelaksanaan Salat Idulfitri, dan sebaliknya remaja masjid turut menjaga keamanan gereja saat perayaan Natal. Peristiwa tersebut merupakan wujud nyata penerapan sila ....</p>
+            
+            <div class="options-list" id="options-18">
+                
+        <label class="option-item" id="opt-label-18-0" data-q="18" data-opt="0">
+            <input type="radio" name="q18" value="0" onchange="selectOption(18, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Keadilan Sosial bagi Seluruh Rakyat Indonesia</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-18-1" data-q="18" data-opt="1">
+            <input type="radio" name="q18" value="1" onchange="selectOption(18, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-18-2" data-q="18" data-opt="2">
+            <input type="radio" name="q18" value="2" onchange="selectOption(18, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Kemanusiaan yang Adil dan Beradab</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-18-3" data-q="18" data-opt="3">
+            <input type="radio" name="q18" value="3" onchange="selectOption(18, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Ketuhanan Yang Maha Esa</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-18" style="display:none;">
+            <div class="exp-status" id="exp-status-18"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Saling menjaga keamanan dan menghormati perayaan hari besar keagamaan antarumat beragama adalah bentuk toleransi beragama yang mencerminkan Sila Pertama, Ketuhanan Yang Maha Esa.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-19" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 19</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Sila kedua Pancasila 'Kemanusiaan yang Adil dan Beradab' dilambangkan dengan rantai emas bermata bulat dan persegi yang saling berkaitan. Makna utama yang terkandung dalam sila kedua Pancasila adalah ....</p>
+            
+            <div class="options-list" id="options-19">
+                
+        <label class="option-item" id="opt-label-19-0" data-q="19" data-opt="0">
+            <input type="radio" name="q19" value="0" onchange="selectOption(19, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">memuliakan harkat dan martabat sesama manusia serta bersikap nondiskriminasi</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-19-1" data-q="19" data-opt="1">
+            <input type="radio" name="q19" value="1" onchange="selectOption(19, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">mewujudkan pemerataan pembangunan ekonomi di seluruh pelosok daerah</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-19-2" data-q="19" data-opt="2">
+            <input type="radio" name="q19" value="2" onchange="selectOption(19, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">melaksanakan pemilihan umum secara langsung, umum, bebas, dan rahasia</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-19-3" data-q="19" data-opt="3">
+            <input type="radio" name="q19" value="3" onchange="selectOption(19, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">menempatkan kepentingan bangsa di atas kepentingan pribadi dan golongan</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-19" style="display:none;">
+            <div class="exp-status" id="exp-status-19"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Sila kedua bermakna bahwa setiap manusia memiliki derajat dan martabat yang tinggi sehingga harus diperlakukan secara adil, beradab, penuh empati, dan tanpa diskriminasi.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-20" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 20</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan perilaku-perilaku berikut ini!<br>1) Menggalang dana bantuan untuk korban bencana gempa bumi<br>2) Tidak membeda-bedakan teman berdasarkan status ekonomi maupun fisik<br>3) Mengikuti upacara bendera hari Senin dengan khidmat<br>4) Menjenguk teman sekelas yang sedang dirawat di rumah sakit<br>Perilaku yang mencerminkan penerapan nilai Sila Kedua Pancasila ditunjukkan oleh nomor ....</p>
+            
+            <div class="options-list" id="options-20">
+                
+        <label class="option-item" id="opt-label-20-0" data-q="20" data-opt="0">
+            <input type="radio" name="q20" value="0" onchange="selectOption(20, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">1, 3, dan 4</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-20-1" data-q="20" data-opt="1">
+            <input type="radio" name="q20" value="1" onchange="selectOption(20, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">1, 2, dan 3</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-20-2" data-q="20" data-opt="2">
+            <input type="radio" name="q20" value="2" onchange="selectOption(20, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">1, 2, dan 4</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-20-3" data-q="20" data-opt="3">
+            <input type="radio" name="q20" value="3" onchange="selectOption(20, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">2, 3, dan 4</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-20" style="display:none;">
+            <div class="exp-status" id="exp-status-20"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Menggalang dana kemanusiaan (1), bersikap nondiskriminatif (2), dan menjenguk teman sakit sebagai bentuk empati (4) adalah penerapan Sila Kedua. Mengikuti upacara bendera (3) lebih mencerminkan nasionalisme pada Sila Ketiga.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-21" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 21</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Rani adalah siswa SMP yang gemar mempelajari tarian tradisional dari berbagai daerah di Indonesia dan selalu bangga mengenakan baju batik pada hari yang ditentukan sekolah. Sikap Rani tersebut mencerminkan nilai-nilai Pancasila, khususnya sila ....</p>
+            
+            <div class="options-list" id="options-21">
+                
+        <label class="option-item" id="opt-label-21-0" data-q="21" data-opt="0">
+            <input type="radio" name="q21" value="0" onchange="selectOption(21, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Ketuhanan Yang Maha Esa</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-21-1" data-q="21" data-opt="1">
+            <input type="radio" name="q21" value="1" onchange="selectOption(21, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-21-2" data-q="21" data-opt="2">
+            <input type="radio" name="q21" value="2" onchange="selectOption(21, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Persatuan Indonesia</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-21-3" data-q="21" data-opt="3">
+            <input type="radio" name="q21" value="3" onchange="selectOption(21, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Kemanusiaan yang Adil dan Beradab</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-21" style="display:none;">
+            <div class="exp-status" id="exp-status-21"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Mencintai dan melestarikan kebudayaan daerah serta bangga terhadap identitas bangsa merupakan wujud cinta tanah air yang terkandung dalam Sila Ketiga, Persatuan Indonesia.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-22" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 22</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Sila ketiga Pancasila dilambangkan dengan pohon beringin yang besar dan berakar tunjang kuat. Makna sila Persatuan Indonesia bagi kehidupan berbangsa adalah ....</p>
+            
+            <div class="options-list" id="options-22">
+                
+        <label class="option-item" id="opt-label-22-0" data-q="22" data-opt="0">
+            <input type="radio" name="q22" value="0" onchange="selectOption(22, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">memberikan kebebasan kepada setiap daerah untuk memisahkan diri apabila tidak sependapat</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-22-1" data-q="22" data-opt="1">
+            <input type="radio" name="q22" value="1" onchange="selectOption(22, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">mengutamakan kepentingan daerah asal di atas kepentingan nasional demi kemajuan lokal</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-22-2" data-q="22" data-opt="2">
+            <input type="radio" name="q22" value="2" onchange="selectOption(22, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">mempersatukan seluruh rakyat Indonesia dalam bingkai keberagaman suku, agama, ras, dan antargolongan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-22-3" data-q="22" data-opt="3">
+            <input type="radio" name="q22" value="3" onchange="selectOption(22, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">menyeragamkan seluruh bahasa dan adat istiadat daerah menjadi satu budaya tunggal</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-22" style="display:none;">
+            <div class="exp-status" id="exp-status-22"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Sila ketiga menjadi landasan pemersatu bangsa di tengah keberagaman SARA serta menumbuhkan rasa nasionalisme dan rela berkorban demi keutuhan NKRI.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-23" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 23</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan ilustrasi kegiatan siswa di kelas berikut ini!<br>Kegiatan yang tampak pada gambar merupakan contoh penerapan sila keempat Pancasila di lingkungan sekolah karena mengedepankan prinsip ....</p>
+            <div class="q-illustration">
+<svg viewBox="0 0 340 190" width="100%" style="max-width:350px; border-radius:12px; background:#f8fafc; border:1px solid #cbd5e1; padding:8px;">
+  <rect width="340" height="190" fill="#f0f9ff" rx="10"/>
+  <!-- Papan Tulis Kelas -->
+  <rect x="195" y="25" width="120" height="75" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="2.5"/>
+  <text x="255" y="42" font-family="sans-serif" font-size="9" font-weight="bold" fill="#0369a1" text-anchor="middle">PEMILIHAN KETUA KELAS</text>
+  <text x="210" y="58" font-family="sans-serif" font-size="8.5" fill="#334155">1. Andi  : |||| ||||</text>
+  <text x="210" y="72" font-family="sans-serif" font-size="8.5" fill="#334155">2. Sari  : |||| |||| ||</text>
+  <text x="210" y="86" font-family="sans-serif" font-size="8.5" fill="#334155">3. Budi  : |||| |</text>
+  <!-- Kotak Suara & Siswa -->
+  <rect x="65" y="88" width="60" height="45" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <rect x="82" y="84" width="26" height="5" fill="#0369a1"/>
+  <circle cx="95" cy="45" r="14" fill="#fed7aa"/>
+  <path d="M75 88 C75 66 115 66 115 88" fill="#2563eb"/>
+  <text x="170" y="172" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Musyawarah &amp; Pemilihan Ketua Kelas Secara Demokratis</text>
+</svg>
+</div>
+            <div class="options-list" id="options-23">
+                
+        <label class="option-item" id="opt-label-23-0" data-q="23" data-opt="0">
+            <input type="radio" name="q23" value="0" onchange="selectOption(23, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">pembagian tugas piket harian berdasarkan latar belakang daerah asal peserta didik</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-23-1" data-q="23" data-opt="1">
+            <input type="radio" name="q23" value="1" onchange="selectOption(23, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">keputusan mutlak yang ditentukan oleh ketua kelas tanpa meminta pendapat teman lain</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-23-2" data-q="23" data-opt="2">
+            <input type="radio" name="q23" value="2" onchange="selectOption(23, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">persaingan bebas antarindividu untuk mendapatkan kekuasaan tertinggi di dalam kelas</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-23-3" data-q="23" data-opt="3">
+            <input type="radio" name="q23" value="3" onchange="selectOption(23, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">demokrasi melalui musyawarah mufakat dan penghormatan terhadap hak memilih setiap siswa</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-23" style="display:none;">
+            <div class="exp-status" id="exp-status-23"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Pemilihan ketua kelas secara demokratis memberikan kesempatan yang sama kepada setiap peserta didik untuk memilih dan dipilih berdasarkan kesepakatan bersama sesuai Sila Keempat Pancasila.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-24" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 24</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Dalam penyelenggaraan pemerintahan negara, Indonesia menganut sistem Demokrasi Pancasila. Salah satu wujud pelaksanaannya adalah pemilihan umum (Pemilu) yang diselenggarakan berdasarkan asas ....</p>
+            
+            <div class="options-list" id="options-24">
+                
+        <label class="option-item" id="opt-label-24-0" data-q="24" data-opt="0">
+            <input type="radio" name="q24" value="0" onchange="selectOption(24, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">LUBER (Langsung, Umum, Bebas, Rahasia) dan JURDIL (Jujur dan Adil)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-24-1" data-q="24" data-opt="1">
+            <input type="radio" name="q24" value="1" onchange="selectOption(24, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Bebas, Terbuka, Terpimpin, dan Mutlak</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-24-2" data-q="24" data-opt="2">
+            <input type="radio" name="q24" value="2" onchange="selectOption(24, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Sentralisasi, Otonomi, Transparan, dan Akuntabel</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-24-3" data-q="24" data-opt="3">
+            <input type="radio" name="q24" value="3" onchange="selectOption(24, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Musyawarah, Gotong Royong, Kekeluargaan, dan Kemandirian</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-24" style="display:none;">
+            <div class="exp-status" id="exp-status-24"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Pemilu di Indonesia berlandaskan Sila Keempat Pancasila dan dilaksanakan berdasarkan asas LUBER (Langsung, Umum, Bebas, dan Rahasia) serta JURDIL (Jujur dan Adil).</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-25" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 25</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Seorang ibu memberikan uang saku Rp25.000 kepada anak SMA, Rp15.000 kepada anak SMP, dan Rp10.000 kepada anak SD. Ketika si bungsu protes meminta jumlah yang sama, sang ibu mencontohkan pengisian air ke dalam tiga gelas berbeda ukuran hingga penuh sesuai kapasitasnya masing-masing. Kisah tersebut mengajarkan makna Sila Kelima Pancasila bahwa adil berarti ....</p>
+            
+            <div class="options-list" id="options-25">
+                
+        <label class="option-item" id="opt-label-25-0" data-q="25" data-opt="0">
+            <input type="radio" name="q25" value="0" onchange="selectOption(25, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">membagi segala sesuatu dengan angka dan jumlah yang sama persis tanpa melihat kondisi</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-25-1" data-q="25" data-opt="1">
+            <input type="radio" name="q25" value="1" onchange="selectOption(25, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">mendahulukan tuntutan hak pribadi sebelum melaksanakan kewajiban di rumah</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-25-2" data-q="25" data-opt="2">
+            <input type="radio" name="q25" value="2" onchange="selectOption(25, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">memberikan bagian paling besar kepada anggota keluarga yang paling muda usianya</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-25-3" data-q="25" data-opt="3">
+            <input type="radio" name="q25" value="3" onchange="selectOption(25, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">memperoleh hak dan perlakuan secara proporsional sesuai dengan kebutuhan dan porsinya</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-25" style="display:none;">
+            <div class="exp-status" id="exp-status-25"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Berdasarkan kisah inspiratif di Bab 2 (hal. 62-63), keadilan sosial bermakna memberikan hak secara proporsional sesuai kebutuhan dan tanggung jawab masing-masing, bukan sekadar menyamaratakan jumlah.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-26" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 26</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Contoh perilaku peserta didik di lingkungan sekolah dan masyarakat yang mencerminkan nilai Sila Kelima 'Keadilan Sosial bagi Seluruh Rakyat Indonesia' adalah ....</p>
+            
+            <div class="options-list" id="options-26">
+                
+        <label class="option-item" id="opt-label-26-0" data-q="26" data-opt="0">
+            <input type="radio" name="q26" value="0" onchange="selectOption(26, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">membiasakan budaya antre saat membeli makanan di kantin dan tidak bersikap boros</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-26-1" data-q="26" data-opt="1">
+            <input type="radio" name="q26" value="1" onchange="selectOption(26, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">mengingatkan teman untuk segera melaksanakan ibadah tepat pada waktunya</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-26-2" data-q="26" data-opt="2">
+            <input type="radio" name="q26" value="2" onchange="selectOption(26, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">memaksakan pendapat pribadi agar diterima seluruh anggota kelompok diskusi</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-26-3" data-q="26" data-opt="3">
+            <input type="radio" name="q26" value="3" onchange="selectOption(26, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">hanya mau berteman dengan siswa yang memiliki hobi dan suku bangsa yang sama</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-26" style="display:none;">
+            <div class="exp-status" id="exp-status-26"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Membiasakan antre (menghargai hak orang lain), hidup hemat/tidak boros, bekerja keras, dan menyalurkan bantuan sosial merupakan penerapan nyata Sila Kelima Pancasila.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-27" data-ans="1">
+        <div class="q-header">
+            <span class="q-number">Soal 27</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Segala bentuk peraturan perundang-undangan yang berlaku di Indonesia tidak boleh bertentangan dengan nilai-nilai Pancasila. Hal ini menunjukkan kedudukan dan fungsi Pancasila sebagai ....</p>
+            
+            <div class="options-list" id="options-27">
+                
+        <label class="option-item" id="opt-label-27-0" data-q="27" data-opt="0">
+            <input type="radio" name="q27" value="0" onchange="selectOption(27, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">perjanjian luhur masyarakat adat daerah</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-27-1" data-q="27" data-opt="1">
+            <input type="radio" name="q27" value="1" onchange="selectOption(27, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">sumber dari segala sumber hukum negara</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-27-2" data-q="27" data-opt="2">
+            <input type="radio" name="q27" value="2" onchange="selectOption(27, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">instrumen kebijakan luar negeri pemerintah</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-27-3" data-q="27" data-opt="3">
+            <input type="radio" name="q27" value="3" onchange="selectOption(27, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">alat pemersatu partai-partai politik</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-27" style="display:none;">
+            <div class="exp-status" id="exp-status-27"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: B</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Salah satu fungsi utama Pancasila adalah sebagai sumber dari segala sumber hukum di Indonesia, sehingga seluruh aturan hukum di bawahnya harus bersumber dan selaras dengan nilai Pancasila.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-28" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 28</span>
+            <span class="q-bab">Bab 2: Penerapan Nilai-Nilai Pancasila</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Selain Hari Lahir Pancasila pada tanggal 1 Juni, bangsa Indonesia juga memperingati Hari Kesaktian Pancasila yang ditetapkan melalui Surat Keputusan Nomor Kep/B/134/1966 setiap tanggal ....</p>
+            
+            <div class="options-list" id="options-28">
+                
+        <label class="option-item" id="opt-label-28-0" data-q="28" data-opt="0">
+            <input type="radio" name="q28" value="0" onchange="selectOption(28, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">10 November</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-28-1" data-q="28" data-opt="1">
+            <input type="radio" name="q28" value="1" onchange="selectOption(28, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">18 Agustus</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-28-2" data-q="28" data-opt="2">
+            <input type="radio" name="q28" value="2" onchange="selectOption(28, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">28 Oktober</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-28-3" data-q="28" data-opt="3">
+            <input type="radio" name="q28" value="3" onchange="selectOption(28, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">1 Oktober</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-28" style="display:none;">
+            <div class="exp-status" id="exp-status-28"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Tanggal 1 Oktober ditetapkan sebagai Hari Kesaktian Pancasila untuk memperingati keteguhan ideologi Pancasila pasca peristiwa Gerakan 30 September.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-29" data-ans="1">
+        <div class="q-header">
+            <span class="q-number">Soal 29</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Manusia merupakan makhluk ciptaan Tuhan yang paling sempurna karena dikaruniai akal dan pikiran. Sesuai sifat kodratnya, manusia berkedudukan sebagai makhluk monodualis, yang artinya manusia sekaligus merupakan ....</p>
+            
+            <div class="options-list" id="options-29">
+                
+        <label class="option-item" id="opt-label-29-0" data-q="29" data-opt="0">
+            <input type="radio" name="q29" value="0" onchange="selectOption(29, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">makhluk berbudaya dan makhluk sejarah</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-29-1" data-q="29" data-opt="1">
+            <input type="radio" name="q29" value="1" onchange="selectOption(29, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">makhluk individu dan makhluk sosial</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-29-2" data-q="29" data-opt="2">
+            <input type="radio" name="q29" value="2" onchange="selectOption(29, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">makhluk ekonomi dan makhluk politik</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-29-3" data-q="29" data-opt="3">
+            <input type="radio" name="q29" value="3" onchange="selectOption(29, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">makhluk jasmani dan makhluk rohani</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-29" style="display:none;">
+            <div class="exp-status" id="exp-status-29"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: B</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Kedudukan manusia sebagai makhluk monodualis berarti manusia memiliki dua sisi kodrat yang tidak terpisahkan, yakni sebagai makhluk individu (pribadi unik) sekaligus makhluk sosial (membutuhkan orang lain).</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-30" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 30</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Dalam kehidupan bermasyarakat, setiap manusia memiliki kebutuhan dan kepentingan yang berbeda-beda. Apabila tidak ada aturan yang membatasi perilaku manusia, dapat terjadi benturan kepentingan dan perpecahan. Oleh karena itu, norma hadir dalam masyarakat dengan fungsi utama untuk ....</p>
+            
+            <div class="options-list" id="options-30">
+                
+        <label class="option-item" id="opt-label-30-0" data-q="30" data-opt="0">
+            <input type="radio" name="q30" value="0" onchange="selectOption(30, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">menjadi pedoman bertingkah laku serta menciptakan ketertiban, keamanan, dan keadilan bersama</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-30-1" data-q="30" data-opt="1">
+            <input type="radio" name="q30" value="1" onchange="selectOption(30, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">memberikan keuntungan dan hak istimewa bagi kelompok masyarakat tertentu saja</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-30-2" data-q="30" data-opt="2">
+            <input type="radio" name="q30" value="2" onchange="selectOption(30, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">membatasi kebebasan warga negara agar tidak dapat mengembangkan bakat dan potensinya</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-30-3" data-q="30" data-opt="3">
+            <input type="radio" name="q30" value="3" onchange="selectOption(30, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">menghilangkan seluruh perbedaan kebiasaan dan tradisi yang ada di lingkungan masyarakat</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-30" style="display:none;">
+            <div class="exp-status" id="exp-status-30"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Norma berfungsi sebagai penuntun perilaku, pengendali sosial, pencipta ketertiban dan keamanan, pencegah benturan kepentingan, serta penjamin keadilan dalam masyarakat.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-31" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 31</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan pernyataan-pernyataan berikut ini!<br>1) Terdapat perintah yang harus dilaksanakan<br>2) Terdapat larangan yang harus ditinggalkan<br>3) Wajib dibukukan secara tertulis oleh pemerintah<br>4) Adanya sanksi bagi pelanggar dan bersifat mengikat<br>Syarat berlakunya norma dalam kehidupan masyarakat ditunjukkan oleh nomor ....</p>
+            
+            <div class="options-list" id="options-31">
+                
+        <label class="option-item" id="opt-label-31-0" data-q="31" data-opt="0">
+            <input type="radio" name="q31" value="0" onchange="selectOption(31, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">1, 3, dan 4</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-31-1" data-q="31" data-opt="1">
+            <input type="radio" name="q31" value="1" onchange="selectOption(31, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">1, 2, dan 3</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-31-2" data-q="31" data-opt="2">
+            <input type="radio" name="q31" value="2" onchange="selectOption(31, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">2, 3, dan 4</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-31-3" data-q="31" data-opt="3">
+            <input type="radio" name="q31" value="3" onchange="selectOption(31, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">1, 2, dan 4</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-31" style="display:none;">
+            <div class="exp-status" id="exp-status-31"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Syarat berlakunya norma meliputi: adanya perintah, adanya larangan, adanya sanksi, serta bersifat mengikat dan memaksa. Norma tidak wajib tertulis karena ada norma tidak tertulis seperti norma kesopanan dan adat.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-32" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 32</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Norma yang bersumber dari wahyu Tuhan Yang Maha Esa yang termuat di dalam kitab suci, mengatur hubungan vertikal manusia dengan Tuhan serta hubungan horizontal dengan sesama dan alam, disebut norma ....</p>
+            
+            <div class="options-list" id="options-32">
+                
+        <label class="option-item" id="opt-label-32-0" data-q="32" data-opt="0">
+            <input type="radio" name="q32" value="0" onchange="selectOption(32, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">hukum</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-32-1" data-q="32" data-opt="1">
+            <input type="radio" name="q32" value="1" onchange="selectOption(32, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">kesopanan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-32-2" data-q="32" data-opt="2">
+            <input type="radio" name="q32" value="2" onchange="selectOption(32, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">agama</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-32-3" data-q="32" data-opt="3">
+            <input type="radio" name="q32" value="3" onchange="selectOption(32, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">kesusilaan</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-32" style="display:none;">
+            <div class="exp-status" id="exp-status-32"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Norma agama bersumber dari Tuhan Yang Maha Esa melalui kitab suci masing-masing agama dan memiliki sanksi berupa dosa yang balasan hakikinya diterima di akhirat kelak.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-33" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 33</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Saat mengerjakan ulangan harian di kelas, Budi melihat kertas jawaban temannya yang terjatuh di lantai. Meskipun pengawas sedang menoleh ke arah lain, Budi segera mengembalikan kertas itu tanpa melihat isinya karena suara hatinya mengatakan bahwa menyontek adalah perbuatan tidak jujur. Tindakan Budi didorong oleh kepatuhan terhadap norma ....</p>
+            
+            <div class="options-list" id="options-33">
+                
+        <label class="option-item" id="opt-label-33-0" data-q="33" data-opt="0">
+            <input type="radio" name="q33" value="0" onchange="selectOption(33, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">hukum</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-33-1" data-q="33" data-opt="1">
+            <input type="radio" name="q33" value="1" onchange="selectOption(33, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">adat istiadat</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-33-2" data-q="33" data-opt="2">
+            <input type="radio" name="q33" value="2" onchange="selectOption(33, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">kesopanan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-33-3" data-q="33" data-opt="3">
+            <input type="radio" name="q33" value="3" onchange="selectOption(33, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">kesusilaan</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-33" style="display:none;">
+            <div class="exp-status" id="exp-status-33"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Norma kesusilaan bersumber dari suara hati nurani manusia untuk membedakan perbuatan baik dan buruk (seperti bersikap jujur). Sanksi pelanggarannya berupa rasa bersalah, malu, dan menyesal.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-34" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 34</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Saat berjalan melewati sekumpulan orang tua yang sedang duduk berbincang di teras rumah, Dinda membungkukkan punggungnya sedikit, berjalan perlahan, dan mengucapkan 'permisi'. Perilaku Dinda merupakan wujud pelaksanaan norma ....</p>
+            
+            <div class="options-list" id="options-34">
+                
+        <label class="option-item" id="opt-label-34-0" data-q="34" data-opt="0">
+            <input type="radio" name="q34" value="0" onchange="selectOption(34, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">hukum</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-34-1" data-q="34" data-opt="1">
+            <input type="radio" name="q34" value="1" onchange="selectOption(34, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">agama</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-34-2" data-q="34" data-opt="2">
+            <input type="radio" name="q34" value="2" onchange="selectOption(34, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">kesusilaan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-34-3" data-q="34" data-opt="3">
+            <input type="radio" name="q34" value="3" onchange="selectOption(34, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">kesopanan</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-34" style="display:none;">
+            <div class="exp-status" id="exp-status-34"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Norma kesopanan (tata krama) bersumber dari kebiasaan dan pergaulan masyarakat setempat, seperti cara berbicara, berpakaian, dan bersikap santun kepada orang yang lebih tua.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-35" data-ans="1">
+        <div class="q-header">
+            <span class="q-number">Soal 35</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Keberadaan kesatuan-kesatuan masyarakat hukum adat beserta hak-hak tradisionalnya (seperti aturan larangan menyalakan listrik/aktivitas saat Nyepi di Bali atau tradisi berjalan tanpa alas kaki suku Baduy) diakui dan dihormati oleh negara sepanjang masih hidup dan sesuai prinsip NKRI. Hal ini dijamin dalam UUD NRI Tahun 1945 Pasal ....</p>
+            
+            <div class="options-list" id="options-35">
+                
+        <label class="option-item" id="opt-label-35-0" data-q="35" data-opt="0">
+            <input type="radio" name="q35" value="0" onchange="selectOption(35, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Pasal 30 ayat (1)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-35-1" data-q="35" data-opt="1">
+            <input type="radio" name="q35" value="1" onchange="selectOption(35, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Pasal 18B ayat (2)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-35-2" data-q="35" data-opt="2">
+            <input type="radio" name="q35" value="2" onchange="selectOption(35, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Pasal 27 ayat (1)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-35-3" data-q="35" data-opt="3">
+            <input type="radio" name="q35" value="3" onchange="selectOption(35, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Pasal 34 ayat (1)</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-35" style="display:none;">
+            <div class="exp-status" id="exp-status-35"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: B</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Pasal 18B ayat (2) UUD NRI Tahun 1945 menyatakan bahwa negara mengakui dan menghormati kesatuan-kesatuan masyarakat hukum adat beserta hak-hak tradisionalnya sepanjang masih hidup dan sesuai dengan perkembangan masyarakat serta prinsip NKRI.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-36" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 36</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan ilustrasi rambu dan aturan berlalu lintas berikut ini!<br>Seorang siswa SMP berusia 13 tahun mengendarai sepeda motor ke sekolah tanpa helm dan belum memiliki SIM, sehingga diberhentikan dan ditilang oleh petugas kepolisian. Peristiwa tersebut menunjukkan pelanggaran terhadap norma ....</p>
+            <div class="q-illustration">
+<svg viewBox="0 0 340 190" width="100%" style="max-width:350px; border-radius:12px; background:#f8fafc; border:1px solid #cbd5e1; padding:8px;">
+  <rect width="340" height="190" fill="#f1f5f9" rx="10"/>
+  <!-- Jalan Raya & Zebra Cross -->
+  <rect x="20" y="115" width="300" height="55" fill="#334155" rx="4"/>
+  <rect x="115" y="120" width="14" height="45" fill="#ffffff"/>
+  <rect x="138" y="120" width="14" height="45" fill="#ffffff"/>
+  <rect x="161" y="120" width="14" height="45" fill="#ffffff"/>
+  <rect x="184" y="120" width="14" height="45" fill="#ffffff"/>
+  <rect x="207" y="120" width="14" height="45" fill="#ffffff"/>
+  <!-- Lampu Lalu Lintas -->
+  <rect x="55" y="25" width="34" height="78" rx="6" fill="#1e293b"/>
+  <rect x="69" y="103" width="6" height="22" fill="#475569"/>
+  <circle cx="72" cy="42" r="9" fill="#ef4444"/>
+  <circle cx="72" cy="64" r="9" fill="#eab308" opacity="0.35"/>
+  <circle cx="72" cy="86" r="9" fill="#22c55e" opacity="0.35"/>
+  <!-- Rambu Dilarang Berkendara Tanpa SIM -->
+  <circle cx="245" cy="64" r="34" fill="#ffffff" stroke="#dc2626" stroke-width="6"/>
+  <line x1="221" y1="40" x2="269" y2="88" stroke="#dc2626" stroke-width="6"/>
+  <text x="245" y="61" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#0f172a" text-anchor="middle">TANPA SIM</text>
+  <text x="245" y="73" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#0f172a" text-anchor="middle">&lt; 17 THN</text>
+  <text x="170" y="183" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Ilustrasi Tertib Berlalu Lintas &amp; Zebra Cross</text>
+</svg>
+</div>
+            <div class="options-list" id="options-36">
+                
+        <label class="option-item" id="opt-label-36-0" data-q="36" data-opt="0">
+            <input type="radio" name="q36" value="0" onchange="selectOption(36, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">kesopanan, karena aturan berkendara hanya berlaku berdasarkan kebiasaan warga kampung setempat</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-36-1" data-q="36" data-opt="1">
+            <input type="radio" name="q36" value="1" onchange="selectOption(36, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">adat istiadat, karena penggunaan helm dan SIM ditetapkan oleh ketua adat di masing-masing desa</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-36-2" data-q="36" data-opt="2">
+            <input type="radio" name="q36" value="2" onchange="selectOption(36, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">kesusilaan, karena sanksi tilang hanya berupa rasa penyesalan dari dalam hati nurani pengendara</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-36-3" data-q="36" data-opt="3">
+            <input type="radio" name="q36" value="3" onchange="selectOption(36, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">hukum, karena bersumber dari peraturan perundang-undangan negara dan sanksinya tegas serta memaksa</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-36" style="display:none;">
+            <div class="exp-status" id="exp-status-36"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Peraturan lalu lintas merupakan bagian dari norma hukum tertulis yang dibuat oleh lembaga negara berwenang, bersifat memaksa, dan memiliki sanksi nyata serta tegas seperti tilang, denda, atau kurungan.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-37" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 37</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Keempat macam norma (agama, kesusilaan, kesopanan, dan hukum) saling melengkapi dalam kehidupan bermasyarakat. Alasan utama mengapa norma hukum tetap sangat diperlukan meskipun sudah ada tiga norma lainnya adalah ....</p>
+            
+            <div class="options-list" id="options-37">
+                
+        <label class="option-item" id="opt-label-37-0" data-q="37" data-opt="0">
+            <input type="radio" name="q37" value="0" onchange="selectOption(37, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">sanksi norma hukum hanya berlaku bagi masyarakat yang tinggal di wilayah perkotaan saja</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-37-1" data-q="37" data-opt="1">
+            <input type="radio" name="q37" value="1" onchange="selectOption(37, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">norma agama, kesusilaan, dan kesopanan sudah tidak berlaku lagi di era modern saat ini</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-37-2" data-q="37" data-opt="2">
+            <input type="radio" name="q37" value="2" onchange="selectOption(37, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">norma hukum memiliki sanksi yang tegas, nyata, dan dapat dikenakan langsung untuk memberi efek jera</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-37-3" data-q="37" data-opt="3">
+            <input type="radio" name="q37" value="3" onchange="selectOption(37, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">norma hukum merupakan satu-satunya aturan yang mengajarkan manusia untuk berbuat jujur</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-37" style="display:none;">
+            <div class="exp-status" id="exp-status-37"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Sanksi norma agama bersifat tidak langsung (akhirat), sedangkan sanksi norma kesusilaan dan kesopanan berupa sanksi batin/sosial. Norma hukum melengkapi ketiganya dengan sanksi nyata yang tegas dan memaksa agar timbul efek jera.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-38" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 38</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Raka adalah siswa kelas VII yang sering terlambat datang ke sekolah hingga lebih dari tiga kali dalam sepekan dan memakai seragam yang tidak sesuai ketentuan tata tertib sekolah. Salah satu faktor internal penyebab Raka melanggar norma tersebut adalah ....</p>
+            
+            <div class="options-list" id="options-38">
+                
+        <label class="option-item" id="opt-label-38-0" data-q="38" data-opt="0">
+            <input type="radio" name="q38" value="0" onchange="selectOption(38, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">rendahnya kesadaran diri terhadap aturan dan sudah terbiasa melakukan pelanggaran</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-38-1" data-q="38" data-opt="1">
+            <input type="radio" name="q38" value="1" onchange="selectOption(38, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">tidak adanya peraturan tertulis yang dibuat oleh pihak kepala sekolah dan kesiswaan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-38-2" data-q="38" data-opt="2">
+            <input type="radio" name="q38" value="2" onchange="selectOption(38, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">banyaknya tugas kelompok yang diberikan oleh guru mata pelajaran di kelas</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-38-3" data-q="38" data-opt="3">
+            <input type="radio" name="q38" value="3" onchange="selectOption(38, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">adanya aturan pemerintah yang memperbolehkan siswa datang terlambat ke sekolah</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-38" style="display:none;">
+            <div class="exp-status" id="exp-status-38"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Dalam Bab 3 dijelaskan bahwa penyebab pelanggaran norma antara lain: tidak mampu mengendalikan diri, sudah terbiasa melanggar, kurang sosialisasi, tekanan lingkungan, rendahnya kesadaran norma, dan menurunnya rasa persatuan.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-39" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 39</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Dalam cerita 'Ketika Amira Mengantungi Sampah', Amira menerapkan prinsip TSP yang diajarkan orang tuanya ketika tidak menemukan tempat sampah di jalan. Kepanjangan dari prinsip TSP tersebut adalah ....</p>
+            
+            <div class="options-list" id="options-39">
+                
+        <label class="option-item" id="opt-label-39-0" data-q="39" data-opt="0">
+            <input type="radio" name="q39" value="0" onchange="selectOption(39, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Tertib (di jalan raya), Sopan (kepada orang tua), dan Patuh (terhadap tata tertib sekolah)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-39-1" data-q="39" data-opt="1">
+            <input type="radio" name="q39" value="1" onchange="selectOption(39, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Taat (beribadah), Sabar (menghadapi ujian), dan Pantang menyerah (dalam belajar)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-39-2" data-q="39" data-opt="2">
+            <input type="radio" name="q39" value="2" onchange="selectOption(39, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Tahan (tidak membuang sembarangan), Simpan (di tempatnya), dan Pungut (jika menemukan sampah)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-39-3" data-q="39" data-opt="3">
+            <input type="radio" name="q39" value="3" onchange="selectOption(39, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Tolong (sesama teman), Santun (dalam bertutur kata), dan Peduli (terhadap lingkungan)</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-39" style="display:none;">
+            <div class="exp-status" id="exp-status-39"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Pada Bab II buku PPKn Rev 1.0 (hal. 23-24), prinsip TSP yang dipraktikkan Amira adalah Tahan (jangan membuang sampah sembarangan), Simpan (simpan sampah hanya di tempatnya), dan Pungut (pungut sampah yang ditemukan).</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-40" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 40</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Dalam kehidupan sehari-hari, Ika selalu membiasakan diri mengucapkan 'tiga kata ajaib' kepada siapa pun, baik kepada orang tua, guru, teman sebaya, maupun adik kelas. Tiga kata ajaib yang dimaksud adalah ....</p>
+            
+            <div class="options-list" id="options-40">
+                
+        <label class="option-item" id="opt-label-40-0" data-q="40" data-opt="0">
+            <input type="radio" name="q40" value="0" onchange="selectOption(40, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">tolong, terima kasih, dan maaf</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-40-1" data-q="40" data-opt="1">
+            <input type="radio" name="q40" value="1" onchange="selectOption(40, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">jujur, disiplin, dan bertanggung jawab</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-40-2" data-q="40" data-opt="2">
+            <input type="radio" name="q40" value="2" onchange="selectOption(40, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">salam, senyum, dan sapa</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-40-3" data-q="40" data-opt="3">
+            <input type="radio" name="q40" value="3" onchange="selectOption(40, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">permisi, silakan, dan mari</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-40" style="display:none;">
+            <div class="exp-status" id="exp-status-40"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Pada kisah 'Tiga Kata Ajaib Ika' di Bab 3 (hal. 71), tiga kata ajaib yang mempererat persaudaraan dan mencerminkan kesopanan adalah tolong, terima kasih, dan maaf.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-41" data-ans="2">
+        <div class="q-header">
+            <span class="q-number">Soal 41</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan diagram hubungan kewajiban manusia berikut ini!<br>Dalam ajaran masyarakat Hindu Bali, konsep tiga hubungan harmonis (kewajiban kepada Tuhan, sesama manusia, dan alam) dikenal dengan istilah ....</p>
+            <div class="q-illustration">
+<svg viewBox="0 0 340 210" width="100%" style="max-width:350px; border-radius:12px; background:#f8fafc; border:1px solid #cbd5e1; padding:8px;">
+  <rect width="340" height="210" fill="#eff6ff" rx="10"/>
+  <circle cx="170" cy="72" r="46" fill="#3b82f6" fill-opacity="0.25" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="132" cy="132" r="46" fill="#f97316" fill-opacity="0.25" stroke="#ea580c" stroke-width="2"/>
+  <circle cx="208" cy="132" r="46" fill="#22c55e" fill-opacity="0.25" stroke="#16a34a" stroke-width="2"/>
+  <text x="170" y="62" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Hubungan dengan</text>
+  <text x="170" y="76" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Tuhan YME</text>
+  <text x="118" y="135" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#7c2d12" text-anchor="middle">Hubungan</text>
+  <text x="118" y="149" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#7c2d12" text-anchor="middle">Sesama Manusia</text>
+  <text x="222" y="135" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#14532d" text-anchor="middle">Hubungan</text>
+  <text x="222" y="149" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#14532d" text-anchor="middle">dengan Alam</text>
+  <text x="170" y="198" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Tiga Hubungan Kewajiban (Tri Hita Karana)</text>
+</svg>
+</div>
+            <div class="options-list" id="options-41">
+                
+        <label class="option-item" id="opt-label-41-0" data-q="41" data-opt="0">
+            <input type="radio" name="q41" value="0" onchange="selectOption(41, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Tut Wuri Handayani</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-41-1" data-q="41" data-opt="1">
+            <input type="radio" name="q41" value="1" onchange="selectOption(41, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Ing Ngarsa Sung Tuladha</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-41-2" data-q="41" data-opt="2">
+            <input type="radio" name="q41" value="2" onchange="selectOption(41, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Tri Hita Karana</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-41-3" data-q="41" data-opt="3">
+            <input type="radio" name="q41" value="3" onchange="selectOption(41, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Bhinneka Tunggal Ika</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-41" style="display:none;">
+            <div class="exp-status" id="exp-status-41"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: C</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Tiga hubungan kewajiban manusia (kepada Tuhan YME, sesama manusia, dan alam lingkungan) dalam ajaran masyarakat Hindu Bali disebut Tri Hita Karana yang bermakna 'tiga penyebab kebahagiaan'.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-42" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 42</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan alur pemenuhan hak dan kewajiban di bawah ini!<br>Berdasarkan bagan tersebut, tindakan yang tepat ketika kamu meminjam buku milik temanmu dan temanmu juga meminjam bukumu adalah ....</p>
+            <div class="q-illustration">
+<svg viewBox="0 0 340 185" width="100%" style="max-width:350px; border-radius:12px; background:#f8fafc; border:1px solid #cbd5e1; padding:8px;">
+  <rect width="340" height="185" fill="#fdf4ff" rx="10"/>
+  <rect x="20" y="55" width="88" height="55" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="64" y="79" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e40af" text-anchor="middle">1. Penuhi Hak</text>
+  <text x="64" y="93" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e40af" text-anchor="middle">Orang Lain</text>
+  <path d="M112 82 L124 82" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="126" y="55" width="88" height="55" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="170" y="79" font-family="sans-serif" font-size="10" font-weight="bold" fill="#92400e" text-anchor="middle">2. Jalankan</text>
+  <text x="170" y="93" font-family="sans-serif" font-size="10" font-weight="bold" fill="#92400e" text-anchor="middle">Kewajiban</text>
+  <path d="M218 82 L230 82" stroke="#64748b" stroke-width="2.5"/>
+  <rect x="232" y="55" width="88" height="55" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="276" y="79" font-family="sans-serif" font-size="10" font-weight="bold" fill="#166534" text-anchor="middle">3. Minta Hak</text>
+  <text x="276" y="93" font-family="sans-serif" font-size="10" font-weight="bold" fill="#166534" text-anchor="middle">Sendiri</text>
+  <text x="170" y="155" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Alur Keseimbangan Pelaksanaan Hak dan Kewajiban</text>
+</svg>
+</div>
+            <div class="options-list" id="options-42">
+                
+        <label class="option-item" id="opt-label-42-0" data-q="42" data-opt="0">
+            <input type="radio" name="q42" value="0" onchange="selectOption(42, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">mengembalikan buku milik teman terlebih dahulu sebelum meminta kembali buku milik kita</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-42-1" data-q="42" data-opt="1">
+            <input type="radio" name="q42" value="1" onchange="selectOption(42, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">menuntut teman mengembalikan buku kita terlebih dahulu sebelum kita mengembalikan bukunya</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-42-2" data-q="42" data-opt="2">
+            <input type="radio" name="q42" value="2" onchange="selectOption(42, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">menyimpan buku milik teman hingga teman tersebut membeli buku pengganti yang baru</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-42-3" data-q="42" data-opt="3">
+            <input type="radio" name="q42" value="3" onchange="selectOption(42, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">meminta guru mengambilkan buku kita tanpa perlu mengembalikan buku yang kita pinjam</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-42" style="display:none;">
+            <div class="exp-status" id="exp-status-42"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Alur pemenuhan hak dan kewajiban yang benar adalah: (1) penuhi hak orang lain, (2) jalankan semua kewajiban diri sendiri, baru kemudian (3) meminta/menerima hak sendiri.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-43" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 43</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Hak asasi manusia (HAM) berbeda dengan hak yang timbul setelah suatu aturan dibuat, karena HAM merupakan ....</p>
+            
+            <div class="options-list" id="options-43">
+                
+        <label class="option-item" id="opt-label-43-0" data-q="43" data-opt="0">
+            <input type="radio" name="q43" value="0" onchange="selectOption(43, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">hak dasar yang sudah melekat pada diri setiap manusia sejak sebelum dilahirkan sebagai anugerah Tuhan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-43-1" data-q="43" data-opt="1">
+            <input type="radio" name="q43" value="1" onchange="selectOption(43, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">wewenang yang diperoleh seseorang setelah menduduki jabatan tertentu di pemerintahan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-43-2" data-q="43" data-opt="2">
+            <input type="radio" name="q43" value="2" onchange="selectOption(43, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">hak istimewa yang hanya diberikan kepada warga negara yang sudah berusia di atas 17 tahun</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-43-3" data-q="43" data-opt="3">
+            <input type="radio" name="q43" value="3" onchange="selectOption(43, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">penghargaan dari sekolah kepada siswa yang berhasil meraih juara dalam perlombaan</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-43" style="display:none;">
+            <div class="exp-status" id="exp-status-43"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Hak Asasi Manusia (HAM) adalah hak dasar yang sudah dimiliki setiap orang bahkan sebelum dilahirkan (seperti hak hidup, hak beragama, dan hak berpendapat) yang wajib dihormati siapa pun.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-44" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 44</span>
+            <span class="q-bab">Bab II (Rev 1.0): UUD NRI Tahun 1945</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan ilustrasi pohon tata urutan peraturan perundang-undangan di Indonesia berikut ini!<br>Jika seluruh hukum di Indonesia diibaratkan sebagai sebuah pohon besar, maka posisi UUD NRI Tahun 1945 digambarkan sebagai ....</p>
+            <div class="q-illustration">
+<svg viewBox="0 0 360 220" width="100%" style="max-width:380px; border-radius:12px; background:#f8fafc; border:1px solid #cbd5e1; padding:8px;">
+  <rect width="360" height="220" fill="#f0fdf4" rx="10"/>
+  <!-- Akar: Pancasila -->
+  <path d="M180 155 Q150 175 110 185 M180 155 Q170 180 155 195 M180 155 Q200 180 215 195 M180 155 Q215 175 250 185" stroke="#78350f" stroke-width="4" fill="none"/>
+  <!-- Batang Utama: UUD NRI 1945 -->
+  <rect x="168" y="95" width="24" height="65" fill="#92400e" rx="4"/>
+  <!-- Dahan: UU / Perpu / PP / Perpres -->
+  <path d="M175 105 L125 75 M185 105 L235 75" stroke="#92400e" stroke-width="7" stroke-linecap="round"/>
+  <!-- Tajuk Daun: Perda -->
+  <ellipse cx="180" cy="58" rx="95" ry="42" fill="#22c55e" opacity="0.85"/>
+  <ellipse cx="135" cy="68" rx="48" ry="28" fill="#16a34a" opacity="0.9"/>
+  <ellipse cx="225" cy="68" rx="48" ry="28" fill="#16a34a" opacity="0.9"/>
+  <!-- Label -->
+  <rect x="240" y="18" width="110" height="26" rx="5" fill="#ffffff" stroke="#16a34a"/>
+  <text x="295" y="34" font-family="sans-serif" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">Ranting: Perda</text>
+  <rect x="10" y="55" width="115" height="26" rx="5" fill="#ffffff" stroke="#92400e"/>
+  <text x="67" y="71" font-family="sans-serif" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle">Dahan: UU / PP / Perpres</text>
+  <rect x="230" y="110" width="120" height="26" rx="5" fill="#ffffff" stroke="#92400e"/>
+  <text x="290" y="126" font-family="sans-serif" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle">Batang: UUD NRI 1945</text>
+  <rect x="115" y="190" width="130" height="24" rx="5" fill="#fef3c7" stroke="#b45309"/>
+  <text x="180" y="206" font-family="sans-serif" font-size="11" font-weight="bold" fill="#92400e" text-anchor="middle">Akar: Pancasila</text>
+</svg>
+</div>
+            <div class="options-list" id="options-44">
+                
+        <label class="option-item" id="opt-label-44-0" data-q="44" data-opt="0">
+            <input type="radio" name="q44" value="0" onchange="selectOption(44, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">batang utama pohon yang kokoh menopang dahan dan ranting peraturan di bawahnya</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-44-1" data-q="44" data-opt="1">
+            <input type="radio" name="q44" value="1" onchange="selectOption(44, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">akar pohon yang tertanam paling dalam di bawah tanah sebagai dasar negara</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-44-2" data-q="44" data-opt="2">
+            <input type="radio" name="q44" value="2" onchange="selectOption(44, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">daun-daun rindang yang berada di bagian paling atas pohon hukum</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-44-3" data-q="44" data-opt="3">
+            <input type="radio" name="q44" value="3" onchange="selectOption(44, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">buah yang dihasilkan setelah seluruh peraturan daerah selesai dilaksanakan</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-44" style="display:none;">
+            <div class="exp-status" id="exp-status-44"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Dalam permisalan pohon hukum (Bab II Rev 1.0 hal. 34-35), Pancasila adalah akarnya (dasar negara), UUD NRI Tahun 1945 adalah batang utamanya (dasar hukum tertulis), sedangkan UU/PP/Perda adalah dahan dan rantingnya.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-45" data-ans="1">
+        <div class="q-header">
+            <span class="q-number">Soal 45</span>
+            <span class="q-bab">Bab II (Rev 1.0): UUD NRI Tahun 1945</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Pada sidang kedua BPUPK tanggal 10–17 Juli 1945, dibentuk Panitia Perancang Undang-Undang Dasar yang diketuai oleh Ir. Sukarno. Hasil rancangan UUD tersebut akhirnya diterima dengan suara bulat dalam sidang pleno BPUPK pada tanggal ....</p>
+            
+            <div class="options-list" id="options-45">
+                
+        <label class="option-item" id="opt-label-45-0" data-q="45" data-opt="0">
+            <input type="radio" name="q45" value="0" onchange="selectOption(45, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">22 Juni 1945</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-45-1" data-q="45" data-opt="1">
+            <input type="radio" name="q45" value="1" onchange="selectOption(45, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">16 Juli 1945</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-45-2" data-q="45" data-opt="2">
+            <input type="radio" name="q45" value="2" onchange="selectOption(45, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">17 Agustus 1945</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-45-3" data-q="45" data-opt="3">
+            <input type="radio" name="q45" value="3" onchange="selectOption(45, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">1 Juni 1945</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-45" style="display:none;">
+            <div class="exp-status" id="exp-status-45"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: B</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Pada sidang kedua BPUPK (10–17 Juli 1945), naskah rancangan Undang-Undang Dasar (Pembukaan dan Batang Tubuh) diterima dengan suara bulat pada tanggal 16 Juli 1945.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-46" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 46</span>
+            <span class="q-bab">Bab II (Rev 1.0): UUD NRI Tahun 1945</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Sebelum dilakukan perubahan (amendemen), sistematika UUD NRI Tahun 1945 terdiri atas tiga bagian, yaitu Pembukaan, Batang Tubuh, dan Penjelasan. Setelah dilakukan amendemen oleh MPR, sistematika UUD NRI Tahun 1945 menjadi ....</p>
+            
+            <div class="options-list" id="options-46">
+                
+        <label class="option-item" id="opt-label-46-0" data-q="46" data-opt="0">
+            <input type="radio" name="q46" value="0" onchange="selectOption(46, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Preambul dan Ketetapan MPR</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-46-1" data-q="46" data-opt="1">
+            <input type="radio" name="q46" value="1" onchange="selectOption(46, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Mukadimah dan Penjelasan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-46-2" data-q="46" data-opt="2">
+            <input type="radio" name="q46" value="2" onchange="selectOption(46, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Batang Tubuh dan Aturan Tambahan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-46-3" data-q="46" data-opt="3">
+            <input type="radio" name="q46" value="3" onchange="selectOption(46, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Pembukaan dan Pasal-Pasal</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-46" style="display:none;">
+            <div class="exp-status" id="exp-status-46"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Setelah dilakukan amendemen pada tahun 1999–2002, sistematika UUD NRI Tahun 1945 disederhanakan menjadi dua bagian utama, yaitu Pembukaan dan Pasal-Pasal.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-47" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 47</span>
+            <span class="q-bab">Bab II (Rev 1.0): UUD NRI Tahun 1945</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Lembaga negara yang memiliki kewenangan konstitusional untuk mengubah dan menetapkan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 (melakukan amendemen) adalah ....</p>
+            
+            <div class="options-list" id="options-47">
+                
+        <label class="option-item" id="opt-label-47-0" data-q="47" data-opt="0">
+            <input type="radio" name="q47" value="0" onchange="selectOption(47, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Mahkamah Konstitusi (MK)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-47-1" data-q="47" data-opt="1">
+            <input type="radio" name="q47" value="1" onchange="selectOption(47, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Dewan Perwakilan Rakyat (DPR)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-47-2" data-q="47" data-opt="2">
+            <input type="radio" name="q47" value="2" onchange="selectOption(47, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Presiden bersama Wakil Presiden</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-47-3" data-q="47" data-opt="3">
+            <input type="radio" name="q47" value="3" onchange="selectOption(47, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Majelis Permusyawaratan Rakyat (MPR)</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-47" style="display:none;">
+            <div class="exp-status" id="exp-status-47"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Majelis Permusyawaratan Rakyat (MPR) melakukan amendemen UUD NRI Tahun 1945 sebanyak empat kali pada kurun waktu tahun 1999 hingga 2002.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-48" data-ans="3">
+        <div class="q-header">
+            <span class="q-number">Soal 48</span>
+            <span class="q-bab">Bab II (Rev 1.0): UUD NRI Tahun 1945</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Perhatikan bagan ringkasan hasil empat kali amendemen UUD NRI Tahun 1945 berikut ini!<br>Berdasarkan bagan tersebut, pembatasan masa jabatan Presiden dan Wakil Presiden maksimal dua kali masa jabatan (masing-masing 5 tahun) merupakan hasil dari ....</p>
+            <div class="q-illustration">
+<svg viewBox="0 0 360 190" width="100%" style="max-width:370px; border-radius:12px; background:#f8fafc; border:1px solid #cbd5e1; padding:8px;">
+  <rect width="360" height="190" fill="#fff1f2" rx="10"/>
+  <rect x="20" y="25" width="150" height="55" rx="6" fill="#ffffff" stroke="#e11d48" stroke-width="1.5"/>
+  <text x="95" y="46" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#be123c" text-anchor="middle">Amendemen I (1999)</text>
+  <text x="95" y="62" font-family="sans-serif" font-size="9" fill="#334155" text-anchor="middle">Masa jabatan Presiden maks. 2x</text>
+  <rect x="190" y="25" width="150" height="55" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="265" y="46" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Amendemen II (2000)</text>
+  <text x="265" y="62" font-family="sans-serif" font-size="9" fill="#334155" text-anchor="middle">Pemilihan langsung DPR/DPRD</text>
+  <rect x="20" y="95" width="150" height="55" rx="6" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+  <text x="95" y="116" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#b45309" text-anchor="middle">Amendemen III (2001)</text>
+  <text x="95" y="132" font-family="sans-serif" font-size="9" fill="#334155" text-anchor="middle">Pemilihan langsung Presiden</text>
+  <rect x="190" y="95" width="150" height="55" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="265" y="116" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#15803d" text-anchor="middle">Amendemen IV (2002)</text>
+  <text x="265" y="132" font-family="sans-serif" font-size="9" fill="#334155" text-anchor="middle">Anggaran Pendidikan min. 20%</text>
+  <text x="180" y="175" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Empat Tahap Amendemen UUD NRI Tahun 1945</text>
+</svg>
+</div>
+            <div class="options-list" id="options-48">
+                
+        <label class="option-item" id="opt-label-48-0" data-q="48" data-opt="0">
+            <input type="radio" name="q48" value="0" onchange="selectOption(48, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">Amendemen Keempat (tahun 2002)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-48-1" data-q="48" data-opt="1">
+            <input type="radio" name="q48" value="1" onchange="selectOption(48, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">Amendemen Ketiga (tahun 2001)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-48-2" data-q="48" data-opt="2">
+            <input type="radio" name="q48" value="2" onchange="selectOption(48, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">Amendemen Kedua (tahun 2000)</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-48-3" data-q="48" data-opt="3">
+            <input type="radio" name="q48" value="3" onchange="selectOption(48, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">Amendemen Pertama (tahun 1999)</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-48" style="display:none;">
+            <div class="exp-status" id="exp-status-48"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: D</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Amendemen Pertama UUD NRI Tahun 1945 pada 14–19 Oktober 1999 membatasi masa jabatan Presiden dan Wakil Presiden maksimal dua kali masa jabatan (total maksimal 10 tahun).</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-49" data-ans="1">
+        <div class="q-header">
+            <span class="q-number">Soal 49</span>
+            <span class="q-bab">Bab II (Rev 1.0): UUD NRI Tahun 1945</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Salah satu hasil penting dari Amendemen Keempat UUD NRI Tahun 1945 pada tahun 2002 di bidang pendidikan adalah kewajiban negara untuk memprioritaskan anggaran pendidikan sekurang-kurangnya sebesar ....</p>
+            
+            <div class="options-list" id="options-49">
+                
+        <label class="option-item" id="opt-label-49-0" data-q="49" data-opt="0">
+            <input type="radio" name="q49" value="0" onchange="selectOption(49, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">50 persen dari seluruh belanja pegawai kementerian negara</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-49-1" data-q="49" data-opt="1">
+            <input type="radio" name="q49" value="1" onchange="selectOption(49, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">20 persen dari Anggaran Pendapatan dan Belanja Negara (APBN) serta APBD</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-49-2" data-q="49" data-opt="2">
+            <input type="radio" name="q49" value="2" onchange="selectOption(49, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">5 persen dari dana bantuan luar negeri setiap tahunnya</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-49-3" data-q="49" data-opt="3">
+            <input type="radio" name="q49" value="3" onchange="selectOption(49, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">10 persen dari pendapatan pajak daerah kabupaten/kota</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-49" style="display:none;">
+            <div class="exp-status" id="exp-status-49"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: B</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Dalam Amendemen Keempat UUD NRI Tahun 1945 (2002), pemerintah diwajibkan mengalokasikan anggaran pendidikan paling sedikit 20% dari APBN dan APBD untuk meningkatkan kualitas pendidikan masyarakat.</p>
+        </div>
+    </article>
+    
+    <article class="question-card" id="question-50" data-ans="0">
+        <div class="q-header">
+            <span class="q-number">Soal 50</span>
+            <span class="q-bab">Bab 3: Patuh Terhadap Norma</span>
+        </div>
+        <div class="q-body">
+            <p class="q-text">Sebagai warga negara yang baik di lingkungan bangsa dan negara, membayar pajak tepat waktu merupakan salah satu bentuk kepatuhan terhadap norma hukum. Manfaat utama pajak yang dibayarkan masyarakat adalah ....</p>
+            
+            <div class="options-list" id="options-50">
+                
+        <label class="option-item" id="opt-label-50-0" data-q="50" data-opt="0">
+            <input type="radio" name="q50" value="0" onchange="selectOption(50, 0)">
+            <span class="opt-badge">A</span>
+            <span class="opt-text">membiayai pembangunan fasilitas umum seperti jalan, jembatan, sekolah, dan beasiswa pendidikan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-50-1" data-q="50" data-opt="1">
+            <input type="radio" name="q50" value="1" onchange="selectOption(50, 1)">
+            <span class="opt-badge">B</span>
+            <span class="opt-text">menambah kekayaan pribadi para pejabat yang bertugas di instansi pemerintahan</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-50-2" data-q="50" data-opt="2">
+            <input type="radio" name="q50" value="2" onchange="selectOption(50, 2)">
+            <span class="opt-badge">C</span>
+            <span class="opt-text">menggantikan seluruh kewajiban warga negara dalam menjaga keamanan lingkungan sekitar</span>
+        </label>
+        
+        <label class="option-item" id="opt-label-50-3" data-q="50" data-opt="3">
+            <input type="radio" name="q50" value="3" onchange="selectOption(50, 3)">
+            <span class="opt-badge">D</span>
+            <span class="opt-text">membebaskan pembayar pajak dari kewajiban mematuhi peraturan lalu lintas di jalan raya</span>
+        </label>
+        
+            </div>
+        </div>
+        <div class="explanation-box" id="exp-50" style="display:none;">
+            <div class="exp-status" id="exp-status-50"></div>
+            <div class="exp-key"><strong>Kunci Jawaban: A</strong></div>
+            <p class="exp-text"><strong>Pembahasan:</strong> Pajak merupakan pemasukan utama negara yang dikembalikan lagi untuk kesejahteraan masyarakat melalui pembangunan infrastruktur (jalan, jembatan, sekolah) serta program beasiswa.</p>
+        </div>
+    </article>
+    
+
+    <!-- Bagian Akhir Soal: Tombol Submit & Hasil Skor -->
+    <section class="submit-footer-card" id="result-section">
+      <div id="pre-submit-area">
+        <p style="margin-bottom: 14px; color: #475569; font-size: 0.95rem;">
+          Pastikan seluruh 50 soal telah diperiksa sebelum menekan tombol selesai.
+        </p>
+        <button type="button" class="btn-submit-main" onclick="submitQuiz()">Selesai &amp; Lihat Skor</button>
+      </div>
+
+      <div class="score-panel" id="score-panel">
+        <div style="font-size: 1rem; font-weight: 700; color: #1e293b;">HASIL PENGERJAAN LATIHAN SOAL</div>
+        <div class="score-big" id="final-score">0</div>
+        <div id="score-predicate" style="font-weight: 600; color: #334155; font-size: 0.98rem;"></div>
+        <div class="score-stats">
+          <div class="stat-box stat-benar" id="stat-benar">Benar: 0</div>
+          <div class="stat-box stat-salah" id="stat-salah">Salah: 0</div>
+          <div class="stat-box stat-kosong" id="stat-kosong">Tidak Dijawab: 0</div>
+        </div>
+        <p style="margin-top: 14px; font-size: 0.88rem; color: #475569;">
+          Silakan gulir ke atas atau klik nomor soal pada daftar di samping untuk melihat pembahasan jawaban benar dan salah.
+        </p>
+        <button type="button" class="btn-reset" onclick="resetQuiz()">Ulangi Latihan Soal</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Navigasi Nomor Soal Samping (Tetap / Sticky saat di-scroll) -->
+  <aside class="sidebar-column" aria-label="Navigasi Nomor Soal">
+    <div class="sidebar-header">
+      <span>Daftar Nomor Soal</span>
+      <span id="side-counter" style="font-size:0.8rem; color:#2563eb;">0/50</span>
+    </div>
+    <div class="legend" id="legend-box">
+      <span><i class="dot dot-empty"></i> Belum</span>
+      <span><i class="dot dot-done"></i> Dijawab</span>
+    </div>
+    <div class="nav-grid">
+      <button type="button" class="nav-btn" id="nav-btn-1" onclick="scrollToQuestion(1)" title="Ke Soal 1">1</button>
+<button type="button" class="nav-btn" id="nav-btn-2" onclick="scrollToQuestion(2)" title="Ke Soal 2">2</button>
+<button type="button" class="nav-btn" id="nav-btn-3" onclick="scrollToQuestion(3)" title="Ke Soal 3">3</button>
+<button type="button" class="nav-btn" id="nav-btn-4" onclick="scrollToQuestion(4)" title="Ke Soal 4">4</button>
+<button type="button" class="nav-btn" id="nav-btn-5" onclick="scrollToQuestion(5)" title="Ke Soal 5">5</button>
+<button type="button" class="nav-btn" id="nav-btn-6" onclick="scrollToQuestion(6)" title="Ke Soal 6">6</button>
+<button type="button" class="nav-btn" id="nav-btn-7" onclick="scrollToQuestion(7)" title="Ke Soal 7">7</button>
+<button type="button" class="nav-btn" id="nav-btn-8" onclick="scrollToQuestion(8)" title="Ke Soal 8">8</button>
+<button type="button" class="nav-btn" id="nav-btn-9" onclick="scrollToQuestion(9)" title="Ke Soal 9">9</button>
+<button type="button" class="nav-btn" id="nav-btn-10" onclick="scrollToQuestion(10)" title="Ke Soal 10">10</button>
+<button type="button" class="nav-btn" id="nav-btn-11" onclick="scrollToQuestion(11)" title="Ke Soal 11">11</button>
+<button type="button" class="nav-btn" id="nav-btn-12" onclick="scrollToQuestion(12)" title="Ke Soal 12">12</button>
+<button type="button" class="nav-btn" id="nav-btn-13" onclick="scrollToQuestion(13)" title="Ke Soal 13">13</button>
+<button type="button" class="nav-btn" id="nav-btn-14" onclick="scrollToQuestion(14)" title="Ke Soal 14">14</button>
+<button type="button" class="nav-btn" id="nav-btn-15" onclick="scrollToQuestion(15)" title="Ke Soal 15">15</button>
+<button type="button" class="nav-btn" id="nav-btn-16" onclick="scrollToQuestion(16)" title="Ke Soal 16">16</button>
+<button type="button" class="nav-btn" id="nav-btn-17" onclick="scrollToQuestion(17)" title="Ke Soal 17">17</button>
+<button type="button" class="nav-btn" id="nav-btn-18" onclick="scrollToQuestion(18)" title="Ke Soal 18">18</button>
+<button type="button" class="nav-btn" id="nav-btn-19" onclick="scrollToQuestion(19)" title="Ke Soal 19">19</button>
+<button type="button" class="nav-btn" id="nav-btn-20" onclick="scrollToQuestion(20)" title="Ke Soal 20">20</button>
+<button type="button" class="nav-btn" id="nav-btn-21" onclick="scrollToQuestion(21)" title="Ke Soal 21">21</button>
+<button type="button" class="nav-btn" id="nav-btn-22" onclick="scrollToQuestion(22)" title="Ke Soal 22">22</button>
+<button type="button" class="nav-btn" id="nav-btn-23" onclick="scrollToQuestion(23)" title="Ke Soal 23">23</button>
+<button type="button" class="nav-btn" id="nav-btn-24" onclick="scrollToQuestion(24)" title="Ke Soal 24">24</button>
+<button type="button" class="nav-btn" id="nav-btn-25" onclick="scrollToQuestion(25)" title="Ke Soal 25">25</button>
+<button type="button" class="nav-btn" id="nav-btn-26" onclick="scrollToQuestion(26)" title="Ke Soal 26">26</button>
+<button type="button" class="nav-btn" id="nav-btn-27" onclick="scrollToQuestion(27)" title="Ke Soal 27">27</button>
+<button type="button" class="nav-btn" id="nav-btn-28" onclick="scrollToQuestion(28)" title="Ke Soal 28">28</button>
+<button type="button" class="nav-btn" id="nav-btn-29" onclick="scrollToQuestion(29)" title="Ke Soal 29">29</button>
+<button type="button" class="nav-btn" id="nav-btn-30" onclick="scrollToQuestion(30)" title="Ke Soal 30">30</button>
+<button type="button" class="nav-btn" id="nav-btn-31" onclick="scrollToQuestion(31)" title="Ke Soal 31">31</button>
+<button type="button" class="nav-btn" id="nav-btn-32" onclick="scrollToQuestion(32)" title="Ke Soal 32">32</button>
+<button type="button" class="nav-btn" id="nav-btn-33" onclick="scrollToQuestion(33)" title="Ke Soal 33">33</button>
+<button type="button" class="nav-btn" id="nav-btn-34" onclick="scrollToQuestion(34)" title="Ke Soal 34">34</button>
+<button type="button" class="nav-btn" id="nav-btn-35" onclick="scrollToQuestion(35)" title="Ke Soal 35">35</button>
+<button type="button" class="nav-btn" id="nav-btn-36" onclick="scrollToQuestion(36)" title="Ke Soal 36">36</button>
+<button type="button" class="nav-btn" id="nav-btn-37" onclick="scrollToQuestion(37)" title="Ke Soal 37">37</button>
+<button type="button" class="nav-btn" id="nav-btn-38" onclick="scrollToQuestion(38)" title="Ke Soal 38">38</button>
+<button type="button" class="nav-btn" id="nav-btn-39" onclick="scrollToQuestion(39)" title="Ke Soal 39">39</button>
+<button type="button" class="nav-btn" id="nav-btn-40" onclick="scrollToQuestion(40)" title="Ke Soal 40">40</button>
+<button type="button" class="nav-btn" id="nav-btn-41" onclick="scrollToQuestion(41)" title="Ke Soal 41">41</button>
+<button type="button" class="nav-btn" id="nav-btn-42" onclick="scrollToQuestion(42)" title="Ke Soal 42">42</button>
+<button type="button" class="nav-btn" id="nav-btn-43" onclick="scrollToQuestion(43)" title="Ke Soal 43">43</button>
+<button type="button" class="nav-btn" id="nav-btn-44" onclick="scrollToQuestion(44)" title="Ke Soal 44">44</button>
+<button type="button" class="nav-btn" id="nav-btn-45" onclick="scrollToQuestion(45)" title="Ke Soal 45">45</button>
+<button type="button" class="nav-btn" id="nav-btn-46" onclick="scrollToQuestion(46)" title="Ke Soal 46">46</button>
+<button type="button" class="nav-btn" id="nav-btn-47" onclick="scrollToQuestion(47)" title="Ke Soal 47">47</button>
+<button type="button" class="nav-btn" id="nav-btn-48" onclick="scrollToQuestion(48)" title="Ke Soal 48">48</button>
+<button type="button" class="nav-btn" id="nav-btn-49" onclick="scrollToQuestion(49)" title="Ke Soal 49">49</button>
+<button type="button" class="nav-btn" id="nav-btn-50" onclick="scrollToQuestion(50)" title="Ke Soal 50">50</button>
+
+    </div>
+    <button type="button" class="btn-submit-side" id="btn-submit-side" onclick="submitQuiz()">Submit Jawaban</button>
+  </aside>
+</div>
+
+<script>
+  const totalQuestions = 50;
+  const userAnswers = {};
+  let isSubmitted = false;
+
+  function selectOption(qNo, optIdx) {
+    if (isSubmitted) return;
+    userAnswers[qNo] = optIdx;
+
+    // Update tampilan opsi terpilih
+    for (let i = 0; i < 4; i++) {
+      const lbl = document.getElementById(`opt-label-${qNo}-${i}`);
+      if (lbl) {
+        if (i === optIdx) {
+          lbl.classList.add('selected');
+        } else {
+          lbl.classList.remove('selected');
+        }
+      }
+    }
+
+    // Update tombol navigasi di samping
+    const navBtn = document.getElementById(`nav-btn-${qNo}`);
+    if (navBtn) {
+      navBtn.classList.add('answered');
+    }
+
+    // Update counter progres
+    const answeredCount = Object.keys(userAnswers).length;
+    document.getElementById('progress-text').textContent = `Terjawab: ${answeredCount} / ${totalQuestions}`;
+    document.getElementById('side-counter').textContent = `${answeredCount}/${totalQuestions}`;
+  }
+
+  function scrollToQuestion(qNo) {
+    const el = document.getElementById(`question-${qNo}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function submitQuiz() {
+    if (isSubmitted) {
+      document.getElementById('result-section').scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    const answeredCount = Object.keys(userAnswers).length;
+    if (answeredCount < totalQuestions) {
+      const confirmSubmit = confirm(`Kamu baru menjawab ${answeredCount} dari ${totalQuestions} soal. Yakin ingin mengakhiri dan melihat skor sekarang?`);
+      if (!confirmSubmit) return;
+    }
+
+    isSubmitted = true;
+    let correctCount = 0;
+    let wrongCount = 0;
+    let emptyCount = 0;
+
+    for (let no = 1; no <= totalQuestions; no++) {
+      const card = document.getElementById(`question-${no}`);
+      const correctAns = parseInt(card.getAttribute('data-ans'), 10);
+      const userAns = userAnswers[no];
+      const navBtn = document.getElementById(`nav-btn-${no}`);
+      const expBox = document.getElementById(`exp-${no}`);
+      const expStatus = document.getElementById(`exp-status-${no}`);
+
+      // Nonaktifkan radio button setelah submit
+      const radios = card.querySelectorAll('input[type="radio"]');
+      radios.forEach(r => r.disabled = true);
+
+      // Tandai opsi yang benar
+      const correctLabel = document.getElementById(`opt-label-${no}-${correctAns}`);
+      if (correctLabel) correctLabel.classList.add('opt-correct');
+
+      expBox.style.display = 'block';
+
+      if (userAns === undefined) {
+        emptyCount++;
+        navBtn.classList.remove('answered');
+        navBtn.classList.add('result-wrong');
+        expBox.classList.add('exp-wrong');
+        expStatus.textContent = '⚠ Tidak Dijawab (Salah)';
+      } else if (userAns === correctAns) {
+        correctCount++;
+        navBtn.classList.remove('answered');
+        navBtn.classList.add('result-correct');
+        expBox.classList.add('exp-right');
+        expStatus.textContent = '✔ Jawaban Kamu Benar!';
+      } else {
+        wrongCount++;
+        const wrongLabel = document.getElementById(`opt-label-${no}-${userAns}`);
+        if (wrongLabel) wrongLabel.classList.add('opt-wrong');
+        navBtn.classList.remove('answered');
+        navBtn.classList.add('result-wrong');
+        expBox.classList.add('exp-wrong');
+        expStatus.textContent = '✘ Jawaban Kamu Kurang Tepat';
+      }
+    }
+
+    // Hitung skor skala 100
+    const score = Math.round((correctCount / totalQuestions) * 100);
+    document.getElementById('final-score').textContent = `${score} / 100`;
+    document.getElementById('stat-benar').textContent = `Benar: ${correctCount}`;
+    document.getElementById('stat-salah').textContent = `Salah: ${wrongCount}`;
+    document.getElementById('stat-kosong').textContent = `Tidak Dijawab: ${emptyCount}`;
+
+    let predikat = '';
+    if (score >= 90) predikat = 'Predikat: Sangat Baik (Istimewa) — Pemahamanmu sangat mantap!';
+    else if (score >= 75) predikat = 'Predikat: Baik — Sudah melampaui kriteria ketuntasan, terus tingkatkan!';
+    else if (score >= 60) predikat = 'Predikat: Cukup — Pelajari kembali pembahasan pada soal yang masih salah.';
+    else predikat = 'Predikat: Perlu Bimbingan — Ayo baca pembahasan tiap soal di atas agar lebih paham!';
+    document.getElementById('score-predicate').textContent = predikat;
+
+    // Ubah legenda di sidebar
+    document.getElementById('legend-box').innerHTML = `
+      <span><i class="dot dot-correct"></i> Benar (${correctCount})</span>
+      <span><i class="dot dot-wrong"></i> Salah (${wrongCount + emptyCount})</span>
+    `;
+    document.getElementById('btn-submit-side').textContent = 'Lihat Hasil Skor';
+    document.getElementById('pre-submit-area').style.display = 'none';
+    document.getElementById('score-panel').style.display = 'block';
+    document.getElementById('result-section').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function resetQuiz() {
+    if (!confirm('Ulangi latihan dari awal? Semua jawaban dan skor saat ini akan direset.')) return;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => location.reload(), 250);
+  }
+</script>
+</body>
+</html>

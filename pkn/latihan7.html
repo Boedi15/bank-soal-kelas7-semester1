@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latihan 100 Soal Pendidikan Pancasila Kelas VII Semester 1</title>
+  <!-- Tailwind CSS CDN untuk tata letak responsif dan estetika modern -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Kustomisasi scrollbar & transisi halus untuk kenyamanan membaca 100 soal */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .option-card {
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .option-card:hover:not(.disabled-option) {
+      transform: translateX(3px);
+    }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-red-100 selection:text-red-900">
+
+  <!-- Header Sticky Atas -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <!-- Lambang Mini Merah Putih Garuda -->
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white shadow-sm shrink-0">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z" fill="#facc15" stroke="#fef08a"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">
+            Latihan Soal Pendidikan Pancasila
+          </h1>
+          <p class="text-xs text-slate-500 font-medium">
+            SMP Kelas VII Semester 1 • Kurikulum Merdeka • 100 Soal Pilihan Ganda
+          </p>
+        </div>
+      </div>
+
+      <!-- Indikator Progres & Aksi Cepat -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <div class="hidden sm:flex flex-col items-end">
+          <span class="text-xs font-semibold text-slate-600">
+            Terjawab: <span id="header-answered-count" class="text-red-600 font-bold">0</span> / 100
+          </span>
+          <div class="w-36 h-2 bg-slate-200 rounded-full overflow-hidden mt-1">
+            <div id="header-progress-bar" class="h-full bg-red-600 transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Tombol Filter Topik / Kategori -->
+        <select id="topic-filter" onchange="filterQuestionsByTopic()" class="text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 max-w-[170px] sm:max-w-[230px]">
+          <option value="ALL">Semua Topik (100 Soal)</option>
+          <option value="1">1. Sejarah Kelahiran Pancasila</option>
+          <option value="2">2. Sidang BPUPK (29 Mei–1 Juni)</option>
+          <option value="3">3. Perumusan Panitia Sembilan</option>
+          <option value="4">4. Penetapan & Nilai Pancasila</option>
+          <option value="5">5. Norma dalam Masyarakat</option>
+          <option value="6">6. Hak & Kewajiban pada Norma</option>
+          <option value="7">7. UUD NRI 1945 Dasar Hukum</option>
+          <option value="8">8. Perumusan & Pengesahan UUD</option>
+          <option value="9">9. Amendemen UUD NRI 1945</option>
+        </select>
+
+        <!-- Tombol Buka Navigasi Nomor di Layar Mobile -->
+        <button onclick="toggleMobileDrawer()" class="lg:hidden inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold shadow-sm active:scale-95">
+          <span>Nomor</span>
+          <span id="mobile-badge-count" class="bg-red-500 text-white px-1.5 py-0.5 rounded-md text-[11px]">0/100</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Kontainer Utama: Area Soal (Kiri/Tengah) + Sidebar Navigasi Tetap (Kanan) -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col lg:flex-row gap-6 items-start">
+
+    <!-- Kolom Utama Daftar Soal -->
+    <main class="w-full lg:w-[calc(100%-320px)] space-y-6">
+
+      <!-- Kartu Hasil Skor Akhir (Tersembunyi sebelum disubmit, muncul di atas setelah disubmit) -->
+      <section id="result-card-top" class="hidden bg-white rounded-2xl border-2 border-red-200 shadow-lg overflow-hidden">
+        <div class="bg-gradient-to-r from-red-700 via-red-600 to-amber-600 px-6 py-5 text-white flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold tracking-wide uppercase mb-1">
+              Hasil Evaluasi Akhir
+            </span>
+            <h2 class="text-xl sm:text-2xl font-extrabold">Rekapitulasi Nilai Latihan Pendidikan Pancasila</h2>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="openResetModal()" class="px-4 py-2.5 bg-white text-red-700 hover:bg-red-50 font-bold text-sm rounded-xl shadow transition flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Ulangi / Acak Ulang Soal
+            </button>
+          </div>
+        </div>
+
+        <div class="p-6 grid grid-cols-2 sm:grid-cols-5 gap-4 items-center">
+          <div class="col-span-2 sm:col-span-1 bg-slate-900 text-white rounded-2xl p-4 text-center shadow-inner">
+            <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Nilai Akhir</div>
+            <div id="score-final-value" class="text-4xl font-black text-amber-400 my-1">0</div>
+            <div id="score-predicate" class="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 inline-block">-</div>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-center">
+            <div class="text-xs font-semibold text-emerald-700">Jawaban Benar</div>
+            <div id="score-correct-count" class="text-2xl font-extrabold text-emerald-600 mt-1">0</div>
+            <div class="text-[11px] text-emerald-600">Soal</div>
+          </div>
+          <div class="bg-rose-50 border border-rose-200 rounded-2xl p-4 text-center">
+            <div class="text-xs font-semibold text-rose-700">Jawaban Salah</div>
+            <div id="score-wrong-count" class="text-2xl font-extrabold text-rose-600 mt-1">0</div>
+            <div class="text-[11px] text-rose-600">Soal</div>
+          </div>
+          <div class="bg-slate-100 border border-slate-200 rounded-2xl p-4 text-center">
+            <div class="text-xs font-semibold text-slate-600">Tidak Dijawab</div>
+            <div id="score-unanswered-count" class="text-2xl font-extrabold text-slate-700 mt-1">0</div>
+            <div class="text-[11px] text-slate-500">Soal</div>
+          </div>
+          <div class="col-span-2 sm:col-span-1 bg-amber-50 border border-amber-200 rounded-2xl p-4 text-center">
+            <div class="text-xs font-semibold text-amber-800">Status KKM (75)</div>
+            <div id="score-kkm-status" class="text-sm font-extrabold text-amber-700 mt-2">-</div>
+          </div>
+        </div>
+
+        <!-- Filter Hasil Setelah Submit -->
+        <div class="px-6 pb-5 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-4">
+          <span class="text-xs font-semibold text-slate-500 mr-1">Tampilkan Pembahasan:</span>
+          <button onclick="filterResultMode('ALL')" id="btn-res-all" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-white">Semua (100)</button>
+          <button onclick="filterResultMode('WRONG')" id="btn-res-wrong" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-100 text-rose-700 hover:bg-rose-200">Hanya Salah & Kosong</button>
+          <button onclick="filterResultMode('CORRECT')" id="btn-res-correct" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-100 text-emerald-700 hover:bg-emerald-200">Hanya Benar</button>
+        </div>
+      </section>
+
+      <!-- Wadah Render 100 Kartu Soal -->
+      <div id="questions-container" class="space-y-6">
+        <!-- Soal akan di-render secara dinamis oleh JavaScript -->
+      </div>
+
+      <!-- Panel Tombol Selesai di Bagian Akhir Soal -->
+      <div id="bottom-action-panel" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h3 class="text-base font-bold text-slate-900">Sudah selesai mengerjakan seluruh 100 soal?</h3>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+            Periksa kembali panel nomor di samping untuk memastikan tidak ada soal yang terlewat.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto justify-end">
+          <button onclick="openResetModal()" class="px-4 py-3 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold transition">
+            Acak Ulang Soal
+          </button>
+          <button id="btn-submit-quiz" onclick="handleAttemptSubmit()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold text-sm shadow-md shadow-red-600/20 transition active:scale-95 flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Selesai &amp; Lihat Skor
+          </button>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Sidebar Navigasi Nomor Soal (Sticky Desktop + Drawer Mobile) -->
+    <aside id="nav-sidebar" class="fixed inset-y-0 right-0 z-40 w-80 bg-white border-l border-slate-200 shadow-2xl transform translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:sticky lg:top-20 lg:w-[300px] lg:rounded-2xl lg:border lg:shadow-sm flex flex-col max-h-screen lg:max-h-[calc(100vh-6rem)]">
+      <!-- Header Sidebar -->
+      <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/80 lg:rounded-t-2xl">
+        <div>
+          <h2 class="text-sm font-bold text-slate-900">Navigasi Nomor Soal</h2>
+          <p class="text-[11px] text-slate-500">Klik nomor untuk melompat cepat</p>
+        </div>
+        <button onclick="toggleMobileDrawer()" class="lg:hidden p-1.5 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Legenda Status Warna -->
+      <div class="px-4 py-2.5 bg-white border-b border-slate-100 grid grid-cols-2 gap-1.5 text-[11px] font-medium text-slate-600">
+        <div class="flex items-center gap-1.5">
+          <span class="w-3 h-3 rounded bg-slate-100 border border-slate-300 inline-block"></span>
+          <span>Belum Dijawab</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="w-3 h-3 rounded bg-blue-600 inline-block"></span>
+          <span>Sudah Dijawab</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span>
+          <span>Benar (Submit)</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="w-3 h-3 rounded bg-rose-500 inline-block"></span>
+          <span>Salah (Submit)</span>
+        </div>
+      </div>
+
+      <!-- Grid 100 Nomor Soal -->
+      <div id="number-grid" class="p-3.5 overflow-y-auto grid grid-cols-5 gap-1.5 flex-1">
+        <!-- Tombol 1-100 di-render oleh JavaScript -->
+      </div>
+
+      <!-- Footer Sidebar dengan Tombol Submit Cepat -->
+      <div class="p-3.5 border-t border-slate-200 bg-slate-50 lg:rounded-b-2xl space-y-2">
+        <div class="flex justify-between text-xs font-semibold text-slate-600">
+          <span>Progres Pengerjaan</span>
+          <span id="sidebar-progress-text" class="text-blue-600 font-bold">0 / 100</span>
+        </div>
+        <button id="sidebar-submit-btn" onclick="handleAttemptSubmit()" class="w-full py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow transition">
+          Selesai &amp; Lihat Skor
+        </button>
+        <button id="sidebar-reset-btn" onclick="openResetModal()" class="hidden w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs shadow transition">
+          Ulangi / Acak Ulang Soal
+        </button>
+      </div>
+    </aside>
+
+    <!-- Backdrop Mobile Drawer -->
+    <div id="mobile-backdrop" onclick="toggleMobileDrawer()" class="fixed inset-0 bg-slate-900/50 z-30 hidden lg:hidden"></div>
+  </div>
+
+  <!-- Modal Konfirmasi Custom (Menggantikan alert/confirm bawaan browser) -->
+  <div id="confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 transform transition-all">
+      <div class="flex items-center gap-3 text-amber-600 mb-3">
+        <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        <h3 id="modal-title" class="text-lg font-bold text-slate-900">Konfirmasi Pengumpulan</h3>
+      </div>
+      <p id="modal-message" class="text-sm text-slate-600 leading-relaxed mb-6">
+        Masih ada beberapa soal yang belum dijawab. Apakah Anda yakin ingin mengakhiri latihan dan melihat skor sekarang?
+      </p>
+      <div class="flex items-center justify-end gap-3">
+        <button onclick="closeModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition">
+          Batal, Lanjut Mengerjakan
+        </button>
+        <button id="modal-confirm-btn" onclick="executeModalAction()" class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow transition">
+          Ya, Lihat Skor Sekarang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * ============================================================================
+     * ASET ILUSTRASI SVG VEKTOR KUSTOM (100% OFFLINE TANPA LINK EKSTERNAL)
+     * ============================================================================
+     */
+    const SVG_ASSETS = {
+      // 1. Ilustrasi Nekara Perunggu Masa Praaksara
+      nekara: `
+        <div class="my-3 p-4 bg-amber-50/70 border border-amber-200 rounded-xl flex flex-col items-center">
+          <svg viewBox="0 0 260 150" class="w-full max-w-[260px] h-auto" role="img" aria-label="Ilustrasi Nekara Perunggu">
+            <defs>
+              <linearGradient id="bronzeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#78350f"/>
+                <stop offset="50%" stop-color="#b45309"/>
+                <stop offset="100%" stop-color="#78350f"/>
+              </linearGradient>
+            </defs>
+            <!-- Bayangan -->
+            <ellipse cx="130" cy="136" rx="72" ry="8" fill="#d97706" opacity="0.25"/>
+            <!-- Badan Nekara (Bentuk dandang terbalik berpinggang) -->
+            <path d="M70 25 L190 25 C195 45, 180 65, 168 78 C162 95, 178 118, 186 132 L74 132 C82 118, 98 95, 92 78 C80 65, 65 45, 70 25 Z" fill="url(#bronzeGrad)" stroke="#451a03" stroke-width="2"/>
+            <!-- Bidang Pukul Atas -->
+            <ellipse cx="130" cy="25" rx="60" ry="9" fill="#d97706" stroke="#451a03" stroke-width="2"/>
+            <ellipse cx="130" cy="25" rx="35" ry="4" fill="none" stroke="#fef3c7" stroke-width="1" stroke-dasharray="3 2"/>
+            <!-- Pegangan Samping (Telinga Nekara) -->
+            <path d="M72 45 C55 45, 55 68, 76 68" fill="none" stroke="#92400e" stroke-width="4" stroke-linecap="round"/>
+            <path d="M188 45 C205 45, 205 68, 184 68" fill="none" stroke="#92400e" stroke-width="4" stroke-linecap="round"/>
+            <!-- Ornamen Geometris Nusantara -->
+            <line x1="76" y1="52" x2="184" y2="52" stroke="#fde68a" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <line x1="92" y1="82" x2="168" y2="82" stroke="#fde68a" stroke-width="1.5"/>
+            <path d="M84 115 L96 102 L108 115 L120 102 L132 115 L144 102 L156 115 L168 102 L178 115" fill="none" stroke="#fde68a" stroke-width="1.5"/>
+          </svg>
+          <span class="text-[11px] font-semibold text-amber-900 mt-1">Gambar: Nekara Perunggu (Peninggalan Masa Praaksara Nusantara)</span>
+        </div>
+      `,
+
+      // 2. Diagram Kesepakatan Panitia Sembilan (Piagam Jakarta)
+      panitia_sembilan: `
+        <div class="my-3 p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col items-center">
+          <svg viewBox="0 0 420 155" class="w-full max-w-[420px] h-auto" role="img" aria-label="Diagram Kesepakatan Panitia Sembilan">
+            <!-- Kotak Kiri: Golongan Keagamaan -->
+            <rect x="10" y="15" width="135" height="58" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+            <text x="77" y="38" font-size="11" font-weight="bold" fill="#065f46" text-anchor="middle">Pendekatan Keagamaan</text>
+            <text x="77" y="53" font-size="9.5" fill="#047857" text-anchor="middle">(4 Tokoh Islam Nasionalis)</text>
+
+            <!-- Kotak Kanan: Golongan Kebangsaan -->
+            <rect x="275" y="15" width="135" height="58" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+            <text x="342" y="38" font-size="11" font-weight="bold" fill="#1e40af" text-anchor="middle">Pendekatan Kebangsaan</text>
+            <text x="342" y="53" font-size="9.5" fill="#1d4ed8" text-anchor="middle">(4 Tokoh Nasionalis Religius)</text>
+
+            <!-- Penengah: Ir. Sukarno -->
+            <circle cx="210" cy="44" r="24" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+            <text x="210" y="42" font-size="9.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Ketua</text>
+            <text x="210" y="53" font-size="8.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">Sukarno</text>
+
+            <!-- Panah Kompromi -->
+            <path d="M145 44 L182 44" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M275 44 L238 44" stroke="#64748b" stroke-width="2"/>
+            <path d="M210 68 L210 92" stroke="#dc2626" stroke-width="2.5"/>
+            <polygon points="205,90 215,90 210,98" fill="#dc2626"/>
+
+            <!-- Hasil Kesepakatan -->
+            <rect x="45" y="100" width="330" height="45" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+            <text x="210" y="120" font-size="11" font-weight="bold" fill="#92400e" text-anchor="middle">Piagam Jakarta (22 Juni 1945) &amp; Musyawarah 18 Agustus 1945</text>
+            <text x="210" y="135" font-size="10.5" font-weight="bold" fill="#b45309" text-anchor="middle">→ Sila I: "Ketuhanan Yang Maha Esa"</text>
+          </svg>
+        </div>
+      `,
+
+      // 3. Lambang Garuda Pancasila dan 5 Perisai
+      garuda_perisai: `
+        <div class="my-3 p-4 bg-amber-50/60 border border-amber-200 rounded-xl flex flex-col items-center">
+          <svg viewBox="0 0 360 175" class="w-full max-w-[360px] h-auto" role="img" aria-label="Lambang Perisai Pancasila">
+            <!-- Siluet Sayap Garuda -->
+            <path d="M125 45 C75 25, 25 35, 15 65 C35 65, 55 72, 65 80 C45 82, 30 92, 25 105 C55 102, 85 102, 115 112 Z" fill="#f59e0b" opacity="0.35"/>
+            <path d="M235 45 C285 25, 335 35, 345 65 C325 65, 305 72, 295 80 C315 82, 330 92, 335 105 C305 102, 275 102, 245 112 Z" fill="#f59e0b" opacity="0.35"/>
+            <!-- Perisai Utama -->
+            <path d="M125 22 L235 22 L235 90 C235 128, 180 148, 180 148 C180 148, 125 128, 125 90 Z" fill="#ffffff" stroke="#1e293b" stroke-width="3"/>
+            <!-- Kuadran Merah & Putih -->
+            <path d="M127 24 L180 24 L180 78 L127 78 Z" fill="#dc2626"/>
+            <path d="M180 78 L233 78 L233 90 C233 125, 180 145, 180 145 Z" fill="#dc2626"/>
+            <!-- Garis Khatulistiwa -->
+            <line x1="125" y1="78" x2="235" y2="78" stroke="#0f172a" stroke-width="4.5"/>
+            <!-- Perisai Tengah (Sila 1: Bintang) -->
+            <rect x="162" y="58" width="36" height="40" rx="4" fill="#0f172a" stroke="#facc15" stroke-width="1.5"/>
+            <polygon points="180,64 184,74 194,74 186,80 189,90 180,84 171,90 174,80 166,74 176,74" fill="#facc15"/>
+            <!-- Kuadran Kanan Atas (Sila 3: Pohon Beringin) -->
+            <circle cx="208" cy="45" r="11" fill="#15803d"/>
+            <rect x="206" y="54" width="4" height="12" fill="#78350f"/>
+            <!-- Kuadran Kiri Atas (Sila 4: Kepala Banteng) -->
+            <circle cx="152" cy="48" r="9" fill="#1e293b"/>
+            <path d="M141 41 Q152 48 163 41" fill="none" stroke="#f8fafc" stroke-width="2.5"/>
+            <!-- Kuadran Kiri Bawah (Sila 5: Padi & Kapas) -->
+            <path d="M146 95 Q142 112 154 122" fill="none" stroke="#eab308" stroke-width="2.5"/>
+            <path d="M162 95 Q166 112 154 122" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+            <!-- Kuadran Kanan Bawah (Sila 2: Rantai Emas) -->
+            <circle cx="204" cy="102" r="5" fill="none" stroke="#facc15" stroke-width="2.5"/>
+            <rect x="209" y="106" width="9" height="9" fill="none" stroke="#facc15" stroke-width="2.5"/>
+            <!-- Pita Bhinneka Tunggal Ika -->
+            <path d="M105 148 Q180 166 255 148 L250 162 Q180 176 110 162 Z" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
+            <text x="180" y="161" font-size="9.5" font-weight="bold" fill="#0f172a" text-anchor="middle">BHINNEKA TUNGGAL IKA</text>
+          </svg>
+        </div>
+      `,
+
+      // 4. Bagan 4 Jenis Norma & Sumbernya
+      empat_norma: `
+        <div class="my-3 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+          <svg viewBox="0 0 440 135" class="w-full max-w-[440px] mx-auto h-auto" role="img" aria-label="Bagan Empat Jenis Norma">
+            <!-- Norma Agama -->
+            <rect x="6" y="10" width="100" height="115" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+            <text x="56" y="34" font-size="10.5" font-weight="bold" fill="#065f46" text-anchor="middle">Norma Agama</text>
+            <line x1="20" y1="44" x2="92" y2="44" stroke="#a7f3d0" stroke-width="1.5"/>
+            <text x="56" y="64" font-size="9" fill="#047857" text-anchor="middle">Sumber:</text>
+            <text x="56" y="78" font-size="9.5" font-weight="bold" fill="#064e3b" text-anchor="middle">Wahyu Tuhan /</text>
+            <text x="56" y="91" font-size="9.5" font-weight="bold" fill="#064e3b" text-anchor="middle">Kitab Suci</text>
+            <text x="56" y="112" font-size="8.5" fill="#059669" text-anchor="middle">Sanksi: Dosa</text>
+
+            <!-- Norma Susila -->
+            <rect x="115" y="10" width="100" height="115" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+            <text x="165" y="34" font-size="10.5" font-weight="bold" fill="#1e40af" text-anchor="middle">Norma Susila</text>
+            <line x1="129" y1="44" x2="201" y2="44" stroke="#bfdbfe" stroke-width="1.5"/>
+            <text x="165" y="64" font-size="9" fill="#1d4ed8" text-anchor="middle">Sumber:</text>
+            <text x="165" y="78" font-size="9.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Hati Nurani</text>
+            <text x="165" y="91" font-size="9.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Manusia</text>
+            <text x="165" y="112" font-size="8.5" fill="#2563eb" text-anchor="middle">Sanksi: Menyesal</text>
+
+            <!-- Norma Kesopanan -->
+            <rect x="224" y="10" width="100" height="115" rx="10" fill="#fefce8" stroke="#eab308" stroke-width="2"/>
+            <text x="274" y="34" font-size="10.5" font-weight="bold" fill="#854d0e" text-anchor="middle">Norma Sopan</text>
+            <line x1="238" y1="44" x2="310" y2="44" stroke="#fef08a" stroke-width="1.5"/>
+            <text x="274" y="64" font-size="9" fill="#a16207" text-anchor="middle">Sumber:</text>
+            <text x="274" y="78" font-size="9.5" font-weight="bold" fill="#713f12" text-anchor="middle">Tatakrama /</text>
+            <text x="274" y="91" font-size="9.5" font-weight="bold" fill="#713f12" text-anchor="middle">Adat Budaya</text>
+            <text x="274" y="112" font-size="8.5" fill="#ca8a04" text-anchor="middle">Sanksi: Dicemooh</text>
+
+            <!-- Norma Hukum -->
+            <rect x="333" y="10" width="100" height="115" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+            <text x="383" y="34" font-size="10.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Norma Hukum</text>
+            <line x1="347" y1="44" x2="419" y2="44" stroke="#fecaca" stroke-width="1.5"/>
+            <text x="383" y="64" font-size="9" fill="#b91c1c" text-anchor="middle">Sumber:</text>
+            <text x="383" y="78" font-size="9.5" font-weight="bold" fill="#7f1d1d" text-anchor="middle">Peraturan</text>
+            <text x="383" y="91" font-size="9.5" font-weight="bold" fill="#7f1d1d" text-anchor="middle">Negara</text>
+            <text x="383" y="112" font-size="8.5" fill="#dc2626" text-anchor="middle">Sanksi: Tegas/Nyata</text>
+          </svg>
+        </div>
+      `,
+
+      // 5. Diagram Venn Tiga Hubungan Kewajiban (Tri Hita Karana)
+      tri_hita_karana: `
+        <div class="my-3 p-4 bg-indigo-50/50 border border-indigo-200 rounded-xl flex flex-col items-center">
+          <svg viewBox="0 0 320 175" class="w-full max-w-[320px] h-auto" role="img" aria-label="Diagram Venn Tiga Hubungan Kewajiban">
+            <!-- Lingkaran Atas: Tuhan YME -->
+            <circle cx="160" cy="62" r="48" fill="#fef3c7" fill-opacity="0.75" stroke="#d97706" stroke-width="2"/>
+            <text x="160" y="46" font-size="10" font-weight="bold" fill="#92400e" text-anchor="middle">Hubungan dengan</text>
+            <text x="160" y="60" font-size="10.5" font-weight="bold" fill="#78350f" text-anchor="middle">Tuhan YME</text>
+
+            <!-- Lingkaran Kiri Bawah: Sesama Manusia -->
+            <circle cx="115" cy="118" r="48" fill="#dbeafe" fill-opacity="0.75" stroke="#2563eb" stroke-width="2"/>
+            <text x="102" y="120" font-size="10" font-weight="bold" fill="#1e40af" text-anchor="middle">Sesama</text>
+            <text x="102" y="133" font-size="10" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Manusia</text>
+
+            <!-- Lingkaran Kanan Bawah: Alam Lingkungan -->
+            <circle cx="205" cy="118" r="48" fill="#dcfce7" fill-opacity="0.75" stroke="#16a34a" stroke-width="2"/>
+            <text x="218" y="120" font-size="10" font-weight="bold" fill="#166534" text-anchor="middle">Alam &amp;</text>
+            <text x="218" y="133" font-size="10" font-weight="bold" fill="#14532d" text-anchor="middle">Lingkungan</text>
+
+            <!-- Titik Tengah -->
+            <circle cx="160" cy="98" r="19" fill="#ffffff" stroke="#4f46e5" stroke-width="2"/>
+            <text x="160" y="96" font-size="8" font-weight="bold" fill="#312e81" text-anchor="middle">Tri Hita</text>
+            <text x="160" y="106" font-size="8" font-weight="bold" fill="#312e81" text-anchor="middle">Karana</text>
+          </svg>
+        </div>
+      `,
+
+      // 6. Pohon Tata Urutan Peraturan Perundang-undangan
+      pohon_hukum: `
+        <div class="my-3 p-4 bg-emerald-50/50 border border-emerald-200 rounded-xl flex flex-col items-center">
+          <svg viewBox="0 0 380 185" class="w-full max-w-[380px] h-auto" role="img" aria-label="Pohon Tata Urutan Peraturan Perundang-undangan">
+            <!-- Tajuk Daun / Ranting -->
+            <ellipse cx="190" cy="52" rx="125" ry="44" fill="#bbf7d0" stroke="#16a34a" stroke-width="2"/>
+            <ellipse cx="190" cy="48" rx="95" ry="30" fill="#86efac"/>
+            <text x="190" y="34" font-size="9.5" font-weight="bold" fill="#14532d" text-anchor="middle">Ranting &amp; Daun: Perda Provinsi &amp; Perda Kab/Kota</text>
+            <text x="190" y="54" font-size="9.5" font-weight="bold" fill="#065f46" text-anchor="middle">Dahan: UU / Perppu, PP, dan Perpres</text>
+
+            <!-- Batang Utama -->
+            <rect x="168" y="78" width="44" height="58" fill="#92400e" stroke="#451a03" stroke-width="2"/>
+            <rect x="95" y="94" width="190" height="24" rx="6" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+            <text x="190" y="109" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle">Batang Utama: UUD NRI 1945 &amp; Tap MPR</text>
+
+            <!-- Tanah & Akar -->
+            <line x1="40" y1="136" x2="340" y2="136" stroke="#78350f" stroke-width="2.5"/>
+            <path d="M172 136 Q140 155 110 165 M185 136 Q180 158 170 172 M205 136 Q230 155 265 165" fill="none" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>
+            <rect x="90" y="150" width="200" height="26" rx="8" fill="#dc2626"/>
+            <text x="190" y="167" font-size="10.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Akar Pohon: PANCASILA (Sumber Segala Hukum)</text>
+          </svg>
+        </div>
+      `,
+
+      // 7. Bagan Alur Perumusan dan Pengesahan UUD NRI Tahun 1945
+      alur_uud: `
+        <div class="my-3 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+          <svg viewBox="0 0 430 115" class="w-full max-w-[430px] mx-auto h-auto" role="img" aria-label="Alur Perumusan dan Pengesahan UUD 1945">
+            <!-- Tahap 1 -->
+            <rect x="6" y="15" width="124" height="85" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+            <text x="68" y="36" font-size="10" font-weight="bold" fill="#1e40af" text-anchor="middle">Sidang I BPUPK</text>
+            <text x="68" y="51" font-size="9" fill="#1d4ed8" text-anchor="middle">29 Mei – 1 Juni 1945</text>
+            <text x="68" y="70" font-size="8.5" fill="#334155" text-anchor="middle">Merumuskan Dasar</text>
+            <text x="68" y="82" font-size="8.5" fill="#334155" text-anchor="middle">Negara (Pancasila)</text>
+
+            <!-- Panah 1 -->
+            <path d="M132 57 L150 57" stroke="#64748b" stroke-width="2.5"/>
+            <polygon points="148,52 156,57 148,62" fill="#64748b"/>
+
+            <!-- Tahap 2 -->
+            <rect x="156" y="15" width="124" height="85" rx="10" fill="#fefce8" stroke="#d97706" stroke-width="2"/>
+            <text x="218" y="36" font-size="10" font-weight="bold" fill="#92400e" text-anchor="middle">Sidang II BPUPK</text>
+            <text x="218" y="51" font-size="9" fill="#b45309" text-anchor="middle">10 – 17 Juli 1945</text>
+            <text x="218" y="70" font-size="8.5" fill="#334155" text-anchor="middle">Merancang Hukum</text>
+            <text x="218" y="82" font-size="8.5" fill="#334155" text-anchor="middle">Dasar (Rancangan UUD)</text>
+
+            <!-- Panah 2 -->
+            <path d="M282 57 L300 57" stroke="#64748b" stroke-width="2.5"/>
+            <polygon points="298,52 306,57 298,62" fill="#64748b"/>
+
+            <!-- Tahap 3 -->
+            <rect x="306" y="15" width="118" height="85" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+            <text x="365" y="36" font-size="10" font-weight="bold" fill="#991b1b" text-anchor="middle">Sidang PPKI</text>
+            <text x="365" y="51" font-size="9" fill="#b91c1c" text-anchor="middle">18 Agustus 1945</text>
+            <text x="365" y="70" font-size="8.5" fill="#334155" text-anchor="middle">Mengesahkan UUD</text>
+            <text x="365" y="82" font-size="8.5" fill="#334155" text-anchor="middle">NRI Tahun 1945</text>
+          </svg>
+        </div>
+      `,
+
+      // 8. Infografis 4 Hasil Utama Amendemen UUD NRI Tahun 1945
+      infografis_amendemen: `
+        <div class="my-3 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+          <svg viewBox="0 0 440 130" class="w-full max-w-[440px] mx-auto h-auto" role="img" aria-label="Infografis 4 Hasil Utama Amendemen UUD NRI 1945">
+            <!-- 01 -->
+            <rect x="6" y="10" width="102" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+            <circle cx="57" cy="30" r="13" fill="#2563eb"/>
+            <text x="57" y="34" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">01</text>
+            <text x="57" y="56" font-size="8.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Amendemen I (1999)</text>
+            <text x="57" y="74" font-size="8.5" fill="#1e40af" text-anchor="middle">Masa Jabatan</text>
+            <text x="57" y="86" font-size="8.5" fill="#1e40af" text-anchor="middle">Presiden Maksimal</text>
+            <text x="57" y="98" font-size="8.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">2 Periode (10 Thn)</text>
+
+            <!-- 02 -->
+            <rect x="115" y="10" width="102" height="110" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+            <circle cx="166" cy="30" r="13" fill="#059669"/>
+            <text x="166" y="34" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">02</text>
+            <text x="166" y="56" font-size="8.5" font-weight="bold" fill="#064e3b" text-anchor="middle">Amendemen II (2000)</text>
+            <text x="166" y="74" font-size="8.5" fill="#065f46" text-anchor="middle">Warga Memilih</text>
+            <text x="166" y="86" font-size="8.5" fill="#065f46" text-anchor="middle">Langsung Anggota</text>
+            <text x="166" y="98" font-size="8.5" font-weight="bold" fill="#047857" text-anchor="middle">DPR &amp; DPRD</text>
+
+            <!-- 03 -->
+            <rect x="224" y="10" width="102" height="110" rx="10" fill="#fefce8" stroke="#d97706" stroke-width="2"/>
+            <circle cx="275" cy="30" r="13" fill="#d97706"/>
+            <text x="275" y="34" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">03</text>
+            <text x="275" y="56" font-size="8.5" font-weight="bold" fill="#78350f" text-anchor="middle">Amendemen III (2001)</text>
+            <text x="275" y="74" font-size="8.5" fill="#92400e" text-anchor="middle">Warga Memilih</text>
+            <text x="275" y="86" font-size="8.5" fill="#92400e" text-anchor="middle">Langsung Presiden</text>
+            <text x="275" y="98" font-size="8.5" font-weight="bold" fill="#b45309" text-anchor="middle">&amp; Wakil Presiden</text>
+
+            <!-- 04 -->
+            <rect x="333" y="10" width="102" height="110" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+            <circle cx="384" cy="30" r="13" fill="#dc2626"/>
+            <text x="384" y="34" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">04</text>
+            <text x="384" y="56" font-size="8.5" font-weight="bold" fill="#7f1d1d" text-anchor="middle">Amendemen IV (2002)</text>
+            <text x="384" y="74" font-size="8.5" fill="#991b1b" text-anchor="middle">Anggaran Pendidikan</text>
+            <text x="384" y="86" font-size="8.5" fill="#991b1b" text-anchor="middle">Minimal</text>
+            <text x="384" y="98" font-size="8.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">20% APBN / APBD</text>
+          </svg>
+        </div>
+      `
+    };
+
+    /**
+     * ============================================================================
+     * BANK 100 SOAL PENDIDIKAN PANCASILA SMP KELAS VII SEMESTER 1
+     * Proporsi:
+     * Topik 1 (Sejarah Kelahiran Pancasila): 12 soal (1-12)
+     * Topik 2 (Sidang BPUPK 29 Mei-1 Juni 1945): 11 soal (13-23)
+     * Topik 3 (Perumusan oleh Panitia Sembilan): 9 soal (24-32)
+     * Topik 4 (Penetapan & Nilai Sila Pancasila): 13 soal (33-45)
+     * Topik 5 (Norma dalam Masyarakat): 15 soal (46-60)
+     * Topik 6 (Hak dan Kewajiban pada Norma): 9 soal (61-69)
+     * Topik 7 (UUD NRI 1945 Dasar Hukum Tertulis): 7 soal (70-76)
+     * Topik 8 (Perumusan & Pengesahan UUD 1945): 12 soal (77-88)
+     * Topik 9 (Amendemen UUD NRI Tahun 1945): 12 soal (89-100)
+     * ============================================================================
+     */
+    const RAW_QUESTIONS = [
+      // --- TOPIK 1: SEJARAH KELAHIRAN PANCASILA (12 SOAL) ---
+      {
+        id: 1,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        svgKey: "nekara",
+        question: "Perhatikan ilustrasi artefak perunggu peninggalan masa praaksara di atas. Benda tersebut dikenal sebagai nekara yang ditemukan tersebar di berbagai wilayah Nusantara seperti Sumatra, Jawa, Bali, hingga Maluku. Keberadaan nekara tersebut menunjukkan bahwa nilai-nilai Pancasila telah berakar sejak masa sejarah awal dalam bentuk ....",
+        options: [
+          "nilai religius penghormatan kepada kekuatan tertinggi dan gotong royong pembuatan benda budaya",
+          "sistem pemerintahan demokrasi parlementer yang dipimpin oleh kepala suku secara bergantian",
+          "penguasaan jalur perdagangan internasional menggunakan mata uang logam standar kerajaan",
+          "penerapan hukum tertulis modern untuk mengatur batas wilayah antar-pulau di Nusantara"
+        ],
+        correctIndex: 0,
+        explanation: "Pada masa sejarah awal (praaksara), benda peninggalan seperti nekara perunggu, lukisan gua, dan menhir mencerminkan nilai ketuhanan/religius (sarana upacara memohon hujan dan penghormatan leluhur) serta nilai kemanusiaan dan gotong royong dalam pengerjaan teknologi logam yang rumit secara bersama-sama. Opsi lain merujuk pada sistem politik dan hukum masa modern yang belum ada pada masa praaksara."
+      },
+      {
+        id: 2,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Nilai-nilai ketuhanan dan kedermawanan sosial pada masa kerajaan awal Nusantara tercatat dalam prasasti Yupa peninggalan Kerajaan Kutai pada abad ke-4 Masehi, yaitu ketika Raja Mulawarman melakukan tindakan terpuji berupa ....",
+        options: [
+          "menyedekahkan 20.000 ekor sapi kepada kaum Brahmana di tempat suci Waprakeswara",
+          "membangun saluran irigasi sungai Gomati sepanjang 12 kilometer untuk kesejahteraan rakyat",
+          "mengirimkan ekspedisi armada laut untuk menyatukan pelabuhan dagang di Selat Malaka",
+          "menetapkan kitab hukum Kutaramanawa sebagai pedoman keadilan bagi seluruh penduduk"
+        ],
+        correctIndex: 0,
+        explanation: "Dalam Prasasti Yupa dari Kerajaan Kutai (Kalimantan Timur), dikisahkan Raja Mulawarman mengadakan upacara kurban dan menyedekahkan 20.000 ekor sapi kepada para Brahmana sebagai wujud nilai ketuhanan dan keadilan sosial. Pembangunan saluran Gomati adalah prestasi Raja Purnawarman dari Tarumanegara, sedangkan Kutaramanawa berasal dari masa Majapahit."
+      },
+      {
+        id: 3,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Pada masa Kerajaan Tarumanegara yang dipimpin oleh Raja Purnawarman, nilai kemanusiaan dan keadilan sosial bagi seluruh rakyat diwujudkan secara nyata melalui kebijakan ....",
+        options: [
+          "penggalian Sungai Chandrabhaga dan Sungai Gomati untuk mencegah banjir serta mengairi sawah",
+          "pembebasan seluruh pajak perdagangan bagi pedagang asing yang singgah di Pelabuhan Sunda Kelapa",
+          "pembangunan Candi Borobudur sebagai pusat pendidikan agama Buddha terbesar di Asia Tenggara",
+          "pembentukan pasukan khusus Bhayangkara untuk menjaga keamanan wilayah ibu kota kerajaan"
+        ],
+        correctIndex: 0,
+        explanation: "Prasasti Tugu mencatat bahwa Raja Purnawarman memerintahkan penggalian Sungai Chandrabhaga dan Sungai Gomati sepanjang 6.112 tombak (±11–12 km) untuk mengatasi banjir dan mengairi pertanian rakyat. Candi Borobudur dibangun Dinasti Syailendra, sedangkan Bhayangkara dibentuk pada masa Majapahit."
+      },
+      {
+        id: 4,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Kerajaan Kalinga di Jawa Tengah pada abad ke-7 Masehi dipimpin oleh Ratu Shima yang sangat terkenal dalam sejarah karena keteguhannya menegakkan nilai keadilan dan kejujuran. Contoh keteladanan hukum pada masa Ratu Shima adalah ....",
+        options: [
+          "menjatuhkan hukuman tegas bahkan kepada putra mahkota sendiri yang menyentuh kantong emas milik orang lain",
+          "menghapuskan seluruh bentuk hukuman fisik dan menggantinya dengan kerja bakti membersihkan jalan desa",
+          "membagi wilayah kerajaan menjadi dua bagian agar tidak terjadi perang saudara di antara para pangeran",
+          "mewajibkan seluruh pejabat kerajaan menulis laporan keuangan setiap bulan di atas daun lontar"
+        ],
+        correctIndex: 0,
+        explanation: "Ratu Shima dari Kerajaan Kalinga menegakkan hukum tanpa pandang bulu. Ketika pangeran mahkota tidak sengaja menyentuh pundi-pundi emas milik Raja Ta-Che yang diletakkan di jalan untuk menguji kejujuran rakyat, Ratu Shima tetap menjatuhkan sanksi hukum secara adil sesuai aturan yang berlaku."
+      },
+      {
+        id: 5,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Kerajaan Sriwijaya yang berkembang pada abad ke-7 hingga ke-12 Masehi dikenal sebagai kerajaan maritim besar yang mencerminkan nilai persatuan dan ketuhanan karena berhasil menjadi ....",
+        options: [
+          "pusat pembelajaran agama Buddha internasional sekaligus pemersatu jalur perdagangan maritim Nusantara",
+          "kerajaan agraris pertama yang mengekspor beras ke seluruh benua Eropa dan Afrika",
+          "pemrakarsa Sumpah Palapa yang menyatukan seluruh daratan Asia Tenggara di bawah satu bendera",
+          "pusat penyebaran agama Islam pertama di pesisir utara Pulau Sumatra"
+        ],
+        correctIndex: 0,
+        explanation: "Kerajaan Sriwijaya merupakan kerajaan maritim yang menyatukan wilayah perairan Nusantara dan menjadi pusat studi agama Buddha tingkat internasional (seperti dicatat pendeta I-Tsing). Sumpah Palapa berasal dari Majapahit, sedangkan pusat Islam pertama di Sumatra adalah Samudera Pasai."
+      },
+      {
+        id: 6,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Pada masa Mataram Kuno di Jawa Tengah, Dinasti Sanjaya yang beragama Hindu dan Dinasti Syailendra yang beragama Buddha hidup berdampingan secara rukun dan harmonis. Bukti peninggalan budaya yang menunjukkan tingginya toleransi dan gotong royong kedua dinasti tersebut adalah ....",
+        options: [
+          "berdirinya Candi Prambanan dan Candi Borobudur yang dibangun dengan semangat kebersamaan rakyat",
+          "penulisan kitab Sutasoma yang memuat semboyan Bhinneka Tunggal Ika oleh Mpu Tantular",
+          "perjanjian damai Giyanti yang membagi wilayah kekuasaan Mataram menjadi Surakarta dan Yogyakarta",
+          "pembangunan Masjid Agung Demak yang memadukan arsitektur Hindu-Jawa dan Islam"
+        ],
+        correctIndex: 0,
+        explanation: "Dinasti Sanjaya (Hindu) membangun kompleks Candi Prambanan dan Dinasti Syailendra (Buddha) membangun Candi Borobudur dengan melibatkan gotong royong masyarakat secara rukun. Kitab Sutasoma berasal dari era Majapahit, sedangkan Perjanjian Giyanti terjadi pada era Mataram Islam abad ke-18."
+      },
+      {
+        id: 7,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Istilah 'Pancasila' secara historis telah ditemukan pada masa Kerajaan Majapahit dalam kitab Negarakertagama karya Mpu Prapanca dan kitab Sutasoma karya Mpu Tantular. Dalam kitab Sutasoma, istilah Pancasila memiliki arti ....",
+        options: [
+          "pelaksanaan kesusilaan yang lima (Pancasila Krama) yaitu larangan berbuat kekerasan, mencuri, berjiwa dengki, berbohong, dan mabuk",
+          "lima dasar negara modern yang terdiri atas kebangsaan, kemanusiaan, mufakat, kesejahteraan, dan ketuhanan",
+          "lima rukun utama dalam sistem pemerintahan kerajaan yang wajib ditaati oleh para adipati daerah",
+          "lima wilayah kekuasaan utama Majapahit yang membentang dari Sumatra hingga Papua"
+        ],
+        correctIndex: 0,
+        explanation: "Dalam kitab Sutasoma karya Mpu Tantular, istilah Pancasila berarti 'batu sendi yang lima' atau pelaksanaan kesusilaan yang lima (Pancasila Krama): tidak boleh melakukan kekerasan, tidak boleh mencuri, tidak boleh berjiwa dengki, tidak boleh berbohong, dan tidak boleh mabuk minuman keras."
+      },
+      {
+        id: 8,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Perkembangan kerajaan-kerajaan Islam seperti Samudera Pasai, Demak, dan Ternate turut memperkaya akar nilai Pancasila dalam kehidupan masyarakat Nusantara, terutama pada aspek ....",
+        options: [
+          "penghormatan terhadap martabat manusia yang setara di hadapan Tuhan serta musyawarah para wali dan ulama",
+          "penerapan sistem kasta yang membedakan kedudukan hukum antara bangsawan dan rakyat biasa",
+          "penutupan pelabuhan Nusantara dari seluruh interaksi budaya dan perdagangan dengan bangsa asing",
+          "penghapusan seluruh tradisi lokal masyarakat Nusantara yang telah ada sebelum masuknya Islam"
+        ],
+        correctIndex: 0,
+        explanation: "Kerajaan Islam seperti Samudera Pasai, Demak (dengan peran Wali Songo), dan Ternate menanamkan nilai tauhid (ketuhanan), kesetaraan derajat manusia tanpa sistem kasta, toleransi akulturasi budaya, serta tradisi musyawarah."
+      },
+      {
+        id: 9,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Perlawanan rakyat Indonesia terhadap penjajahan bangsa Barat pada abad ke-17 hingga ke-19 (seperti Sultan Hasanuddin, Pattimura, Pangeran Diponegoro, dan Tuanku Imam Bonjol) sering kali mengalami kegagalan dalam mengusir penjajah secara tuntas karena ....",
+        options: [
+          "perjuangan masih bersifat kedaerahan, belum terorganisasi secara nasional, dan mudah diadu domba (devide et impera)",
+          "rakyat Indonesia sama sekali tidak memiliki semangat bela negara maupun keberanian menghadapi penjajah",
+          "seluruh raja dan tokoh adat di Nusantara bekerja sama mendukung kebijakan tanam paksa penjajah",
+          "bangsa Indonesia tidak memiliki sumber daya alam maupun wilayah strategis yang dipertahankan"
+        ],
+        correctIndex: 0,
+        explanation: "Pada masa perlawanan fisik sebelum abad ke-20, perjuangan pahlawan daerah masih bersifat lokal/kedaerahan, bergantung pada satu pemimpin karismatik, dan mudah dipecah belah oleh politik adu domba (devide et impera) kolonial Belanda. Hal ini menjadi pelajaran penting menuju persatuan nasional."
+      },
+      {
+        id: 10,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Peristiwa berdirinya organisasi Budi Utomo pada tanggal 20 Mei 1908 menandai dimulainya babak baru perjuangan bangsa Indonesia yang dikenal sebagai masa Kebangkitan Nasional karena ....",
+        options: [
+          "perjuangan kemerdekaan mulai dilakukan melalui organisasi modern yang teratur, pendidikan, dan kesadaran nasional",
+          "Budi Utomo langsung memproklamasikan kemerdekaan Indonesia di hadapan pemerintah kolonial Belanda",
+          "perlawanan bersenjata di seluruh kepulauan Nusantara resmi dibubarkan oleh pemerintah Hindia Belanda",
+          "seluruh partai politik di Hindia Belanda dilebur menjadi satu partai tunggal pimpinan dr. Sutomo"
+        ],
+        correctIndex: 0,
+        explanation: "Budi Utomo yang digagas dr. Wahidin Sudirohusodo dan didirikan dr. Sutomo pada 20 Mei 1908 merupakan organisasi modern pertama di Indonesia yang mengubah strategi perjuangan dari perlawanan fisik kedaerahan menjadi perjuangan terorganisasi berbasis pendidikan dan kesadaran kebangsaan."
+      },
+      {
+        id: 11,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Tonggak sejarah penting yang mengikrarkan satu tanah air, satu bangsa, dan menjunjung bahasa persatuan Bahasa Indonesia pada tanggal 28 Oktober 1928 serta menyatukan pemuda dari berbagai suku dan daerah adalah ....",
+        options: [
+          "Kongres Pemuda II yang melahirkan ikrar Sumpah Pemuda",
+          "Kongres Perempuan Indonesia I yang diselenggarakan di Yogyakarta",
+          "Berdirinya Indische Partij oleh Tiga Serangkai di Bandung",
+          "Sidang pertama Badan Penyelidik Usaha-Usaha Persiapan Kemerdekaan"
+        ],
+        correctIndex: 0,
+        explanation: "Kongres Pemuda II tanggal 27–28 Oktober 1928 menghasilkan ikrar Sumpah Pemuda yang menegaskan satu tumpah darah Indonesia, satu bangsa Indonesia, dan menjunjung bahasa persatuan Bahasa Indonesia—memperkuat sila ketiga Pancasila sebelum kemerdekaan."
+      },
+      {
+        id: 12,
+        topicId: "1",
+        topicName: "1. Sejarah Kelahiran Pancasila",
+        question: "Setelah menyerang pangkalan militer Amerika Serikat di Pearl Harbour pada 7 Desember 1941 dan memaksa Belanda menyerah tanpa syarat di Kalijati (8 Maret 1942), Jepang berusaha menarik simpati rakyat Indonesia melalui propaganda Gerakan 3A. Namun, pada praktiknya Jepang justru menyengsarakan rakyat melalui kebijakan kerja paksa yang disebut ....",
+        options: [
+          "romusha",
+          "cultuurstelsel",
+          "batig slot",
+          "poenale sanctie"
+        ],
+        correctIndex: 0,
+        explanation: "Pada masa pendudukan Jepang (1942–1945), Jepang mengerahkan tenaga kerja paksa dari rakyat Indonesia yang disebut romusha untuk membangun benteng, jalan, dan lapangan udara militer yang menimbulkan penderitaan luar biasa. Cultuurstelsel (tanam paksa), batig slot, dan poenale sanctie adalah kebijakan era kolonial Belanda."
+      },
+
+      // --- TOPIK 2: KELAHIRAN PANCASILA DALAM SIDANG BPUPK (11 SOAL) ---
+      {
+        id: 13,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Karena posisi militer Jepang semakin terdesak oleh pasukan Sekutu dalam Perang Asia Timur Raya, pemerintah pendudukan Jepang di Jawa mengumumkan rencana pembentukan BPUPK (Dokuritsu Zyunbi Tyoosakai) pada tanggal ....",
+        options: [
+          "1 Maret 1945 dan meresmikannya pada tanggal 29 April 1945",
+          "17 Agustus 1945 dan meresmikannya pada tanggal 18 Agustus 1945",
+          "7 Agustus 1945 dan meresmikannya pada tanggal 9 Agustus 1945",
+          "22 Juni 1945 dan meresmikannya pada tanggal 10 Juli 1945"
+        ],
+        correctIndex: 0,
+        explanation: "Pembentukan BPUPK diumumkan oleh Letnan Jenderal Kumakichi Harada pada tanggal 1 Maret 1945 untuk menarik simpati bangsa Indonesia, kemudian diresmikan pada tanggal 29 April 1945 bertepatan dengan hari ulang tahun Kaisar Hirohito (Tentyosetsu)."
+      },
+      {
+        id: 14,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Pelantikan anggota BPUPK dilaksanakan pada tanggal 28 Mei 1945 bertempat di Gedung Chuo Sangi-in (sekarang dikenal sebagai Gedung Pancasila) di Jakarta. Susunan pimpinan BPUPK yang ditetapkan saat itu adalah ....",
+        options: [
+          "dr. K.R.T. Radjiman Wedyodiningrat sebagai ketua, didampingi wakil ketua Ichibangase Yosio dan R.P. Soeroso",
+          "Ir. Sukarno sebagai ketua, didampingi wakil ketua Drs. Moh. Hatta dan Mr. Ahmad Subardjo",
+          "Mr. Muhammad Yamin sebagai ketua, didampingi wakil ketua Prof. Dr. Soepomo dan Ki Bagus Hadikusumo",
+          "R.P. Soeroso sebagai ketua, didampingi wakil ketua K.H. Wahid Hasyim dan Mr. A.A. Maramis"
+        ],
+        correctIndex: 0,
+        explanation: "BPUPK diketuai oleh tokoh nasional dr. K.R.T. Radjiman Wedyodiningrat, dengan dua orang wakil ketua yaitu Ichibangase Yosio (perwakilan Jepang) dan R.P. Soeroso (perwakilan Indonesia yang juga menjabat kepala sekretariat)."
+      },
+      {
+        id: 15,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Sidang pertama BPUPK berlangsung dari tanggal 29 Mei hingga 1 Juni 1945. Pada pembukaan sidang tersebut, Ketua BPUPK dr. K.R.T. Radjiman Wedyodiningrat mengajukan pertanyaan pokok kepada seluruh anggota sidang mengenai ....",
+        options: [
+          "apa dasar negara Indonesia merdeka yang akan kita bentuk (Philosofische Grondslag)?",
+          "siapa yang layak diangkat menjadi Presiden dan Wakil Presiden Republik Indonesia pertama?",
+          "bagaimana cara merebut senjata dari tentara Jepang sebelum pasukan Sekutu mendarat?",
+          "kapan tanggal pasti pembacaan teks Proklamasi Kemerdekaan Indonesia dilaksanakan?"
+        ],
+        correctIndex: 0,
+        explanation: "Pertanyaan utama yang diajukan oleh dr. K.R.T. Radjiman Wedyodiningrat pada awal sidang pertama BPUPK (29 Mei 1945) adalah mengenai dasar negara (Philosofische Grondslag) bagi Indonesia merdeka yang akan dibentuk."
+      },
+      {
+        id: 16,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Pada hari pertama sidang BPUPK tanggal 29 Mei 1945, salah satu tokoh pergerakan nasional menyampaikan pidato usulan lima asas dasar negara secara lisan, yaitu Peri Kebangsaan, Peri Kemanusiaan, Peri Ketuhanan, Peri Kerakyatan, dan Kesejahteraan Rakyat. Tokoh yang menyampaikan usulan tersebut adalah ....",
+        options: [
+          "Mr. Muhammad Yamin",
+          "Prof. Dr. Mr. Soepomo",
+          "Ir. Sukarno",
+          "Drs. Mohammad Hatta"
+        ],
+        correctIndex: 0,
+        explanation: "Mr. Muhammad Yamin berpidato pada tanggal 29 Mei 1945 dengan mengusulkan lima asas dasar negara: Peri Kebangsaan, Peri Kemanusiaan, Peri Ketuhanan, Peri Kerakyatan, dan Kesejahteraan Rakyat."
+      },
+      {
+        id: 17,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Pada tanggal 31 Mei 1945 dalam sidang pertama BPUPK, Prof. Dr. Soepomo menyampaikan pidato mengenai dasar negara dan teori bentuk negara. Konsep negara yang diusulkan oleh Soepomo agar negara menyatu dengan seluruh rakyat dan mengatasi segala golongan disebut paham negara ....",
+        options: [
+          "integralistik (negara kekeluargaan)",
+          "individualistik (liberal)",
+          "teokratis (negara agama tunggal)",
+          "federalis (negara serikat)"
+        ],
+        correctIndex: 0,
+        explanation: "Pada 31 Mei 1945, Prof. Dr. Soepomo mengusulkan teori negara integralistik (paham kekeluargaan), di mana negara tidak memihak pada satu golongan tertentu melainkan menyatu dengan seluruh rakyat. Ia juga menyampaikan lima prinsip dasar negara: Persatuan, Kekeluargaan, Keseimbangan Lahir dan Batin, Musyawarah, dan Keadilan Rakyat."
+      },
+      {
+        id: 18,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Perhatikan lima rumusan dasar negara berikut:\n1) Kebangsaan Indonesia\n2) Internasionalisme atau Peri Kemanusiaan\n3) Mufakat atau Demokrasi\n4) Kesejahteraan Sosial\n5) Ketuhanan yang Berkebudayaan\n\nRumusan dasar negara tersebut disampaikan tanpa teks pada tanggal 1 Juni 1945 dan diberi nama 'Pancasila' oleh ....",
+        options: [
+          "Ir. Sukarno",
+          "Mr. Muhammad Yamin",
+          "Prof. Dr. Soepomo",
+          "dr. K.R.T. Radjiman Wedyodiningrat"
+        ],
+        correctIndex: 0,
+        explanation: "Pada tanggal 1 Juni 1945, Ir. Sukarno menyampaikan pidato bersejarah yang merumuskan lima prinsip dasar negara (Kebangsaan Indonesia, Internasionalisme/Peri Kemanusiaan, Mufakat/Demokrasi, Kesejahteraan Sosial, dan Ketuhanan yang Berkebudayaan) dan mengusulkan nama 'Pancasila' atas petunjuk seorang ahli bahasa (M. Yamin)."
+      },
+      {
+        id: 19,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Dalam pidatonya pada tanggal 1 Juni 1945, Ir. Sukarno menjelaskan bahwa apabila kelima sila Pancasila diperas menjadi tiga sila (Trisila), maka rumusannya menjadi ....",
+        options: [
+          "Sosio-Nasionalisme, Sosio-Demokrasi, dan Ketuhanan",
+          "Ketuhanan, Kemanusiaan, dan Persatuan Indonesia",
+          "Kebangsaan, Kerakyatan, dan Keadilan Sosial",
+          "Gotong Royong, Kekeluargaan, dan Musyawarah"
+        ],
+        correctIndex: 0,
+        explanation: "Ir. Sukarno menjelaskan bahwa jika Pancasila diperas menjadi Trisila, maka sila Kebangsaan dan Internasionalisme menjadi Sosio-Nasionalisme; Mufakat/Demokrasi dan Kesejahteraan Sosial menjadi Sosio-Demokrasi; ditambah Ketuhanan. Jika diperas lagi menjadi Ekasila, intinya adalah Gotong Royong."
+      },
+      {
+        id: 20,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Pemerintah Republik Indonesia secara resmi menetapkan tanggal 1 Juni 1945 sebagai Hari Lahir Pancasila dan menjadikannya hari libur nasional melalui dasar hukum berupa ....",
+        options: [
+          "Keputusan Presiden (Keppres) Nomor 24 Tahun 2016",
+          "Ketetapan MPR Nomor XVIII/MPR/1998",
+          "Undang-Undang Nomor 12 Tahun 2011",
+          "Dekrit Presiden tanggal 5 Juli 1959"
+        ],
+        correctIndex: 0,
+        explanation: "Melalui Keputusan Presiden (Keppres) Nomor 24 Tahun 2016, pemerintah menetapkan tanggal 1 Juni 1945 sebagai Hari Lahir Pancasila karena pada tanggal itulah istilah dan rumusan Pancasila pertama kali dikemukakan secara utuh oleh Ir. Sukarno dalam sidang BPUPK."
+      },
+      {
+        id: 21,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Sikap keteladanan para pendiri bangsa selama berlangsungnya sidang pertama BPUPK pada 29 Mei–1 Juni 1945 yang patut diterapkan pelajar dalam diskusi kelas adalah ....",
+        options: [
+          "menyampaikan gagasan secara santun, rasional, dan menghargai perbedaan pendapat demi kepentingan bersama",
+          "mempertahankan pendapat pribadi secara mutlak meskipun bertentangan dengan hasil keputusan musyawarah",
+          "menolak mendengarkan usulan anggota kelompok yang berasal dari suku atau agama yang berbeda",
+          "menyerahkan seluruh keputusan diskusi hanya kepada satu orang tanpa memberikan masukan sama sekali"
+        ],
+        correctIndex: 0,
+        explanation: "Para tokoh BPUPK memiliki latar belakang pemikiran yang beragam, namun mereka berdebat secara intelektual, santun, dan mengutamakan persatuan serta masa depan bangsa di atas kepentingan golongan."
+      },
+      {
+        id: 22,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Jumlah anggota resmi BPUPK yang dilantik pada tanggal 28 Mei 1945 beserta anggota tambahan pada masa sidang kedua menunjukkan keterwakilan berbagai unsur masyarakat Indonesia, dengan jumlah anggota awal sebanyak ....",
+        options: [
+          "62 orang tokoh Indonesia ditambah 7 orang anggota istimewa perwakilan Jepang tanpa hak suara",
+          "21 orang tokoh Indonesia ditambah 6 orang anggota tambahan pada bulan Agustus 1945",
+          "9 orang tokoh perumus naskah Piagam Jakarta di rumah kediaman Ir. Sukarno",
+          "45 orang tokoh pemuda dari perwakilan organisasi kedaerahan se-Nusantara"
+        ],
+        correctIndex: 0,
+        explanation: "BPUPK saat dilantik beranggotakan 62 orang anggota aktif dari berbagai wilayah dan golongan di Indonesia serta 7 orang anggota istimewa dari pihak Jepang yang tidak memiliki hak suara (kemudian pada sidang kedua ditambah 6 anggota baru dari Indonesia). Angka 21 + 6 adalah anggota PPKI."
+      },
+      {
+        id: 23,
+        topicId: "2",
+        topicName: "2. Sidang BPUPK (29 Mei–1 Juni)",
+        question: "Setelah sidang pertama BPUPK berakhir pada tanggal 1 Juni 1945, rumusan dasar negara belum langsung disahkan menjadi naskah final sehingga BPUPK memasuki masa reses (istirahat sidang) dan membentuk ....",
+        options: [
+          "Panitia Delapan yang bertugas menampung dan menggolongkan usulan-usulan tertulis para anggota BPUPK",
+          "Panitia Persiapan Kemerdekaan Indonesia untuk segera melantik Presiden dan Wakil Presiden",
+          "Komite Nasional Indonesia Pusat sebagai lembaga pembantu tugas-tugas presiden sementara",
+          "Tentara Keamanan Rakyat untuk mempertahankan kemerdekaan dari serangan pasukan Sekutu"
+        ],
+        correctIndex: 0,
+        explanation: "Di akhir sidang pertama BPUPK tanggal 1 Juni 1945, dibentuk Panitia Kecil beranggotakan 8 orang (Panitia Delapan) yang diketuai Ir. Sukarno untuk mengumpulkan, memeriksa, dan menggolongkan berbagai usulan anggota BPUPK selama masa reses."
+      },
+
+      // --- TOPIK 3: PERUMUSAN PANCASILA OLEH PANITIA SEMBILAN (9 SOAL) ---
+      {
+        id: 24,
+        topicId: "3",
+        topicName: "3. Perumusan Panitia Sembilan",
+        question: "Dalam rapat gabungan antara Panitia Delapan dan anggota BPUPK yang hadir di Jakarta selama masa reses, dibentuklah panitia khusus yang beranggotakan 9 orang tokoh nasional untuk merumuskan rancangan pembukaan hukum dasar. Panitia tersebut dikenal dengan nama ....",
+        options: [
+          "Panitia Sembilan",
+          "Panitia Perancang UUD",
+          "Panitia Penghalus Bahasa",
+          "Panitia Pembela Tanah Air"
+        ],
+        correctIndex: 0,
+        explanation: "Panitia Sembilan dibentuk pada 22 Juni 1945 untuk menjembatani perbedaan pandangan antara golongan nasionalis religius (kebangsaan) dan golongan Islam nasionalis (keagamaan) mengenai dasar negara."
+      },
+      {
+        id: 25,
+        topicId: "3",
+        topicName: "3. Perumusan Panitia Sembilan",
+        svgKey: "panitia_sembilan",
+        question: "Perhatikan diagram proses kompromi perumusan dasar negara di atas. Komposisi keanggotaan Panitia Sembilan disusun secara sangat seimbang untuk mencerminkan persatuan bangsa, yaitu terdiri atas ....",
+        options: [
+          "4 tokoh golongan nasionalis religius (kebangsaan) dan 4 tokoh golongan Islam nasionalis dengan Ir. Sukarno sebagai ketua",
+          "5 tokoh perwakilan militer Jepang dan 4 tokoh perwakilan pemuda dari gerakan bawah tanah Jakarta",
+          "6 tokoh perwakilan pulau Jawa dan 3 tokoh perwakilan kerajaan-kerajaan di luar Pulau Jawa",
+          "7 tokoh ahli hukum tata negara dan 2 tokoh perwakilan organisasi perempuan Indonesia"
+        ],
+        correctIndex: 0,
+        explanation: "Panitia Sembilan terdiri atas 4 tokoh golongan kebangsaan (Drs. Moh. Hatta, Mr. A.A. Maramis, Mr. Ahmad Subardjo, Mr. Muhammad Yamin) dan 4 tokoh golongan Islam (K.H. Wahid Hasyim, K.H. Kahar Muzakir, H. Agus Salim, R. Abikusno Tjokrosujoso), dengan Ir. Sukarno sebagai ketua sekaligus penengah."
+      },
+      {
+        id: 26,
+        topicId: "3",
+        topicName: "3. Perumusan Panitia Sembilan",
+        question: "Rapat bersejarah Panitia Sembilan yang menghasilkan kesepakatan rancangan Mukadimah (Pembukaan) Hukum Dasar Negara dilaksanakan pada tanggal 22 Juni 1945 bertempat di ....",
+        options: [
+          "kediaman Ir. Sukarno, Jalan Pegangsaan Timur Nomor 56, Jakarta",
+          "kediaman Laksamana Tadashi Maeda, Jalan Imam Bonjol Nomor 1, Jakarta",
+          "Gedung Chuo Sangi-in, Jalan Pejambon Nomor 6, Jakarta",
+          "rumah warga di Rengasdengklok, Kabupaten Karawang, Jawa Barat"
+        ],
+        correctIndex: 0,
+        explanation: "Panitia Sembilan bersidang di rumah kediaman Ir. Sukarno di Jalan Pegangsaan Timur No. 56 Jakarta pada tanggal 22 Juni 1945 dan berhasil menyepakati rancangan Pembukaan Hukum Dasar yang memuat rumusan Pancasila."
+      },
+      {
+        id: 27,
+        topicId: "3",
+        topicName: "3. Perumusan Panitia Sembilan",
+        question: "Naskah kesepakatan yang dihasilkan oleh Panitia Sembilan pada tanggal 22 Juni 1945 oleh Mr. Muhammad Yamin dinamakan sebagai 'Piagam Jakarta' (Jakarta Charter), sedangkan oleh Ir. Sukarno disebut 'Mukadimah', dan oleh Sukiman Wirjosandjojo disebut sebagai ....",
+        options: [
+          "Gentlemen's Agreement (Perjanjian Luhur)",
+          "Declaration of Independence",
+          "Philosofische Grondslag",
+          "Weltanschauung"
+        ],
+        correctIndex: 0,
+        explanation: "Naskah 22 Juni 1945 memiliki tiga sebutan terkenal: 'Mukadimah' (oleh Ir. Sukarno), 'Piagam Jakarta / Jakarta Charter' (oleh Mr. Muhammad Yamin), dan 'Gentlemen's Agreement' (oleh Sukiman Wirjosandjojo) sebagai perjanjian luhur antargolongan pendiri bangsa."
+      },
+      {
+        id: 28,
+        topicId: "3",
+        topicName: "3. Perumusan Panitia Sembilan",
+        question: "Perbedaan utama antara rumusan Pancasila dalam pidato Ir. Sukarno tanggal 1 Juni 1945 dengan rumusan yang tercantum dalam Piagam Jakarta tanggal 22 Juni 1945 terletak pada ....",
+        options: [
+          "sila Ketuhanan ditempatkan menjadi sila pertama dengan rumusan 'Ketuhanan, dengan kewajiban menjalankan syariat Islam bagi pemeluk-pemeluknya'",
+          "jumlah sila yang semula berjumlah lima prinsip dipadatkan menjadi tiga prinsip utama (Trisila)",
+          "sila Keadilan Sosial dihapuskan dan digantikan dengan prinsip Persatuan Asia Timur Raya",
+          "sila Kerakyatan diubah menjadi sistem pemerintahan kerajaan konstitusional"
+        ],
+        correctIndex: 0,
+        explanation: "Dalam Piagam Jakarta (22 Juni 1945), urutan sila diubah sehingga sila Ketuhanan menempati urutan pertama dengan rumusan 'Ketuhanan, dengan kewajiban menjalankan syariat Islam bagi pemeluk-pemeluknya', diikuti Kemanusiaan yang adil dan beradab, Persatuan Indonesia, Kerakyatan, dan Keadilan sosial."
+      },
+      {
+        id: 29,
+        topicId: "3",
+        topicName: "3. Perumusan Panitia Sembilan",
+        question: "Berikut ini yang merupakan tokoh anggota Panitia Sembilan yang berasal dari golongan Islam nasionalis adalah ....",
+        options: [
+          "K.H. Wahid Hasyim, H. Agus Salim, K.H. Kahar Muzakir, dan Abikusno Tjokrosujoso",
+          "Mr. A.A. Maramis, Mr. Ahmad Subardjo, Mr. Muhammad Yamin, dan Drs. Moh. Hatta",
+          "Prof. Dr. Soepomo, R.P. Soeroso, dr. Radjiman Wedyodiningrat, dan Ki Hajar Dewantara",
+          "Sayuti Melik, Sukarni, Wikana, dan Chaerul Saleh"
+        ],
+        correctIndex: 0,
+        explanation: "Empat tokoh golongan Islam dalam Panitia Sembilan adalah K.H. Wahid Hasyim, H. Agus Salim, K.H. Kahar Muzakir, dan R. Abikusno Tjokrosujoso. Sedangkan A.A. Maramis, Ahmad Subardjo, M. Yamin, dan Moh. Hatta berasal dari golongan kebangsaan."
+      },
+      {
+        id: 30,
+        topicId: "3",
+        topicName: "3. Perumusan Panitia Sembilan",
+        question: "Peran penting Mr. A.A. Maramis sebagai satu-satunya tokoh beragama Kristen dalam keanggotaan Panitia Sembilan mencerminkan bahwa proses perumusan dasar negara Indonesia sejak awal mengedepankan semangat ....",
+        options: [
+          "inklusivitas, toleransi lintas agama, dan persatuan nasional dalam kebinekaan",
+          "dominasi satu golongan mayoritas tanpa melibatkan pandangan warga minoritas",
+          "pemisahan mutlak antara nilai-nilai moral agama dengan kehidupan bernegara",
+          "penyeragaman seluruh keyakinan dan adat istiadat masyarakat di seluruh Nusantara"
+        ],
+        correctIndex: 0,
+        explanation: "Keterlibatan aktif Mr. A.A. Maramis (tokoh Kristen asal Sulawesi Utara) bersama tokoh-tokoh Islam dan kebangsaan dalam Panitia Sembilan membuktikan bahwa Pancasila dirancang secara inklusif dan penuh toleransi untuk seluruh rakyat Indonesia."
+      },
+      {
+        id: 31,
+        topicId: "3",
+        topicName: "3. Perumusan Panitia Sembilan",
+        question: "Rancangan Pembukaan Hukum Dasar (Piagam Jakarta) yang telah disepakati oleh Panitia Sembilan pada tanggal 22 Juni 1945 selanjutnya dilaporkan dan diterima dalam ....",
+        options: [
+          "Sidang Kedua BPUPK yang berlangsung pada tanggal 10 hingga 17 Juli 1945",
+          "Kongres Pemuda II di Gedung Indonesische Clubgebouw Jakarta",
+          "Konferensi Meja Bundar di Den Haag, Kerajaan Belanda",
+          "Sidang Istimewa MPR tahun 1998 di Gedung Nusantara Jakarta"
+        ],
+        correctIndex: 0,
+        explanation: "Hasil kerja Panitia Sembilan berupa Piagam Jakarta dilaporkan oleh Ir. Sukarno pada awal Sidang Kedua BPUPK (10–17 Juli 1945) dan diterima sebagai rancangan Pembukaan (Preambule) Hukum Dasar Negara."
+      },
+      {
+        id: 32,
+        topicId: "3",
+        topicName: "3. Perumusan Panitia Sembilan",
+        question: "Nilai utama yang dapat dipelajari generasi muda dari keberhasilan Panitia Sembilan menyusun Piagam Jakarta meskipun terjadi perdebatan sengit antara golongan kebangsaan dan golongan keagamaan adalah ....",
+        options: [
+          "mengutamakan kompromi yang bermartabat dan titik temu demi menjaga keutuhan bangsa",
+          "menghindari rapat atau musyawarah apabila terdapat perbedaan pandangan di antara anggota",
+          "memaksakan kehendak kelompok yang memiliki jumlah pendukung paling banyak di ruangan",
+          "menunda pengambilan keputusan penting hingga terjadi konflik terbuka di masyarakat"
+        ],
+        correctIndex: 0,
+        explanation: "Panitia Sembilan menunjukkan kearifan bernegara: mereka tidak membiarkan perbedaan pandangan memecah belah bangsa, melainkan mencari titik temu (kompromi luhur) demi terwujudnya kemerdekaan Indonesia yang bersatu."
+      },
+
+      // --- TOPIK 4: PENETAPAN PANCASILA SEBAGAI DASAR NEGARA & NILAI SILA (13 SOAL) ---
+      {
+        id: 33,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Peristiwa eksternal yang mempercepat langkah bangsa Indonesia menuju proklamasi kemerdekaan adalah dijatuhkannya bom atom oleh tentara Sekutu di dua kota penting Jepang pada bulan Agustus 1945, yaitu ....",
+        options: [
+          "Hiroshima pada tanggal 6 Agustus 1945 dan Nagasaki pada tanggal 9 Agustus 1945",
+          "Tokyo pada tanggal 1 Agustus 1945 dan Osaka pada tanggal 5 Agustus 1945",
+          "Kyoto pada tanggal 10 Agustus 1945 dan Yokohama pada tanggal 14 Agustus 1945",
+          "Pearl Harbour pada tanggal 7 Desember 1941 dan Kalijati pada tanggal 8 Maret 1942"
+        ],
+        correctIndex: 0,
+        explanation: "Amerika Serikat menjatuhkan bom atom di Kota Hiroshima pada 6 Agustus 1945 dan Kota Nagasaki pada 9 Agustus 1945 yang melumpuhkan kekuatan Jepang hingga akhirnya Jepang menyerah tanpa syarat kepada Sekutu pada 14/15 Agustus 1945."
+      },
+      {
+        id: 34,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Setelah BPUPK dibubarkan karena dianggap telah menyelesaikan tugasnya, pada tanggal 7 Agustus 1945 dibentuklah PPKI (Dokuritsu Zyunbi Iinkai). Pada tanggal 9 Agustus 1945, tiga tokoh bangsa yaitu Ir. Sukarno, Drs. Moh. Hatta, dan dr. Radjiman Wedyodiningrat dipanggil ke Dalat, Vietnam oleh panglima tertinggi tentara Jepang wilayah Selatan bernama ....",
+        options: [
+          "Marsekal Hisaichi Terauchi",
+          "Laksamana Tadashi Maeda",
+          "Letnan Jenderal Kumakichi Harada",
+          "Mayor Jenderal Otoshi Nishimura"
+        ],
+        correctIndex: 0,
+        explanation: "Pada 9 Agustus 1945, Sukarno, Moh. Hatta, dan Radjiman Wedyodiningrat berangkat ke Dalat (Saigon), Vietnam untuk bertemu Marsekal Hisaichi Terauchi yang mengesahkan pengangkatan Sukarno sebagai Ketua PPKI dan Moh. Hatta sebagai Wakil Ketua PPKI serta menjanjikan kemerdekaan Indonesia."
+      },
+      {
+        id: 35,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Latar belakang terjadinya Peristiwa Rengasdengklok pada dini hari tanggal 16 Agustus 1945 adalah ....",
+        options: [
+          "perbedaan pendapat antara golongan pemuda dan golongan tua mengenai waktu dan cara pelaksanaan proklamasi kemerdekaan",
+          "upaya tentara Jepang untuk menangkap Ir. Sukarno dan Drs. Moh. Hatta sebelum sidang PPKI dimulai",
+          "rencana pemindahan ibu kota negara Indonesia dari Jakarta ke wilayah Karawang secara permanen",
+          "kesepakatan antara golongan tua dan pasukan Sekutu untuk menunda kemerdekaan hingga akhir tahun 1945"
+        ],
+        correctIndex: 0,
+        explanation: "Setelah mendengar berita kekalahan Jepang dari Sekutu melalui radio bawah tanah (Sutan Syahrir), golongan pemuda (Wikana, Sukarni, Chaerul Saleh, dll.) mendesak agar proklamasi segera dilakukan lepas dari campur tangan Jepang (PPKI), sedangkan golongan tua menginginkan rapat PPKI terlebih dahulu. Pemuda lalu mengamankan Sukarno-Hatta ke Rengasdengklok agar terhindar dari pengaruh Jepang."
+      },
+      {
+        id: 36,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Setelah tercapai kesepakatan antara golongan tua dan golongan pemuda di Rengasdengklok (dengan jaminan Mr. Ahmad Subardjo), penyusunan naskah teks Proklamasi Kemerdekaan Indonesia dilaksanakan pada malam hari tanggal 16 Agustus 1945 bertempat di ....",
+        options: [
+          "rumah kediaman Laksamana Muda Tadashi Maeda di Jalan Imam Bonjol No. 1, Jakarta",
+          "gedung Pegangsaan Timur No. 56, Jakarta",
+          "Markas Besar Tentara Jepang Gunseikanbu di Jakarta",
+          "Istana Merdeka, Jalan Medan Merdeka Utara, Jakarta"
+        ],
+        correctIndex: 0,
+        explanation: "Karena situasi malam hari diberlakukan jam malam oleh tentara Jepang, Laksamana Muda Tadashi Maeda (perwira tinggi Angkatan Laut Jepang yang bersimpati pada perjuangan Indonesia) menawarkan rumahnya di Jl. Imam Bonjol No. 1 Jakarta sebagai tempat aman merumuskan naskah Proklamasi."
+      },
+      {
+        id: 37,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Sebelum Sidang PPKI dimulai pada pagi hari tanggal 18 Agustus 1945, Drs. Mohammad Hatta mengadakan rapat pendahuluan dengan tokoh-tokoh Islam seperti Ki Bagus Hadikusumo, K.H. Wahid Hasyim, Mr. Kasman Singodimedjo, dan Teuku Muhammad Hasan. Hasil kesepakatan bersejarah dari rapat pendahuluan tersebut adalah ....",
+        options: [
+          "mengubah tujuh kata pada sila pertama Piagam Jakarta menjadi 'Ketuhanan Yang Maha Esa' demi menjaga persatuan bangsa",
+          "menambahkan pasal khusus yang mewajibkan setiap warga negara mengikuti wajib militer selama dua tahun",
+          "menunda pengesahan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 hingga pemilu pertama",
+          "mengganti lambang negara Burung Garuda menjadi lambang Padi dan Kapas secara tunggal"
+        ],
+        correctIndex: 0,
+        explanation: "Sore hari 17 Agustus 1945, utusan dari Indonesia bagian Timur menyampaikan keberatan terkait tujuh kata dalam sila pertama Piagam Jakarta. Dengan jiwa besar demi keutuhan Negara Kesatuan Republik Indonesia, tokoh-tokoh Islam bersama Moh. Hatta pada pagi 18 Agustus 1945 sepakat mengubahnya menjadi 'Ketuhanan Yang Maha Esa'."
+      },
+      {
+        id: 38,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Pancasila secara resmi ditetapkan sebagai dasar negara Republik Indonesia yang sah dan mengikat secara hukum pada tanggal ....",
+        options: [
+          "18 Agustus 1945 melalui Sidang PPKI bersamaan dengan pengesahan Pembukaan UUD NRI Tahun 1945",
+          "1 Juni 1945 melalui pidato Ir. Sukarno di hadapan anggota BPUPK",
+          "22 Juni 1945 melalui penandatanganan Piagam Jakarta oleh Panitia Sembilan",
+          "17 Agustus 1945 melalui pembacaan teks Proklamasi Kemerdekaan Indonesia"
+        ],
+        correctIndex: 0,
+        explanation: "1 Juni 1945 adalah Hari Lahir Pancasila, 22 Juni 1945 adalah perumusan Piagam Jakarta, dan 18 Agustus 1945 adalah tanggal penetapan/pengesahan Pancasila secara konstitusional sebagai dasar negara dalam alinea keempat Pembukaan UUD NRI Tahun 1945 oleh PPKI."
+      },
+      {
+        id: 39,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Berikut ini yang merupakan tiga keputusan utama hasil Sidang Pertama PPKI pada tanggal 18 Agustus 1945 adalah ....",
+        options: [
+          "mengesahkan UUD NRI Tahun 1945, memilih Ir. Sukarno sebagai Presiden dan Drs. Moh. Hatta sebagai Wakil Presiden, serta membentuk Komite Nasional",
+          "membentuk 12 kementerian negara, membagi wilayah Indonesia menjadi 8 provinsi, dan membentuk Badan Keamanan Rakyat",
+          "membubarkan BPUPK, membentuk Partai Nasional Indonesia, dan menetapkan bendera Merah Putih sebagai bendera negara",
+          "mengesahkan Piagam Jakarta, mengangkat Jenderal Sudirman sebagai Panglima Besar, dan memindahkan ibu kota ke Yogyakarta"
+        ],
+        correctIndex: 0,
+        explanation: "Tiga keputusan Sidang PPKI 18 Agustus 1945: (1) Mengesahkan UUD NRI Tahun 1945; (2) Memilih Ir. Sukarno sebagai Presiden dan Drs. Moh. Hatta sebagai Wakil Presiden secara aklamasi atas usul Otto Iskandardinata; (3) Tugas Presiden untuk sementara waktu dibantu oleh sebuah Komite Nasional (KNIP)."
+      },
+      {
+        id: 40,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        svgKey: "garuda_perisai",
+        question: "Perhatikan ilustrasi lambang perisai Garuda Pancasila di atas. Simbol rantai emas yang tersusun dari mata rantai berbentuk persegi (melambangkan laki-laki) dan lingkaran (melambangkan perempuan) yang saling berkaitan tanpa putus melambangkan sila kedua Pancasila, yang bermakna ....",
+        options: [
+          "manusia sebagai makhluk bermartabat yang saling membutuhkan, sederajat, dan menjunjung tinggi nilai kemanusiaan yang adil dan beradab",
+          "persatuan seluruh suku bangsa di Indonesia yang bernaung di bawah satu payung negara kesatuan",
+          "kesejahteraan dan kemakmuran seluruh rakyat Indonesia secara adil tanpa membeda-bedakan status sosial",
+          "kedaulatan rakyat yang dilaksanakan melalui hikmat kebijaksanaan dalam permusyawaratan perwakilan"
+        ],
+        correctIndex: 0,
+        explanation: "Simbol rantai emas bermata persegi dan lingkaran yang saling mengait melambangkan sila ke-2 ('Kemanusiaan yang adil dan beradab'), bermakna hubungan antarmanusia (laki-laki dan perempuan) yang saling membantu, setara, dan menghormati hak asasi manusia."
+      },
+      {
+        id: 41,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Dalam perisai Garuda Pancasila terdapat garis hitam tebal melintang di tengah perisai yang melambangkan bahwa negara Republik Indonesia ....",
+        options: [
+          "dilalui oleh garis khatulistiwa (ekuator) sehingga memiliki kekayaan alam dan posisi geografis yang strategis",
+          "terbagi menjadi dua wilayah hukum adat yang berbeda antara Indonesia bagian barat dan bagian timur",
+          "pernah mengalami penjajahan panjang sebelum akhirnya merdeka pada tanggal 17 Agustus 1945",
+          "membatasi campur tangan pemerintah pusat terhadap urusan rumah tangga pemerintahan daerah"
+        ],
+        correctIndex: 0,
+        explanation: "Garis hitam tebal melintang di tengah perisai Garuda Pancasila melambangkan garis khatulistiwa (ekuator) yang melintasi wilayah Negara Kesatuan Republik Indonesia dari barat ke timur."
+      },
+      {
+        id: 42,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Penerapan nilai-nilai sila pertama Pancasila ('Ketuhanan Yang Maha Esa') dalam kehidupan sehari-hari di lingkungan sekolah ditunjukkan oleh perilaku ....",
+        options: [
+          "menjaga ketenangan dan tidak mengganggu teman yang sedang melaksanakan ibadah sesuai agama dan kepercayaannya",
+          "mengutamakan pembelian produk buatan dalam negeri dibandingkan produk impor dari luar negeri",
+          "menyelesaikan perbedaan pendapat mengenai jadwal piket kelas melalui pemungutan suara yang tertib",
+          "membagi tugas kelompok secara merata agar tidak ada anggota yang merasa terbebani sendiri"
+        ],
+        correctIndex: 0,
+        explanation: "Menghormati kebebasan beribadah dan menjaga kerukunan antarumat beragama merupakan wujud nyata sila pertama. Cinta produk dalam negeri adalah sila ke-3, musyawarah/voting tertib adalah sila ke-4, dan pembagian tugas secara adil adalah sila ke-5."
+      },
+      {
+        id: 43,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Sila ketiga Pancasila ('Persatuan Indonesia') dilambangkan dengan pohon beringin yang memiliki akar tunggang kuat dan akar gantung yang menjulur ke segala arah. Dalam kehidupan bermasyarakat, nilai sila ketiga tersebut diwujudkan melalui sikap ....",
+        options: [
+          "bangga menggunakan bahasa Indonesia yang baik, melestarikan budaya daerah, dan menjaga kerukunan antarsuku",
+          "melaksanakan ibadah tepat waktu sesuai tuntunan kitab suci masing-masing dengan penuh keikhlasan",
+          "bersikap hemat, tidak bergaya hidup mewah, dan rajin menabung untuk masa depan pendidikan",
+          "menghargai hasil keputusan rapat OSIS meskipun usulan pribadi tidak terpilih sebagai keputusan akhir"
+        ],
+        correctIndex: 0,
+        explanation: "Pohon beringin melambangkan tempat berteduh seluruh rakyat Indonesia yang beragam suku, budaya, dan bahasa di bawah naungan NKRI. Sikap bangga berbahasa Indonesia dan menjaga kerukunan antarsuku merupakan pengamalan sila ketiga."
+      },
+      {
+        id: 44,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Kepala banteng dipilih sebagai lambang sila keempat Pancasila ('Kerakyatan yang dipimpin oleh hikmat kebijaksanaan dalam permusyawaratan/perwakilan') karena filosofi banteng sebagai hewan sosial yang suka berkumpul. Sikap berikut yang bertentangan dengan nilai sila keempat adalah ....",
+        options: [
+          "memaksakan kehendak pribadi kepada orang lain dan menolak melaksanakan hasil keputusan musyawarah",
+          "memberikan kesempatan kepada setiap anggota rapat untuk menyampaikan pendapat secara bergantian",
+          "menerima hasil pemilihan ketua kelas secara lapang dada karena telah dilaksanakan secara jujur dan adil",
+          "mengutamakan musyawarah untuk mencapai mufakat dalam menyelesaikan masalah bersama di lingkungan RT"
+        ],
+        correctIndex: 0,
+        explanation: "Sila keempat menuntut kita mengutamakan musyawarah mufakat, menghargai suara orang lain, dan melaksanakan hasil keputusan bersama dengan penuh tanggung jawab. Memaksakan kehendak pribadi jelas bertentangan dengan sila keempat."
+      },
+      {
+        id: 45,
+        topicId: "4",
+        topicName: "4. Penetapan & Nilai Pancasila",
+        question: "Sila kelima Pancasila ('Keadilan sosial bagi seluruh rakyat Indonesia') dilambangkan dengan padi dan kapas yang mencerminkan kebutuhan dasar manusia (pangan dan sandang). Contoh pengamalan sila kelima di lingkungan keluarga dan sekolah adalah ....",
+        options: [
+          "menghargai hasil karya teman, bersikap adil terhadap sesama, serta tidak melakukan pemborosan sumber daya",
+          "mengikuti kegiatan peringatan hari besar keagamaan di sekolah dengan tertib dan khidmat",
+          "mempelajari tarian tradisional dari berbagai provinsi sebagai bentuk kecintaan terhadap tanah air",
+          "mengikuti pemilihan pengurus MPK dan OSIS secara langsung, umum, bebas, dan rahasia"
+        ],
+        correctIndex: 0,
+        explanation: "Pengamalan sila kelima mencakup sikap adil kepada sesama, menghormati hak orang lain, menghargai hasil karya orang lain, suka bekerja keras, dan hidup hemat (tidak boros/bermewah-mewahan)."
+      },
+
+      // --- TOPIK 5: NORMA DALAM MASYARAKAT (15 SOAL) ---
+      {
+        id: 46,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Dalam kajian ilmu sosial dan Pendidikan Pancasila, manusia memiliki kedudukan sebagai makhluk Tuhan Yang Maha Esa, makhluk individu, sekaligus makhluk sosial (monodualis). Makna manusia sebagai makhluk monodualis adalah ....",
+        options: [
+          "manusia memiliki kepribadian dan kepentingan diri sendiri sebagai individu, namun sekaligus tidak dapat hidup tanpa bantuan orang lain",
+          "manusia dapat memenuhi seluruh kebutuhan hidupnya secara mandiri tanpa memerlukan aturan atau kerja sama masyarakat",
+          "manusia hanya memiliki kewajiban kepada negara dan tidak memiliki hak pribadi atas kebebasan berpikir",
+          "manusia selalu memiliki keinginan yang seragam sehingga tidak pernah terjadi benturan kepentingan di masyarakat"
+        ],
+        correctIndex: 0,
+        explanation: "Sebagai makhluk monodualis, manusia memiliki dua sisi kodrat yang menyatu: sebagai makhluk individu (memiliki ciri khas, kehendak, dan kepentingan pribadi) dan sebagai makhluk sosial (selalu berinteraksi dan membutuhkan orang lain dalam masyarakat)."
+      },
+      {
+        id: 47,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Menurut Kamus Besar Bahasa Indonesia (KBBI), pengertian norma yang tepat adalah ....",
+        options: [
+          "aturan atau ketentuan yang mengikat warga kelompok dalam masyarakat, dipakai sebagai panduan, tatanan, dan pengendali tingkah laku yang sesuai",
+          "kumpulan hukuman pidana yang hanya dijatuhkan oleh hakim pengadilan negeri kepada pelaku kejahatan berat",
+          "kebiasaan turun-temurun yang hanya berlaku di daerah pedesaan dan tidak mengikat masyarakat perkotaan",
+          "keinginan bebas setiap individu untuk bertindak sesuai kehendak hatinya tanpa dibatasi oleh aturan"
+        ],
+        correctIndex: 0,
+        explanation: "Menurut KBBI, norma adalah aturan atau ketentuan yang mengikat warga kelompok dalam masyarakat, dipakai sebagai panduan, tatanan, dan pengendali tingkah laku yang sesuai dan berterima."
+      },
+      {
+        id: 48,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Para ahli hukum dan sosiologi Indonesia memberikan definisi mengenai norma. Menurut Prof. Dr. Soerjono Soekanto, norma dalam kehidupan masyarakat pada hakikatnya adalah ....",
+        options: [
+          "perangkat aturan agar hubungan antarmanusia di dalam suatu masyarakat terlaksana sebagaimana yang diharapkan",
+          "perintah tertulis dari kepala negara yang disertai sanksi penjara dan denda uang bagi pelanggarnya",
+          "keyakinan batin setiap manusia yang bersumber semata-mata dari ajaran kitab suci agama tertentu",
+          "tata cara sopan santun berpakaian yang berlaku dalam upacara resmi kenegaraan"
+        ],
+        correctIndex: 0,
+        explanation: "Menurut sosiolog hukum Indonesia Prof. Dr. Soerjono Soekanto, norma merupakan perangkat aturan yang dibuat agar hubungan antarmanusia dalam suatu masyarakat dapat terlaksana secara tertib dan harmonis sebagaimana diharapkan."
+      },
+      {
+        id: 49,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Ahli hukum tata negara Indonesia, Prof. Dr. Maria Farida Indrati Soeprapto, menjelaskan bahwa norma merupakan ukuran yang harus dipatuhi oleh seseorang dalam hubungannya dengan sesamanya ataupun lingkungannya. Mengapa keberadaan norma sangat penting dalam masyarakat?",
+        options: [
+          "menciptakan ketertiban, keamanan, kedamaian, serta mencegah terjadinya benturan kepentingan antarwarga",
+          "membatasi kreativitas dan kebebasan warga negara agar tidak berani menyampaikan pendapat di muka umum",
+          "memberikan kekuasaan mutlak kepada aparat penegak hukum untuk menghukum warga tanpa proses peradilan",
+          "menghilangkan seluruh perbedaan budaya, bahasa, dan kebiasaan yang berkembang di daerah-daerah"
+        ],
+        correctIndex: 0,
+        explanation: "Nilai penting dan fungsi norma adalah menjadi pedoman tingkah laku, menjaga kerukunan, melindungi hak-hak orang lain, mencegah benturan kepentingan (konflik), serta mewujudkan ketertiban dan keadilan dalam masyarakat."
+      },
+      {
+        id: 50,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Suatu kaidah atau norma sosial dapat berlaku efektif dan ditaati oleh anggota masyarakat apabila memenuhi syarat-syarat tertentu. Salah satu syarat utama berlakunya norma dalam masyarakat adalah ....",
+        options: [
+          "adanya kesadaran, pengakuan, dan penerimaan dari masyarakat bahwa aturan tersebut bermanfaat serta memiliki sanksi yang jelas",
+          "aturan tersebut harus selalu ditulis dalam bahasa asing dan disahkan oleh lembaga internasional",
+          "aturan tersebut hanya mengikat masyarakat golongan ekonomi menengah ke bawah saja",
+          "tidak boleh ada sanksi atau teguran bagi anggota masyarakat yang melanggar aturan tersebut"
+        ],
+        correctIndex: 0,
+        explanation: "Syarat berlakunya norma meliputi: (1) memiliki tujuan yang jelas dan bermanfaat bagi kebaikan bersama; (2) diterima dan diakui oleh masyarakat; (3) sifatnya jelas/tidak membingungkan; serta (4) memiliki sanksi yang tegas/nyata bagi pelanggarnya."
+      },
+      {
+        id: 51,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        svgKey: "empat_norma",
+        question: "Perhatikan bagan empat jenis norma dan sumbernya di atas. Peraturan hidup yang bersumber dari wahyu Tuhan Yang Maha Esa melalui kitab suci dan ajaran agama, serta memiliki sanksi berupa dosa atau balasan di akhirat kelak disebut ....",
+        options: [
+          "Norma Agama",
+          "Norma Kesusilaan",
+          "Norma Kesopanan",
+          "Norma Hukum"
+        ],
+        correctIndex: 0,
+        explanation: "Norma agama bersumber dari Tuhan Yang Maha Esa melalui ajaran agama dan kitab suci. Sanksinya bersifat tidak langsung di dunia (berupa dosa dan balasan di akhirat kelak), misalnya kewajiban beribadah, larangan mencuri, dan perintah berbuat baik kepada sesama."
+      },
+      {
+        id: 52,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Saat mengerjakan ujian akhir semester, Rani melihat kertas jawaban temannya terbuka lebar, namun ia memilih tidak menyontek karena hatinya merasa tindakan itu tidak jujur dan akan membuatnya menyesal. Perilaku Rani mencerminkan ketaatan terhadap ....",
+        options: [
+          "Norma Kesusilaan",
+          "Norma Hukum",
+          "Norma Kesopanan",
+          "Norma Adat Istiadat"
+        ],
+        correctIndex: 0,
+        explanation: "Norma kesusilaan bersumber dari hati nurani manusia (bisikan kalbu) yang membedakan perbuatan baik dan buruk secara universal, seperti jujur, tidak menyontek, dan menolong orang yang kesusahan. Sanksinya berupa rasa bersalah, malu, dan penyesalan batin."
+      },
+      {
+        id: 53,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Norma kesopanan (norma sosial) bersumber dari pergaulan hidup sehari-hari, tata krama, dan adat istiadat masyarakat setempat. Ciri khas yang membedakan norma kesopanan dengan norma kesusilaan adalah ....",
+        options: [
+          "norma kesopanan bersifat relatif/lokal sesuai budaya daerah tertentu, sedangkan norma kesusilaan bersifat universal",
+          "norma kesopanan sanksinya berupa hukuman penjara, sedangkan norma kesusilaan sanksinya berupa denda uang",
+          "norma kesopanan bersumber dari kitab suci, sedangkan norma kesusilaan bersumber dari undang-undang negara",
+          "norma kesopanan berlaku selamanya tanpa perubahan, sedangkan norma kesusilaan selalu berubah setiap tahun"
+        ],
+        correctIndex: 0,
+        explanation: "Norma kesopanan bersifat relatif/lokal tergantung tempat, waktu, dan budaya masyarakat (misalnya tata cara makan, cara menyapa orang yang lebih tua, atau berpakaian adat), sedangkan norma kesusilaan (seperti kejujuran dan larangan membunuh) bersifat universal."
+      },
+      {
+        id: 54,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Negara Republik Indonesia mengakui dan menghormati keberadaan kesatuan-kesatuan masyarakat hukum adat beserta hak-hak tradisionalnya sepanjang masih hidup dan sesuai dengan perkembangan masyarakat serta prinsip NKRI. Ketentuan konstitusional tersebut tercantum dalam UUD NRI Tahun 1945 yaitu ....",
+        options: [
+          "Pasal 18B ayat (2)",
+          "Pasal 1 ayat (3)",
+          "Pasal 27 ayat (1)",
+          "Pasal 31 ayat (4)"
+        ],
+        correctIndex: 0,
+        explanation: "Pasal 18B ayat (2) UUD NRI Tahun 1945 menyatakan bahwa negara mengakui dan menghormati kesatuan-kesatuan masyarakat hukum adat beserta hak-hak tradisionalnya sepanjang masih hidup dan sesuai dengan perkembangan masyarakat dan prinsip NKRI."
+      },
+      {
+        id: 55,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Di antara keempat jenis norma yang berlaku di masyarakat, norma yang memiliki sifat paling memaksa, dibuat oleh lembaga negara yang berwenang, dan memiliki sanksi tegas, nyata, serta dapat dipaksakan oleh aparat penegak hukum adalah ....",
+        options: [
+          "Norma Hukum",
+          "Norma Kesopanan",
+          "Norma Kesusilaan",
+          "Norma Agama"
+        ],
+        correctIndex: 0,
+        explanation: "Norma hukum dibuat oleh badan resmi negara (seperti DPR dan Presiden), bersifat memaksa seluruh warga negara tanpa kecuali, dan memiliki sanksi nyata dan tegas (pidana penjara, kurungan, denda, atau pencabutan hak) yang ditegakkan oleh polisi, jaksa, dan hakim."
+      },
+      {
+        id: 56,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Keempat jenis norma (agama, kesusilaan, kesopanan, dan hukum) saling berhubungan dan saling melengkapi satu sama lain. Contoh perbuatan yang sekaligus melanggar keempat norma tersebut secara bersamaan adalah ....",
+        options: [
+          "melakukan pencurian atau perampasan harta benda milik orang lain",
+          "tidak mengenakan dasi dan topi saat mengikuti upacara bendera hari Senin",
+          "makan sambil berbicara keras di meja makan keluarga",
+          "terlambat bangun pagi pada hari libur sekolah"
+        ],
+        correctIndex: 0,
+        explanation: "Tindakan mencuri melanggar Norma Agama (berdosa karena dilarang ajaran agama), Norma Kesusilaan (bertentangan dengan hati nurani), Norma Kesopanan (tercela dan dikucilkan masyarakat), serta Norma Hukum (melanggar KUHP dan diancam pidana penjara)."
+      },
+      {
+        id: 57,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Mengapa norma hukum tetap sangat diperlukan dalam kehidupan bernegara meskipun dalam masyarakat sudah ada norma agama, norma kesusilaan, dan norma kesopanan?",
+        options: [
+          "karena tidak semua hal diatur secara rinci dalam norma lain dan sanksi ketiga norma lain belum cukup memaksa pelanggar di dunia",
+          "karena norma agama dan norma kesusilaan sudah tidak berlaku lagi di era modern saat ini",
+          "karena sanksi norma hukum dapat dibeli dengan uang sehingga memudahkan penyelesaian perkara",
+          "karena norma hukum hanya mengatur hubungan pribadi antara manusia dengan Tuhan Yang Maha Esa"
+        ],
+        correctIndex: 0,
+        explanation: "Norma hukum melengkapi ketiga norma lainnya karena: (1) mengatur hal-hal teknis kenegaraan (seperti lalu lintas, pajak, pemilu) yang tidak diatur rinci dalam norma sosial; dan (2) memberikan sanksi nyata/memaksa secara langsung di dunia bagi pelaku kejahatan."
+      },
+      {
+        id: 58,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Pelanggaran norma masih sering terjadi di lingkungan sekitar kita, seperti pelanggaran lalu lintas atau perundungan (bullying) di sekolah. Faktor internal utama yang menyebabkan seseorang melanggar norma adalah ....",
+        options: [
+          "rendahnya kesadaran diri, sikap egois yang mengutamakan kepentingan pribadi, dan kurangnya pengendalian emosi",
+          "terlalu banyaknya jumlah rambu lalu lintas dan tata tertib yang dipasang di tempat umum",
+          "ketegasan aparat penegak hukum dalam memberikan sanksi kepada setiap pelanggar aturan",
+          "tingginya tingkat pendidikan dan literasi digital yang dimiliki oleh generasi muda"
+        ],
+        correctIndex: 0,
+        explanation: "Faktor penyebab pelanggaran norma terbagi atas faktor internal (rendahnya kesadaran, sifat egois, kurangnya empati/pengendalian diri) dan faktor eksternal (pengaruh pergaulan negatif, lemahnya pengawasan, atau kurangnya keteladanan)."
+      },
+      {
+        id: 59,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Penerapan norma di lingkungan keluarga menjadi fondasi pembentukan karakter anak sejak dini. Contoh perilaku yang mencerminkan ketaatan terhadap norma di lingkungan keluarga adalah ....",
+        options: [
+          "berpamitan dan mencium tangan orang tua sebelum berangkat ke sekolah serta membantu pekerjaan rumah",
+          "membayar pajak bumi dan bangunan tepat waktu melalui kantor pos atau layanan perbankan",
+          "menggunakan helm berstandar SNI dan membawa surat izin mengemudi saat berkendara di jalan raya",
+          "mengikuti kegiatan ronda malam (siskamling) bersama ketua RT dan warga kampung"
+        ],
+        correctIndex: 0,
+        explanation: "Berpamitan kepada orang tua, berbicara santun di rumah, dan membantu membersihkan rumah adalah penerapan norma di lingkungan keluarga. Membayar pajak dan memakai helm adalah norma bernegara, sedangkan siskamling adalah norma di masyarakat."
+      },
+      {
+        id: 60,
+        topicId: "5",
+        topicName: "5. Norma dalam Masyarakat",
+        question: "Dalam kehidupan bermasyarakat dan bernegara, kepatuhan warga terhadap norma hukum di jalan raya dapat diwujudkan dengan cara ....",
+        options: [
+          "menyeberang jalan melalui zebra cross atau jembatan penyeberangan serta mematuhi lampu lalu lintas",
+          "mempercepat laju kendaraan saat lampu lalu lintas menyala kuning agar tidak terjebak kemacetan",
+          "memarkir kendaraan di atas trotoar pejalan kaki asalkan tidak berlangsung lebih dari satu jam",
+          "menggunakan trotoar jalan untuk mendahului antrean kendaraan saat jam pulang sekolah"
+        ],
+        correctIndex: 0,
+        explanation: "Menyeberang melalui zebra cross/JPO dan mematuhi lampu lalu lintas adalah bentuk ketaatan terhadap UU Lalu Lintas dan Angkutan Jalan sekaligus menghormati hak keselamatan pengguna jalan lainnya."
+      },
+
+      // --- TOPIK 6: HAK DAN KEWAJIBAN PADA NORMA (9 SOAL) ---
+      {
+        id: 61,
+        topicId: "6",
+        topicName: "6. Hak & Kewajiban pada Norma",
+        question: "Berdasarkan Kamus Besar Bahasa Indonesia (KBBI) dan konsep Hak Asasi Manusia (HAM), pengertian 'hak' yang paling tepat adalah ....",
+        options: [
+          "kewenangan, kekuasaan untuk berbuat sesuatu, atau sesuatu yang benar dan layak diterima oleh setiap manusia sejak lahir",
+          "beban tugas yang wajib dikerjakan oleh setiap warga negara tanpa boleh menuntut imbalan apa pun",
+          "sanksi pidana yang dijatuhkan oleh negara kepada warga yang melanggar ketertiban umum",
+          "aturan adat istiadat yang hanya berlaku bagi kepala suku dan tokoh masyarakat setempat"
+        ],
+        correctIndex: 0,
+        explanation: "Menurut KBBI, hak berarti milik/kepunyaan, kewenangan, atau kekuasaan untuk berbuat sesuatu (karena telah ditentukan oleh undang-undang/aturan). Dalam konsep HAM, hak adalah anugerah Tuhan yang melekat pada setiap manusia sejak lahir (hak hidup, hak kebebasan, hak pendidikan, dll.)."
+      },
+      {
+        id: 62,
+        topicId: "6",
+        topicName: "6. Hak & Kewajiban pada Norma",
+        question: "Sementara itu, pengertian 'kewajiban' dalam kehidupan bermasyarakat dan bernegara adalah ....",
+        options: [
+          "segala sesuatu yang harus dilaksanakan dengan penuh tanggung jawab oleh seseorang sesuai aturan dan norma yang berlaku",
+          "fasilitas umum yang disediakan oleh pemerintah untuk dinikmati secara gratis oleh seluruh penduduk",
+          "pilihan sukarela yang boleh dikerjakan atau ditinggalkan sesuai suasana hati masing-masing individu",
+          "penghargaan yang diberikan sekolah kepada peserta didik yang meraih peringkat pertama di kelas"
+        ],
+        correctIndex: 0,
+        explanation: "Kewajiban berasal dari kata 'wajib' yang berarti harus dilakukan/tidak boleh tidak dilaksanakan. Kewajiban adalah segala sesuatu yang harus dikerjakan dengan penuh tanggung jawab agar tercipta keseimbangan dengan hak."
+      },
+      {
+        id: 63,
+        topicId: "6",
+        topicName: "6. Hak & Kewajiban pada Norma",
+        svgKey: "tri_hita_karana",
+        question: "Perhatikan diagram Venn tiga hubungan kewajiban manusia (yang dalam kearifan lokal Nusantara dikenal sebagai Tri Hita Karana) di atas. Ketiga dimensi hubungan kewajiban manusia tersebut meliputi ....",
+        options: [
+          "kewajiban terhadap Tuhan Yang Maha Esa, kewajiban terhadap sesama manusia, dan kewajiban terhadap alam lingkungan",
+          "kewajiban terhadap pemerintah pusat, kewajiban terhadap pemerintah daerah, dan kewajiban terhadap luar negeri",
+          "kewajiban di bidang ekonomi, kewajiban di bidang pertahanan keamanan, dan kewajiban di bidang olahraga",
+          "kewajiban membayar pajak kendaraan, kewajiban mengikuti upacara, dan kewajiban menjaga kebersihan kamar"
+        ],
+        correctIndex: 0,
+        explanation: "Kewajiban manusia mencakup tiga hubungan harmonis (Tri Hita Karana): (1) Hubungan dengan Tuhan YME (beribadah dan bersyukur); (2) Hubungan dengan sesama manusia (menghormati hak orang lain, tolong-menolong); dan (3) Hubungan dengan alam/lingkungan (melestarikan alam dan tidak merusak ekosistem)."
+      },
+      {
+        id: 64,
+        topicId: "6",
+        topicName: "6. Hak & Kewajiban pada Norma",
+        question: "Kewajiban manusia dalam menjaga kelestarian alam dan mencegah pencemaran lingkungan hidup di Indonesia telah diatur secara tegas dalam peraturan perundang-undangan, yaitu ....",
+        options: [
+          "Undang-Undang Nomor 32 Tahun 2009 tentang Perlindungan dan Pengelolaan Lingkungan Hidup",
+          "Undang-Undang Nomor 20 Tahun 2003 tentang Sistem Pendidikan Nasional",
+          "Undang-Undang Nomor 39 Tahun 1999 tentang Hak Asasi Manusia",
+          "Undang-Undang Nomor 1 Tahun 1974 tentang Perkawinan"
+        ],
+        correctIndex: 0,
+        explanation: "UU Nomor 32 Tahun 2009 mengatur tentang Perlindungan dan Pengelolaan Lingkungan Hidup (PPLH), yang menegaskan bahwa setiap orang berkewajiban memelihara kelestarian fungsi lingkungan hidup serta mengendalikan pencemaran dan/atau kerusakan lingkungan hidup."
+      },
+      {
+        id: 65,
+        topicId: "6",
+        topicName: "6. Hak & Kewajiban pada Norma",
+        question: "Agar pelaksanaan hak dan kewajiban dalam kehidupan bermasyarakat berjalan secara harmonis dan tidak menimbulkan konflik egoisme, urutan penerapan yang paling tepat adalah ....",
+        options: [
+          "memenuhi hak orang lain terlebih dahulu → menjalankan semua kewajiban diri sendiri → baru meminta atau menerima hak sendiri",
+          "menuntut hak pribadi secara maksimal terlebih dahulu → menunda kewajiban → mengabaikan hak orang lain",
+          "menjalankan kewajiban hanya jika mendapat pujian → meminta hak orang lain → menuntut pemerintah",
+          "meminta hak sendiri di awal → mengkritik orang lain → melaksanakan kewajiban apabila tersisa waktu"
+        ],
+        correctIndex: 0,
+        explanation: "Dalam buku teks Pendidikan Pancasila diajarkan urutan etis dan harmonis dalam pemenuhan hak dan kewajiban: (1) Penuhi hak orang lain terlebih dahulu (menghormati hak sesama); (2) Jalankan semua kewajiban diri dengan tanggung jawab; (3) Baru meminta/menerima hak diri sendiri."
+      },
+      {
+        id: 66,
+        topicId: "6",
+        topicName: "6. Hak & Kewajiban pada Norma",
+        question: "Setiap peserta didik di sekolah memiliki hak untuk mendapatkan pengajaran dan penilaian yang objektif dari guru. Namun, hak tersebut baru layak dituntut setelah peserta didik melaksanakan kewajibannya, yaitu ....",
+        options: [
+          "mengikuti pelajaran dengan tertib, menghormati guru, dan mengerjakan tugas sekolah tepat waktu",
+          "menuntut nilai tertinggi di kelas meskipun jarang masuk sekolah dan tidak mengumpulkan tugas",
+          "meminta fasilitas ruang kelas berpendingin udara sebelum menjaga kebersihan kelasnya sendiri",
+          "melarang teman sekelas bertanya kepada guru agar waktu pelajaran hanya digunakan untuk dirinya"
+        ],
+        correctIndex: 0,
+        explanation: "Keseimbangan hak dan kewajiban di sekolah menuntut siswa melaksanakan kewajibannya terlebih dahulu—seperti menaati tata tertib sekolah, menghormati guru, dan belajar dengan tekun—sebelum menuntut hak memperoleh ilmu dan nilai."
+      },
+      {
+        id: 67,
+        topicId: "6",
+        topicName: "6. Hak & Kewajiban pada Norma",
+        question: "Di ruang publik seperti perpustakaan sekolah atau transportasi umum, tindakan berikut yang mencerminkan kesadaran memenuhi hak orang lain sebelum menuntut hak sendiri adalah ....",
+        options: [
+          "mengecilkan suara gawai dan tidak berisik di perpustakaan agar pengunjung lain dapat membaca dengan tenang",
+          "meletakkan tas di kursi kosong bus umum agar tidak ada penumpang lain yang duduk di sebelahnya",
+          "meminjam buku referensi populer melampaui batas waktu peminjaman tanpa melapor kepada petugas",
+          "mendahului antrean pembelian tiket karena merasa memiliki urusan yang lebih mendesak"
+        ],
+        correctIndex: 0,
+        explanation: "Menjaga ketenangan di perpustakaan berarti memenuhi hak pengunjung lain atas suasana belajar yang kondusif, sebagaimana kita juga berhak mendapatkan ketenangan saat membaca."
+      },
+      {
+        id: 68,
+        topicId: "6",
+        topicName: "6. Hak & Kewajiban pada Norma",
+        question: "Hubungan antara norma dengan hak dan kewajiban dalam masyarakat ibarat dua sisi mata uang yang tidak dapat dipisahkan. Peran utama norma terhadap hak dan kewajiban warga adalah ....",
+        options: [
+          "menjamin perlindungan hak setiap warga sekaligus menetapkan batasan kewajiban agar tidak melanggar hak orang lain",
+          "menghapuskan seluruh hak pribadi warga negara agar seluruh kekayaan dikuasai oleh kelompok tertentu",
+          "membebaskan warga negara dari segala kewajiban sosial apabila sudah membayar iuran lingkungan",
+          "mengutamakan hak pejabat negara di atas hak warga negara biasa di hadapan hukum"
+        ],
+        correctIndex: 0,
+        explanation: "Norma hadir untuk menjamin agar setiap orang memperoleh haknya secara adil sekaligus membatasi kebebasan seseorang melalui kewajiban agar tidak merampas atau merugikan hak orang lain."
+      },
+      {
+        id: 69,
+        topicId: "6",
+        topicName: "6. Hak & Kewajiban pada Norma",
+        question: "Pasal 27 ayat (1) UUD NRI Tahun 1945 menyatakan bahwa 'Segala warga negara bersamaan kedudukannya di dalam hukum dan pemerintahan dan wajib menjunjung hukum dan pemerintahan itu dengan tidak ada kecualinya.' Ketentuan ini menunjukkan bahwa ....",
+        options: [
+          "setiap warga negara memiliki hak kesetaraan di depan hukum sekaligus kewajiban mutlak untuk menaati hukum",
+          "hanya aparat penegak hukum yang wajib menaati peraturan perundang-undangan nasional",
+          "warga negara yang berjasa besar bagi negara dibebaskan dari kewajiban mematuhi peraturan lalu lintas",
+          "hak mendapatkan perlindungan hukum hanya diberikan kepada warga negara yang mengajukan permohonan tertulis"
+        ],
+        correctIndex: 0,
+        explanation: "Pasal 27 ayat (1) UUD NRI Tahun 1945 memuat asas persamaan di hadapan hukum (equality before the law) yang memadukan hak diperlakukan adil oleh hukum dan kewajiban menaati hukum tanpa pengecualian."
+      },
+
+      // --- TOPIK 7: UUD NRI TAHUN 1945 SEBAGAI DASAR HUKUM TERTULIS NEGARA (7 SOAL) ---
+      {
+        id: 70,
+        topicId: "7",
+        topicName: "7. UUD NRI 1945 Dasar Hukum",
+        question: "Sebagai negara hukum sebagaimana ditegaskan dalam Pasal 1 ayat (3) UUD NRI Tahun 1945, Indonesia memerlukan dasar hukum tertulis tertinggi (konstitusi). Alasan utama negara memerlukan dasar hukum tertulis adalah ....",
+        options: [
+          "menjadi pedoman tertinggi dalam penyelenggaraan negara agar seluruh peraturan di bawahnya selaras dan tidak saling bertentangan",
+          "agar pemerintah memiliki kekuasaan mutlak tanpa pengawasan dari lembaga perwakilan rakyat maupun mahkamah",
+          "menggantikan seluruh nilai-nilai Pancasila sehingga tidak lagi digunakan dalam kehidupan bermasyarakat",
+          "memudahkan perubahan batas wilayah negara setiap tahun sesuai keinginan kepala daerah"
+        ],
+        correctIndex: 0,
+        explanation: "Dasar hukum tertulis (UUD NRI Tahun 1945) diperlukan untuk mengatur pembagian kekuasaan negara, menjamin hak asasi warga negara, serta menjadi tolok ukur tertinggi agar seluruh peraturan perundang-undangan di bawahnya tidak saling bertentangan."
+      },
+      {
+        id: 71,
+        topicId: "7",
+        topicName: "7. UUD NRI 1945 Dasar Hukum",
+        svgKey: "pohon_hukum",
+        question: "Perhatikan ilustrasi pohon tata urutan peraturan perundang-undangan di atas. Dalam perumpamaan pohon besar sistem hukum Indonesia tersebut, Pancasila diibaratkan sebagai akar pohon yang menopang seluruh bagian pohon karena ....",
+        options: [
+          "Pancasila merupakan sumber dari segala sumber hukum negara yang menjiwai seluruh peraturan perundang-undangan",
+          "Pancasila merupakan peraturan teknis daerah yang langsung mengatur sanksi pelanggaran ketertiban umum",
+          "Pancasila dapat diubah sewaktu-waktu melalui peraturan pemerintah atau peraturan presiden",
+          "Pancasila hanya berlaku bagi lembaga eksekutif dan tidak mengikat lembaga legislatif maupun yudikatif"
+        ],
+        correctIndex: 0,
+        explanation: "Dalam perumpamaan pohon hukum Indonesia (selaras dengan UU No. 12 Tahun 2011), Pancasila adalah akar yang menghujam kuat ke bumi sebagai sumber dari segala sumber hukum negara. Tanpa akar Pancasila yang kuat, batang, dahan, dan ranting hukum akan tumbang."
+      },
+      {
+        id: 72,
+        topicId: "7",
+        topicName: "7. UUD NRI 1945 Dasar Hukum",
+        question: "Masih merujuk pada perumpamaan pohon tata urutan peraturan perundang-undangan di Indonesia, bagian 'batang utama' yang kokoh berdiri langsung di atas akar Pancasila melambangkan ....",
+        options: [
+          "UUD NRI Tahun 1945 dan Ketetapan MPR (Tap MPR)",
+          "Peraturan Daerah Provinsi dan Peraturan Daerah Kabupaten/Kota",
+          "Peraturan Bupati dan Peraturan Desa",
+          "Keputusan Kepala Sekolah dan Tata Tertib OSIS"
+        ],
+        correctIndex: 0,
+        explanation: "Dalam perumpamaan pohon hukum tersebut: Akar = Pancasila; Batang utama = UUD NRI Tahun 1945 dan Tap MPR; Dahan = UU/Perppu, Peraturan Pemerintah (PP), dan Peraturan Presiden (Perpres); serta Ranting/Daun = Perda Provinsi dan Perda Kabupaten/Kota."
+      },
+      {
+        id: 73,
+        topicId: "7",
+        topicName: "7. UUD NRI 1945 Dasar Hukum",
+        question: "Menurut Undang-Undang Nomor 12 Tahun 2011 tentang Pembentukan Peraturan Perundang-undangan, tata urutan (hierarki) peraturan perundang-undangan di Indonesia dari yang tertinggi hingga terendah yang benar adalah ....",
+        options: [
+          "UUD NRI 1945 → Tap MPR → UU/Perppu → PP → Perpres → Perda Provinsi → Perda Kabupaten/Kota",
+          "UUD NRI 1945 → UU/Perppu → Tap MPR → Perpres → PP → Perda Kabupaten/Kota → Perda Provinsi",
+          "Tap MPR → UUD NRI 1945 → PP → UU/Perppu → Perda Provinsi → Perpres → Perda Kabupaten/Kota",
+          "UUD NRI 1945 → Perpres → PP → UU/Perppu → Tap MPR → Perda Provinsi → Perda Kabupaten/Kota"
+        ],
+        correctIndex: 0,
+        explanation: "Berdasarkan Pasal 7 ayat (1) UU Nomor 12 Tahun 2011, urutan hierarki peraturan perundang-undangan adalah: (1) UUD NRI Tahun 1945; (2) Ketetapan MPR; (3) Undang-Undang/Peraturan Pemerintah Pengganti Undang-Undang; (4) Peraturan Pemerintah; (5) Peraturan Presiden; (6) Peraturan Daerah Provinsi; (7) Peraturan Daerah Kabupaten/Kota."
+      },
+      {
+        id: 74,
+        topicId: "7",
+        topicName: "7. UUD NRI 1945 Dasar Hukum",
+        question: "Asas hukum 'Lex Superior Derogat Legi Inferiori' berlaku dalam tata urutan peraturan perundang-undangan di Indonesia. Makna dari asas tersebut bagi Peraturan Daerah (ranting pohon) terhadap UUD NRI Tahun 1945 (batang pohon) adalah ....",
+        options: [
+          "peraturan yang lebih rendah tidak boleh bertentangan dengan peraturan yang lebih tinggi di atasnya",
+          "peraturan daerah memiliki kedudukan yang lebih tinggi dibandingkan undang-undang nasional",
+          "undang-undang nasional harus menyesuaikan isinya dengan peraturan kepala desa setempat",
+          "setiap provinsi bebas membuat peraturan daerah yang menyimpang dari nilai-nilai Pancasila"
+        ],
+        correctIndex: 0,
+        explanation: "Asas 'Lex Superior Derogat Legi Inferiori' berarti peraturan hukum yang lebih tinggi mengesampingkan peraturan yang lebih rendah. Oleh karena itu, seluruh peraturan di bawah UUD NRI Tahun 1945 (UU, PP, Perpres, Perda) tidak boleh bertentangan dengan UUD NRI Tahun 1945."
+      },
+      {
+        id: 75,
+        topicId: "7",
+        topicName: "7. UUD NRI 1945 Dasar Hukum",
+        question: "Di dalam batang tubuh UUD NRI Tahun 1945, ketentuan yang secara khusus menegaskan identitas dan karakter negara Indonesia bahwa 'Negara Indonesia adalah negara hukum' tercantum dalam ....",
+        options: [
+          "Pasal 1 ayat (3)",
+          "Pasal 1 ayat (1)",
+          "Pasal 2 ayat (1)",
+          "Pasal 3 ayat (1)"
+        ],
+        correctIndex: 0,
+        explanation: "Pasal 1 ayat (1) menyatakan Indonesia adalah negara kesatuan berbentuk republik; Pasal 1 ayat (2) menyatakan kedaulatan berada di tangan rakyat dan dilaksanakan menurut UUD; sedangkan Pasal 1 ayat (3) menegaskan 'Negara Indonesia adalah negara hukum'."
+      },
+      {
+        id: 76,
+        topicId: "7",
+        topicName: "7. UUD NRI 1945 Dasar Hukum",
+        question: "Kedudukan Pembukaan (Preambule) UUD NRI Tahun 1945 dalam sistem ketatanegaraan Indonesia bersifat tetap dan tidak dapat diubah oleh siapa pun, termasuk oleh MPR hasil pemilu, karena ....",
+        options: [
+          "memuat dasar negara Pancasila, cita-cita proklamasi, dan tujuan negara yang menjadi pokok kaidah negara yang fundamental",
+          "hanya terdiri atas satu paragraf singkat yang berisi daftar nama-nama anggota PPKI tahun 1945",
+          "seluruh pasalnya sudah dicabut dan digantikan oleh Undang-Undang Dasar Sementara Tahun 1950",
+          "tidak memiliki kekuatan hukum mengikat bagi lembaga-lembaga tinggi negara"
+        ],
+        correctIndex: 0,
+        explanation: "Pembukaan UUD NRI Tahun 1945 merupakan Staatsfundamentalnorm (pokok kaidah negara yang fundamental) karena memuat dasar negara Pancasila dan tujuan kemerdekaan Indonesia. Mengubah Pembukaan UUD 1945 sama artinya dengan membubarkan Negara Kesatuan Republik Indonesia yang diproklamasikan 17 Agustus 1945."
+      },
+
+      // --- TOPIK 8: PERUMUSAN DAN PENGESAHAN UUD NRI TAHUN 1945 (12 SOAL) ---
+      {
+        id: 77,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        svgKey: "alur_uud",
+        question: "Perhatikan bagan alur perumusan dan pengesahan UUD NRI Tahun 1945 di atas. Pembahasan rancangan Hukum Dasar (Undang-Undang Dasar) secara resmi mulai dikerjakan oleh BPUPK pada ....",
+        options: [
+          "Sidang Kedua BPUPK tanggal 10 hingga 17 Juli 1945",
+          "Sidang Pertama BPUPK tanggal 29 Mei hingga 1 Juni 1945",
+          "Sidang Kedua PPKI tanggal 19 Agustus 1945",
+          "Rapat Panitia Sembilan tanggal 22 Juni 1945"
+        ],
+        correctIndex: 0,
+        explanation: "Sidang Pertama BPUPK (29 Mei–1 Juni 1945) membahas dasar negara, sedangkan Sidang Kedua BPUPK (10–17 Juli 1945) membahas rancangan Hukum Dasar (UUD), wilayah negara, bentuk negara, keuangan, dan pembelaan tanah air."
+      },
+      {
+        id: 78,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Untuk mempercepat penyusunan rancangan negara merdeka pada Sidang Kedua BPUPK tanggal 11 Juli 1945, dibentuklah tiga panitia kerja utama yaitu ....",
+        options: [
+          "Panitia Hukum Dasar (ketua Ir. Sukarno), Panitia Keuangan dan Perekonomian (ketua Drs. Moh. Hatta), dan Panitia Pembela Tanah Air (ketua Abikusno Tjokrosujoso)",
+          "Panitia Delapan (ketua Ir. Sukarno), Panitia Sembilan (ketua Mr. M. Yamin), dan Panitia Penghalus Bahasa (ketua H. Agus Salim)",
+          "Panitia Pemilihan Umum (ketua R.P. Soeroso), Panitia Pendidikan (ketua Ki Hajar Dewantara), dan Panitia Agama (ketua K.H. Wahid Hasyim)",
+          "Panitia Rengasdengklok (ketua Sukarni), Panitia Proklamasi (ketua Sayuti Melik), dan Panitia Keamanan (ketua Sudirman)"
+        ],
+        correctIndex: 0,
+        explanation: "Pada 11 Juli 1945 dalam Sidang Kedua BPUPK dibentuk 3 panitia: (1) Panitia Hukum Dasar/Perancang UUD (19 anggota, diketuai Ir. Sukarno); (2) Panitia Keuangan & Perekonomian (23 anggota, diketuai Drs. Moh. Hatta); dan (3) Panitia Pembela Tanah Air (23 anggota, diketuai Abikusno Tjokrosujoso)."
+      },
+      {
+        id: 79,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Di dalam Panitia Hukum Dasar yang diketuai oleh Ir. Sukarno, dibentuk lagi sebuah Panitia Kecil Perancang UUD yang beranggotakan 7 orang pakar untuk menyusun draf pasal-pasal UUD. Tokoh utama yang mengetuai Panitia Kecil Perancang UUD tersebut adalah ....",
+        options: [
+          "Prof. Dr. Mr. Soepomo",
+          "Drs. Mohammad Hatta",
+          "dr. K.R.T. Radjiman Wedyodiningrat",
+          "Otto Iskandardinata"
+        ],
+        correctIndex: 0,
+        explanation: "Panitia Kecil Perancang UUD diketuai oleh Prof. Dr. Mr. Soepomo dengan anggota Mr. Wongsonegoro, Mr. Ahmad Subardjo, Mr. A.A. Maramis, Mr. R.P. Singgih, H. Agus Salim, dan Dr. Sukiman Wirjosandjojo."
+      },
+      {
+        id: 80,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Dalam rapat-rapat Sidang Kedua BPUPK pada tanggal 11 dan 16 Juli 1945, para anggota BPUPK menyepakati sejumlah hal fundamental mengenai negara Indonesia merdeka, di antaranya adalah ....",
+        options: [
+          "bentuk negara kesatuan, bentuk pemerintahan republik, bendera negara Sang Merah Putih, dan bahasa negara Bahasa Indonesia",
+          "bentuk negara serikat (federal), bentuk pemerintahan monarki absolut, dan ibu kota negara di Yogyakarta",
+          "pemilihan presiden dilakukan langsung oleh rakyat melalui pemilu setiap empat tahun sekali",
+          "pembagian wilayah Indonesia menjadi 38 provinsi otonom dengan mata uang masing-masing"
+        ],
+        correctIndex: 0,
+        explanation: "Pada Sidang Kedua BPUPK disepakati bahwa Indonesia adalah negara kesatuan berbentuk republik, wilayahnya meliputi bekas Hindia Belanda, bendera kebangsaan adalah Sang Merah Putih, dan bahasa nasional/negara adalah Bahasa Indonesia."
+      },
+      {
+        id: 81,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Rancangan Hukum Dasar (Undang-Undang Dasar) yang telah diselesaikan oleh Panitia Perancang UUD dan Panitia Penghalus Bahasa (Husein Djajadiningrat, Agus Salim, Soepomo) akhirnya diterima dengan suara bulat oleh BPUPK pada tanggal ....",
+        options: [
+          "16 Juli 1945",
+          "1 Juni 1945",
+          "22 Juni 1945",
+          "18 Agustus 1945"
+        ],
+        correctIndex: 0,
+        explanation: "Pada tanggal 16 Juli 1945, seluruh naskah Rancangan Hukum Dasar (yang terdiri atas Pembukaan dan pasal-pasal UUD) diterima secara bulat oleh sidang pleno BPUPK sebelum sidang kedua ditutup pada 17 Juli 1945."
+      },
+      {
+        id: 82,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Pada saat Sidang PPKI tanggal 18 Agustus 1945 mengesahkan UUD NRI Tahun 1945, selain perubahan pada sila pertama Pembukaan UUD, terdapat pula penyesuaian penting pada bagian Batang Tubuh mengenai syarat menjadi Presiden Indonesia, yaitu ....",
+        options: [
+          "syarat Presiden harus 'orang Indonesia asli yang beragama Islam' diubah menjadi 'orang Indonesia asli' saja",
+          "masa jabatan Presiden ditetapkan seumur hidup tanpa perlu dipilih kembali oleh MPR",
+          "Presiden harus berasal dari keturunan raja-raja Nusantara yang pernah berkuasa",
+          "usia minimal calon Presiden ditetapkan paling rendah berusia 25 tahun"
+        ],
+        correctIndex: 0,
+        explanation: "Demi persatuan dan kesetaraan seluruh warga negara Indonesia, pada Sidang PPKI 18 Agustus 1945 Pasal 6 ayat (1) yang semula berbunyi 'Presiden ialah orang Indonesia asli yang beragama Islam' diubah menjadi 'Presiden ialah orang Indonesia asli'."
+      },
+      {
+        id: 83,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Sehari setelah mengesahkan UUD NRI Tahun 1945, PPKI kembali menggelar sidang kedua pada tanggal 19 Agustus 1945. Salah satu keputusan penting dalam sidang tersebut yang berkaitan dengan kelengkapan pemerintahan daerah adalah ....",
+        options: [
+          "membagi wilayah Republik Indonesia menjadi 8 provinsi dan menetapkan 12 kementerian negara",
+          "memilih Ir. Sukarno dan Drs. Moh. Hatta sebagai Presiden dan Wakil Presiden RI",
+          "mengesahkan lagu kebangsaan Indonesia Raya ciptaan Wage Rudolf Supratman",
+          "membentuk Dewan Perwakilan Daerah dan Mahkamah Konstitusi"
+        ],
+        correctIndex: 0,
+        explanation: "Sidang Kedua PPKI tanggal 19 Agustus 1945 memutuskan pembagian wilayah Indonesia menjadi 8 provinsi (Sumatra, Jawa Barat, Jawa Tengah, Jawa Timur, Sunda Kecil, Maluku, Sulawesi, dan Borneo) beserta gubernurnya, serta membentuk 12 kementerian."
+      },
+      {
+        id: 84,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Pada tanggal 29 Agustus 1945, Presiden Ir. Sukarno secara resmi melantik Komite Nasional Indonesia Pusat (KNIP) yang diketuai oleh Mr. Kasman Singodimedjo. Sebelum terbentuknya MPR dan DPR melalui pemilu, kedudukan dan fungsi KNIP berdasarkan Aturan Peralihan UUD 1945 adalah ....",
+        options: [
+          "membantu tugas-tugas Presiden dan menjalankan kekuasaan legislatif (membuat undang-undang bersama Presiden)",
+          "mengadili sengketa hasil pemilihan umum kepala daerah di seluruh Indonesia",
+          "mengatur sistem perbankan syariah dan mencetak mata uang Ori (Oeang Republik Indonesia)",
+          "memimpin operasi militer pertempuran melawan tentara Sekutu di Surabaya"
+        ],
+        correctIndex: 0,
+        explanation: "Berdasarkan Pasal IV Aturan Peralihan UUD 1945, sebelum MPR, DPR, dan DPA dibentuk menurut UUD ini, segala kekuasaannya dijalankan oleh Presiden dengan bantuan sebuah Komite Nasional (KNIP)."
+      },
+      {
+        id: 85,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Sistematika naskah UUD NRI Tahun 1945 sebelum dilakukan amendemen (perubahan) tahun 1999–2002 terdiri atas tiga bagian utama, yaitu ....",
+        options: [
+          "Pembukaan (4 alinea), Batang Tubuh (16 bab, 37 pasal, 4 pasal Aturan Peralihan, 2 ayat Aturan Tambahan), dan Penjelasan",
+          "Mukadimah (5 alinea), Pasal-Pasal (21 bab, 73 pasal), dan Lampiran Peta Wilayah Nusantara",
+          "Pembukaan (3 alinea), Batang Tubuh (10 bab, 30 pasal), dan Penjelasan Umum saja",
+          "Preambule (4 alinea), Pasal-Pasal (18 bab, 45 pasal), dan Dekrit Presiden"
+        ],
+        correctIndex: 0,
+        explanation: "Sebelum amendemen, sistematika UUD 1945 terdiri atas: (1) Pembukaan (4 alinea); (2) Batang Tubuh (16 bab, 37 pasal, 4 pasal Aturan Peralihan, dan 2 ayat Aturan Tambahan); serta (3) Penjelasan (Penjelasan Umum dan Penjelasan Pasal demi Pasal yang disusun Prof. Soepomo)."
+      },
+      {
+        id: 86,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Naskah lengkap UUD NRI Tahun 1945 beserta bagian Penjelasannya diumumkan secara resmi kepada seluruh rakyat Indonesia melalui lembaran negara berupa ....",
+        options: [
+          "Berita Republik Indonesia Tahun II Nomor 7 tanggal 15 Februari 1946",
+          "Lembaran Negara Republik Indonesia Nomor 1 Tahun 1945 tanggal 18 Agustus 1945",
+          "Maklumat Wakil Presiden Nomor X tanggal 16 Oktober 1945",
+          "Dekrit Presiden Republik Indonesia tanggal 5 Juli 1959"
+        ],
+        correctIndex: 0,
+        explanation: "Naskah resmi UUD 1945 (Pembukaan, Batang Tubuh, dan Penjelasan) dimuat dalam Berita Republik Indonesia Tahun II Nomor 7 tanggal 15 Februari 1946."
+      },
+      {
+        id: 87,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Setelah dilakukan empat kali amendemen pada tahun 1999–2002, sistematika UUD NRI Tahun 1945 mengalami penyempurnaan menjadi hanya dua bagian utama, yaitu ....",
+        options: [
+          "Pembukaan (terdiri atas 4 alinea) dan Pasal-Pasal (terdiri atas 21 bab, 73 pasal, 3 pasal Aturan Peralihan, dan 2 pasal Aturan Tambahan)",
+          "Mukadimah (terdiri atas 4 alinea) dan Penjelasan (terdiri atas 16 bab dan 37 pasal)",
+          "Pembukaan (terdiri atas 5 alinea) dan Batang Tubuh (terdiri atas 15 bab dan 50 pasal)",
+          "Pancasila (terdiri atas 5 sila) dan Piagam Jakarta (terdiri atas 7 kata)"
+        ],
+        correctIndex: 0,
+        explanation: "Sesudah amendemen (Pasal II Aturan Tambahan), bagian Penjelasan dihapus dan substansi normatifnya dimasukkan ke dalam pasal-pasal, sehingga UUD NRI Tahun 1945 kini terdiri atas Pembukaan (4 alinea) dan Pasal-Pasal (21 bab, 73 pasal, 3 pasal Aturan Peralihan, dan 2 pasal Aturan Tambahan)."
+      },
+      {
+        id: 88,
+        topicId: "8",
+        topicName: "8. Perumusan & Pengesahan UUD",
+        question: "Alinea keempat Pembukaan UUD NRI Tahun 1945 memuat empat tujuan negara Indonesia yang melindungi segenap bangsa, memajukan kesejahteraan umum, mencerdaskan kehidupan bangsa, dan ikut melaksanakan ketertiban dunia. Tujuan negara dalam mencerdaskan kehidupan bangsa diwujudkan pelajar dengan cara ....",
+        options: [
+          "belajar dengan sungguh-sungguh, gemar membaca, dan mengembangkan kemampuan berpikir kritis serta kreatif",
+          "menuntut pemerintah membebaskan seluruh siswa dari kewajiban mengikuti ujian dan tugas sekolah",
+          "mengutamakan bermain gawai sepanjang hari tanpa memperhatikan jadwal belajar di rumah",
+          "menolak bekerja sama dengan teman sekolah yang memiliki kemampuan akademik berbeda"
+        ],
+        correctIndex: 0,
+        explanation: "Mencerdaskan kehidupan bangsa merupakan salah satu tujuan nasional Indonesia di alinea keempat Pembukaan UUD NRI Tahun 1945. Pelajar berperan aktif mewujudkan tujuan ini dengan tekun belajar, berliterasi, dan berakhlak mulia."
+      },
+
+      // --- TOPIK 9: AMENDEMEN UUD NRI TAHUN 1945 (12 SOAL) ---
+      {
+        id: 89,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Dalam hukum tata negara, istilah 'amendemen' (perubahan) terhadap UUD NRI Tahun 1945 yang dilakukan oleh Majelis Permusyawaratan Rakyat (MPR) pada tahun 1999–2002 memiliki arti ....",
+        options: [
+          "menyempurnakan, menambah, atau mengubah pasal-pasal tertentu dalam UUD tanpa mengganti keseluruhan naskah dan tetap mempertahankan Pembukaan UUD 1945",
+          "membubarkan UUD NRI Tahun 1945 secara total dan menggantinya dengan konstitusi negara serikat",
+          "menghapuskan seluruh lembaga perwakilan rakyat sehingga kekuasaan terpusat sepenuhnya di tangan presiden",
+          "mengubah rumusan dasar negara Pancasila agar sesuai dengan sistem pemerintahan parlementer"
+        ],
+        correctIndex: 0,
+        explanation: "Amendemen UUD NRI Tahun 1945 dilakukan dengan sistem adendum (naskah asli tetap dipertahankan dan perubahan dilampirkan/disempurnakan pada pasal-pasal) dengan kesepakatan dasar tidak mengubah Pembukaan UUD NRI Tahun 1945 dan tetap mempertahankan bentuk NKRI."
+      },
+      {
+        id: 90,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Lembaga negara yang memiliki kewenangan konstitusional untuk mengubah dan menetapkan Undang-Undang Dasar sesuai Pasal 3 ayat (1) dan Pasal 37 UUD NRI Tahun 1945 adalah ....",
+        options: [
+          "Majelis Permusyawaratan Rakyat (MPR)",
+          "Dewan Perwakilan Rakyat (DPR) bersama Presiden",
+          "Mahkamah Konstitusi (MK)",
+          "Komisi Pemilihan Umum (KPU)"
+        ],
+        correctIndex: 0,
+        explanation: "Sesuai Pasal 3 ayat (1) dan Pasal 37 UUD NRI Tahun 1945, Majelis Permusyawaratan Rakyat (MPR) berwenang mengubah dan menetapkan Undang-Undang Dasar."
+      },
+      {
+        id: 91,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        svgKey: "infografis_amendemen",
+        question: "Perhatikan infografis 4 hasil utama amendemen UUD NRI Tahun 1945 di atas. Amendemen Pertama yang disahkan pada Sidang Umum MPR tanggal 14–19 Oktober 1999 mengubah 9 pasal dengan fokus utama berupa ....",
+        options: [
+          "membatasi kekuasaan Presiden dan menetapkan masa jabatan Presiden dan Wakil Presiden maksimal dua periode (10 tahun)",
+          "menetapkan anggaran pendidikan minimal 20% dari APBN dan APBD",
+          "menghapuskan lembaga Dewan Pertimbangan Agung dan membentuk Mahkamah Konstitusi",
+          "mengatur pemilihan Presiden dan Wakil Presiden secara langsung oleh rakyat"
+        ],
+        correctIndex: 0,
+        explanation: "Amendemen Pertama (14–19 Oktober 1999) mengubah 9 pasal untuk mencegah pemusatan kekuasaan di tangan Presiden (executive heavy), di antaranya Pasal 7 yang membatasi masa jabatan Presiden dan Wakil Presiden selama 5 tahun dan sesudahnya dapat dipilih kembali dalam jabatan yang sama hanya untuk satu kali masa jabatan (maksimal 2 periode / 10 tahun)."
+      },
+      {
+        id: 92,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Amendemen Kedua UUD NRI Tahun 1945 dilaksanakan pada Sidang Tahunan MPR tanggal 1–18 Agustus 2000 yang mengubah 25 pasal pada 5 bab. Salah satu tonggak penting hasil Amendemen Kedua tersebut adalah ....",
+        options: [
+          "rakyat memilih secara langsung anggota DPR dan DPRD melalui pemilihan umum serta dimasukkannya bab khusus tentang Hak Asasi Manusia (Pasal 28A–28J)",
+          "pemilihan Presiden dan Wakil Presiden secara langsung dalam satu pasangan oleh seluruh rakyat",
+          "pembentukan Dewan Perwakilan Daerah (DPD) sebagai lembaga perwakilan daerah di tingkat pusat",
+          "penegasan bahwa mata uang negara adalah Rupiah dan bank sentral bersifat independen"
+        ],
+        correctIndex: 0,
+        explanation: "Amendemen Kedua (1–18 Agustus 2000) mengubah 25 pasal pada 5 bab, mencakup otonomi daerah (Pasal 18, 18A, 18B), pemilihan langsung anggota DPR/DPRD (seluruh anggota DPR dipilih melalui pemilu, menghapus fraksi ABRI/TNI-Polri yang diangkat), wilayah negara, atribut negara (bendera, bahasa, lambang, lagu kebangsaan), serta penambahan Bab XA tentang Hak Asasi Manusia (Pasal 28A–28J)."
+      },
+      {
+        id: 93,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Pada tanggal 1–9 November 2001, MPR mengesahkan Amendemen Ketiga UUD NRI Tahun 1945 yang mencakup perubahan 22 pasal. Perubahan fundamental dalam sistem demokrasi Indonesia pada Amendemen Ketiga adalah ....",
+        options: [
+          "Presiden dan Wakil Presiden dipilih dalam satu pasangan secara langsung oleh rakyat melalui pemilihan umum (Pasal 6A)",
+          "masa jabatan Presiden dibatasi paling lama dua kali masa jabatan berturut-turut",
+          "anggaran pendidikan nasional wajib dialokasikan sekurang-kurangnya dua puluh persen dari APBN",
+          "negara menghormati bahasa daerah sebagai kekayaan budaya nasional yang dilindungi negara"
+        ],
+        correctIndex: 0,
+        explanation: "Amendemen Ketiga (1–9 November 2001) mengubah 22 pasal, antara lain menegaskan kedaulatan berada di tangan rakyat dan dilaksanakan menurut UUD (Pasal 1 ayat 2), Indonesia adalah negara hukum (Pasal 1 ayat 3), Presiden dan Wakil Presiden dipilih langsung oleh rakyat (Pasal 6A), serta pembentukan lembaga baru yaitu DPD, Mahkamah Konstitusi (MK), dan Komisi Yudisial (KY)."
+      },
+      {
+        id: 94,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Amendemen Keempat UUD NRI Tahun 1945 yang disahkan pada tanggal 1–10 Agustus 2002 mengubah 13 pasal (serta 3 pasal Aturan Peralihan dan 2 pasal Aturan Tambahan). Kebijakan strategis bagi peningkatan kualitas sumber daya manusia Indonesia yang ditetapkan dalam Amendemen Keempat adalah ....",
+        options: [
+          "negara memprioritaskan anggaran pendidikan sekurang-kurangnya 20% dari APBN dan APBD untuk memenuhi kebutuhan penyelenggaraan pendidikan nasional",
+          "pemerintah membebaskan seluruh warga negara dari kewajiban mengikuti pendidikan dasar sembilan tahun",
+          "pengelolaan seluruh sekolah negeri dan swasta diserahkan sepenuhnya kepada lembaga asing",
+          "pemilihan kepala daerah dilaksanakan secara tertutup oleh DPRD tanpa melibatkan partisipasi masyarakat"
+        ],
+        correctIndex: 0,
+        explanation: "Amendemen Keempat (1–10 Agustus 2002) menyempurnakan Pasal 31 ayat (4) UUD NRI Tahun 1945 yang mewajibkan negara memprioritaskan anggaran pendidikan sekurang-kurangnya 20% dari Anggaran Pendapatan dan Belanja Negara (APBN) serta Anggaran Pendapatan dan Belanja Daerah (APBD)."
+      },
+      {
+        id: 95,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Dalam empat kali proses amendemen UUD NRI Tahun 1945 (tahun 1999, 2000, 2001, dan 2002), MPR menyepakati lima kesepakatan dasar yang tidak boleh dilanggar. Salah satu kesepakatan dasar tersebut adalah ....",
+        options: [
+          "tidak mengubah Pembukaan UUD NRI Tahun 1945 dan tetap mempertahankan Negara Kesatuan Republik Indonesia (NKRI)",
+          "mengubah sistem pemerintahan presidensial menjadi sistem pemerintahan parlementer",
+          "menghapuskan bagian batang tubuh UUD 1945 dan menggantinya dengan ketetapan presiden",
+          "membatasi hak asasi manusia agar tidak diatur secara tertulis di dalam konstitusi"
+        ],
+        correctIndex: 0,
+        explanation: "Lima kesepakatan dasar MPR dalam amendemen UUD 1945: (1) Tidak mengubah Pembukaan UUD NRI 1945; (2) Tetap mempertahankan NKRI; (3) Mempertegas sistem pemerintahan presidensial; (4) Penjelasan UUD 1945 yang memuat hal normatif dimasukkan ke dalam pasal-pasal; dan (5) Perubahan dilakukan dengan cara adendum."
+      },
+      {
+        id: 96,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Sebelum Amendemen Ketiga UUD NRI Tahun 1945, Presiden dan Wakil Presiden Indonesia dipilih oleh ....",
+        options: [
+          "Majelis Permusyawaratan Rakyat (MPR) dengan suara terbanyak",
+          "Dewan Perwakilan Rakyat (DPR) setelah mendapat persetujuan Mahkamah Agung",
+          "rakyat secara langsung melalui pemungutan suara di tempat pemungutan suara",
+          "Komite Nasional Indonesia Pusat bersama para gubernur se-Indonesia"
+        ],
+        correctIndex: 0,
+        explanation: "Sebelum Amendemen Ketiga (2001), Pasal 6 ayat (2) UUD 1945 menyatakan 'Presiden dan Wakil Presiden dipilih oleh Majelis Permusyawaratan Rakyat dengan suara yang terbanyak.' Setelah Amendemen Ketiga, Presiden dan Wakil Presiden dipilih langsung oleh rakyat."
+      },
+      {
+        id: 97,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Seiring dengan pelaksanaan Amendemen UUD NRI Tahun 1945, lahir beberapa lembaga negara baru di bidang kekuasaan kehakiman dan perwakilan daerah, seperti Mahkamah Konstitusi (MK), Komisi Yudisial (KY), dan Dewan Perwakilan Daerah (DPD), sementara satu lembaga tinggi negara lama dihapuskan yaitu ....",
+        options: [
+          "Dewan Pertimbangan Agung (DPA)",
+          "Badan Pemeriksa Keuangan (BPK)",
+          "Mahkamah Agung (MA)",
+          "Dewan Perwakilan Rakyat (DPR)"
+        ],
+        correctIndex: 0,
+        explanation: "Pada Amendemen Keempat UUD NRI Tahun 1945 (2002), Bab IV tentang Dewan Pertimbangan Agung (DPA) dihapuskan karena dinilai kurang efektif, dan digantikan dengan ketentuan Pasal 16 bahwa Presiden membentuk suatu dewan pertimbangan yang bertugas memberikan nasihat dan pertimbangan kepada Presiden."
+      },
+      {
+        id: 98,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Manfaat nyata yang langsung dirasakan oleh peserta didik tingkat SMP di seluruh Indonesia dari hasil Amendemen Keempat UUD NRI Tahun 1945 (Pasal 31 ayat 2 dan ayat 4) adalah ....",
+        options: [
+          "adanya program wajib belajar yang dibiayai pemerintah serta bantuan operasional sekolah (BOS) dari alokasi minimal 20% anggaran pendidikan",
+          "hak untuk ikut memberikan suara dalam pemilihan umum Presiden dan Wakil Presiden sejak usia 12 tahun",
+          "kebebasan untuk tidak mengikuti peraturan tata tertib sekolah atas nama hak asasi manusia",
+          "kewajiban bagi seluruh siswa SMP untuk mengikuti pelatihan kemiliteran setiap akhir pekan"
+        ],
+        correctIndex: 0,
+        explanation: "Pasal 31 ayat (2) mewajibkan setiap warga negara mengikuti pendidikan dasar dan pemerintah wajib membiayainya, didukung Pasal 31 ayat (4) tentang alokasi anggaran pendidikan minimal 20% APBN/APBD yang membiayai dana BOS, beasiswa, dan fasilitas sekolah."
+      },
+      {
+        id: 99,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Jika diurutkan secara kronologis dari tahun 1999 hingga 2002, rangkaian pelaksanaan keempat tahap amendemen UUD NRI Tahun 1945 berlangsung setiap tahun sekali pada bulan ....",
+        options: [
+          "Oktober 1999 (Amendemen I) → Agustus 2000 (Amendemen II) → November 2001 (Amendemen III) → Agustus 2002 (Amendemen IV)",
+          "Agustus 1999 (Amendemen I) → Oktober 2000 (Amendemen II) → Agustus 2001 (Amendemen III) → November 2002 (Amendemen IV)",
+          "Juni 1999 (Amendemen I) → Juli 2000 (Amendemen II) → Agustus 2001 (Amendemen III) → September 2002 (Amendemen IV)",
+          "Mei 1999 (Amendemen I) → Juni 2000 (Amendemen II) → Juli 2001 (Amendemen III) → Agustus 2002 (Amendemen IV)"
+        ],
+        correctIndex: 0,
+        explanation: "Kronologi resmi 4 tahap amendemen UUD NRI Tahun 1945: Amendemen I (14–19 Oktober 1999), Amendemen II (1–18 Agustus 2000), Amendemen III (1–9 November 2001), dan Amendemen IV (1–10 Agustus 2002)."
+      },
+      {
+        id: 100,
+        topicId: "9",
+        topicName: "9. Amendemen UUD NRI 1945",
+        question: "Seluruh rangkaian sejarah kelahiran Pancasila, penegakan norma dalam masyarakat, serta perumusan hingga amendemen UUD NRI Tahun 1945 bermuara pada satu tujuan utama bagi generasi pelajar Indonesia masa kini, yaitu ....",
+        options: [
+          "menjadi warga negara muda yang cerdas, berkarakter Pancasila, taat norma hukum, dan menjaga keutuhan NKRI",
+          "menghafal seluruh tanggal peristiwa sejarah tanpa perlu menerapkannya dalam pergaulan sehari-hari",
+          "mengutamakan kepentingan kelompok sendiri di atas kepentingan persatuan bangsa dan negara",
+          "menolak segala bentuk kemajuan ilmu pengetahuan dan teknologi modern dari luar negeri"
+        ],
+        correctIndex: 0,
+        explanation: "Pembelajaran Pendidikan Pancasila kelas VII SMP bertujuan membentuk profil Pelajar Pancasila yang beriman dan bertakwa kepada Tuhan YME, berkebinekaan global, bergotong royong, mandiri, bernalar kritis, kreatif, taat norma, serta setia menjaga keutuhan NKRI berlandaskan UUD NRI Tahun 1945."
+      }
+    ];
+
+    /**
+     * ============================================================================
+     * LOGIKA STATE, PENGACAKAN SEIMBANG (A, B, C, D), RENDER UI, & PENILAIAN
+     * ============================================================================
+     */
+    let quizQuestions = [];
+    let userAnswers = {}; // { questionIndex: selectedOptionIndex }
+    let isSubmitted = false;
+    let pendingModalAction = null;
+
+    const OPTION_LETTERS = ["A", "B", "C", "D"];
+
+    // Algoritma Fisher-Yates Shuffle
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    /**
+     * Mempersiapkan soal dengan:
+     * 1. Urutan soal yang tetap proporsional per bab (atau bisa diacak saat reset)
+     * 2. Distribusi kunci jawaban (A, B, C, D) yang merata/seimbang (masing-masing 25 soal)
+     *    serta pengacakan posisi pengecoh sehingga posisi jawaban benar tersebar adil dan acak.
+     */
+    function prepareQuestions(shuffleQuestionOrder = false) {
+      let baseList = shuffleQuestionOrder ? shuffleArray(RAW_QUESTIONS) : [...RAW_QUESTIONS];
+
+      // Buat pool target indeks kunci jawaban seimbang (25 A, 25 B, 25 C, 25 D) lalu acak
+      const targetKeyPool = [];
+      for (let i = 0; i < baseList.length; i++) {
+        targetKeyPool.push(i % 4);
+      }
+      const shuffledKeyPositions = shuffleArray(targetKeyPool);
+
+      quizQuestions = baseList.map((item, idx) => {
+        const correctText = item.options[item.correctIndex];
+        const distractors = item.options.filter((_, oIdx) => oIdx !== item.correctIndex);
+        const shuffledDistractors = shuffleArray(distractors);
+
+        const targetPos = shuffledKeyPositions[idx];
+        const arrangedOptions = [];
+        let dCursor = 0;
+        for (let pos = 0; pos < 4; pos++) {
+          if (pos === targetPos) {
+            arrangedOptions.push(correctText);
+          } else {
+            arrangedOptions.push(shuffledDistractors[dCursor++]);
+          }
+        }
+
+        return {
+          ...item,
+          displayNumber: idx + 1,
+          shuffledOptions: arrangedOptions,
+          finalCorrectIndex: targetPos
+        };
+      });
+    }
+
+    // Render seluruh kartu soal dan grid nomor di sidebar
+    function renderQuiz() {
+      const container = document.getElementById("questions-container");
+      const numberGrid = document.getElementById("number-grid");
+
+      let questionsHTML = "";
+      let gridHTML = "";
+
+      quizQuestions.forEach((q, idx) => {
+        const qNum = idx + 1;
+        const svgBlock = q.svgKey && SVG_ASSETS[q.svgKey] ? SVG_ASSETS[q.svgKey] : "";
+
+        // Kartu Soal
+        questionsHTML += `
+          <article id="question-card-${qNum}" data-topic="${q.topicId}" data-qindex="${idx}" class="question-card bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs transition-all">
+            <!-- Header Soal -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-red-600 text-white font-extrabold text-sm shadow-xs">
+                  ${qNum}
+                </span>
+                <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600">
+                  ${q.topicName}
+                </span>
+              </div>
+              <span id="status-badge-${qNum}" class="hidden text-xs font-bold px-3 py-1 rounded-full"></span>
+            </div>
+
+            <!-- Ilustrasi SVG Kustom (Jika Ada) -->
+            ${svgBlock}
+
+            <!-- Teks Pertanyaan -->
+            <div class="text-sm sm:text-[15px] font-medium text-slate-800 leading-relaxed whitespace-pre-line mb-4">
+              ${q.question}
+            </div>
+
+            <!-- Daftar Opsi Pilihan Ganda A, B, C, D -->
+            <div class="space-y-2.5" id="options-group-${qNum}">
+              ${q.shuffledOptions.map((optText, optIdx) => {
+                const letter = OPTION_LETTERS[optIdx];
+                return `
+                  <button
+                    type="button"
+                    id="opt-btn-${qNum}-${optIdx}"
+                    onclick="selectOption(${idx}, ${optIdx})"
+                    class="option-card w-full text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-blue-50/70 hover:border-blue-300 flex items-start gap-3 group focus:outline-none"
+                  >
+                    <span id="opt-letter-${qNum}-${optIdx}" class="w-7 h-7 rounded-lg bg-white border border-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 group-hover:border-blue-400 group-hover:text-blue-700">
+                      ${letter}
+                    </span>
+                    <span class="text-xs sm:text-sm text-slate-700 leading-relaxed flex-1">
+                      ${optText}
+                    </span>
+                    <span id="opt-icon-${qNum}-${optIdx}" class="shrink-0 mt-0.5"></span>
+                  </button>
+                `;
+              }).join("")}
+            </div>
+
+            <!-- Kotak Pembahasan Lengkap (Muncul setelah Submit) -->
+            <div id="explanation-box-${qNum}" class="hidden mt-4 p-4 rounded-xl bg-amber-50/80 border border-amber-200 text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <div class="flex items-center gap-2 font-bold text-amber-900 mb-1.5">
+                <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Pembahasan &amp; Kunci Jawaban (${OPTION_LETTERS[q.finalCorrectIndex]}):</span>
+              </div>
+              <p class="text-slate-700">${q.explanation}</p>
+            </div>
+          </article>
+        `;
+
+        // Tombol Nomor di Sidebar
+        gridHTML += `
+          <button
+            type="button"
+            id="nav-num-${qNum}"
+            onclick="scrollToQuestion(${qNum})"
+            class="h-9 rounded-lg text-xs font-bold border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center justify-center"
+            title="Lompat ke Soal Nomor ${qNum}"
+          >
+            ${qNum}
+          </button>
+        `;
+      });
+
+      container.innerHTML = questionsHTML;
+      numberGrid.innerHTML = gridHTML;
+      updateProgressUI();
+    }
+
+    // Memilih jawaban pada soal tertentu
+    function selectOption(qIdx, optIdx) {
+      if (isSubmitted) return; // Kunci perubahan setelah disubmit
+
+      userAnswers[qIdx] = optIdx;
+      const qNum = qIdx + 1;
+
+      // Perbarui tampilan visual opsi yang dipilih vs tidak dipilih
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById(`opt-btn-${qNum}-${i}`);
+        const letterBox = document.getElementById(`opt-letter-${qNum}-${i}`);
+
+        if (i === optIdx) {
+          btn.className = "option-card w-full text-left p-3.5 rounded-xl border-2 border-blue-600 bg-blue-50 flex items-start gap-3 shadow-xs";
+          letterBox.className = "w-7 h-7 rounded-lg bg-blue-600 border border-blue-600 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5";
+        } else {
+          btn.className = "option-card w-full text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-blue-50/70 hover:border-blue-300 flex items-start gap-3 group";
+          letterBox.className = "w-7 h-7 rounded-lg bg-white border border-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 group-hover:border-blue-400 group-hover:text-blue-700";
+        }
+      }
+
+      // Perbarui warna tombol di sidebar menjadi biru (sudah dijawab)
+      const navBtn = document.getElementById(`nav-num-${qNum}`);
+      if (navBtn) {
+        navBtn.className = "h-9 rounded-lg text-xs font-bold border border-blue-600 bg-blue-600 text-white hover:bg-blue-700 transition flex items-center justify-center shadow-xs";
+      }
+
+      updateProgressUI();
+    }
+
+    // Memperbarui indikator progres jumlah soal terjawab
+    function updateProgressUI() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = quizQuestions.length;
+      const pct = Math.round((answeredCount / total) * 100);
+
+      document.getElementById("header-answered-count").textContent = answeredCount;
+      document.getElementById("header-progress-bar").style.width = `${pct}%`;
+      document.getElementById("mobile-badge-count").textContent = `${answeredCount}/${total}`;
+      document.getElementById("sidebar-progress-text").textContent = `${answeredCount} / ${total}`;
+    }
+
+    // Scroll halus ke nomor soal tertentu
+    function scrollToQuestion(qNum) {
+      // Pastikan filter topik dikembalikan ke ALL jika soal target sedang tersembunyi
+      const targetCard = document.getElementById(`question-card-${qNum}`);
+      if (targetCard && targetCard.classList.contains("hidden")) {
+        document.getElementById("topic-filter").value = "ALL";
+        filterQuestionsByTopic();
+        if (isSubmitted) filterResultMode("ALL");
+      }
+
+      if (targetCard) {
+        const headerOffset = 84;
+        const elementPosition = targetCard.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+
+        // Efek sorotan sesaat pada kartu tujuan
+        targetCard.classList.add("ring-2", "ring-red-400");
+        setTimeout(() => {
+          targetCard.classList.remove("ring-2", "ring-red-400");
+        }, 1200);
+      }
+
+      // Tutup drawer mobile jika terbuka
+      const sidebar = document.getElementById("nav-sidebar");
+      if (!sidebar.classList.contains("translate-x-full") && window.innerWidth < 1024) {
+        toggleMobileDrawer();
+      }
+    }
+
+    // Toggle Drawer Sidebar pada layar mobile/tablet
+    function toggleMobileDrawer() {
+      const sidebar = document.getElementById("nav-sidebar");
+      const backdrop = document.getElementById("mobile-backdrop");
+      const isClosed = sidebar.classList.contains("translate-x-full");
+
+      if (isClosed) {
+        sidebar.classList.remove("translate-x-full");
+        backdrop.classList.remove("hidden");
+      } else {
+        sidebar.classList.add("translate-x-full");
+        backdrop.classList.add("hidden");
+      }
+    }
+
+    // Filter soal berdasarkan topik kisi-kisi (1-9)
+    function filterQuestionsByTopic() {
+      const selectedTopic = document.getElementById("topic-filter").value;
+      const cards = document.querySelectorAll(".question-card");
+
+      cards.forEach((card) => {
+        if (selectedTopic === "ALL" || card.dataset.topic === selectedTopic) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    }
+
+    // Filter hasil setelah submit (Semua / Hanya Salah & Kosong / Hanya Benar)
+    function filterResultMode(mode) {
+      document.getElementById("topic-filter").value = "ALL";
+      const cards = document.querySelectorAll(".question-card");
+
+      // Update gaya tombol filter hasil
+      document.getElementById("btn-res-all").className = mode === "ALL"
+        ? "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-white"
+        : "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200";
+      document.getElementById("btn-res-wrong").className = mode === "WRONG"
+        ? "px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white"
+        : "px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-100 text-rose-700 hover:bg-rose-200";
+      document.getElementById("btn-res-correct").className = mode === "CORRECT"
+        ? "px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white"
+        : "px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-100 text-emerald-700 hover:bg-emerald-200";
+
+      cards.forEach((card) => {
+        const idx = parseInt(card.dataset.qindex, 10);
+        const userAns = userAnswers[idx];
+        const isCorrect = userAns !== undefined && userAns === quizQuestions[idx].finalCorrectIndex;
+
+        if (mode === "ALL") {
+          card.classList.remove("hidden");
+        } else if (mode === "CORRECT") {
+          card.classList.toggle("hidden", !isCorrect);
+        } else if (mode === "WRONG") {
+          card.classList.toggle("hidden", isCorrect);
+        }
+      });
+    }
+
+    // Penanganan tombol "Selesai & Lihat Skor"
+    function handleAttemptSubmit() {
+      if (isSubmitted) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      const answeredCount = Object.keys(userAnswers).length;
+      const unansweredCount = quizQuestions.length - answeredCount;
+
+      if (unansweredCount > 0) {
+        pendingModalAction = "SUBMIT";
+        document.getElementById("modal-title").textContent = "Masih Ada Soal Belum Dijawab";
+        document.getElementById("modal-message").innerHTML = `
+          Anda baru menjawab <strong>${answeredCount} dari 100 soal</strong> (masih terdapat <strong class="text-rose-600">${unansweredCount} soal kosong</strong>).<br><br>
+          Apakah Anda yakin ingin menyelesaikan latihan dan menampilkan skor akhir serta pembahasannya sekarang?
+        `;
+        document.getElementById("modal-confirm-btn").textContent = "Ya, Selesai & Lihat Skor";
+        openModal();
+      } else {
+        finalizeAndGradeQuiz();
+      }
+    }
+
+    // Penanganan tombol "Ulangi / Acak Ulang Soal"
+    function openResetModal() {
+      pendingModalAction = "RESET";
+      document.getElementById("modal-title").textContent = "Ulangi & Acak Ulang Soal?";
+      document.getElementById("modal-message").textContent =
+        "Seluruh jawaban saat ini akan direset, dan urutan soal beserta posisi pilihan jawaban (A, B, C, D) akan diacak ulang untuk latihan baru. Lanjutkan?";
+      document.getElementById("modal-confirm-btn").textContent = "Ya, Acak Ulang Sekarang";
+      openModal();
+    }
+
+    function openModal() {
+      const modal = document.getElementById("confirm-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("confirm-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      pendingModalAction = null;
+    }
+
+    function executeModalAction() {
+      const action = pendingModalAction;
+      closeModal();
+      if (action === "SUBMIT") {
+        finalizeAndGradeQuiz();
+      } else if (action === "RESET") {
+        resetAndShuffleQuiz();
+      }
+    }
+
+    // Proses Penilaian Akhir, Sorotan Benar/Salah, & Tampilkan Pembahasan
+    function finalizeAndGradeQuiz() {
+      isSubmitted = true;
+      document.getElementById("topic-filter").value = "ALL";
+      filterQuestionsByTopic();
+
+      let correctCount = 0;
+      let wrongCount = 0;
+      let unansweredCount = 0;
+
+      quizQuestions.forEach((q, idx) => {
+        const qNum = idx + 1;
+        const userChoice = userAnswers[idx];
+        const correctChoice = q.finalCorrectIndex;
+        const isCorrect = userChoice !== undefined && userChoice === correctChoice;
+
+        if (userChoice === undefined) {
+          unansweredCount++;
+        } else if (isCorrect) {
+          correctCount++;
+        } else {
+          wrongCount++;
+        }
+
+        // Badge Status Benar / Salah / Tidak Dijawab pada kartu soal
+        const statusBadge = document.getElementById(`status-badge-${qNum}`);
+        statusBadge.classList.remove("hidden");
+        if (userChoice === undefined) {
+          statusBadge.className = "text-xs font-bold px-3 py-1 rounded-full bg-slate-200 text-slate-700";
+          statusBadge.textContent = "Tidak Dijawab (Salah)";
+        } else if (isCorrect) {
+          statusBadge.className = "text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300";
+          statusBadge.textContent = "✓ Jawaban Benar";
+        } else {
+          statusBadge.className = "text-xs font-bold px-3 py-1 rounded-full bg-rose-100 text-rose-800 border border-rose-300";
+          statusBadge.textContent = `✗ Jawaban Salah (Anda: ${OPTION_LETTERS[userChoice]})`;
+        }
+
+        // Sorot opsi jawaban benar (hijau) & pilihan salah user (merah)
+        for (let i = 0; i < 4; i++) {
+          const btn = document.getElementById(`opt-btn-${qNum}-${i}`);
+          const letterBox = document.getElementById(`opt-letter-${qNum}-${i}`);
+          const iconSlot = document.getElementById(`opt-icon-${qNum}-${i}`);
+
+          btn.disabled = true;
+
+          if (i === correctChoice) {
+            btn.className = "disabled-option w-full text-left p-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50/90 flex items-start gap-3";
+            letterBox.className = "w-7 h-7 rounded-lg bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5";
+            iconSlot.innerHTML = `<span class="text-xs font-extrabold text-emerald-700 bg-emerald-200/80 px-2 py-0.5 rounded-md">Kunci</span>`;
+          } else if (i === userChoice && userChoice !== correctChoice) {
+            btn.className = "disabled-option w-full text-left p-3.5 rounded-xl border-2 border-rose-500 bg-rose-50/90 flex items-start gap-3";
+            letterBox.className = "w-7 h-7 rounded-lg bg-rose-600 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5";
+            iconSlot.innerHTML = `<span class="text-xs font-extrabold text-rose-700 bg-rose-200/80 px-2 py-0.5 rounded-md">Pilihanmu</span>`;
+          } else {
+            btn.className = "disabled-option w-full text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50/40 opacity-75 flex items-start gap-3";
+            letterBox.className = "w-7 h-7 rounded-lg bg-white border border-slate-300 text-slate-500 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5";
+          }
+        }
+
+        // Tampilkan kotak pembahasan lengkap
+        const expBox = document.getElementById(`explanation-box-${qNum}`);
+        expBox.classList.remove("hidden");
+
+        // Perbarui indikator warna tombol nomor di sidebar (Hijau = Benar, Merah = Salah/Kosong)
+        const navBtn = document.getElementById(`nav-num-${qNum}`);
+        if (isCorrect) {
+          navBtn.className = "h-9 rounded-lg text-xs font-bold border border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-600 transition flex items-center justify-center shadow-xs";
+        } else {
+          navBtn.className = "h-9 rounded-lg text-xs font-bold border border-rose-600 bg-rose-500 text-white hover:bg-rose-600 transition flex items-center justify-center shadow-xs";
+        }
+      });
+
+      // Hitung Skor Akhir (0 - 100)
+      const finalScore = correctCount; // Karena total tepat 100 soal, 1 soal benar = 1 poin
+      let predicate = "Perlu Bimbingan";
+      if (finalScore >= 90) predicate = "Sangat Baik (A)";
+      else if (finalScore >= 80) predicate = "Baik (B)";
+      else if (finalScore >= 75) predicate = "Cukup / Tuntas (C)";
+      else predicate = "Belum Tuntas (D)";
+
+      document.getElementById("score-final-value").textContent = finalScore;
+      document.getElementById("score-predicate").textContent = predicate;
+      document.getElementById("score-correct-count").textContent = correctCount;
+      document.getElementById("score-wrong-count").textContent = wrongCount;
+      document.getElementById("score-unanswered-count").textContent = unansweredCount;
+
+      const kkmEl = document.getElementById("score-kkm-status");
+      if (finalScore >= 75) {
+        kkmEl.textContent = "LULUS KKM";
+        kkmEl.className = "text-sm font-extrabold text-emerald-700 mt-2";
+      } else {
+        kkmEl.textContent = "BELUM TUNTAS";
+        kkmEl.className = "text-sm font-extrabold text-rose-700 mt-2";
+      }
+
+      // Tampilkan kartu hasil skor akhir di atas & sesuaikan tombol aksi
+      document.getElementById("result-card-top").classList.remove("hidden");
+      document.getElementById("btn-submit-quiz").classList.add("hidden");
+      document.getElementById("sidebar-submit-btn").classList.add("hidden");
+      document.getElementById("sidebar-reset-btn").classList.remove("hidden");
+
+      // Scroll mulus ke bagian paling atas untuk melihat kartu rekap skor
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Mengulang latihan dan mengacak ulang urutan soal beserta opsi A, B, C, D
+    function resetAndShuffleQuiz() {
+      isSubmitted = false;
+      userAnswers = {};
+      document.getElementById("topic-filter").value = "ALL";
+      document.getElementById("result-card-top").classList.add("hidden");
+      document.getElementById("btn-submit-quiz").classList.remove("hidden");
+      document.getElementById("sidebar-submit-btn").classList.remove("hidden");
+      document.getElementById("sidebar-reset-btn").classList.add("hidden");
+
+      prepareQuestions(true);
+      renderQuiz();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Inisialisasi aplikasi saat halaman dimuat
+    window.addEventListener("DOMContentLoaded", () => {
+      prepareQuestions(false);
+      renderQuiz();
+    });
+  </script>
+</body>
+</html>

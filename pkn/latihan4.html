@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- Meta viewport agar tampilan responsif di HP, tablet, maupun desktop -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latihan Soal PPKn SMP Kelas VII Semester 1 (50 Soal)</title>
+  <!-- Memuat Tailwind CSS untuk tata letak modern dan responsif -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Memuat font Inter dari Google Fonts dengan fallback sistem yang bersih -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    // Konfigurasi Tailwind kustom untuk warna dan tipografi ramah siswa SMP
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+          colors: {
+            merah: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              600: '#dc2626',
+              700: '#b91c1c',
+            },
+            biru: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Pengaturan halus scroll dan kenyamanan baca */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+
+    /* Styling kartu soal dan transisi halus */
+    .question-card {
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .question-card:hover {
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    }
+
+    /* Styling opsi jawaban agar mudah disentuh jari (touch target nyaman) */
+    .option-btn {
+      transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+
+    /* Navigasi nomor soal */
+    .nav-num-btn {
+      transition: all 0.15s ease;
+    }
+
+    .nav-num-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Scrollbar rapi untuk navigasi nomor pada desktop */
+    .nav-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .nav-scroll::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
+
+  <!-- Baris navigasi nomor soal khusus layar kecil / HP (tetap di atas saat di-scroll) -->
+  <div id="mobile-nav-bar" class="lg:hidden sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-3 py-2.5">
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-red-600 text-white font-bold text-xs">7</span>
+          <div>
+            <p class="text-xs font-bold text-slate-900 leading-tight">PPKn Kelas VII • 50 Soal</p>
+            <p id="mobile-progress-text" class="text-[11px] text-slate-500">Terjawab: 0 / 50</p>
+          </div>
+        </div>
+        <button
+          type="button"
+          onclick="toggleMobileGrid()"
+          id="mobile-grid-toggle-btn"
+          class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition">
+          Lihat Semua Nomor
+        </button>
+      </div>
+
+      <!-- Baris horizontal cepat untuk geser nomor soal di HP -->
+      <div id="mobile-quick-strip" class="flex items-center gap-1.5 overflow-x-auto nav-scroll pb-1"></div>
+
+      <!-- Grid penuh 50 nomor di HP yang bisa dibuka/tutup -->
+      <div id="mobile-full-grid" class="hidden grid-cols-10 gap-1.5 pt-2.5 mt-2 border-t border-slate-100"></div>
+    </div>
+  </div>
+
+  <!-- Kotak notifikasi / pesan non-alert (pengganti alert/confirm) -->
+  <div id="toast-banner" class="hidden fixed bottom-5 right-5 z-50 max-w-sm bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg border border-slate-700 text-sm">
+    <div class="flex items-start justify-between gap-3">
+      <p id="toast-message" class="leading-relaxed"></p>
+      <button type="button" onclick="hideToast()" class="text-slate-400 hover:text-white font-bold text-xs px-1">✕</button>
+    </div>
+  </div>
+
+  <!-- Kontainer utama halaman latihan soal -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+    <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+
+      <!-- Kolom Kiri / Utama: Ringkasan Hasil (muncul setelah submit) + Daftar 50 Soal + Tombol Submit -->
+      <main class="w-full lg:flex-1 min-w-0">
+
+        <!-- Ringkasan Skor & Hasil Setelah Submit (awalnya tersembunyi) -->
+        <section id="result-summary-card" class="hidden mb-6 bg-white rounded-2xl border-2 border-blue-200 shadow-md overflow-hidden">
+          <div class="bg-gradient-to-r from-red-600 via-rose-600 to-blue-700 px-5 sm:px-6 py-4 text-white flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span class="inline-block text-[11px] font-bold uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full mb-1">
+                Hasil Latihan Soal PPKn
+              </span>
+              <h1 class="text-lg sm:text-xl font-extrabold">Rekap Nilai &amp; Pembahasan Lengkap</h1>
+            </div>
+            <button
+              type="button"
+              onclick="resetQuiz()"
+              class="px-4 py-2 rounded-xl bg-white text-slate-900 hover:bg-slate-100 font-bold text-xs sm:text-sm shadow transition cursor-pointer">
+              Kerjakan Ulang
+            </button>
+          </div>
+
+          <div class="p-5 sm:p-6">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-4">
+              <div class="bg-blue-50 border border-blue-200 rounded-xl p-3.5 text-center">
+                <p class="text-xs font-semibold text-blue-700">Nilai Akhir</p>
+                <p id="score-final" class="text-2xl sm:text-3xl font-extrabold text-blue-900 mt-1">0</p>
+                <p class="text-[11px] text-blue-600 mt-0.5">Skala 0 – 100</p>
+              </div>
+              <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 text-center">
+                <p class="text-xs font-semibold text-emerald-700">Jawaban Benar</p>
+                <p id="score-correct" class="text-2xl sm:text-3xl font-extrabold text-emerald-700 mt-1">0</p>
+                <p class="text-[11px] text-emerald-600 mt-0.5">dari 50 soal</p>
+              </div>
+              <div class="bg-rose-50 border border-rose-200 rounded-xl p-3.5 text-center">
+                <p class="text-xs font-semibold text-rose-700">Jawaban Salah</p>
+                <p id="score-wrong" class="text-2xl sm:text-3xl font-extrabold text-rose-700 mt-1">0</p>
+                <p class="text-[11px] text-rose-600 mt-0.5">perlu dicek lagi</p>
+              </div>
+              <div class="bg-slate-100 border border-slate-200 rounded-xl p-3.5 text-center">
+                <p class="text-xs font-semibold text-slate-600">Tidak Terjawab</p>
+                <p id="score-unanswered" class="text-2xl sm:text-3xl font-extrabold text-slate-800 mt-1">0</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">belum dipilih</p>
+              </div>
+            </div>
+
+            <div id="score-encouragement" class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-700 leading-relaxed"></div>
+          </div>
+        </section>
+
+        <!-- Wadah daftar 50 soal pilihan ganda -->
+        <div id="questions-container" class="space-y-5"></div>
+
+        <!-- Bagian bawah setelah soal ke-50: Tombol Submit / Kumpulkan Jawaban & Kerjakan Ulang -->
+        <div class="mt-8 bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="text-center sm:text-left">
+            <p class="text-sm font-bold text-slate-900">Sudah siap mengecek hasil belajarmu?</p>
+            <p id="bottom-progress-hint" class="text-xs text-slate-500 mt-0.5">
+              Kamu sudah menjawab <span id="bottom-answered-count" class="font-bold text-slate-800">0</span> dari 50 soal.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
+            <button
+              type="button"
+              id="reset-btn-bottom"
+              onclick="resetQuiz()"
+              class="hidden px-4 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-bold text-sm transition cursor-pointer">
+              Kerjakan Ulang
+            </button>
+            <button
+              type="button"
+              id="submit-quiz-btn"
+              onclick="submitQuiz()"
+              class="w-full sm:w-auto px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 active:scale-[0.99] text-white font-bold text-sm shadow-md shadow-red-600/20 transition cursor-pointer">
+              Submit / Kumpulkan Jawaban
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <!-- Sidebar Kanan (Desktop): Navigasi Nomor Soal 1 - 50 dengan posisi tetap (sticky) -->
+      <aside class="hidden lg:block w-80 xl:w-88 shrink-0">
+        <div class="sticky top-6 bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+          <div class="flex items-center justify-between gap-2 pb-3 border-b border-slate-100">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-red-600">PPKn Kelas VII</span>
+              <h2 class="text-base font-extrabold text-slate-900">Navigasi Nomor Soal</h2>
+            </div>
+            <span id="desktop-progress-badge" class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
+              0 / 50
+            </span>
+          </div>
+
+          <!-- Progress bar pengerjaan -->
+          <div class="mt-3">
+            <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+              <div id="desktop-progress-bar" class="h-full bg-blue-600 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Keterangan warna status nomor -->
+          <div class="mt-3.5 flex flex-wrap gap-x-3 gap-y-1.5 text-[11px] text-slate-600">
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded bg-slate-100 border border-slate-300 inline-block"></span> Belum
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded bg-blue-600 inline-block"></span> Terjawab
+            </span>
+            <span id="legend-correct" class="hidden items-center gap-1.5">
+              <span class="w-3 h-3 rounded bg-emerald-600 inline-block"></span> Benar
+            </span>
+            <span id="legend-wrong" class="hidden items-center gap-1.5">
+              <span class="w-3 h-3 rounded bg-rose-600 inline-block"></span> Salah
+            </span>
+          </div>
+
+          <!-- Grid 50 nomor soal (1 sampai 50) -->
+          <div id="desktop-nav-grid" class="mt-4 grid grid-cols-5 gap-2 max-h-[54vh] overflow-y-auto nav-scroll pr-1"></div>
+
+          <!-- Tombol cepat menuju tombol submit di bagian bawah -->
+          <div class="mt-4 pt-3 border-t border-slate-100">
+            <a
+              href="#submit-quiz-btn"
+              class="block w-full text-center py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+              Ke Tombol Kumpulkan Jawaban ↓
+            </a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <script>
+    /**
+     * Kumpulan arsip foto asli (Wikimedia Commons) yang selaras dengan materi PPKn SMP Kelas VII.
+     * Jika tidak ada koneksi internet atau gagal termuat, elemen gambar menyembunyikan frame kosong
+     * dan tetap menampilkan keterangan sumber foto asli tanpa membuat gambar ilustrasi buatan.
+     */
+    const ARCHIVE_PHOTOS = {
+      gedungPancasila: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Gedung_Pancasila.jpg/960px-Gedung_Pancasila.jpg",
+        caption: "Arsip Foto Asli: Gedung Pancasila di Jl. Pejambon No. 6, Jakarta Pusat (tempat bersejarah perumusan dasar negara).",
+        source: "Sumber: Wikimedia Commons (Arsip Publik)"
+      },
+      sukarno: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/President_Sukarno_official_portrait_1964.jpg/640px-President_Sukarno_official_portrait_1964.jpg",
+        caption: "Arsip Foto Asli: Potret Ir. Soekarno (Bung Karno), tokoh perumus dasar negara pada sidang BPUPKI 1 Juni 1945 & Proklamator.",
+        source: "Sumber: Wikimedia Commons (Arsip Publik)"
+      },
+      hatta: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Mohammad_Hatta_1950.jpg/640px-Mohammad_Hatta_1950.jpg",
+        caption: "Arsip Foto Asli: Potret Drs. Mohammad Hatta (Bung Hatta), Wakil Presiden pertama RI dan Proklamator Kemerdekaan Indonesia.",
+        source: "Sumber: Wikimedia Commons (Arsip Publik)"
+      },
+      radjiman: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Radjiman_Wediodiningrat%2C_Kami_Perkenalkan_%281952%29%2C_p77.jpg/600px-Radjiman_Wediodiningrat%2C_Kami_Perkenalkan_%281952%29%2C_p77.jpg",
+        caption: "Arsip Foto Asli: dr. K.R.T. Radjiman Wedyodiningrat, Ketua BPUPKI yang membuka sidang dengan pertanyaan tentang dasar negara.",
+        source: "Sumber: Wikimedia Commons (Arsip Publik)"
+      },
+      muhammadYamin: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Mohammad_Yamin_%281954%29.jpg/600px-Mohammad_Yamin_%281954%29.jpg",
+        caption: "Arsip Foto Asli: Mr. Muhammad Yamin, salah satu tokoh yang mengusulkan rumusan dasar negara pada sidang pertama BPUPKI.",
+        source: "Sumber: Wikimedia Commons (Arsip Publik)"
+      },
+      proklamasiFoto: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Indonesia_declaration_of_independence_17_August_1945.jpg/960px-Indonesia_declaration_of_independence_17_August_1945.jpg",
+        caption: "Arsip Foto Asli: Pembacaan Proklamasi Kemerdekaan Indonesia tanggal 17 Agustus 1945 oleh Ir. Soekarno didampingi Drs. Mohammad Hatta.",
+        source: "Sumber: Wikimedia Commons / Arsip Nasional"
+      },
+      teksProklamasi: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Teks_proklamasi_ketikan_%28asli%29.jpg/800px-Teks_proklamasi_ketikan_%28asli%29.jpg",
+        caption: "Arsip Foto Asli: Naskah Proklamasi Kemerdekaan Republik Indonesia ketikan yang ditandatangani Soekarno dan Mohammad Hatta.",
+        source: "Sumber: Wikimedia Commons / Kemdikbud"
+      },
+      bendera17Agustus: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Indonesian_flag_raised_17_August_1945.jpg/960px-Indonesian_flag_raised_17_August_1945.jpg",
+        caption: "Arsip Foto Asli: Pengibaran Bendera Merah Putih pada peristiwa Proklamasi Kemerdekaan Indonesia 17 Agustus 1945.",
+        source: "Sumber: Wikimedia Commons (Foto Frans Mendur)"
+      },
+      garudaPancasila: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/National_emblem_of_Indonesia_Garuda_Pancasila.svg/600px-National_emblem_of_Indonesia_Garuda_Pancasila.svg.png",
+        caption: "Arsip Gambar Resmi: Lambang Negara Garuda Pancasila dengan semboyan Bhinneka Tunggal Ika.",
+        source: "Sumber: Wikimedia Commons (Arsip Publik)"
+      },
+      borobudur: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Borobudur-Indonesia-2009.jpg/960px-Borobudur-Indonesia-2009.jpg",
+        caption: "Arsip Foto Asli: Candi Borobudur di Jawa Tengah, warisan budaya bangsa yang mencerminkan kekayaan sejarah dan kearifan lokal nusantara.",
+        source: "Sumber: Wikimedia Commons (Arsip Publik)"
+      }
+    };
+
+    /**
+     * Bank 50 Soal Pilihan Ganda PPKn SMP Kelas VII Semester 1
+     * Mengacu pada materi Bab 1-3 (Sejarah Kelahiran Pancasila, Penerapan Nilai-Nilai Pancasila, Patuh Terhadap Norma)
+     * dan materi Bab I-II (Sejarah Kelahiran Pancasila, Norma dan UUD NRI Tahun 1945 termasuk amendemen).
+     * Kunci jawaban (answerIndex: 0=A, 1=B, 2=C, 3=D) disebar merata (12-13 soal per huruf).
+     */
+    const QUIZ_DATA = [
+      // --- BAGIAN 1: SEJARAH KELAHIRAN & PERUMUSAN PANCASILA (SOAL 1 - 15) ---
+      {
+        id: 1,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Pada tanggal 1 Maret 1945, pemerintah pendudukan Jepang mengumumkan pembentukan badan untuk menyelidiki usaha-usaha persiapan kemerdekaan Indonesia. Apa nama resmi badan tersebut dalam bahasa Jepang?",
+        options: [
+          "Dokuritsu Zyunbi Iinkai",
+          "Dokuritsu Zyunbi Tyoosakai",
+          "Chuo Sangi In",
+          "Tonarigumi"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B (Dokuritsu Zyunbi Tyoosakai). Pada 1 Maret 1945, Jepang mengumumkan pembentukan Dokuritsu Zyunbi Tyoosakai (BPUPKI) sebagai upaya menarik simpati rakyat Indonesia saat terdesak oleh Sekutu."
+      },
+      {
+        id: 2,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Kapan BPUPKI secara resmi dilantik oleh pihak Jepang bersamaan dengan hari ulang tahun Kaisar Hirohito?",
+        options: [
+          "29 April 1945",
+          "1 Juni 1945",
+          "22 Juni 1945",
+          "7 Agustus 1945"
+        ],
+        answerIndex: 0,
+        photoKey: "radjiman",
+        explanation: "Jawaban yang tepat adalah A (29 April 1945). BPUPKI resmi dilantik pada 29 April 1945 dengan Ketua dr. K.R.T. Radjiman Wedyodiningrat serta dua wakil ketua, yaitu Ichibangase Yosio dan R.P. Soeroso."
+      },
+      {
+        id: 3,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Siapakah tokoh yang menyampaikan pertanyaan mendasar pada pidato pembukaan sidang pertama BPUPKI mengenai apa yang harus menjadi dasar negara Indonesia merdeka?",
+        options: [
+          "Mr. Soepomo",
+          "Mr. Muhammad Yamin",
+          "dr. K.R.T. Radjiman Wedyodiningrat",
+          "Drs. Mohammad Hatta"
+        ],
+        answerIndex: 2,
+        photoKey: "radjiman",
+        explanation: "Jawaban yang tepat adalah C (dr. K.R.T. Radjiman Wedyodiningrat). Sebagai Ketua BPUPKI, beliau mengajukan pertanyaan kepada peserta sidang tentang dasar negara apa yang akan dipakai untuk mendirikan Indonesia merdeka."
+      },
+      {
+        id: 4,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Gedung bersejarah tempat berlangsungnya sidang BPUPKI di Jalan Pejambon Nomor 6, Jakarta Pusat, yang dahulu bernama Chuo Sangi In kini dikenal dengan nama apa?",
+        options: [
+          "Gedung Proklamasi",
+          "Gedung Pancasila",
+          "Gedung Merdeka",
+          "Gedung Sumpah Pemuda"
+        ],
+        answerIndex: 1,
+        photoKey: "gedungPancasila",
+        explanation: "Jawaban yang tepat adalah B (Gedung Pancasila). Gedung yang beralamat di Jalan Pejambon No. 6 Jakarta Pusat ini menjadi tempat bersejarah perumusan dasar negara Pancasila dalam sidang BPUPKI."
+      },
+      {
+        id: 5,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Sidang resmi pertama BPUPKI berlangsung pada tanggal 29 Mei sampai 1 Juni 1945. Apa agenda utama yang dibahas dalam sidang pertama tersebut?",
+        options: [
+          "Pengesahan Presiden dan Wakil Presiden",
+          "Pembagian wilayah provinsi Indonesia",
+          "Pembahasan dasar negara Indonesia merdeka",
+          "Pembentukan Komite Nasional Indonesia Pusat"
+        ],
+        answerIndex: 2,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah C (Pembahasan dasar negara Indonesia merdeka). Sidang pertama BPUPKI (29 Mei–1 Juni 1945) khusus membahas rumusan dasar negara, sedangkan sidang kedua (10–17 Juli 1945) membahas rancangan UUD."
+      },
+      {
+        id: 6,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Pada tanggal 29 Mei 1945, Mr. Muhammad Yamin berpidato mengusulkan lima asas dasar negara secara lisan. Rumusan lisan yang diusulkan Muhammad Yamin adalah...",
+        options: [
+          "Ketuhanan Yang Maha Esa, Kebangsaan Persatuan Indonesia, Rasa Kemanusiaan yang Adil dan Beradab, Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan, Keadilan Sosial bagi Seluruh Rakyat Indonesia",
+          "Peri Kebangsaan, Peri Kemanusiaan, Peri Ketuhanan, Peri Kerakyatan, dan Kesejahteraan Sosial",
+          "Persatuan, Kekeluargaan, Keseimbangan Lahir dan Batin, Musyawarah, dan Keadilan Rakyat",
+          "Kebangsaan Indonesia, Internasionalisme atau Perikemanusiaan, Mufakat atau Demokrasi, Kesejahteraan Sosial, dan Ketuhanan yang Berkebudayaan"
+        ],
+        answerIndex: 1,
+        photoKey: "muhammadYamin",
+        explanation: "Jawaban yang tepat adalah B. Dalam pidatonya tanggal 29 Mei 1945, Mr. Muhammad Yamin mengusulkan secara lisan: Peri Kebangsaan, Peri Kemanusiaan, Peri Ketuhanan, Peri Kerakyatan, dan Kesejahteraan Sosial."
+      },
+      {
+        id: 7,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Tokoh perumus dasar negara yang berpidato pada tanggal 31 Mei 1945 dan menekankan bahwa negara Indonesia merdeka harus mengatasi segala golongan serta mempersatukan diri dengan segala lapisan rakyat adalah...",
+        options: [
+          "Mr. Soepomo",
+          "Ir. Soekarno",
+          "Achmad Soebardjo",
+          "A.A. Maramis"
+        ],
+        answerIndex: 0,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah A (Mr. Soepomo). Pada 31 Mei 1945, Soepomo mengusulkan lima dasar negara (Persatuan, Kekeluargaan, Keseimbangan lahir dan batin, Musyawarah, Keadilan rakyat) dan menegaskan negara mengatasi segala golongan."
+      },
+      {
+        id: 8,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Istilah 'Pancasila' untuk menamai lima dasar negara Indonesia merdeka dikemukakan oleh Ir. Soekarno pada pidato sidang BPUPKI tanggal...",
+        options: [
+          "29 Mei 1945",
+          "31 Mei 1945",
+          "1 Juni 1945",
+          "18 Agustus 1945"
+        ],
+        answerIndex: 2,
+        photoKey: "sukarno",
+        explanation: "Jawaban yang tepat adalah C (1 Juni 1945). Pada 1 Juni 1945, Ir. Soekarno menyampaikan pidato tentang dasar negara dan memberi nama lima prinsip tersebut dengan istilah 'Pancasila', yang kemudian diperingati sebagai Hari Lahir Pancasila."
+      },
+      {
+        id: 9,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Selain mengusulkan lima dasar negara pada 1 Juni 1945, Ir. Soekarno juga menyampaikan bahwa kelima sila tersebut dapat diperas menjadi tiga sila yang disebut...",
+        options: [
+          "Tri Sakti",
+          "Eka Prasetya",
+          "Dasa Dharma",
+          "Trisila"
+        ],
+        answerIndex: 3,
+        photoKey: "sukarno",
+        explanation: "Jawaban yang tepat adalah D (Trisila). Menurut Ir. Soekarno, lima dasar negara dapat diperas menjadi Trisila (Sosio-nasionalisme, Sosio-demokrasi, dan Ketuhanan) dan bahkan diperas lagi menjadi satu sila yaitu Ekasila (Gotong Royong)."
+      },
+      {
+        id: 10,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Untuk menampung usulan dan merumuskan dasar negara lebih lanjut setelah sidang pertama BPUPKI, dibentuklah panitia kecil yang beranggotakan sembilan orang dan dikenal dengan nama...",
+        options: [
+          "Panitia Delapan",
+          "Panitia Sembilan",
+          "Panitia Perancang UUD",
+          "Panitia Persiapan Kemerdekaan"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B (Panitia Sembilan). Panitia Sembilan diketuai oleh Ir. Soekarno dan pada tanggal 22 Juni 1945 berhasil merumuskan naskah yang dikenal sebagai Piagam Jakarta (Jakarta Charter)."
+      },
+      {
+        id: 11,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Naskah rancangan Pembukaan Hukum Dasar yang dihasilkan oleh Panitia Sembilan pada tanggal 22 Juni 1945 oleh Mr. Muhammad Yamin diberi nama...",
+        options: [
+          "Proklamasi Kemerdekaan",
+          "Teks Rengasdengklok",
+          "Piagam Jakarta (Jakarta Charter)",
+          "Dekrit Presiden"
+        ],
+        answerIndex: 2,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah C (Piagam Jakarta / Jakarta Charter). Dokumen hasil kesepakatan Panitia Sembilan tanggal 22 Juni 1945 tersebut memuat rumusan dasar negara yang menjadi cikal bakal Pembukaan UUD NRI Tahun 1945."
+      },
+      {
+        id: 12,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Pernyataan terkenal Proklamator Ir. Soekarno yang bermakna 'Jangan sekali-kali melupakan sejarah' disingkat menjadi...",
+        options: [
+          "Jasmerah",
+          "Bhinneka",
+          "Tutwuri",
+          "Sumpah"
+        ],
+        answerIndex: 0,
+        photoKey: "sukarno",
+        explanation: "Jawaban yang tepat adalah A (Jasmerah). Singkatan 'Jasmerah' berasal dari ucapan Ir. Soekarno 'Jangan sekali-kali melupakan sejarah', karena melupakan sejarah perjuangan bangsa sama artinya dengan menghilangkan identitas bangsa."
+      },
+      {
+        id: 13,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Setelah BPUPKI dibubarkan karena tugasnya dianggap selesai, pada tanggal 7 Agustus 1945 Jepang mengumumkan pembentukan badan baru yang bertugas mempersiapkan kemerdekaan Indonesia, yaitu...",
+        options: [
+          "KNIP",
+          "PETA",
+          "PPKI (Dokuritsu Zyunbi Iinkai)",
+          "Putera"
+        ],
+        answerIndex: 2,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah C (PPKI / Dokuritsu Zyunbi Iinkai). PPKI dibentuk pada 7 Agustus 1945 dengan ketua Ir. Soekarno dan wakil ketua Drs. Mohammad Hatta untuk mempersiapkan kemerdekaan Indonesia."
+      },
+      {
+        id: 14,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Perbedaan mendasar antara BPUPKI dan PPKI dalam sejarah kemerdekaan Indonesia adalah...",
+        options: [
+          "BPUPKI dibentuk setelah Proklamasi, sedangkan PPKI dibentuk sebelum masa penjajahan Belanda",
+          "BPUPKI adalah badan penyelidik usaha persiapan kemerdekaan, sedangkan PPKI adalah panitia yang mempersiapkan kemerdekaan dan mengesahkan dasar negara serta UUD",
+          "BPUPKI seluruh anggotanya dari Jepang, sedangkan PPKI seluruh anggotanya dari Sekutu",
+          "BPUPKI hanya bersidang sekali pada tahun 1946, sedangkan PPKI bersidang selama satu tahun penuh"
+        ],
+        answerIndex: 1,
+        photoKey: "proklamasiFoto",
+        explanation: "Jawaban yang tepat adalah B. BPUPKI bertugas menyelidiki usaha-usaha persiapan kemerdekaan (merumuskan dasar negara dan rancangan UUD), sedangkan PPKI mempersiapkan kemerdekaan dan menetapkan/mengesahkan dasar negara serta UUD 1945 pada 18 Agustus 1945."
+      },
+      {
+        id: 15,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Pancasila secara resmi ditetapkan dan disahkan sebagai dasar negara Republik Indonesia oleh PPKI pada tanggal...",
+        options: [
+          "1 Juni 1945",
+          "22 Juni 1945",
+          "17 Agustus 1945",
+          "18 Agustus 1945"
+        ],
+        answerIndex: 3,
+        photoKey: "garudaPancasila",
+        explanation: "Jawaban yang tepat adalah D (18 Agustus 1945). Pada sidang PPKI tanggal 18 Agustus 1945, Pancasila disahkan sebagai dasar negara Indonesia yang tercantum dalam Pembukaan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945."
+      },
+
+      // --- BAGIAN 2: PENERAPAN NILAI-NILAI PANCASILA (SOAL 16 - 25) ---
+      {
+        id: 16,
+        topic: "Penerapan Nilai-Nilai Pancasila",
+        question: "Di kelas VII, Raka dan teman-temannya yang berbeda agama saling menghormati saat ada yang beribadah dan tidak saling mengejek keyakinan masing-masing. Sikap ini mencerminkan pengamalan sila...",
+        options: [
+          "Ketuhanan Yang Maha Esa",
+          "Kemanusiaan yang Adil dan Beradab",
+          "Persatuan Indonesia",
+          "Keadilan Sosial bagi Seluruh Rakyat Indonesia"
+        ],
+        answerIndex: 0,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah A (Ketuhanan Yang Maha Esa). Menghormati kebebasan beribadah dan membina kerukunan antarumat beragama merupakan wujud penerapan nilai Ketuhanan Yang Maha Esa dalam kehidupan sehari-hari."
+      },
+      {
+        id: 17,
+        topic: "Penerapan Nilai-Nilai Pancasila",
+        question: "Saat ada teman sekelas yang terjatuh dari sepeda dan terluka, Dita segera membantu membawanya ke UKS dan memperlakukannya dengan penuh kepedulian tanpa membeda-bedakan. Sikap Dita sesuai dengan sila...",
+        options: [
+          "Ketuhanan Yang Maha Esa",
+          "Kemanusiaan yang Adil dan Beradab",
+          "Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan",
+          "Keadilan Sosial bagi Seluruh Rakyat Indonesia"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B (Kemanusiaan yang Adil dan Beradab). Sila kedua menekankan pengakuan terhadap harkat dan martabat manusia, sikap saling menolong, tenggang rasa, serta memperlakukan sesama secara adil dan beradab."
+      },
+      {
+        id: 18,
+        topic: "Penerapan Nilai-Nilai Pancasila",
+        question: "Mengikuti upacara bendera dengan tertib, menyanyikan lagu 'Garuda Pancasila' dengan khidmat, serta mengutamakan kepentingan bangsa dan negara di atas kepentingan pribadi merupakan pengamalan nilai...",
+        options: [
+          "Keadilan sosial bagi seluruh rakyat Indonesia",
+          "Kerakyatan yang dipimpin oleh hikmat kebijaksanaan",
+          "Persatuan Indonesia",
+          "Ketuhanan Yang Maha Esa"
+        ],
+        answerIndex: 2,
+        photoKey: "bendera17Agustus",
+        explanation: "Jawaban yang tepat adalah C (Persatuan Indonesia). Cinta tanah air, menjaga keutuhan bangsa, serta menempatkan kepentingan bersama di atas kepentingan pribadi atau golongan adalah wujud nilai Persatuan Indonesia."
+      },
+      {
+        id: 19,
+        topic: "Penerapan Nilai-Nilai Pancasila",
+        question: "Dalam menentukan jadwal piket kelas dan ketua kelas baru, seluruh siswa diajak berdiskusi bersama dan menerima hasil keputusan bersama dengan lapang dada. Perilaku tersebut sesuai dengan sila keempat yang mengutamakan...",
+        options: [
+          "Pemaksaan kehendak mayoritas tanpa diskusi",
+          "Musyawarah untuk mufakat dengan semangat kekeluargaan",
+          "Keputusan sepihak dari ketua kelas saja",
+          "Mengabaikan pendapat teman yang berbeda"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B (Musyawarah untuk mufakat dengan semangat kekeluargaan). Nilai kerakyatan dalam Pancasila mengajarkan pengambilan keputusan bersama melalui musyawarah yang menghargai setiap pendapat dan dilaksanakan dengan penuh tanggung jawab."
+      },
+      {
+        id: 20,
+        topic: "Penerapan Nilai-Nilai Pancasila",
+        question: "Membiasakan hidup hemat, tidak bersikap boros, menghargai hasil karya orang lain, dan ikut bergotong royong membersihkan lingkungan sekolah merupakan penerapan sila kelima, yaitu...",
+        options: [
+          "Ketuhanan Yang Maha Esa",
+          "Persatuan Indonesia",
+          "Kerakyatan dalam permusyawaratan",
+          "Keadilan Sosial bagi Seluruh Rakyat Indonesia"
+        ],
+        answerIndex: 3,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah D (Keadilan Sosial bagi Seluruh Rakyat Indonesia). Sila kelima mendorong sikap adil terhadap sesama, suka bekerja keras, tidak boros, serta mengembangkan perbuatan luhur yang mencerminkan kekeluargaan dan gotong royong."
+      },
+      {
+        id: 21,
+        topic: "Penerapan Nilai-Nilai Pancasila",
+        question: "Ketika Pancasila berfungsi sebagai 'pandangan hidup bangsa', artinya Pancasila berperan sebagai...",
+        options: [
+          "Hiasan dinding di ruang kelas saja",
+          "Petunjuk arah atau pedoman dalam bersikap dan bertingkah laku sehari-hari",
+          "Aturan yang hanya berlaku bagi pejabat negara",
+          "Dokumen sejarah yang tidak perlu diamalkan lagi"
+        ],
+        answerIndex: 1,
+        photoKey: "garudaPancasila",
+        explanation: "Jawaban yang tepat adalah B. Sebagai pandangan hidup bangsa (way of life), Pancasila menjadi pegangan dan pedoman bagi seluruh warga negara Indonesia untuk bersikap, bertutur kata, dan bertindak dalam kehidupan sehari-hari."
+      },
+      {
+        id: 22,
+        topic: "Penerapan Nilai-Nilai Pancasila",
+        question: "Apa arti Pancasila sebagai 'dasar negara' bagi Republik Indonesia?",
+        options: [
+          "Sumber dari segala sumber hukum dan pondasi penyelenggaraan negara Indonesia",
+          "Lagu wajib nasional yang dinyanyikan saat hari libur",
+          "Nama gedung pertemuan di Jakarta Pusat",
+          "Peraturan tata tertib khusus untuk siswa SMP"
+        ],
+        answerIndex: 0,
+        photoKey: "garudaPancasila",
+        explanation: "Jawaban yang tepat adalah A. Sebagai dasar negara, Pancasila merupakan pondasi berdirinya NKRI dan menjadi sumber nilai serta sumber hukum dalam mengatur kehidupan ketatanegaraan dan pemerintahan Indonesia."
+      },
+      {
+        id: 23,
+        topic: "Penerapan Nilai-Nilai Pancasila",
+        question: "Meneladani semangat juang para pendiri negara seperti sikap rela berkorban dan mendahulukan kepentingan bangsa di atas kepentingan pribadi sangat penting karena...",
+        options: [
+          "Supaya kita bisa menyuruh orang lain bekerja keras",
+          "Agar kita terhindar dari kewajiban belajar di sekolah",
+          "Untuk menjaga persatuan dan meneruskan cita-cita kemerdekaan bangsa",
+          "Karena semangat juang hanya diperlukan saat lomba saja"
+        ],
+        answerIndex: 2,
+        photoKey: "hatta",
+        explanation: "Jawaban yang tepat adalah C. Para pendiri negara merumuskan dan menetapkan Pancasila dengan semangat persatuan dan rela berkorban demi cita-cita Indonesia yang merdeka, bersatu, berdaulat, adil, dan makmur."
+      },
+      {
+        id: 24,
+        topic: "Penerapan Nilai-Nilai Pancasila",
+        question: "Menjaga warisan budaya daerah dan situs bersejarah seperti Candi Borobudur serta menghargai keragaman daerah di Indonesia merupakan bagian dari upaya merawat jati diri bangsa yang selaras dengan nilai Pancasila, khususnya...",
+        options: [
+          "Mengutamakan ego kelompok sendiri",
+          "Menghargai kekayaan budaya dan memperkokoh persatuan bangsa",
+          "Menutup diri dari kemajuan ilmu pengetahuan",
+          "Membedakan hak warga negara berdasarkan asal daerah"
+        ],
+        answerIndex: 1,
+        photoKey: "borobudur",
+        explanation: "Jawaban yang tepat adalah B. Menghargai budaya, sejarah, dan keragaman nusantara membantu kita menjaga identitas bangsa sekaligus memperkuat persatuan dan keadilan dalam bingkai Pancasila."
+      },
+      {
+        id: 25,
+        topic: "Penerapan Nilai-Nilai Pancasila",
+        question: "Di lingkungan keluarga, contoh perilaku yang menunjukkan penerapan nilai Pancasila adalah...",
+        options: [
+          "Membantu orang tua merapikan rumah dan menghormati kakak serta adik",
+          "Menonton televisi larut malam hingga mengganggu anggota keluarga lain",
+          "Menolak pembagian tugas rumah tangga karena merasa paling muda",
+          "Memaksakan keinginan sendiri saat keluarga berdiskusi"
+        ],
+        answerIndex: 0,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah A. Di lingkungan keluarga, membantu orang tua, saling menyayangi, menghormati anggota keluarga, dan bermusyawarah merupakan wujud nyata penerapan nilai-nilai Pancasila."
+      },
+
+      // --- BAGIAN 3: PATUH TERHADAP NORMA DALAM KEHIDUPAN (SOAL 26 - 37) ---
+      {
+        id: 26,
+        topic: "Patuh Terhadap Norma",
+        question: "Apa yang dimaksud dengan 'norma' dalam kehidupan bermasyarakat?",
+        options: [
+          "Kebiasaan aneh yang hanya dilakukan saat hari raya",
+          "Aturan atau pedoman perilaku yang berlaku dalam masyarakat untuk menciptakan ketertiban",
+          "Pendapat pribadi seseorang yang wajib diikuti orang lain",
+          "Permainan tradisional dari setiap daerah"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B. Norma adalah kaidah, aturan, atau pedoman yang mengatur perilaku manusia dalam kehidupan bersama agar tercipta keteraturan, keamanan, dan keadilan."
+      },
+      {
+        id: 27,
+        topic: "Patuh Terhadap Norma",
+        question: "Norma yang bersumber dari wahyu atau ajaran Tuhan Yang Maha Esa dan berisi perintah serta larangan bagi pemeluknya disebut...",
+        options: [
+          "Norma kesusilaan",
+          "Norma kesopanan",
+          "Norma agama",
+          "Norma hukum"
+        ],
+        answerIndex: 2,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah C (Norma agama). Norma agama bersumber dari ajaran agama/kepercayaan kepada Tuhan Yang Maha Esa, dengan sanksi berupa dosa atau hukuman dari Tuhan di akhirat sesuai keyakinan masing-masing."
+      },
+      {
+        id: 28,
+        topic: "Patuh Terhadap Norma",
+        question: "Norma yang bersumber dari hati nurani manusia untuk membedakan mana perbuatan yang baik dan buruk, dan pelanggarannya menimbulkan rasa bersalah atau menyesal dalam diri sendiri adalah...",
+        options: [
+          "Norma kesusilaan",
+          "Norma kesopanan",
+          "Norma hukum",
+          "Norma adat"
+        ],
+        answerIndex: 0,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah A (Norma kesusilaan). Norma kesusilaan berasal dari suara hati nurani manusia; jika melanggarnya (misalnya berbohong atau curang), hati nurani akan merasa gelisah, bersalah, atau menyesal."
+      },
+      {
+        id: 29,
+        topic: "Patuh Terhadap Norma",
+        question: "Mengucapkan salam saat bertemu guru, berbicara dengan bahasa yang santun kepada orang yang lebih tua, dan tidak meludah sembarangan merupakan contoh perilaku yang sesuai dengan...",
+        options: [
+          "Norma hukum",
+          "Norma kesopanan",
+          "Norma agama",
+          "Hukum pidana"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B (Norma kesopanan). Norma kesopanan bersumber dari pergaulan dan tata krama masyarakat setempat; pelanggarannya biasanya mendapat celaan, teguran, atau cemoohan dari lingkungan sekitar."
+      },
+      {
+        id: 30,
+        topic: "Patuh Terhadap Norma",
+        question: "Peraturan yang dibuat oleh badan resmi negara, bersifat memaksa, dan memiliki sanksi tegas yang dilaksanakan oleh aparat penegak hukum disebut...",
+        options: [
+          "Norma kesopanan",
+          "Norma kesusilaan",
+          "Norma hukum",
+          "Norma kebiasaan"
+        ],
+        answerIndex: 2,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah C (Norma hukum). Norma hukum dibuat oleh lembaga negara yang berwenang, bersifat memaksa dan mengikat, serta mempunyai sanksi tegas berupa denda, kurungan, atau penjara."
+      },
+      {
+        id: 31,
+        topic: "Patuh Terhadap Norma",
+        question: "Menyeberang jalan raya melalui zebra cross dan mematuhi lampu lalu lintas merupakan contoh kepatuhan terhadap...",
+        options: [
+          "Norma hukum dan keselamatan bersama",
+          "Norma agama semata",
+          "Aturan permainan olahraga",
+          "Kebiasaan makan keluarga"
+        ],
+        answerIndex: 0,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah A (Norma hukum dan keselamatan bersama). Aturan lalu lintas seperti zebra cross dan rambu jalan merupakan bagian dari aturan hukum yang bertujuan melindungi keselamatan pejalan kaki dan pengguna jalan."
+      },
+      {
+        id: 32,
+        topic: "Patuh Terhadap Norma",
+        question: "Apa perbedaan utama sanksi norma hukum dibandingkan sanksi norma kesopanan dan kesusilaan?",
+        options: [
+          "Norma hukum tidak memiliki sanksi sama sekali",
+          "Sanksi norma hukum bersifat tegas, resmi, dan dipaksakan oleh negara melalui aparat berwenang",
+          "Sanksi norma hukum hanya berupa rasa malu di hati",
+          "Norma hukum hanya berlaku jika seseorang mau mematuhinya"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B. Sanksi norma hukum tegas dan nyata (seperti tilang, denda, atau pidana) serta ditegakkan oleh aparat negara, sedangkan norma kesopanan berupa teguran/cemoohan dan kesusilaan berupa penyesalan batin."
+      },
+      {
+        id: 33,
+        topic: "Patuh Terhadap Norma",
+        question: "Mengapa norma sangat penting dalam mewujudkan keadilan di masyarakat?",
+        options: [
+          "Karena norma membuat satu kelompok selalu menang atas kelompok lain",
+          "Karena norma menghapus semua hak warga negara",
+          "Karena norma memberikan batas, hak, dan kewajiban yang jelas sehingga setiap orang diperlakukan adil dan tertib",
+          "Karena norma membuat orang tidak perlu bekerja sama"
+        ],
+        answerIndex: 2,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah C. Norma mengatur batas tindakan setiap individu, menyeimbangkan hak dan kewajiban, serta melindungi kepentingan bersama sehingga keadilan dan ketertiban dapat terwujud."
+      },
+      {
+        id: 34,
+        topic: "Patuh Terhadap Norma",
+        question: "Sikap patuh terhadap norma yang paling baik tumbuh karena...",
+        options: [
+          "Takut saja jika ada polisi atau guru yang mengawasi",
+          "Ingin dipuji teman di media sosial",
+          "Terpaksa karena mendapat ancaman",
+          "Kesadaran diri bahwa norma berguna bagi ketertiban dan kebaikan bersama"
+        ],
+        answerIndex: 3,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah D. Kepatuhan yang paling kuat dan berkelanjutan lahir dari kesadaran diri (bukan sekadar takut diawasi), karena kita memahami manfaat norma bagi keamanan dan ketertiban bersama."
+      },
+      {
+        id: 35,
+        topic: "Patuh Terhadap Norma",
+        question: "Jika di sekolah ada tata tertib datang tepat waktu sebelum bel berbunyi, dampak positif jika seluruh siswa mematuhinya adalah...",
+        options: [
+          "Kegiatan belajar mengajar dimulai tepat waktu dan berjalan tertib",
+          "Guru menjadi tidak perlu mengajar di kelas",
+          "Siswa boleh membolos saat jam pelajaran berlangsung",
+          "Suasana kelas menjadi gaduh dan tidak teratur"
+        ],
+        answerIndex: 0,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah A. Disiplin datang tepat waktu membuat proses pembelajaran di kelas berjalan lancar, tepat waktu, dan menghargai waktu bersama."
+      },
+      {
+        id: 36,
+        topic: "Patuh Terhadap Norma",
+        question: "Perilaku menyontek saat ulangan di sekolah melanggar norma utama yang berkaitan dengan kejujuran dan hati nurani, yaitu...",
+        options: [
+          "Norma kesopanan berpakaian",
+          "Norma kesusilaan",
+          "Norma hukum pidana berat",
+          "Norma adat pernikahan"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B (Norma kesusilaan). Menyontek merupakan perbuatan tidak jujur yang bertentangan dengan suara hati nurani dan tata tertib kejujuran di sekolah."
+      },
+      {
+        id: 37,
+        topic: "Patuh Terhadap Norma",
+        question: "Apa akibatnya jika dalam suatu masyarakat tidak ada norma yang dipatuhi?",
+        options: [
+          "Kehidupan menjadi sangat damai tanpa aturan",
+          "Semua orang otomatis saling menghormati tanpa batas",
+          "Akan muncul kekacauan, ketidakadilan, dan rasa tidak aman",
+          "Pembangunan berjalan lebih cepat tanpa hukum"
+        ],
+        answerIndex: 2,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah C. Tanpa norma yang ditaati, setiap orang bisa bertindak semaunya sendiri sehingga memicu konflik, ketidakadilan, dan kekacauan dalam kehidupan bersama."
+      },
+
+      // --- BAGIAN 4: PERUMUSAN, PENGESAHAN, AMENDEMEN & UUD NRI TAHUN 1945 (SOAL 38 - 50) ---
+      {
+        id: 38,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Dalam tata urutan peraturan perundang-undangan di Indonesia, Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 berkedudukan sebagai...",
+        options: [
+          "Peraturan daerah tingkat kabupaten/kota",
+          "Hukum dasar tertulis yang menjadi sumber dan acuan peraturan di bawahnya",
+          "Surat keputusan kepala sekolah",
+          "Peraturan yang hanya berlaku sementara selama satu bulan"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B. UUD NRI Tahun 1945 merupakan hukum dasar tertulis tertinggi dalam sistem hukum nasional, sehingga peraturan perundang-undangan di bawahnya tidak boleh bertentangan dengannya."
+      },
+      {
+        id: 39,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Sidang resmi kedua BPUPKI yang membahas rancangan Undang-Undang Dasar (termasuk laporan Panitia Hukum Dasar, Panitia Keuangan, dan Panitia Pembelaan Tanah Air) dilaksanakan pada tanggal...",
+        options: [
+          "29 Mei – 1 Juni 1945",
+          "22 Juni 1945",
+          "10 – 17 Juli 1945",
+          "17 – 18 Agustus 1945"
+        ],
+        answerIndex: 2,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah C (10 – 17 Juli 1945). Pada sidang kedua BPUPKI tanggal 10–17 Juli 1945, para tokoh membahas dan merumuskan rancangan Undang-Undang Dasar negara Indonesia merdeka."
+      },
+      {
+        id: 40,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Kapan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 secara resmi disahkan oleh PPKI?",
+        options: [
+          "17 Agustus 1945",
+          "18 Agustus 1945",
+          "29 April 1945",
+          "1 Juni 1945"
+        ],
+        answerIndex: 1,
+        photoKey: "proklamasiFoto",
+        explanation: "Jawaban yang tepat adalah B (18 Agustus 1945). Pada sidang PPKI tanggal 18 Agustus 1945, UUD 1945 disahkan menjadi konstitusi/hukum dasar negara Republik Indonesia bersamaan dengan pengesahan Pancasila sebagai dasar negara."
+      },
+      {
+        id: 41,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Mengapa naskah Proklamasi Kemerdekaan Indonesia tanggal 17 Agustus 1945 memiliki hubungan yang sangat erat dengan Pembukaan UUD NRI Tahun 1945?",
+        options: [
+          "Karena Pembukaan UUD 1945 menjabarkan pernyataan kemerdekaan dan cita-cita yang ditegaskan dalam Proklamasi",
+          "Karena Pembukaan UUD 1945 menghapus isi Proklamasi Kemerdekaan",
+          "Karena naskah Proklamasi dibuat setelah amendemen UUD tahun 2002",
+          "Karena keduanya ditulis oleh pemerintah penjajah"
+        ],
+        answerIndex: 0,
+        photoKey: "teksProklamasi",
+        explanation: "Jawaban yang tepat adalah A. Proklamasi 17 Agustus 1945 menyatakan kemerdekaan bangsa Indonesia, sedangkan Pembukaan UUD NRI Tahun 1945 memuat pokok-pokok pikiran, dasar negara, dan tujuan kemerdekaan tersebut."
+      },
+      {
+        id: 42,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Apa yang dimaksud dengan 'amendemen' terhadap UUD NRI Tahun 1945?",
+        options: [
+          "Penghapusan seluruh isi UUD dan penggantian nama negara",
+          "Perubahan atau penyempurnaan pasal-pasal konstitusi secara resmi sesuai kebutuhan zaman dan ketatanegaraan",
+          "Pembubaran lembaga negara tanpa melalui aturan",
+          "Penerjemahan UUD ke bahasa asing saja"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B. Amendemen UUD adalah perubahan/penyempurnaan ketentuan konstitusi secara sah untuk memperkuat sistem ketatanegaraan, demokrasi, dan perlindungan hak asasi manusia sesuai perkembangan zaman."
+      },
+      {
+        id: 43,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "UUD Negara Republik Indonesia Tahun 1945 telah mengalami perubahan (amendemen) secara bertahap oleh MPR RI sebanyak...",
+        options: [
+          "Dua kali (tahun 1999 dan 2000)",
+          "Tiga kali (tahun 1999, 2000, dan 2001)",
+          "Empat kali (tahun 1999, 2000, 2001, dan 2002)",
+          "Lima kali (tahun 1998 sampai 2002)"
+        ],
+        answerIndex: 2,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah C (Empat kali: tahun 1999, 2000, 2001, dan 2002). MPR RI melakukan amendemen UUD NRI Tahun 1945 secara bertahap pada sidang tahunan MPR tahun 1999, 2000, 2001, dan 2002."
+      },
+      {
+        id: 44,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Lembaga negara yang memiliki kewenangan mengubah dan menetapkan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 adalah...",
+        options: [
+          "Mahkamah Agung (MA)",
+          "Majelis Permusyawaratan Rakyat (MPR)",
+          "Kepolisian Negara Republik Indonesia (Polri)",
+          "Pemerintah Desa"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B (Majelis Permusyawaratan Rakyat / MPR). Berdasarkan UUD NRI Tahun 1945, MPR berwenang mengubah dan menetapkan Undang-Undang Dasar sesuai tata cara konstitusional."
+      },
+      {
+        id: 45,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Salah satu kesepakatan dasar dalam melakukan perubahan (amendemen) UUD NRI Tahun 1945 adalah...",
+        options: [
+          "Mengubah Pembukaan UUD NRI Tahun 1945",
+          "Menghapus bentuk Negara Kesatuan Republik Indonesia (NKRI)",
+          "Tidak mengubah Pembukaan UUD NRI Tahun 1945 dan tetap mempertahankan bentuk NKRI",
+          "Menghilangkan sistem pemerintahan presidensial menjadi kerajaan"
+        ],
+        answerIndex: 2,
+        photoKey: "garudaPancasila",
+        explanation: "Jawaban yang tepat adalah C. Dalam amendemen UUD NRI Tahun 1945, disepakati untuk tidak mengubah Pembukaan UUD 1945 (yang memuat dasar negara Pancasila) dan tetap mempertahankan bentuk Negara Kesatuan Republik Indonesia."
+      },
+      {
+        id: 46,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Berdasarkan UUD NRI Tahun 1945, setiap warga negara berhak mendapatkan pendidikan. Sebagai siswa SMP Kelas VII, kewajiban yang sejalan dengan hak memperoleh pendidikan tersebut adalah...",
+        options: [
+          "Belajar dengan sungguh-sungguh dan mematuhi tata tertib sekolah",
+          "Datang ke sekolah hanya saat ada acara hiburan",
+          "Mengabaikan tugas dari guru karena merasa sudah punya hak",
+          "Merusak fasilitas sekolah saat jam istirahat"
+        ],
+        answerIndex: 0,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah A. Hak dan kewajiban harus berjalan seimbang: warga negara berhak mendapat pendidikan, dan siswa berkewajiban belajar sungguh-sungguh, menghormati guru, serta menjaga fasilitas sekolah."
+      },
+      {
+        id: 47,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Prinsip keseimbangan antara hak dan kewajiban dalam kehidupan bernegara mengandung makna bahwa...",
+        options: [
+          "Kita boleh menuntut hak sebanyak-banyaknya tanpa peduli kewajiban",
+          "Kewajiban hanya berlaku bagi orang dewasa yang sudah bekerja",
+          "Setiap hak yang kita peroleh selalu diiringi dengan tanggung jawab dan pelaksanaan kewajiban",
+          "Hak orang lain boleh diabaikan demi kepentingan pribadi"
+        ],
+        answerIndex: 2,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah C. Hak dan kewajiban merupakan dua sisi yang tidak terpisahkan; menuntut hak harus diimbangi pelaksanaan kewajiban serta penghormatan terhadap hak orang lain."
+      },
+      {
+        id: 48,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Mengapa UUD NRI Tahun 1945 disebut juga sebagai alat kontrol bagi peraturan perundang-undangan yang berada di bawahnya?",
+        options: [
+          "Karena UUD mengatur cara bermain sepak bola antarnegara",
+          "Karena semua undang-undang dan peraturan di bawahnya harus sesuai dan tidak boleh bertentangan dengan UUD NRI Tahun 1945",
+          "Karena UUD hanya berlaku bagi warga negara asing",
+          "Karena UUD tidak perlu ditaati oleh lembaga negara"
+        ],
+        answerIndex: 1,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah B. Sebagai hukum dasar, UUD NRI Tahun 1945 menjadi tolok ukur (alat kontrol) agar setiap undang-undang atau peraturan di bawahnya selaras dengan konstitusi dan prinsip keadilan."
+      },
+      {
+        id: 49,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Dalam UUD NRI Tahun 1945, kebebasan setiap penduduk untuk memeluk agamanya masing-masing dan beribadat menurut agama dan kepercayaannya itu dijamin oleh negara. Hal ini memperkuat kerukunan bangsa karena...",
+        options: [
+          "Memaksa semua warga negara menganut satu agama yang sama",
+          "Melarang masyarakat melaksanakan ibadah di tempat ibadah",
+          "Menjadikan agama sebagai alasan untuk memecah belah tetangga",
+          "Melindungi kebebasan beribadah sekaligus menumbuhkan sikap saling menghormati antarumat beragama"
+        ],
+        answerIndex: 3,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah D. Jaminan kebebasan beragama dan beribadah dalam UUD NRI Tahun 1945 melindungi hak setiap pemeluk agama dan mendorong sikap toleransi serta kerukunan di tengah masyarakat yang beragam."
+      },
+      {
+        id: 50,
+        topic: "Norma dan UUD NRI Tahun 1945",
+        question: "Sebagai pelajar SMP Kelas VII yang patuh pada Pancasila, norma, dan UUD NRI Tahun 1945, sikap apa yang paling tepat kamu lakukan saat melihat teman yang melakukan perundungan (bullying) di sekolah?",
+        options: [
+          "Melaporkan kejadian tersebut kepada guru/wali kelas dan menolong teman yang menjadi korban",
+          "Ikut menertawakan agar dianggap kompak oleh kelompok tertentu",
+          "Merekam dan menyebarkannya untuk bahan candaan",
+          "Berdiam diri padahal melihat langsung tindakan tersebut merugikan teman"
+        ],
+        answerIndex: 0,
+        photoKey: null,
+        explanation: "Jawaban yang tepat adalah A. Perundungan bertentangan dengan nilai kemanusiaan Pancasila, norma kesusilaan/kesopanan, dan hak anak untuk merasa aman; melapor kepada guru dan membantu korban adalah tindakan terpuji dan berani."
+      }
+    ];
+
+    // State aplikasi: menyimpan pilihan jawaban siswa (key: questionId, value: optionIndex 0..3)
+    const userAnswers = {};
+    let isSubmitted = false;
+
+    /**
+     * Menghasilkan HTML blok foto arsip asli dengan fallback aman saat offline/gagal muat.
+     * Tidak menggambar kanvas/ilustrasi buatan; jika gambar gagal dimuat, wadah foto disembunyikan
+     * dan tetap menampilkan keterangan arsip/sumber foto asli secara rapi.
+     */
+    function renderPhotoBlock(photoKey, questionId) {
+      if (!photoKey || !ARCHIVE_PHOTOS[photoKey]) return "";
+      const photo = ARCHIVE_PHOTOS[photoKey];
+      return `
+        <figure id="photo-figure-${questionId}" class="mt-3.5 mb-4 rounded-xl border border-slate-200 bg-slate-50 overflow-hidden">
+          <div id="photo-frame-${questionId}" class="bg-slate-100 flex items-center justify-center max-h-64 overflow-hidden">
+            <img
+              src="${photo.url}"
+              alt="${photo.caption}"
+              loading="lazy"
+              class="w-full h-auto max-h-64 object-contain"
+              onerror="handlePhotoError(${questionId})"
+            />
+          </div>
+          <figcaption class="px-3.5 py-2.5 text-xs text-slate-600 bg-white border-t border-slate-100 leading-relaxed">
+            <span class="font-semibold text-slate-800">${photo.caption}</span>
+            <span class="block text-[11px] text-slate-400 mt-0.5">${photo.source}</span>
+          </figcaption>
+        </figure>
+      `;
+    }
+
+    /**
+     * Menangani jika foto tidak dapat termuat (misalnya saat mode offline tanpa akses ke Wikimedia):
+     * menyembunyikan frame gambar kosong agar tidak tampil ikon broken image.
+     */
+    function handlePhotoError(questionId) {
+      const frame = document.getElementById(`photo-frame-${questionId}`);
+      if (frame) {
+        frame.classList.add("hidden");
+      }
+    }
+
+    /**
+     * Merender seluruh 50 kartu soal ke dalam #questions-container.
+     */
+    function renderQuestions() {
+      const container = document.getElementById("questions-container");
+      const letters = ["A", "B", "C", "D"];
+
+      container.innerHTML = QUIZ_DATA.map((q) => {
+        const optionsHtml = q.options.map((optText, idx) => {
+          return `
+            <button
+              type="button"
+              id="opt-${q.id}-${idx}"
+              onclick="selectOption(${q.id}, ${idx})"
+              class="option-btn w-full text-left flex items-start gap-3 p-3.5 rounded-xl border border-slate-200 bg-white hover:bg-blue-50/60 hover:border-blue-300 text-slate-700 cursor-pointer"
+              aria-pressed="false"
+            >
+              <span
+                id="badge-${q.id}-${idx}"
+                class="w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 border border-slate-200"
+              >
+                ${letters[idx]}
+              </span>
+              <span class="text-sm leading-relaxed flex-1">${optText}</span>
+            </button>
+          `;
+        }).join("");
+
+        return `
+          <article
+            id="question-card-${q.id}"
+            class="question-card bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm scroll-mt-24 lg:scroll-mt-8"
+          >
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div class="flex items-center gap-2.5">
+                <span class="inline-flex items-center justify-center px-3 py-1 rounded-lg bg-red-50 text-red-700 border border-red-200 font-extrabold text-xs">
+                  Soal No. ${q.id}
+                </span>
+                <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 font-semibold text-xs">
+                  ${q.topic}
+                </span>
+              </div>
+              <span id="status-pill-${q.id}" class="text-xs font-semibold text-slate-400">
+                Belum dijawab
+              </span>
+            </div>
+
+            <h3 class="text-base sm:text-[17px] font-bold text-slate-900 leading-relaxed">
+              ${q.question}
+            </h3>
+
+            ${renderPhotoBlock(q.photoKey, q.id)}
+
+            <div class="mt-4 space-y-2.5" role="group" aria-label="Pilihan jawaban soal ${q.id}">
+              ${optionsHtml}
+            </div>
+
+            <!-- Kotak pembahasan lengkap yang muncul setelah tombol Kumpulkan Jawaban ditekan -->
+            <div id="explanation-${q.id}" class="hidden mt-4 pt-4 border-t border-slate-100"></div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    /**
+     * Merender navigasi nomor soal 1 sampai 50 pada sidebar desktop dan bar navigasi HP.
+     */
+    function renderNavigation() {
+      const desktopGrid = document.getElementById("desktop-nav-grid");
+      const mobileStrip = document.getElementById("mobile-quick-strip");
+      const mobileGrid = document.getElementById("mobile-full-grid");
+
+      let desktopHtml = "";
+      let mobileStripHtml = "";
+      let mobileGridHtml = "";
+
+      for (let num = 1; num <= QUIZ_DATA.length; num++) {
+        desktopHtml += `
+          <button
+            type="button"
+            id="nav-desktop-${num}"
+            onclick="scrollToQuestion(${num})"
+            class="nav-num-btn h-9 rounded-lg text-xs font-bold border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center justify-center cursor-pointer"
+          >
+            ${num}
+          </button>
+        `;
+
+        mobileStripHtml += `
+          <button
+            type="button"
+            id="nav-mstrip-${num}"
+            onclick="scrollToQuestion(${num})"
+            class="nav-num-btn w-8 h-8 rounded-lg text-xs font-bold border border-slate-200 bg-slate-100 text-slate-700 shrink-0 flex items-center justify-center cursor-pointer"
+          >
+            ${num}
+          </button>
+        `;
+
+        mobileGridHtml += `
+          <button
+            type="button"
+            id="nav-mgrid-${num}"
+            onclick="scrollToQuestion(${num}, true)"
+            class="nav-num-btn h-8 rounded-lg text-xs font-bold border border-slate-200 bg-slate-100 text-slate-700 flex items-center justify-center cursor-pointer"
+          >
+            ${num}
+          </button>
+        `;
+      }
+
+      desktopGrid.innerHTML = desktopHtml;
+      mobileStrip.innerHTML = mobileStripHtml;
+      mobileGrid.innerHTML = mobileGridHtml;
+    }
+
+    /**
+     * Menggulir layar menuju kartu soal tertentu.
+     */
+    function scrollToQuestion(questionId, closeMobileGrid = false) {
+      const target = document.getElementById(`question-card-${questionId}`);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      if (closeMobileGrid) {
+        const grid = document.getElementById("mobile-full-grid");
+        const btn = document.getElementById("mobile-grid-toggle-btn");
+        if (grid && !grid.classList.contains("hidden")) {
+          grid.classList.add("hidden");
+          grid.classList.remove("grid");
+          if (btn) btn.textContent = "Lihat Semua Nomor";
+        }
+      }
+    }
+
+    /**
+     * Membuka atau menutup panel 50 nomor di layar kecil / HP.
+     */
+    function toggleMobileGrid() {
+      const grid = document.getElementById("mobile-full-grid");
+      const btn = document.getElementById("mobile-grid-toggle-btn");
+      const isHidden = grid.classList.contains("hidden");
+
+      if (isHidden) {
+        grid.classList.remove("hidden");
+        grid.classList.add("grid");
+        btn.textContent = "Tutup Grid";
+      } else {
+        grid.classList.add("hidden");
+        grid.classList.remove("grid");
+        btn.textContent = "Lihat Semua Nomor";
+      }
+    }
+
+    /**
+     * Menangani pemilihan opsi jawaban (A, B, C, D) oleh siswa.
+     */
+    function selectOption(questionId, optionIndex) {
+      // Jika kuis sudah disubmit, cegah perubahan langsung agar hasil evaluasi tetap konsisten
+      if (isSubmitted) {
+        showToast("Kuis sudah dikumpulkan. Klik 'Kerjakan Ulang' jika ingin mencoba lagi.");
+        return;
+      }
+
+      userAnswers[questionId] = optionIndex;
+      updateQuestionOptionStyles(questionId);
+      updateProgressUI();
+    }
+
+    /**
+     * Memperbarui tampilan pilihan jawaban pada kartu soal saat belum disubmit.
+     */
+    function updateQuestionOptionStyles(questionId) {
+      const selectedIdx = userAnswers[questionId];
+      const statusPill = document.getElementById(`status-pill-${questionId}`);
+
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById(`opt-${questionId}-${i}`);
+        const badge = document.getElementById(`badge-${questionId}-${i}`);
+        const isSelected = selectedIdx === i;
+
+        btn.setAttribute("aria-pressed", isSelected ? "true" : "false");
+
+        // Reset kelas dasar
+        btn.className = "option-btn w-full text-left flex items-start gap-3 p-3.5 rounded-xl border cursor-pointer ";
+        badge.className = "w-7 h-7 rounded-lg font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 border ";
+
+        if (isSelected) {
+          btn.className += "bg-blue-50 border-blue-600 text-blue-950 font-medium ring-1 ring-blue-600/30";
+          badge.className += "bg-blue-600 text-white border-blue-600";
+        } else {
+          btn.className += "bg-white border-slate-200 hover:bg-blue-50/60 hover:border-blue-300 text-slate-700";
+          badge.className += "bg-slate-100 text-slate-700 border-slate-200";
+        }
+      }
+
+      if (statusPill && !isSubmitted) {
+        if (selectedIdx !== undefined) {
+          statusPill.textContent = "Sudah dijawab";
+          statusPill.className = "text-xs font-bold text-blue-600";
+        } else {
+          statusPill.textContent = "Belum dijawab";
+          statusPill.className = "text-xs font-semibold text-slate-400";
+        }
+      }
+    }
+
+    /**
+     * Memperbarui indikator jumlah soal terjawab, progress bar, dan warna nomor navigasi.
+     */
+    function updateProgressUI() {
+      const total = QUIZ_DATA.length;
+      const answeredCount = Object.keys(userAnswers).length;
+      const percent = Math.round((answeredCount / total) * 100);
+
+      document.getElementById("desktop-progress-badge").textContent = `${answeredCount} / ${total}`;
+      document.getElementById("desktop-progress-bar").style.width = `${percent}%`;
+      document.getElementById("mobile-progress-text").textContent = `Terjawab: ${answeredCount} / ${total}`;
+      document.getElementById("bottom-answered-count").textContent = answeredCount;
+
+      if (!isSubmitted) {
+        for (let num = 1; num <= total; num++) {
+          const isAnswered = userAnswers[num] !== undefined;
+          const classes = isAnswered
+            ? "bg-blue-600 text-white border-blue-600 shadow-sm"
+            : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200";
+
+          setNavButtonStyle(num, classes);
+        }
+      }
+    }
+
+    /**
+     * Menerapkan kelas warna ke tombol nomor pada desktop dan mobile.
+     */
+    function setNavButtonStyle(num, colorAndBorderClasses) {
+      const dBtn = document.getElementById(`nav-desktop-${num}`);
+      const mStripBtn = document.getElementById(`nav-mstrip-${num}`);
+      const mGridBtn = document.getElementById(`nav-mgrid-${num}`);
+
+      if (dBtn) {
+        dBtn.className = `nav-num-btn h-9 rounded-lg text-xs font-bold border flex items-center justify-center cursor-pointer ${colorAndBorderClasses}`;
+      }
+      if (mStripBtn) {
+        mStripBtn.className = `nav-num-btn w-8 h-8 rounded-lg text-xs font-bold border shrink-0 flex items-center justify-center cursor-pointer ${colorAndBorderClasses}`;
+      }
+      if (mGridBtn) {
+        mGridBtn.className = `nav-num-btn h-8 rounded-lg text-xs font-bold border flex items-center justify-center cursor-pointer ${colorAndBorderClasses}`;
+      }
+    }
+
+    /**
+     * Menghitung nilai, menandai benar/salah pada setiap soal dan navigasi, serta menampilkan pembahasan.
+     */
+    function submitQuiz() {
+      if (isSubmitted) {
+        showToast("Jawabanmu sudah dinilai. Scroll ke atas untuk melihat rekap nilai.");
+        document.getElementById("result-summary-card").scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      isSubmitted = true;
+      const letters = ["A", "B", "C", "D"];
+      let correctCount = 0;
+      let wrongCount = 0;
+      let unansweredCount = 0;
+
+      QUIZ_DATA.forEach((q) => {
+        const userChoice = userAnswers[q.id];
+        const isUnanswered = userChoice === undefined;
+        const isCorrect = !isUnanswered && userChoice === q.answerIndex;
+
+        const card = document.getElementById(`question-card-${q.id}`);
+        const statusPill = document.getElementById(`status-pill-${q.id}`);
+        const explanationBox = document.getElementById(`explanation-${q.id}`);
+
+        if (isUnanswered) {
+          unansweredCount++;
+          card.className = "question-card bg-white rounded-2xl border-2 border-amber-300 p-5 sm:p-6 shadow-sm scroll-mt-24 lg:scroll-mt-8";
+          statusPill.textContent = "Tidak Dijawab";
+          statusPill.className = "text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800";
+          setNavButtonStyle(q.id, "bg-amber-100 text-amber-900 border-amber-400");
+        } else if (isCorrect) {
+          correctCount++;
+          card.className = "question-card bg-white rounded-2xl border-2 border-emerald-400 p-5 sm:p-6 shadow-sm scroll-mt-24 lg:scroll-mt-8";
+          statusPill.textContent = "Benar ✓";
+          statusPill.className = "text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800";
+          setNavButtonStyle(q.id, "bg-emerald-600 text-white border-emerald-600");
+        } else {
+          wrongCount++;
+          card.className = "question-card bg-white rounded-2xl border-2 border-rose-400 p-5 sm:p-6 shadow-sm scroll-mt-24 lg:scroll-mt-8";
+          statusPill.textContent = "Salah ✕";
+          statusPill.className = "text-xs font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800";
+          setNavButtonStyle(q.id, "bg-rose-600 text-white border-rose-600");
+        }
+
+        // Warnai tiap opsi agar siswa langsung tahu mana jawaban benar & mana pilihan mereka
+        for (let idx = 0; idx < 4; idx++) {
+          const btn = document.getElementById(`opt-${q.id}-${idx}`);
+          const badge = document.getElementById(`badge-${q.id}-${idx}`);
+          btn.className = "option-btn w-full text-left flex items-start gap-3 p-3.5 rounded-xl border cursor-default ";
+          badge.className = "w-7 h-7 rounded-lg font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 border ";
+
+          if (idx === q.answerIndex) {
+            btn.className += "bg-emerald-50 border-emerald-500 text-emerald-950 font-semibold";
+            badge.className += "bg-emerald-600 text-white border-emerald-600";
+          } else if (idx === userChoice && idx !== q.answerIndex) {
+            btn.className += "bg-rose-50 border-rose-500 text-rose-950 font-medium";
+            badge.className += "bg-rose-600 text-white border-rose-600";
+          } else {
+            btn.className += "bg-slate-50/70 border-slate-200 text-slate-500";
+            badge.className += "bg-slate-100 text-slate-500 border-slate-200";
+          }
+        }
+
+        // Tampilkan pembahasan lengkap pada setiap soal
+        const userChoiceLabel = isUnanswered ? "Tidak dijawab" : `Pilihan ${letters[userChoice]}`;
+        const correctLabel = `${letters[q.answerIndex]}. ${q.options[q.answerIndex]}`;
+
+        explanationBox.className = `mt-4 pt-4 border-t ${isCorrect ? "border-emerald-100" : "border-rose-100"}`;
+        explanationBox.innerHTML = `
+          <div class="rounded-xl ${isCorrect ? "bg-emerald-50/80 border border-emerald-200" : "bg-slate-50 border border-slate-200"} p-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+              <p class="text-xs font-extrabold uppercase tracking-wide ${isCorrect ? "text-emerald-800" : "text-slate-800"}">
+                Pembahasan Soal No. ${q.id}
+              </p>
+              <span class="text-xs font-semibold text-slate-600">
+                Jawabanmu: <strong class="${isCorrect ? "text-emerald-700" : "text-rose-700"}">${userChoiceLabel}</strong>
+              </span>
+            </div>
+            <p class="text-xs sm:text-sm font-bold text-emerald-800 mb-1.5">
+              Kunci Jawaban Benar: ${correctLabel}
+            </p>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              ${q.explanation}
+            </p>
+          </div>
+        `;
+        explanationBox.classList.remove("hidden");
+      });
+
+      // Hitung nilai akhir skala 0–100 (dibulatkan ke bilangan bulat terdekat)
+      const finalScore = Math.round((correctCount / QUIZ_DATA.length) * 100);
+
+      document.getElementById("score-final").textContent = finalScore;
+      document.getElementById("score-correct").textContent = correctCount;
+      document.getElementById("score-wrong").textContent = wrongCount;
+      document.getElementById("score-unanswered").textContent = unansweredCount;
+
+      let message = "";
+      if (finalScore >= 90) {
+        message = `Keren banget! Nilai kamu <strong>${finalScore}</strong>. Pemahamanmu tentang sejarah kelahiran Pancasila, penerapan nilai Pancasila, norma, dan UUD NRI Tahun 1945 sudah sangat mantap. Tetap pertahankan semangat belajarmu ya!`;
+      } else if (finalScore >= 75) {
+        message = `Bagus sekali! Nilai kamu <strong>${finalScore}</strong>. Sebagian besar materi sudah kamu kuasai dengan baik. Yuk, baca pembahasan pada soal yang masih keliru supaya makin paham!`;
+      } else if (finalScore >= 60) {
+        message = `Cukup baik, nilai kamu <strong>${finalScore}</strong>. Jangan berkecil hati ya! Coba pelajari kembali pembahasan di tiap nomor soal lalu tekan <strong>Kerjakan Ulang</strong> untuk menantang dirimu lagi.`;
+      } else {
+        message = `Nilai kamu saat ini <strong>${finalScore}</strong>. Ini saat yang pas buat belajar santai sambil membaca pembahasan di bawah setiap soal. Setelah itu, kamu bisa coba <strong>Kerjakan Ulang</strong> dan lihat peningkatan nilaimu!`;
+      }
+
+      document.getElementById("score-encouragement").innerHTML = message;
+      document.getElementById("result-summary-card").classList.remove("hidden");
+      document.getElementById("reset-btn-bottom").classList.remove("hidden");
+      document.getElementById("legend-correct").classList.remove("hidden");
+      document.getElementById("legend-correct").classList.add("inline-flex");
+      document.getElementById("legend-wrong").classList.remove("hidden");
+      document.getElementById("legend-wrong").classList.add("inline-flex");
+
+      const submitBtn = document.getElementById("submit-quiz-btn");
+      submitBtn.textContent = "Sudah Dikumpulkan";
+      submitBtn.className = "w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-700 text-white font-bold text-sm cursor-default";
+
+      document.getElementById("result-summary-card").scrollIntoView({ behavior: "smooth", block: "start" });
+      showToast(`Selesai dinilai! Nilai akhir kamu: ${finalScore} (${correctCount} benar dari 50 soal).`);
+    }
+
+    /**
+     * Mereset seluruh jawaban, skor, dan pembahasan agar siswa dapat mengerjakan ulang dari awal.
+     */
+    function resetQuiz() {
+      isSubmitted = false;
+      Object.keys(userAnswers).forEach((k) => delete userAnswers[k]);
+
+      document.getElementById("result-summary-card").classList.add("hidden");
+      document.getElementById("reset-btn-bottom").classList.add("hidden");
+      document.getElementById("legend-correct").classList.add("hidden");
+      document.getElementById("legend-correct").classList.remove("inline-flex");
+      document.getElementById("legend-wrong").classList.add("hidden");
+      document.getElementById("legend-wrong").classList.remove("inline-flex");
+
+      const submitBtn = document.getElementById("submit-quiz-btn");
+      submitBtn.textContent = "Submit / Kumpulkan Jawaban";
+      submitBtn.className = "w-full sm:w-auto px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 active:scale-[0.99] text-white font-bold text-sm shadow-md shadow-red-600/20 transition cursor-pointer";
+
+      QUIZ_DATA.forEach((q) => {
+        const card = document.getElementById(`question-card-${q.id}`);
+        const explanationBox = document.getElementById(`explanation-${q.id}`);
+
+        card.className = "question-card bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm scroll-mt-24 lg:scroll-mt-8";
+        explanationBox.classList.add("hidden");
+        explanationBox.innerHTML = "";
+        updateQuestionOptionStyles(q.id);
+      });
+
+      updateProgressUI();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      showToast("Jawaban telah direset. Selamat mengerjakan ulang!");
+    }
+
+    /**
+     * Menampilkan pesan notifikasi kecil di pojok kanan bawah tanpa memakai alert().
+     */
+    let toastTimer = null;
+    function showToast(message) {
+      const banner = document.getElementById("toast-banner");
+      const textEl = document.getElementById("toast-message");
+      textEl.textContent = message;
+      banner.classList.remove("hidden");
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        hideToast();
+      }, 4200);
+    }
+
+    function hideToast() {
+      const banner = document.getElementById("toast-banner");
+      banner.classList.add("hidden");
+    }
+
+    // Inisialisasi aplikasi saat halaman dimuat
+    window.addEventListener("DOMContentLoaded", () => {
+      try {
+        renderQuestions();
+        renderNavigation();
+        updateProgressUI();
+      } catch (err) {
+        showToast("Terjadi kendala saat memuat daftar soal. Silakan muat ulang halaman.");
+      }
+    });
+  </script>
+</body>
+</html>

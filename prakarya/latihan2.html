@@ -1,0 +1,2976 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Interaktif 100 Soal (Paket B) - Seni Tari &amp; Prakarya SMP Kelas 7</title>
+  <style>
+    /* ==========================================================================
+       VARIABEL WARNA & RESET DASAR (TEMA EMERALD / TEAL - 100% OFFLINE)
+       ========================================================================== */
+    :root {
+      --bg-body: #f0fdfa;
+      --bg-card: #ffffff;
+      --bg-subtle: #f8fafc;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-light: #64748b;
+      --border-color: #cbd5e1;
+      --border-light: #e2e8f0;
+      --primary: #0d9488;
+      --primary-hover: #0f766e;
+      --primary-soft: #ccfbf1;
+      --primary-border: #5eead4;
+      --answered-bg: #dbeafe;
+      --answered-border: #2563eb;
+      --answered-text: #1d4ed8;
+      --success: #16a34a;
+      --success-soft: #f0fdf4;
+      --success-border: #86efac;
+      --danger: #dc2626;
+      --danger-soft: #fef2f2;
+      --danger-border: #fca5a5;
+      --warning: #d97706;
+      --warning-soft: #fffbeb;
+      --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
+      --radius-md: 10px;
+      --radius-lg: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 16px;
+      padding-bottom: 64px;
+    }
+
+    /* ==========================================================================
+       HEADER TOPBAR RINGKAS
+       ========================================================================== */
+    .topbar {
+      background: linear-gradient(135deg, #115e59 0%, #0d9488 60%, #14b8a6 100%);
+      color: #ffffff;
+      padding: 16px 24px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 24px;
+    }
+
+    .topbar-inner {
+      max-width: 1340px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .topbar-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .paket-badge {
+      display: inline-block;
+      width: fit-content;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 10px;
+      border-radius: 999px;
+      margin-bottom: 2px;
+    }
+
+    .topbar-title h1 {
+      font-size: 1.32rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .topbar-title p {
+      font-size: 0.88rem;
+      color: #ccfbf1;
+    }
+
+    .topbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ==========================================================================
+       TOMBOL & KOMPONEN KONTROL
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-light {
+      background-color: #ffffff;
+      color: #115e59;
+      border-color: #ccfbf1;
+    }
+
+    .btn-light:hover {
+      background-color: #f0fdfa;
+    }
+
+    .btn-outline-light {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-outline-light:hover {
+      background-color: rgba(255, 255, 255, 0.26);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-success {
+      background-color: var(--success);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-success:hover {
+      background-color: #15803d;
+    }
+
+    .btn-secondary {
+      background-color: #ffffff;
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-subtle);
+    }
+
+    .btn-sm {
+      padding: 7px 12px;
+      font-size: 0.82rem;
+    }
+
+    .btn-lg {
+      padding: 14px 28px;
+      font-size: 1.05rem;
+    }
+
+    /* ==========================================================================
+       LAYOUT UTAMA 2 KOLOM (100 SOAL DI KIRI, SIDEBAR TETAP DI KANAN)
+       ========================================================================== */
+    .main-container {
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 325px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* ==========================================================================
+       PANEL HASIL SKOR (TAMPIL SETELAH SUBMIT)
+       ========================================================================== */
+    .score-panel {
+      display: none;
+      background: var(--bg-card);
+      border: 2px solid var(--primary-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .score-panel.visible {
+      display: block;
+      animation: fadeInDown 0.35s ease;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .score-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+    }
+
+    .score-badge-box {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .score-circle {
+      width: 94px;
+      height: 94px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0d9488, #115e59);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      flex-shrink: 0;
+    }
+
+    .score-circle .score-num {
+      font-size: 2.05rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .score-circle .score-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+      opacity: 0.92;
+    }
+
+    .score-summary-text h2 {
+      font-size: 1.28rem;
+      color: var(--text-main);
+    }
+
+    .score-predicate {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .score-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat-box {
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+
+    .stat-box.correct {
+      background-color: var(--success-soft);
+      border-color: var(--success-border);
+      color: #166534;
+    }
+
+    .stat-box.wrong {
+      background-color: var(--danger-soft);
+      border-color: var(--danger-border);
+      color: #991b1b;
+    }
+
+    .stat-box.empty {
+      background-color: var(--warning-soft);
+      border-color: #fde68a;
+      color: #92400e;
+    }
+
+    .stat-box .stat-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .stat-box .stat-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       TOOLBAR FILTER SOAL
+       ========================================================================== */
+    .quiz-toolbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quiz-toolbar-info {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .quiz-toolbar-info strong {
+      color: var(--text-main);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ==========================================================================
+       KARTU PERTANYAAN (SOAL 1 - 100)
+       ========================================================================== */
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 24px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .question-card:hover {
+      border-color: #99f6e4;
+      box-shadow: var(--shadow-md);
+    }
+
+    .question-card.answered {
+      border-left: 4px solid var(--answered-border);
+    }
+
+    .question-card.review-correct {
+      border-color: var(--success-border);
+      border-left: 5px solid var(--success);
+    }
+
+    .question-card.review-wrong {
+      border-color: var(--danger-border);
+      border-left: 5px solid var(--danger);
+    }
+
+    .question-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .q-number-badge {
+      background-color: var(--primary-soft);
+      color: #115e59;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--primary-border);
+    }
+
+    .q-topic-badge {
+      background-color: var(--bg-subtle);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-light);
+    }
+
+    .q-status-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .q-status-tag.tag-correct {
+      background-color: var(--success-soft);
+      color: var(--success);
+    }
+
+    .q-status-tag.tag-wrong {
+      background-color: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .question-text {
+      font-size: 1.03rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      line-height: 1.58;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 15px;
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-md);
+      background-color: #ffffff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .option-item:hover:not(.locked) {
+      background-color: #f0fdfa;
+      border-color: var(--primary-border);
+    }
+
+    .option-item.selected {
+      background-color: var(--answered-bg);
+      border-color: var(--answered-border);
+    }
+
+    .option-item.locked {
+      cursor: default;
+    }
+
+    .option-item.correct-answer {
+      background-color: var(--success-soft) !important;
+      border-color: var(--success) !important;
+      color: #14532d;
+    }
+
+    .option-item.wrong-answer {
+      background-color: var(--danger-soft) !important;
+      border-color: var(--danger) !important;
+      color: #7f1d1d;
+    }
+
+    .option-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .option-item.selected .option-letter {
+      background-color: var(--answered-border);
+      border-color: var(--answered-border);
+      color: #ffffff;
+    }
+
+    .option-item.correct-answer .option-letter {
+      background-color: var(--success) !important;
+      border-color: var(--success) !important;
+      color: #ffffff !important;
+    }
+
+    .option-item.wrong-answer .option-letter {
+      background-color: var(--danger) !important;
+      border-color: var(--danger) !important;
+      color: #ffffff !important;
+    }
+
+    .option-text {
+      font-size: 0.96rem;
+      padding-top: 3px;
+      flex: 1;
+    }
+
+    .option-badge-info {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      align-self: center;
+      white-space: nowrap;
+    }
+
+    .badge-kunci {
+      background-color: var(--success);
+      color: #ffffff;
+    }
+
+    .badge-pilihanmu {
+      background-color: var(--danger);
+      color: #ffffff;
+    }
+
+    /* Kotak Pembahasan Soal */
+    .explanation-box {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background-color: #f0fdfa;
+      border: 1px solid #99f6e4;
+      border-left: 4px solid #0d9488;
+      font-size: 0.92rem;
+      color: #1e293b;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      color: #0f766e;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ==========================================================================
+       SIDEBAR NAVIGASI NOMOR TETAP (POSITION: STICKY)
+       ========================================================================== */
+    .sidebar-wrapper {
+      position: sticky;
+      top: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-md);
+      max-height: calc(100vh - 40px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-header {
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+
+    .sidebar-header h3 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: var(--border-light);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--answered-border);
+      transition: width 0.25s ease;
+    }
+
+    .legend-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .dot-empty {
+      background-color: #f1f5f9;
+      border: 1px solid #94a3b8;
+    }
+
+    .dot-answered {
+      background-color: var(--answered-bg);
+      border: 1px solid var(--answered-border);
+    }
+
+    .dot-correct {
+      background-color: var(--success);
+    }
+
+    .dot-wrong {
+      background-color: var(--danger);
+    }
+
+    .nav-grid-scroll {
+      overflow-y: auto;
+      padding-right: 4px;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .nav-num-btn {
+      height: 34px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background-color: #f1f5f9;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-num-btn:hover {
+      border-color: var(--primary);
+      background-color: var(--primary-soft);
+      color: #115e59;
+    }
+
+    .nav-num-btn.is-answered {
+      background-color: var(--answered-bg);
+      border-color: var(--answered-border);
+      color: var(--answered-text);
+      font-weight: 700;
+    }
+
+    .nav-num-btn.is-correct {
+      background-color: var(--success);
+      border-color: var(--success);
+      color: #ffffff;
+    }
+
+    .nav-num-btn.is-wrong {
+      background-color: var(--danger);
+      border-color: var(--danger);
+      color: #ffffff;
+    }
+
+    .sidebar-footer {
+      border-top: 1px solid var(--border-light);
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ==========================================================================
+       AREA SUBMIT BAWAH
+       ========================================================================== */
+    .bottom-submit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      text-align: center;
+      margin-top: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .bottom-submit-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .bottom-submit-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    /* ==========================================================================
+       CUSTOM MODAL DIALOG (TANPA ALERT & CONFIRM)
+       ========================================================================== */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.55);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      max-width: 460px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      animation: fadeInDown 0.2s ease;
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .modal-body {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* ==========================================================================
+       RESPONSIF TABLET & MOBILE
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .main-container {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar-wrapper {
+        position: static;
+        max-height: none;
+        order: -1;
+      }
+
+      .nav-grid {
+        grid-template-columns: repeat(10, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .score-stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        padding: 14px 16px;
+      }
+
+      .question-card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER RINGKAS -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-title-group topbar-title">
+        <span class="paket-badge">Paket B &bull; Variasi Soal Baru</span>
+        <h1>Kuis 100 Soal Prakarya &amp; Seni Tari SMP Kelas 7 (Semester 1)</h1>
+        <p>Kurikulum Merdeka &bull; Studi Kasus &amp; Analisis Budaya &bull; Kunci Acak &amp; Pembahasan Lengkap</p>
+      </div>
+      <div class="topbar-actions">
+        <button type="button" class="btn btn-outline-light" id="btnShuffleOptions" title="Ulangi latihan dan acak ulang posisi pilihan A, B, C, D">
+          &#8635; Ulangi &amp; Acak Opsi
+        </button>
+        <button type="button" class="btn btn-light" id="btnDownloadHtml" title="Simpan file HTML mandiri ini untuk dibuka kapan saja secara offline">
+          &#11015; Unduh File HTML (.html)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- KONTAINER UTAMA 2 KOLOM -->
+  <main class="main-container">
+    <!-- KOLOM KIRI: HASIL SKOR + DAFTAR 100 SOAL -->
+    <section class="questions-column">
+
+      <!-- PANEL HASIL SKOR (TERSEMBUNYI SEBELUM SUBMIT) -->
+      <div class="score-panel" id="scorePanel">
+        <div class="score-header">
+          <div class="score-badge-box">
+            <div class="score-circle" id="scoreCircle">
+              <span class="score-num" id="finalScoreText">0</span>
+              <span class="score-label">Skor Akhir</span>
+            </div>
+            <div class="score-summary-text">
+              <h2>Hasil Evaluasi Kuis Seni Tari (Paket B)</h2>
+              <p id="scoreDetailSummary" style="color: var(--text-muted); font-size: 0.92rem; margin-top: 2px;">
+                Latihan selesai! Silakan pelajari kotak pembahasan di bawah setiap nomor soal untuk memperdalam pemahamanmu.
+              </p>
+              <span class="score-predicate" id="scorePredicate">Predikat</span>
+            </div>
+          </div>
+          <div>
+            <button type="button" class="btn btn-primary" id="btnRetryTop">
+              &#8634; Ulangi &amp; Acak Opsi
+            </button>
+          </div>
+        </div>
+
+        <div class="score-stats-grid">
+          <div class="stat-box correct">
+            <div class="stat-val" id="statCorrect">0</div>
+            <div class="stat-name">Jawaban Benar</div>
+          </div>
+          <div class="stat-box wrong">
+            <div class="stat-val" id="statWrong">0</div>
+            <div class="stat-name">Jawaban Salah</div>
+          </div>
+          <div class="stat-box empty">
+            <div class="stat-val" id="statEmpty">0</div>
+            <div class="stat-name">Tidak Dijawab</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOLBAR FILTER SOAL -->
+      <div class="quiz-toolbar">
+        <div class="quiz-toolbar-info">
+          Daftar Soal: <strong>100 Pilihan Ganda</strong> (Mencakup 13 Kisi-Kisi Materi)
+        </div>
+        <div class="filter-group" id="filterGroup">
+          <button type="button" class="btn btn-secondary btn-sm active-filter" data-filter="all">Semua Soal (100)</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-filter="unanswered">Belum Dijawab</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-filter="wrong" id="btnFilterWrong" style="display:none;">Hanya Jawaban Salah</button>
+        </div>
+      </div>
+
+      <!-- TEMPAT RENDER 100 SOAL -->
+      <div id="questionsContainer"></div>
+
+      <!-- KARTU SUBMIT DI BAWAH SOAL KE-100 -->
+      <div class="bottom-submit-card" id="bottomSubmitCard">
+        <h3>Sudah Siap Mengumpulkan Jawaban?</h3>
+        <p id="bottomStatusText">Periksa kembali pilihan jawabanmu atau gunakan navigasi nomor di samping sebelum menekan tombol selesai.</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+          <button type="button" class="btn btn-success btn-lg" id="btnSubmitBottom">
+            &#10004; Selesai &amp; Lihat Skor
+          </button>
+          <button type="button" class="btn btn-secondary btn-lg" id="btnJumpUnansweredBottom">
+            Lompat ke Soal Kosong
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KOLOM KANAN: SIDEBAR NAVIGASI NOMOR TETAP (POSITION: STICKY) -->
+    <aside class="sidebar-wrapper" aria-label="Navigasi Nomor Soal">
+      <div class="sidebar-header">
+        <h3>Navigasi Nomor Soal</h3>
+        <div class="progress-row">
+          <span id="progressText">0/100 Terjawab</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+      </div>
+
+      <div class="legend-grid">
+        <div class="legend-item">
+          <span class="legend-dot dot-empty"></span>
+          <span>Belum dijawab</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot dot-answered"></span>
+          <span>Sudah dijawab</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot dot-correct"></span>
+          <span>Benar (Hasil)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot dot-wrong"></span>
+          <span>Salah (Hasil)</span>
+        </div>
+      </div>
+
+      <div class="nav-grid-scroll">
+        <div class="nav-grid" id="navGrid"></div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button type="button" class="btn btn-success" id="btnSubmitSidebar" style="width: 100%;">
+          &#10004; Selesai &amp; Lihat Skor
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnResetSidebar" style="width: 100%;">
+          &#8634; Ulangi &amp; Acak Opsi
+        </button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- MODAL KONFIRMASI KUSTOM (PENGGANTI ALERT & CONFIRM) -->
+  <div class="modal-backdrop" id="customModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-title" id="modalTitle">Konfirmasi</div>
+      <div class="modal-body" id="modalBody">Pesan</div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       BANK DATA 100 SOAL BARU (PAKET B) - SEPENUHNYA BERBEDA DARI PAKET A
+       Mencakup 13 Kisi-Kisi Prakarya / Seni Tari SMP Kelas 7 Semester 1
+       ========================================================================== */
+    const RAW_QUESTIONS = [
+      // ========================================================================
+      // 1. TUJUAN DAN PENGERTIAN TARI (Soal 1 - 8)
+      // ========================================================================
+      {
+        id: 1,
+        topic: "1. Tujuan dan Pengertian Tari",
+        question: "Saat menyaksikan pertunjukan tari di sekolah, Rina mengamati bahwa gerakan tangan penari yang menirukan burung terbang tampak jauh lebih lembut, teratur, dan indah dibandingkan gerakan mengepakkan tangan biasa. Proses penghalusan gerak keseharian menjadi gerak tari yang estetis disebut...",
+        options: [
+          "Stilisasi gerak",
+          "Improvisasi spontan",
+          "Komposisi panggung",
+          "Sinkronisasi musik"
+        ],
+        answer: 0,
+        explanation: "Stilisasi adalah proses pengolahan dan penghalusan gerak-gerak sehari-hari atau gerak alam agar tampak lebih indah, ritmis, dan bernilai estetis dalam seni tari."
+      },
+      {
+        id: 2,
+        topic: "1. Tujuan dan Pengertian Tari",
+        question: "Menurut tokoh seni tari Nusantara, Bagong Kussudiardja, seni tari merupakan keindahan bentuk anggota badan manusia yang bergerak, berirama, dan...",
+        options: [
+          "Berjiwa atau harmonis",
+          "Menggunakan kostum mewah",
+          "Diiringi alat musik modern",
+          "Dilakukan secara berpasangan"
+        ],
+        answer: 0,
+        explanation: "Bagong Kussudiardja mendefinisikan seni tari sebagai keindahan bentuk anggota badan manusia yang bergerak, berirama, dan berjiwa (harmonis)."
+      },
+      {
+        id: 3,
+        topic: "1. Tujuan dan Pengertian Tari",
+        question: "Perhatikan aktivitas berikut: (1) Atlet berlari cepat di lintasan, (2) Penari menampilkan gerak melangkah serempak mengikuti irama gendang, (3) Petani mencangkul di sawah, (4) Penari memperagakan gerak mencangkul yang diperhalus dengan ekspresi gembira. Aktivitas yang termasuk gerak tari ditunjukkan oleh nomor...",
+        options: [
+          "(2) dan (4)",
+          "(1) dan (3)",
+          "(1) dan (2)",
+          "(3) dan (4)"
+        ],
+        answer: 0,
+        explanation: "Nomor (2) dan (4) merupakan gerak yang telah diolah secara ritmis dan estetis untuk ekspresi seni, sedangkan (1) dan (3) adalah gerak fungsional olahraga dan bekerja."
+      },
+      {
+        id: 4,
+        topic: "1. Tujuan dan Pengertian Tari",
+        question: "Gerak tari yang tercipta dari hasil menirukan perilaku atau gerakan binatang dan fenomena alam di sekitar manusia, seperti gerak kupu-kupu terbang atau ombak laut, disebut gerak...",
+        options: [
+          "Imitatif",
+          "Mimitif",
+          "Abstrak",
+          "Stagnan"
+        ],
+        answer: 0,
+        explanation: "Gerak imitatif adalah gerak tari yang bersumber dari peniruan terhadap gerak-gerik hewan maupun gejala alam di sekitar."
+      },
+      {
+        id: 5,
+        topic: "1. Tujuan dan Pengertian Tari",
+        question: "Seorang koreografer menciptakan gerakan menirukan aktivitas manusia sehari-hari seperti orang sedang membatik, menenun kain, atau merias wajah. Sumber gerak yang menirukan aktivitas manusia tersebut dikenal dengan istilah...",
+        options: [
+          "Gerak mimitif",
+          "Gerak imitatif",
+          "Gerak mekanik",
+          "Gerak refleks"
+        ],
+        answer: 0,
+        explanation: "Gerak mimitif adalah gerak tari yang dihasilkan dari pengolahan dan peniruan aktivitas atau perilaku manusia sehari-hari."
+      },
+      {
+        id: 6,
+        topic: "1. Tujuan dan Pengertian Tari",
+        question: "Dalam seni tari, kemampuan seorang penari menyampaikan rasa sedih, gembira, atau semangat heroik kepada penonton tanpa mengucapkan sepatah kata pun membuktikan bahwa tari berfungsi sebagai...",
+        options: [
+          "Bahasa komunikasi nonverbal yang ekspresif",
+          "Pengganti tulisan ilmiah di buku pelajaran",
+          "Sarana latihan kekuatan angkat beban",
+          "Permainan tebak kata di atas panggung"
+        ],
+        answer: 0,
+        explanation: "Seni tari merupakan bahasa tubuh (komunikasi nonverbal) yang mampu menyampaikan pesan, cerita, dan perasaan dari penari kepada penonton."
+      },
+      {
+        id: 7,
+        topic: "1. Tujuan dan Pengertian Tari",
+        question: "Ketika penari melakukan gerakan berjalan kecil dengan jari-jari kaki berjinjit (trisig) dalam tari Jawa tanpa maksud menceritakan sesuatu melainkan agar perpindahan tempat terlihat anggun, gerak tersebut tergolong...",
+        options: [
+          "Gerak murni",
+          "Gerak maknawi",
+          "Gerak simbolis ritual",
+          "Gerak pantomim"
+        ],
+        answer: 0,
+        explanation: "Trisig merupakan gerak murni yang berfungsi memperindah perpindahan posisi penari di atas panggung tanpa mengandung makna cerita khusus."
+      },
+      {
+        id: 8,
+        topic: "1. Tujuan dan Pengertian Tari",
+        question: "Tujuan mempelajari seni tari di jenjang SMP dalam Kurikulum Merdeka tidak hanya melatih kelenturan tubuh siswa, tetapi juga bertujuan menumbuhkan...",
+        options: [
+          "Kepekaan estetis, kreativitas gerak, serta apresiasi terhadap keragaman budaya bangsa",
+          "Kemampuan bersaing secara tidak sehat antarkelas",
+          "Sikap menolak seluruh bentuk seni dari daerah lain",
+          "Keinginan menjadi atlet lari jarak jauh"
+        ],
+        answer: 0,
+        explanation: "Pembelajaran seni tari di SMP bertujuan mengembangkan kecerdasan kinestetik, kreativitas berkarya, kepekaan estetis, dan penghargaan terhadap budaya Nusantara."
+      },
+
+      // ========================================================================
+      // 2. MENJELASKAN LATAR BELAKANG NILAI TARI DALAM KONTEKS BUDAYA (Soal 9 - 16)
+      // ========================================================================
+      {
+        id: 9,
+        topic: "2. Latar Belakang Nilai Tari dalam Konteks Budaya",
+        question: "Masyarakat Suku Dayak di Kalimantan hidup berdampingan dengan hutan lebat dan sungai besar. Hal ini melatarbelakangi lahirnya Tari Kancet Ledo (Tari Gong) yang mengandung nilai budaya berupa...",
+        options: [
+          "Kelembutan budi pekerti, kelincahan, dan penghargaan terhadap kelestarian alam hutan",
+          "Kehidupan pelaut yang bertarung melawan badai samudra",
+          "Tata aturan makan di dalam istana kerajaan Eropa",
+          "Kehidupan masyarakat industri perkotaan modern"
+        ],
+        answer: 0,
+        explanation: "Tari Kancet Ledo terinspirasi dari alam Kalimantan dan burung enggang yang melambangkan kelembutan, keluhuran budi, serta harmoni manusia dengan alam."
+      },
+      {
+        id: 10,
+        topic: "2. Latar Belakang Nilai Tari dalam Konteks Budaya",
+        question: "Dalam Tari Piring dari Minangkabau, penari mengayunkan piring dengan gerakan cepat tanpa menjatuhkannya, bahkan di bagian akhir terkadang menari di atas pecahan piring. Nilai budaya masyarakat Minang yang tercermin dari gerak tersebut adalah...",
+        options: [
+          "Ketangkasan, kehati-hatian, kerja keras, dan keteguhan hati dalam menghadapi rintangan hidup",
+          "Sikap ceroboh dan suka membuang-buang peralatan makan",
+          "Kemalasan bekerja di ladang pertanian",
+          "Ketakutan menghadapi perubahan zaman"
+        ],
+        answer: 0,
+        explanation: "Gerak Tari Piring mencerminkan etos kerja masyarakat Minangkabau yang tangkas, teliti, terampil, dan pantang menyerah menghadapi tantangan."
+      },
+      {
+        id: 11,
+        topic: "2. Latar Belakang Nilai Tari dalam Konteks Budaya",
+        question: "Tari Pakarena dari Sulawesi Selatan menampilkan gerakan penari perempuan yang sangat lembut, perlahan, dan tenang, meskipun diiringi tabuhan gendang (ganrang) yang bertempo cepat dan keras. Filosofi nilai budaya Bugis-Makassar di balik kontras tersebut adalah...",
+        options: [
+          "Keteguhan prinsip, kesabaran, dan kesantunan perempuan dalam menjaga kehormatan diri di tengah gejolak kehidupan",
+          "Ketidakmampuan penari mengikuti ketukan pemusik",
+          "Perselisihan antara kelompok penari dan kelompok pemusik",
+          "Tanda bahwa pertunjukan segera dihentikan"
+        ],
+        answer: 0,
+        explanation: "Kontras antara gerak lembut penari dan tabuhan gendang cepat dalam Tari Pakarena melambangkan kelembutan lahiriah yang disertai keteguhan prinsip batin."
+      },
+      {
+        id: 12,
+        topic: "2. Latar Belakang Nilai Tari dalam Konteks Budaya",
+        question: "Mengapa tarian-tarian tradisional di wilayah Papua seperti Tari Yospan dan Tari Musyoh banyak menggunakan gerakan melompat-lompat, hentakan kaki bertenaga, dan sorak-sorai gembira?",
+        options: [
+          "Mencerminkan keterbukaan karakter, semangat persaudaraan yang hangat, serta kondisi geografis alam yang luas",
+          "Karena masyarakat Papua tidak menyukai alat musik tifa",
+          "Sebagai bentuk penolakan terhadap tamu yang datang berkunjung",
+          "Karena pengaruh tata krama kerajaan di pulau Jawa"
+        ],
+        answer: 0,
+        explanation: "Karakter masyarakat Papua yang terbuka, penuh semangat kebersamaan, dan menyatu dengan bentang alam yang luas tercermin dalam gerak tari yang dinamis dan bertenaga."
+      },
+      {
+        id: 13,
+        topic: "2. Latar Belakang Nilai Tari dalam Konteks Budaya",
+        question: "Dalam Tari Bedhaya di lingkungan keraton Jawa, setiap gerakan penari dilakukan dengan tempo lambat, posisi tubuh rendah (mendhak), dan pandangan mata tertunduk santun. Nilai budaya yang melatarbelakangi ciri gerak tersebut adalah...",
+        options: [
+          "Pengendalian hawa nafsu, kerendahan hati, dan keselarasan jiwa manusia dengan Tuhan",
+          "Keinginan pamer kekuatan fisik di depan rakyat",
+          "Ketergesaan dalam menyelesaikan tugas kerajaan",
+          "Kebebasan berekspresi tanpa aturan adat"
+        ],
+        answer: 0,
+        explanation: "Tari klasik keraton Jawa mengajarkan filosofi pengendalian diri, ketenangan batin, sopan santun, dan keharmonisan spiritual."
+      },
+      {
+        id: 14,
+        topic: "2. Latar Belakang Nilai Tari dalam Konteks Budaya",
+        question: "Tari Cakalele dari Maluku menampilkan penari laki-laki yang membawa parang dan salawaku (perisai) dengan gerakan tegas dan gagah. Nilai budaya yang diwariskan melalui tarian ini adalah...",
+        options: [
+          "Keberanian, jiwa kesatria, dan kesiapsiagaan membela tanah air serta kehormatan masyarakat",
+          "Permusuhan antartetangga di dalam satu kampung",
+          "Ketakutan menghadapi ancaman dari luar",
+          "Kesedihan mendalam saat ditinggal pergi"
+        ],
+        answer: 0,
+        explanation: "Tari Cakalele merupakan tarian perang tradisional Maluku yang mewariskan nilai kepahlawanan, keberanian, dan semangat menjaga keutuhan negeri."
+      },
+      {
+        id: 15,
+        topic: "2. Latar Belakang Nilai Tari dalam Konteks Budaya",
+        question: "Di daerah Betawi, Tari Lenggang Nyai mengangkat kisah perjuangan seorang perempuan Betawi bernama Nyai Dasimah dalam menentukan pilihan hidupnya. Hal ini membuktikan bahwa tari dapat berlatar belakang pada...",
+        options: [
+          "Kisah sejarah sosial dan nilai emansipasi yang hidup dalam ingatan budaya masyarakat",
+          "Aturan perdagangan rempah VOC di pelabuhan",
+          "Ritual pemanggilan arwah di gua prasejarah",
+          "Upacara penobatan raja-raja Majapahit"
+        ],
+        answer: 0,
+        explanation: "Tari Lenggang Nyai merupakan tari kreasi Betawi yang terinspirasi dari cerita rakyat/sejarah sosial Betawi tentang keberanian dan kebebasan perempuan."
+      },
+      {
+        id: 16,
+        topic: "2. Latar Belakang Nilai Tari dalam Konteks Budaya",
+        question: "Keterkaitan antara mata pencaharian masyarakat dengan bentuk karya tari daerah dapat diamati pada contoh berikut, yaitu...",
+        options: [
+          "Tari Nelayan dan Tari Batik yang geraknya terinspirasi dari aktivitas kerja masyarakat setempat",
+          "Tari Balet klasik yang berasal dari istana Prancis",
+          "Tari Breakdance yang lahir di jalanan kota New York",
+          "Tari Flamenco yang berkembang di Spanyol"
+        ],
+        answer: 0,
+        explanation: "Tari Nelayan dan Tari Batik lahir dari pengamatan langsung terhadap aktivitas mata pencaharian masyarakat pesisir dan perajin batik di Indonesia."
+      },
+
+      // ========================================================================
+      // 3. MENJELASKAN JENIS DAN FUNGSI TARI DALAM KONTEKS BUDAYA (Soal 17 - 24)
+      // ========================================================================
+      {
+        id: 17,
+        topic: "3. Jenis dan Fungsi Tari dalam Konteks Budaya",
+        question: "Dalam upacara adat Mappadendang di Sulawesi Selatan atau ritual Gawai Dayak di Kalimantan, tarian yang ditampilkan tidak boleh diubah geraknya secara sembarangan dan harus diawali dengan doa adat. Berdasarkan fungsinya, tarian tersebut termasuk jenis...",
+        options: [
+          "Tari upacara (ritual)",
+          "Tari hiburan pergaulan",
+          "Tari pertunjukan komersial",
+          "Tari senam kreasi"
+        ],
+        answer: 0,
+        explanation: "Tari upacara memiliki sifat sakral dan terikat aturan adat tertentu karena menjadi bagian inti dari sebuah ritual keagamaan atau tradisi leluhur."
+      },
+      {
+        id: 18,
+        topic: "3. Jenis dan Fungsi Tari dalam Konteks Budaya",
+        question: "Pada acara pesta rakyat atau perayaan pernikahan di daerah Sumatera Utara, seluruh tamu dan kerabat diajak ikut menari Tor-Tor bersama dalam suasana penuh keakraban. Fungsi utama tari Tor-Tor dalam konteks tersebut adalah sebagai...",
+        options: [
+          "Sarana pergaulan sosial dan mempererat ikatan kekerabatan masyarakat",
+          "Ritual mengusir wabah penyakit di hutan",
+          "Tontonan berbayar di gedung opera tertutup",
+          "Ujian kenaikan tingkat bela diri"
+        ],
+        answer: 0,
+        explanation: "Dalam acara adat suka cita seperti pernikahan, tari berfungsi sebagai media komunikasi sosial, kegembiraan bersama, dan pengikat tali persaudaraan."
+      },
+      {
+        id: 19,
+        topic: "3. Jenis dan Fungsi Tari dalam Konteks Budaya",
+        question: "Sendratari Ramayana yang dipentaskan secara rutin di panggung terbuka Candi Prambanan dengan tata cahaya megah, tiket masuk, dan alur cerita dramatis yang terencana merupakan contoh tari yang berfungsi sebagai...",
+        options: [
+          "Seni pertunjukan (tontonan estetis)",
+          "Upacara pemujaan roh nenek moyang",
+          "Tari spontan tanpa latihan",
+          "Ritual memanggil hujan"
+        ],
+        answer: 0,
+        explanation: "Sendratari Ramayana Prambanan digarap secara profesional dari segi koreografi, panggung, musik, dan tata lampu untuk disajikan sebagai seni pertunjukan bagi penonton."
+      },
+      {
+        id: 20,
+        topic: "3. Jenis dan Fungsi Tari dalam Konteks Budaya",
+        question: "Perhatikan ciri-ciri tari berikut: (1) Berkembang di lingkungan masyarakat pedesaan, (2) Gerakannya sederhana dan penuh kegembiraan, (3) Bersifat merakyat dan mudah diikuti bersama. Ciri-ciri tersebut dimiliki oleh jenis...",
+        options: [
+          "Tari rakyat (folklasik)",
+          "Tari klasik keraton",
+          "Tari kontemporer eksperimental",
+          "Tari sakral istana"
+        ],
+        answer: 0,
+        explanation: "Tari rakyat tumbuh dan berkembang di kalangan rakyat jelata dengan pola gerak yang sederhana, ceria, spontan, dan mengutamakan kebersamaan."
+      },
+      {
+        id: 21,
+        topic: "3. Jenis dan Fungsi Tari dalam Konteks Budaya",
+        question: "Tari Tayub di Jawa Tengah, Tari Ronggeng di Sumatera, dan Tari Joged Bumbung di Bali memiliki kesamaan fungsi dalam konteks budaya masyarakat, yaitu sebagai...",
+        options: [
+          "Tari pergaulan dan hiburan rakyat dalam acara perayaan",
+          "Tari pemakaman jenazah bangsawan",
+          "Tari latihan perang prajurit berkuda",
+          "Tari ritual penyembuhan orang sakit"
+        ],
+        answer: 0,
+        explanation: "Tari Tayub, Ronggeng, dan Joged Bumbung dikenal sebagai tari pergaulan rakyat di mana penari mengajak penonton menari bersama dalam suasana gembira."
+      },
+      {
+        id: 22,
+        topic: "3. Jenis dan Fungsi Tari dalam Konteks Budaya",
+        question: "Sebuah sanggar tari di Bandung menciptakan karya tari baru yang memadukan gerak dasar Tari Jaipong dengan iringan musik angklung dan perkusi modern untuk ditampilkan pada festival seni remaja. Karya tersebut dikategorikan sebagai...",
+        options: [
+          "Tari kreasi baru berpola tradisi",
+          "Tari upacara animisme kuno",
+          "Tari klasik baku keraton",
+          "Tari ritual pemujaan dewa"
+        ],
+        answer: 0,
+        explanation: "Tari kreasi baru berpola tradisi bertolak dari unsur-unsur tari tradisional yang sudah ada lalu dikembangkan dan dikreasikan agar sesuai selera zaman."
+      },
+      {
+        id: 23,
+        topic: "3. Jenis dan Fungsi Tari dalam Konteks Budaya",
+        question: "Perbedaan utama antara tari upacara dengan tari pertunjukan terletak pada...",
+        options: [
+          "Tujuan utamanya: tari upacara mengutamakan tercapainya tujuan ritual/sakral, sedangkan tari pertunjukan mengutamakan kepuasan estetis penonton",
+          "Tari upacara tidak memiliki gerakan, sedangkan tari pertunjukan penuh gerakan",
+          "Tari upacara hanya boleh dilakukan siang hari, sedangkan tari pertunjukan hanya pagi hari",
+          "Tari upacara menggunakan musik modern, sedangkan tari pertunjukan tanpa musik"
+        ],
+        answer: 0,
+        explanation: "Tari upacara berorientasi pada nilai kesakralan dan kelengkapan ritual adat, sedangkan tari pertunjukan berorientasi pada keindahan artistik bagi penikmat seni."
+      },
+      {
+        id: 24,
+        topic: "3. Jenis dan Fungsi Tari dalam Konteks Budaya",
+        question: "Di lingkungan sekolah SMP, kegiatan ekstrakurikuler seni tari daerah memberikan manfaat edukatif yang penting bagi perkembangan karakter siswa, antara lain...",
+        options: [
+          "Melatih kepekaan rasa, konsentrasi, kedisiplinan, dan kemampuan bekerja sama dalam kelompok",
+          "Mengurangi interaksi sosial antarpeserta didik",
+          "Membuat siswa melupakan pelajaran akademik lainnya",
+          "Mendorong sikap meremehkan kesenian daerah lain"
+        ],
+        answer: 0,
+        explanation: "Pembelajaran tari melatih motorik, konsentrasi, disiplin waktu/gerak, kerja sama tim, dan empati budaya siswa."
+      },
+
+      // ========================================================================
+      // 4. MENYADARI PERAN TARI SEBAGAI IDENTITAS BANGSA (Soal 25 - 31)
+      // ========================================================================
+      {
+        id: 25,
+        topic: "4. Peran Tari sebagai Identitas Bangsa",
+        question: "Dalam upacara pembukaan ajang olahraga internasional seperti Asian Games di Jakarta, ditampilkan tarian kolosal yang memadukan berbagai ragam gerak tari dari Aceh hingga Papua. Peran seni tari dalam peristiwa tersebut adalah...",
+        options: [
+          "Menunjukkan jati diri, persatuan, dan kebanggaan budaya bangsa Indonesia di mata dunia",
+          "Menggantikan pertandingan cabang olahraga atletik",
+          "Menunjukkan bahwa Indonesia hanya memiliki satu suku bangsa",
+          "Menutup diri dari pergaulan internasional"
+        ],
+        answer: 0,
+        explanation: "Pementasan ragam tari Nusantara pada ajang internasional menjadi simbol persatuan dalam keberagaman sekaligus identitas budaya Indonesia yang membanggakan."
+      },
+      {
+        id: 26,
+        topic: "4. Peran Tari sebagai Identitas Bangsa",
+        question: "Bayangkan jika generasi muda Indonesia lebih hafal tarian viral dari luar negeri tetapi sama sekali tidak mengenal tarian daerahnya sendiri. Dampak jangka panjang yang paling mengkhawatirkan bagi identitas bangsa adalah...",
+        options: [
+          "Terputusnya pewarisan budaya lokal dan memudarnya jati diri bangsa di tengah arus globalisasi",
+          "Bertambahnya jumlah maestro tari tradisional di setiap desa",
+          "Semakin kuatnya perlindungan hak cipta budaya Nusantara",
+          "Meningkatnya jumlah wisatawan yang belajar tari daerah"
+        ],
+        answer: 0,
+        explanation: "Jika generasi penerus tidak mengenal budayanya sendiri, warisan tari tradisional berisiko punah dan bangsa kehilangan ciri khas identitasnya."
+      },
+      {
+        id: 27,
+        topic: "4. Peran Tari sebagai Identitas Bangsa",
+        question: "Ketika seorang pelajar Indonesia mengikuti program pertukaran pelajar di luar negeri dan menampilkan Tari Zapin atau Tari Jaipong pada malam budaya, tindakan pelajar tersebut mencerminkan sikap...",
+        options: [
+          "Cinta tanah air dan berperan aktif memperkenalkan identitas budaya Indonesia",
+          "Malu mengakui asal daerahnya sendiri",
+          "Meniru budaya negara tuan rumah sepenuhnya",
+          "Mengabaikan keragaman budaya Nusantara"
+        ],
+        answer: 0,
+        explanation: "Menampilkan seni tari daerah di forum internasional merupakan wujud nyata rasa bangga dan cinta tanah air sebagai duta muda budaya bangsa."
+      },
+      {
+        id: 28,
+        topic: "4. Peran Tari sebagai Identitas Bangsa",
+        question: "Tari Reog Ponorogo, Tari Ondel-Ondel Betawi, dan Tari Barong Bali memiliki keunikan visual berupa topeng atau barongan khas daerah masing-masing. Keunikan ini memperkuat peran tari sebagai identitas bangsa karena...",
+        options: [
+          "Setiap simbol visual dan geraknya merepresentasikan karakter serta kearifan lokal khas Indonesia",
+          "Bentuknya sama persis dengan kesenian dari benua Eropa",
+          "Tidak memiliki makna cerita maupun nilai filosofis",
+          "Hanya dibuat untuk dijual sebagai mainan anak-anak"
+        ],
+        answer: 0,
+        explanation: "Keunikan bentuk topeng, busana, dan koreografi daerah menjadi ciri pengenal autentik yang membedakan budaya Indonesia dengan bangsa lain."
+      },
+      {
+        id: 29,
+        topic: "4. Peran Tari sebagai Identitas Bangsa",
+        question: "Cara kreatif yang dapat dilakukan siswa SMP untuk melestarikan dan mempromosikan tari daerah sebagai identitas bangsa di era digital saat ini adalah...",
+        options: [
+          "Membuat konten video edukasi atau penampilan tari tradisional yang menarik dan membagikannya secara positif di media sosial",
+          "Mengejek teman yang berlatih tari daerah di sanggar",
+          "Mengubah nama tarian daerah menjadi nama bahasa asing agar keren",
+          "Menyimpan video tarian daerah tanpa pernah ditonton"
+        ],
+        answer: 0,
+        explanation: "Pemanfaatan media digital secara kreatif oleh pelajar dapat memperluas apresiasi masyarakat terhadap keindahan tari tradisional Indonesia."
+      },
+      {
+        id: 30,
+        topic: "4. Peran Tari sebagai Identitas Bangsa",
+        question: "Salah satu wujud nyata pengakuan dunia internasional terhadap seni tari Indonesia sebagai bagian penting peradaban manusia adalah ditetapkannya Tari Saman dari Aceh oleh UNESCO pada tahun 2011 dalam daftar...",
+        options: [
+          "Warisan Budaya Takbenda yang Memerlukan Perlindungan Mendesak",
+          "Situs Warisan Geologi Dunia",
+          "Cagar Biosfer Hutan Hujan Tropis",
+          "Tujuh Keajaiban Bangunan Kuno Dunia"
+        ],
+        answer: 0,
+        explanation: "UNESCO menetapkan Tari Saman dalam Daftar Warisan Budaya Takbenda (Intangible Cultural Heritage) pada 24 November 2011, yang semakin mengukuhkan identitas budaya Indonesia."
+      },
+      {
+        id: 31,
+        topic: "4. Peran Tari sebagai Identitas Bangsa",
+        question: "Menghargai dan mempelajari tarian yang berasal dari provinsi lain di Indonesia (misalnya siswa di Jawa belajar Tari Piring dari Sumatera Barat) akan menumbuhkan sikap...",
+        options: [
+          "Toleransi budaya dan rasa persatuan sebagai satu bangsa Indonesia",
+          "Etnosentrisme yang menganggap budayanya paling unggul",
+          "Perpecahan antarwilayah di Nusantara",
+          "Sikap acuh tak acuh terhadap sesama warga negara"
+        ],
+        answer: 0,
+        explanation: "Mempelajari seni tari lintas daerah menumbuhkan saling pengertian, penghargaan terhadap keberagaman, dan memperkokoh persatuan nasional."
+      },
+
+      // ========================================================================
+      // 5. TARI PADA ERA PRASEJARAH DAN ANIMISME (Soal 32 - 39)
+      // ========================================================================
+      {
+        id: 32,
+        topic: "5. Tari pada Era Prasejarah dan Animisme",
+        question: "Pada zaman prasejarah, masyarakat belum mengenal konsep hiburan komersial. Ketika terjadi musim kemarau panjang yang mengancam kehidupan suku, mereka mengadakan tarian ritual dengan tujuan...",
+        options: [
+          "Memohon turunnya hujan kepada kekuatan alam dan roh leluhur melalui gerak simbolis",
+          "Mengadakan festival wisata budaya bagi pendatang",
+          "Menguji ketahanan fisik penari untuk lomba lari",
+          "Mengiringi pembacaan undang-undang kerajaan"
+        ],
+        answer: 0,
+        explanation: "Pada era prasejarah, tarian difungsikan sebagai sarana magis-religius untuk memohon hujan, kesuburan tanah, kesembuhan, dan perlindungan."
+      },
+      {
+        id: 33,
+        topic: "5. Tari pada Era Prasejarah dan Animisme",
+        question: "Selain kepercayaan animisme (percaya pada roh), masyarakat prasejarah juga menganut dinamisme, yaitu keyakinan bahwa benda-benda tertentu memiliki kekuatan gaib. Dalam praktik tari prasejarah, hal ini tampak pada...",
+        options: [
+          "Penggunaan benda-benda yang dianggap bertuah (seperti batu menhir, tengkorak hewan buruan, atau senjata) sebagai pusat lingkaran tarian",
+          "Penggunaan lampu sorot LED berdaya tinggi di atas panggung",
+          "Pembacaan naskah drama modern sebelum menari",
+          "Penggunaan pakaian seragam sekolah"
+        ],
+        answer: 0,
+        explanation: "Kepercayaan dinamisme mendorong masyarakat prasejarah menari mengelilingi benda pusaka, batu besar (menhir), atau api unggun yang diyakini memiliki daya magis."
+      },
+      {
+        id: 34,
+        topic: "5. Tari pada Era Prasejarah dan Animisme",
+        question: "Jejak tradisi tari era prasejarah dan animisme yang masih dapat kita saksikan pelestariannya hingga kini di Indonesia terdapat pada pertunjukan...",
+        options: [
+          "Tari Sanghyang di Bali dan Tari Seblang di Banyuwangi",
+          "Tari Merak di Jawa Barat",
+          "Tari Serampang Dua Belas di Sumatera Utara",
+          "Tari Yapong di Jakarta"
+        ],
+        answer: 0,
+        explanation: "Tari Sanghyang (Bali) dan Tari Seblang (Banyuwangi) masih mempertahankan unsur ritual purba seperti pemujaan roh pelindung desa dan kondisi trans (kesurupan)."
+      },
+      {
+        id: 35,
+        topic: "5. Tari pada Era Prasejarah dan Animisme",
+        question: "Mengapa iringan musik pada tari era prasejarah didominasi oleh bunyi-bunyian ritmis yang monoton dan berulang-ulang (seperti tabuhan nekara, kentongan kayu, dan hentakan kaki)?",
+        options: [
+          "Untuk membangun suasana magis yang khidmat serta membantu penari memasuki kondisi trans (ekstase)",
+          "Karena masyarakat prasejarah lebih menyukai musik pop modern",
+          "Untuk mengatur jadwal keberangkatan kapal dagang",
+          "Karena alat musik tiup terbuat dari logam emas murni"
+        ],
+        answer: 0,
+        explanation: "Ritme perkusi yang repetitif dan konstan menciptakan efek sugesti psikologis dan suasana sakral yang mendukung komunikasi spiritual dengan roh leluhur."
+      },
+      {
+        id: 36,
+        topic: "5. Tari pada Era Prasejarah dan Animisme",
+        question: "Pada nekara perunggu peninggalan zaman prasejarah (seperti Nekara Pejeng dan Nekara Sangeang), ditemukan hiasan relief manusia yang menari mengenakan hiasan bulu burung di kepala. Temuan ini membuktikan bahwa...",
+        options: [
+          "Seni tari telah menjadi bagian penting dalam upacara masyarakat Nusantara sejak zaman logam prasejarah",
+          "Masyarakat prasejarah sudah mengenal teknologi percetakan buku",
+          "Nekara digunakan sebagai alat transportasi air",
+          "Seni tari baru dikenal setelah bangsa Eropa datang"
+        ],
+        answer: 0,
+        explanation: "Relief pada nekara perunggu merupakan bukti sejarah autentik bahwa aktivitas tari ritual sudah berkembang sejak era prasejarah di kepulauan Indonesia."
+      },
+      {
+        id: 37,
+        topic: "5. Tari pada Era Prasejarah dan Animisme",
+        question: "Karakteristik gerak tari pada era prasejarah cenderung sederhana, kasar, tegas, dan berulang-ulang karena...",
+        options: [
+          "Gerakan lahir secara spontan dari dorongan emosi kolektif dan kebutuhan ritual, belum melalui penghalusan aturan istana",
+          "Penari dilarang menggerakkan tangan dan kepala",
+          "Tarian hanya berlangsung selama lima detik",
+          "Penari harus membaca catatan koreografi yang rumit"
+        ],
+        answer: 0,
+        explanation: "Tari prasejarah bersifat komunal dan spontan sebagai luapan emosi ritual bersama, berbeda dengan tari klasik keraton yang telah distilisasi secara halus."
+      },
+      {
+        id: 38,
+        topic: "5. Tari pada Era Prasejarah dan Animisme",
+        question: "Dalam kehidupan suku-suku purba pada masa prasejarah, tarian penyembuhan orang sakit dipimpin oleh seorang tetua adat atau dukun (shaman) yang menari sambil...",
+        options: [
+          "Membacakan mantra dan menggerakkan dedaunan atau asap kemenyan untuk mengusir roh jahat",
+          "Membagikan resep obat kimia dari apotek modern",
+          "Memainkan alat musik piano dan biola",
+          "Menulis laporan kesehatan di atas kertas"
+        ],
+        answer: 0,
+        explanation: "Pada masa animisme, penyakit sering diyakini akibat gangguan roh sehingga penyembuhannya dilakukan melalui tarian ritual dan mantra oleh tetua adat."
+      },
+      {
+        id: 39,
+        topic: "5. Tari pada Era Prasejarah dan Animisme",
+        question: "Makna simbolis dari formasi melingkar yang selalu hadir dalam tarian ritual era animisme adalah...",
+        options: [
+          "Melambangkan lingkaran perlindungan magis, kesetaraan anggota suku, dan ikatan solidaritas yang tak terputus",
+          "Memudahkan penonton memotret dari satu sudut saja",
+          "Membagi kelompok menjadi pemenang dan yang kalah",
+          "Meniru bentuk panggung teater Yunani"
+        ],
+        answer: 0,
+        explanation: "Formasi melingkar melambangkan kebersamaan tanpa sekat, perlindungan spiritual dari segala penjuru, dan pemusatan energi ritual."
+      },
+
+      // ========================================================================
+      // 6. TARI SEBAGAI UNGKAPAN RASA SYUKUR (Soal 40 - 46)
+      // ========================================================================
+      {
+        id: 40,
+        topic: "6. Tari sebagai Ungkapan Rasa Syukur",
+        question: "Masyarakat suku bangsa di Indonesia memiliki tradisi menggelar tarian saat menyambut musim panen raya. Pada Tari Hudoq dari Kalimantan Timur, penari mengenakan topeng dan kostum daun pisang yang melambangkan...",
+        options: [
+          "Harapan perlindungan tanaman dari hama sekaligus ungkapan syukur atas kesuburan dan hasil panen",
+          "Kisah pelayaran pedagang rempah dari Timur Tengah",
+          "Upacara penobatan panglima angkatan laut",
+          "Pertandingan olahraga antardesa"
+        ],
+        answer: 0,
+        explanation: "Tari Hudoq merupakan tradisi masyarakat Dayak Bahau dan Modang sebagai wujud doa kesuburan dan syukur atas keberhasilan musim tanam dan panen."
+      },
+      {
+        id: 41,
+        topic: "6. Tari sebagai Ungkapan Rasa Syukur",
+        question: "Dalam tradisi masyarakat agraris di Jawa Barat (seperti masyarakat adat Ciptagelar), upacara Seren Taun dimeriahkan dengan berbagai tarian rakyat sambil mengarak ikatan padi (rengkong). Makna utama kegiatan ini adalah...",
+        options: [
+          "Wujud syukur kepada Tuhan Yang Maha Esa atas limpahan rezeki panen padi selama setahun",
+          "Bentuk protes petani karena harga pupuk mahal",
+          "Upacara pelepasan prajurit menuju medan perang",
+          "Pesta perpisahan warga yang pindah ke kota"
+        ],
+        answer: 0,
+        explanation: "Seren Taun adalah upacara adat tahunan masyarakat agraris Sunda untuk mensyukuri hasil panen dan memohon berkah pertanian di tahun mendatang."
+      },
+      {
+        id: 42,
+        topic: "6. Tari sebagai Ungkapan Rasa Syukur",
+        question: "Tari Ngaseuk atau Tari Tandur di beberapa daerah pedesaan menggambarkan gerakan menanam padi secara bersama-sama dengan wajah ceria. Pesan moral yang terkandung dalam tarian ini adalah...",
+        options: [
+          "Mensyukuri karunia tanah yang subur dan menjaga semangat gotong royong dalam bekerja",
+          "Menghindari pekerjaan bertani karena melelahkan",
+          "Bekerja sendiri-sendiri tanpa peduli tetangga",
+          "Menebang seluruh hutan untuk dijadikan permukiman"
+        ],
+        answer: 0,
+        explanation: "Tari bertema pertanian mengajarkan rasa syukur atas berkah alam dan pentingnya kebersamaan (gotong royong) masyarakat desa."
+      },
+      {
+        id: 43,
+        topic: "6. Tari sebagai Ungkapan Rasa Syukur",
+        question: "Di daerah Maluku dan Papua, tradisi Pesta Papeda atau upacara adat syukur hasil panen sagu sering diiringi tarian bersama yang diiringi alat musik tifa. Ciri khas interaksi penari dalam tarian syukur ini adalah...",
+        options: [
+          "Bergandengan tangan dalam barisan atau lingkaran sebagai simbol persaudaraan dan berbagi kebahagiaan",
+          "Saling membelakangi dan tidak mau bertegur sapa",
+          "Menari secara terpisah di ruangan yang terkunci",
+          "Menunjukkan wajah sedih dan menunduk lesu"
+        ],
+        answer: 0,
+        explanation: "Tarian syukur masyarakat Indonesia Timur seperti Tari Seka atau Tari Tifa menonjolkan kebersamaan melalui gandengan tangan dan irama gembira."
+      },
+      {
+        id: 44,
+        topic: "6. Tari sebagai Ungkapan Rasa Syukur",
+        question: "Mengapa ekspresi wajah penari (wirasa) sangat menentukan keberhasilan penyampaian makna pada tarian bertema ungkapan rasa syukur?",
+        options: [
+          "Karena senyuman tulus dan tatapan mata yang berbinar memancarkan kebahagiaan dan ketulusan rasa terima kasih kepada penonton",
+          "Karena penonton hanya melihat wajah penari tanpa melihat gerakannya",
+          "Karena ekspresi wajah menggantikan seluruh iringan musik",
+          "Karena penari tidak boleh menggerakkan kaki sama sekali"
+        ],
+        answer: 0,
+        explanation: "Ekspresi wajah yang cerah dan tulus menghidupkan suasana syukur sehingga penonton ikut merasakan kehangatan dan kebahagiaan tersebut."
+      },
+      {
+        id: 45,
+        topic: "6. Tari sebagai Ungkapan Rasa Syukur",
+        question: "Selain rasa syukur atas panen hasil bumi dan laut, tarian ungkapan rasa syukur dalam siklus kehidupan manusia di Nusantara juga sering diadakan pada peristiwa...",
+        options: [
+          "Kelahiran anak, khitanan, pernikahan, dan selamatan membangun rumah baru",
+          "Saat terjadi pertengkaran antarwarga kampung",
+          "Ketika mengalami kerugian dalam berdagang",
+          "Saat bencana banjir melanda permukiman"
+        ],
+        answer: 0,
+        explanation: "Dalam budaya Nusantara, momen-momen bahagia dalam siklus hidup manusia disyukuri bersama keluarga dan tetangga melalui kenduri dan tarian adat."
+      },
+      {
+        id: 46,
+        topic: "6. Tari sebagai Ungkapan Rasa Syukur",
+        question: "Apabila kamu diminta merancang sebuah tari kreasi bertema 'Syukur atas Panen Raya' untuk tugas kelompok SMP, properti dan iringan musik yang paling sesuai dipilih adalah...",
+        options: [
+          "Properti bakul atau tampah dengan iringan musik tradisional bertempo ceria dan dinamis",
+          "Properti pedang dan tombak dengan musik ratapan sedih",
+          "Properti koper dan jas hujan dengan iringan sirene",
+          "Properti payung hitam dengan musik pengiring pemakaman"
+        ],
+        answer: 0,
+        explanation: "Bakul atau tampah merepresentasikan hasil panen, sedangkan tempo musik yang ceria selaras dengan suasana hati yang bersyukur."
+      },
+
+      // ========================================================================
+      // 7. PENGARUH HINDU-BUDDHA DALAM TARI (Soal 47 - 54)
+      // ========================================================================
+      {
+        id: 47,
+        topic: "7. Pengaruh Hindu-Buddha dalam Tari",
+        question: "Pada masa kejayaan kerajaan-kerajaan Hindu-Buddha di Nusantara, seni tari mengalami peningkatan status sosial dan estetika yang ditandai dengan...",
+        options: [
+          "Lahirnya kaidah gerak yang terstruktur rapi (pakem), tata busana keemasan yang megah, serta keterkaitan dengan upacara keagamaan di candi dan istana",
+          "Hilangnya seluruh bentuk musik pengiring tradisional",
+          "Larangan menampilkan kisah kepahlawanan dalam tarian",
+          "Penggunaan bahasa Belanda dalam setiap nyanyian pengiring"
+        ],
+        answer: 0,
+        explanation: "Peradaban Hindu-Buddha membawa sistem estetika seni pertunjukan yang teratur (seperti kitab Natyasastra) yang berpadu dengan kearifan lokal Nusantara."
+      },
+      {
+        id: 48,
+        topic: "7. Pengaruh Hindu-Buddha dalam Tari",
+        question: "Dalam pertunjukan Wayang Wong (Wayang Orang) dan Sendratari yang berkembang dari tradisi Hindu-Buddha, terdapat pembagian karakter tokoh yang jelas. Tokoh raksasa seperti Rahwana atau Cakil memiliki ciri gerak...",
+        options: [
+          "Gagah kasar (brangasan), langkah lebar, kepala mendongak, dan gerak tangan terbuka lebar",
+          "Sangat halus, pelan, dan pandangan mata selalu menunduk",
+          "Duduk diam bersila tanpa berpindah tempat",
+          "Melompat kecil seperti kelinci yang ketakutan"
+        ],
+        answer: 0,
+        explanation: "Tokoh raksasa atau antagonis berwatak keras digambarkan melalui gerak gagah kasar, volume ruang gerak luas, dan ekspresi garang."
+      },
+      {
+        id: 49,
+        topic: "7. Pengaruh Hindu-Buddha dalam Tari",
+        question: "Tari Rejang dan Tari Pendet di Bali merupakan warisan tradisi Hindu-Bali yang hingga kini masih dipentaskan di halaman pura pada saat upacara keagamaan (Odalan) dengan fungsi sebagai...",
+        options: [
+          "Tarian persembahan dan penyambutan turunnya para dewa ke dunia",
+          "Tarian hiburan komedi untuk wisatawan di hotel",
+          "Tarian latihan perang prajurit berkuda",
+          "Tarian pergaulan muda-mudi di pasar malam"
+        ],
+        answer: 0,
+        explanation: "Tari Rejang dan Tari Pendet sakral merupakan bagian dari kelompok Tari Wali (tari upacara keagamaan Hindu di Bali) sebagai wujud bhakti dan persembahan."
+      },
+      {
+        id: 50,
+        topic: "7. Pengaruh Hindu-Buddha dalam Tari",
+        question: "Di Pulau Bali, seni tari diklasifikasikan menjadi tiga kelompok berdasarkan tingkat kesakralan dan fungsinya dalam budaya Hindu-Bali, yaitu...",
+        options: [
+          "Tari Wali (sakral), Tari Bebali (pengiring upacara), dan Tari Balih-balihan (hiburan/tontonan)",
+          "Tari Tunggal, Tari Berpasangan, dan Tari Massal",
+          "Tari Prasejarah, Tari Kolonial, dan Tari Modern",
+          "Tari Pesisir, Tari Pegunungan, dan Tari Pedalaman"
+        ],
+        answer: 0,
+        explanation: "Klasifikasi Tari Wali, Bebali, dan Balih-balihan dirumuskan di Bali untuk menjaga batas kesakralan tari upacara agama agar tidak tercampur dengan tari hiburan."
+      },
+      {
+        id: 51,
+        topic: "7. Pengaruh Hindu-Buddha dalam Tari",
+        question: "Relief pada dinding Candi Borobudur yang dibangun pada masa Dinasti Syailendra (Buddha Mahayana) menampilkan adegan para penari dan pemusik. Hal ini menunjukkan bahwa pada masa Kerajaan Mataram Kuno...",
+        options: [
+          "Seni tari dan musik telah mencapai tingkat kemajuan tinggi dan dihormati dalam kehidupan masyarakat serta agama",
+          "Masyarakat dilarang keras memainkan alat musik dan menari",
+          "Hanya bangsa asing yang boleh menjadi penari di candi",
+          "Seni tari hanya dilakukan di dalam gua tersembunyi"
+        ],
+        answer: 0,
+        explanation: "Pahatan relief penari pada Candi Borobudur membuktikan bahwa seni pertunjukan berkembang pesat dan memiliki nilai mulia pada masa Mataram Kuno."
+      },
+      {
+        id: 52,
+        topic: "7. Pengaruh Hindu-Buddha dalam Tari",
+        question: "Salah satu ciri khas gerakan mata dalam tari tradisional Bali (seperti pada Tari Legong atau Tari Baris) yang mendapat pengaruh kuat estetika seni pertunjukan Hindu adalah gerakan melirik tajam ke kanan dan kiri dengan cepat yang disebut...",
+        options: [
+          "Seledet",
+          "Mendhak",
+          "Trisig",
+          "Gebyog"
+        ],
+        answer: 0,
+        explanation: "Seledet adalah gerakan lirikan bola mata yang tajam dan ekspresif dalam tari Bali yang menghidupkan karakter penari."
+      },
+      {
+        id: 53,
+        topic: "7. Pengaruh Hindu-Buddha dalam Tari",
+        question: "Mengapa kisah Ramayana dan Mahabharata yang berasal dari India dapat diterima dan menyatu dengan sangat baik dalam seni tari di Jawa dan Bali?",
+        options: [
+          "Karena para seniman Nusantara mengadaptasi cerita tersebut dengan nilai-nilai moral lokal, bahasa daerah, dan iringan gamelan khas Indonesia",
+          "Karena seluruh naskah pementasan wajib menggunakan bahasa Inggris",
+          "Karena masyarakat Nusantara dipaksa meninggalkan seluruh tradisi aslinya",
+          "Karena kisah tersebut tidak memiliki nilai kepahlawanan"
+        ],
+        answer: 0,
+        explanation: "Kejeniusan lokal (local genius) seniman Nusantara mengolah kisah Ramayana dan Mahabharata dengan nuansa budaya, gamelan, dan nilai filosofi asli Indonesia."
+      },
+      {
+        id: 54,
+        topic: "7. Pengaruh Hindu-Buddha dalam Tari",
+        question: "Penggunaan mahkota berukir (gelungan), kelat bahu, gelang kaki (gongseng), dan kain prada keemasan pada busana tari klasik Jawa dan Bali merupakan warisan estetika dari era...",
+        options: [
+          "Kerajaan Hindu-Buddha",
+          "Zaman batu tua (Paleolitikum)",
+          "Masa pendudukan Jepang",
+          "Era industri digital abad ke-21"
+        ],
+        answer: 0,
+        explanation: "Ornamen busana tari klasik seperti gelungan, kelat bahu, dan motif prada keemasan banyak terinspirasi dari busana kebesaran arca dan relief masa Hindu-Buddha."
+      },
+
+      // ========================================================================
+      // 8. TARI PADA ERA KERAJAAN ISLAM (Soal 55 - 62)
+      // ========================================================================
+      {
+        id: 55,
+        topic: "8. Tari pada Era Kerajaan Islam",
+        question: "Pada masa penyebaran Islam di Pulau Jawa oleh Wali Songo, kesenian tradisional termasuk tari dan wayang tetap dilestarikan dengan cara...",
+        options: [
+          "Memasukkan nilai-nilai tauhid, akhlak mulia, dan pesan dakwah Islam ke dalam cerita serta syair pengiringnya",
+          "Mengganti seluruh gamelan dengan gitar listrik",
+          "Melarang masyarakat berkumpul menyaksikan pertunjukan seni",
+          "Menghapus seluruh unsur budaya lokal Jawa"
+        ],
+        answer: 0,
+        explanation: "Wali Songo menggunakan pendekatan budaya yang bijaksana dengan menyisipkan pesan dakwah Islam ke dalam pertunjukan seni yang sudah akrab dengan masyarakat."
+      },
+      {
+        id: 56,
+        topic: "8. Tari pada Era Kerajaan Islam",
+        question: "Tari Rapa'i Geleng dari Aceh merupakan tarian yang memadukan gerakan kepala menggeleng cepat dan hentakan tubuh dengan tabuhan alat musik perkusi Rapa'i. Fungsi historis tarian ini pada masa kerajaan Islam Aceh adalah...",
+        options: [
+          "Media syiar agama Islam, menanamkan nilai moral, serta membangkitkan semangat persatuan dan keteguhan iman",
+          "Tarian penyambutan pedagang VOC Belanda",
+          "Ritual pemujaan dewa matahari di puncak gunung",
+          "Tarian hiburan pesta dansa bangsawan Eropa"
+        ],
+        answer: 0,
+        explanation: "Rapa'i Geleng diciptakan sebagai sarana dakwah Islam yang dinamis, sarat pesan religius, kekompakan, dan kebersamaan umat."
+      },
+      {
+        id: 57,
+        topic: "8. Tari pada Era Kerajaan Islam",
+        question: "Tari Topeng Cirebon berkembang pesat pada masa Kesultanan Cirebon (era Sunan Gunung Jati). Dalam tarian ini, perubahan lima karakter topeng (Panji, Samba, Rumyang, Tumenggung, Klana) memiliki makna filosofis Islam berupa...",
+        options: [
+          "Perjalanan spiritual dan tahapan perkembangan jiwa manusia dari kesucian bayi hingga pengendalian hawa nafsu menuju kedewasaan iman",
+          "Daftar harga barang dagangan di pelabuhan Cirebon",
+          "Urutan pangkat tentara kolonial Portugis",
+          "Kisah dewa-dewa mitologi Yunani"
+        ],
+        answer: 0,
+        explanation: "Tari Topeng Cirebon sarat simbolisme tasawuf Islam mengenai tahapan perjalanan hidup manusia dan perjuangan menaklukkan hawa nafsu."
+      },
+      {
+        id: 58,
+        topic: "8. Tari pada Era Kerajaan Islam",
+        question: "Dalam tradisi kesenian pesisir utara Jawa dan Madura (seperti Tari Rudat atau Tari Hadrah), gerakan tari banyak menyerap unsur gerak pencak silat yang diiringi tabuhan rebana. Hal ini mencerminkan nilai budaya era Islam berupa...",
+        options: [
+          "Keseimbangan antara ketangkasan membela kebenaran (bela diri) dengan kelembutan syiar agama dan kebersamaan",
+          "Keinginan untuk menyerang desa tetangga tanpa alasan",
+          "Penolakan terhadap seluruh bentuk olahraga fisik",
+          "Larangan menggunakan syair pujian kepada Nabi Muhammad Saw."
+        ],
+        answer: 0,
+        explanation: "Tari Rudat dan Hadrah memadukan gerakan silat yang tangkas dengan lantunan selawat dan rebana sebagai simbol keteguhan iman dan kesiapsiagaan menjaga kebenaran."
+      },
+      {
+        id: 59,
+        topic: "8. Tari pada Era Kerajaan Islam",
+        question: "Tari Saman dari dataran tinggi Gayo, Aceh, memiliki keunikan dalam hal iringan musiknya karena...",
+        options: [
+          "Tidak menggunakan alat musik sama sekali, melainkan mengandalkan harmoni syair vokal, tepukan tangan, tepukan dada, dan petikan jari penari",
+          "Diiringi oleh orkestra simfoni lengkap dengan 50 pemain biola",
+          "Menggunakan rekaman musik elektronik bervolume keras",
+          "Diiringi gamelan gong kebyar dari Bali"
+        ],
+        answer: 0,
+        explanation: "Musik pengiring Tari Saman bersumber sepenuhnya dari tubuh penari (internal), yaitu lantunan syair Gayo serta bunyi tepukan dada, paha, dan tangan."
+      },
+      {
+        id: 60,
+        topic: "8. Tari pada Era Kerajaan Islam",
+        question: "Di wilayah Kesultanan Melayu seperti Siak, Deli, dan Pontianak, Tari Zapin semula hanya ditarikan oleh penari laki-laki di lingkungan istana dan perkampungan Arab-Melayu, lalu berkembang menjadi tarian rakyat yang menjunjung tinggi...",
+        options: [
+          "Adab kesopanan, keharmonisan langkah, dan nilai edukasi akhlak melalui pantun serta syair Melayu",
+          "Kebebasan berpakaian terbuka di depan umum",
+          "Persaingan antarkelompok untuk saling menjatuhkan",
+          "Ritual sesaji hewan kurban di tengah laut"
+        ],
+        answer: 0,
+        explanation: "Tari Zapin mengutamakan kesantunan gerak, keserasian langkah kaki, serta syair pantun yang berisi nasihat agama dan budi pekerti."
+      },
+      {
+        id: 61,
+        topic: "8. Tari pada Era Kerajaan Islam",
+        question: "Tari Srimpi di lingkungan Kasultanan Yogyakarta dan Kasunanan Surakarta (era kerajaan Mataram Islam) umumnya dibawakan oleh empat orang penari putri. Secara filosofis dalam budaya Jawa-Islam, angka empat tersebut melambangkan...",
+        options: [
+          "Empat unsur alam (api, air, angin, tanah) serta empat arah mata angin yang harus diselaraskan dalam diri manusia",
+          "Empat jenis makanan pokok masyarakat pesisir",
+          "Empat kapal dagang milik kompeni Belanda",
+          "Empat musim salju di benua Eropa"
+        ],
+        answer: 0,
+        explanation: "Tari Srimpi berjumlah empat penari yang melambangkan kiblat papat lima pancer (empat unsur alam dan arah mata angin) sebagai simbol keseimbangan mikrokosmos dan makrokosmos."
+      },
+      {
+        id: 62,
+        topic: "8. Tari pada Era Kerajaan Islam",
+        question: "Perubahan fungsi dan bentuk tari pada era kerajaan Islam menunjukkan bahwa seni tari bersifat dinamis, artinya...",
+        options: [
+          "Mampu menyesuaikan diri dengan nilai kepercayaan baru tanpa kehilangan akar keindahan budayanya",
+          "Selalu menghancurkan peninggalan seni dari masa sebelumnya",
+          "Tidak pernah mengalami perkembangan dari abad ke abad",
+          "Hanya dapat hidup jika dipaksakan oleh penguasa asing"
+        ],
+        answer: 0,
+        explanation: "Seni tari Nusantara terbukti lentur dan dinamis karena mampu berakulturasi dengan nilai-nilai Islam dan melahirkan ragam tari baru yang kaya makna."
+      },
+
+      // ========================================================================
+      // 9. TARI PADA MASA KOLONIAL (Soal 63 - 70)
+      // ========================================================================
+      {
+        id: 63,
+        topic: "9. Tari pada Masa Kolonial",
+        question: "Pada masa kolonial Belanda, di Batavia (Jakarta) berkembang kesenian Tari Cokek yang diiringi musik Gambang Kromong. Kesenian ini menjadi bukti adanya akulturasi budaya pada era kolonial antara budaya lokal Betawi dengan budaya...",
+        options: [
+          "Tionghoa dan Eropa",
+          "Suku Inca dan Maya",
+          "Bangsa Viking Skandinavia",
+          "Suku Aborigin Australia"
+        ],
+        answer: 0,
+        explanation: "Tari Cokek dan musik Gambang Kromong merupakan hasil perpaduan harmonis antara budaya masyarakat Betawi, peranakan Tionghoa, dan sentuhan Eropa pada masa kolonial."
+      },
+      {
+        id: 64,
+        topic: "9. Tari pada Masa Kolonial",
+        question: "Mengapa para raja dan seniman keraton di Jawa pada abad ke-18 hingga ke-19 (masa penjajahan Belanda) sangat tekun menciptakan dan membakukan aturan gerak tari klasik yang rumit dan halus?",
+        options: [
+          "Sebagai bentuk perlawanan kultural dan penjagaan martabat budaya keraton ketika kekuasaan politik dan militer dibatasi oleh penjajah",
+          "Karena mendapat hadiah uang dari gubernur jenderal Belanda setiap hari",
+          "Untuk menggantikan seluruh pelajaran membaca dan menulis di sekolah",
+          "Agar rakyat jelata tidak bisa memahami bahasa daerahnya sendiri"
+        ],
+        answer: 0,
+        explanation: "Seni tari dan budaya menjadi ruang kedaulatan spiritual dan martabat keraton di tengah tekanan politik kolonial Belanda."
+      },
+      {
+        id: 65,
+        topic: "9. Tari pada Masa Kolonial",
+        question: "Di daerah Maluku dan Nusa Tenggara Timur yang pernah mengalami kontak lama dengan bangsa Portugis dan Belanda pada era kolonial, muncul tari pergaulan seperti Tari Katreji dan Tari Dansa Tali. Pengaruh budaya Eropa pada tarian tersebut terlihat jelas pada...",
+        options: [
+          "Formasi tari berpasangan putra-putri yang saling bertukar posisi mengikuti aba-aba (komando) dengan langkah kaki ritmis",
+          "Penggunaan topeng kayu raksasa berbentuk burung garuda",
+          "Gerakan duduk bersila sambil menepuk dada secara cepat",
+          "Iringan gamelan slendro-pelog lengkap dengan sinden"
+        ],
+        answer: 0,
+        explanation: "Tari Katreji (dari pengaruh Portugis-Belanda) menampilkan pola dansa berpasangan yang dinamis dengan aba-aba pergantian formasi yang meriah."
+      },
+      {
+        id: 66,
+        topic: "9. Tari pada Masa Kolonial",
+        question: "Pada masa pendudukan Jepang (1942–1945), pemerintah militer Jepang melarang pengaruh budaya Barat (Belanda dan Inggris), namun mengizinkan pertunjukan tari tradisional dengan syarat...",
+        options: [
+          "Disisipi pesan-pesan propaganda untuk mendukung kepentingan Jepang dalam Perang Asia Timur Raya",
+          "Seluruh penari wajib mengenakan pakaian adat Belanda",
+          "Pertunjukan hanya boleh dilakukan di dalam kapal perang",
+          "Dilarang menggunakan bahasa Indonesia maupun bahasa daerah"
+        ],
+        answer: 0,
+        explanation: "Jepang memanfaatkan kesenian rakyat dan seni pertunjukan sebagai alat propaganda perang sekaligus membatasi kebebasan berekspresi seniman."
+      },
+      {
+        id: 67,
+        topic: "9. Tari pada Masa Kolonial",
+        question: "Di luar lingkungan istana pada era kolonial, muncul kesenian rakyat seperti Ronggeng Gunung di Jawa Barat atau Gandrung di Banyuwangi yang pada masanya sering menjadi simbol...",
+        options: [
+          "Semangat kebersamaan rakyat kecil dan solidaritas dalam menghadapi kerasnya kehidupan di bawah penindasan kolonial",
+          "Kemewahan hidup para pejabat kompeni Belanda",
+          "Upacara penyerahan hasil panen kepada raja Eropa",
+          "Pertunjukan khusus di dalam benteng militer Belanda"
+        ],
+        answer: 0,
+        explanation: "Tari Gandrung Banyuwangi pada masa kolonial awalnya merupakan tarian rakyat untuk menghibur dan menyemangati warga Blambangan yang menderita akibat perang kolonial."
+      },
+      {
+        id: 68,
+        topic: "9. Tari pada Masa Kolonial",
+        question: "Tari Beksan Trunajaya dan Beksan Lawung di Kasultanan Yogyakarta diciptakan pada masa kolonial dengan menampilkan gerakan prajurit yang tangkas memainkan senjata tombak. Fungsi tersirat dari tarian ini bagi kalangan keraton adalah...",
+        options: [
+          "Menjaga kesiapsiagaan fisik, mental keprajuritan, dan disiplin militer secara terselubung melalui seni tari",
+          "Menghibur tentara VOC agar betah tinggal di Yogyakarta",
+          "Mengajarkan cara bertani padi di lahan kering",
+          "Menggantikan upacara pernikahan adat Jawa"
+        ],
+        answer: 0,
+        explanation: "Melalui Beksan Lawung, latihan keprajuritan dan semangat bela negara terus dipelihara tanpa memancing kecurigaan pemerintah kolonial Belanda."
+      },
+      {
+        id: 69,
+        topic: "9. Tari pada Masa Kolonial",
+        question: "Perbedaan mencolok antara perkembangan tari di dalam istana (keraton) dengan tari di luar istana (rakyat) pada masa kolonial adalah...",
+        options: [
+          "Tari istana berkembang menuju penghalusan estetika dan pembakuan aturan yang ketat, sedangkan tari rakyat berkembang secara spontan sebagai hiburan dan pelipur lara masyarakat",
+          "Tari istana tidak memiliki penari, sedangkan tari rakyat memiliki ratusan penari",
+          "Tari istana menggunakan musik rock, sedangkan tari rakyat tanpa musik",
+          "Tari istana dilarang oleh raja, sedangkan tari rakyat diwajibkan oleh Belanda"
+        ],
+        answer: 0,
+        explanation: "Pada era kolonial terjadi pemisahan ruang sosial yang tajam antara tradisi agung di keraton dan tradisi kecil di kalangan rakyat jelata."
+      },
+      {
+        id: 70,
+        topic: "9. Tari pada Masa Kolonial",
+        question: "Pelajaran berharga yang dapat dipetik dari sejarah seni tari Indonesia pada masa kolonial adalah...",
+        options: [
+          "Seni budaya merupakan kekuatan pemersatu dan identitas yang tidak mudah dihancurkan oleh penjajahan fisik",
+          "Bangsa yang dijajah harus melupakan seluruh kesenian tradisionalnya",
+          "Seni tari hanya berguna jika mendatangkan keuntungan bagi penjajah",
+          "Kesenian daerah hanya boleh dipelajari oleh kalangan bangsawan"
+        ],
+        answer: 0,
+        explanation: "Ketahanan budaya masyarakat Indonesia menjaga kelestarian tari tradisional meski berada dalam tekanan kolonialisme selama berabad-abad."
+      },
+
+      // ========================================================================
+      // 10. TARI PADA ZAMAN KEMERDEKAAN (Soal 71 - 77)
+      // ========================================================================
+      {
+        id: 71,
+        topic: "10. Tari pada Zaman Kemerdekaan",
+        question: "Momentum Proklamasi Kemerdekaan Indonesia tahun 1945 membawa angin segar bagi dunia seni tari tanah air, salah satunya ditandai dengan...",
+        options: [
+          "Munculnya semangat menggali identitas budaya nasional dan menciptakan tari-tari bertema perjuangan serta kebangsaan",
+          "Ditutupnya seluruh sanggar tari di seluruh provinsi",
+          "Penghapusan mata pelajaran kesenian di sekolah-sekolah",
+          "Kewajiban meniru tarian dari negara penjajah"
+        ],
+        answer: 0,
+        explanation: "Kemerdekaan membangkitkan kesadaran berbangsa sehingga para seniman berlomba menggali kekayaan tradisi daerah sebagai wajah kebudayaan nasional Indonesia."
+      },
+      {
+        id: 72,
+        topic: "10. Tari pada Zaman Kemerdekaan",
+        question: "Pada era awal kemerdekaan (tahun 1950-an), lahirlah karya tari kreasi yang menggambarkan kerja keras kaum tani dan nelayan yang merdeka, seperti Tari Tani dan Tari Nelayan. Pemilihan tema kerakyatan tersebut bertujuan untuk...",
+        options: [
+          "Menghargai peran rakyat pekerja sebagai tulang punggung pembangunan bangsa yang baru merdeka",
+          "Menunjukkan bahwa pekerjaan petani sangat membosankan",
+          "Menggantikan seluruh tarian klasik keraton",
+          "Menarik minat bangsa asing untuk kembali menjajah"
+        ],
+        answer: 0,
+        explanation: "Semangat kerakyatan dan egalitarianisme pada awal kemerdekaan mendorong seniman mengangkat kehidupan petani, nelayan, dan buruh ke dalam karya tari."
+      },
+      {
+        id: 73,
+        topic: "10. Tari pada Zaman Kemerdekaan",
+        question: "Pada tahun 1955, Indonesia menjadi tuan rumah Konferensi Asia-Afrika (KAA) di Bandung. Dalam perhelatan bersejarah tersebut, seni tari daerah Indonesia ditampilkan di hadapan para pemimpin bangsa Asia dan Afrika dengan peran sebagai...",
+        options: [
+          "Simbol persahabatan antarbangsa, keramahan, dan kedaulatan budaya Indonesia di panggung dunia",
+          "Acara selingan yang tidak memiliki makna diplomatik",
+          "Sarana memamerkan kekuatan senjata militer",
+          "Lomba menari antarperdana menteri negara peserta"
+        ],
+        answer: 0,
+        explanation: "Dalam KAA 1955, penampilan tari daerah (seperti karya Raden Tjetje Somantri) sukses memukau delegasi internasional dan mempererat diplomasi budaya."
+      },
+      {
+        id: 74,
+        topic: "10. Tari pada Zaman Kemerdekaan",
+        question: "Tari Remo dari Jawa Timur yang dikenal dengan gerakan kaki menghentak dinamis dan bunyi gongseng di pergelangan kaki pada era kemerdekaan sering dipentaskan sebagai...",
+        options: [
+          "Tarian pembuka pertunjukan Ludruk dan tarian penyambutan tamu yang memancarkan semangat kepahlawanan",
+          "Tarian ritual pemakaman di lingkungan istana",
+          "Tarian khusus untuk anak-anak usia balita",
+          "Tarian pengiring upacara penanaman padi"
+        ],
+        answer: 0,
+        explanation: "Tari Remo menggambarkan jiwa kepahlawanan dan semangat juang arek-arek Jawa Timur yang gagah dan terbuka menyambut tamu."
+      },
+      {
+        id: 75,
+        topic: "10. Tari pada Zaman Kemerdekaan",
+        question: "Dampak positif demokratisasi seni pada zaman kemerdekaan terhadap tari-tarian klasik yang dulunya bersifat tertutup di dalam keraton adalah...",
+        options: [
+          "Masyarakat umum dari berbagai lapisan sosial memperoleh kesempatan yang sama untuk mempelajari dan mementaskannya",
+          "Tarian keraton tidak lagi memiliki aturan gerak yang jelas",
+          "Seluruh gamelan keraton dijual ke luar negeri",
+          "Penari keraton dilarang tampil di hadapan rakyat"
+        ],
+        answer: 0,
+        explanation: "Setelah kemerdekaan, seni tari keraton tidak lagi eksklusif milik keluarga bangsawan, melainkan menjadi milik bersama seluruh rakyat Indonesia."
+      },
+      {
+        id: 76,
+        topic: "10. Tari pada Zaman Kemerdekaan",
+        question: "Selain di Jawa, perkembangan tari kreasi pada era awal kemerdekaan juga tumbuh pesat di Bali. Tokoh seniman Bali yang menciptakan Tari Panji Semirang dan Tari Margapati dengan memadukan unsur tradisi secara dinamis adalah...",
+        options: [
+          "I Nyoman Kaler",
+          "Raden Saleh",
+          "Ki Hajar Dewantara",
+          "Abdul Muis"
+        ],
+        answer: 0,
+        explanation: "I Nyoman Kaler adalah maestro tari Bali era kemerdekaan yang melahirkan berbagai tari lepas (kreasi tradisi) legendaris seperti Tari Panji Semirang dan Margapati."
+      },
+      {
+        id: 77,
+        topic: "10. Tari pada Zaman Kemerdekaan",
+        question: "Mengapa pembentukan lembaga pendidikan tinggi seni seperti Akademi Seni Tari Indonesia (ASTI) di Yogyakarta pada tahun 1961 sangat penting bagi sejarah tari era kemerdekaan?",
+        options: [
+          "Melahirkan seniman dan koreografer terdidik yang mampu mengkaji, melestarikan, sekaligus berinovasi secara ilmiah dan artistik",
+          "Membatasi orang yang boleh belajar menari hanya untuk penduduk kota",
+          "Menghapus peran sanggar-sanggar seni tradisional di pedesaan",
+          "Mengubah seluruh tari daerah menjadi tarian balet Eropa"
+        ],
+        answer: 0,
+        explanation: "Pendirian ASTI (kini bagian dari ISI Yogyakarta) memperkuat regenerasi seniman tari akademis yang profesional dan berwawasan luas."
+      },
+
+      // ========================================================================
+      // 11. TARI PADA ZAMAN PASCA KEMERDEKAAN (Soal 78 - 84)
+      // ========================================================================
+      {
+        id: 78,
+        topic: "11. Tari pada Zaman Pasca Kemerdekaan",
+        question: "Pada era pasca kemerdekaan hingga masa kini, banyak koreografer Indonesia menciptakan karya tari bertema pelestarian lingkungan hidup, seperti kerusakan hutan atau pencemaran laut. Fenomena ini menunjukkan bahwa seni tari masa kini berfungsi sebagai...",
+        options: [
+          "Media kritik sosial dan sarana penyadaran masyarakat terhadap isu-isu kemanusiaan serta alam",
+          "Ritual magis untuk meminta hujan di zaman batu",
+          "Alat propaganda perang pemerintah kolonial",
+          "Hiburan semata tanpa pesan moral apa pun"
+        ],
+        answer: 0,
+        explanation: "Koreografer era pasca kemerdekaan hingga kontemporer peka terhadap realitas sosial dan lingkungan, menjadikan panggung tari sebagai ruang refleksi kritis."
+      },
+      {
+        id: 79,
+        topic: "11. Tari pada Zaman Pasca Kemerdekaan",
+        question: "Salah satu tokoh koreografer perempuan pelopor tari kontemporer Indonesia dari Jakarta yang karyanya (seperti Bedhaya Hagoromo) menggali akar tradisi secara mendalam namun dikemas modern adalah...",
+        options: [
+          "Sardono W. Kusumo atau Retno Maruti",
+          "R.A. Kartini",
+          "Cut Nyak Dien",
+          "Dewi Sartika"
+        ],
+        answer: 0,
+        explanation: "Sardono W. Kusumo dan Retno Maruti merupakan maestro tari Indonesia era pasca kemerdekaan yang terkenal mendalami akar tradisi Nusantara dalam garapan kontemporer/kreasi."
+      },
+      {
+        id: 80,
+        topic: "11. Tari pada Zaman Pasca Kemerdekaan",
+        question: "Perbedaan paling mendasar antara tari kreasi baru berpola tradisi dengan tari kontemporer yang berkembang di era pasca kemerdekaan terletak pada...",
+        options: [
+          "Tari kontemporer jauh lebih bebas mengeksplorasi gerak baru di luar aturan baku tradisi serta memadukan berbagai disiplin seni modern",
+          "Tari kontemporer wajib ditarikan di dalam keraton dengan busana adat lengkap",
+          "Tari kreasi baru tidak boleh menggunakan iringan musik sama sekali",
+          "Tari kontemporer sudah ada sejak zaman kerajaan Sriwijaya"
+        ],
+        answer: 0,
+        explanation: "Tari kontemporer mengutamakan kebebasan eksplorasi tubuh, ruang, dan gagasan kekinian tanpa terikat struktur gerak tradisional."
+      },
+      {
+        id: 81,
+        topic: "11. Tari pada Zaman Pasca Kemerdekaan",
+        question: "Pada era pasca kemerdekaan, pertunjukan tari tidak lagi terbatas di pendopo keraton atau lapangan desa, melainkan juga digelar di ruang-ruang alternatif (site-specific) seperti...",
+        options: [
+          "Taman budaya, gedung kesenian modern, museum, hingga ruang publik perkotaan",
+          "Hanya di dalam gua prasejarah yang gelap gulita",
+          "Hanya di atas kapal layar milik VOC",
+          "Hanya di dalam ruang sidang pengadilan"
+        ],
+        answer: 0,
+        explanation: "Seniman tari kontemporer sering memanfaatkan ruang publik, taman budaya, hingga situs alam sebagai bagian integral dari konsep artistik karya."
+      },
+      {
+        id: 82,
+        topic: "11. Tari pada Zaman Pasca Kemerdekaan",
+        question: "Kolaborasi lintas budaya (interkultural) dalam seni tari era pasca kemerdekaan, misalnya seniman tari Indonesia berkolaborasi dengan pemusik atau penari dari Jepang dan Eropa, memberikan manfaat berupa...",
+        options: [
+          "Memperluas wawasan artistik seniman dan memperkenalkan kekayaan gerak tari Indonesia ke panggung seni dunia",
+          "Menghilangkan identitas asli bangsa Indonesia",
+          "Membuat penari Indonesia lupa cara menari tradisional",
+          "Menghentikan perkembangan sanggar tari di daerah"
+        ],
+        answer: 0,
+        explanation: "Kolaborasi seni internasional membuka dialog budaya yang setara dan mengangkat reputasi koreografer Indonesia di kancah global."
+      },
+      {
+        id: 83,
+        topic: "11. Tari pada Zaman Pasca Kemerdekaan",
+        question: "Dalam sebuah festival tari kreasi remaja tingkat nasional masa kini, peserta sering memadukan gerak tari daerah dengan teknik tata lampu (lighting) dan latar proyeksi video (video mapping). Peran teknologi dalam pertunjukan tersebut adalah...",
+        options: [
+          "Memperkuat suasana dramatis dan daya tarik visual tanpa menghilangkan esensi gerak tari sebagai unsur utama",
+          "Menggantikan peran penari sehingga tidak perlu ada manusia di panggung",
+          "Menutupi kesalahan gerak penari yang tidak berlatih",
+          "Menghilangkan nilai budaya dari tarian yang dibawakan"
+        ],
+        answer: 0,
+        explanation: "Teknologi tata cahaya dan multimedia berfungsi sebagai elemen pendukung estetika panggung agar pesan karya tari tersampaikan lebih kuat."
+      },
+      {
+        id: 84,
+        topic: "11. Tari pada Zaman Pasca Kemerdekaan",
+        question: "Tantangan terbesar bagi pelestarian seni tari tradisional Indonesia pada era pasca kemerdekaan di tengah derasnya arus budaya pop global adalah...",
+        options: [
+          "Menjaga minat dan regenerasi penari muda agar tetap mencintai serta melestarikan tari daerah di samping mengikuti perkembangan zaman",
+          "Kurangnya jumlah provinsi dan suku bangsa di Indonesia",
+          "Tidak adanya alat musik tradisional di seluruh Nusantara",
+          "Larangan pemerintah untuk mengadakan festival seni daerah"
+        ],
+        answer: 0,
+        explanation: "Regenerasi pewaris seni tari di kalangan generasi muda menjadi kunci utama agar warisan tari daerah tetap hidup dan relevan."
+      },
+
+      // ========================================================================
+      // 12. JENIS TARI BERDASARKAN FUNGSI, JUMLAH PENARI, DAN POLA GERAKAN (Soal 85 - 92)
+      // ========================================================================
+      {
+        id: 85,
+        topic: "12. Jenis Tari (Fungsi, Jumlah Penari, Pola Gerakan)",
+        question: "Dalam sebuah pentas seni sekolah, Andi membawakan Tari Gambir Anom seorang diri di atas panggung. Ia harus mampu menguasai seluruh ruang panggung dan menghidupkan karakter tokoh secara mandiri. Berdasarkan jumlah penarinya, tarian Andi termasuk jenis...",
+        options: [
+          "Tari tunggal (solo)",
+          "Tari berpasangan (duet)",
+          "Tari kelompok (koor)",
+          "Tari kolosal"
+        ],
+        answer: 0,
+        explanation: "Tari tunggal diperagakan oleh satu orang penari sehingga seluruh fokus penonton dan penguasaan ruang panggung bertumpu pada satu individu."
+      },
+      {
+        id: 86,
+        topic: "12. Jenis Tari (Fungsi, Jumlah Penari, Pola Gerakan)",
+        question: "Perhatikan daftar tarian berikut: (1) Tari Legong Kraton (3 penari), (2) Tari Gambyong Pareanom (1 penari), (3) Tari Karonsih (2 penari putra-putri), (4) Tari Saman (puluhan penari). Pasangan tari dan kategori jumlah penarinya yang tepat adalah...",
+        options: [
+          "(2) Tari tunggal dan (3) Tari berpasangan",
+          "(1) Tari tunggal dan (2) Tari kelompok",
+          "(3) Tari tunggal dan (4) Tari berpasangan",
+          "(1) Tari berpasangan dan (3) Tari massal"
+        ],
+        answer: 0,
+        explanation: "Tari Gambyong (umumnya ditarikan tunggal) termasuk tari tunggal, sedangkan Tari Karonsih (mengisahkan Panji dan Sekartaji) merupakan tari berpasangan."
+      },
+      {
+        id: 87,
+        topic: "12. Jenis Tari (Fungsi, Jumlah Penari, Pola Gerakan)",
+        question: "Kunci keberhasilan utama dalam penyajian tari kelompok seperti Tari Saman atau Tari Piring beregu terletak pada...",
+        options: [
+          "Kekompakan gerak, ketepatan tempo bersama, serta kelancaran transisi pola lantai antarpenari",
+          "Penonjolan kemampuan satu orang penari saja sementara yang lain diam",
+          "Kebebasan setiap penari bergerak sesuka hati tanpa melihat teman",
+          "Penggunaan kostum yang berbeda-beda warna dan tema"
+        ],
+        answer: 0,
+        explanation: "Tari kelompok mengutamakan kesatuan (unity), kekompakan irama, dan harmoni formasi seluruh anggota kelompok."
+      },
+      {
+        id: 88,
+        topic: "12. Jenis Tari (Fungsi, Jumlah Penari, Pola Gerakan)",
+        question: "Jika sebuah kelompok tari yang terdiri atas 8 siswa membentuk formasi menyerupai huruf V atau garis menyudut di atas panggung, jenis pola lantai yang mereka terapkan merupakan pengembangan dari pola lantai dasar...",
+        options: [
+          "Garis lurus",
+          "Garis lengkung lingkaran",
+          "Garis spiral melingkar",
+          "Angka delapan melengkung"
+        ],
+        answer: 0,
+        explanation: "Formasi huruf V, segitiga, zig-zag, vertikal, dan diagonal merupakan variasi pengembangan dari pola lantai dasar garis lurus."
+      },
+      {
+        id: 89,
+        topic: "12. Jenis Tari (Fungsi, Jumlah Penari, Pola Gerakan)",
+        question: "Pola lantai garis lengkung (seperti lingkaran, lengkung ular, dan angka delapan) dalam pertunjukan tari kelompok sangat tepat digunakan untuk menciptakan kesan...",
+        options: [
+          "Lembut, luwes, dinamis, dan menyatu dalam kebersamaan",
+          "Kaku, tegang, dan terpecah belah",
+          "Konflik peperangan yang sangat keras",
+          "Jarak pemisah yang jauh antarpenari"
+        ],
+        answer: 0,
+        explanation: "Pola lantai garis lengkung memberikan kesan estetis yang lembut, mengalir, dinamis, dan akrab."
+      },
+      {
+        id: 90,
+        topic: "12. Jenis Tari (Fungsi, Jumlah Penari, Pola Gerakan)",
+        question: "Dalam koreografi tari kelompok, terdapat tiga pola garapan gerak antarpenari, yaitu gerak serempak (unison), gerak berurutan bergantian (canon), dan gerak berlawanan (kontras). Jika penari nomor 1 melakukan gerak mengangkat tangan, lalu disusul penari nomor 2, 3, dan 4 secara bergantian seperti gelombang ombak, teknik tersebut disebut...",
+        options: [
+          "Gerak berurutan / bergantian (canon)",
+          "Gerak serempak (unison)",
+          "Gerak diam (statis)",
+          "Gerak tunggal (solo)"
+        ],
+        answer: 0,
+        explanation: "Gerak canon adalah teknik menyusun gerak yang sama namun dilakukan secara susul-menyusul atau bergantian oleh para penari sehingga tampak dinamis."
+      },
+      {
+        id: 91,
+        topic: "12. Jenis Tari (Fungsi, Jumlah Penari, Pola Gerakan)",
+        question: "Tari tradisional klasik (seperti Tari Bedhaya dan Tari Serimpi) dan tari tradisional rakyat (seperti Tari Jaipong dan Tari Maumere) dibedakan berdasarkan...",
+        options: [
+          "Pola garapan gerak, nilai artistik, dan lingkungan sosial tempat tari tersebut tumbuh berkembang",
+          "Jumlah lampu yang digunakan di atas panggung",
+          "Usia penari yang wajib di atas 50 tahun",
+          "Bahan lantai panggung yang terbuat dari kayu jati"
+        ],
+        answer: 0,
+        explanation: "Tari klasik lahir di istana dengan aturan gerak baku yang halus, sedangkan tari rakyat lahir di masyarakat umum dengan gerak yang lebih bebas dan merakyat."
+      },
+      {
+        id: 92,
+        topic: "12. Jenis Tari (Fungsi, Jumlah Penari, Pola Gerakan)",
+        question: "Tari Gatotkaca Gandrung dari Jawa Tengah menceritakan kisah kesatria Gatotkaca yang sedang jatuh cinta dan terbang di angkasa mencari Dewi Pergiwa. Dilihat dari bentuk penyajiannya, tarian ini termasuk...",
+        options: [
+          "Tari tunggal dramatik (memiliki alur cerita/tokoh tertentu)",
+          "Tari massal tanpa tema cerita",
+          "Tari upacara pemakaman adat",
+          "Tari pergaulan berpasangan"
+        ],
+        answer: 0,
+        explanation: "Tari Gatotkaca Gandrung dibawakan oleh satu penari (tunggal) yang memerankan tokoh Gatotkaca dalam sebuah fragmen cerita (dramatik)."
+      },
+
+      // ========================================================================
+      // 13. UNSUR POKOK TARI: WIRAGA, WIRAMA, WIRASA (Soal 93 - 100)
+      // ========================================================================
+      {
+        id: 93,
+        topic: "13. Unsur Pokok Tari (Wiraga, Wirama, Wirasa)",
+        question: "Saat mengikuti ujian praktik seni tari, Budi hafal seluruh urutan gerakan tangan dan kaki dengan sangat tepat, tetapi gerakan Budi terlihat terburu-buru dan tidak sesuai dengan ketukan musik gamelan pengiring. Unsur pokok tari yang masih perlu diperbaiki oleh Budi adalah...",
+        options: [
+          "Wirama",
+          "Wiraga",
+          "Tata rias",
+          "Tata busana"
+        ],
+        answer: 0,
+        explanation: "Budi sudah menguasai wiraga (hafal gerak), namun belum selaras dengan ketukan dan tempo musik pengiring sehingga ia perlu melatih kepekaan wirama."
+      },
+      {
+        id: 94,
+        topic: "13. Unsur Pokok Tari (Wiraga, Wirama, Wirasa)",
+        question: "Siti menarikan Tari Merak dengan irama musik yang sangat pas dan penghayatan wajah yang cerah, tetapi posisi kakinya masih kaku serta rentangan tangannya kurang luwes. Untuk meningkatkan kualitas tariannya, Siti harus melatih unsur...",
+        options: [
+          "Wiraga",
+          "Wirama",
+          "Wirasa",
+          "Tata suara"
+        ],
+        answer: 0,
+        explanation: "Kelenturan tubuh, ketepatan sikap tangan, kaki, dan teknik gerak fisik merupakan bagian dari unsur wiraga."
+      },
+      {
+        id: 95,
+        topic: "13. Unsur Pokok Tari (Wiraga, Wirama, Wirasa)",
+        question: "Mengapa seorang penari yang sudah menguasai teknik gerak (wiraga) dan ketukan musik (wirama) tetap dianggap belum sempurna penampilannya apabila belum menguasai unsur wirasa?",
+        options: [
+          "Karena tanpa wirasa (penjiwaan/ekspresi), gerakan tari akan tampak hampa, kaku seperti robot, dan tidak mampu menyentuh perasaan penonton",
+          "Karena wirasa menentukan mahal atau murahnya kostum tari",
+          "Karena wirasa berfungsi mengatur volume pengeras suara panggung",
+          "Karena wirasa hanya diperlukan oleh pemain alat musik"
+        ],
+        answer: 0,
+        explanation: "Wirasa adalah jiwa dari sebuah tarian; penghayatan emosi membuat setiap gerakan menjadi hidup, bermakna, dan komunikatif bagi penonton."
+      },
+      {
+        id: 96,
+        topic: "13. Unsur Pokok Tari (Wiraga, Wirama, Wirasa)",
+        question: "Dalam seni tari, irama (wirama) terbagi menjadi dua macam, yaitu wirama tandak dan wirama bebas. Yang dimaksud dengan wirama tandak adalah...",
+        options: [
+          "Irama yang ketukan dan temponya ajek (tetap/teratur) sehingga mudah diikuti oleh penari",
+          "Irama yang tidak memiliki ketukan sama sekali",
+          "Suara teriakan penonton di luar gedung",
+          "Gerakan penari tanpa menggunakan tenaga"
+        ],
+        answer: 0,
+        explanation: "Wirama tandak memiliki ketukan yang teratur dan konstan (seperti pada musik tari rakyat yang riang), sedangkan wirama bebas tidak terikat ketukan tetap."
+      },
+      {
+        id: 97,
+        topic: "13. Unsur Pokok Tari (Wiraga, Wirama, Wirasa)",
+        question: "Perhatikan pernyataan berikut: 'Penari melakukan gerakan berputar di tempat dengan rentangan kedua tangan terbuka lebar, lalu melangkah maju membentuk garis diagonal.' Pernyataan tersebut menjelaskan pemanfaatan elemen dasar gerak tari berupa...",
+        options: [
+          "Ruang (ruang pribadi dan ruang umum/lintasan)",
+          "Intensitas tenaga",
+          "Tata rias fantasi",
+          "Iringan vokal akapela"
+        ],
+        answer: 0,
+        explanation: "Rentangan tangan mencakup ruang pribadi (volume gerak), sedangkan langkah maju membentuk diagonal memanfaatkan ruang umum (lintasan panggung)."
+      },
+      {
+        id: 98,
+        topic: "13. Unsur Pokok Tari (Wiraga, Wirama, Wirasa)",
+        question: "Dalam sebuah koreografi, pergantian dari gerakan yang sangat lambat dan mengalun menuju gerakan yang cepat dan patah-patah dilakukan untuk menghindari kebosanan penonton. Pengaturan cepat lambatnya gerak dalam satuan durasi tersebut berkaitan dengan elemen...",
+        options: [
+          "Waktu (tempo dan ritme gerak)",
+          "Tata busana daerah",
+          "Properti kipas",
+          "Arah mata angin"
+        ],
+        answer: 0,
+        explanation: "Elemen waktu dalam gerak tari mencakup tempo (cepat/lambatnya gerak), ritme (pola ketukan), dan durasi lamanya gerakan dilakukan."
+      },
+      {
+        id: 99,
+        topic: "13. Unsur Pokok Tari (Wiraga, Wirama, Wirasa)",
+        question: "Ketika penari melakukan gerakan melompat tinggi (level tinggi), kemudian turun merendah dengan posisi lutut ditekuk setengah jongkok/mendhak (level sedang), lalu duduk bersimpuh di lantai (level rendah), variasi level tersebut bertujuan untuk...",
+        options: [
+          "Menciptakan dinamika visual yang menarik dan tidak monoton dalam ruang pentas",
+          "Menghemat biaya pembelian kostum penari",
+          "Menunjukkan bahwa penari kelelahan di tengah pertunjukan",
+          "Menghindari sorotan lampu panggung"
+        ],
+        answer: 0,
+        explanation: "Variasi level tinggi, sedang, dan rendah memberikan keragaman komposisi ruang sehingga tarian tampak dinamis dan estetis."
+      },
+      {
+        id: 100,
+        topic: "13. Unsur Pokok Tari (Wiraga, Wirama, Wirasa)",
+        question: "Kesatuan yang harmonis antara kemampuan teknik gerak tubuh (wiraga), ketepatan irama (wirama), dan kedalaman penghayatan rasa (wirasa) dalam suatu pertunjukan tari akan menghasilkan...",
+        options: [
+          "Karya tari yang utuh, hidup, bernilai estetis tinggi, dan mampu menyampaikan pesan budaya kepada penikmat seni",
+          "Pertunjukan yang kaku dan sulit dipahami oleh penonton",
+          "Persaingan antara penari dengan pemusik pengiring",
+          "Penghapusan seluruh unsur tradisi dalam tarian"
+        ],
+        answer: 0,
+        explanation: "Wiraga, wirama, dan wirasa merupakan tritunggal unsur pokok tari yang saling melengkapi untuk mewujudkan keindahan seni tari yang paripurna."
+      }
+    ];
+
+    /* ==========================================================================
+       STATE APLIKASI KUIS
+       ========================================================================== */
+    let quizData = [];          // Menyimpan 100 soal dengan urutan opsi yang sudah diacak
+    let userAnswers = {};       // Map: questionId -> selectedOptionIndex (0..3)
+    let isSubmitted = false;    // Status apakah kuis sudah dikumpulkan
+    let currentFilter = "all";  // 'all' | 'unanswered' | 'wrong'
+
+    const LETTERS = ["A", "B", "C", "D"];
+
+    /* ==========================================================================
+       ALGORITMA FISHER-YATES SHUFFLE UNTUK MENGACAK KUNCI JAWABAN (A, B, C, D)
+       ========================================================================== */
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function prepareQuizData() {
+      quizData = RAW_QUESTIONS.map((q) => {
+        const optionObjects = q.options.map((optText, idx) => ({
+          text: optText,
+          isCorrect: idx === q.answer
+        }));
+
+        const shuffledOptions = shuffleArray(optionObjects);
+        const newCorrectIndex = shuffledOptions.findIndex((o) => o.isCorrect);
+
+        return {
+          id: q.id,
+          topic: q.topic,
+          question: q.question,
+          options: shuffledOptions.map((o) => o.text),
+          answer: newCorrectIndex,
+          explanation: q.explanation
+        };
+      });
+    }
+
+    /* ==========================================================================
+       RENDER NAVIGASI NOMOR TETAP DI SAMPING (1 - 100)
+       ========================================================================== */
+    function renderSidebarNav() {
+      const navGrid = document.getElementById("navGrid");
+      navGrid.innerHTML = "";
+
+      quizData.forEach((q) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "nav-num-btn";
+        btn.id = `nav-btn-${q.id}`;
+        btn.textContent = q.id;
+        btn.title = `Lompat ke Soal Nomor ${q.id}`;
+
+        if (isSubmitted) {
+          const userAns = userAnswers[q.id];
+          if (userAns !== undefined && userAns === q.answer) {
+            btn.classList.add("is-correct");
+          } else {
+            btn.classList.add("is-wrong");
+          }
+        } else {
+          if (userAnswers[q.id] !== undefined) {
+            btn.classList.add("is-answered");
+          }
+        }
+
+        btn.addEventListener("click", () => {
+          const targetCard = document.getElementById(`question-card-${q.id}`);
+          if (targetCard && targetCard.style.display === "none") {
+            setFilter("all");
+          }
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+
+        navGrid.appendChild(btn);
+      });
+
+      updateProgressStats();
+    }
+
+    function updateProgressStats() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = quizData.length;
+      const percent = Math.round((answeredCount / total) * 100);
+
+      document.getElementById("progressText").textContent = `${answeredCount}/${total} Terjawab`;
+      document.getElementById("progressPercent").textContent = `${percent}%`;
+      document.getElementById("progressBarFill").style.width = `${percent}%`;
+
+      const bottomStatus = document.getElementById("bottomStatusText");
+      if (!isSubmitted) {
+        if (answeredCount === total) {
+          bottomStatus.innerHTML = `<strong>Luar biasa!</strong> Seluruh 100 soal sudah terjawab. Klik tombol di bawah untuk melihat skor akhir dan pembahasannya.`;
+        } else {
+          const sisa = total - answeredCount;
+          bottomStatus.textContent = `Progres saat ini: ${answeredCount}/100 soal terjawab (masih ada ${sisa} soal yang belum dijawab).`;
+        }
+      }
+    }
+
+    /* ==========================================================================
+       RENDER DAFTAR 100 SOAL PILIHAN GANDA
+       ========================================================================== */
+    function renderQuestions() {
+      const container = document.getElementById("questionsContainer");
+      container.innerHTML = "";
+
+      quizData.forEach((q) => {
+        const card = document.createElement("article");
+        card.className = "question-card";
+        card.id = `question-card-${q.id}`;
+
+        const userChoice = userAnswers[q.id];
+        const isAnswered = userChoice !== undefined;
+        const isCorrect = isAnswered && userChoice === q.answer;
+
+        if (!isSubmitted && isAnswered) {
+          card.classList.add("answered");
+        } else if (isSubmitted) {
+          card.classList.add(isCorrect ? "review-correct" : "review-wrong");
+        }
+
+        if (currentFilter === "unanswered" && isAnswered) {
+          card.style.display = "none";
+        } else if (currentFilter === "wrong" && isSubmitted && isCorrect) {
+          card.style.display = "none";
+        }
+
+        let statusTagHtml = "";
+        if (isSubmitted) {
+          if (isCorrect) {
+            statusTagHtml = `<span class="q-status-tag tag-correct">&#10004; Benar</span>`;
+          } else if (isAnswered) {
+            statusTagHtml = `<span class="q-status-tag tag-wrong">&#10008; Salah</span>`;
+          } else {
+            statusTagHtml = `<span class="q-status-tag tag-wrong">&#9888; Kosong</span>`;
+          }
+        }
+
+        let optionsHtml = `<div class="options-list">`;
+        q.options.forEach((optText, idx) => {
+          let optClasses = ["option-item"];
+          let badgeHtml = "";
+
+          if (isSubmitted) {
+            optClasses.push("locked");
+            if (idx === q.answer) {
+              optClasses.push("correct-answer");
+              badgeHtml = `<span class="option-badge-info badge-kunci">Kunci Benar (${LETTERS[idx]})</span>`;
+            } else if (idx === userChoice && userChoice !== q.answer) {
+              optClasses.push("wrong-answer");
+              badgeHtml = `<span class="option-badge-info badge-pilihanmu">Jawabanmu</span>`;
+            }
+          } else {
+            if (idx === userChoice) {
+              optClasses.push("selected");
+            }
+          }
+
+          optionsHtml += `
+            <div class="${optClasses.join(" ")}" data-qid="${q.id}" data-opt="${idx}" role="button" tabindex="0">
+              <span class="option-letter">${LETTERS[idx]}</span>
+              <span class="option-text">${escapeHtml(optText)}</span>
+              ${badgeHtml}
+            </div>
+          `;
+        });
+        optionsHtml += `</div>`;
+
+        let explanationHtml = "";
+        if (isSubmitted) {
+          const userChoiceLabel = isAnswered
+            ? `Pilihanmu: <strong>${LETTERS[userChoice]}. ${escapeHtml(q.options[userChoice])}</strong>`
+            : `Pilihanmu: <strong>Tidak dijawab (Kosong)</strong>`;
+
+          explanationHtml = `
+            <div class="explanation-box">
+              <div class="explanation-title">&#128218; Pembahasan Soal No. ${q.id}</div>
+              <p style="margin-bottom: 6px; font-size: 0.86rem; color: #475569;">
+                ${userChoiceLabel} &nbsp;|&nbsp; Kunci Jawaban: <strong style="color: #15803d;">${LETTERS[q.answer]}. ${escapeHtml(q.options[q.answer])}</strong>
+              </p>
+              <p>${escapeHtml(q.explanation)}</p>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="question-meta">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
+              <span class="q-number-badge">Soal No. ${q.id}</span>
+              <span class="q-topic-badge">${escapeHtml(q.topic)}</span>
+            </div>
+            ${statusTagHtml}
+          </div>
+          <div class="question-text">${escapeHtml(q.question)}</div>
+          ${optionsHtml}
+          ${explanationHtml}
+        `;
+
+        container.appendChild(card);
+      });
+
+      if (!isSubmitted) {
+        document.querySelectorAll(".option-item").forEach((el) => {
+          el.addEventListener("click", handleSelectOption);
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleSelectOption.call(el);
+            }
+          });
+        });
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    /* ==========================================================================
+       PENANGANAN PEMILIHAN JAWABAN
+       ========================================================================== */
+    function handleSelectOption() {
+      if (isSubmitted) return;
+
+      const qid = parseInt(this.getAttribute("data-qid"), 10);
+      const optIdx = parseInt(this.getAttribute("data-opt"), 10);
+
+      userAnswers[qid] = optIdx;
+
+      const card = document.getElementById(`question-card-${qid}`);
+      if (card) {
+        card.classList.add("answered");
+        const opts = card.querySelectorAll(".option-item");
+        opts.forEach((optEl) => {
+          const currentIdx = parseInt(optEl.getAttribute("data-opt"), 10);
+          if (currentIdx === optIdx) {
+            optEl.classList.add("selected");
+          } else {
+            optEl.classList.remove("selected");
+          }
+        });
+      }
+
+      const navBtn = document.getElementById(`nav-btn-${qid}`);
+      if (navBtn) {
+        navBtn.classList.add("is-answered");
+      }
+
+      updateProgressStats();
+
+      if (currentFilter === "unanswered" && card) {
+        setTimeout(() => {
+          card.style.display = "none";
+        }, 180);
+      }
+    }
+
+    /* ==========================================================================
+       FILTER TAMPILAN SOAL
+       ========================================================================== */
+    function setFilter(filterMode) {
+      currentFilter = filterMode;
+
+      document.querySelectorAll("#filterGroup .btn").forEach((btn) => {
+        if (btn.getAttribute("data-filter") === filterMode) {
+          btn.style.backgroundColor = "var(--primary)";
+          btn.style.color = "#ffffff";
+          btn.style.borderColor = "var(--primary)";
+        } else {
+          btn.style.backgroundColor = "#ffffff";
+          btn.style.color = "var(--text-main)";
+          btn.style.borderColor = "var(--border-color)";
+        }
+      });
+
+      renderQuestions();
+    }
+
+    /* ==========================================================================
+       MODAL KONFIRMASI KUSTOM
+       ========================================================================== */
+    function showCustomModal({ title, body, buttons }) {
+      const modal = document.getElementById("customModal");
+      document.getElementById("modalTitle").textContent = title;
+      document.getElementById("modalBody").innerHTML = body;
+
+      const actionsEl = document.getElementById("modalActions");
+      actionsEl.innerHTML = "";
+
+      buttons.forEach((btnCfg) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = `btn ${btnCfg.className || "btn-secondary"}`;
+        b.textContent = btnCfg.label;
+        b.addEventListener("click", () => {
+          closeCustomModal();
+          if (btnCfg.onClick) btnCfg.onClick();
+        });
+        actionsEl.appendChild(b);
+      });
+
+      modal.classList.add("open");
+    }
+
+    function closeCustomModal() {
+      document.getElementById("customModal").classList.remove("open");
+    }
+
+    /* ==========================================================================
+       LOMPAT KE SOAL KOSONG PERTAMA
+       ========================================================================== */
+    function jumpToFirstUnanswered() {
+      const firstEmpty = quizData.find((q) => userAnswers[q.id] === undefined);
+      if (!firstEmpty) {
+        showCustomModal({
+          title: "Semua Soal Telah Terjawab",
+          body: "Seluruh 100 soal sudah dijawab. Klik tombol <strong>Selesai &amp; Lihat Skor</strong> untuk melihat nilai akhir dan pembahasannya.",
+          buttons: [{ label: "Baik", className: "btn-primary" }]
+        });
+        return;
+      }
+
+      if (currentFilter !== "all" && currentFilter !== "unanswered") {
+        setFilter("all");
+      }
+
+      const card = document.getElementById(`question-card-${firstEmpty.id}`);
+      if (card) {
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
+    /* ==========================================================================
+       PROSES SUBMIT KUIS & HITUNG SKOR AKHIR
+       ========================================================================== */
+    function requestSubmitQuiz() {
+      if (isSubmitted) {
+        document.getElementById("scorePanel").scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = quizData.length;
+      const unansweredCount = total - answeredCount;
+
+      if (unansweredCount > 0) {
+        showCustomModal({
+          title: "Masih Ada Soal yang Belum Dijawab",
+          body: `Kamu baru menjawab <strong>${answeredCount} dari ${total} soal</strong>. Masih tersisa <strong>${unansweredCount} soal</strong> kosong yang akan dihitung salah jika langsung dikumpulkan.<br><br>Apakah kamu tetap ingin menyelesaikan kuis sekarang?`,
+          buttons: [
+            {
+              label: "Lompat ke Soal Kosong",
+              className: "btn-secondary",
+              onClick: jumpToFirstUnanswered
+            },
+            {
+              label: "Ya, Selesai & Lihat Skor",
+              className: "btn-success",
+              onClick: finalizeSubmitQuiz
+            }
+          ]
+        });
+      } else {
+        showCustomModal({
+          title: "Selesaikan & Kumpulkan Kuis?",
+          body: "Seluruh 100 soal sudah kamu jawab. Kumpulkan sekarang untuk melihat skor akhir dan pembahasan mendetail setiap soal?",
+          buttons: [
+            {
+              label: "Periksa Kembali",
+              className: "btn-secondary"
+            },
+            {
+              label: "Selesai & Lihat Skor",
+              className: "btn-success",
+              onClick: finalizeSubmitQuiz
+            }
+          ]
+        });
+      }
+    }
+
+    function finalizeSubmitQuiz() {
+      isSubmitted = true;
+
+      let correctCount = 0;
+      let wrongCount = 0;
+      let emptyCount = 0;
+
+      quizData.forEach((q) => {
+        const ans = userAnswers[q.id];
+        if (ans === undefined) {
+          emptyCount++;
+        } else if (ans === q.answer) {
+          correctCount++;
+        } else {
+          wrongCount++;
+        }
+      });
+
+      const finalScore = correctCount;
+
+      let predicateText = "";
+      let predicateBg = "";
+      let predicateColor = "";
+
+      if (finalScore >= 90) {
+        predicateText = "Predikat: Sangat Baik (A) — Pemahaman Istimewa!";
+        predicateBg = "#dcfce7";
+        predicateColor = "#166534";
+      } else if (finalScore >= 75) {
+        predicateText = "Predikat: Baik (B) — Lulus Kriteria Ketuntasan!";
+        predicateBg = "#ccfbf1";
+        predicateColor = "#115e59";
+      } else if (finalScore >= 60) {
+        predicateText = "Predikat: Cukup (C) — Tingkatkan Latihan Lagi!";
+        predicateBg = "#fef3c7";
+        predicateColor = "#92400e";
+      } else {
+        predicateText = "Predikat: Perlu Pendalaman (D) — Pelajari Pembahasan!";
+        predicateBg = "#fee2e2";
+        predicateColor = "#991b1b";
+      }
+
+      document.getElementById("finalScoreText").textContent = finalScore;
+      document.getElementById("statCorrect").textContent = correctCount;
+      document.getElementById("statWrong").textContent = wrongCount;
+      document.getElementById("statEmpty").textContent = emptyCount;
+
+      const predEl = document.getElementById("scorePredicate");
+      predEl.textContent = predicateText;
+      predEl.style.backgroundColor = predicateBg;
+      predEl.style.color = predicateColor;
+
+      document.getElementById("scorePanel").classList.add("visible");
+      document.getElementById("btnFilterWrong").style.display = "inline-flex";
+
+      document.getElementById("bottomSubmitCard").innerHTML = `
+        <h3>Kuis Paket B Telah Selesai (Skor Akhir: ${finalScore} / 100)</h3>
+        <p>Periksa kotak pembahasan di bawah setiap nomor soal untuk memahami alasan kunci jawabannya, atau ulangi kuis dengan urutan opsi teracak baru.</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+          <button type="button" class="btn btn-primary btn-lg" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            &#8593; Lihat Kartu Skor di Atas
+          </button>
+          <button type="button" class="btn btn-secondary btn-lg" id="btnRetryBottom">
+            &#8634; Ulangi &amp; Acak Opsi
+          </button>
+        </div>
+      `;
+
+      document.getElementById("btnRetryBottom").addEventListener("click", resetQuizWithShuffle);
+
+      const btnSubSide = document.getElementById("btnSubmitSidebar");
+      btnSubSide.textContent = "Lihat Kartu Skor";
+      btnSubSide.className = "btn btn-primary";
+
+      setFilter("all");
+      renderSidebarNav();
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* ==========================================================================
+       RESET & ACAK ULANG OPSI JAWABAN
+       ========================================================================== */
+    function resetQuizWithShuffle() {
+      isSubmitted = false;
+      userAnswers = {};
+      currentFilter = "all";
+
+      document.getElementById("scorePanel").classList.remove("visible");
+      document.getElementById("btnFilterWrong").style.display = "none";
+
+      const btnSubSide = document.getElementById("btnSubmitSidebar");
+      btnSubSide.innerHTML = "&#10004; Selesai &amp; Lihat Skor";
+      btnSubSide.className = "btn btn-success";
+
+      document.getElementById("bottomSubmitCard").innerHTML = `
+        <h3>Sudah Siap Mengumpulkan Jawaban?</h3>
+        <p id="bottomStatusText">Periksa kembali pilihan jawabanmu atau gunakan navigasi nomor di samping sebelum menekan tombol selesai.</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+          <button type="button" class="btn btn-success btn-lg" id="btnSubmitBottom">
+            &#10004; Selesai &amp; Lihat Skor
+          </button>
+          <button type="button" class="btn btn-secondary btn-lg" id="btnJumpUnansweredBottom">
+            Lompat ke Soal Kosong
+          </button>
+        </div>
+      `;
+      document.getElementById("btnSubmitBottom").addEventListener("click", requestSubmitQuiz);
+      document.getElementById("btnJumpUnansweredBottom").addEventListener("click", jumpToFirstUnanswered);
+
+      prepareQuizData();
+      setFilter("all");
+      renderSidebarNav();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function handleManualShuffleOptions() {
+      if (isSubmitted) {
+        resetQuizWithShuffle();
+        return;
+      }
+
+      const hasAnswered = Object.keys(userAnswers).length > 0;
+      if (hasAnswered) {
+        showCustomModal({
+          title: "Ulangi & Acak Ulang Opsi A/B/C/D?",
+          body: "Tindakan ini akan mengosongkan jawaban yang sudah dipilih dan mengacak ulang posisi kunci jawaban A, B, C, D. Lanjutkan?",
+          buttons: [
+            { label: "Batal", className: "btn-secondary" },
+            {
+              label: "Ya, Ulangi & Acak Opsi",
+              className: "btn-primary",
+              onClick: resetQuizWithShuffle
+            }
+          ]
+        });
+      } else {
+        resetQuizWithShuffle();
+      }
+    }
+
+    /* ==========================================================================
+       UNDUH FILE HTML MANDIRI (.html) UNTUK PENGGUNAAN OFFLINE
+       ========================================================================== */
+    function downloadOfflineHtml() {
+      const docClone = document.documentElement.cloneNode(true);
+
+      const clonedQuestions = docClone.querySelector("#questionsContainer");
+      if (clonedQuestions) clonedQuestions.innerHTML = "";
+
+      const clonedNav = docClone.querySelector("#navGrid");
+      if (clonedNav) clonedNav.innerHTML = "";
+
+      const clonedModal = docClone.querySelector("#customModal");
+      if (clonedModal) clonedModal.classList.remove("open");
+
+      const clonedScore = docClone.querySelector("#scorePanel");
+      if (clonedScore) clonedScore.classList.remove("visible");
+
+      const htmlContent = "<!DOCTYPE html>\n" + docClone.outerHTML;
+      const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "kuis_seni_tari_smp_kelas7_paket2.html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    /* ==========================================================================
+       INISIALISASI HALAMAN
+       ========================================================================== */
+    document.addEventListener("DOMContentLoaded", () => {
+      prepareQuizData();
+      renderSidebarNav();
+      setFilter("all");
+
+      document.getElementById("btnShuffleOptions").addEventListener("click", handleManualShuffleOptions);
+      document.getElementById("btnDownloadHtml").addEventListener("click", downloadOfflineHtml);
+      document.getElementById("btnSubmitSidebar").addEventListener("click", requestSubmitQuiz);
+      document.getElementById("btnSubmitBottom").addEventListener("click", requestSubmitQuiz);
+      document.getElementById("btnJumpUnansweredBottom").addEventListener("click", jumpToFirstUnanswered);
+      document.getElementById("btnRetryTop").addEventListener("click", resetQuizWithShuffle);
+
+      document.getElementById("btnResetSidebar").addEventListener("click", () => {
+        showCustomModal({
+          title: "Ulangi Kuis dari Awal?",
+          body: "Semua jawaban akan direset dan posisi pilihan A, B, C, D akan diacak ulang untuk latihan baru.",
+          buttons: [
+            { label: "Batal", className: "btn-secondary" },
+            {
+              label: "Ya, Ulangi & Acak Opsi",
+              className: "btn-primary",
+              onClick: resetQuizWithShuffle
+            }
+          ]
+        });
+      });
+
+      document.querySelectorAll("#filterGroup .btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const mode = btn.getAttribute("data-filter");
+          setFilter(mode);
+        });
+      });
+
+      document.getElementById("customModal").addEventListener("click", (e) => {
+        if (e.target.id === "customModal") {
+          closeCustomModal();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

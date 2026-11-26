@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materi & Latihan 50 Soal Matematika SMP Kelas VII Semester 1 (Kurikulum Merdeka)</title>
+<style>
+  :root {
+    --primary: #1e40af;
+    --primary-light: #3b82f6;
+    --primary-bg: #eff6ff;
+    --secondary: #0f766e;
+    --secondary-bg: #f0fdfa;
+    --accent: #d97706;
+    --accent-bg: #fffbeb;
+    --success: #15803d;
+    --success-bg: #f0fdf4;
+    --danger: #b91c1c;
+    --danger-bg: #fef2f2;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #cbd5e1;
+    --bg-body: #f8fafc;
+    --card-bg: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.6;
+  }
+
+  /* Header & Navigation */
+  header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+    color: white;
+    padding: 1.75rem 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-container {
+    max-width: 1050px;
+    margin: 0 auto;
+  }
+
+  .badge-kurikulum {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.6rem;
+  }
+
+  header h1 {
+    font-size: 1.65rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+  }
+
+  header p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+
+  .nav-tabs {
+    background: white;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+
+  .nav-inner {
+    max-width: 1050px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tab-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .tab-btn:hover {
+    color: var(--primary);
+  }
+
+  .tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  .progress-pill {
+    background: var(--primary-bg);
+    color: var(--primary);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid #bfdbfe;
+  }
+
+  /* Main Container */
+  main {
+    max-width: 1050px;
+    margin: 1.75rem auto 4rem auto;
+    padding: 0 1rem;
+  }
+
+  .section-view {
+    display: none;
+  }
+
+  .section-view.active {
+    display: block;
+    animation: fadeIn 0.25s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Materi Styling */
+  .materi-intro {
+    background: white;
+    border-left: 5px solid var(--primary);
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    margin-bottom: 1.5rem;
+  }
+
+  .bab-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 1.75rem;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+  }
+
+  .bab-header {
+    background: #1e293b;
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bab-header.bab1 { background: linear-gradient(90deg, #1e40af, #2563eb); }
+  .bab-header.bab2 { background: linear-gradient(90deg, #0f766e, #0d9488); }
+  .bab-header.bab3 { background: linear-gradient(90deg, #b45309, #d97706); }
+
+  .bab-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .bab-page-tag {
+    font-size: 0.8rem;
+    background: rgba(255,255,255,0.2);
+    padding: 0.2rem 0.65rem;
+    border-radius: 6px;
+  }
+
+  .bab-body {
+    padding: 1.5rem;
+  }
+
+  .sub-bab {
+    margin-bottom: 1.4rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px dashed #cbd5e1;
+  }
+
+  .sub-bab:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .sub-bab h3 {
+    font-size: 1.05rem;
+    color: var(--primary);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .bab-card.bab2-card .sub-bab h3 { color: var(--secondary); }
+  .bab-card.bab3-card .sub-bab h3 { color: #b45309; }
+
+  .penting-box {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-left: 4px solid #3b82f6;
+    border-radius: 6px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.75rem 0;
+  }
+
+  .penting-box.teal { border-left-color: #0d9488; background: #f0fdfa; }
+  .penting-box.amber { border-left-color: #d97706; background: #fffbeb; }
+
+  .penting-title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.35rem;
+    color: #0f172a;
+  }
+
+  .materi-list {
+    padding-left: 1.35rem;
+    margin-top: 0.4rem;
+  }
+
+  .materi-list li {
+    margin-bottom: 0.4rem;
+  }
+
+  .formula-pill {
+    display: inline-block;
+    background: #e2e8f0;
+    color: #0f172a;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.92rem;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 0.75rem 0;
+  }
+
+  table.materi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+
+  table.materi-table th, table.materi-table td {
+    border: 1px solid #cbd5e1;
+    padding: 0.55rem 0.75rem;
+    text-align: left;
+  }
+
+  table.materi-table th {
+    background: #f1f5f9;
+    font-weight: 700;
+  }
+
+  .cta-start-quiz {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    border: 2px dashed var(--primary-light);
+  }
+
+  /* Quiz Controls & Filter */
+  .quiz-toolbar {
+    background: white;
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    border: 1px solid #e2e8f0;
+  }
+
+  .toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-select {
+    padding: 0.45rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+    background: white;
+    color: var(--text-main);
+  }
+
+  .btn {
+    padding: 0.55rem 1.1rem;
+    border-radius: 7px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+  }
+  .btn-primary:hover { background: #1e3a8a; }
+
+  .btn-outline {
+    background: white;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { background: #f1f5f9; }
+
+  .btn-success {
+    background: var(--success);
+    color: white;
+    font-size: 1.05rem;
+    padding: 0.85rem 2rem;
+    box-shadow: 0 4px 10px rgba(21, 128, 61, 0.25);
+  }
+  .btn-success:hover { background: #166534; }
+
+  /* Question Navigator Grid */
+  .nav-grid-box {
+    background: white;
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e2e8f0;
+  }
+
+  .nav-grid-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .q-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+    gap: 0.4rem;
+  }
+
+  .q-num-btn {
+    height: 34px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-main);
+    transition: all 0.15s;
+  }
+
+  .q-num-btn:hover {
+    border-color: var(--primary);
+  }
+
+  .q-num-btn.answered {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .q-num-btn.res-correct {
+    background: var(--success);
+    color: white;
+    border-color: var(--success);
+  }
+
+  .q-num-btn.res-wrong {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+  }
+
+  /* Question Cards */
+  .question-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.4rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    border: 1px solid #e2e8f0;
+    scroll-margin-top: 80px;
+  }
+
+  .question-card.border-correct {
+    border: 2px solid var(--success);
+  }
+
+  .question-card.border-wrong {
+    border: 2px solid var(--danger);
+  }
+
+  .q-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .q-number-badge {
+    background: #1e293b;
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 6px;
+  }
+
+  .q-bab-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-bg);
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+  }
+
+  .q-text {
+    font-size: 1.02rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: #0f172a;
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .option-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: #ffffff;
+  }
+
+  .option-label:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+
+  .option-label.selected {
+    background: var(--primary-bg);
+    border-color: var(--primary);
+  }
+
+  .option-label.opt-correct {
+    background: var(--success-bg) !important;
+    border-color: var(--success) !important;
+    color: #14532d;
+    font-weight: 600;
+  }
+
+  .option-label.opt-wrong {
+    background: var(--danger-bg) !important;
+    border-color: var(--danger) !important;
+    color: #7f1d1d;
+  }
+
+  .option-label input[type="radio"] {
+    margin-top: 0.25rem;
+    accent-color: var(--primary);
+    transform: scale(1.15);
+    cursor: pointer;
+  }
+
+  .opt-letter {
+    font-weight: 700;
+    min-width: 22px;
+  }
+
+  /* Pembahasan Box (Hidden until submitted) */
+  .pembahasan-box {
+    display: none;
+    margin-top: 1.1rem;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-left: 5px solid #0284c7;
+  }
+
+  .pembahasan-box.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .status-line {
+    font-weight: 700;
+    margin-bottom: 0.45rem;
+    font-size: 0.95rem;
+  }
+
+  .status-line.benar { color: var(--success); }
+  .status-line.salah { color: var(--danger); }
+  .status-line.kosong { color: var(--accent); }
+
+  .pembahasan-detail {
+    font-size: 0.93rem;
+    color: #334155;
+    line-height: 1.65;
+  }
+
+  /* Score Summary Panel */
+  #score-panel {
+    display: none;
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border: 2px solid var(--primary);
+    text-align: center;
+  }
+
+  #score-panel.show {
+    display: block;
+    animation: fadeIn 0.35s ease;
+  }
+
+  .score-circle {
+    width: 135px;
+    height: 135px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1rem auto;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+  }
+
+  .score-big {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .score-sub {
+    font-size: 0.8rem;
+    opacity: 0.9;
+  }
+
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin: 1.25rem 0;
+    flex-wrap: wrap;
+  }
+
+  .stat-box {
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    min-width: 120px;
+    font-weight: 700;
+  }
+
+  .stat-box.benar { background: var(--success-bg); color: var(--success); border: 1px solid #bbf7d0; }
+  .stat-box.salah { background: var(--danger-bg); color: var(--danger); border: 1px solid #fecaca; }
+  .stat-box.kosong { background: var(--accent-bg); color: var(--accent); border: 1px solid #fde68a; }
+
+  .submit-area {
+    background: white;
+    padding: 1.75rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    header h1 { font-size: 1.35rem; }
+    .tab-btn { padding: 0.75rem 0.85rem; font-size: 0.88rem; }
+    .question-card { padding: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <span class="badge-kurikulum">KURIKULUM MERDEKA • SMP KELAS VII SEMESTER 1</span>
+    <h1>Modul Materi & Latihan 50 Soal Matematika</h1>
+    <p>Sumber Materi: Buku Paket Matematika SMP Kelas VII (Bab 1 Bilangan Bulat, Bab 2 Aljabar, Bab 3 Persamaan &amp; Pertidaksamaan Linear Satu Variabel)</p>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <div class="nav-inner">
+    <div class="tab-buttons">
+      <button class="tab-btn active" id="tab-materi" onclick="switchTab('materi')">📚 Ringkasan Materi Buku Paket</button>
+      <button class="tab-btn" id="tab-soal" onclick="switchTab('soal')">📝 Latihan 50 Soal Pilihan Ganda</button>
+    </div>
+    <div class="progress-pill" id="progress-counter">Terjawab: 0 / 50</div>
+  </div>
+</nav>
+
+<main>
+  <!-- ==================== VIEW 1: MATERI BUKU PAKET ==================== -->
+  <section id="view-materi" class="section-view active">
+    <div class="materi-intro">
+      <strong>Panduan Belajar Offline:</strong> Ringkasan materi di bawah ini disusun berurutan mulai dari halaman awal buku paket (Bab 1) hingga akhir pembahasan <em>Persamaan Linear dan Pertidaksamaan Linear Satu Variabel</em> (Bab 3). Pelajari konsep pentingnya terlebih dahulu, lalu klik tab <strong>"Latihan 50 Soal Pilihan Ganda"</strong> untuk menguji pemahamanmu!
+    </div>
+
+    <!-- BAB 1 -->
+    <article class="bab-card">
+      <div class="bab-header bab1">
+        <h2>BAB 1: BILANGAN BULAT</h2>
+        <span class="bab-page-tag">Buku Paket Hlm. 12 – 59</span>
+      </div>
+      <div class="bab-body">
+        <div class="sub-bab">
+          <h3>1. Bilangan Positif dan Negatif &amp; Garis Bilangan</h3>
+          <p>Dengan menetapkan <strong>0 sebagai titik pangkal (acuan)</strong>, kita dapat menyatakan besaran yang lebih besar dari 0 menggunakan tanda positif (<span class="formula-pill">+</span>) dan besaran yang lebih kecil dari 0 menggunakan tanda negatif (<span class="formula-pill">-</span>).</p>
+          <ul class="materi-list">
+            <li><strong>Contoh Penggunaan:</strong> Suhu 2°C di bawah 0°C ditulis <span class="formula-pill">-2°C</span>; suhu 27°C di atas 0°C ditulis <span class="formula-pill">+27°C</span>. Ketinggian di atas permukaan laut (+), kedalaman di bawah laut (-). Untung (+), rugi (-).</li>
+            <li><strong>Pengelompokan Bilangan:</strong> Bilangan bulat terdiri atas <em>bilangan bulat negatif</em> (..., -3, -2, -1), <em>nol (0)</em>, dan <em>bilangan bulat positif</em> (+1, +2, +3, ... yang disebut juga <strong>bilangan asli</strong>). Bilangan 0 bukan bilangan positif maupun negatif.</li>
+            <li><strong>Nilai Mutlak:</strong> Jarak antara titik asal (0) dengan titik bilangan tersebut pada garis bilangan. Contoh: nilai mutlak dari +4 adalah 4, nilai mutlak dari -3 adalah 3, dan nilai mutlak dari 0 adalah 0.</li>
+          </ul>
+          <div class="penting-box">
+            <div class="penting-title">Aturan Membandingkan Dua Bilangan</div>
+            1. Bilangan positif &gt; 0 &gt; bilangan negatif.<br>
+            2. Pada dua bilangan positif, bilangan dengan nilai mutlak lebih besar adalah bilangan yang lebih besar.<br>
+            3. Pada dua bilangan negatif, bilangan dengan nilai mutlak lebih besar justru merupakan bilangan yang <strong>lebih kecil</strong> (letak di garis bilangan lebih ke kiri). Contoh: <span class="formula-pill">-5 &lt; -2</span>.
+          </div>
+        </div>
+
+        <div class="sub-bab">
+          <h3>2. Penjumlahan dan Pengurangan Bilangan Bulat</h3>
+          <ul class="materi-list">
+            <li><strong>Penjumlahan Dua Bilangan Bertanda Sama:</strong> Tandanya tetap sama dengan kedua bilangan tersebut, dan nilai mutlaknya adalah <em>jumlah</em> nilai mutlak keduanya. Contoh: <span class="formula-pill">(-18) + (-5) = -(18 + 5) = -23</span>.</li>
+            <li><strong>Penjumlahan Dua Bilangan Berbeda Tanda:</strong> Tandanya mengikuti bilangan dengan nilai mutlak terbesar, dan nilai mutlaknya adalah <em>selisih</em> nilai mutlak keduanya. Contoh: <span class="formula-pill">(-10) + (+6) = -(10 - 6) = -4</span>.</li>
+            <li><strong>Pengurangan Bilangan Positif &amp; Negatif:</strong> Mengurangi suatu bilangan sama artinya dengan <strong>menjumlahkan dengan lawan tanda bilangan pengurangnya</strong>. Contoh: <span class="formula-pill">(+6) - (-9) = (+6) + (+9) = +15</span>.</li>
+            <li><strong>Sifat Operasi Penjumlahan:</strong> Berlaku sifat komutatif (<span class="formula-pill">a + b = b + a</span>) dan asosiatif (<span class="formula-pill">(a + b) + c = a + (b + c)</span>). <em>Catatan: Sifat komutatif dan asosiatif TIDAK berlaku pada operasi pengurangan secara langsung sebelum diubah menjadi penjumlahan.</em></li>
+          </ul>
+        </div>
+
+        <div class="sub-bab">
+          <h3>3. Perkalian, Pembagian, Perpangkatan &amp; Operasi Campuran</h3>
+          <div class="penting-box">
+            <div class="penting-title">Aturan Tanda Perkalian &amp; Pembagian</div>
+            • <strong>Tanda Sama → Hasil Positif (+):</strong> (+) × (+) = (+) dan (-) × (-) = (+)<br>
+            • <strong>Tanda Berbeda → Hasil Negatif (-):</strong> (+) × (-) = (-) dan (-) × (+) = (-)<br>
+            • Jika mengalikan beberapa bilangan: banyaknya faktor negatif <strong>genap</strong> menghasilkan tanda (+), sedangkan banyaknya faktor negatif <strong>ganjil</strong> menghasilkan tanda (-).<br>
+            • <strong>Pembagian dengan Pecahan/Kebalikan:</strong> Membagi suatu bilangan sama dengan mengalikan dengan kebalikan pembaginya. Pembagian dengan 0 tidak terdefinisi (tidak diperbolehkan).
+          </div>
+          <ul class="materi-list">
+            <li><strong>Perpangkatan (Eksponen):</strong> Perhatikan perbedaan tanda kurung! <span class="formula-pill">(-3)² = (-3) × (-3) = +9</span>, sedangkan <span class="formula-pill">-3² = -(3 × 3) = -9</span>.</li>
+            <li><strong>Urutan Operasi Hitung Campuran:</strong> (1) Operasi di dalam tanda kurung, (2) Perpangkatan/eksponen, (3) Perkalian dan pembagian secara berurutan dari kiri ke kanan, (4) Penjumlahan dan pengurangan.</li>
+            <li><strong>Sifat Distributif:</strong> <span class="formula-pill">a × (b + c) = a × b + a × c</span> dan <span class="formula-pill">(b + c) × a = b × a + c × a</span>.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- BAB 2 -->
+    <article class="bab-card bab2-card">
+      <div class="bab-header bab2">
+        <h2>BAB 2: ALJABAR</h2>
+        <span class="bab-page-tag">Buku Paket Hlm. 60 – 89</span>
+      </div>
+      <div class="bab-body">
+        <div class="sub-bab">
+          <h3>1. Kalimat Matematika dengan Huruf (Variabel) &amp; Aturan Penulisan</h3>
+          <p>Huruf seperti <em>a, b, x, y</em> digunakan untuk menyatakan besaran yang belum diketahui atau nilainya berubah-ubah (variabel). Kalimat matematika yang memuat huruf disebut <strong>bentuk aljabar</strong>.</p>
+          <div class="penting-box teal">
+            <div class="penting-title">Aturan Penulisan Bentuk Aljabar</div>
+            1. <strong>Hapus tanda perkalian (×):</strong> <span class="formula-pill">3 × a = 3a</span>.<br>
+            2. <strong>Bilangan ditulis di depan huruf:</strong> <span class="formula-pill">x × (-4) = -4x</span>. Angka 1 dihapus: <span class="formula-pill">1 × a = a</span> dan <span class="formula-pill">(-1) × a = -a</span>.<br>
+            3. <strong>Urutan alfabetis untuk perkalian huruf:</strong> <span class="formula-pill">b × a = ab</span>.<br>
+            4. <strong>Perpangkatan huruf yang sama:</strong> <span class="formula-pill">a × a × 3 = 3a²</span>.<br>
+            5. <strong>Pembagian ditulis sebagai pecahan:</strong> <span class="formula-pill">x : 3 = x/3</span> dan <span class="formula-pill">(a + b) : 2 = (a + b)/2</span>.
+          </div>
+        </div>
+
+        <div class="sub-bab">
+          <h3>2. Substitusi Bentuk Aljabar</h3>
+          <p>Mengganti huruf (variabel) dengan suatu bilangan dalam bentuk aljabar disebut <strong>substitusi</strong>. Saat mensubstitusikan bilangan negatif, selalu gunakan tanda kurung agar tidak keliru dalam perhitungan tanda.</p>
+          <p>Contoh: Nilai <span class="formula-pill">3x - 5</span> untuk <span class="formula-pill">x = -2</span> adalah <span class="formula-pill">3 × (-2) - 5 = -6 - 5 = -11</span>.</p>
+        </div>
+
+        <div class="sub-bab">
+          <h3>3. Suku, Koefisien &amp; Penyederhanaan Bentuk Aljabar Linear</h3>
+          <ul class="materi-list">
+            <li><strong>Suku dan Koefisien:</strong> Pada bentuk aljabar <span class="formula-pill">3a - 7 = 3a + (-7)</span>, bagian <span class="formula-pill">3a</span> dan <span class="formula-pill">-7</span> disebut <strong>suku</strong>. Bilangan 3 di depan huruf <em>a</em> disebut <strong>koefisien</strong> dari <em>a</em>.</li>
+            <li><strong>Menggabungkan Suku Sejenis:</strong> Suku-suku dengan huruf yang sama dapat digabungkan menggunakan sifat distributif: <span class="formula-pill">7a + 5 - a - 8 = (7 - 1)a + (5 - 8) = 6a - 3</span>.</li>
+            <li><strong>Penjumlahan &amp; Pengurangan Bentuk Linear:</strong> Pada pengurangan, ubah seluruh tanda pada bentuk aljabar pengurang lalu gabungkan suku sejenis. Contoh: <span class="formula-pill">(2a + 5) - (a - 7) = 2a + 5 - a + 7 = a + 12</span>.</li>
+            <li><strong>Perkalian &amp; Pembagian dengan Bilangan:</strong> Gunakan sifat distributif: <span class="formula-pill">3(2x + 1) - 8(x - 2) = 6x + 3 - 8x + 16 = -2x + 19</span>.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- BAB 3 -->
+    <article class="bab-card bab3-card">
+      <div class="bab-header bab3">
+        <h2>BAB 3: PERSAMAAN LINEAR &amp; PERTIDAKSAMAAN LINEAR SATU VARIABEL</h2>
+        <span class="bab-page-tag">Buku Paket Hlm. 90 – 122</span>
+      </div>
+      <div class="bab-body">
+        <div class="sub-bab">
+          <h3>1. Konsep Persamaan dan Pertidaksamaan</h3>
+          <div class="table-wrap">
+            <table class="materi-table">
+              <thead>
+                <tr>
+                  <th>Jenis Kalimat Matematika</th>
+                  <th>Simbol Penghubung</th>
+                  <th>Keterangan &amp; Contoh</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Persamaan</strong></td>
+                  <td><span class="formula-pill">=</span> (sama dengan)</td>
+                  <td>Menyatakan dua besaran bernilai sama/seimbang. Contoh: <span class="formula-pill">3x + 2 = x + 10</span>. Nilai <em>x</em> yang membuat persamaan bernilai benar disebut <strong>penyelesaian persamaan</strong>.</td>
+                </tr>
+                <tr>
+                  <td><strong>Pertidaksamaan</strong></td>
+                  <td><span class="formula-pill">&lt;</span>, <span class="formula-pill">&gt;</span>, <span class="formula-pill">≤</span>, <span class="formula-pill">≥</span></td>
+                  <td>Menyatakan hubungan ketidaksamaan:<br>• <span class="formula-pill">&lt;</span> : kurang dari / lebih kecil dari<br>• <span class="formula-pill">&gt;</span> : lebih dari / lebih besar dari<br>• <span class="formula-pill">≤</span> : tidak lebih dari / kurang dari atau sama dengan (maksimal)<br>• <span class="formula-pill">≥</span> : tidak kurang dari / lebih dari atau sama dengan (minimal)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="sub-bab">
+          <h3>2. Sifat-Sifat Persamaan &amp; Cara Menyelesaikan Persamaan Linear</h3>
+          <p>Seperti timbangan yang seimbang, jika kedua sisi (sisi kiri dan sisi kanan) diberi perlakuan yang sama, persamaan tetap berlaku:</p>
+          <div class="penting-box amber">
+            <div class="penting-title">4 Sifat Utama Persamaan (Jika A = B)</div>
+            1. <strong>Penjumlahan:</strong> <span class="formula-pill">A + m = B + m</span><br>
+            2. <strong>Pengurangan:</strong> <span class="formula-pill">A - m = B - m</span><br>
+            3. <strong>Perkalian:</strong> <span class="formula-pill">A × m = B × m</span><br>
+            4. <strong>Pembagian:</strong> <span class="formula-pill">A / m = B / m</span> (dengan syarat <span class="formula-pill">m ≠ 0</span>)
+          </div>
+          <ul class="materi-list">
+            <li><strong>Metode Transpos (Memindahkan Suku):</strong> Suku dapat dipindahkan dari satu sisi ke sisi lainnya dengan syarat <strong>tanda di depannya berubah menjadi kebalikannya</strong> (+ menjadi -, dan - menjadi +).</li>
+            <li><strong>Langkah-Langkah Menyelesaikan Persamaan Linear (<span class="formula-pill">ax + b = 0</span>):</strong><br>
+              (1) Hapus tanda kurung menggunakan sifat distributif, dan hilangkan penyebut pecahan/desimal dengan mengalikan kedua sisi dengan KPK penyebut atau 10, 100, dst.<br>
+              (2) Pindahkan semua suku bervariabel ke sisi kiri dan suku bilangan (konstanta) ke sisi kanan.<br>
+              (3) Sederhanakan hingga menjadi bentuk <span class="formula-pill">ax = b</span>.<br>
+              (4) Bagi kedua sisi dengan koefisien <em>a</em> untuk memperoleh <span class="formula-pill">x = b/a</span>.
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-bab">
+          <h3>3. Penerapan Persamaan Linear &amp; Perbandingan (Proporsi)</h3>
+          <ul class="materi-list">
+            <li><strong>Menyelesaikan Soal Cerita:</strong> (1) Identifikasi hubungan besaran melalui diagram/tabel, (2) Misalkan besaran yang ditanyakan dengan variabel <em>x</em> dan susun persamaannya, (3) Selesaikan persamaan, (4) Periksa kembali apakah jawaban masuk akal sesuai konteks soal.</li>
+            <li><strong>Perbandingan (Proporsi):</strong> Jika dua rasio bernilai sama (<span class="formula-pill">a : b = c : d</span>), berlaku sifat perkalian suku tepi sama dengan perkalian suku tengah: <span class="formula-pill">ad = bc</span>.</li>
+          </ul>
+        </div>
+
+        <div class="sub-bab">
+          <h3>4. Menentukan Penyelesaian Pertidaksamaan Linear Satu Variabel</h3>
+          <p>Berbeda dengan persamaan linear yang hanya memiliki satu penyelesaian, pertidaksamaan linear memiliki banyak penyelesaian berupa rentang nilai (interval). Pada buku paket (Hlm. 120–121), penyelesaian pertidaksamaan dapat ditentukan dengan mencari terlebih dahulu <strong>nilai batas dari persamaannya</strong>:</p>
+          <ul class="materi-list">
+            <li>Contoh: Untuk menyelesaikan <span class="formula-pill">3x + 2 &lt; x + 10</span>, cari batas persamaannya yaitu <span class="formula-pill">3x + 2 = x + 10</span> yang menghasilkan <span class="formula-pill">x = 4</span>.</li>
+            <li>Jika diuji bilangan di sebelah kiri 4 (misal <span class="formula-pill">x = 3</span>), diperoleh <span class="formula-pill">11 &lt; 13</span> (bernilai benar). Maka penyelesaian pertidaksamaan tersebut adalah <span class="formula-pill">x &lt; 4</span>.</li>
+            <li>Dalam soal cerita kehidupan sehari-hari (misalnya menghitung jumlah maksimal barang yang dapat dibeli agar sisa uang tidak kurang dari batas tertentu), perhatikan syarat bilangan bulat yang memenuhi interval pertidaksamaan tersebut.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <div class="cta-start-quiz">
+      <h3>Siap Menguji Kemampuanmu?</h3>
+      <p style="margin: 0.4rem 0 1rem 0; color: var(--text-muted);">Tersedia 50 soal pilihan ganda dengan posisi kunci jawaban yang diacak otomatis beserta pembahasan lengkap setelah selesai.</p>
+      <button class="btn btn-primary" onclick="switchTab('soal')">Mulai Kerjakan 50 Soal Sekarang →</button>
+    </div>
+  </section>
+
+  <!-- ==================== VIEW 2: LATIHAN 50 SOAL ==================== -->
+  <section id="view-soal" class="section-view">
+    
+    <!-- Panel Skor (Muncul setelah Submit) -->
+    <div id="score-panel">
+      <h2 style="margin-bottom: 1rem; color: #0f172a;">Hasil Latihan Matematika Kelas VII</h2>
+      <div class="score-circle">
+        <span class="score-big" id="final-score">0</span>
+        <span class="score-sub">SKOR AKHIR (0–100)</span>
+      </div>
+      <p id="score-predicate" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;"></p>
+      <div class="stats-row">
+        <div class="stat-box benar">✔ Benar: <span id="stat-benar">0</span></div>
+        <div class="stat-box salah">✖ Salah: <span id="stat-salah">0</span></div>
+        <div class="stat-box kosong">⚠ Kosong: <span id="stat-kosong">0</span></div>
+      </div>
+      <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        Silakan gulir ke bawah untuk melihat <strong>kunci jawaban dan pembahasan lengkap langkah demi langkah</strong> pada setiap nomor soal.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="scrollToFirstWrong()">🔍 Lihat Pembahasan Soal</button>
+        <button class="btn btn-outline" onclick="resetAndShuffleQuiz()">🔄 Ulangi &amp; Acak Kunci Jawaban</button>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="quiz-toolbar">
+      <div class="toolbar-left">
+        <label for="bab-filter" style="font-weight: 600; font-size: 0.9rem;">Filter Materi:</label>
+        <select id="bab-filter" class="filter-select" onchange="filterQuestions()">
+          <option value="ALL">Semua Bab (50 Soal)</option>
+          <option value="Bab 1">Bab 1: Bilangan Bulat (No. 1–16)</option>
+          <option value="Bab 2">Bab 2: Aljabar (No. 17–32)</option>
+          <option value="Bab 3">Bab 3: Persamaan &amp; Pertidaksamaan Linear (No. 33–50)</option>
+        </select>
+      </div>
+      <div>
+        <button class="btn btn-outline" onclick="resetAndShuffleQuiz()" title="Mengulang latihan dan mengacak ulang posisi opsi A, B, C, D">🔀 Acak Ulang Pilihan</button>
+      </div>
+    </div>
+
+    <!-- Navigasi Nomor Soal -->
+    <div class="nav-grid-box">
+      <div class="nav-grid-title">
+        <span>Navigasi Cepat Nomor Soal (Klik nomor untuk melompat)</span>
+        <span id="nav-legend">Biru = Terjawab</span>
+      </div>
+      <div class="q-grid" id="question-nav-grid"></div>
+    </div>
+
+    <!-- Daftar Soal Container -->
+    <div id="questions-container"></div>
+
+    <!-- Tombol Submit Akhir -->
+    <div class="submit-area" id="submit-container">
+      <h3 style="margin-bottom: 0.5rem;">Sudah Selesai Mengerjakan Semua Soal?</h3>
+      <p id="submit-warning" style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.15rem;">
+        Pastikan semua jawaban sudah terisi sebelum menekan tombol kumpulkan.
+      </p>
+      <button class="btn btn-success" onclick="submitQuiz()">✅ Kumpulkan Jawaban &amp; Lihat Skor + Pembahasan</button>
+    </div>
+
+  </section>
+</main>
+
+<script>
+  // Data 50 Soal Matematika SMP Kelas VII Semester 1 (Kurikulum Merdeka)
+  const RAW_QUESTIONS = [{"bab": "Bab 1: Bilangan Bulat", "q": "Suhu udara di puncak Dieng pada malam hari mencapai 3°C di bawah 0°C, sedangkan suhu di Surabaya pada siang hari mencapai 32°C di atas 0°C. Penulisan kedua suhu tersebut secara berturut-turut menggunakan tanda positif dan negatif adalah ....", "options": ["-3°C dan +32°C", "+3°C dan -32°C", "-3°C dan -32°C", "+3°C dan +32°C"], "correct": 0, "explanation": "Dengan menetapkan 0°C sebagai titik acuan, suhu di bawah 0°C dinyatakan dengan tanda negatif (-), sehingga 3°C di bawah 0°C ditulis <b>-3°C</b>. Sebaliknya, suhu di atas 0°C dinyatakan dengan tanda positif (+), sehingga 32°C di atas 0°C ditulis <b>+32°C</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Ditetapkan titik A sebagai titik pangkal 0 km. Jika posisi '7 km di sebelah Timur A' dinyatakan sebagai +7 km, maka posisi '-4,5 km' menyatakan ....", "options": ["4,5 km di sebelah Barat A", "4,5 km di sebelah Timur A", "4,5 km di sebelah Utara A", "4,5 km di sebelah Selatan A"], "correct": 0, "explanation": "Karena arah Timur dari titik pangkal A ditetapkan sebagai arah positif (+), maka arah yang berlawanan yaitu arah Barat merupakan arah negatif (-). Jadi, <b>-4,5 km</b> menyatakan posisi <b>4,5 km di sebelah Barat A</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Perhatikan kumpulan bilangan berikut: -12; +7; 0; +0,6; -3; +25; -8/3. Bilangan yang termasuk ke dalam himpunan bilangan asli adalah ....", "options": ["+7 dan +25", "0, +7, dan +25", "-12, -3, +7, dan +25", "-12, 0, +7, dan +25"], "correct": 0, "explanation": "Bilangan bulat mencakup bilangan bulat negatif, nol (0), dan bilangan bulat positif. Bilangan bulat positif disebut juga <b>bilangan asli</b> (1, 2, 3, ...). Nol bukan bilangan positif maupun negatif. Dari daftar tersebut, yang merupakan bilangan bulat positif (bilangan asli) adalah <b>+7 dan +25</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Urutan bilangan -4, +3, -6, 0, -1 dari yang terkecil hingga terbesar menggunakan tanda pertidaksamaan yang tepat adalah ....", "options": ["-6 < -4 < -1 < 0 < +3", "-1 < -4 < -6 < 0 < +3", "+3 < 0 < -1 < -4 < -6", "-6 < -1 < -4 < 0 < +3"], "correct": 0, "explanation": "Pada garis bilangan, semakin ke kiri letak suatu bilangan maka nilainya semakin kecil. Untuk dua bilangan negatif, bilangan yang nilai mutlaknya lebih besar justru bernilai lebih kecil (-6 < -4 < -1). Semua bilangan negatif lebih kecil dari 0, dan 0 lebih kecil dari bilangan positif (+3). Jadi urutannya: <b>-6 < -4 < -1 < 0 < +3</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Bilangan-bilangan yang memiliki nilai mutlak sama dengan 9 adalah ....", "options": ["+9 dan -9", "Hanya +9", "Hanya -9", "0 dan +9"], "correct": 0, "explanation": "Nilai mutlak adalah jarak antara titik asal (0) dengan titik yang bersesuaian dengan bilangan tersebut pada garis bilangan. Baik titik +9 maupun titik -9 sama-sama berjarak 9 satuan dari titik 0. Maka, bilangan yang nilai mutlaknya 9 adalah <b>+9 dan -9</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Hasil dari (-18) + (+7) - (-12) adalah ....", "options": ["+1", "-23", "-1", "+23"], "correct": 0, "explanation": "Ubah semua operasi menjadi kalimat penjumlahan terlebih dahulu:<br>(-18) + (+7) - (-12) = (-18) + (+7) + (+12)<br>Kelompokkan suku positif dan negatif:<br>= (-18) + (+19)<br>= +(19 - 18) = <b>+1</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Hasil hitung dari (-14) + 19 + 12 - 20 adalah ....", "options": ["-3", "+3", "-7", "+7"], "correct": 0, "explanation": "Susun suku-suku positif dan negatif menggunakan sifat komutatif dan asosiatif:<br>(-14) + 19 + 12 - 20 = (19 + 12) + (-14 - 20)<br>= 31 + (-34)<br>= -(34 - 31) = <b>-3</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Hasil dari (-2,7) - (-3,4) + (-1,5) adalah ....", "options": ["-0,8", "+0,8", "-7,6", "-2,2"], "correct": 0, "explanation": "Ubah pengurangan bilangan negatif menjadi penjumlahan bilangan positif:<br>(-2,7) - (-3,4) + (-1,5) = -2,7 + 3,4 - 1,5<br>Gabungkan suku negatif: (-2,7 - 1,5) + 3,4 = -4,2 + 3,4 = <b>-0,8</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Hasil dari (-1/3) + (+1/6) - (-2/3) adalah ....", "options": ["1/2", "-1/2", "5/6", "-5/6"], "correct": 0, "explanation": "Ubah operasi menjadi penjumlahan dan samakan penyebutnya menjadi 6:<br>(-1/3) + (1/6) - (-2/3) = -1/3 + 1/6 + 2/3<br>= -2/6 + 1/6 + 4/6<br>= (-2 + 1 + 4)/6 = 3/6 = <b>1/2</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Perhatikan perbandingan nilai perpangkatan berikut: P = (-4)² dan Q = -4². Nilai P dan Q secara berturut-turut adalah ....", "options": ["16 dan -16", "-16 dan 16", "16 dan 16", "-16 dan -16"], "correct": 0, "explanation": "Makna (-4)² berbeda dengan -4²:<br>• P = (-4)² = (-4) × (-4) = <b>16</b> (tanda negatif ikut dikuadratkan).<br>• Q = -4² = -(4 × 4) = <b>-16</b> (hanya angka 4 yang dikuadratkan, lalu diberi tanda negatif)."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Hasil dari 24 : (-3) × 2 adalah ....", "options": ["-16", "-4", "+16", "+4"], "correct": 0, "explanation": "Perkalian dan pembagian memiliki kedudukan yang setara sehingga dikerjakan berurutan dari kiri ke kanan (atau ubah pembagian menjadi perkalian dengan kebalikannya):<br>24 : (-3) × 2 = 24 × (-1/3) × 2<br>= (-8) × 2 = <b>-16</b>.<br><i>Catatan: Kesalahan umum adalah mengalikan (-3) × 2 terlebih dahulu.</i>"}, {"bab": "Bab 1: Bilangan Bulat", "q": "Hasil dari (-16) × (-5/6) × (-3) adalah ....", "options": ["-40", "+40", "-24", "+24"], "correct": 0, "explanation": "Terdapat 3 bilangan negatif (jumlah ganjil), sehingga tanda hasil kalinya adalah negatif (-).<br>(-16) × (-5/6) × (-3) = -(16 × 5/6 × 3)<br>= -(16 × 5/2) = -(8 × 5) = <b>-40</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Hasil dari 36 : (-2)² + (-5²) adalah ....", "options": ["-16", "34", "-34", "16"], "correct": 0, "explanation": "Kerjakan eksponen (perpangkatan) terlebih dahulu sebelum pembagian dan penjumlahan:<br>• (-2)² = (-2) × (-2) = 4<br>• (-5²) = -(5 × 5) = -25<br>Maka: 36 : 4 + (-25) = 9 - 25 = <b>-16</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Dengan menggunakan sifat distributif, hasil dari 69 × (-7,2) + 31 × (-7,2) adalah ....", "options": ["-720", "+720", "-273,6", "-72"], "correct": 0, "explanation": "Gunakan sifat distributif: (b × a) + (c × a) = (b + c) × a.<br>69 × (-7,2) + 31 × (-7,2) = (69 + 31) × (-7,2)<br>= 100 × (-7,2) = <b>-720</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Tabel skor uji kebugaran 5 siswa adalah: A = 52, B = 56, C = 55, D = 60, E = 47. Jika skor C (55) ditetapkan sebagai titik acuan (0), maka rata-rata skor kelima siswa tersebut adalah ....", "options": ["54", "55", "53", "56"], "correct": 0, "explanation": "Selisih tiap skor terhadap acuan C = 55:<br>• A: 52 - 55 = -3<br>• B: 56 - 55 = +1<br>• C: 55 - 55 = 0<br>• D: 60 - 55 = +5<br>• E: 47 - 55 = -8<br>Rata-rata = 55 + (-3 + 1 + 0 + 5 - 8) : 5<br>= 55 + (-5) : 5 = 55 - 1 = <b>54</b>."}, {"bab": "Bab 1: Bilangan Bulat", "q": "Diketahui perbedaan zona waktu terhadap Tokyo (0): London (-9) dan Sydney (+1). Jika pertandingan sepak bola di London dimulai pada pukul 14.00 waktu setempat, maka penonton di Sydney dapat menyaksikan siaran langsung tersebut pada pukul ....", "options": ["24.00 (00.00 hari berikutnya)", "04.00 waktu setempat", "23.00 waktu setempat", "22.00 waktu setempat"], "correct": 0, "explanation": "Perbedaan waktu antara Sydney (+1) dan London (-9) adalah (+1) - (-9) = +10 jam (Sydney 10 jam lebih cepat dari London).<br>Jika di London pukul 14.00, maka di Sydney adalah pukul 14.00 + 10 jam = <b>24.00 (pukul 00.00 hari berikutnya)</b>."}, {"bab": "Bab 2: Aljabar", "q": "Lidi-lidi yang sama panjang disusun membentuk deretan persegi berdampingan. Untuk membuat 1 persegi diperlukan 4 lidi, 2 persegi diperlukan 7 lidi, dan 3 persegi diperlukan 10 lidi. Bentuk aljabar yang menyatakan banyaknya lidi yang diperlukan untuk membuat a persegi adalah ....", "options": ["3a + 1", "4a + 1", "3a + 4", "4a - 1"], "correct": 0, "explanation": "Berdasarkan pola penyusunan lidi (seperti pemikiran Yuni pada buku paket): terdapat 1 lidi vertikal di ujung kiri, ditambah 3 lidi untuk setiap persegi yang dibentuk. Maka untuk <i>a</i> persegi dibutuhkan 1 + (a × 3) = <b>3a + 1</b> lidi. (Jika menggunakan cara Heru: 4 + 3(a - 1) = 4 + 3a - 3 = 3a + 1)."}, {"bab": "Bab 2: Aljabar", "q": "Berdasarkan aturan penulisan bentuk aljabar, hasil dari y × (-1) × x + 5 adalah ....", "options": ["-xy + 5", "-1yx + 5", "y(-x) + 5", "-yx + 5"], "correct": 0, "explanation": "Aturan penulisan aljabar:<br>1. Tanda perkalian (×) dihapus.<br>2. Perkalian dengan -1 ditulis tanda negatif (-) saja tanpa angka 1.<br>3. Huruf-huruf diurutkan secara alfabetis (x sebelum y).<br>Jadi, y × (-1) × x + 5 ditulis <b>-xy + 5</b>."}, {"bab": "Bab 2: Aljabar", "q": "Bentuk aljabar yang tepat untuk menyatakan (a - b) : (-7) adalah ....", "options": ["-(a - b)/7", "(a - b)/7", "-a/7 - b", "a - b/(-7)"], "correct": 0, "explanation": "Dalam bentuk aljabar, pembagian dinyatakan dalam bentuk pecahan tanpa simbol titik dua (:). Pembagian oleh bilangan negatif (-7) diletakkan tanda negatifnya di depan pecahan: <b>-(a - b)/7</b>."}, {"bab": "Bab 2: Aljabar", "q": "Rina berjalan dari rumah menuju sekolah yang berjarak 1.500 meter dengan kecepatan tetap 75 meter per menit. Sisa jarak Rina ke sekolah setelah ia berjalan selama t menit adalah ....", "options": ["(1.500 - 75t) meter", "(75t - 1.500) meter", "(1.500 + 75t) meter", "(1.500/75t) meter"], "correct": 0, "explanation": "Jarak yang sudah ditempuh Rina selama <i>t</i> menit = kecepatan × waktu = 75t meter.<br>Maka sisa jarak menuju sekolah adalah jarak total dikurangi jarak tempuh = <b>(1.500 - 75t) meter</b>."}, {"bab": "Bab 2: Aljabar", "q": "Sebuah toko memberikan potongan harga (diskon) sebesar 20% untuk semua barang. Jika harga normal sebuah tas adalah p rupiah, maka harga tas tersebut setelah mendapat potongan adalah ....", "options": ["0,8p rupiah", "0,2p rupiah", "(p - 20) rupiah", "1,2p rupiah"], "correct": 0, "explanation": "Potongan harga 20% dari p adalah (20/100)p = 0,2p.<br>Harga yang harus dibayar = harga normal - diskon = p - 0,2p = (1 - 0,2)p = <b>0,8p rupiah</b> (atau 80/100 p)."}, {"bab": "Bab 2: Aljabar", "q": "Luas sebuah trapesium yang memiliki panjang sisi sejajar atas a cm, sisi sejajar bawah b cm, dan tinggi h cm dinyatakan dalam bentuk aljabar sebagai ....", "options": ["(a + b)h / 2 cm²", "(ab)h / 2 cm²", "2(a + b)h cm²", "(a + b + h) / 2 cm²"], "correct": 0, "explanation": "Rumus luas trapesium adalah 1/2 × (jumlah sisi sejajar) × tinggi.<br>Dengan mengganti besaran ke bentuk aljabar: 1/2 × (a + b) × h = <b>(a + b)h / 2 cm²</b>."}, {"bab": "Bab 2: Aljabar", "q": "Jika diketahui x = -3 dan y = 4, maka nilai dari bentuk aljabar x² - 2xy adalah ....", "options": ["33", "15", "-33", "-15"], "correct": 0, "explanation": "Substitusikan x = -3 dan y = 4 ke dalam bentuk aljabar (gunakan tanda kurung untuk bilangan negatif):<br>x² - 2xy = (-3)² - 2(-3)(4)<br>= 9 - (-24)<br>= 9 + 24 = <b>33</b>."}, {"bab": "Bab 2: Aljabar", "q": "Kecepatan rambat bunyi di udara dinyatakan dengan rumus (331,5 + 0,6t) m/detik, dengan t adalah suhu udara dalam °C. Jika suhu udara saat itu 25°C, maka kecepatan bunyi di udara adalah ....", "options": ["346,5 m/detik", "333 m/detik", "356,5 m/detik", "345 m/detik"], "correct": 0, "explanation": "Substitusikan t = 25 ke dalam persamaan (331,5 + 0,6t):<br>= 331,5 + 0,6 × 25<br>= 331,5 + 15<br>= <b>346,5 m/detik</b>."}, {"bab": "Bab 2: Aljabar", "q": "Suku-suku dan koefisien variabel pada bentuk aljabar 7 - 4x secara berurutan adalah ....", "options": ["Suku: 7 dan -4x; koefisien x adalah -4", "Suku: 7 dan 4x; koefisien x adalah 4", "Suku: 7 dan -4; koefisien x adalah -4", "Suku: 7 dan -4x; koefisien x adalah 7"], "correct": 0, "explanation": "Bentuk 7 - 4x dapat ditulis sebagai penjumlahan suku-sukunya: 7 + (-4x).<br>Jadi, suku-sukunya adalah <b>7 dan -4x</b>, sedangkan bilangan di depan huruf x (koefisien dari x) adalah <b>-4</b>."}, {"bab": "Bab 2: Aljabar", "q": "Bentuk sederhana dari 0,5x - 1,8 - 1,3x + 2,4 adalah ....", "options": ["-0,8x + 0,6", "0,8x + 0,6", "-0,8x - 4,2", "1,8x + 0,6"], "correct": 0, "explanation": "Kumpulkan suku-suku sejenis:<br>(0,5x - 1,3x) + (-1,8 + 2,4)<br>= (0,5 - 1,3)x + 0,6<br>= <b>-0,8x + 0,6</b>."}, {"bab": "Bab 2: Aljabar", "q": "Hasil pengurangan (5a + 6) oleh (-2a + 9) adalah ....", "options": ["7a - 3", "3a + 15", "7a + 15", "3a - 3"], "correct": 0, "explanation": "Dalam pengurangan bentuk aljabar, ubah semua tanda pada suku pengurang lalu jumlahkan:<br>(5a + 6) - (-2a + 9) = 5a + 6 + 2a - 9<br>= (5a + 2a) + (6 - 9) = <b>7a - 3</b>."}, {"bab": "Bab 2: Aljabar", "q": "Bentuk sederhana dari (3x + 1)/2 × 6 adalah ....", "options": ["9x + 3", "9x + 1", "3x + 3", "18x + 6"], "correct": 0, "explanation": "Sederhanakan pembagi 2 dengan pengali 6 (6 : 2 = 3):<br>(3x + 1)/2 × 6 = (3x + 1) × 3<br>Gunakan sifat distributif: 3x × 3 + 1 × 3 = <b>9x + 3</b>."}, {"bab": "Bab 2: Aljabar", "q": "Hasil dari (12x - 8) : (-4) adalah ....", "options": ["-3x + 2", "-3x - 2", "3x - 2", "-3x - 8"], "correct": 0, "explanation": "Ubah pembagian menjadi perkalian dengan kebalikannya (-1/4) dan terapkan sifat distributif:<br>(12x - 8) × (-1/4) = 12x × (-1/4) + (-8) × (-1/4)<br>= -3x + 2 = <b>-3x + 2</b>."}, {"bab": "Bab 2: Aljabar", "q": "Bentuk sederhana dari 3(2x + 1) - 8(x - 2) adalah ....", "options": ["-2x + 19", "-2x - 13", "14x - 13", "-2x + 3"], "correct": 0, "explanation": "Hapus tanda kurung menggunakan sifat distributif (hati-hati tanda negatif pada -8):<br>3(2x + 1) - 8(x - 2) = (6x + 3) + (-8x + 16)<br>= (6x - 8x) + (3 + 16)<br>= <b>-2x + 19</b>."}, {"bab": "Bab 2: Aljabar", "q": "Bentuk sederhana dari 2/3(9a - 6) - 1/2(2a - 10) adalah ....", "options": ["5a + 1", "5a - 9", "7a + 1", "5a - 1"], "correct": 0, "explanation": "Kalikan masing-masing suku di dalam kurung:<br>• 2/3(9a - 6) = (2/3 × 9a) - (2/3 × 6) = 6a - 4<br>• -1/2(2a - 10) = (-1/2 × 2a) + (-1/2 × -10) = -a + 5<br>Gabungkan: (6a - 4) + (-a + 5) = (6a - a) + (-4 + 5) = <b>5a + 1</b>."}, {"bab": "Bab 2: Aljabar", "q": "Pada sebuah kalender bulanan, dipilih 3 tanggal yang tersusun secara vertikal (atas, tengah, bawah). Jika tanggal yang berada di tengah dimisalkan sebagai a, maka jumlah ketiga tanggal tersebut selalu sama dengan ....", "options": ["3a", "3a + 7", "3a - 7", "a + 14"], "correct": 0, "explanation": "Pada kalender, selisih hari dalam satu kolom vertikal adalah 7 hari. Jika tanggal tengah = a, maka tanggal di atasnya = (a - 7) dan tanggal di bawahnya = (a + 7).<br>Jumlah ketiganya = (a - 7) + a + (a + 7) = 3a - 7 + 7 = <b>3a</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Sebuah lift memiliki batas kapasitas angkut maksimal 300 kg. Seorang petugas dengan berat badan 60 kg masuk ke dalam lift sambil membawa a kotak barang yang masing-masing beratnya 20 kg. Kalimat matematika (pertidaksamaan) yang menyatakan situasi tersebut agar lift aman digunakan adalah ....", "options": ["20a + 60 ≤ 300", "20a + 60 < 300", "20a + 60 ≥ 300", "60a + 20 ≤ 300"], "correct": 0, "explanation": "Total berat di dalam lift adalah berat petugas (60 kg) ditambah berat <i>a</i> kotak (20a kg). Karena batas maksimal 300 kg artinya 'tidak lebih dari 300 kg' (boleh sama dengan 300 kg atau kurang dari 300 kg), maka tandanya adalah ≤. Jadi ditulis: <b>20a + 60 ≤ 300</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Harga karcis masuk Taman Mini adalah x rupiah untuk dewasa dan y rupiah untuk pelajar. Arti dari pertidaksamaan 3x > 5y adalah ....", "options": ["Harga 3 karcis dewasa lebih mahal daripada harga 5 karcis pelajar", "Harga 3 karcis dewasa lebih murah daripada harga 5 karcis pelajar", "Harga 3 karcis dewasa sama dengan harga 5 karcis pelajar", "Total harga 3 karcis dewasa dan 5 karcis pelajar lebih dari 0"], "correct": 0, "explanation": "3x menyatakan harga total 3 karcis dewasa, dan 5y menyatakan harga total 5 karcis pelajar. Tanda '>' berarti 'lebih besar dari' (lebih mahal). Jadi 3x > 5y berarti <b>harga 3 karcis dewasa lebih mahal daripada harga 5 karcis pelajar</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Manakah di antara persamaan berikut yang memiliki penyelesaian x = -2?", "options": ["2x - 3 = x - 5", "3x + 2 = 8", "-2x = -4", "x - 5 = 3"], "correct": 0, "explanation": "Substitusikan x = -2 ke dalam persamaan 2x - 3 = x - 5:<br>• Sisi kiri: 2(-2) - 3 = -4 - 3 = -7<br>• Sisi kanan: (-2) - 5 = -7<br>Karena sisi kiri sama dengan sisi kanan (-7 = -7), maka <b>x = -2</b> adalah penyelesaian dari <b>2x - 3 = x - 5</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Perhatikan langkah penyelesaian persamaan berikut:<br>Langkah 1: 3x - 5 = 7<br>Langkah 2: 3x = 7 + 5<br>Sifat persamaan yang digunakan dari Langkah 1 ke Langkah 2 adalah ....", "options": ["Jika A = B, maka A + m = B + m", "Jika A = B, maka A - m = B - m", "Jika A = B, maka A × m = B × m", "Jika A = B, maka A/m = B/m"], "correct": 0, "explanation": "Untuk menghilangkan suku -5 di sisi kiri, kedua sisi ditambahkan dengan 5:<br>3x - 5 + 5 = 7 + 5 → 3x = 7 + 5.<br>Ini sesuai dengan sifat penjumlahan pada persamaan: <b>Jika A = B, maka A + m = B + m</b> (dengan m = 5)."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Penyelesaian dari persamaan linear 8x - 3 = 5 + 6x adalah ....", "options": ["x = 4", "x = 1", "x = -4", "x = 2"], "correct": 0, "explanation": "Pindahkan suku bervariabel ke sisi kiri dan suku bilangan ke sisi kanan (ingat tanda berubah saat berpindah sisi):<br>8x - 3 = 5 + 6x<br>8x - 6x = 5 + 3<br>2x = 8<br>x = 8 : 2 → <b>x = 4</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Nilai x yang memenuhi persamaan 5x - 2(x - 3) = 3 adalah ....", "options": ["x = -1", "x = 1", "x = 3", "x = -3"], "correct": 0, "explanation": "Hapus tanda kurung terlebih dahulu:<br>5x - 2(x - 3) = 3<br>5x - 2x + 6 = 3<br>3x = 3 - 6<br>3x = -3<br>x = -3 : 3 → <b>x = -1</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Penyelesaian dari persamaan dengan koefisien desimal 0,15x - 0,3 = 0,2x - 1 adalah ....", "options": ["x = 14", "x = -14", "x = 1,4", "x = 26"], "correct": 0, "explanation": "Kalikan kedua sisi dengan 100 untuk mengubah semua koefisien menjadi bilangan bulat:<br>15x - 30 = 20x - 100<br>15x - 20x = -100 + 30<br>-5x = -70<br>x = (-70) : (-5) → <b>x = 14</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Nilai x yang memenuhi persamaan pecahan (x + 2)/6 = (x - 3)/4 adalah ....", "options": ["x = 13", "x = -13", "x = 5", "x = -5"], "correct": 0, "explanation": "Kalikan kedua sisi dengan KPK dari 6 dan 4, yaitu 12 (pembatalan penyebut pecahan):<br>12 × (x + 2)/6 = 12 × (x - 3)/4<br>2(x + 2) = 3(x - 3)<br>2x + 4 = 3x - 9<br>2x - 3x = -9 - 4<br>-x = -13 → <b>x = 13</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Jika penyelesaian dari persamaan 3x - a = 8 adalah x = 2, maka nilai a adalah ....", "options": ["-2", "2", "14", "-14"], "correct": 0, "explanation": "Substitusikan nilai x = 2 ke dalam persamaan 3x - a = 8:<br>3(2) - a = 8<br>6 - a = 8<br>-a = 8 - 6<br>-a = 2 → <b>a = -2</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Sebuah kandang kelinci berbentuk persegi panjang dibuat menggunakan pagar kawat sepanjang 24 meter (untuk 3 sisi: 2 sisi samping dan 1 sisi depan, karena sisi belakang menempel tembok). Jika panjang pagar depan 3 meter lebih panjang dari pagar samping, maka panjang pagar samping adalah ....", "options": ["7 meter", "10 meter", "6 meter", "8 meter"], "correct": 0, "explanation": "Misalkan panjang pagar samping = x meter, maka panjang pagar depan = (x + 3) meter.<br>Total panjang pagar kawat = 2 sisi samping + 1 sisi depan:<br>2x + (x + 3) = 24<br>3x + 3 = 24<br>3x = 21 → <b>x = 7 meter</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Sejumlah kertas lipat dibagikan kepada siswa di kelas. Jika setiap siswa menerima 2 lembar, tersisa 8 lembar. Namun jika setiap siswa menerima 3 lembar, kertas kurang 4 lembar. Banyaknya siswa di kelas dan jumlah kertas lipat seluruhnya berturut-turut adalah ....", "options": ["12 siswa dan 32 lembar", "12 siswa dan 24 lembar", "4 siswa dan 16 lembar", "10 siswa dan 28 lembar"], "correct": 0, "explanation": "Misalkan banyaknya siswa = x.<br>Jumlah kertas lipat dinyatakan dalam dua cara yang sama:<br>2x + 8 = 3x - 4<br>2x - 3x = -4 - 8<br>-x = -12 → x = <b>12 siswa</b>.<br>Jumlah kertas lipat = 2(12) + 8 = 24 + 8 = <b>32 lembar</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Adik berjalan kaki dari rumah menuju stasiun dengan kecepatan 60 m/menit. Sembilan menit kemudian, Kakak menyusul bersepeda dari rumah dengan kecepatan 240 m/menit. Waktu yang dibutuhkan Kakak sejak berangkat hingga menyusul Adik adalah ....", "options": ["3 menit", "4 menit", "5 menit", "6 menit"], "correct": 0, "explanation": "Misalkan waktu Kakak menyusul = x menit, maka waktu Adik sudah berjalan = (x + 9) menit.<br>Saat tersusul, jarak tempuh Adik = jarak tempuh Kakak:<br>60(x + 9) = 240x<br>60x + 540 = 240x<br>540 = 180x → x = 540 : 180 = <b>3 menit</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Tangki A berisi 29 liter air dan Tangki B berisi 10 liter air. Setelah sebagian air dituang dari Tangki A ke Tangki B, volume air di Tangki A menjadi dua kali volume air di Tangki B. Banyaknya air yang dituang dari Tangki A ke Tangki B adalah ....", "options": ["3 liter", "4 liter", "5 liter", "2 liter"], "correct": 0, "explanation": "Misalkan banyaknya air yang dituang dari Tangki A ke Tangki B adalah <i>x</i> liter.<br>• Volume akhir Tangki A = (29 - x) liter<br>• Volume akhir Tangki B = (10 + x) liter<br>Karena isi Tangki A menjadi dua kali isi Tangki B:<br>29 - x = 2(10 + x)<br>29 - x = 20 + 2x<br>29 - 20 = 2x + x<br>9 = 3x → <b>x = 3 liter</b>.<br><i>(Cek: A = 29 - 3 = 26 liter, B = 10 + 3 = 13 liter; 26 = 2 × 13, tepat!)</i>"}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Nilai x yang memenuhi perbandingan 5 : 8 = (x - 2) : 16 adalah ....", "options": ["x = 12", "x = 10", "x = 8", "x = 14"], "correct": 0, "explanation": "Gunakan sifat perbandingan a : b = c : d → ad = bc (hasil kali suku tepi sama dengan hasil kali suku tengah):<br>8(x - 2) = 5 × 16<br>8x - 16 = 80<br>8x = 96 → x = 96 : 8 = <b>12</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Untuk membuat kopi susu dengan komposisi tetap, dicampurkan 160 ml susu dan 120 ml kopi. Jika tersedia 180 ml kopi, maka banyaknya susu yang harus ditambahkan agar rasanya sama adalah ....", "options": ["240 ml", "220 ml", "135 ml", "200 ml"], "correct": 0, "explanation": "Buat perbandingan kopi : susu = 120 : 160 = 180 : x.<br>120x = 160 × 180<br>x = (160 × 180) / 120<br>x = (160 × 3) / 2 = 80 × 3 = <b>240 ml</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Penyelesaian dari pertidaksamaan linear satu variabel 3x + 2 < x + 10 untuk x bilangan bulat adalah ....", "options": ["x < 4", "x > 4", "x ≤ 4", "x < 6"], "correct": 0, "explanation": "Cari batas titik pembuat sama (persamaan):<br>3x + 2 = x + 10<br>3x - x = 10 - 2<br>2x = 8 → x = 4.<br>Uji titik x = 0 (di sebelah kiri 4): 3(0) + 2 < 0 + 10 → 2 < 10 (Benar).<br>Jadi penyelesaian pertidaksamaan tersebut adalah <b>x < 4</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Faris berbelanja membawa uang Rp10.000,00. Ia ingin membeli x buah buku tulis seharga Rp1.500,00 per buah, namun ia harus menyisakan uang paling sedikit Rp2.000,00 untuk ongkos pulang. Pertidaksamaan yang tepat dan jumlah buku maksimal yang dapat dibeli Faris adalah ....", "options": ["10.000 - 1.500x ≥ 2.000; maksimal 5 buku", "10.000 - 1.500x > 2.000; maksimal 6 buku", "10.000 - 1.500x ≤ 2.000; maksimal 5 buku", "1.500x - 10.000 ≥ 2.000; maksimal 4 buku"], "correct": 0, "explanation": "Sisa uang = 10.000 - 1.500x. Karena sisa uang harus 'paling sedikit Rp2.000,00', tandanya adalah ≥ (lebih dari atau sama dengan):<br>10.000 - 1.500x ≥ 2.000<br>Batas persamaan: 10.000 - 1.500x = 2.000 → 1.500x = 8.000 → x = 16/3 = 5,33.<br>Karena x harus ≤ 5,33 dan banyaknya buku merupakan bilangan bulat, maka Faris dapat membeli <b>maksimal 5 buku</b>."}, {"bab": "Bab 3: Persamaan & Pertidaksamaan Linear", "q": "Sebuah pita kertas sepanjang x cm dipotong menjadi 5 bagian sama panjang. Jika panjang setiap potongan pita tidak kurang dari 20 cm, maka batas nilai x yang memenuhi adalah ....", "options": ["x ≥ 100", "x > 100", "x ≤ 100", "x ≥ 4"], "correct": 0, "explanation": "Panjang setiap potongan pita = x/5 cm. Istilah 'tidak kurang dari 20 cm' berarti lebih dari atau sama dengan 20 (≥ 20).<br>x/5 ≥ 20<br>Kalikan kedua sisi dengan 5:<br><b>x ≥ 100</b>."}];
+
+  let activeQuestions = [];
+  let userAnswers = {};
+  let isSubmitted = false;
+
+  // Fungsi Fisher-Yates Shuffle untuk mengacak posisi pilihan jawaban (A, B, C, D)
+  function shuffleArray(array) {
+    const arr = array.slice();
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // Inisialisasi soal dengan pengacakan opsi A, B, C, D
+  function initQuiz() {
+    userAnswers = {};
+    isSubmitted = false;
+    document.getElementById('score-panel').classList.remove('show');
+    document.getElementById('submit-container').style.display = 'block';
+    document.getElementById('nav-legend').innerHTML = 'Biru = Terjawab';
+
+    activeQuestions = RAW_QUESTIONS.map((item, idx) => {
+      const mappedOptions = item.options.map((text, optIdx) => ({
+        text: text,
+        isCorrect: optIdx === item.correct
+      }));
+      const shuffledOptions = shuffleArray(mappedOptions);
+      return {
+        number: idx + 1,
+        bab: item.bab,
+        q: item.q,
+        options: shuffledOptions,
+        explanation: item.explanation
+      };
+    });
+
+    renderNavGrid();
+    renderQuestions();
+    updateProgress();
+  }
+
+  // Render Grid Navigasi 1 - 50
+  function renderNavGrid() {
+    const grid = document.getElementById('question-nav-grid');
+    grid.innerHTML = '';
+    activeQuestions.forEach((qObj) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'q-num-btn';
+      btn.id = `nav-btn-${qObj.number}`;
+      btn.textContent = qObj.number;
+      btn.onclick = () => {
+        // Reset filter ke ALL jika soal tersembunyi
+        const filterVal = document.getElementById('bab-filter').value;
+        if (filterVal !== 'ALL' && !qObj.bab.startsWith(filterVal)) {
+          document.getElementById('bab-filter').value = 'ALL';
+          filterQuestions();
+        }
+        const el = document.getElementById(`q-card-${qObj.number}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+      grid.appendChild(btn);
+    });
+  }
+
+  // Render Seluruh 50 Kartu Soal
+  function renderQuestions() {
+    const container = document.getElementById('questions-container');
+    container.innerHTML = '';
+    const letters = ['A', 'B', 'C', 'D'];
+
+    activeQuestions.forEach((qObj) => {
+      const card = document.createElement('div');
+      card.className = 'question-card';
+      card.id = `q-card-${qObj.number}`;
+      card.dataset.bab = qObj.bab;
+
+      let optionsHtml = '';
+      qObj.options.forEach((opt, optIdx) => {
+        optionsHtml += `
+          <label class="option-label" id="opt-label-${qObj.number}-${optIdx}" onclick="selectOption(${qObj.number}, ${optIdx})">
+            <input type="radio" name="q_${qObj.number}" value="${optIdx}">
+            <span class="opt-letter">${letters[optIdx]}.</span>
+            <span>${opt.text}</span>
+          </label>
+        `;
+      });
+
+      card.innerHTML = `
+        <div class="q-meta">
+          <span class="q-number-badge">Soal No. ${qObj.number}</span>
+          <span class="q-bab-tag">${qObj.bab}</span>
+        </div>
+        <div class="q-text">${qObj.q}</div>
+        <div class="options-list">${optionsHtml}</div>
+        <div class="pembahasan-box" id="pembahasan-${qObj.number}">
+          <div class="status-line" id="status-${qObj.number}"></div>
+          <div class="pembahasan-detail" id="detail-${qObj.number}"></div>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+  }
+
+  // Menangani Pilihan Jawaban Siswa
+  function selectOption(qNum, optIdx) {
+    if (isSubmitted) return; // Kunci jawaban setelah di-submit
+    userAnswers[qNum] = optIdx;
+
+    // Update tampilan radio & highlight pilihan
+    const qObj = activeQuestions[qNum - 1];
+    qObj.options.forEach((_, idx) => {
+      const lbl = document.getElementById(`opt-label-${qNum}-${idx}`);
+      const radio = lbl.querySelector('input[type="radio"]');
+      if (idx === optIdx) {
+        lbl.classList.add('selected');
+        radio.checked = true;
+      } else {
+        lbl.classList.remove('selected');
+        radio.checked = false;
+      }
+    });
+
+    // Update navigasi grid
+    const navBtn = document.getElementById(`nav-btn-${qNum}`);
+    if (navBtn) navBtn.classList.add('answered');
+
+    updateProgress();
+  }
+
+  // Update Counter Progres
+  function updateProgress() {
+    const answeredCount = Object.keys(userAnswers).length;
+    document.getElementById('progress-counter').textContent = `Terjawab: ${answeredCount} / 50`;
+    const warnEl = document.getElementById('submit-warning');
+    if (answeredCount < 50) {
+      warnEl.textContent = `Kamu baru menjawab ${answeredCount} dari 50 soal. Masih ada ${50 - answeredCount} soal yang belum dijawab.`;
+    } else {
+      warnEl.textContent = `Hebat! Semua 50 soal sudah terjawab. Klik tombol di bawah untuk melihat skor dan pembahasan lengkap.`;
+    }
+  }
+
+  // Filter Soal berdasarkan Bab
+  function filterQuestions() {
+    const filterVal = document.getElementById('bab-filter').value;
+    activeQuestions.forEach((qObj) => {
+      const card = document.getElementById(`q-card-${qObj.number}`);
+      if (filterVal === 'ALL' || qObj.bab.startsWith(filterVal)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Submit & Hitung Skor + Tampilkan Pembahasan Lengkap
+  function submitQuiz() {
+    const answeredCount = Object.keys(userAnswers).length;
+    if (answeredCount < 50) {
+      const confirmSubmit = confirm(`Kamu baru mengerjakan ${answeredCount} dari 50 soal (masih ada ${50 - answeredCount} soal kosong). Apakah kamu yakin ingin mengumpulkan sekarang?`);
+      if (!confirmSubmit) return;
+    }
+
+    isSubmitted = true;
+    // Tampilkan semua bab agar hasil terlihat utuh
+    document.getElementById('bab-filter').value = 'ALL';
+    filterQuestions();
+
+    let benar = 0;
+    let salah = 0;
+    let kosong = 0;
+    const letters = ['A', 'B', 'C', 'D'];
+
+    activeQuestions.forEach((qObj) => {
+      const qNum = qObj.number;
+      const chosenIdx = userAnswers[qNum];
+      const correctIdx = qObj.options.findIndex(o => o.isCorrect);
+      const card = document.getElementById(`q-card-${qNum}`);
+      const navBtn = document.getElementById(`nav-btn-${qNum}`);
+      const pembahasanBox = document.getElementById(`pembahasan-${qNum}`);
+      const statusEl = document.getElementById(`status-${qNum}`);
+      const detailEl = document.getElementById(`detail-${qNum}`);
+
+      // Disable semua radio input
+      qObj.options.forEach((_, idx) => {
+        const lbl = document.getElementById(`opt-label-${qNum}-${idx}`);
+        lbl.querySelector('input').disabled = true;
+        if (idx === correctIdx) {
+          lbl.classList.add('opt-correct');
+        }
+      });
+
+      navBtn.classList.remove('answered');
+
+      if (chosenIdx === undefined) {
+        kosong++;
+        card.classList.add('border-wrong');
+        navBtn.classList.add('res-wrong');
+        statusEl.className = 'status-line kosong';
+        statusEl.innerHTML = `⚠ Tidak Dijawab • Kunci Jawaban Benar: <strong>${letters[correctIdx]}. ${qObj.options[correctIdx].text}</strong>`;
+      } else if (chosenIdx === correctIdx) {
+        benar++;
+        card.classList.add('border-correct');
+        navBtn.classList.add('res-correct');
+        statusEl.className = 'status-line benar';
+        statusEl.innerHTML = `✔ Jawaban Kamu Benar (${letters[chosenIdx]})`;
+      } else {
+        salah++;
+        card.classList.add('border-wrong');
+        navBtn.classList.add('res-wrong');
+        const wrongLbl = document.getElementById(`opt-label-${qNum}-${chosenIdx}`);
+        wrongLbl.classList.add('opt-wrong');
+        statusEl.className = 'status-line salah';
+        statusEl.innerHTML = `✖ Jawaban Kamu Salah (${letters[chosenIdx]}) • Kunci Jawaban Benar: <strong>${letters[correctIdx]}. ${qObj.options[correctIdx].text}</strong>`;
+      }
+
+      detailEl.innerHTML = `<strong>Pembahasan Lengkap:</strong><br>${qObj.explanation}`;
+      pembahasanBox.classList.add('show');
+    });
+
+    // Hitung Skor Skala 100 (50 soal × 2 poin = 100)
+    const finalScore = benar * 2;
+    document.getElementById('final-score').textContent = finalScore;
+    document.getElementById('stat-benar').textContent = benar;
+    document.getElementById('stat-salah').textContent = salah;
+    document.getElementById('stat-kosong').textContent = kosong;
+
+    let predicate = '';
+    if (finalScore >= 90) {
+      predicate = '🏆 Luar Biasa! Penguasaan materi sangat baik (Predikat A).';
+    } else if (finalScore >= 75) {
+      predicate = '👏 Bagus! Kamu sudah melampaui Kriteria Ketuntasan Minimal (Predikat B).';
+    } else if (finalScore >= 60) {
+      predicate = '👍 Cukup Baik! Pelajari kembali pembahasan soal yang masih keliru (Predikat C).';
+    } else {
+      predicate = '💪 Tetap Semangat! Baca ulang ringkasan materi dan pelajari pembahasan di bawah ini.';
+    }
+    document.getElementById('score-predicate').textContent = predicate;
+    document.getElementById('nav-legend').innerHTML = '<span style="color:#15803d;">Hijau = Benar</span> | <span style="color:#b91c1c;">Merah = Salah/Kosong</span>';
+
+    document.getElementById('submit-container').style.display = 'none';
+    const scorePanel = document.getElementById('score-panel');
+    scorePanel.classList.add('show');
+    scorePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function scrollToFirstWrong() {
+    const firstCard = document.getElementById('q-card-1');
+    if (firstCard) firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function resetAndShuffleQuiz() {
+    if (Object.keys(userAnswers).length > 0 && !isSubmitted) {
+      if (!confirm('Mengacak ulang akan menghapus jawabanmu saat ini. Lanjutkan?')) return;
+    }
+    initQuiz();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Pindah Tab Materi <-> Soal
+  function switchTab(tabName) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section-view').forEach(v => v.classList.remove('active'));
+
+    document.getElementById(`tab-${tabName}`).classList.add('active');
+    document.getElementById(`view-${tabName}`).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Jalankan saat halaman pertama kali dimuat
+  window.addEventListener('DOMContentLoaded', initQuiz);
+</script>
+</body>
+</html>

@@ -1,0 +1,3109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Bahasa Inggris Kelas 7 Semester 1 (100 Soal)</title>
+  <style>
+    /* =========================================================================
+       VARIABEL WARNA & RESET DASAR (100% OFFLINE, TANPA KETERGANTUNGAN EKSTERNAL)
+       ========================================================================= */
+    :root {
+      --bg-page: #f4f7fb;
+      --bg-card: #ffffff;
+      --bg-subtle: #eef2f7;
+      --bg-accent-soft: #e8f0fe;
+      --text-primary: #162032;
+      --text-secondary: #4a5970;
+      --text-muted: #6e7d94;
+      --border-color: #dce3ee;
+      --primary: #1d5fd6;
+      --primary-hover: #1549ab;
+      --success-bg: #e7f7ed;
+      --success-border: #28a745;
+      --success-text: #155724;
+      --danger-bg: #fdecec;
+      --danger-border: #dc3545;
+      --danger-text: #721c24;
+      --warning-bg: #fff8e6;
+      --warning-border: #e0a800;
+      --warning-text: #664d03;
+      --answered-bg: #dbeafe;
+      --answered-border: #3b82f6;
+      --answered-text: #1e40af;
+      --shadow-sm: 0 2px 8px rgba(22, 32, 50, 0.05);
+      --shadow-md: 0 8px 24px rgba(22, 32, 50, 0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --font-sans: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-size: 16px;
+      padding: 20px 16px 64px;
+    }
+
+    /* =========================================================================
+       TATA LETAK UTAMA: KOLOM SOAL (KIRI) & PANEL NAVIGASI TETAP (KANAN)
+       ========================================================================= */
+    .quiz-layout {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .quiz-main {
+      min-width: 0;
+    }
+
+    /* Header ringkas khusus halaman soal */
+    .quiz-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quiz-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .quiz-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    /* =========================================================================
+       KARTU SKOR & HASIL SETELAH SUBMIT
+       ========================================================================= */
+    .score-panel {
+      display: none;
+      background: var(--bg-card);
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .score-panel.visible {
+      display: block;
+    }
+
+    .score-header-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .score-heading {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .score-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .score-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .score-box.final-score {
+      background: var(--bg-accent-soft);
+      border-color: #93c5fd;
+    }
+
+    .score-box.correct-box {
+      background: var(--success-bg);
+      border-color: #9ae6b4;
+    }
+
+    .score-box.wrong-box {
+      background: var(--danger-bg);
+      border-color: #feb2b2;
+    }
+
+    .score-box.unanswered-box {
+      background: var(--warning-bg);
+      border-color: #fbd38d;
+    }
+
+    .score-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .score-value {
+      display: block;
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    /* =========================================================================
+       KARTU TIAP SOAL (1 - 100)
+       ========================================================================= */
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 24px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .question-card.status-correct {
+      border-color: var(--success-border);
+      background: #fcfffd;
+    }
+
+    .question-card.status-wrong {
+      border-color: var(--danger-border);
+      background: #fffdfd;
+    }
+
+    .question-card.status-unanswered {
+      border-color: var(--warning-border);
+    }
+
+    .question-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .q-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 3px 11px;
+      border-radius: 999px;
+    }
+
+    .q-chapter {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-subtle);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .q-result-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      display: none;
+    }
+
+    .q-result-badge.correct {
+      display: inline-block;
+      background: var(--success-bg);
+      color: var(--success-text);
+      border: 1px solid var(--success-border);
+    }
+
+    .q-result-badge.wrong {
+      display: inline-block;
+      background: var(--danger-bg);
+      color: var(--danger-text);
+      border: 1px solid var(--danger-border);
+    }
+
+    .q-result-badge.unanswered {
+      display: inline-block;
+      background: var(--warning-bg);
+      color: var(--warning-text);
+      border: 1px solid var(--warning-border);
+    }
+
+    .question-prompt {
+      font-size: 1.03rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+      white-space: pre-line;
+    }
+
+    /* Opsi Pilihan Ganda A, B, C, D */
+    .options-group {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+      user-select: none;
+    }
+
+    .option-item:hover {
+      background: var(--bg-subtle);
+      border-color: #b4c3d8;
+    }
+
+    .option-item input[type="radio"] {
+      margin-top: 3px;
+      accent-color: var(--primary);
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .option-letter {
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 22px;
+      flex-shrink: 0;
+    }
+
+    .option-text {
+      color: var(--text-primary);
+      font-size: 0.97rem;
+      flex: 1;
+    }
+
+    .option-item.selected {
+      background: var(--bg-accent-soft);
+      border-color: var(--primary);
+    }
+
+    /* Highlight opsi setelah submit */
+    .option-item.option-correct-answer {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+
+    .option-item.option-correct-answer .option-letter,
+    .option-item.option-correct-answer .option-text {
+      color: var(--success-text);
+      font-weight: 600;
+    }
+
+    .option-item.option-wrong-user {
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+    }
+
+    .option-item.option-wrong-user .option-letter,
+    .option-item.option-wrong-user .option-text {
+      color: var(--danger-text);
+    }
+
+    .option-tag {
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .option-tag.tag-right {
+      background: var(--success-border);
+      color: #ffffff;
+    }
+
+    .option-tag.tag-user-wrong {
+      background: var(--danger-border);
+      color: #ffffff;
+    }
+
+    /* =========================================================================
+       BLOK PEMBAHASAN SOAL (MUNCUL SETELAH SUBMIT)
+       ========================================================================= */
+    .explanation-box {
+      display: none;
+      margin-top: 16px;
+      padding: 15px 16px;
+      border-radius: var(--radius-md);
+      background: var(--bg-subtle);
+      border-left: 4px solid var(--primary);
+      font-size: 0.94rem;
+      color: var(--text-primary);
+    }
+
+    .explanation-box.visible {
+      display: block;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .explanation-main {
+      margin-bottom: 10px;
+    }
+
+    .distractor-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding-top: 8px;
+      border-top: 1px dashed #c8d3e3;
+      font-size: 0.89rem;
+      color: var(--text-secondary);
+    }
+
+    .distractor-list li strong {
+      color: var(--text-primary);
+    }
+
+    /* =========================================================================
+       TOMBOL SUBMIT DI BAGIAN AKHIR SOAL
+       ========================================================================= */
+    .submit-section {
+      margin-top: 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .submit-info {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 700;
+      padding: 11px 20px;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: var(--bg-subtle);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: #dfe6f0;
+    }
+
+    .btn-warning {
+      background: #d97706;
+      color: #ffffff;
+    }
+
+    .btn-warning:hover {
+      background: #b45309;
+    }
+
+    /* =========================================================================
+       PANEL NAVIGASI NOMOR 1 - 100 DI SAMPING (POSISI TETAP SAAT SCROLL)
+       ========================================================================= */
+    .nav-sidebar {
+      position: sticky;
+      top: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-md);
+      max-height: calc(100vh - 40px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .nav-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .nav-progress-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--bg-accent-soft);
+      padding: 2px 9px;
+      border-radius: 999px;
+    }
+
+    .nav-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-swatch {
+      width: 13px;
+      height: 13px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      display: inline-block;
+    }
+
+    .swatch-unanswered {
+      background: #ffffff;
+    }
+
+    .swatch-answered {
+      background: var(--answered-bg);
+      border-color: var(--answered-border);
+    }
+
+    .swatch-correct {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+
+    .swatch-wrong {
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: 5px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .nav-num-btn {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.76rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
+    }
+
+    .nav-num-btn:hover {
+      border-color: var(--primary);
+      background: var(--bg-subtle);
+    }
+
+    .nav-num-btn.answered {
+      background: var(--answered-bg);
+      border-color: var(--answered-border);
+      color: var(--answered-text);
+      font-weight: 700;
+    }
+
+    .nav-num-btn.nav-correct {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success-text);
+      font-weight: 700;
+    }
+
+    .nav-num-btn.nav-wrong {
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+      color: var(--danger-text);
+      font-weight: 700;
+    }
+
+    .nav-num-btn.nav-missing {
+      background: var(--warning-bg);
+      border-color: var(--warning-border);
+      color: var(--warning-text);
+      font-weight: 700;
+    }
+
+    .nav-footer-actions {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-footer-actions .btn {
+      flex: 1;
+      padding: 8px 10px;
+      font-size: 0.84rem;
+    }
+
+    /* =========================================================================
+       MODAL KONFIRMASI (MENGGANTIKAN confirm() AGAR AMAN & MENDUKUNG OPSI LANJUT)
+       ========================================================================= */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      max-width: 440px;
+      width: 100%;
+      padding: 22px 24px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .modal-desc {
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* =========================================================================
+       RESPONSIVITAS TABLET & MOBILE
+       ========================================================================= */
+    @media (max-width: 960px) {
+      .quiz-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      /* Di layar lebih kecil, panel nomor dibuat ringkas & tetap menempel di atas layar saat scroll */
+      .nav-sidebar {
+        position: sticky;
+        top: 8px;
+        z-index: 50;
+        max-height: none;
+        padding: 12px 14px;
+      }
+
+      .nav-grid {
+        grid-template-columns: repeat(20, minmax(0, 1fr));
+        max-height: 112px;
+        gap: 4px;
+      }
+
+      .nav-num-btn {
+        font-size: 0.7rem;
+        border-radius: 5px;
+      }
+
+      .score-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        padding: 12px 10px 56px;
+      }
+
+      .quiz-header,
+      .question-card,
+      .submit-section,
+      .score-panel {
+        padding: 16px;
+      }
+
+      .nav-grid {
+        grid-template-columns: repeat(10, minmax(0, 1fr));
+        max-height: 126px;
+      }
+
+      .question-card {
+        scroll-margin-top: 195px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-layout">
+    <!-- =====================================================================
+         KOLOM UTAMA: HEADER SINGKAT, PANEL SKOR, 100 SOAL, DAN TOMBOL SUBMIT
+         ===================================================================== -->
+    <main class="quiz-main">
+      <header class="quiz-header">
+        <h1 class="quiz-title">Latihan Soal Bahasa Inggris Kelas 7 Semester 1</h1>
+        <p class="quiz-subtitle">
+          100 Soal Pilihan Ganda • Chapter 0–3 (The Beginning, About Me, Culinary and Me, Home Sweet Home)
+        </p>
+      </header>
+
+      <!-- Panel Skor (muncul setelah submit) -->
+      <section id="scorePanel" class="score-panel" aria-live="polite">
+        <div class="score-header-row">
+          <h2 class="score-heading">Hasil Pengerjaan Kuis</h2>
+          <div class="score-actions">
+            <button type="button" id="jumpFirstWrongBtn" class="btn btn-secondary">
+              Cek Jawaban Salah
+            </button>
+            <button type="button" id="resetQuizTopBtn" class="btn btn-primary">
+              Ulangi Kuis / Reset
+            </button>
+          </div>
+        </div>
+        <div class="score-grid">
+          <div class="score-box final-score">
+            <span class="score-label">Nilai Akhir</span>
+            <span id="finalScoreVal" class="score-value">0</span>
+          </div>
+          <div class="score-box correct-box">
+            <span class="score-label">Jawaban Benar</span>
+            <span id="correctCountVal" class="score-value">0</span>
+          </div>
+          <div class="score-box wrong-box">
+            <span class="score-label">Jawaban Salah</span>
+            <span id="wrongCountVal" class="score-value">0</span>
+          </div>
+          <div class="score-box unanswered-box">
+            <span class="score-label">Belum Dijawab</span>
+            <span id="unansweredCountVal" class="score-value">100</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Daftar 100 Soal -->
+      <form id="quizForm">
+        <div id="questionList" class="question-list"></div>
+
+        <div class="submit-section">
+          <div class="submit-info">
+            Terjawab: <strong id="bottomAnsweredCount">0</strong> dari <strong>100</strong> soal.
+            Klik <strong>Submit / Selesai</strong> untuk melihat skor dan pembahasan lengkap.
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" id="resetQuizBottomBtn" class="btn btn-secondary">
+              Reset Jawaban
+            </button>
+            <button type="submit" id="submitQuizBtn" class="btn btn-primary">
+              Submit / Selesai
+            </button>
+          </div>
+        </div>
+      </form>
+    </main>
+
+    <!-- =====================================================================
+         PANEL NAVIGASI NOMOR 1 - 100 DI SAMPING (POSISI TETAP SAAT SCROLL)
+         ===================================================================== -->
+    <aside class="nav-sidebar" aria-label="Navigasi Nomor Soal">
+      <div class="nav-header">
+        <span class="nav-title">Nomor Soal</span>
+        <span id="sidebarProgressBadge" class="nav-progress-text">0 / 100</span>
+      </div>
+
+      <div class="nav-legend" id="navLegend">
+        <span class="legend-item">
+          <span class="legend-swatch swatch-unanswered"></span>Belum
+        </span>
+        <span class="legend-item">
+          <span class="legend-swatch swatch-answered"></span>Terjawab
+        </span>
+      </div>
+
+      <div id="navGrid" class="nav-grid"></div>
+
+      <div class="nav-footer-actions">
+        <button type="button" id="sidebarSubmitBtn" class="btn btn-primary">
+          Submit Kuis
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Modal Konfirmasi saat masih ada soal belum terjawab -->
+  <div id="confirmModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle">
+    <div class="modal-box">
+      <h3 id="confirmModalTitle" class="modal-title">Masih Ada Soal Belum Dijawab</h3>
+      <p id="confirmModalDesc" class="modal-desc">
+        Terdapat soal yang belum dipilih jawabannya. Apakah Anda tetap ingin mengumpulkan kuis sekarang atau kembali memeriksa?
+      </p>
+      <div class="modal-actions">
+        <button type="button" id="modalReviewBtn" class="btn btn-secondary">
+          Kembali Mengecek
+        </button>
+        <button type="button" id="modalForceSubmitBtn" class="btn btn-warning">
+          Tetap Submit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* =====================================================================
+         DATA MENTAH 100 SOAL (KELAS 7 / 1 SMP SEMESTER 1 - KURIKULUM MERDEKA)
+         Struktur tiap item:
+         - id: 1..100
+         - chapter: nama bab sesuai English for Nusantara Semester 1
+         - q: teks pertanyaan
+         - correct: teks jawaban benar (akan diacak posisinya ke A/B/C/D)
+         - distractors: array 3 pengecoh (teks opsi salah)
+         - explanation: pembahasan utama dalam bahasa Indonesia
+         - distractorNotes: penjelasan khusus untuk masing-masing pengecoh
+         ===================================================================== */
+      const RAW_QUESTIONS = [
+        // ---------------- CHAPTER 0: THE BEGINNING (NO. 1 - 15) ----------------
+        {
+          id: 1,
+          chapter: "Chapter 0: The Beginning",
+          q: "How do you spell your name 'BIMA' in English using the alphabet?",
+          correct: "Bee - Aye - Em - Aye",
+          distractors: [
+            "Beh - Ah - Em - Ah",
+            "Bee - Ee - En - Aye",
+            "Bay - Aye - Em - Ee"
+          ],
+          explanation: "Dalam pelafalan alfabet bahasa Inggris, huruf B dilafalkan /biː/ ('Bee'), I dilafalkan /aɪ/ ('Aye'), M dilafalkan /em/ ('Em'), dan A dilafalkan /eɪ/ ('Aye').",
+          distractorNotes: {
+            "Beh - Ah - Em - Ah": "Menggunakan pelafalan huruf bahasa Indonesia, bukan alfabet bahasa Inggris.",
+            "Bee - Ee - En - Aye": "Huruf kedua adalah 'I' ('Aye', bukan 'Ee') dan huruf ketiga adalah 'M' ('Em', bukan 'En').",
+            "Bay - Aye - Em - Ee": "Huruf pertama adalah 'B' ('Bee') dan huruf terakhir adalah 'A' ('Aye')."
+          }
+        },
+        {
+          id: 2,
+          chapter: "Chapter 0: The Beginning",
+          q: "Look at the clock: 07:15. How do you say this time in English?",
+          correct: "It is a quarter past seven.",
+          distractors: [
+            "It is a quarter to seven.",
+            "It is half past seven.",
+            "It is seven to fifteen."
+          ],
+          explanation: "15 menit dalam bahasa Inggris disebut 'a quarter'. Karena jarum menit melewati angka 12 menuju 15 menit setelah jam 7, digunakan 'past': 'a quarter past seven'.",
+          distractorNotes: {
+            "It is a quarter to seven.": "'To' berarti kurang 15 menit (06:45), bukan lewat 15 menit.",
+            "It is half past seven.": "'Half past seven' berarti pukul 07:30 (lewat 30 menit).",
+            "It is seven to fifteen.": "Susunan membaca jam yang tidak lazim dalam bahasa Inggris."
+          }
+        },
+        {
+          id: 3,
+          chapter: "Chapter 0: The Beginning",
+          q: "Today is Wednesday. What day was yesterday?",
+          correct: "Tuesday",
+          distractors: [
+            "Thursday",
+            "Friday",
+            "Monday"
+          ],
+          explanation: "Jika hari ini Wednesday (Rabu), maka kemarin ('yesterday') adalah Tuesday (Selasa).",
+          distractorNotes: {
+            "Thursday": "Thursday (Kamis) adalah hari setelah Wednesday.",
+            "Friday": "Friday (Jumat) adalah dua hari setelah Wednesday.",
+            "Monday": "Monday (Senin) adalah dua hari sebelum Wednesday."
+          }
+        },
+        {
+          id: 4,
+          chapter: "Chapter 0: The Beginning",
+          q: "What comes after the tenth month of the year (October)?",
+          correct: "November",
+          distractors: [
+            "September",
+            "December",
+            "August"
+          ],
+          explanation: "Urutan bulan setelah October (bulan ke-10) adalah November (bulan ke-11).",
+          distractorNotes: {
+            "September": "September adalah bulan ke-9 (sebelum October).",
+            "December": "December adalah bulan ke-12 (setelah November).",
+            "August": "August adalah bulan ke-8."
+          }
+        },
+        {
+          id: 5,
+          chapter: "Chapter 0: The Beginning",
+          q: "When you mix red and yellow paint together, what color do you get?",
+          correct: "Orange",
+          distractors: [
+            "Purple",
+            "Green",
+            "Brown"
+          ],
+          explanation: "Campuran warna merah ('red') dan kuning ('yellow') menghasilkan warna jingga ('orange').",
+          distractorNotes: {
+            "Purple": "Ungu ('purple') berasal dari campuran merah dan biru.",
+            "Green": "Hijau ('green') berasal dari campuran biru dan kuning.",
+            "Brown": "Cokelat ('brown') biasanya muncul dari campuran banyak warna atau komplementer."
+          }
+        },
+        {
+          id: 6,
+          chapter: "Chapter 0: The Beginning",
+          q: "My father's sister is my ....",
+          correct: "aunt",
+          distractors: [
+            "uncle",
+            "cousin",
+            "nephew"
+          ],
+          explanation: "Saudara perempuan dari ayah atau ibu disebut 'aunt' (bibi/tante).",
+          distractorNotes: {
+            "uncle": "'Uncle' berarti paman (saudara laki-laki ayah/ibu).",
+            "cousin": "'Cousin' berarti sepupu.",
+            "nephew": "'Nephew' berarti keponakan laki-laki."
+          }
+        },
+        {
+          id: 7,
+          chapter: "Chapter 0: The Beginning",
+          q: "Teacher: 'Please, ... the whiteboard before we start the lesson.'",
+          correct: "clean",
+          distractors: [
+            "sleep",
+            "eat",
+            "swim"
+          ],
+          explanation: "Instruksi kelas yang wajar sebelum pelajaran dimulai adalah membersihkan papan tulis ('clean the whiteboard').",
+          distractorNotes: {
+            "sleep": "Tidak sesuai konteks instruksi kelas ('sleep' = tidur).",
+            "eat": "Tidak sesuai konteks membersihkan papan tulis ('eat' = makan).",
+            "swim": "Tidak sesuai konteks ruang kelas ('swim' = berenang)."
+          }
+        },
+        {
+          id: 8,
+          chapter: "Chapter 0: The Beginning",
+          q: "How do you write the number 48 in English words?",
+          correct: "Forty-eight",
+          distractors: [
+            "Fourty-eight",
+            "Fourteen-eight",
+            "Eighty-four"
+          ],
+          explanation: "Penulisan 40 yang baku dalam bahasa Inggris adalah 'forty' (tanpa huruf 'u'), sehingga 48 adalah 'forty-eight'.",
+          distractorNotes: {
+            "Fourty-eight": "Salah ejaan; 'forty' tidak memakai huruf 'u' di depan.",
+            "Fourteen-eight": "'Fourteen' berarti 14, bukan 40.",
+            "Eighty-four": "'Eighty-four' berarti 84."
+          }
+        },
+        {
+          id: 9,
+          chapter: "Chapter 0: The Beginning",
+          q: "It is 06:30 in the morning. You can say, 'It is ....'",
+          correct: "half past six",
+          distractors: [
+            "quarter past six",
+            "six to thirty",
+            "half to six"
+          ],
+          explanation: "Setengah jam ('half') setelah pukul 6 ('past six') adalah 'half past six' (06:30).",
+          distractorNotes: {
+            "quarter past six": "Berarti 06:15 (lewat 15 menit).",
+            "six to thirty": "Bentuk yang tidak tepat untuk menyatakan waktu.",
+            "half to six": "Bentuk ungkapan jam yang tidak baku dalam bahasa Inggris."
+          }
+        },
+        {
+          id: 10,
+          chapter: "Chapter 0: The Beginning",
+          q: "Which classroom instruction means 'diam dan dengarkan'?",
+          correct: "Be quiet and listen.",
+          distractors: [
+            "Open your bag and run.",
+            "Close the door and shout.",
+            "Stand up and go home."
+          ],
+          explanation: "'Be quiet' berarti diam/tenang dan 'listen' berarti dengarkan.",
+          distractorNotes: {
+            "Open your bag and run.": "Berarti 'buka tasmu dan berlari'.",
+            "Close the door and shout.": "Berarti 'tutup pintu dan berteriak'.",
+            "Stand up and go home.": "Berarti 'berdiri dan pulang ke rumah'."
+          }
+        },
+        {
+          id: 11,
+          chapter: "Chapter 0: The Beginning",
+          q: "My mother's brother is my ....",
+          correct: "uncle",
+          distractors: [
+            "niece",
+            "grandmother",
+            "sister"
+          ],
+          explanation: "Saudara laki-laki dari ibu atau ayah disebut 'uncle' (paman).",
+          distractorNotes: {
+            "niece": "'Niece' berarti keponakan perempuan.",
+            "grandmother": "'Grandmother' berarti nenek.",
+            "sister": "'Sister' berarti saudara perempuan sekandung."
+          }
+        },
+        {
+          id: 12,
+          chapter: "Chapter 0: The Beginning",
+          q: "What is the ordinal number for '3rd'?",
+          correct: "Third",
+          distractors: [
+            "Three",
+            "Thirth",
+            "Thirteen"
+          ],
+          explanation: "Bilangan bertingkat (ordinal number) untuk urutan ke-3 adalah 'third' (3rd).",
+          distractorNotes: {
+            "Three": "'Three' adalah bilangan pokok (cardinal number) 3.",
+            "Thirth": "Ejaan yang salah.",
+            "Thirteen": "'Thirteen' berarti 13."
+          }
+        },
+        {
+          id: 13,
+          chapter: "Chapter 0: The Beginning",
+          q: "The sky on a clear sunny day is usually ....",
+          correct: "blue",
+          distractors: [
+            "black",
+            "pink",
+            "violet"
+          ],
+          explanation: "Langit pada hari yang cerah umumnya berwarna biru ('blue').",
+          distractorNotes: {
+            "black": "Langit malam hari yang gelap sering digambarkan hitam/gelap.",
+            "pink": "Bukan warna utama langit cerah.",
+            "violet": "Bukan warna langit pada siang hari yang cerah."
+          }
+        },
+        {
+          id: 14,
+          chapter: "Chapter 0: The Beginning",
+          q: "If today is Friday, the day after tomorrow is ....",
+          correct: "Sunday",
+          distractors: [
+            "Saturday",
+            "Thursday",
+            "Monday"
+          ],
+          explanation: "Jika hari ini Friday (Jumat), maka besok Saturday (Sabtu) dan lusa ('the day after tomorrow') adalah Sunday (Minggu).",
+          distractorNotes: {
+            "Saturday": "Saturday adalah besok ('tomorrow'), bukan lusa.",
+            "Thursday": "Thursday adalah kemarin ('yesterday').",
+            "Monday": "Monday adalah tiga hari setelah Friday."
+          }
+        },
+        {
+          id: 15,
+          chapter: "Chapter 0: The Beginning",
+          q: "Listen to the instruction: 'Raise your hand if you know the answer.' What should you do?",
+          correct: "Lift your hand up.",
+          distractors: [
+            "Lower your head down.",
+            "Erase the board.",
+            "Pack your books."
+          ],
+          explanation: "'Raise your hand' berarti mengangkat tangan ke atas ('lift your hand up').",
+          distractorNotes: {
+            "Lower your head down.": "Berarti menundukkan kepala.",
+            "Erase the board.": "Berarti menghapus papan tulis.",
+            "Pack your books.": "Berarti membereskan buku-buku ke tas."
+          }
+        },
+
+        // ---------------- CHAPTER 1: ABOUT ME (NO. 16 - 45) ----------------
+        {
+          id: 16,
+          chapter: "Chapter 1: About Me",
+          q: "Rina meets her English teacher at 08:00 in the morning. She says, '....'",
+          correct: "Good morning, Ma'am.",
+          distractors: [
+            "Good night, Ma'am.",
+            "See you later, Ma'am.",
+            "Goodbye, Ma'am."
+          ],
+          explanation: "Salam pada pagi hari (08:00) menggunakan ungkapan 'Good morning'.",
+          distractorNotes: {
+            "Good night, Ma'am.": "Digunakan saat berpisah menjelang tidur/malam hari.",
+            "See you later, Ma'am.": "Ungkapan berpamitan ('leave-taking'), bukan salam pagi.",
+            "Goodbye, Ma'am.": "Ungkapan berpamitan saat meninggalkan tempat."
+          }
+        },
+        {
+          id: 17,
+          chapter: "Chapter 1: About Me",
+          q: "Dika is going home after school. He says to his friends, '....'",
+          correct: "See you tomorrow!",
+          distractors: [
+            "Nice to meet you!",
+            "Good afternoon!",
+            "How do you do?"
+          ],
+          explanation: "'See you tomorrow!' adalah ungkapan berpamitan ('leave-taking') ketika akan bertemu lagi esok hari.",
+          distractorNotes: {
+            "Nice to meet you!": "Diucapkan saat pertama kali berkenalan.",
+            "Good afternoon!": "Salam siang/sore hari, bukan pamit pulang.",
+            "How do you do?": "Salam formal saat berkenalan."
+          }
+        },
+        {
+          id: 18,
+          chapter: "Chapter 1: About Me",
+          q: "Hello! My name ... Galang. I ... thirteen years old.",
+          correct: "is - am",
+          distractors: [
+            "am - is",
+            "are - am",
+            "is - are"
+          ],
+          explanation: "Subjek tunggal 'My name' menggunakan 'is', sedangkan subjek 'I' selalu menggunakan 'am'.",
+          distractorNotes: {
+            "am - is": "'My name' tidak memakai 'am', dan 'I' tidak memakai 'is'.",
+            "are - am": "'My name' adalah tunggal sehingga memakai 'is', bukan 'are'.",
+            "is - are": "Subjek 'I' berpasangan dengan 'am', bukan 'are'."
+          }
+        },
+        {
+          id: 19,
+          chapter: "Chapter 1: About Me",
+          q: "Monita and Andre ... classmates in Class 7A.",
+          correct: "are",
+          distractors: [
+            "am",
+            "is",
+            "was not"
+          ],
+          explanation: "Subjek jamak ('Monita and Andre') menggunakan to be 'are' untuk menyatakan fakta saat ini.",
+          distractorNotes: {
+            "am": "Hanya digunakan untuk subjek 'I'.",
+            "is": "Digunakan untuk subjek orang ketiga tunggal (he/she/it atau satu nama).",
+            "was not": "Bentuk lampau negatif; kalimat menyatakan kondisi saat ini di kelas."
+          }
+        },
+        {
+          id: 20,
+          chapter: "Chapter 1: About Me",
+          q: "This is Sinta. ... favorite hobby is drawing anime characters.",
+          correct: "Her",
+          distractors: [
+            "She",
+            "His",
+            "Their"
+          ],
+          explanation: "Sinta adalah perempuan (she), dan sebelum kata benda ('favorite hobby') diperlukan possessive adjective 'Her'.",
+          distractorNotes: {
+            "She": "'She' adalah subject pronoun, bukan kata sifat kepemilikan di depan 'favorite hobby'.",
+            "His": "'His' digunakan untuk laki-laki (he).",
+            "Their": "'Their' digunakan untuk subjek jamak (they)."
+          }
+        },
+        {
+          id: 21,
+          chapter: "Chapter 1: About Me",
+          q: "I have two younger brothers. ... names are Adi and Bayu.",
+          correct: "Their",
+          distractors: [
+            "Our",
+            "Your",
+            "Its"
+          ],
+          explanation: "Kata ganti kepemilikan untuk 'two younger brothers' (mereka / they) adalah 'Their'.",
+          distractorNotes: {
+            "Our": "'Our' berarti milik kami/kita (we).",
+            "Your": "'Your' berarti milikmu/kalian (you).",
+            "Its": "'Its' umumnya untuk benda/hewan tunggal."
+          }
+        },
+        {
+          id: 22,
+          chapter: "Chapter 1: About Me",
+          q: "Which sentence uses an adverb of frequency correctly?",
+          correct: "I always brush my teeth before bed.",
+          distractors: [
+            "I brush always my teeth before bed.",
+            "Always I am brush my teeth before bed.",
+            "I teeth brush always before bed."
+          ],
+          explanation: "Adverb of frequency seperti 'always' diletakkan sebelum kata kerja utama ('always brush').",
+          distractorNotes: {
+            "I brush always my teeth before bed.": "Penempatan 'always' setelah kata kerja 'brush' kurang tepat untuk kalimat biasa ini.",
+            "Always I am brush my teeth before bed.": "Salah tata bahasa karena ada 'am' sebelum kata kerja 'brush'.",
+            "I teeth brush always before bed.": "Susunan kata tidak beraturan."
+          }
+        },
+        {
+          id: 23,
+          chapter: "Chapter 1: About Me",
+          q: "Dina doesn't like spicy food at all. She ... eats chili sauce.",
+          correct: "never",
+          distractors: [
+            "always",
+            "usually",
+            "often"
+          ],
+          explanation: "Karena tidak menyukai makanan pedas sama sekali, ia tidak pernah ('never') makan sambal.",
+          distractorNotes: {
+            "always": "Berarti selalu (100%), bertentangan dengan tidak suka sama sekali.",
+            "usually": "Berarti biasanya, tidak sesuai konteks tidak suka.",
+            "often": "Berarti sering, bertentangan dengan makna kalimat."
+          }
+        },
+        {
+          id: 24,
+          chapter: "Chapter 1: About Me",
+          q: "Andre has curly black hair and is very friendly. The underlined-style words 'curly black' describe his ....",
+          correct: "physical appearance",
+          distractors: [
+            "daily routine",
+            "favorite food",
+            "household chore"
+          ],
+          explanation: "'Curly black hair' (rambut hitam keriting) menunjukkan ciri fisik ('physical appearance'), sedangkan 'friendly' menunjukkan sifat/karakter.",
+          distractorNotes: {
+            "daily routine": "Rutinitas harian berkaitan dengan aktivitas waktu ke waktu.",
+            "favorite food": "Berkaitan dengan makanan kesukaan.",
+            "household chore": "Berkaitan dengan pekerjaan rumah tangga."
+          }
+        },
+        {
+          id: 25,
+          chapter: "Chapter 1: About Me",
+          q: "How do you introduce your friend 'Tono' to your new classmate 'Rani'?",
+          correct: "Rani, this is my friend, Tono.",
+          distractors: [
+            "Rani, what is your hobby?",
+            "Rani, please open the window.",
+            "Rani, I am fine, thank you."
+          ],
+          explanation: "Untuk memperkenalkan orang lain, kita menggunakan ungkapan seperti 'This is ...'.",
+          distractorNotes: {
+            "Rani, what is your hobby?": "Pertanyaan tentang hobi, bukan memperkenalkan orang lain.",
+            "Rani, please open the window.": "Kalimat perintah membuka jendela.",
+            "Rani, I am fine, thank you.": "Jawaban saat ditanya kabar."
+          }
+        },
+        {
+          id: 26,
+          chapter: "Chapter 1: About Me",
+          q: "My brother is tall and slim. He is also very .... He always helps others.",
+          correct: "helpful",
+          distractors: [
+            "lazy",
+            "shy",
+            "noisy"
+          ],
+          explanation: "Orang yang selalu membantu orang lain memiliki sifat suka menolong ('helpful').",
+          distractorNotes: {
+            "lazy": "Berarti malas.",
+            "shy": "Berarti pemalu.",
+            "noisy": "Berarti berisik."
+          }
+        },
+        {
+          id: 27,
+          chapter: "Chapter 1: About Me",
+          q: "We have a cat. ... fur is white and soft.",
+          correct: "Its",
+          distractors: [
+            "It's",
+            "Her",
+            "His"
+          ],
+          explanation: "Kata ganti kepemilikan ('possessive') untuk seekor kucing ('a cat') adalah 'Its' (tanpa apostrof).",
+          distractorNotes: {
+            "It's": "Kependekan dari 'It is' atau 'It has', bukan kata ganti kepemilikan.",
+            "Her": "Digunakan untuk perempuan.",
+            "His": "Digunakan untuk laki-laki."
+          }
+        },
+        {
+          id: 28,
+          chapter: "Chapter 1: About Me",
+          q: "Complete the sentence: '... are you from?' — 'I am from Bandung.'",
+          correct: "Where",
+          distractors: [
+            "Who",
+            "When",
+            "Why"
+          ],
+          explanation: "Kata tanya 'Where' digunakan untuk menanyakan tempat atau asal daerah.",
+          distractorNotes: {
+            "Who": "Menanyakan orang/siapa.",
+            "When": "Menanyakan waktu.",
+            "Why": "Menanyakan alasan."
+          }
+        },
+        {
+          id: 29,
+          chapter: "Chapter 1: About Me",
+          q: "What is the negative form of 'She is a shy student'?",
+          correct: "She is not a shy student.",
+          distractors: [
+            "She are not a shy student.",
+            "She am not a shy student.",
+            "She not is a shy student."
+          ],
+          explanation: "Kalimat negatif dengan to be 'is' dibentuk dengan menambahkan 'not' setelah 'is': 'She is not ...' (atau 'She isn't ...').",
+          distractorNotes: {
+            "She are not a shy student.": "Subjek 'She' menggunakan 'is', bukan 'are'.",
+            "She am not a shy student.": "Subjek 'She' tidak memakai 'am'.",
+            "She not is a shy student.": "Urutan 'not' dan 'is' terbalik."
+          }
+        },
+        {
+          id: 30,
+          chapter: "Chapter 1: About Me",
+          q: "Which hobby is an outdoor sport?",
+          correct: "Playing badminton",
+          distractors: [
+            "Reading comics",
+            "Listening to podcasts",
+            "Playing chess"
+          ],
+          explanation: "'Playing badminton' adalah olahraga yang umum dimainkan di lapangan/luar ruangan maupun hall olahraga.",
+          distractorNotes: {
+            "Reading comics": "Kegiatan membaca di dalam ruangan/santai.",
+            "Listening to podcasts": "Kegiatan mendengarkan audio.",
+            "Playing chess": "Permainan papan/indoor."
+          }
+        },
+        {
+          id: 31,
+          chapter: "Chapter 1: About Me",
+          q: "I wake up at 04:30, take a shower, and have breakfast before going to school. These are my ....",
+          correct: "morning routines",
+          distractors: [
+            "cooking recipes",
+            "bedroom furniture",
+            "weather forecasts"
+          ],
+          explanation: "Bangun tidur, mandi, dan sarapan sebelum berangkat sekolah adalah rutinitas pagi ('morning routines').",
+          distractorNotes: {
+            "cooking recipes": "Resep masakan.",
+            "bedroom furniture": "Perabotan kamar tidur.",
+            "weather forecasts": "Prakiraan cuaca."
+          }
+        },
+        {
+          id: 32,
+          chapter: "Chapter 1: About Me",
+          q: "A: 'Nice to meet you, Sinta.'\nB: '....'",
+          correct: "Nice to meet you too, Galang.",
+          distractors: [
+            "Good night, Galang.",
+            "I don't know, Galang.",
+            "See you last week, Galang."
+          ],
+          explanation: "Balasan yang tepat untuk 'Nice to meet you' adalah 'Nice to meet you too'.",
+          distractorNotes: {
+            "Good night, Galang.": "Salam malam/pamit tidur.",
+            "I don't know, Galang.": "Tidak sesuai konteks sapaan perkenalan.",
+            "See you last week, Galang.": "Tidak tepat secara waktu ('last week' = minggu lalu)."
+          }
+        },
+        {
+          id: 33,
+          chapter: "Chapter 1: About Me",
+          q: "We study together in the library. The classroom is ... too.",
+          correct: "ours",
+          distractors: [
+            "my",
+            "your",
+            "their"
+          ],
+          explanation: "Jika diikuti kata benda ('our classroom'), gunakan 'our'; jika berdiri sendiri tanpa kata benda di akhir kalimat, gunakan possessive pronoun 'ours'. Di sini setelah 'classroom' tidak ada kata benda lagi sehingga 'ours' tepat.",
+          distractorNotes: {
+            "my": "Berarti milik saya, tidak sesuai dengan subjek 'We'.",
+            "your": "Berarti milikmu/kalian.",
+            "their": "Berarti milik mereka."
+          }
+        },
+        {
+          id: 34,
+          chapter: "Chapter 1: About Me",
+          q: "Which adverb of frequency shows the highest frequency (100%)?",
+          correct: "Always",
+          distractors: [
+            "Sometimes",
+            "Rarely",
+            "Never"
+          ],
+          explanation: "'Always' berarti selalu (paling sering), sedangkan 'sometimes' (kadang-kadang), 'rarely' (jarang), dan 'never' (tidak pernah).",
+          distractorNotes: {
+            "Sometimes": "Menunjukkan frekuensi sedang/kadang-kadang.",
+            "Rarely": "Menunjukkan frekuensi jarang.",
+            "Never": "Menunjukkan frekuensi 0% (tidak pernah)."
+          }
+        },
+        {
+          id: 35,
+          chapter: "Chapter 1: About Me",
+          q: "Complete the sentence: '... they your new friends?' — 'Yes, they are.'",
+          correct: "Are",
+          distractors: [
+            "Is",
+            "Am",
+            "Does"
+          ],
+          explanation: "Kalimat tanya nominal dengan subjek 'they' diawali to be 'Are'.",
+          distractorNotes: {
+            "Is": "Untuk subjek tunggal seperti he/she/it.",
+            "Am": "Hanya untuk subjek 'I'.",
+            "Does": "Kata kerja bantu untuk kalimat verbal orang ketiga tunggal."
+          }
+        },
+        {
+          id: 36,
+          chapter: "Chapter 1: About Me",
+          q: "My twin brother and I share a bedroom. ... bedroom has two desks.",
+          correct: "Our",
+          distractors: [
+            "His",
+            "Her",
+            "Its"
+          ],
+          explanation: "Subjek 'My twin brother and I' sama dengan 'we', sehingga kata sifat kepemilikannya adalah 'Our'.",
+          distractorNotes: {
+            "His": "Hanya merujuk pada satu laki-laki.",
+            "Her": "Hanya merujuk pada satu perempuan.",
+            "Its": "Merujuk pada benda/hewan tunggal."
+          }
+        },
+        {
+          id: 37,
+          chapter: "Chapter 1: About Me",
+          q: "What does 'cheerful' mean when describing a person's character?",
+          correct: "Happy and full of positive energy",
+          distractors: [
+            "Very angry and rude",
+            "Very sleepy and tired",
+            "Afraid of everything"
+          ],
+          explanation: "'Cheerful' berarti ceria, gembira, dan penuh semangat positif.",
+          distractorNotes: {
+            "Very angry and rude": "Berarti sangat marah dan kasar.",
+            "Very sleepy and tired": "Berarti sangat mengantuk dan lelah.",
+            "Afraid of everything": "Berarti takut pada segala hal."
+          }
+        },
+        {
+          id: 38,
+          chapter: "Chapter 1: About Me",
+          q: "Which sentence correctly introduces oneself?",
+          correct: "Let me introduce myself. I'm Bagas.",
+          distractors: [
+            "Let me introduce yourself. I'm Bagas.",
+            "Please introduce me myself is Bagas.",
+            "My name are Bagas."
+          ],
+          explanation: "Memperkenalkan diri sendiri menggunakan 'introduce myself' dan to be tunggal 'I'm Bagas'.",
+          distractorNotes: {
+            "Let me introduce yourself. I'm Bagas.": "'Yourself' berarti dirimu sendiri, bukan diri pembicara.",
+            "Please introduce me myself is Bagas.": "Struktur kalimat tidak baku.",
+            "My name are Bagas.": "'My name' tunggal sehingga memakai 'is', bukan 'are'."
+          }
+        },
+        {
+          id: 39,
+          chapter: "Chapter 1: About Me",
+          q: "Rafi ... plays video games on weekdays because he studies in the evening.",
+          correct: "rarely",
+          distractors: [
+            "always every minute",
+            "every day all night",
+            "constantly at school"
+          ],
+          explanation: "Karena belajar pada malam hari di hari sekolah ('weekdays'), ia jarang ('rarely') bermain video game.",
+          distractorNotes: {
+            "always every minute": "Tidak wajar dan bertentangan dengan konteks belajar.",
+            "every day all night": "Bertentangan dengan kebiasaan belajar malam.",
+            "constantly at school": "Tidak tepat secara konteks."
+          }
+        },
+        {
+          id: 40,
+          chapter: "Chapter 1: About Me",
+          q: "Look at that boy over there. ... name is Kevin.",
+          correct: "His",
+          distractors: [
+            "Her",
+            "My",
+            "Your"
+          ],
+          explanation: "Anak laki-laki ('that boy') menggunakan possessive adjective 'His'.",
+          distractorNotes: {
+            "Her": "Untuk perempuan.",
+            "My": "Untuk diri sendiri (saya).",
+            "Your": "Untuk orang yang diajak bicara."
+          }
+        },
+        {
+          id: 41,
+          chapter: "Chapter 1: About Me",
+          q: "Which pair shows opposite personality traits?",
+          correct: "Polite - Rude",
+          distractors: [
+            "Kind - Friendly",
+            "Smart - Clever",
+            "Neat - Tidy"
+          ],
+          explanation: "'Polite' (sopan) berlawanan makna dengan 'rude' (kasar/tidak sopan).",
+          distractorNotes: {
+            "Kind - Friendly": "Keduanya bermakna positif/ramah (bersinonim).",
+            "Smart - Clever": "Keduanya berarti pintar/cerdas (bersinonim).",
+            "Neat - Tidy": "Keduanya berarti rapi (bersinonim)."
+          }
+        },
+        {
+          id: 42,
+          chapter: "Chapter 1: About Me",
+          q: "A: 'How are you doing today?'\nB: '....'",
+          correct: "I'm doing great, thanks!",
+          distractors: [
+            "I'm thirteen years old.",
+            "I live on Jalan Merpati.",
+            "It is on Monday."
+          ],
+          explanation: "'How are you doing?' menanyakan kabar/keadaan, sehingga dijawab dengan kabar seperti 'I'm doing great, thanks!'.",
+          distractorNotes: {
+            "I'm thirteen years old.": "Jawaban untuk pertanyaan usia.",
+            "I live on Jalan Merpati.": "Jawaban untuk pertanyaan alamat.",
+            "It is on Monday.": "Jawaban untuk pertanyaan hari."
+          }
+        },
+        {
+          id: 43,
+          chapter: "Chapter 1: About Me",
+          q: "My sister likes painting. ... paintings are on the wall.",
+          correct: "Her",
+          distractors: [
+            "He",
+            "They",
+            "Us"
+          ],
+          explanation: "'My sister' adalah perempuan tunggal, sehingga sebelum kata benda 'paintings' digunakan 'Her'.",
+          distractorNotes: {
+            "He": "Subject pronoun laki-laki.",
+            "They": "Subject pronoun jamak.",
+            "Us": "Object pronoun ('kami/kita')."
+          }
+        },
+        {
+          id: 44,
+          chapter: "Chapter 1: About Me",
+          q: "I ... have breakfast at 06:15 before walking to school.",
+          correct: "usually",
+          distractors: [
+            "never not",
+            "am usually",
+            "is usually"
+          ],
+          explanation: "'Usually' (biasanya) langsung diletakkan sebelum kata kerja 'have'.",
+          distractorNotes: {
+            "never not": "Double negative yang tidak baku dalam bahasa Inggris standar.",
+            "am usually": "Tidak memakai 'am' sebelum kata kerja utama 'have'.",
+            "is usually": "Salah to be untuk subjek 'I'."
+          }
+        },
+        {
+          id: 45,
+          chapter: "Chapter 1: About Me",
+          q: "Which sentence correctly states age and grade?",
+          correct: "I am twelve and I am in the seventh grade.",
+          distractors: [
+            "I am twelve years and I am seven grade.",
+            "I have twelve years old.",
+            "Me is twelve in seven grade."
+          ],
+          explanation: "Usia memakai to be 'am' ('I am twelve'), dan tingkatan kelas ke-7 memakai 'the seventh grade'.",
+          distractorNotes: {
+            "I am twelve years and I am seven grade.": "Kurang tepat; 'twelve years' tanpa 'old' dan 'seven grade' seharusnya 'seventh grade'.",
+            "I have twelve years old.": "Bahasa Inggris memakai 'to be', bukan 'have', untuk menyatakan usia.",
+            "Me is twelve in seven grade.": "Subjek seharusnya 'I', bukan 'Me', serta memakai 'is'."
+          }
+        },
+
+        // ---------------- CHAPTER 2: CULINARY AND ME (NO. 46 - 75) ----------------
+        {
+          id: 46,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "This lime juice tastes very .... It makes me squint.",
+          correct: "sour",
+          distractors: [
+            "salty",
+            "crispy",
+            "sweet"
+          ],
+          explanation: "Air jeruk nipis ('lime juice') memiliki rasa asam ('sour').",
+          distractorNotes: {
+            "salty": "Berarti asin.",
+            "crispy": "Berarti renyah (tekstur).",
+            "sweet": "Berarti manis."
+          }
+        },
+        {
+          id: 47,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Fried tempeh and potato chips have a ... texture when eaten fresh.",
+          correct: "crispy",
+          distractors: [
+            "sour",
+            "bitter",
+            "liquid"
+          ],
+          explanation: "Gorengan tempe dan keripik kentang yang baru matang memiliki tekstur renyah ('crispy').",
+          distractorNotes: {
+            "sour": "Merujuk pada rasa asam.",
+            "bitter": "Merujuk pada rasa pahit.",
+            "liquid": "Berarti cair."
+          }
+        },
+        {
+          id: 48,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Bitter melon ('pare') is famous for its ... taste.",
+          correct: "bitter",
+          distractors: [
+            "sweet",
+            "salty",
+            "sour"
+          ],
+          explanation: "Pare ('bitter melon') dikenal memiliki rasa pahit ('bitter').",
+          distractorNotes: {
+            "sweet": "Berarti manis.",
+            "salty": "Berarti asin.",
+            "sour": "Berarti asam."
+          }
+        },
+        {
+          id: 49,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Choose the correct article: 'I need ... egg to make fried rice.'",
+          correct: "an",
+          distractors: [
+            "a",
+            "two a",
+            "an two"
+          ],
+          explanation: "Kata 'egg' diawali bunyi vokal /e/, sehingga menggunakan artikel 'an' ('an egg').",
+          distractorNotes: {
+            "a": "'A' dipakai sebelum bunyi konsonan, bukan bunyi vokal seperti 'egg'.",
+            "two a": "Tidak tepat secara tata bahasa.",
+            "an two": "'An' hanya untuk tunggal (satu), sedangkan 'two' jamak."
+          }
+        },
+        {
+          id: 50,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Please buy ... loaf of bread and ... apple from the mini-market.",
+          correct: "a - an",
+          distractors: [
+            "an - a",
+            "an - an",
+            "a - a"
+          ],
+          explanation: "'Loaf' diawali bunyi konsonan /l/ sehingga memakai 'a', sedangkan 'apple' diawali bunyi vokal /æ/ sehingga memakai 'an'.",
+          distractorNotes: {
+            "an - a": "Terbalik; 'loaf' memakai 'a' dan 'apple' memakai 'an'.",
+            "an - an": "'Loaf' tidak diawali bunyi vokal.",
+            "a - a": "'Apple' diawali bunyi vokal sehingga memakai 'an'."
+          }
+        },
+        {
+          id: 51,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Look at the two bowls of noodles over there. ... are very spicy!",
+          correct: "Those",
+          distractors: [
+            "This",
+            "That",
+            "An"
+          ],
+          explanation: "Benda jamak ('two bowls') yang letaknya agak jauh menggunakan demonstratif jamak 'Those'.",
+          distractorNotes: {
+            "This": "Untuk benda tunggal dekat.",
+            "That": "Untuk benda tunggal jauh.",
+            "An": "Artikel tunggal sebelum bunyi vokal."
+          }
+        },
+        {
+          id: 52,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "I am holding this glass of iced tea in my hand. ... tea is cold and sweet.",
+          correct: "This",
+          distractors: [
+            "Those",
+            "These",
+            "Many"
+          ],
+          explanation: "Satu gelas teh ('this glass of iced tea') yang sedang dipegang/dekat memakai 'This'.",
+          distractorNotes: {
+            "Those": "Untuk jamak yang jauh.",
+            "These": "Untuk jamak yang dekat.",
+            "Many": "Untuk kata benda dapat dihitung jamak."
+          }
+        },
+        {
+          id: 53,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Which sentence is a negative imperative (larangan/perintah negatif) in cooking?",
+          correct: "Don't touch the hot pan with bare hands.",
+          distractors: [
+            "Pour warm water into the glass.",
+            "Stir the soup gently for two minutes.",
+            "Slice the tomatoes thinly."
+          ],
+          explanation: "Kalimat perintah negatif ('negative imperative') diawali dengan 'Don't' (Do not) + verb 1.",
+          distractorNotes: {
+            "Pour warm water into the glass.": "Kalimat perintah positif ('positive imperative').",
+            "Stir the soup gently for two minutes.": "Kalimat perintah positif.",
+            "Slice the tomatoes thinly.": "Kalimat perintah positif."
+          }
+        },
+        {
+          id: 54,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "In a Procedure Text, the section that states the final purpose (for example, 'How to Make Sweet Iced Tea') is called the ....",
+          correct: "Goal",
+          distractors: [
+            "Ingredients",
+            "Steps",
+            "Conclusion"
+          ],
+          explanation: "Struktur utama Procedure Text terdiri atas Goal (tujuan), Ingredients/Materials (bahan/alat), dan Steps (langkah-langkah).",
+          distractorNotes: {
+            "Ingredients": "Berisi daftar bahan makanan yang digunakan.",
+            "Steps": "Berisi urutan langkah-langkah pembuatan.",
+            "Conclusion": "Bukan bagian struktur baku Procedure Text."
+          }
+        },
+        {
+          id: 55,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Which list belongs to the 'Ingredients' part of a recipe for fried bananas (pisang goreng)?",
+          correct: "Ripe bananas, flour, sugar, a pinch of salt, and cooking oil",
+          distractors: [
+            "First, peel the bananas and cut them into slices.",
+            "Next, fry until golden brown and serve warm.",
+            "Finally, drain the excess oil on a plate."
+          ],
+          explanation: "Bagian 'Ingredients' memuat daftar bahan yang diperlukan, bukan urutan langkah kerja.",
+          distractorNotes: {
+            "First, peel the bananas and cut them into slices.": "Termasuk bagian 'Steps' (langkah kerja).",
+            "Next, fry until golden brown and serve warm.": "Termasuk bagian 'Steps'.",
+            "Finally, drain the excess oil on a plate.": "Termasuk bagian 'Steps'."
+          }
+        },
+        {
+          id: 56,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Add ... of salt to the soup so it isn't too salty.",
+          correct: "a pinch",
+          distractors: [
+            "a bunch",
+            "a loaf",
+            "a bar"
+          ],
+          explanation: "Garam dalam takaran sangat sedikit/sejumput disebut 'a pinch of salt'.",
+          distractorNotes: {
+            "a bunch": "Biasanya untuk ikatan (misalnya sayuran berdaun atau pisang).",
+            "a loaf": "Untuk roti ('a loaf of bread').",
+            "a bar": "Untuk batangan (misalnya cokelat/sabun)."
+          }
+        },
+        {
+          id: 57,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Please pour ... of warm water into the cup to dissolve the sugar.",
+          correct: "half a glass",
+          distractors: [
+            "a slice",
+            "a piece of paper",
+            "a clove"
+          ],
+          explanation: "Air minum/cairan dalam gelas menggunakan takaran seperti 'half a glass of water'.",
+          distractorNotes: {
+            "a slice": "Untuk irisan tipis (roti, keju, buah).",
+            "a piece of paper": "Untuk kertas, bukan air.",
+            "a clove": "Untuk siung (misalnya bawang putih)."
+          }
+        },
+        {
+          id: 58,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "These mangoes are very ripe and sweet. What is the singular form of 'These mangoes'?",
+          correct: "This mango",
+          distractors: [
+            "Those mango",
+            "These mango",
+            "That mangoes"
+          ],
+          explanation: "Bentuk tunggal dari 'these' adalah 'this', dan bentuk tunggal dari 'mangoes' adalah 'mango'.",
+          distractorNotes: {
+            "Those mango": "'Those' jamak, sedangkan 'mango' tunggal.",
+            "These mango": "'These' jamak, sedangkan 'mango' tunggal.",
+            "That mangoes": "'That' tunggal, sedangkan 'mangoes' jamak."
+          }
+        },
+        {
+          id: 59,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Which action verb means 'mengupas kulit buah atau sayuran'?",
+          correct: "Peel",
+          distractors: [
+            "Boil",
+            "Pour",
+            "Fry"
+          ],
+          explanation: "'Peel' berarti mengupas (seperti mengupas kentang, pisang, atau apel).",
+          distractorNotes: {
+            "Boil": "Berarti merebus.",
+            "Pour": "Berarti menuangkan.",
+            "Fry": "Berarti menggoreng."
+          }
+        },
+        {
+          id: 60,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Chili peppers ('cabai') usually taste ....",
+          correct: "spicy / hot",
+          distractors: [
+            "sweet and milky",
+            "bland and tasteless",
+            "sour like lemon"
+          ],
+          explanation: "Cabai ('chili peppers') identik dengan rasa pedas ('spicy' / 'hot').",
+          distractorNotes: {
+            "sweet and milky": "Tidak sesuai rasa cabai.",
+            "bland and tasteless": "'Bland/tasteless' berarti hambar/tidak berasa.",
+            "sour like lemon": "Asam seperti lemon."
+          }
+        },
+        {
+          id: 61,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Complete the instruction: '... the ingredients in a bowl until well mixed.'",
+          correct: "Stir",
+          distractors: [
+            "Don't stir",
+            "Peel",
+            "Freeze"
+          ],
+          explanation: "Perintah mengaduk bahan hingga tercampur rata menggunakan kata kerja 'Stir'.",
+          distractorNotes: {
+            "Don't stir": "Merupakan larangan jangan mengaduk, bertentangan dengan 'until well mixed'.",
+            "Peel": "Berarti mengupas.",
+            "Freeze": "Berarti membekukan."
+          }
+        },
+        {
+          id: 62,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Honey and ripe mangoes usually taste ....",
+          correct: "sweet",
+          distractors: [
+            "salty",
+            "bitter",
+            "sour"
+          ],
+          explanation: "Madu ('honey') dan mangga matang memiliki rasa manis ('sweet').",
+          distractorNotes: {
+            "salty": "Berarti asin.",
+            "bitter": "Berarti pahit.",
+            "sour": "Berarti asam."
+          }
+        },
+        {
+          id: 63,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Choose the correct sentence: 'I want ... orange juice and ... slice of cake.'",
+          correct: "a glass of - a",
+          distractors: [
+            "an - an",
+            "a - an",
+            "two - a"
+          ],
+          explanation: "'Orange juice' adalah uncountable noun sehingga butuh takaran seperti 'a glass of', lalu diikuti 'a slice of cake' ('slice' berawalan konsonan 's').",
+          distractorNotes: {
+            "an - an": "'Orange juice' tidak memakai 'an' langsung, dan 'slice' memakai 'a'.",
+            "a - an": "'Orange' memakai 'an' dan 'slice' memakai 'a'.",
+            "two - a": "'Orange juice' bukan benda satuan hitung langsung."
+          }
+        },
+        {
+          id: 64,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Look at those cookies on the table! ... look delicious.",
+          correct: "They",
+          distractors: [
+            "It",
+            "He",
+            "She"
+          ],
+          explanation: "Kata ganti untuk 'those cookies' (jamak, benda) adalah 'They'.",
+          distractorNotes: {
+            "It": "Untuk benda tunggal.",
+            "He": "Untuk laki-laki.",
+            "She": "Untuk perempuan."
+          }
+        },
+        {
+          id: 65,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Which one is a proper warning in the kitchen?",
+          correct: "Do not leave the stove unattended while cooking.",
+          distractors: [
+            "Always leave the stove on when you go out.",
+            "Drink boiling oil directly from the pan.",
+            "Put wet hands on exposed wires."
+          ],
+          explanation: "Keamanan di dapur menuntut kita tidak meninggalkan kompor menyala tanpa diawasi ('Do not leave the stove unattended').",
+          distractorNotes: {
+            "Always leave the stove on when you go out.": "Berbahaya dan bertentangan dengan keselamatan dapur.",
+            "Drink boiling oil directly from the pan.": "Tidak masuk akal dan berbahaya.",
+            "Put wet hands on exposed wires.": "Berbahaya (risiko sengatan listrik)."
+          }
+        },
+        {
+          id: 66,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "In a Procedure Text, sequence words like 'First', 'Then', 'Next', and 'Finally' are mostly found in the ....",
+          correct: "Steps",
+          distractors: [
+            "Goal",
+            "Title only",
+            "Price list"
+          ],
+          explanation: "Kata hubung urutan ('sequence connectors') digunakan untuk menyusun langkah-langkah pada bagian 'Steps'.",
+          distractorNotes: {
+            "Goal": "Hanya menyatakan tujuan pembuatan.",
+            "Title only": "Hanya judul.",
+            "Price list": "Daftar harga, bukan bagian Procedure Text."
+          }
+        },
+        {
+          id: 67,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Soy sauce ('kecap asin') gives a ... flavor to dishes.",
+          correct: "salty",
+          distractors: [
+            "sweet",
+            "sour",
+            "icy"
+          ],
+          explanation: "Kecap asin ('soy sauce') memberikan rasa asin ('salty').",
+          distractorNotes: {
+            "sweet": "Rasa manis.",
+            "sour": "Rasa asam.",
+            "icy": "Rasa/sifat dingin seperti es."
+          }
+        },
+        {
+          id: 68,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "She eats ... banana every morning.",
+          correct: "a",
+          distractors: [
+            "an",
+            "many",
+            "those"
+          ],
+          explanation: "Kata 'banana' berawalan bunyi konsonan /b/, sehingga memakai artikel 'a'.",
+          distractorNotes: {
+            "an": "Dipakai sebelum bunyi vokal.",
+            "many": "Dipakai untuk kata benda jamak ('bananas').",
+            "those": "Kata tunjuk jamak untuk benda jauh."
+          }
+        },
+        {
+          id: 69,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Put ... tablespoons of sugar into the tea.",
+          correct: "two",
+          distractors: [
+            "an",
+            "a one",
+            "much"
+          ],
+          explanation: "'Tablespoons' adalah bentuk jamak yang dapat dihitung, sehingga angka seperti 'two' tepat digunakan.",
+          distractorNotes: {
+            "an": "Untuk tunggal sebelum vokal.",
+            "a one": "Gabungan yang tidak tepat.",
+            "much": "Untuk uncountable noun, bukan bentuk jamak terhitung 'tablespoons'."
+          }
+        },
+        {
+          id: 70,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "What does 'chop' mean when preparing vegetables?",
+          correct: "Cut into small pieces",
+          distractors: [
+            "Freeze into ice",
+            "Pour into a bottle",
+            "Wash with soap"
+          ],
+          explanation: "'Chop' berarti memotong/mencincang menjadi potongan-potongan kecil.",
+          distractorNotes: {
+            "Freeze into ice": "Membekukan menjadi es.",
+            "Pour into a bottle": "Menuangkan ke botol.",
+            "Wash with soap": "Mencuci dengan sabun."
+          }
+        },
+        {
+          id: 71,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "These apples are fresh, ... those apples in the basket are rotten.",
+          correct: "whereas / while",
+          distractors: [
+            "so that",
+            "because of",
+            "in order to"
+          ],
+          explanation: "Untuk membandingkan dua hal yang berbeda ('these apples' yang segar dan 'those apples' yang busuk), digunakan 'whereas' atau 'while'.",
+          distractorNotes: {
+            "so that": "Menyatakan tujuan ('agar').",
+            "because of": "Menyatakan penyebab.",
+            "in order to": "Menyatakan tujuan ('untuk')."
+          }
+        },
+        {
+          id: 72,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Which sentence uses a polite request/imperative in a restaurant or kitchen?",
+          correct: "Please pass me the bowl of rice.",
+          distractors: [
+            "Pass me the bowl of rice now!",
+            "Don't passing the bowl.",
+            "You passing me bowl."
+          ],
+          explanation: "Menambahkan 'Please' pada kalimat perintah membuat permintaan terdengar sopan.",
+          distractorNotes: {
+            "Pass me the bowl of rice now!": "Perintah langsung/kasar tanpa 'please'.",
+            "Don't passing the bowl.": "Salah bentuk kata kerja; seharusnya 'Don't pass'.",
+            "You passing me bowl.": "Bukan kalimat yang gramatikal."
+          }
+        },
+        {
+          id: 73,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Lemon juice is sour, while ice cream is usually ....",
+          correct: "sweet",
+          distractors: [
+            "spicy",
+            "bitter",
+            "salty"
+          ],
+          explanation: "Es krim umumnya memiliki rasa manis ('sweet').",
+          distractorNotes: {
+            "spicy": "Pedas.",
+            "bitter": "Pahit.",
+            "salty": "Asin."
+          }
+        },
+        {
+          id: 74,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "My mom adds ... of garlic to make the fried rice fragrant.",
+          correct: "two cloves",
+          distractors: [
+            "two sheets",
+            "two pairs",
+            "two pages"
+          ],
+          explanation: "Bawang putih ('garlic') dihitung per siung ('cloves').",
+          distractorNotes: {
+            "two sheets": "Untuk lembaran (kertas).",
+            "two pairs": "Untuk pasangan (sepatu, kaus kaki).",
+            "two pages": "Untuk halaman buku."
+          }
+        },
+        {
+          id: 75,
+          chapter: "Chapter 2: Culinary and Me",
+          q: "Before you start cooking, what is a good first step?",
+          correct: "Wash your hands and prepare the ingredients.",
+          distractors: [
+            "Serve the food before cooking it.",
+            "Throw all ingredients into the bin.",
+            "Turn off the light and sleep."
+          ],
+          explanation: "Mencuci tangan dan menyiapkan bahan adalah langkah awal yang tepat sebelum memasak.",
+          distractorNotes: {
+            "Serve the food before cooking it.": "Tidak logis secara urutan.",
+            "Throw all ingredients into the bin.": "Membuang bahan ke tempat sampah.",
+            "Turn off the light and sleep.": "Tidak sesuai konteks memasak."
+          }
+        },
+
+        // ---------------- CHAPTER 3: HOME SWEET HOME (NO. 76 - 100) ----------------
+        {
+          id: 76,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "We cook meals and keep the stove and refrigerator in the ....",
+          correct: "kitchen",
+          distractors: [
+            "bathroom",
+            "garage",
+            "yard"
+          ],
+          explanation: "Kompor ('stove') dan kulkas ('refrigerator') berada di dapur ('kitchen').",
+          distractorNotes: {
+            "bathroom": "Kamar mandi.",
+            "garage": "Garasi.",
+            "yard": "Halaman."
+          }
+        },
+        {
+          id: 77,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "Where do guests usually sit and chat with the family?",
+          correct: "Living room",
+          distractors: [
+            "Laundry room",
+            "Pantry",
+            "Attic"
+          ],
+          explanation: "Ruang tamu ('living room') adalah tempat menerima dan berbincang dengan tamu.",
+          distractorNotes: {
+            "Laundry room": "Ruang cuci/setrika.",
+            "Pantry": "Tempat penyimpanan bahan makanan/dapur kecil.",
+            "Attic": "Loteng."
+          }
+        },
+        {
+          id: 78,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "A pillow, blanket, and mattress are commonly found in a ....",
+          correct: "bedroom",
+          distractors: [
+            "kitchen",
+            "bathroom",
+            "dining room"
+          ],
+          explanation: "Bantal ('pillow'), selimut ('blanket'), dan kasur ('mattress') berada di kamar tidur ('bedroom').",
+          distractorNotes: {
+            "kitchen": "Dapur.",
+            "bathroom": "Kamar mandi.",
+            "dining room": "Ruang makan."
+          }
+        },
+        {
+          id: 79,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "The cat is sleeping ... the sofa. You can see it right on top of the cushion.",
+          correct: "on",
+          distractors: [
+            "under",
+            "behind",
+            "inside"
+          ],
+          explanation: "Karena berada di atas permukaan bantalan sofa ('on top of the cushion'), preposisi yang tepat adalah 'on'.",
+          distractorNotes: {
+            "under": "Berarti di bawah.",
+            "behind": "Berarti di belakang.",
+            "inside": "Berarti di dalam."
+          }
+        },
+        {
+          id: 80,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "My shoes are ... the table, touching the floor below it.",
+          correct: "under",
+          distractors: [
+            "above",
+            "next to",
+            "in front of"
+          ],
+          explanation: "Posisi sepatu yang berada di bawah meja adalah 'under' ('under the table').",
+          distractorNotes: {
+            "above": "Berarti di atas (tidak menyentuh permukaan).",
+            "next to": "Berarti di sebelah.",
+            "in front of": "Berarti di depan."
+          }
+        },
+        {
+          id: 81,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "The lamp is hanging ... the dining table, higher than the table.",
+          correct: "above",
+          distractors: [
+            "under",
+            "inside",
+            "beneath"
+          ],
+          explanation: "Lampu gantung yang berada lebih tinggi di atas meja disebut 'above' ('above the dining table').",
+          distractorNotes: {
+            "under": "Di bawah.",
+            "inside": "Di dalam.",
+            "beneath": "Di bawah."
+          }
+        },
+        {
+          id: 82,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "The television is ... the cabinet; the cabinet is right beside it.",
+          correct: "next to",
+          distractors: [
+            "under",
+            "inside",
+            "below"
+          ],
+          explanation: "Posisi bersebelahan dengan benda lain disebut 'next to' (atau 'beside').",
+          distractorNotes: {
+            "under": "Di bawah.",
+            "inside": "Di dalam.",
+            "below": "Di bawah."
+          }
+        },
+        {
+          id: 83,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "The garden is ... the house; when you walk out of the back door, you see it.",
+          correct: "behind",
+          distractors: [
+            "in front of",
+            "under",
+            "inside"
+          ],
+          explanation: "Area di bagian pintu belakang rumah berada di belakang ('behind') rumah.",
+          distractorNotes: {
+            "in front of": "Di depan.",
+            "under": "Di bawah.",
+            "inside": "Di dalam."
+          }
+        },
+        {
+          id: 84,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "There is a big tree ... our house, facing the street in front of it.",
+          correct: "in front of",
+          distractors: [
+            "behind",
+            "inside",
+            "under"
+          ],
+          explanation: "Posisi menghadap ke jalan di bagian depan rumah adalah 'in front of'.",
+          distractorNotes: {
+            "behind": "Di belakang.",
+            "inside": "Di dalam.",
+            "under": "Di bawah."
+          }
+        },
+        {
+          id: 85,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "My books and pencils are ... my school bag.",
+          correct: "in",
+          distractors: [
+            "above",
+            "in front of",
+            "behind"
+          ],
+          explanation: "Benda yang tersimpan di dalam tas menggunakan preposisi 'in' (atau 'inside').",
+          distractorNotes: {
+            "above": "Di atas.",
+            "in front of": "Di depan.",
+            "behind": "Di belakang."
+          }
+        },
+        {
+          id: 86,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "Which activity is a household chore (pekerjaan rumah)?",
+          correct: "Sweeping and mopping the floor",
+          distractors: [
+            "Playing online games all afternoon",
+            "Watching movies at the cinema",
+            "Buying snacks at the mall"
+          ],
+          explanation: "Menyapu dan mengepel lantai ('sweeping and mopping the floor') adalah pekerjaan rumah tangga ('household chore').",
+          distractorNotes: {
+            "Playing online games all afternoon": "Hiburan/hobi, bukan tugas rumah tangga.",
+            "Watching movies at the cinema": "Rekreasi di bioskop.",
+            "Buying snacks at the mall": "Berbelanja jajanan di mal."
+          }
+        },
+        {
+          id: 87,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "After waking up in the morning, a good habit in the bedroom is to ....",
+          correct: "make the bed",
+          distractors: [
+            "wash the car in the rain",
+            "cook dinner on the roof",
+            "water the plants inside the fridge"
+          ],
+          explanation: "Merapikan tempat tidur setelah bangun tidur disebut 'make the bed'.",
+          distractorNotes: {
+            "wash the car in the rain": "Tidak sesuai konteks merapikan kamar tidur.",
+            "cook dinner on the roof": "Tidak wajar.",
+            "water the plants inside the fridge": "Tidak wajar."
+          }
+        },
+        {
+          id: 88,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "It is ... outside. You should take an umbrella before going out.",
+          correct: "rainy",
+          distractors: [
+            "sunny and dry",
+            "windless and hot",
+            "clear and bright"
+          ],
+          explanation: "Saat cuaca hujan ('rainy'), kita disarankan membawa payung ('umbrella').",
+          distractorNotes: {
+            "sunny and dry": "Cerah dan kering, tidak selalu membutuhkan payung untuk hujan.",
+            "windless and hot": "Tanpa angin dan panas.",
+            "clear and bright": "Cerah dan terang."
+          }
+        },
+        {
+          id: 89,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "On a very hot and sunny day, people often wear sunglasses and turn on the ....",
+          correct: "fan or air conditioner",
+          distractors: [
+            "thick winter coat",
+            "raincoat and boots",
+            "fireplace heater"
+          ],
+          explanation: "Saat udara panas dan terik, kipas angin ('fan') atau AC ('air conditioner') membantu menyejukkan ruangan.",
+          distractorNotes: {
+            "thick winter coat": "Mantel musim dingin tebal justru membuat makin panas.",
+            "raincoat and boots": "Jas hujan dan sepatu bot dipakai saat hujan/becek.",
+            "fireplace heater": "Pemanas ruangan untuk cuaca dingin."
+          }
+        },
+        {
+          id: 90,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "After dinner, Rani helps her mother ... the dirty dishes.",
+          correct: "wash",
+          distractors: [
+            "sleep",
+            "plant",
+            "ride"
+          ],
+          explanation: "Pekerjaan setelah makan malam adalah mencuci piring kotor ('wash the dirty dishes').",
+          distractorNotes: {
+            "sleep": "Tidur.",
+            "plant": "Menanam.",
+            "ride": "Mengendarai."
+          }
+        },
+        {
+          id: 91,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "Where do you usually brush your teeth and take a bath?",
+          correct: "In the bathroom",
+          distractors: [
+            "In the dining room",
+            "In the living room",
+            "In the study room"
+          ],
+          explanation: "Menggosok gigi dan mandi dilakukan di kamar mandi ('bathroom').",
+          distractorNotes: {
+            "In the dining room": "Ruang makan.",
+            "In the living room": "Ruang tamu.",
+            "In the study room": "Ruang belajar."
+          }
+        },
+        {
+          id: 92,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "The clock is ... the wall, right above the sofa.",
+          correct: "on",
+          distractors: [
+            "under",
+            "inside",
+            "below"
+          ],
+          explanation: "Jam dinding yang menempel/terpasang pada dinding menggunakan preposisi 'on' ('on the wall').",
+          distractorNotes: {
+            "under": "Di bawah.",
+            "inside": "Di dalam.",
+            "below": "Di bawah."
+          }
+        },
+        {
+          id: 93,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "Which weather word describes a sky covered with thick grey clouds?",
+          correct: "Cloudy",
+          distractors: [
+            "Sunny",
+            "Clear",
+            "Dry"
+          ],
+          explanation: "Langit yang tertutup awan disebut berawan ('cloudy').",
+          distractorNotes: {
+            "Sunny": "Cerah/banyak sinar matahari.",
+            "Clear": "Terang/tidak berawan.",
+            "Dry": "Kering."
+          }
+        },
+        {
+          id: 94,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "Every Saturday morning, my father waters the plants in the ....",
+          correct: "garden / yard",
+          distractors: [
+            "pillowcase",
+            "refrigerator",
+            "wardrobe"
+          ],
+          explanation: "Tanaman hias/kebun umumnya berada di taman atau halaman ('garden' / 'yard').",
+          distractorNotes: {
+            "pillowcase": "Sarung bantal.",
+            "refrigerator": "Kulkas.",
+            "wardrobe": "Lemari pakaian."
+          }
+        },
+        {
+          id: 95,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "The study desk is ... the window, so natural light comes in during the day.",
+          correct: "near / next to",
+          distractors: [
+            "inside the glass",
+            "under the roof tiles",
+            "below the floor"
+          ],
+          explanation: "Meja belajar yang diletakkan dekat/di sebelah jendela ('near' atau 'next to' the window) mendapat cahaya alami.",
+          distractorNotes: {
+            "inside the glass": "Di dalam kaca jendela (tidak logis).",
+            "under the roof tiles": "Di bawah genteng.",
+            "below the floor": "Di bawah lantai."
+          }
+        },
+        {
+          id: 96,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "Which furniture item is used to store folded clothes in a bedroom?",
+          correct: "Wardrobe",
+          distractors: [
+            "Sink",
+            "Stove",
+            "Doormat"
+          ],
+          explanation: "'Wardrobe' adalah lemari pakaian untuk menyimpan baju.",
+          distractorNotes: {
+            "Sink": "Wastafel/bak cuci.",
+            "Stove": "Kompor.",
+            "Doormat": "Keset kaki."
+          }
+        },
+        {
+          id: 97,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "When it is 'windy' outside, you can see the tree branches ....",
+          correct: "swaying in the breeze",
+          distractors: [
+            "turning into ice cubes",
+            "walking into the kitchen",
+            "ringing like a phone"
+          ],
+          explanation: "Saat berangin ('windy'), dahan pohon tampak bergoyang tertiup angin ('swaying in the breeze').",
+          distractorNotes: {
+            "turning into ice cubes": "Tidak sesuai konteks angin.",
+            "walking into the kitchen": "Tidak logis.",
+            "ringing like a phone": "Tidak sesuai konteks."
+          }
+        },
+        {
+          id: 98,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "Please take out the ... before it gets full and smells bad.",
+          correct: "rubbish / trash",
+          distractors: [
+            "homework",
+            "blanket",
+            "cushion"
+          ],
+          explanation: "'Take out the rubbish/trash' berarti membuang sampah keluar rumah ke tempat sampah utama.",
+          distractorNotes: {
+            "homework": "PR/tugas sekolah.",
+            "blanket": "Selimut.",
+            "cushion": "Bantal sofa."
+          }
+        },
+        {
+          id: 99,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "The rug is on the floor, ... the coffee table.",
+          correct: "under",
+          distractors: [
+            "above the ceiling",
+            "inside the kettle",
+            "on the clouds"
+          ],
+          explanation: "Karpet ('rug') di lantai sering berada di bawah meja kopi ('under the coffee table').",
+          distractorNotes: {
+            "above the ceiling": "Di atas plafon.",
+            "inside the kettle": "Di dalam ceret.",
+            "on the clouds": "Di atas awan."
+          }
+        },
+        {
+          id: 100,
+          chapter: "Chapter 3: Home Sweet Home",
+          q: "What do you call a room where the family gathers to eat meals together?",
+          correct: "Dining room",
+          distractors: [
+            "Bathroom",
+            "Garage",
+            "Balcony"
+          ],
+          explanation: "Ruang makan ('dining room') adalah ruangan tempat keluarga makan bersama.",
+          distractorNotes: {
+            "Bathroom": "Kamar mandi.",
+            "Garage": "Garasi.",
+            "Balcony": "Balkon."
+          }
+        }
+      ];
+
+      /* =====================================================================
+         PENGACAKAN KUNCI JAWABAN SECARA MERATA & DETERMINISTIK PER SOAL
+         Pola huruf benar disebar merata (25 A, 25 B, 25 C, 25 D) lalu diacak
+         berdasarkan seed deterministik per nomor soal agar tidak berulang
+         dan selalu konsisten saat halaman dimuat ulang.
+         ===================================================================== */
+      const LETTERS = ["A", "B", "C", "D"];
+
+      // PRNG deterministik (Mulberry32) agar pengacakan terdistribusi merata dan konsisten
+      function createRng(seed) {
+        let a = seed >>> 0;
+        return function () {
+          a |= 0;
+          a = (a + 0x6d2b79f5) | 0;
+          let t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      // Fisher-Yates shuffle dengan RNG yang diberikan
+      function shuffleArray(arr, rng) {
+        const copy = arr.slice();
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          const temp = copy[i];
+          copy[i] = copy[j];
+          copy[j] = temp;
+        }
+        return copy;
+      }
+
+      // Bangun urutan target huruf jawaban benar (25 A, 25 B, 25 C, 25 D) secara merata
+      function buildBalancedTargetLetters() {
+        const pool = [];
+        for (let i = 0; i < 25; i++) {
+          pool.push("A", "B", "C", "D");
+        }
+        const rng = createRng(20261125);
+        return shuffleArray(pool, rng);
+      }
+
+      function prepareQuestions(rawList) {
+        const balancedLetters = buildBalancedTargetLetters();
+
+        return rawList.map((item, idx) => {
+          const rng = createRng(10000 + item.id * 97);
+          const shuffledDistractors = shuffleArray(item.distractors, rng);
+          const targetLetter = balancedLetters[idx];
+          const targetIndex = LETTERS.indexOf(targetLetter);
+
+          // Susun 4 opsi sehingga jawaban benar berada tepat di posisi targetIndex
+          const orderedTexts = [];
+          let distractorPointer = 0;
+          for (let pos = 0; pos < 4; pos++) {
+            if (pos === targetIndex) {
+              orderedTexts.push(item.correct);
+            } else {
+              orderedTexts.push(shuffledDistractors[distractorPointer]);
+              distractorPointer++;
+            }
+          }
+
+          const options = orderedTexts.map((text, optIdx) => ({
+            letter: LETTERS[optIdx],
+            text,
+            isCorrect: text === item.correct
+          }));
+
+          return {
+            id: item.id,
+            chapter: item.chapter,
+            q: item.q,
+            options,
+            correctLetter: targetLetter,
+            correctText: item.correct,
+            explanation: item.explanation,
+            distractorNotes: item.distractorNotes
+          };
+        });
+      }
+
+      const questions = prepareQuestions(RAW_QUESTIONS);
+
+      /* =====================================================================
+         STATE APLIKASI
+         ===================================================================== */
+      const userAnswers = {}; // { [questionId]: "A" | "B" | "C" | "D" }
+      let isSubmitted = false;
+      let pendingForceSubmit = false;
+
+      /* =====================================================================
+         ELEMEN DOM
+         ===================================================================== */
+      const questionListEl = document.getElementById("questionList");
+      const navGridEl = document.getElementById("navGrid");
+      const navLegendEl = document.getElementById("navLegend");
+      const sidebarProgressBadgeEl = document.getElementById("sidebarProgressBadge");
+      const bottomAnsweredCountEl = document.getElementById("bottomAnsweredCount");
+      const quizFormEl = document.getElementById("quizForm");
+
+      const scorePanelEl = document.getElementById("scorePanel");
+      const finalScoreValEl = document.getElementById("finalScoreVal");
+      const correctCountValEl = document.getElementById("correctCountVal");
+      const wrongCountValEl = document.getElementById("wrongCountVal");
+      const unansweredCountValEl = document.getElementById("unansweredCountVal");
+
+      const confirmModalEl = document.getElementById("confirmModal");
+      const confirmModalDescEl = document.getElementById("confirmModalDesc");
+      const modalReviewBtnEl = document.getElementById("modalReviewBtn");
+      const modalForceSubmitBtnEl = document.getElementById("modalForceSubmitBtn");
+
+      const sidebarSubmitBtnEl = document.getElementById("sidebarSubmitBtn");
+      const resetQuizTopBtnEl = document.getElementById("resetQuizTopBtn");
+      const resetQuizBottomBtnEl = document.getElementById("resetQuizBottomBtn");
+      const jumpFirstWrongBtnEl = document.getElementById("jumpFirstWrongBtn");
+
+      /* =====================================================================
+         RENDER SOAL & PANEL NAVIGASI NOMOR 1 - 100
+         ===================================================================== */
+      function renderQuestions() {
+        const fragment = document.createDocumentFragment();
+
+        questions.forEach((item) => {
+          const card = document.createElement("article");
+          card.className = "question-card";
+          card.id = `question-card-${item.id}`;
+
+          // Top bar nomor & bab
+          const topBar = document.createElement("div");
+          topBar.className = "question-top";
+
+          const meta = document.createElement("div");
+          meta.className = "question-meta";
+
+          const numBadge = document.createElement("span");
+          numBadge.className = "q-number";
+          numBadge.textContent = `No. ${item.id}`;
+
+          const chapBadge = document.createElement("span");
+          chapBadge.className = "q-chapter";
+          chapBadge.textContent = item.chapter;
+
+          meta.appendChild(numBadge);
+          meta.appendChild(chapBadge);
+
+          const resultBadge = document.createElement("span");
+          resultBadge.className = "q-result-badge";
+          resultBadge.id = `result-badge-${item.id}`;
+
+          topBar.appendChild(meta);
+          topBar.appendChild(resultBadge);
+
+          // Teks soal
+          const promptEl = document.createElement("div");
+          promptEl.className = "question-prompt";
+          promptEl.textContent = item.q;
+
+          // Opsi A, B, C, D
+          const optionsGroup = document.createElement("div");
+          optionsGroup.className = "options-group";
+
+          item.options.forEach((opt) => {
+            const label = document.createElement("label");
+            label.className = "option-item";
+            label.id = `option-label-${item.id}-${opt.letter}`;
+
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = `q_${item.id}`;
+            radio.value = opt.letter;
+            radio.id = `q_${item.id}_${opt.letter}`;
+
+            radio.addEventListener("change", () => {
+              if (isSubmitted) return;
+              userAnswers[item.id] = opt.letter;
+              updateSelectedOptionStyle(item.id);
+              updateProgressUI();
+            });
+
+            const letterSpan = document.createElement("span");
+            letterSpan.className = "option-letter";
+            letterSpan.textContent = `${opt.letter}.`;
+
+            const textSpan = document.createElement("span");
+            textSpan.className = "option-text";
+            textSpan.textContent = opt.text;
+
+            label.appendChild(radio);
+            label.appendChild(letterSpan);
+            label.appendChild(textSpan);
+            optionsGroup.appendChild(label);
+          });
+
+          // Kotak pembahasan (tersembunyi sebelum submit)
+          const expBox = document.createElement("div");
+          expBox.className = "explanation-box";
+          expBox.id = `explanation-box-${item.id}`;
+
+          const expTitle = document.createElement("span");
+          expTitle.className = "explanation-title";
+          expTitle.textContent = `Pembahasan (Kunci Jawaban: ${item.correctLetter}. ${item.correctText})`;
+
+          const expMain = document.createElement("p");
+          expMain.className = "explanation-main";
+          expMain.textContent = item.explanation;
+
+          const distractorUl = document.createElement("ul");
+          distractorUl.className = "distractor-list";
+
+          item.options.forEach((opt) => {
+            const li = document.createElement("li");
+            if (opt.isCorrect) {
+              li.innerHTML = `<strong>${opt.letter} (${escapeHtml(opt.text)}) — Jawaban Benar:</strong> ${escapeHtml(item.explanation)}`;
+            } else {
+              const note = item.distractorNotes[opt.text] || "Pilihan ini kurang tepat untuk konteks soal ini.";
+              li.innerHTML = `<strong>${opt.letter} (${escapeHtml(opt.text)}):</strong> ${escapeHtml(note)}`;
+            }
+            distractorUl.appendChild(li);
+          });
+
+          expBox.appendChild(expTitle);
+          expBox.appendChild(expMain);
+          expBox.appendChild(distractorUl);
+
+          card.appendChild(topBar);
+          card.appendChild(promptEl);
+          card.appendChild(optionsGroup);
+          card.appendChild(expBox);
+
+          fragment.appendChild(card);
+        });
+
+        questionListEl.innerHTML = "";
+        questionListEl.appendChild(fragment);
+      }
+
+      function renderSidebarNav() {
+        const fragment = document.createDocumentFragment();
+
+        questions.forEach((item) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "nav-num-btn";
+          btn.id = `nav-btn-${item.id}`;
+          btn.textContent = String(item.id);
+          btn.setAttribute("aria-label", `Ke soal nomor ${item.id}`);
+
+          btn.addEventListener("click", () => {
+            const targetCard = document.getElementById(`question-card-${item.id}`);
+            if (targetCard) {
+              targetCard.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          });
+
+          fragment.appendChild(btn);
+        });
+
+        navGridEl.innerHTML = "";
+        navGridEl.appendChild(fragment);
+      }
+
+      /* =====================================================================
+         PEMBARUAN STATUS VISUAL SAAT MENJAWAB
+         ===================================================================== */
+      function updateSelectedOptionStyle(questionId) {
+        const selectedLetter = userAnswers[questionId];
+        LETTERS.forEach((letter) => {
+          const labelEl = document.getElementById(`option-label-${questionId}-${letter}`);
+          if (labelEl) {
+            labelEl.classList.toggle("selected", selectedLetter === letter);
+          }
+        });
+      }
+
+      function updateProgressUI() {
+        const answeredCount = Object.keys(userAnswers).length;
+        sidebarProgressBadgeEl.textContent = `${answeredCount} / 100`;
+        bottomAnsweredCountEl.textContent = String(answeredCount);
+
+        if (!isSubmitted) {
+          questions.forEach((item) => {
+            const navBtn = document.getElementById(`nav-btn-${item.id}`);
+            if (navBtn) {
+              navBtn.classList.toggle("answered", Boolean(userAnswers[item.id]));
+            }
+          });
+        }
+      }
+
+      /* =====================================================================
+         PROSES SUBMIT, PERHITUNGAN SKOR & PEMBAHASAN LENGKAP
+         ===================================================================== */
+      function handleSubmitRequest() {
+        if (isSubmitted) {
+          scorePanelEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+
+        const answeredCount = Object.keys(userAnswers).length;
+        const unansweredCount = questions.length - answeredCount;
+
+        if (unansweredCount > 0 && !pendingForceSubmit) {
+          confirmModalDescEl.textContent = `Masih ada ${unansweredCount} soal yang belum terjawab (terjawab ${answeredCount} dari 100 soal). Apakah Anda ingin tetap submit atau kembali memeriksa?`;
+          confirmModalEl.classList.add("open");
+          return;
+        }
+
+        pendingForceSubmit = false;
+        confirmModalEl.classList.remove("open");
+        evaluateAndShowResults();
+      }
+
+      function evaluateAndShowResults() {
+        isSubmitted = true;
+
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unansweredCount = 0;
+
+        questions.forEach((item) => {
+          const chosen = userAnswers[item.id];
+          const cardEl = document.getElementById(`question-card-${item.id}`);
+          const badgeEl = document.getElementById(`result-badge-${item.id}`);
+          const navBtnEl = document.getElementById(`nav-btn-${item.id}`);
+          const expBoxEl = document.getElementById(`explanation-box-${item.id}`);
+
+          // Kunci radio agar tidak berubah setelah submit
+          LETTERS.forEach((letter) => {
+            const radioEl = document.getElementById(`q_${item.id}_${letter}`);
+            const labelEl = document.getElementById(`option-label-${item.id}-${letter}`);
+            if (radioEl) {
+              radioEl.disabled = true;
+            }
+            if (labelEl) {
+              labelEl.classList.remove("selected", "option-correct-answer", "option-wrong-user");
+              const oldTag = labelEl.querySelector(".option-tag");
+              if (oldTag) oldTag.remove();
+            }
+          });
+
+          cardEl.classList.remove("status-correct", "status-wrong", "status-unanswered");
+          badgeEl.className = "q-result-badge";
+          navBtnEl.classList.remove("answered", "nav-correct", "nav-wrong", "nav-missing");
+
+          // Tandai kunci jawaban benar pada opsi yang sesuai
+          const rightLabelEl = document.getElementById(`option-label-${item.id}-${item.correctLetter}`);
+          if (rightLabelEl) {
+            rightLabelEl.classList.add("option-correct-answer");
+            const rightTag = document.createElement("span");
+            rightTag.className = "option-tag tag-right";
+            rightTag.textContent = "Kunci Benar";
+            rightLabelEl.appendChild(rightTag);
+          }
+
+          if (!chosen) {
+            unansweredCount++;
+            cardEl.classList.add("status-unanswered");
+            badgeEl.classList.add("unanswered");
+            badgeEl.textContent = "Belum Dijawab";
+            navBtnEl.classList.add("nav-missing");
+          } else if (chosen === item.correctLetter) {
+            correctCount++;
+            cardEl.classList.add("status-correct");
+            badgeEl.classList.add("correct");
+            badgeEl.textContent = "Benar";
+            navBtnEl.classList.add("nav-correct");
+          } else {
+            wrongCount++;
+            cardEl.classList.add("status-wrong");
+            badgeEl.classList.add("wrong");
+            badgeEl.textContent = `Salah (Dipilih: ${chosen})`;
+            navBtnEl.classList.add("nav-wrong");
+
+            const wrongLabelEl = document.getElementById(`option-label-${item.id}-${chosen}`);
+            if (wrongLabelEl) {
+              wrongLabelEl.classList.add("option-wrong-user");
+              const wrongTag = document.createElement("span");
+              wrongTag.className = "option-tag tag-user-wrong";
+              wrongTag.textContent = "Pilihan Anda";
+              wrongLabelEl.appendChild(wrongTag);
+            }
+          }
+
+          // Tampilkan pembahasan lengkap untuk setiap soal
+          if (expBoxEl) {
+            expBoxEl.classList.add("visible");
+          }
+        });
+
+        // Nilai 0 - 100 (1 soal = 1 poin dari 100 soal)
+        const finalScore = correctCount;
+        finalScoreValEl.textContent = String(finalScore);
+        correctCountValEl.textContent = String(correctCount);
+        wrongCountValEl.textContent = String(wrongCount);
+        unansweredCountValEl.textContent = String(unansweredCount);
+
+        // Perbarui legenda sidebar ke mode hasil
+        navLegendEl.innerHTML = `
+          <span class="legend-item"><span class="legend-swatch swatch-correct"></span>Benar</span>
+          <span class="legend-item"><span class="legend-swatch swatch-wrong"></span>Salah</span>
+          <span class="legend-item"><span class="legend-swatch swatch-unanswered"></span>Kosong</span>
+        `;
+
+        scorePanelEl.classList.add("visible");
+        scorePanelEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      /* =====================================================================
+         RESET / ULANGI KUIS
+         ===================================================================== */
+      function resetQuiz() {
+        isSubmitted = false;
+        pendingForceSubmit = false;
+
+        Object.keys(userAnswers).forEach((key) => {
+          delete userAnswers[key];
+        });
+
+        scorePanelEl.classList.remove("visible");
+
+        navLegendEl.innerHTML = `
+          <span class="legend-item"><span class="legend-swatch swatch-unanswered"></span>Belum</span>
+          <span class="legend-item"><span class="legend-swatch swatch-answered"></span>Terjawab</span>
+        `;
+
+        questions.forEach((item) => {
+          const cardEl = document.getElementById(`question-card-${item.id}`);
+          const badgeEl = document.getElementById(`result-badge-${item.id}`);
+          const navBtnEl = document.getElementById(`nav-btn-${item.id}`);
+          const expBoxEl = document.getElementById(`explanation-box-${item.id}`);
+
+          cardEl.className = "question-card";
+          badgeEl.className = "q-result-badge";
+          badgeEl.textContent = "";
+          navBtnEl.className = "nav-num-btn";
+          expBoxEl.classList.remove("visible");
+
+          LETTERS.forEach((letter) => {
+            const radioEl = document.getElementById(`q_${item.id}_${letter}`);
+            const labelEl = document.getElementById(`option-label-${item.id}-${letter}`);
+            if (radioEl) {
+              radioEl.checked = false;
+              radioEl.disabled = false;
+            }
+            if (labelEl) {
+              labelEl.className = "option-item";
+              const tag = labelEl.querySelector(".option-tag");
+              if (tag) tag.remove();
+            }
+          });
+        });
+
+        updateProgressUI();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      /* =====================================================================
+         EVENT LISTENERS
+         ===================================================================== */
+      quizFormEl.addEventListener("submit", (e) => {
+        e.preventDefault();
+        handleSubmitRequest();
+      });
+
+      sidebarSubmitBtnEl.addEventListener("click", () => {
+        handleSubmitRequest();
+      });
+
+      modalReviewBtnEl.addEventListener("click", () => {
+        pendingForceSubmit = false;
+        confirmModalEl.classList.remove("open");
+      });
+
+      modalForceSubmitBtnEl.addEventListener("click", () => {
+        pendingForceSubmit = true;
+        handleSubmitRequest();
+      });
+
+      resetQuizTopBtnEl.addEventListener("click", resetQuiz);
+      resetQuizBottomBtnEl.addEventListener("click", resetQuiz);
+
+      jumpFirstWrongBtnEl.addEventListener("click", () => {
+        const firstWrong = questions.find(
+          (item) => userAnswers[item.id] && userAnswers[item.id] !== item.correctLetter
+        );
+        const targetItem =
+          firstWrong || questions.find((item) => !userAnswers[item.id]);
+        if (targetItem) {
+          const card = document.getElementById(`question-card-${targetItem.id}`);
+          if (card) {
+            card.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
+      });
+
+      // Inisialisasi tampilan awal
+      renderQuestions();
+      renderSidebarNav();
+      updateProgressUI();
+    })();
+  </script>
+</body>
+</html>

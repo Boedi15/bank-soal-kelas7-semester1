@@ -1,0 +1,2569 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latihan Soal Matematika SMP Kelas VII Semester 1 (Kurikulum Merdeka) — Paket 3</title>
+  <style>
+    /* ==========================================================================
+       VARIABEL TEMA & RESET (100% MANDIRI OFFLINE TANPA CDN EKSTERNAL)
+       ========================================================================== */
+    :root {
+      --primary: #0f766e;
+      --primary-mid: #0d9488;
+      --primary-light: #f0fdfa;
+      --accent-blue: #2563eb;
+      --accent-blue-light: #eff6ff;
+      --success: #16a34a;
+      --success-light: #f0fdf4;
+      --warning: #d97706;
+      --warning-light: #fffbeb;
+      --danger: #dc2626;
+      --danger-light: #fef2f2;
+      --bg-body: #f1f5f9;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 10px 25px rgba(15, 23, 42, 0.08);
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==========================================================================
+       HEADER & TOMBOL UNDUH OFFLINE
+       ========================================================================== */
+    header {
+      background: linear-gradient(135deg, #115e59 0%, #0f766e 55%, #0d9488 100%);
+      color: #ffffff;
+      padding: 18px 24px;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1260px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .brand-title h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .brand-title p {
+      font-size: 0.83rem;
+      opacity: 0.92;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .offline-pill {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+    }
+
+    .btn-download {
+      background: #ffffff;
+      color: var(--primary);
+      border: none;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 0.86rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .btn-download:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       NAVIGASI TAB UTAMA
+       ========================================================================== */
+    .main-wrapper {
+      max-width: 1260px;
+      margin: 22px auto 64px;
+      padding: 0 16px;
+    }
+
+    .tab-bar {
+      display: flex;
+      gap: 12px;
+      background: var(--bg-card);
+      padding: 8px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 250px;
+      padding: 14px 20px;
+      border: none;
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .tab-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .tab-btn.active {
+      background: var(--primary-mid);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.28);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       TAB RANGKUMAN MATERI BAB 1 - 3
+       ========================================================================== */
+    .bab-filter-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .bab-pill {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1.5px solid var(--primary-mid);
+      background: #ffffff;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .bab-pill.active, .bab-pill:hover {
+      background: var(--primary-mid);
+      color: #ffffff;
+    }
+
+    .materi-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      margin-bottom: 22px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .materi-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .bab-badge {
+      background: var(--primary-mid);
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    .materi-header h2 {
+      font-size: 1.28rem;
+      color: var(--primary);
+    }
+
+    .materi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 18px;
+    }
+
+    .sub-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .sub-box h3 {
+      font-size: 1.04rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .sub-box ul {
+      padding-left: 20px;
+      font-size: 0.93rem;
+      color: #334155;
+    }
+
+    .sub-box li {
+      margin-bottom: 6px;
+    }
+
+    .formula-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary-mid);
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin: 10px 0;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: #115e59;
+    }
+
+    .example-box {
+      background: var(--accent-blue-light);
+      border-left: 4px solid var(--accent-blue);
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin-top: 12px;
+      font-size: 0.91rem;
+      color: #1e3a8a;
+    }
+
+    /* ==========================================================================
+       TAB LATIHAN 50 SOAL (PAKET 3)
+       ========================================================================== */
+    .quiz-top-bar {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 18px 22px;
+      margin-bottom: 22px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .student-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .student-field label {
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .student-field input {
+      padding: 9px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.93rem;
+      min-width: 230px;
+      outline: none;
+    }
+
+    .student-field input:focus {
+      border-color: var(--primary-mid);
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-tool {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid #99f6e4;
+      padding: 9px 15px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.86rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-tool:hover {
+      background: #ccfbf1;
+    }
+
+    .quiz-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .quiz-layout {
+        grid-template-columns: 1fr;
+      }
+      .nav-sidebar {
+        order: -1;
+        position: static !important;
+      }
+    }
+
+    /* SIDEBAR NAVIGASI NOMOR */
+    .nav-sidebar {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 94px;
+    }
+
+    .nav-sidebar h3 {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .progress-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary-mid);
+      width: 0%;
+      transition: width 0.25s ease;
+    }
+
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      max-height: 360px;
+      overflow-y: auto;
+      padding-right: 3px;
+    }
+
+    .num-btn {
+      aspect-ratio: 1;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .num-btn:hover {
+      border-color: var(--primary-mid);
+      background: var(--primary-light);
+    }
+
+    .num-btn.answered {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+    }
+
+    .num-btn.doubt {
+      background: var(--warning) !important;
+      color: #ffffff !important;
+      border-color: var(--warning) !important;
+    }
+
+    .num-btn.nav-correct {
+      background: var(--success) !important;
+      color: #ffffff !important;
+      border-color: var(--success) !important;
+    }
+
+    .num-btn.nav-wrong {
+      background: var(--danger) !important;
+      color: #ffffff !important;
+      border-color: var(--danger) !important;
+    }
+
+    .legend-row {
+      display: flex;
+      gap: 10px;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-box {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* KARTU SOAL */
+    .question-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 20px;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 102px;
+    }
+
+    .question-card.card-correct {
+      border-color: var(--success);
+    }
+
+    .question-card.card-wrong {
+      border-color: var(--danger);
+    }
+
+    .q-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .q-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .q-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+    }
+
+    .q-bab {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .btn-doubt {
+      border: 1.5px solid #fcd34d;
+      background: #fffbeb;
+      color: #b45309;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-doubt.active {
+      background: var(--warning);
+      color: #ffffff;
+      border-color: var(--warning);
+    }
+
+    .q-body {
+      font-size: 1.03rem;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      line-height: 1.65;
+    }
+
+    .svg-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin: 12px 0 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: auto;
+    }
+
+    .svg-box svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      background: #ffffff;
+      transition: all 0.15s;
+    }
+
+    .option-item:hover {
+      border-color: var(--primary-mid);
+      background: #f0fdfa;
+    }
+
+    .option-item.selected {
+      border-color: var(--accent-blue);
+      background: var(--accent-blue-light);
+    }
+
+    .option-item.opt-right {
+      border-color: var(--success) !important;
+      background: var(--success-light) !important;
+    }
+
+    .option-item.opt-wrong {
+      border-color: var(--danger) !important;
+      background: var(--danger-light) !important;
+    }
+
+    .opt-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-item.selected .opt-letter {
+      background: var(--accent-blue);
+      color: #ffffff;
+    }
+
+    .option-item.opt-right .opt-letter {
+      background: var(--success);
+      color: #ffffff;
+    }
+
+    .option-item.opt-wrong .opt-letter {
+      background: var(--danger);
+      color: #ffffff;
+    }
+
+    .opt-text {
+      padding-top: 3px;
+      font-size: 0.97rem;
+    }
+
+    /* KOTAK PEMBAHASAN */
+    .explanation-panel {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: #f8fafc;
+      border-left: 5px solid var(--primary-mid);
+      font-size: 0.93rem;
+    }
+
+    .explanation-panel.is-correct {
+      background: var(--success-light);
+      border-left-color: var(--success);
+    }
+
+    .explanation-panel.is-wrong {
+      background: var(--danger-light);
+      border-left-color: var(--danger);
+    }
+
+    .exp-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 800;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* PANEL SUBMIT & HASIL SKOR */
+    .submit-box {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      margin-top: 22px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+      color: #ffffff;
+      border: none;
+      padding: 15px 34px;
+      border-radius: var(--radius-md);
+      font-size: 1.08rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(13, 148, 136, 0.3);
+      transition: transform 0.15s;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+    }
+
+    .score-summary {
+      display: none;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 30px 24px;
+      margin-bottom: 24px;
+      border: 2px solid var(--primary-mid);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .score-ring {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #115e59 0%, #0d9488 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      box-shadow: 0 8px 22px rgba(15, 118, 110, 0.3);
+    }
+
+    .score-ring .big-num {
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .score-ring .sub-lbl {
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+      opacity: 0.92;
+    }
+
+    .summary-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 12px;
+      max-width: 660px;
+      margin: 18px auto;
+    }
+
+    .stat-tile {
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .stat-tile strong {
+      display: block;
+      font-size: 1.4rem;
+    }
+
+    .filter-review-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .rev-btn {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: #ffffff;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    .rev-btn.active {
+      background: var(--primary-mid);
+      color: #ffffff;
+      border-color: var(--primary-mid);
+    }
+
+    /* PECAHAN MATEMATIKA RAPI */
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      font-size: 0.88em;
+      line-height: 1.1;
+      margin: 0 2px;
+    }
+    .frac > span:first-child {
+      border-bottom: 1.5px solid currentColor;
+      padding: 0 3px;
+    }
+    .frac > span:last-child {
+      padding: 0 3px;
+    }
+
+    /* MODAL CUSTOM (TANPA ALERT/CONFIRM BROWSER) */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
+      text-align: center;
+    }
+
+    .modal-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 10px;
+    }
+
+    .modal-card p {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .modal-btns {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-m-ok {
+      background: var(--primary-mid);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-m-cancel {
+      background: #f1f5f9;
+      color: var(--text-main);
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       HEADER UTAMA
+       ======================================================================== -->
+  <header>
+    <div class="header-container">
+      <div class="brand-title">
+        <div class="brand-icon">PK-3</div>
+        <div>
+          <h1>Latihan Soal Matematika SMP Kelas VII Semester 1 (Kurikulum Merdeka) — Paket 3</h1>
+          <p>Edisi 50 Soal Baru &bull; Bilangan Bulat, Aljabar, &amp; Persamaan/Pertidaksamaan Linear</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="offline-pill"><span class="pulse-dot"></span> Mandiri Offline</span>
+        <button class="btn-download" onclick="downloadOfflineFile()">
+          &#128190; Unduh File HTML (Offline)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- TAB BAR (LATIHAN 50 SOAL PAKET 3 AKTIF SECARA DEFAULT) -->
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tabBtnKuis" onclick="switchTab('kuis')">
+        &#128221; Latihan 50 Soal (Paket 3)
+      </button>
+      <button class="tab-btn" id="tabBtnMateri" onclick="switchTab('materi')">
+        &#128218; Rangkuman Materi Bab 1–3
+      </button>
+    </div>
+
+    <!-- ======================================================================
+         TAB 1 (AKTIF DEFAULT): LATIHAN 50 SOAL PILIHAN GANDA — PAKET 3
+         ====================================================================== -->
+    <section id="sectionKuis" class="tab-content active">
+      <!-- BARIS IDENTITAS & TOMBOL ACAK -->
+      <div class="quiz-top-bar">
+        <div class="student-field">
+          <label for="studentName">Nama Siswa (Opsional):</label>
+          <input type="text" id="studentName" placeholder="Ketik nama lengkapmu di sini..." />
+        </div>
+        <div class="quiz-toolbar">
+          <button class="btn-tool" onclick="confirmShuffleAndReset()">
+            &#128256; Acak Ulang Opsi &amp; Mulai Baru
+          </button>
+        </div>
+      </div>
+
+      <!-- PANEL SKOR & FILTER HASIL (MUNCUL SETELAH SUBMIT) -->
+      <div class="score-summary" id="scoreSummary">
+        <h2 id="scoreTitle" style="color: var(--primary); margin-bottom: 14px;">Hasil Latihan Paket 3</h2>
+        <div class="score-ring">
+          <span class="big-num" id="scoreValue">0</span>
+          <span class="sub-lbl">Skor Akhir</span>
+        </div>
+        <div id="gradeBadge" style="display:inline-block; padding:6px 18px; border-radius:999px; font-weight:800; font-size:0.94rem; margin-bottom:10px;"></div>
+
+        <div class="summary-stats">
+          <div class="stat-tile">
+            <strong id="countCorrect" style="color: var(--success);">0</strong>
+            <span>Benar</span>
+          </div>
+          <div class="stat-tile">
+            <strong id="countWrong" style="color: var(--danger);">0</strong>
+            <span>Salah</span>
+          </div>
+          <div class="stat-tile">
+            <strong id="countEmpty" style="color: var(--warning);">0</strong>
+            <span>Kosong</span>
+          </div>
+          <div class="stat-tile">
+            <strong style="color: var(--primary-mid);">50</strong>
+            <span>Total Soal</span>
+          </div>
+        </div>
+
+        <div class="filter-review-row">
+          <button class="rev-btn active" onclick="filterResults('all', this)">Semua Soal (50)</button>
+          <button class="rev-btn" id="btnOnlyWrong" onclick="filterResults('wrong', this)">Jawaban Salah (0)</button>
+          <button class="rev-btn" id="btnOnlyCorrect" onclick="filterResults('correct', this)">Jawaban Benar (0)</button>
+          <button class="btn-tool" onclick="repeatQuiz()" style="border-radius:999px;">&#8635; Ulangi Paket 3</button>
+        </div>
+      </div>
+
+      <!-- GRID UTAMA: DAFTAR 50 SOAL + NAVIGASI NOMOR -->
+      <div class="quiz-layout">
+        <div id="questionsList">
+          <!-- 50 Kartu Soal dirender oleh JavaScript -->
+        </div>
+
+        <aside class="nav-sidebar">
+          <h3>Navigasi 50 Nomor Soal</h3>
+          <div class="progress-text">
+            Terjawab: <strong id="progressAnswered">0</strong> / <strong>50</strong> soal
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="number-grid" id="navGrid"></div>
+          <div class="legend-row" id="navLegend">
+            <div class="legend-item"><span class="legend-box" style="background:#f8fafc; border:1px solid #cbd5e1;"></span> Belum</div>
+            <div class="legend-item"><span class="legend-box" style="background:var(--accent-blue);"></span> Dijawab</div>
+            <div class="legend-item"><span class="legend-box" style="background:var(--warning);"></span> Ragu-ragu</div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- TOMBOL SUBMIT -->
+      <div class="submit-box" id="submitBox">
+        <p style="color: var(--text-muted); margin-bottom: 14px; font-size: 0.95rem;">
+          Pastikan seluruh soal sudah diperiksa. Klik tombol di bawah untuk menilai dan melihat pembahasan langkah demi langkah.
+        </p>
+        <button class="btn-submit" onclick="submitQuizPrompt()">
+          &#10004; Selesai &amp; Lihat Skor
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 2: RANGKUMAN MATERI BAB 1–3
+         ====================================================================== -->
+    <section id="sectionMateri" class="tab-content">
+      <div class="bab-filter-bar">
+        <button class="bab-pill active" onclick="filterMateri('all', this)">Semua Bab (Bab 1–3)</button>
+        <button class="bab-pill" onclick="filterMateri('bab1', this)">Bab 1: Bilangan Bulat</button>
+        <button class="bab-pill" onclick="filterMateri('bab2', this)">Bab 2: Aljabar</button>
+        <button class="bab-pill" onclick="filterMateri('bab3', this)">Bab 3: Persamaan &amp; Pertidaksamaan Linear</button>
+      </div>
+
+      <!-- BAB 1 -->
+      <article class="materi-card" data-bab="bab1">
+        <div class="materi-header">
+          <span class="bab-badge">BAB 1</span>
+          <h2>Bilangan Bulat (Titik Acuan, Garis Bilangan, Operasi Hitung, &amp; Eksponen)</h2>
+        </div>
+        <div class="materi-grid">
+          <div class="sub-box">
+            <h3>1. Bilangan Positif, Negatif, &amp; Garis Bilangan</h3>
+            <ul>
+              <li><strong>Bilangan Positif (+):</strong> Bilangan lebih besar dari titik acuan 0 (misal: suhu di atas 0&deg;C, ketinggian di atas laut, arah Timur).</li>
+              <li><strong>Bilangan Negatif (&minus;):</strong> Bilangan lebih kecil dari 0 (misal: suhu di bawah 0&deg;C, kedalaman di bawah laut, arah Barat).</li>
+              <li><strong>Nilai Mutlak (<code>|a|</code>):</strong> Jarak suatu bilangan dari 0 pada garis bilangan tanpa memandang tanda. Contoh: <code>|&minus;13| = 13</code> dan <code>|+13| = 13</code>.</li>
+            </ul>
+            <div class="example-box">
+              <strong>Contoh Soal &amp; Pembahasan:</strong><br/>
+              Suhu freezer &minus;18&deg;C dan suhu dapur +28&deg;C. Berapa selisih suhu keduanya?<br/>
+              <em>Jawab:</em> <code>28 &minus; (&minus;18) = 28 + 18 = 46&deg;C</code>.
+            </div>
+          </div>
+
+          <div class="sub-box">
+            <h3>2. Penjumlahan, Pengurangan, Perkalian, &amp; Pembagian</h3>
+            <ul>
+              <li><strong>Penjumlahan:</strong> Tanda sama dijumlahkan nilai mutlaknya; tanda beda dikurangkan nilai mutlak besar dengan kecil dan tandanya mengikuti bilangan bernilai mutlak terbesar.</li>
+              <li><strong>Pengurangan:</strong> <code>a &minus; (&minus;b) = a + b</code> dan <code>a &minus; (+b) = a + (&minus;b)</code>.</li>
+              <li><strong>Perkalian &amp; Pembagian:</strong> Dua bilangan bertanda sama menghasilkan <strong>(+)</strong>; bertanda beda menghasilkan <strong>(&minus;)</strong>.</li>
+            </ul>
+            <div class="formula-box">
+              a &divide; b = a &times; (1/b) &nbsp;|&nbsp; (&minus;) &times; (&minus;) = (+)
+            </div>
+          </div>
+
+          <div class="sub-box">
+            <h3>3. Perpangkatan (Eksponen) &amp; Sifat Operasi</h3>
+            <ul>
+              <li><strong>Perpangkatan:</strong>
+                <br/><code>(&minus;4)&sup3; = (&minus;4) &times; (&minus;4) &times; (&minus;4) = &minus;64</code>
+                <br/><code>&minus;4&sup2; = &minus;(4 &times; 4) = &minus;16</code>
+                <br/><code>(&minus;5)&sup2; = (&minus;5) &times; (&minus;5) = +25</code>
+              </li>
+              <li><strong>Sifat Komutatif &amp; Asosiatif:</strong> Mengelompokkan bilangan yang berpasangan bulat (seperti <code>&minus;24 + (&minus;16) = &minus;40</code>) mempermudah hitungan.</li>
+            </ul>
+          </div>
+
+          <div class="sub-box">
+            <h3>4. Rata-Rata Titik Acuan &amp; Himpunan Bilangan</h3>
+            <ul>
+              <li><strong>Rata-Rata Titik Acuan:</strong> Pilih nilai acuan sementara <code>A</code>, hitung selisih tiap data terhadap <code>A</code>, lalu:
+                <br/><code>Rata-rata = A + (Jumlah selisih &divide; Banyak data)</code>.
+              </li>
+              <li><strong>Diagram Venn Himpunan:</strong> Himpunan <em>Bilangan Asli</em> (1, 2, 3, ...) berada di dalam <em>Bilangan Bulat</em> (..., &minus;1, 0, 1, ...), dan keduanya berada di dalam <em>Semua Bilangan (Rasional)</em>.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- BAB 2 -->
+      <article class="materi-card" data-bab="bab2">
+        <div class="materi-header">
+          <span class="bab-badge">BAB 2</span>
+          <h2>Aljabar (Aturan Penulisan, Substitusi, &amp; Penyederhanaan Bentuk Linear)</h2>
+        </div>
+        <div class="materi-grid">
+          <div class="sub-box">
+            <h3>1. Aturan Penulisan Perkalian, Pangkat, &amp; Pembagian</h3>
+            <ul>
+              <li><strong>Perkalian:</strong> Tanda <code>&times;</code> dihapus, bilangan ditulis di depan huruf, huruf diurutkan abjad, angka <code>1</code> tidak ditulis: <code>y &times; (&minus;1) &times; x &times; 5 = &minus;5xy</code>.</li>
+              <li><strong>Perpangkatan:</strong> Perkalian berulang ditulis pangkat: <code>p &times; p &times; t = p&sup2;t</code>.</li>
+              <li><strong>Pembagian:</strong> Ditulis dalam bentuk pecahan: <code>(3m &minus; 2n) &divide; (&minus;6) = &minus;(3m &minus; 2n)/6</code>.</li>
+            </ul>
+          </div>
+
+          <div class="sub-box">
+            <h3>2. Substitusi &amp; Unsur Bentuk Aljabar</h3>
+            <ul>
+              <li><strong>Suku, Koefisien, &amp; Konstanta:</strong> Pada <code>7 &minus; 5x + 3y</code>, suku-sukunya adalah <code>7, &minus;5x, 3y</code>; koefisien <code>x</code> adalah <code>&minus;5</code>; koefisien <code>y</code> adalah <code>3</code>; konstanta adalah <code>7</code>.</li>
+              <li><strong>Bentuk Linear vs Kuadrat:</strong> Bentuk linear memiliki pangkat tertinggi variabel 1 (misal <code>4x &minus; 7</code>), sedangkan bentuk kuadrat memuat pangkat 2 (misal <code>2x&sup2; + 1</code>).</li>
+            </ul>
+            <div class="example-box">
+              <strong>Contoh Substitusi:</strong><br/>
+              Jika <code>x = &minus;2</code>, nilai dari <code>&minus;3x&sup2; + 4x &minus; 5</code>:<br/>
+              <em>Jawab:</em> <code>&minus;3(&minus;2)&sup2; + 4(&minus;2) &minus; 5 = &minus;12 &minus; 8 &minus; 5 = &minus;25</code>.
+            </div>
+          </div>
+
+          <div class="sub-box">
+            <h3>3. Menyederhanakan Bentuk Linear &amp; Pola Geometri</h3>
+            <ul>
+              <li><strong>Pengurangan &amp; Distributif:</strong>
+                <br/><code>(6x &minus; 9) &minus; (8x &minus; 4) = 6x &minus; 9 &minus; 8x + 4 = &minus;2x &minus; 5</code>.
+              </li>
+              <li><strong>Pola Segilima Lidi:</strong> 1 segilima = 5 lidi, 2 segilima = 9 lidi, sehingga <code>n</code> segilima berderet memerlukan <code>1 + 4n</code> lidi.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- BAB 3 -->
+      <article class="materi-card" data-bab="bab3">
+        <div class="materi-header">
+          <span class="bab-badge">BAB 3</span>
+          <h2>Persamaan &amp; Pertidaksamaan Linear Satu Variabel</h2>
+        </div>
+        <div class="materi-grid">
+          <div class="sub-box">
+            <h3>1. Sifat Persamaan, Transposisi, Desimal, &amp; Pecahan</h3>
+            <ul>
+              <li><strong>Sifat Persamaan:</strong> Kedua ruas tetap setara jika ditambah, dikurangi, dikali, atau dibagi bilangan tak nol yang sama.</li>
+              <li><strong>Transposisi (Pindah Ruas):</strong> Suku yang berpindah melewati tanda <code>=</code> berubah tanda.</li>
+              <li><strong>Desimal &amp; Pecahan:</strong> Kalikan kedua ruas dengan 10/100 (untuk desimal) atau KPK penyebut (untuk pecahan).</li>
+            </ul>
+            <div class="example-box">
+              <strong>Contoh Pecahan:</strong><br/>
+              <code>(2x &minus; 1)/3 = (x + 4)/4</code> &rarr; kali 12:<br/>
+              <code>4(2x &minus; 1) = 3(x + 4) &rarr; 8x &minus; 4 = 3x + 12 &rarr; 5x = 16 &rarr; x = 3,2</code>.
+            </div>
+          </div>
+
+          <div class="sub-box">
+            <h3>2. Perbandingan (Proporsi) &amp; Soal Cerita</h3>
+            <ul>
+              <li><strong>Sifat Proporsi:</strong> <code>a : b = c : d &hArr; a &times; d = b &times; c</code> (hasil kali suku luar sama dengan hasil kali suku dalam).</li>
+              <li><strong>Penerapan:</strong> Digunakan untuk skala peta, campuran larutan, umur, pembagian barang, hingga masalah susul-menyusul.</li>
+            </ul>
+          </div>
+
+          <div class="sub-box">
+            <h3>3. Pertidaksamaan Linear Satu Variabel</h3>
+            <ul>
+              <li>Simbol: <code>&lt;</code> (kurang dari), <code>&gt;</code> (lebih dari), <code>&le;</code> (tidak melebihi / maksimal), <code>&ge;</code> (minimal / sekurang-kurangnya).</li>
+              <li><strong>Pembalikan Tanda:</strong> Jika kedua ruas dikali atau dibagi <strong>bilangan negatif</strong>, tanda pertidaksamaan wajib dibalik.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- MODAL KONFIRMASI -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal-card">
+      <h3 id="modalHead">Konfirmasi</h3>
+      <p id="modalBody">Pesan</p>
+      <div class="modal-btns" id="modalFooter"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       JAVASCRIPT: ILUSTRASI SVG INLINE + 50 SOAL BARU PAKET 3 + LOGIKA KUIS
+       ======================================================================== -->
+  <script>
+    // ========================================================================
+    // 1. ILUSTRASI SVG INLINE (TAJAM, INFORMATIF, 100% OFFLINE)
+    // ========================================================================
+    const SVG_P3 = {
+      // Soal 1: Termometer digital freezer (-18°C) dan termometer ruang dapur (+28°C)
+      termometerFreezer: `
+        <svg width="440" height="150" viewBox="0 0 440 150" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="428" height="138" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Freezer -18°C -->
+          <rect x="28" y="24" width="175" height="102" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+          <text x="115" y="46" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">Termometer Freezer Daging</text>
+          <rect x="52" y="58" width="126" height="36" rx="6" fill="#1e293b"/>
+          <text x="115" y="83" text-anchor="middle" font-size="19" font-family="monospace" font-weight="bold" fill="#38bdf8">-18.0 &deg;C</text>
+          <text x="115" y="113" text-anchor="middle" font-size="10.5" fill="#1d4ed8">18&deg;C di bawah 0&deg;C</text>
+
+          <!-- Dapur +28°C -->
+          <rect x="237" y="24" width="175" height="102" rx="10" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.5"/>
+          <text x="324" y="46" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">Termometer Ruang Dapur</text>
+          <rect x="261" y="58" width="126" height="36" rx="6" fill="#1e293b"/>
+          <text x="324" y="83" text-anchor="middle" font-size="19" font-family="monospace" font-weight="bold" fill="#fbbf24">+28.0 &deg;C</text>
+          <text x="324" y="113" text-anchor="middle" font-size="10.5" fill="#b45309">28&deg;C di atas 0&deg;C</text>
+        </svg>`,
+
+      // Soal 2: Penampang laut helikopter (+450 m) dan kapal selam (-320 m)
+      helikopterKapalSelam: `
+        <svg width="430" height="175" viewBox="0 0 430 175" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="418" height="163" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+          <!-- Laut -->
+          <rect x="6" y="92" width="418" height="77" fill="#bae6fd"/>
+          <line x1="6" y1="92" x2="424" y2="92" stroke="#0284c7" stroke-width="2" stroke-dasharray="5,3"/>
+          <text x="215" y="85" text-anchor="middle" font-size="11" font-weight="bold" fill="#0369a1">Permukaan Laut (0 m)</text>
+          <!-- Helikopter +450 m -->
+          <rect x="92" y="34" width="46" height="18" rx="8" fill="#0f766e"/>
+          <line x1="78" y1="29" x2="152" y2="29" stroke="#0f172a" stroke-width="2.5"/>
+          <line x1="115" y1="29" x2="115" y2="34" stroke="#0f172a" stroke-width="2"/>
+          <text x="115" y="20" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#115e59">Helikopter (+450 m)</text>
+          <!-- Kapal Selam -320 m -->
+          <rect x="280" y="128" width="68" height="18" rx="9" fill="#1e3a8a"/>
+          <rect x="306" y="120" width="14" height="10" rx="2" fill="#1e3a8a"/>
+          <text x="314" y="161" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e3a8a">Kapal Selam (-320 m)</text>
+        </svg>`,
+
+      // Soal 3: Garis arah mata angin Stasiun Yogyakarta (Barat - dan Timur +)
+      stasiunYogyakarta: `
+        <svg width="470" height="125" viewBox="0 0 470 125" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="458" height="113" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="235" y="24" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#0f766e">Titik Acuan 0 km: Stasiun Yogyakarta (Barat = &minus;, Timur = +)</text>
+          <line x1="30" y1="68" x2="440" y2="68" stroke="#334155" stroke-width="2.2"/>
+          <polygon points="30,68 39,63 39,73" fill="#334155"/>
+          <polygon points="440,68 431,63 431,73" fill="#334155"/>
+          <text x="42" y="54" font-size="11" font-weight="bold" fill="#dc2626">BARAT (&minus;)</text>
+          <text x="428" y="54" text-anchor="end" font-size="11" font-weight="bold" fill="#0d9488">TIMUR (+)</text>
+
+          <!-- Titik -14 km -->
+          <circle cx="115" cy="68" r="5.5" fill="#dc2626"/>
+          <text x="115" y="89" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">-14 km</text>
+          <text x="115" y="104" text-anchor="middle" font-size="10" fill="#475569">(Kota A)</text>
+
+          <!-- Titik 0 km -->
+          <circle cx="245" cy="68" r="6.5" fill="#0f172a"/>
+          <text x="245" y="89" text-anchor="middle" font-size="11" font-weight="bold" fill="#0f172a">0 km</text>
+          <text x="245" y="104" text-anchor="middle" font-size="10" fill="#475569">(Stasiun)</text>
+
+          <!-- Titik +9,5 km -->
+          <circle cx="335" cy="68" r="5.5" fill="#0d9488"/>
+          <text x="335" y="89" text-anchor="middle" font-size="11" font-weight="bold" fill="#0f766e">+9,5 km</text>
+          <text x="335" y="104" text-anchor="middle" font-size="10" fill="#475569">(Kota B)</text>
+        </svg>`,
+
+      // Soal 5: Garis bilangan titik P, Q, R (bilangan negatif & pecahan)
+      garisBilanganPQR: `
+        <svg width="470" height="98" viewBox="0 0 470 98" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="458" height="86" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <line x1="25" y1="52" x2="445" y2="52" stroke="#1e293b" stroke-width="2"/>
+          <polygon points="25,52 33,47 33,57" fill="#1e293b"/>
+          <polygon points="445,52 437,47 437,57" fill="#1e293b"/>
+          <g font-size="11.5" text-anchor="middle" fill="#334155">
+            <line x1="60" y1="46" x2="60" y2="58" stroke="#1e293b"/><text x="60" y="75">-4</text>
+            <line x1="120" y1="46" x2="120" y2="58" stroke="#1e293b"/><text x="120" y="75">-3</text>
+            <line x1="180" y1="46" x2="180" y2="58" stroke="#1e293b"/><text x="180" y="75">-2</text>
+            <line x1="240" y1="46" x2="240" y2="58" stroke="#1e293b"/><text x="240" y="75">-1</text>
+            <line x1="300" y1="44" x2="300" y2="60" stroke="#1e293b" stroke-width="2.2"/><text x="300" y="75" font-weight="bold">0</text>
+            <line x1="360" y1="46" x2="360" y2="58" stroke="#1e293b"/><text x="360" y="75">+1</text>
+            <line x1="420" y1="46" x2="420" y2="58" stroke="#1e293b"/><text x="420" y="75">+2</text>
+          </g>
+          <!-- P di -3,5 (x=90), Q di -1,5 (x=210), R di +1,5 (x=390) -->
+          <circle cx="90" cy="52" r="5.5" fill="#dc2626"/>
+          <text x="90" y="33" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#dc2626">P</text>
+          <circle cx="210" cy="52" r="5.5" fill="#2563eb"/>
+          <text x="210" y="33" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#2563eb">Q</text>
+          <circle cx="390" cy="52" r="5.5" fill="#0d9488"/>
+          <text x="390" y="33" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#0f766e">R</text>
+        </svg>`,
+
+      // Soal 8: Garis bilangan lompatan (-6) + (+11)
+      lompatanGarisBilangan: `
+        <svg width="470" height="125" viewBox="0 0 470 125" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="458" height="113" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <line x1="25" y1="84" x2="445" y2="84" stroke="#1e293b" stroke-width="2"/>
+          <g font-size="10.5" text-anchor="middle" fill="#334155">
+            <line x1="45" y1="79" x2="45" y2="89" stroke="#1e293b"/><text x="45" y="104">-7</text>
+            <line x1="75" y1="79" x2="75" y2="89" stroke="#1e293b"/><text x="75" y="104">-6</text>
+            <line x1="135" y1="79" x2="135" y2="89" stroke="#1e293b"/><text x="135" y="104">-4</text>
+            <line x1="195" y1="79" x2="195" y2="89" stroke="#1e293b"/><text x="195" y="104">-2</text>
+            <line x1="255" y1="78" x2="255" y2="90" stroke="#1e293b" stroke-width="2"/><text x="255" y="104" font-weight="bold">0</text>
+            <line x1="315" y1="79" x2="315" y2="89" stroke="#1e293b"/><text x="315" y="104">+2</text>
+            <line x1="375" y1="79" x2="375" y2="89" stroke="#1e293b"/><text x="375" y="104">+4</text>
+            <line x1="405" y1="79" x2="405" y2="89" stroke="#1e293b"/><text x="405" y="104">+5</text>
+          </g>
+          <!-- Panah 1: dari 0 (255) ke -6 (75) -->
+          <path d="M 255 82 Q 165 48 78 80" fill="none" stroke="#dc2626" stroke-width="2.2"/>
+          <polygon points="75,82 84,75 82,84" fill="#dc2626"/>
+          <text x="165" y="56" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">-6</text>
+          <!-- Panah 2: dari -6 (75) ke +5 (405) -->
+          <path d="M 75 78 Q 240 16 402 78" fill="none" stroke="#0d9488" stroke-width="2.5"/>
+          <polygon points="405,80 395,78 399,70" fill="#0d9488"/>
+          <text x="240" y="34" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#0f766e">+11</text>
+        </svg>`,
+
+      // Soal 17: Diagram Venn Bilangan Asli, Bilangan Bulat, dan Semua Bilangan (Rasional)
+      diagramVennBilangan: `
+        <svg width="430" height="165" viewBox="0 0 430 165" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="418" height="153" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Himpunan Luar: Semua Bilangan (Rasional) -->
+          <ellipse cx="215" cy="84" rx="190" ry="68" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+          <text x="72" y="54" font-size="11" font-weight="bold" fill="#1d4ed8">Semua Bilangan</text>
+          <text x="355" y="88" text-anchor="middle" font-size="11" fill="#1e3a8a">-3/4 &nbsp; 0,6</text>
+
+          <!-- Himpunan Tengah: Bilangan Bulat -->
+          <ellipse cx="195" cy="88" rx="125" ry="48" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+          <text x="108" y="75" font-size="11" font-weight="bold" fill="#0f766e">Bilangan Bulat</text>
+          <text x="282" y="92" text-anchor="middle" font-size="11" fill="#115e59">-5 &nbsp; 0</text>
+
+          <!-- Himpunan Dalam: Bilangan Asli -->
+          <ellipse cx="175" cy="96" rx="68" ry="28" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="175" y="93" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#92400e">Bilangan Asli</text>
+          <text x="175" y="109" text-anchor="middle" font-size="10.5" fill="#78350f">1, 2, 3, ...</text>
+        </svg>`,
+
+      // Soal 18: Pola lidi membentuk deretan segilima beraturan berdampingan
+      polaLidiSegilima: `
+        <svg width="450" height="130" viewBox="0 0 450 130" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="438" height="118" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- 1 Segilima (5 lidi) -->
+          <polygon points="55,28 82,48 72,80 38,80 28,48" fill="none" stroke="#d97706" stroke-width="3.2" stroke-linejoin="round"/>
+          <text x="55" y="104" text-anchor="middle" font-size="11" fill="#334155">1 Segilima (5 lidi)</text>
+
+          <!-- 2 Segilima (9 lidi) -->
+          <g fill="none" stroke="#d97706" stroke-width="3.2" stroke-linejoin="round">
+            <polygon points="150,28 177,48 167,80 133,80 123,48"/>
+            <polyline points="177,48 204,28 231,48 221,80 167,80"/>
+          </g>
+          <text x="177" y="104" text-anchor="middle" font-size="11" fill="#334155">2 Segilima (9 lidi)</text>
+
+          <!-- 3 Segilima (13 lidi) -->
+          <g fill="none" stroke="#d97706" stroke-width="3.2" stroke-linejoin="round">
+            <polygon points="295,28 322,48 312,80 278,80 268,48"/>
+            <polyline points="322,48 349,28 376,48 366,80 312,80"/>
+            <polyline points="376,48 403,28 430,48 420,80 366,80"/>
+          </g>
+          <text x="349" y="104" text-anchor="middle" font-size="11" fill="#334155">3 Segilima (13 lidi)</text>
+        </svg>`,
+
+      // Soal 25: Jajargenjang dengan alas (2a + 3) cm dan tinggi 6 cm
+      jajargenjangAljabar: `
+        <svg width="370" height="145" viewBox="0 0 370 145" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="358" height="133" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <polygon points="105,34 295,34 255,108 65,108" fill="#f0fdfa" stroke="#0d9488" stroke-width="2.2"/>
+          <line x1="105" y1="34" x2="105" y2="108" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4,3"/>
+          <rect x="105" y="98" width="10" height="10" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="115" y="76" font-size="12.5" font-weight="bold" fill="#dc2626">t = 6 cm</text>
+          <text x="165" y="128" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#0f766e">Alas = (2a + 3) cm</text>
+        </svg>`,
+
+      // Soal 34: Susunan ubin persegi berbingkai ukuran k x k dengan tengah kosong
+      ubinBerbingkai: `
+        <svg width="410" height="150" viewBox="0 0 410 150" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="398" height="138" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Contoh k = 5 ubin -->
+          <g transform="translate(45, 22)" stroke="#0f766e" stroke-width="1.5">
+            <!-- Baris 1 -->
+            <rect x="0" y="0" width="18" height="18" fill="#14b8a6"/><rect x="18" y="0" width="18" height="18" fill="#14b8a6"/><rect x="36" y="0" width="18" height="18" fill="#14b8a6"/><rect x="54" y="0" width="18" height="18" fill="#14b8a6"/><rect x="72" y="0" width="18" height="18" fill="#14b8a6"/>
+            <!-- Baris 2-4 tepi -->
+            <rect x="0" y="18" width="18" height="18" fill="#14b8a6"/><rect x="72" y="18" width="18" height="18" fill="#14b8a6"/>
+            <rect x="0" y="36" width="18" height="18" fill="#14b8a6"/><rect x="72" y="36" width="18" height="18" fill="#14b8a6"/>
+            <rect x="0" y="54" width="18" height="18" fill="#14b8a6"/><rect x="72" y="54" width="18" height="18" fill="#14b8a6"/>
+            <!-- Baris 5 -->
+            <rect x="0" y="72" width="18" height="18" fill="#14b8a6"/><rect x="18" y="72" width="18" height="18" fill="#14b8a6"/><rect x="36" y="72" width="18" height="18" fill="#14b8a6"/><rect x="54" y="72" width="18" height="18" fill="#14b8a6"/><rect x="72" y="72" width="18" height="18" fill="#14b8a6"/>
+          </g>
+          <text x="90" y="132" text-anchor="middle" font-size="11" fill="#334155">Contoh: k = 5 (16 ubin)</text>
+
+          <!-- Sketsa umum k x k -->
+          <rect x="215" y="26" width="84" height="84" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/>
+          <rect x="233" y="44" width="48" height="48" fill="#ffffff" stroke="#0f766e" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <text x="257" y="20" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#0f766e">k ubin</text>
+          <text x="328" y="72" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#0f766e">k ubin</text>
+          <text x="257" y="132" text-anchor="middle" font-size="11" fill="#334155">Bingkai k &times; k (k &ge; 3)</text>
+        </svg>`,
+
+      // Soal 35: Timbangan seimbang (4x + 3 = 2x + 11)
+      timbanganPaket3: `
+        <svg width="430" height="165" viewBox="0 0 430 165" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="418" height="153" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <polygon points="215,76 197,145 233,145" fill="#64748b"/>
+          <rect x="170" y="145" width="90" height="8" rx="4" fill="#334155"/>
+          <line x1="80" y1="76" x2="350" y2="76" stroke="#1e293b" stroke-width="4"/>
+          <circle cx="215" cy="76" r="6" fill="#0d9488"/>
+          <!-- Kiri: 4x + 3g -->
+          <line x1="80" y1="76" x2="80" y2="96" stroke="#475569" stroke-width="2"/>
+          <rect x="20" y="96" width="120" height="8" rx="4" fill="#0f766e"/>
+          <rect x="24" y="70" width="22" height="22" rx="4" fill="#0d9488"/><text x="35" y="85" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">x</text>
+          <rect x="50" y="70" width="22" height="22" rx="4" fill="#0d9488"/><text x="61" y="85" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">x</text>
+          <rect x="76" y="70" width="22" height="22" rx="4" fill="#0d9488"/><text x="87" y="85" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">x</text>
+          <rect x="102" y="70" width="22" height="22" rx="4" fill="#0d9488"/><text x="113" y="85" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">x</text>
+          <circle cx="48" cy="55" r="9" fill="#d97706"/><text x="48" y="59" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">1g</text>
+          <circle cx="72" cy="55" r="9" fill="#d97706"/><text x="72" y="59" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">1g</text>
+          <circle cx="96" cy="55" r="9" fill="#d97706"/><text x="96" y="59" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">1g</text>
+          <text x="80" y="123" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e293b">4 kotak x + 3 pemberat 1g</text>
+          <!-- Kanan: 2x + 11g -->
+          <line x1="350" y1="76" x2="350" y2="96" stroke="#475569" stroke-width="2"/>
+          <rect x="290" y="96" width="120" height="8" rx="4" fill="#0f766e"/>
+          <rect x="300" y="70" width="22" height="22" rx="4" fill="#0d9488"/><text x="311" y="85" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">x</text>
+          <rect x="326" y="70" width="22" height="22" rx="4" fill="#0d9488"/><text x="337" y="85" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">x</text>
+          <rect x="355" y="62" width="46" height="30" rx="5" fill="#2563eb"/><text x="378" y="81" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">11 g</text>
+          <text x="350" y="123" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e293b">2 kotak x + 11 pemberat 1g</text>
+        </svg>`,
+
+      // Soal 45: Diagram jarak susul pejalan kaki (50 m/menit, 12 menit duluan) & pesepeda (200 m/menit)
+      diagramSusulSepeda: `
+        <svg width="460" height="145" viewBox="0 0 460 145" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="448" height="133" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="230" y="24" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e293b">Jarak Tempuh Sampai Pesepeda Menyusul Pejalan Kaki</text>
+          <!-- Pejalan Kaki -->
+          <text x="18" y="56" font-size="10.5" font-weight="bold" fill="#b45309">Pejalan Kaki (50 m/mnt):</text>
+          <line x1="155" y1="52" x2="395" y2="52" stroke="#d97706" stroke-width="3"/>
+          <line x1="155" y1="45" x2="155" y2="59" stroke="#d97706" stroke-width="2"/>
+          <line x1="255" y1="45" x2="255" y2="59" stroke="#d97706" stroke-width="2"/>
+          <line x1="395" y1="45" x2="395" y2="59" stroke="#d97706" stroke-width="2"/>
+          <text x="205" y="42" text-anchor="middle" font-size="9.5" fill="#92400e">12 menit (600 m)</text>
+          <text x="325" y="42" text-anchor="middle" font-size="9.5" fill="#92400e">x menit (50x m)</text>
+          <!-- Pesepeda -->
+          <text x="18" y="102" font-size="10.5" font-weight="bold" fill="#0f766e">Pesepeda (200 m/mnt):</text>
+          <line x1="155" y1="98" x2="395" y2="98" stroke="#0d9488" stroke-width="3"/>
+          <line x1="155" y1="91" x2="155" y2="105" stroke="#0d9488" stroke-width="2"/>
+          <line x1="395" y1="91" x2="395" y2="105" stroke="#0d9488" stroke-width="2"/>
+          <text x="275" y="88" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#0f766e">Menyusul selama x menit (200x meter)</text>
+          <text x="395" y="124" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#2563eb">Titik Susul</text>
+        </svg>`,
+
+      // Soal 49: Garis bilangan pertidaksamaan x >= -2 (bulatan penuh di -2, panah ke kanan)
+      garisPertidaksamaanP3: `
+        <svg width="430" height="88" viewBox="0 0 430 88" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="418" height="76" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <line x1="30" y1="48" x2="400" y2="48" stroke="#1e293b" stroke-width="2"/>
+          <polygon points="30,48 38,43 38,53" fill="#1e293b"/>
+          <polygon points="400,48 392,43 392,53" fill="#1e293b"/>
+          <g font-size="11.5" text-anchor="middle" fill="#334155">
+            <line x1="70" y1="43" x2="70" y2="53" stroke="#1e293b"/><text x="70" y="69">-3</text>
+            <line x1="125" y1="43" x2="125" y2="53" stroke="#1e293b"/><text x="125" y="69">-2</text>
+            <line x1="180" y1="43" x2="180" y2="53" stroke="#1e293b"/><text x="180" y="69">-1</text>
+            <line x1="235" y1="43" x2="235" y2="53" stroke="#1e293b"/><text x="235" y="69">0</text>
+            <line x1="290" y1="43" x2="290" y2="53" stroke="#1e293b"/><text x="290" y="69">+1</text>
+            <line x1="345" y1="43" x2="345" y2="53" stroke="#1e293b"/><text x="345" y="69">+2</text>
+          </g>
+          <!-- Sinar ke kanan dari x = -2 (bulatan penuh) -->
+          <line x1="125" y1="35" x2="390" y2="35" stroke="#0d9488" stroke-width="3.5"/>
+          <polygon points="396,35 387,30 387,40" fill="#0d9488"/>
+          <circle cx="125" cy="35" r="5.5" fill="#0d9488"/>
+        </svg>`
+    };
+
+    // ========================================================================
+    // 2. BANK 50 SOAL BARU — PAKET 3 (100% LENGKAP TANPA SINGKATAN)
+    //    Soal 1–17 : Bab 1 (Bilangan Bulat - 17 soal)
+    //    Soal 18–34: Bab 2 (Aljabar - 17 soal)
+    //    Soal 35–50: Bab 3 (Persamaan & Pertidaksamaan Linear - 16 soal)
+    // ========================================================================
+    const PACKET3_QUESTIONS = [
+      // --- BAB 1: BILANGAN BULAT (SOAL 1 - 17) ---
+      {
+        id: 1,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Perhatikan ilustrasi pembacaan termometer digital di bawah ini. Suhu di dalam freezer daging tercatat -18&deg;C, sedangkan suhu di ruang dapur tercatat +28&deg;C. Perbedaan (selisih) suhu antara ruang dapur dan di dalam freezer daging tersebut adalah ....",
+        svg: SVG_P3.termometerFreezer,
+        options: [
+          "46&deg;C",
+          "10&deg;C",
+          "-10&deg;C",
+          "-46&deg;C"
+        ],
+        correctIndex: 0,
+        explanation: "Suhu dapur = +28°C dan suhu freezer = -18°C. Selisih suhu = 28 - (-18) = 28 + 18 = 46°C."
+      },
+      {
+        id: 2,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Perhatikan gambar penampang laut berikut. Sebuah helikopter pemantau terbang pada ketinggian 450 m di atas permukaan laut, sedangkan sebuah kapal selam berada pada kedalaman 320 m di bawah permukaan laut. Jarak vertikal antara helikopter pemantau dan kapal selam tersebut adalah ....",
+        svg: SVG_P3.helikopterKapalSelam,
+        options: [
+          "130 m",
+          "770 m",
+          "-770 m",
+          "670 m"
+        ],
+        correctIndex: 1,
+        explanation: "Posisi helikopter = +450 m dan posisi kapal selam = -320 m. Jarak vertikal = (+450) - (-320) = 450 + 320 = 770 m."
+      },
+      {
+        id: 3,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Perhatikan garis arah mata angin dengan Stasiun Yogyakarta sebagai titik acuan 0 km berikut (arah Timur bertanda positif dan arah Barat bertanda negatif). Jika Kota A berada pada posisi -14 km dan Kota B berada pada posisi +9,5 km, maka jarak antara Kota A dan Kota B adalah ....",
+        svg: SVG_P3.stasiunYogyakarta,
+        options: [
+          "4,5 km",
+          "22,5 km",
+          "23,5 km",
+          "-23,5 km"
+        ],
+        correctIndex: 2,
+        explanation: "Jarak Kota A ke Stasiun = 14 km dan Stasiun ke Kota B = 9,5 km. Jarak total = (+9,5) - (-14) = 9,5 + 14 = 23,5 km."
+      },
+      {
+        id: 4,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Diberikan himpunan bilangan berikut: { -15, +9, 0, +0,4, -<span class='frac'><span>7</span><span>2</span></span>, +31 }. Kelompok bilangan yang semuanya merupakan bilangan bulat adalah ....",
+        svg: null,
+        options: [
+          "-15, +9, +31",
+          "-15, +9, 0, +0,4",
+          "+9, +31",
+          "-15, +9, 0, +31"
+        ],
+        correctIndex: 3,
+        explanation: "Bilangan bulat terdiri dari bilangan bulat negatif, nol, dan bilangan bulat positif. Jadi yang termasuk bilangan bulat adalah -15, +9, 0, dan +31 (sedangkan +0,4 dan -7/2 bukan bilangan bulat)."
+      },
+      {
+        id: 5,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Perhatikan garis bilangan di bawah ini. Bilangan yang ditunjukkan oleh titik P, Q, dan R secara berturut-turut adalah ....",
+        svg: SVG_P3.garisBilanganPQR,
+        options: [
+          "-3,5; -1,5; dan +1,5",
+          "-4,5; -2,5; dan +1,5",
+          "-3,5; -1,5; dan +2,5",
+          "-2,5; -1,5; dan +1,5"
+        ],
+        correctIndex: 0,
+        explanation: "Titik P terletak tepat di tengah antara -4 dan -3 (-3,5); titik Q terletak di tengah antara -2 dan -1 (-1,5); dan titik R terletak di tengah antara +1 dan +2 (+1,5)."
+      },
+      {
+        id: 6,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Urutan bilangan berikut dari yang terkecil hingga yang terbesar menggunakan tanda ketidaksamaan yang benar adalah: -3,5; -<span class='frac'><span>1</span><span>2</span></span>; -4; 0; +2.",
+        svg: null,
+        options: [
+          "-3,5 &lt; -4 &lt; -<span class='frac'><span>1</span><span>2</span></span> &lt; 0 &lt; +2",
+          "-4 &lt; -3,5 &lt; -<span class='frac'><span>1</span><span>2</span></span> &lt; 0 &lt; +2",
+          "-4 &lt; -<span class='frac'><span>1</span><span>2</span></span> &lt; -3,5 &lt; 0 &lt; +2",
+          "+2 &lt; 0 &lt; -<span class='frac'><span>1</span><span>2</span></span> &lt; -3,5 &lt; -4"
+        ],
+        correctIndex: 1,
+        explanation: "Karena -1/2 = -0,5, posisi dari paling kiri (terkecil) ke kanan (terbesar) pada garis bilangan adalah -4 < -3,5 < -1/2 < 0 < +2."
+      },
+      {
+        id: 7,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Diketahui dua bilangan berbeda yang memiliki nilai mutlak sebesar 13. Jika nilai mutlak dari -19 dikurangi dengan nilai mutlak dari +7 (ditulis |-19| - |+7|), maka hasilnya adalah ....",
+        svg: null,
+        options: [
+          "-26",
+          "-12",
+          "12",
+          "26"
+        ],
+        correctIndex: 2,
+        explanation: "Nilai mutlak |-19| = 19 dan |+7| = 7. Maka |-19| - |+7| = 19 - 7 = 12."
+      },
+      {
+        id: 8,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Perhatikan ilustrasi lompatan pada garis bilangan di bawah ini. Kalimat matematika penjumlahan beserta hasil akhir yang ditunjukkan oleh diagram panah tersebut adalah ....",
+        svg: SVG_P3.lompatanGarisBilangan,
+        options: [
+          "(-6) + (+5) = -1",
+          "(+6) + (-11) = -5",
+          "(-6) + (+11) = -5",
+          "(-6) + (+11) = +5"
+        ],
+        correctIndex: 3,
+        explanation: "Panah pertama bergerak dari 0 ke kiri sejauh 6 satuan menuju -6, lalu panah kedua bergerak ke kanan sejauh 11 satuan berhenti di +5. Kalimat matematikanya: (-6) + (+11) = +5."
+      },
+      {
+        id: 9,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Dengan memanfaatkan sifat komutatif dan asosiatif penjumlahan, hasil dari (-24) + (+17) + (-16) + (+23) adalah ....",
+        svg: null,
+        options: [
+          "0",
+          "-80",
+          "+80",
+          "-14"
+        ],
+        correctIndex: 0,
+        explanation: "Kelompokkan bilangan bertanda sama: [(-24) + (-16)] + [(+17) + (+23)] = (-40) + (+40) = 0."
+      },
+      {
+        id: 10,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Dalam babak penyisihan lomba cerdas cermat, Regu Elang memperoleh skor awal -15. Pada soal berikutnya terjadi kesalahan sistem sehingga juri mengurangi skor penalti sebesar -25 dari skor Regu Elang. Skor Regu Elang setelah pengurangan penalti tersebut adalah ....",
+        svg: null,
+        options: [
+          "-40",
+          "+10",
+          "-10",
+          "+40"
+        ],
+        correctIndex: 1,
+        explanation: "Skor akhir = (-15) - (-25) = (-15) + (+25) = +10."
+      },
+      {
+        id: 11,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Hasil dari operasi campuran penjumlahan dan pengurangan -13 + 19 - 24 + 8 adalah ....",
+        svg: null,
+        options: [
+          "+10",
+          "-26",
+          "-10",
+          "-64"
+        ],
+        correctIndex: 2,
+        explanation: "Kumpulkan suku positif dan negatif: (19 + 8) + (-13 - 24) = 27 + (-37) = -10."
+      },
+      {
+        id: 12,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Suhu udara di sebuah kota pegunungan pada pukul 18.00 tercatat 14&deg;C. Setelah matahari terbenam, suhu udara turun rata-rata 3&deg;C setiap jam selama 6 jam berturut-turut. Suhu udara di kota tersebut pada pukul 24.00 adalah ....",
+        svg: null,
+        options: [
+          "+32&deg;C",
+          "-18&deg;C",
+          "+4&deg;C",
+          "-4&deg;C"
+        ],
+        correctIndex: 3,
+        explanation: "Perubahan suhu selama 6 jam = 6 × (-3°C) = -18°C. Suhu pada pukul 24.00 = 14 + (-18) = -4°C."
+      },
+      {
+        id: 13,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Hasil dari (-4)&sup3; - (-4&sup2;) + (-5)&sup2; adalah ....",
+        svg: null,
+        options: [
+          "-23",
+          "-55",
+          "-105",
+          "+23"
+        ],
+        correctIndex: 0,
+        explanation: "(-4)³ = (-4)×(-4)×(-4) = -64; (-4²) = -(4×4) = -16; (-5)² = (-5)×(-5) = +25. Maka: -64 - (-16) + 25 = -64 + 16 + 25 = -23."
+      },
+      {
+        id: 14,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Hasil dari (-36) ÷ 9 × (-5) ditambah hasil dari (-<span class='frac'><span>4</span><span>9</span></span>) ÷ (-<span class='frac'><span>8</span><span>15</span></span>) adalah ....",
+        svg: null,
+        options: [
+          "19<span class='frac'><span>1</span><span>6</span></span>",
+          "20<span class='frac'><span>5</span><span>6</span></span>",
+          "-19<span class='frac'><span>1</span><span>6</span></span>",
+          "21<span class='frac'><span>1</span><span>3</span></span>"
+        ],
+        correctIndex: 1,
+        explanation: "(-36) ÷ 9 × (-5) = (-4) × (-5) = 20. Kemudian (-4/9) ÷ (-8/15) = (-4/9) × (-15/8) = +60/72 = +5/6. Total = 20 + 5/6 = 20 5/6."
+      },
+      {
+        id: 15,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Hitunglah hasil dari 20 - (-3)&sup2; × 4 + (-18) ÷ (-6) adalah ....",
+        svg: null,
+        options: [
+          "47",
+          "-19",
+          "-13",
+          "59"
+        ],
+        correctIndex: 2,
+        explanation: "Hitung pangkat: (-3)² = 9. Lalu perkalian & pembagian: 9 × 4 = 36 dan (-18) ÷ (-6) = +3. Maka: 20 - 36 + 3 = -16 + 3 = -13."
+      },
+      {
+        id: 16,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Nilai ulangan Matematika 5 siswa adalah 76, 85, 79, 88, dan 82. Dengan menggunakan nilai 80 sebagai titik acuan sementara (selisih: -4, +5, -1, +8, +2), rata-rata nilai ulangan kelima siswa tersebut adalah ....",
+        svg: null,
+        options: [
+          "80",
+          "81",
+          "83",
+          "82"
+        ],
+        correctIndex: 3,
+        explanation: "Jumlah selisih terhadap 80 = (-4) + (+5) + (-1) + (+8) + (+2) = +10. Rata-rata selisih = 10 ÷ 5 = +2. Jadi rata-rata nilai = 80 + 2 = 82."
+      },
+      {
+        id: 17,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Perhatikan Diagram Venn hubungan himpunan bilangan berikut. Berdasarkan diagram tersebut, pernyataan yang BENAR adalah ....",
+        svg: SVG_P3.diagramVennBilangan,
+        options: [
+          "Setiap bilangan asli pasti merupakan bilangan bulat",
+          "Setiap bilangan bulat pasti merupakan bilangan asli",
+          "Bilangan 0 dan -5 termasuk ke dalam himpunan bilangan asli",
+          "Pecahan -3/4 termasuk ke dalam himpunan bilangan bulat"
+        ],
+        correctIndex: 0,
+        explanation: "Pada Diagram Venn, lingkaran Bilangan Asli berada sepenuhnya di dalam lingkaran Bilangan Bulat, artinya setiap bilangan asli pasti termasuk bilangan bulat."
+      },
+
+      // --- BAB 2: ALJABAR (SOAL 18 - 34) ---
+      {
+        id: 18,
+        bab: "Bab 2: Aljabar",
+        text: "Perhatikan pola batang lidi yang disusun membentuk deretan segilima beraturan berdampingan berikut (1 segilima = 5 lidi, 2 segilima = 9 lidi, 3 segilima = 13 lidi). Jika dibuat sebanyak n buah segilima berderet, bentuk aljabar yang menyatakan banyak batang lidi yang diperlukan adalah ....",
+        svg: SVG_P3.polaLidiSegilima,
+        options: [
+          "5n",
+          "4n + 1",
+          "5n - 1",
+          "4n + 5"
+        ],
+        correctIndex: 1,
+        explanation: "1 segilima = 5 = 4(1) + 1; 2 segilima = 9 = 4(2) + 1; 3 segilima = 13 = 4(3) + 1. Jadi untuk n segilima dibutuhkan 4n + 1 batang lidi."
+      },
+      {
+        id: 19,
+        bab: "Bab 2: Aljabar",
+        text: "Nadia membeli 4 buah buku gambar seharga p rupiah per buku dan 3 buah spidol seharga q rupiah per spidol. Jika ia membayar dengan uang Rp50.000,00, bentuk aljabar yang menyatakan uang kembalian Nadia adalah ....",
+        svg: null,
+        options: [
+          "50.000 - 4p + 3q",
+          "(4p + 3q) - 50.000",
+          "50.000 - (4p + 3q)",
+          "50.000 - 7pq"
+        ],
+        correctIndex: 2,
+        explanation: "Total belanja = 4p + 3q. Uang kembalian = uang yang dibayarkan dikurangi total belanja = 50.000 - (4p + 3q)."
+      },
+      {
+        id: 20,
+        bab: "Bab 2: Aljabar",
+        text: "Bentuk sederhana sesuai aturan penulisan perkalian bentuk aljabar dari y × (-1) × x × 5 + (a - b) × (-4) adalah ....",
+        svg: null,
+        options: [
+          "-5yx - 4(a - b)",
+          "5xy - 4a - 4b",
+          "-5xy + 4(a - b)",
+          "-5xy - 4(a - b)"
+        ],
+        correctIndex: 3,
+        explanation: "y × (-1) × x × 5 = -5xy (huruf urut abjad, bilangan di depan), dan (a - b) × (-4) = -4(a - b). Jadi hasilnya -5xy - 4(a - b)."
+      },
+      {
+        id: 21,
+        bab: "Bab 2: Aljabar",
+        text: "Sebuah balok memiliki alas berbentuk persegi dengan panjang sisi p cm dan tinggi t cm. Bentuk aljabar yang menyatakan volume balok tersebut adalah ....",
+        svg: null,
+        options: [
+          "p&sup2;t cm&sup3;",
+          "2pt cm&sup3;",
+          "pt&sup2; cm&sup3;",
+          "(2p + t) cm&sup3;"
+        ],
+        correctIndex: 0,
+        explanation: "Volume balok = luas alas × tinggi = (p × p) × t = p²t cm³."
+      },
+      {
+        id: 22,
+        bab: "Bab 2: Aljabar",
+        text: "Penulisan yang benar dalam bentuk pecahan aljabar dari pembagian (3m - 2n) ÷ (-6) adalah ....",
+        svg: null,
+        options: [
+          "<span class='frac'><span>3m - 2n</span><span>6</span></span>",
+          "-<span class='frac'><span>3m - 2n</span><span>6</span></span>",
+          "-<span class='frac'><span>6</span><span>3m - 2n</span></span>",
+          "3m + <span class='frac'><span>n</span><span>3</span></span>"
+        ],
+        correctIndex: 1,
+        explanation: "Pembagian dengan bilangan negatif (-6) ditulis sebagai pecahan dengan tanda negatif di depan pecahan: -(3m - 2n)/6."
+      },
+      {
+        id: 23,
+        bab: "Bab 2: Aljabar",
+        text: "Jarak antara Kota X dan Kota Y adalah 180 km. Sebuah mobil berangkat dari Kota X menuju Kota Y dengan kecepatan rata-rata v km/jam selama 3 jam. Bentuk aljabar yang menyatakan sisa jarak yang masih harus ditempuh mobil tersebut adalah ....",
+        svg: null,
+        options: [
+          "(3v - 180) km",
+          "(180 - <span class='frac'><span>v</span><span>3</span></span>) km",
+          "(180 - 3v) km",
+          "(180 + 3v) km"
+        ],
+        correctIndex: 2,
+        explanation: "Jarak yang sudah ditempuh selama 3 jam = 3v km. Sisa jarak = jarak total - jarak ditempuh = (180 - 3v) km."
+      },
+      {
+        id: 24,
+        bab: "Bab 2: Aljabar",
+        text: "Sebuah baju berharga awal h rupiah mendapat potongan harga (diskon) sebesar 25%. Bentuk aljabar yang menyatakan harga baju setelah diskon adalah ....",
+        svg: null,
+        options: [
+          "0,25h rupiah",
+          "(h - 25) rupiah",
+          "1,25h rupiah",
+          "0,75h rupiah"
+        ],
+        correctIndex: 3,
+        explanation: "Harga setelah diskon 25% = 100%h - 25%h = 75%h = 0,75h rupiah."
+      },
+      {
+        id: 25,
+        bab: "Bab 2: Aljabar",
+        text: "Perhatikan gambar jajargenjang di bawah ini. Jika panjang alasnya (2a + 3) cm dan tingginya 6 cm, bentuk aljabar paling sederhana yang menyatakan luas jajargenjang tersebut adalah ....",
+        svg: SVG_P3.jajargenjangAljabar,
+        options: [
+          "(12a + 18) cm&sup2;",
+          "(12a + 3) cm&sup2;",
+          "(6a + 9) cm&sup2;",
+          "(2a + 9) cm&sup2;"
+        ],
+        correctIndex: 0,
+        explanation: "Luas jajargenjang = alas × tinggi = (2a + 3) × 6 = 12a + 18 cm²."
+      },
+      {
+        id: 26,
+        bab: "Bab 2: Aljabar",
+        text: "Jika nilai x = -2, maka nilai dari bentuk aljabar -3x&sup2; + 4x - 5 adalah ....",
+        svg: null,
+        options: [
+          "-1",
+          "-25",
+          "-15",
+          "19"
+        ],
+        correctIndex: 1,
+        explanation: "Substitusikan x = -2: -3(-2)² + 4(-2) - 5 = -3(4) - 8 - 5 = -12 - 8 - 5 = -25."
+      },
+      {
+        id: 27,
+        bab: "Bab 2: Aljabar",
+        text: "Diketahui a = -<span class='frac'><span>1</span><span>2</span></span> dan b = -4. Nilai dari bentuk aljabar 4a - 3b adalah ....",
+        svg: null,
+        options: [
+          "-14",
+          "-10",
+          "10",
+          "14"
+        ],
+        correctIndex: 2,
+        explanation: "4(-1/2) - 3(-4) = -2 - (-12) = -2 + 12 = 10."
+      },
+      {
+        id: 28,
+        bab: "Bab 2: Aljabar",
+        text: "Pada bentuk aljabar 7 - 5x + 3y, suku-suku, koefisien variabel x, dan koefisien variabel y secara berturut-turut adalah ....",
+        svg: null,
+        options: [
+          "7, 5x, 3y; koefisien x = 5; koefisien y = 3",
+          "7, -5x, 3y; koefisien x = 7; koefisien y = -5",
+          "-5x, 3y; koefisien x = -5; koefisien y = 3",
+          "7, -5x, 3y; koefisien x = -5; koefisien y = 3"
+        ],
+        correctIndex: 3,
+        explanation: "7 - 5x + 3y = 7 + (-5x) + 3y. Suku-sukunya: 7, -5x, dan 3y. Koefisien x adalah -5 dan koefisien y adalah 3."
+      },
+      {
+        id: 29,
+        bab: "Bab 2: Aljabar",
+        text: "Di antara bentuk-bentuk aljabar berikut, manakah yang merupakan bentuk aljabar LINEAR?",
+        svg: null,
+        options: [
+          "6 - <span class='frac'><span>2</span><span>3</span></span>x",
+          "3x&sup2; - 5x + 1",
+          "4xy + 7",
+          "x&sup3; - 8"
+        ],
+        correctIndex: 0,
+        explanation: "Bentuk aljabar linear adalah bentuk aljabar yang variabelnya berpangkat tertinggi satu, yaitu 6 - (2/3)x."
+      },
+      {
+        id: 30,
+        bab: "Bab 2: Aljabar",
+        text: "Bentuk sederhana dari (6x - 9) - (8x - 4) adalah ....",
+        svg: null,
+        options: [
+          "-2x - 13",
+          "-2x - 5",
+          "14x - 13",
+          "-2x + 5"
+        ],
+        correctIndex: 1,
+        explanation: "(6x - 9) - (8x - 4) = 6x - 9 - 8x + 4 = (6x - 8x) + (-9 + 4) = -2x - 5."
+      },
+      {
+        id: 31,
+        bab: "Bab 2: Aljabar",
+        text: "Bentuk sederhana dari -4(3a - 5) + 2(5a - 7) adalah ....",
+        svg: null,
+        options: [
+          "-2a - 34",
+          "-22a + 6",
+          "-2a + 6",
+          "2a - 6"
+        ],
+        correctIndex: 2,
+        explanation: "-4(3a - 5) + 2(5a - 7) = -12a + 20 + 10a - 14 = (-12a + 10a) + (20 - 14) = -2a + 6."
+      },
+      {
+        id: 32,
+        bab: "Bab 2: Aljabar",
+        text: "Bentuk sederhana dari (18x - 12) ÷ (-3) + (6x + 9) ÷ <span class='frac'><span>3</span><span>2</span></span> adalah ....",
+        svg: null,
+        options: [
+          "-2x + 10",
+          "10x + 2",
+          "-2x - 2",
+          "-2x + 10"
+        ],
+        correctIndex: 3,
+        explanation: "(18x - 12) ÷ (-3) = -6x + 4. Kemudian (6x + 9) × (2/3) = 4x + 6. Jika dijumlahkan: (-6x + 4) + (4x + 6) = -2x + 10."
+      },
+      {
+        id: 33,
+        bab: "Bab 2: Aljabar",
+        text: "Bentuk sederhana dari <span class='frac'><span>1</span><span>3</span></span>(6x - 9) - <span class='frac'><span>1</span><span>4</span></span>(8x + 12) adalah ....",
+        svg: null,
+        options: [
+          "-6",
+          "0",
+          "4x - 6",
+          "-3"
+        ],
+        correctIndex: 0,
+        explanation: "1/3(6x - 9) = 2x - 3, dan -1/4(8x + 12) = -2x - 3. Gabungkan: (2x - 2x) + (-3 - 3) = -6."
+      },
+      {
+        id: 34,
+        bab: "Bab 2: Aljabar",
+        text: "Perhatikan gambar susunan ubin persegi berbingkai berukuran k &times; k ubin dengan bagian tengah kosong (k &ge; 3) berikut. Banyak seluruh ubin berwarna yang membentuk bingkai tersebut adalah ....",
+        svg: SVG_P3.ubinBerbingkai,
+        options: [
+          "4k",
+          "4k - 4",
+          "4k - 2",
+          "k&sup2; - 4"
+        ],
+        correctIndex: 1,
+        explanation: "Keempat sisi bingkai memuat 4k ubin, dikurangi 4 ubin pojok yang terhitung dua kali menjadi 4k - 4 (uji k = 5: 4(5) - 4 = 16 ubin)."
+      },
+
+      // --- BAB 3: PERSAMAAN & PERTIDAKSAMAAN LINEAR SATU VARIABEL (SOAL 35 - 50) ---
+      {
+        id: 35,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Perhatikan ilustrasi timbangan dalam keadaan seimbang berikut. Piring kiri berisi 4 kotak bermassa x gram dan 3 pemberat 1 g, sedangkan piring kanan berisi 2 kotak x gram dan 11 pemberat 1 g. Persamaan yang sesuai dan massa 1 kotak x adalah ....",
+        svg: SVG_P3.timbanganPaket3,
+        options: [
+          "4x + 3 = 2x + 11; x = 7 gram",
+          "4x + 3 = 2x + 11; x = 3,5 gram",
+          "4x + 3 = 2x + 11; x = 4 gram",
+          "4x + 3 = 13x; x = 2 gram"
+        ],
+        correctIndex: 2,
+        explanation: "Persamaan dari timbangan: 4x + 3 = 2x + 11 → 4x - 2x = 11 - 3 → 2x = 8 → x = 4 gram."
+      },
+      {
+        id: 36,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Daya angkut maksimal sebuah mobil pikap adalah 800 kg. Jika mobil tersebut mengangkut sopir seberat 65 kg beserta 5 karung beras dengan berat masing-masing x kg, pertidaksamaan linear yang menyatakan situasi tersebut adalah ....",
+        svg: null,
+        options: [
+          "5x + 65 &lt; 800",
+          "5x + 65 &ge; 800",
+          "5x - 65 &le; 800",
+          "5x + 65 &le; 800"
+        ],
+        correctIndex: 3,
+        explanation: "Kalimat 'daya angkut maksimal 800 kg' berarti total berat tidak boleh melebihi 800 kg (kurang dari atau sama dengan 800 kg): 5x + 65 ≤ 800."
+      },
+      {
+        id: 37,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Dengan menguji nilai substitusi, manakah di antara persamaan linear berikut yang memiliki penyelesaian x = -3?",
+        svg: null,
+        options: [
+          "2x + 11 = x + 8",
+          "3x - 4 = 5",
+          "5x + 10 = -25",
+          "4 - 2x = -2"
+        ],
+        correctIndex: 0,
+        explanation: "Substitusi x = -3 pada 2x + 11 = x + 8: Ruas kiri = 2(-3) + 11 = 5; Ruas kanan = -3 + 8 = 5. Karena ruas kiri = ruas kanan, x = -3 adalah penyelesaiannya."
+      },
+      {
+        id: 38,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Perhatikan langkah penyelesaian persamaan: 5x + 6 = 21 &rarr; 5x = 15 &rarr; x = 3. Sifat-sifat persamaan yang digunakan pada langkah pertama dan kedua secara berurutan adalah ....",
+        svg: null,
+        options: [
+          "Sifat penjumlahan kedua ruas dan sifat pembagian kedua ruas",
+          "Sifat pengurangan kedua ruas dan sifat pembagian kedua ruas",
+          "Sifat pengurangan kedua ruas dan sifat perkalian kedua ruas",
+          "Sifat pembagian kedua ruas dan sifat pengurangan kedua ruas"
+        ],
+        correctIndex: 1,
+        explanation: "Dari 5x + 6 = 21 menjadi 5x = 15 kedua ruas dikurangi 6 (sifat pengurangan), lalu dari 5x = 15 menjadi x = 3 kedua ruas dibagi 5 (sifat pembagian)."
+      },
+      {
+        id: 39,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Penyelesaian dari persamaan 9x - 14 = 4x + 11 menggunakan cara transposisi (pindah ruas) adalah ....",
+        svg: null,
+        options: [
+          "x = -5",
+          "x = 0,6",
+          "x = 5",
+          "x = 2,5"
+        ],
+        correctIndex: 2,
+        explanation: "Pindahkan 4x ke kiri dan -14 ke kanan: 9x - 4x = 11 + 14 → 5x = 25 → x = 5."
+      },
+      {
+        id: 40,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Nilai x yang memenuhi persamaan bertanda kurung 3(2x - 5) - 4(x - 2) = 7 adalah ....",
+        svg: null,
+        options: [
+          "x = 0",
+          "x = 15",
+          "x = -7",
+          "x = 7"
+        ],
+        correctIndex: 3,
+        explanation: "Jabarkan tanda kurung: 6x - 15 - 4x + 8 = 7 → 2x - 7 = 7 → 2x = 14 → x = 7."
+      },
+      {
+        id: 41,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Penyelesaian dari persamaan berkoefisien desimal 0,35x - 0,8 = 0,15x + 0,4 adalah ....",
+        svg: null,
+        options: [
+          "x = 6",
+          "x = -2",
+          "x = 0,6",
+          "x = 2,4"
+        ],
+        correctIndex: 0,
+        explanation: "Kalikan kedua ruas dengan 100 agar menjadi bilangan bulat: 35x - 80 = 15x + 40 → 35x - 15x = 40 + 80 → 20x = 120 → x = 6."
+      },
+      {
+        id: 42,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Nilai x yang memenuhi persamaan pecahan <span class='frac'><span>2x - 1</span><span>3</span></span> = <span class='frac'><span>x + 4</span><span>4</span></span> adalah ....",
+        svg: null,
+        options: [
+          "x = 2",
+          "x = 3,2",
+          "x = 1,6",
+          "x = 4"
+        ],
+        correctIndex: 1,
+        explanation: "Kalikan kedua ruas dengan KPK(3, 4) = 12: 4(2x - 1) = 3(x + 4) → 8x - 4 = 3x + 12 → 5x = 16 → x = 16 ÷ 5 = 3,2."
+      },
+      {
+        id: 43,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Umur Ayah sekarang 4 kali umur anaknya. Lima tahun yang akan datang, jumlah umur Ayah dan anaknya adalah 55 tahun. Umur anak tersebut sekarang adalah ....",
+        svg: null,
+        options: [
+          "10 tahun",
+          "11 tahun",
+          "9 tahun",
+          "12 tahun"
+        ],
+        correctIndex: 2,
+        explanation: "Misalkan umur anak sekarang = x, maka umur Ayah = 4x. Lima tahun lagi: (x + 5) + (4x + 5) = 55 → 5x + 10 = 55 → 5x = 45 → x = 9 tahun."
+      },
+      {
+        id: 44,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Sebungkus permen akan dibagikan kepada x orang anak. Jika setiap anak mendapat 5 permen, tersisa 6 permen. Namun, jika setiap anak mendapat 7 permen, kurang 4 permen. Banyak anak (x) dan total permen dalam bungkus berturut-turut adalah ....",
+        svg: null,
+        options: [
+          "4 anak dan 26 permen",
+          "6 anak dan 36 permen",
+          "5 anak dan 29 permen",
+          "5 anak dan 31 permen"
+        ],
+        correctIndex: 3,
+        explanation: "Total permen pada kedua kondisi sama: 5x + 6 = 7x - 4 → 6 + 4 = 7x - 5x → 10 = 2x → x = 5 anak. Total permen = 5(5) + 6 = 31 permen."
+      },
+      {
+        id: 45,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Perhatikan diagram jarak susul di bawah ini. Seorang pejalan kaki berangkat dari rumah dengan kecepatan 50 m/menit. Dua belas menit kemudian, kakaknya menyusul bersepeda dari rumah melewati jalur yang sama dengan kecepatan 200 m/menit. Waktu yang diperlukan pesepeda sejak berangkat hingga menyusul pejalan kaki (x) adalah ....",
+        svg: SVG_P3.diagramSusulSepeda,
+        options: [
+          "4 menit",
+          "3 menit",
+          "5 menit",
+          "6 menit"
+        ],
+        correctIndex: 0,
+        explanation: "Jarak tempuh pejalan kaki = jarak tempuh pesepeda: 50(12 + x) = 200x → 600 + 50x = 200x → 600 = 150x → x = 4 menit."
+      },
+      {
+        id: 46,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Nilai x yang memenuhi perbandingan 6 : (x + 2) = 9 : 15 adalah ....",
+        svg: null,
+        options: [
+          "x = 10",
+          "x = 8",
+          "x = 6",
+          "x = 9"
+        ],
+        correctIndex: 1,
+        explanation: "Hasil kali suku luar = hasil kali suku dalam: 6 × 15 = 9(x + 2) → 90 = 9x + 18 → 9x = 72 → x = 8."
+      },
+      {
+        id: 47,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Pada sebuah peta berskala 1 : 250.000, jarak antara dua pelabuhan terukur 4,8 cm. Jarak sebenarnya antara kedua pelabuhan tersebut adalah ....",
+        svg: null,
+        options: [
+          "1,2 km",
+          "120 km",
+          "12 km",
+          "24 km"
+        ],
+        correctIndex: 2,
+        explanation: "1 : 250.000 = 4,8 : x → x = 4,8 × 250.000 cm = 1.200.000 cm = 12 km."
+      },
+      {
+        id: 48,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Untuk membuat minuman segar, perbandingan volume sirup dan air matang adalah 2 : 7. Jika tersedia 630 ml air matang, banyak sirup yang dibutuhkan agar takarannya pas adalah ....",
+        svg: null,
+        options: [
+          "90 ml",
+          "270 ml",
+          "140 ml",
+          "180 ml"
+        ],
+        correctIndex: 3,
+        explanation: "2 : 7 = x : 630 → 7x = 2 × 630 → 7x = 1.260 → x = 180 ml."
+      },
+      {
+        id: 49,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Perhatikan grafik penyelesaian pertidaksamaan pada garis bilangan di bawah ini. Pertidaksamaan yang sesuai dengan grafik tersebut beserta salah satu anggota himpunan penyelesaiannya adalah ....",
+        svg: SVG_P3.garisPertidaksamaanP3,
+        options: [
+          "x &ge; -2; salah satu anggotanya adalah -2",
+          "x &gt; -2; salah satu anggotanya adalah -2",
+          "x &le; -2; salah satu anggotanya adalah -3",
+          "x &lt; -2; salah satu anggotanya adalah 0"
+        ],
+        correctIndex: 0,
+        explanation: "Bulatan penuh di angka -2 menandakan -2 termasuk dalam penyelesaian (tanda sama dengan ikut), dan panah ke kanan menunjukkan nilai lebih besar dari -2, sehingga x ≥ -2."
+      },
+      {
+        id: 50,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Rafi membawa uang Rp30.000,00 untuk membeli x buah buku tulis seharga Rp4.500,00 per buku. Jika ia harus menyisakan uang minimal Rp5.000,00 untuk ongkos pulang naik angkutan, banyak buku tulis maksimal yang dapat dibeli Rafi adalah ....",
+        svg: null,
+        options: [
+          "6 buku",
+          "5 buku",
+          "4 buku",
+          "7 buku"
+        ],
+        correctIndex: 1,
+        explanation: "Sisa uang harus ≥ 5.000: 30.000 - 4.500x ≥ 5.000 → 25.000 ≥ 4.500x → x ≤ 5,55. Karena banyak buku harus bilangan bulat, maksimal yang dapat dibeli adalah 5 buku."
+      }
+    ];
+
+    // Perbaikan opsi tidak kembar pada soal nomor 32 (-2x + 10)
+    PACKET3_QUESTIONS[31].options = ["-2x + 10", "10x + 2", "-2x - 2", "-10x + 10"];
+
+    // ========================================================================
+    // 3. STATE & ALGORITMA PENGACAKAN POSISI OPSI A, B, C, D MERATA
+    // ========================================================================
+    let activeQuestions = [];
+    let userAnswers = {}; // { questionId: optionIndex }
+    let doubtFlags = {};  // { questionId: boolean }
+    let isSubmitted = false;
+    const LETTERS = ["A", "B", "C", "D"];
+
+    /**
+     * Mengacak posisi opsi jawaban A, B, C, D secara merata (~12-13 soal per huruf)
+     * namun tetap mempertahankan urutan soal 1 sampai 50 sesuai topik Bab 1–3.
+     */
+    function buildShuffledOptionsQuiz() {
+      const targetPool = [];
+      for (let i = 0; i < 13; i++) targetPool.push(0, 1);
+      for (let i = 0; i < 12; i++) targetPool.push(2, 3);
+
+      for (let i = targetPool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [targetPool[i], targetPool[j]] = [targetPool[j], targetPool[i]];
+      }
+
+      activeQuestions = PACKET3_QUESTIONS.map((q, idx) => {
+        const desiredPos = targetPool[idx];
+        const correctText = q.options[q.correctIndex];
+        const distractors = q.options.filter((_, oIdx) => oIdx !== q.correctIndex);
+
+        for (let i = distractors.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
+        }
+
+        const newOpts = [];
+        let dIdx = 0;
+        for (let pos = 0; pos < 4; pos++) {
+          newOpts.push(pos === desiredPos ? correctText : distractors[dIdx++]);
+        }
+
+        return {
+          ...q,
+          options: newOpts,
+          correctIndex: desiredPos
+        };
+      });
+    }
+
+    // ========================================================================
+    // 4. RENDER HALAMAN KUIS & NAVIGASI 50 NOMOR
+    // ========================================================================
+    function renderQuiz() {
+      const qContainer = document.getElementById("questionsList");
+      const nGrid = document.getElementById("navGrid");
+      qContainer.innerHTML = "";
+      nGrid.innerHTML = "";
+
+      activeQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+        const chosen = userAnswers[q.id];
+        const isDoubt = !!doubtFlags[q.id];
+        const isCorrect = chosen === q.correctIndex;
+
+        // Tombol navigasi nomor
+        const navBtn = document.createElement("button");
+        navBtn.className = "num-btn";
+        navBtn.id = `nav-item-${q.id}`;
+        navBtn.textContent = displayNum;
+        if (isSubmitted) {
+          navBtn.classList.add(isCorrect ? "nav-correct" : "nav-wrong");
+        } else {
+          if (chosen !== undefined) navBtn.classList.add("answered");
+          if (isDoubt) navBtn.classList.add("doubt");
+        }
+        navBtn.onclick = () => {
+          document.getElementById(`card-q-${q.id}`).scrollIntoView({ behavior: "smooth" });
+        };
+        nGrid.appendChild(navBtn);
+
+        // Kartu soal
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `card-q-${q.id}`;
+        if (isSubmitted) {
+          card.classList.add(isCorrect ? "card-correct" : "card-wrong");
+        }
+
+        let optionsHTML = `<div class="options-list">`;
+        q.options.forEach((optText, optIdx) => {
+          let cls = "option-item";
+          if (!isSubmitted) {
+            if (chosen === optIdx) cls += " selected";
+          } else {
+            if (optIdx === q.correctIndex) cls += " opt-right";
+            else if (chosen === optIdx) cls += " opt-wrong";
+          }
+
+          const clickHandler = isSubmitted ? "" : `onclick="handleSelectOption(${q.id}, ${optIdx})"`;
+          optionsHTML += `
+            <div class="${cls}" ${clickHandler}>
+              <span class="opt-letter">${LETTERS[optIdx]}</span>
+              <span class="opt-text">${optText}</span>
+            </div>
+          `;
+        });
+        optionsHTML += `</div>`;
+
+        // Pembahasan lengkap setelah submit
+        let expHTML = "";
+        if (isSubmitted) {
+          let statusBadge = "";
+          if (chosen === undefined) {
+            statusBadge = `<span style="color:var(--warning);">&#9888; Tidak Dijawab</span>`;
+          } else if (isCorrect) {
+            statusBadge = `<span style="color:var(--success);">&#10004; Jawaban Benar</span>`;
+          } else {
+            statusBadge = `<span style="color:var(--danger);">&#10008; Jawaban Salah</span>`;
+          }
+
+          const userAnsStr = chosen !== undefined
+            ? `<strong>${LETTERS[chosen]}.</strong> ${q.options[chosen]}`
+            : `<em>Kosong</em>`;
+          const keyAnsStr = `<strong>${LETTERS[q.correctIndex]}.</strong> ${q.options[q.correctIndex]}`;
+
+          expHTML = `
+            <div class="explanation-panel ${isCorrect ? "is-correct" : "is-wrong"}">
+              <div class="exp-top">
+                ${statusBadge}
+                <span>Kunci Jawaban: <strong>${LETTERS[q.correctIndex]}</strong></span>
+              </div>
+              <div style="margin-bottom:8px; font-size:0.89rem;">
+                <div>Jawaban Kamu: ${userAnsStr}</div>
+                <div>Kunci Benar: ${keyAnsStr}</div>
+              </div>
+              <div style="border-top:1px solid rgba(0,0,0,0.08); padding-top:8px;">
+                <strong>Pembahasan Langkah demi Langkah:</strong> ${q.explanation}
+              </div>
+            </div>
+          `;
+        }
+
+        const doubtBtnHTML = isSubmitted
+          ? ""
+          : `<button class="btn-doubt ${isDoubt ? "active" : ""}" id="doubt-btn-${q.id}" onclick="toggleDoubt(${q.id})">&#9873; Ragu-ragu</button>`;
+
+        card.innerHTML = `
+          <div class="q-header">
+            <div class="q-header-left">
+              <span class="q-badge">Soal No. ${displayNum}</span>
+              <span class="q-bab">${q.bab}</span>
+            </div>
+            ${doubtBtnHTML}
+          </div>
+          <div class="q-body">${q.text}</div>
+          ${q.svg ? `<div class="svg-box">${q.svg}</div>` : ""}
+          ${optionsHTML}
+          ${expHTML}
+        `;
+
+        qContainer.appendChild(card);
+      });
+
+      updateProgressBar();
+    }
+
+    function handleSelectOption(qId, optIdx) {
+      if (isSubmitted) return;
+      userAnswers[qId] = optIdx;
+
+      const card = document.getElementById(`card-q-${qId}`);
+      card.querySelectorAll(".option-item").forEach((el, idx) => {
+        el.classList.toggle("selected", idx === optIdx);
+      });
+
+      const navBtn = document.getElementById(`nav-item-${qId}`);
+      if (navBtn) navBtn.classList.add("answered");
+
+      updateProgressBar();
+    }
+
+    function toggleDoubt(qId) {
+      if (isSubmitted) return;
+      doubtFlags[qId] = !doubtFlags[qId];
+
+      const btn = document.getElementById(`doubt-btn-${qId}`);
+      if (btn) btn.classList.toggle("active", doubtFlags[qId]);
+
+      const navBtn = document.getElementById(`nav-item-${qId}`);
+      if (navBtn) navBtn.classList.toggle("doubt", doubtFlags[qId]);
+    }
+
+    function updateProgressBar() {
+      const count = Object.keys(userAnswers).length;
+      document.getElementById("progressAnswered").textContent = count;
+      document.getElementById("progressFill").style.width = `${(count / activeQuestions.length) * 100}%`;
+    }
+
+    // ========================================================================
+    // 5. SUBMIT & PENILAIAN OTOMATIS
+    // ========================================================================
+    function submitQuizPrompt() {
+      const answered = Object.keys(userAnswers).length;
+      const missing = activeQuestions.length - answered;
+
+      if (missing > 0) {
+        openModal(
+          "Selesai & Lihat Skor Sekarang?",
+          `Masih ada <strong>${missing} soal</strong> yang belum dijawab. Lanjutkan untuk menilai seluruh jawaban dan menampilkan pembahasan lengkap?`,
+          [
+            { text: "Batal", cls: "btn-m-cancel", fn: closeModal },
+            { text: "Ya, Lihat Skor", cls: "btn-m-ok", fn: () => { closeModal(); executeSubmit(); } }
+          ]
+        );
+      } else {
+        executeSubmit();
+      }
+    }
+
+    function executeSubmit() {
+      isSubmitted = true;
+      let correct = 0;
+      let wrong = 0;
+      let empty = 0;
+
+      activeQuestions.forEach(q => {
+        const chosen = userAnswers[q.id];
+        if (chosen === undefined) {
+          empty++;
+          wrong++;
+        } else if (chosen === q.correctIndex) {
+          correct++;
+        } else {
+          wrong++;
+        }
+      });
+
+      const score = correct * 2;
+      const student = document.getElementById("studentName").value.trim();
+
+      document.getElementById("scoreTitle").textContent = student
+        ? `Hasil Evaluasi Paket 3 — ${student}`
+        : "Hasil Evaluasi Latihan Paket 3";
+      document.getElementById("scoreValue").textContent = score;
+      document.getElementById("countCorrect").textContent = correct;
+      document.getElementById("countWrong").textContent = wrong;
+      document.getElementById("countEmpty").textContent = empty;
+
+      document.getElementById("btnOnlyWrong").textContent = `Jawaban Salah (${wrong})`;
+      document.getElementById("btnOnlyCorrect").textContent = `Jawaban Benar (${correct})`;
+
+      const badge = document.getElementById("gradeBadge");
+      if (score >= 90) {
+        badge.textContent = "Predikat: Sangat Baik (Istimewa)";
+        badge.style.background = "#f0fdf4";
+        badge.style.color = "#15803d";
+      } else if (score >= 75) {
+        badge.textContent = "Predikat: Baik (Tuntas KKTP)";
+        badge.style.background = "#eff6ff";
+        badge.style.color = "#1d4ed8";
+      } else if (score >= 60) {
+        badge.textContent = "Predikat: Cukup (Perlu Berlatih Lagi)";
+        badge.style.background = "#fffbeb";
+        badge.style.color = "#b45309";
+      } else {
+        badge.textContent = "Predikat: Perlu Bimbingan & Pelajari Ulang Materi";
+        badge.style.background = "#fef2f2";
+        badge.style.color = "#b91c1c";
+      }
+
+      document.getElementById("navLegend").innerHTML = `
+        <div class="legend-item"><span class="legend-box" style="background:var(--success);"></span> Benar</div>
+        <div class="legend-item"><span class="legend-box" style="background:var(--danger);"></span> Salah</div>
+      `;
+
+      document.getElementById("scoreSummary").style.display = "block";
+      document.getElementById("submitBox").style.display = "none";
+
+      renderQuiz();
+      document.getElementById("scoreSummary").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function filterResults(mode, btn) {
+      document.querySelectorAll(".rev-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      activeQuestions.forEach(q => {
+        const card = document.getElementById(`card-q-${q.id}`);
+        const isCorrect = userAnswers[q.id] === q.correctIndex;
+        if (mode === "all") card.style.display = "block";
+        else if (mode === "correct") card.style.display = isCorrect ? "block" : "none";
+        else if (mode === "wrong") card.style.display = !isCorrect ? "block" : "none";
+      });
+    }
+
+    // ========================================================================
+    // 6. ACAK ULANG OPSI & ULANGI KUIS
+    // ========================================================================
+    function confirmShuffleAndReset() {
+      openModal(
+        "Acak Ulang Opsi & Mulai Baru?",
+        "Posisi pilihan jawaban A, B, C, D pada seluruh 50 soal akan diacak ulang dan jawabanmu saat ini akan direset. Lanjutkan?",
+        [
+          { text: "Batal", cls: "btn-m-cancel", fn: closeModal },
+          { text: "Ya, Mulai Baru", cls: "btn-m-ok", fn: () => { closeModal(); repeatQuiz(); } }
+        ]
+      );
+    }
+
+    function repeatQuiz() {
+      userAnswers = {};
+      doubtFlags = {};
+      isSubmitted = false;
+      document.getElementById("scoreSummary").style.display = "none";
+      document.getElementById("submitBox").style.display = "block";
+      document.getElementById("navLegend").innerHTML = `
+        <div class="legend-item"><span class="legend-box" style="background:#f8fafc; border:1px solid #cbd5e1;"></span> Belum</div>
+        <div class="legend-item"><span class="legend-box" style="background:var(--accent-blue);"></span> Dijawab</div>
+        <div class="legend-item"><span class="legend-box" style="background:var(--warning);"></span> Ragu-ragu</div>
+      `;
+      buildShuffledOptionsQuiz();
+      renderQuiz();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // ========================================================================
+    // 7. NAVIGASI TAB & FILTER MATERI
+    // ========================================================================
+    function switchTab(tab) {
+      document.getElementById("sectionKuis").classList.toggle("active", tab === "kuis");
+      document.getElementById("sectionMateri").classList.toggle("active", tab === "materi");
+      document.getElementById("tabBtnKuis").classList.toggle("active", tab === "kuis");
+      document.getElementById("tabBtnMateri").classList.toggle("active", tab === "materi");
+    }
+
+    function filterMateri(bab, btn) {
+      document.querySelectorAll(".bab-pill").forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      document.querySelectorAll(".materi-card").forEach(c => {
+        c.style.display = (bab === "all" || c.dataset.bab === bab) ? "block" : "none";
+      });
+    }
+
+    // ========================================================================
+    // 8. MODAL & UNDUH FILE HTML OFFLINE (Blob + URL.createObjectURL)
+    // ========================================================================
+    function openModal(title, body, buttons) {
+      document.getElementById("modalHead").textContent = title;
+      document.getElementById("modalBody").innerHTML = body;
+      const footer = document.getElementById("modalFooter");
+      footer.innerHTML = "";
+      buttons.forEach(b => {
+        const btn = document.createElement("button");
+        btn.className = b.cls;
+        btn.textContent = b.text;
+        btn.onclick = b.fn;
+        footer.appendChild(btn);
+      });
+      document.getElementById("modalBackdrop").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("modalBackdrop").style.display = "none";
+    }
+
+    function downloadOfflineFile() {
+      try {
+        const fullHTML = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+        const blob = new Blob([fullHTML], { type: "text/html;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "kuis_matematika_smp7_sem1_paket3.html";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      } catch (e) {
+        openModal(
+          "Simpan Halaman Offline",
+          "Tekan <strong>Ctrl + S</strong> (Windows) atau <strong>Cmd + S</strong> (Mac) di browser untuk menyimpan halaman ini sebagai file <code>kuis_matematika_smp7_sem1_paket3.html</code>.",
+          [{ text: "Tutup", cls: "btn-m-ok", fn: closeModal }]
+        );
+      }
+    }
+
+    // Inisialisasi saat halaman dimuat
+    window.addEventListener("DOMContentLoaded", () => {
+      buildShuffledOptionsQuiz();
+      renderQuiz();
+    });
+  </script>
+</body>
+</html>

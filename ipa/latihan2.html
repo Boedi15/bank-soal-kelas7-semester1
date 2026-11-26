@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latihan Soal IPA SMP Kelas 7 — Bab 1 s.d. Bab 3</title>
+  <style>
+    /* =========================================================
+       DESIGN TOKENS & RESET (OFFLINE SELF-CONTAINED CSS)
+       ========================================================= */
+    :root {
+      --bg-page: #f0f6fc;
+      --bg-surface: #ffffff;
+      --bg-subtle: #e6f0fa;
+      --bg-accent-soft: #e0f2fe;
+      --bg-teal-soft: #e6f7f5;
+
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #38bdf8;
+
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+
+      --success-bg: #dcfce7;
+      --success-border: #16a34a;
+      --success-text: #14532d;
+
+      --danger-bg: #fee2e2;
+      --danger-border: #dc2626;
+      --danger-text: #7f1d1d;
+
+      --warning-bg: #fef3c7;
+      --warning-border: #d97706;
+      --warning-text: #78350f;
+
+      --border-color: #cbd5e1;
+      --border-light: #e2e8f0;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 4px 12px rgba(2, 132, 199, 0.08);
+      --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.1);
+
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* =========================================================
+       TOP HEADER BAR
+       ========================================================= */
+    .top-header {
+      background: linear-gradient(135deg, #0369a1 0%, #0284c7 55%, #0d9488 100%);
+      color: #ffffff;
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow-md);
+      border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-subtitle {
+      margin: 0.15rem 0 0;
+      font-size: 0.88rem;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
+    .header-stats {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .pill-badge {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* =========================================================
+       MAIN TWO-COLUMN LAYOUT (QUESTIONS + STICKY NAVIGATOR)
+       ========================================================= */
+    .main-container {
+      max-width: 1320px;
+      margin: 1.5rem auto 3rem;
+      padding: 0 1.25rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .main-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* =========================================================
+       SCORE SUMMARY BANNER (SHOWN AFTER SUBMIT)
+       ========================================================= */
+    .score-banner {
+      display: none;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 2px solid var(--primary);
+      box-shadow: var(--shadow-lg);
+      animation: fadeSlideIn 0.35s ease;
+    }
+
+    .score-banner.visible {
+      display: block;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .score-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .score-heading {
+      margin: 0;
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+
+    .score-grade-tag {
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-top: 1.15rem;
+    }
+
+    @media (max-width: 640px) {
+      .score-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .score-card {
+      background: var(--bg-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.9rem;
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+
+    .score-card.highlight {
+      background: linear-gradient(135deg, #e0f2fe, #ccfbf1);
+      border-color: var(--primary);
+    }
+
+    .score-card-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .score-card-value {
+      font-size: 1.65rem;
+      font-weight: 800;
+      margin-top: 0.2rem;
+      color: var(--text-primary);
+    }
+
+    .score-card.correct .score-card-value { color: var(--success-border); }
+    .score-card.wrong .score-card-value { color: var(--danger-border); }
+    .score-card.unanswered .score-card-value { color: var(--warning-border); }
+    .score-card.highlight .score-card-value { color: var(--primary-dark); }
+
+    /* =========================================================
+       QUESTION LIST & QUESTION CARDS
+       ========================================================= */
+    .questions-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .question-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.45rem;
+      border: 1.5px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      scroll-margin-top: 1.25rem;
+    }
+
+    .question-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .question-card.answered-card {
+      border-color: #7dd3fc;
+    }
+
+    .question-card.result-correct {
+      border-color: var(--success-border);
+      background: #fbfffc;
+    }
+
+    .question-card.result-wrong {
+      border-color: var(--danger-border);
+      background: #fffafa;
+    }
+
+    .question-card.result-unanswered {
+      border-color: var(--warning-border);
+    }
+
+    .question-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-number-badge {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 0.28rem 0.75rem;
+      border-radius: var(--radius-full);
+    }
+
+    .q-topic-badge {
+      background: var(--bg-teal-soft);
+      color: var(--teal-dark);
+      border: 1px solid #99f6e4;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.24rem 0.7rem;
+      border-radius: var(--radius-full);
+    }
+
+    .q-status-pill {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.22rem 0.65rem;
+      border-radius: var(--radius-full);
+    }
+
+    .q-status-pill.correct {
+      background: var(--success-bg);
+      color: var(--success-text);
+    }
+
+    .q-status-pill.wrong {
+      background: var(--danger-bg);
+      color: var(--danger-text);
+    }
+
+    .q-status-pill.unanswered {
+      background: var(--warning-bg);
+      color: var(--warning-text);
+    }
+
+    .question-text {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0 0 0.9rem;
+      white-space: pre-line;
+    }
+
+    /* =========================================================
+       INLINE SVG ILLUSTRATION CONTAINER
+       ========================================================= */
+    .svg-illustration-box {
+      margin: 0.75rem 0 1.05rem;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .svg-illustration-box svg {
+      max-width: 100%;
+      width: 100%;
+      max-height: 250px;
+      height: auto;
+      display: block;
+    }
+
+    .svg-caption {
+      margin-top: 0.45rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* =========================================================
+       OPTIONS (A, B, C, D)
+       ========================================================= */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0.95rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      line-height: 1.45;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--bg-accent-soft);
+    }
+
+    .option-btn.selected {
+      border-color: var(--primary);
+      background: #e0f2fe;
+      box-shadow: inset 0 0 0 1px var(--primary);
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn.opt-correct-reveal {
+      border-color: var(--success-border);
+      background: var(--success-bg);
+      color: var(--success-text);
+      font-weight: 600;
+    }
+
+    .option-btn.opt-wrong-selected {
+      border-color: var(--danger-border);
+      background: var(--danger-bg);
+      color: var(--danger-text);
+    }
+
+    .option-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-full);
+      background: var(--bg-subtle);
+      color: var(--primary-dark);
+      border: 1px solid #bae6fd;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .option-btn.selected .option-letter {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .option-btn.opt-correct-reveal .option-letter {
+      background: var(--success-border);
+      color: #ffffff;
+      border-color: var(--success-border);
+    }
+
+    .option-btn.opt-wrong-selected .option-letter {
+      background: var(--danger-border);
+      color: #ffffff;
+      border-color: var(--danger-border);
+    }
+
+    .option-text {
+      flex: 1;
+    }
+
+    /* =========================================================
+       EXPLANATION BOX (SHOWN PER QUESTION AFTER SUBMIT)
+       ========================================================= */
+    .explanation-box {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem 1.15rem;
+      border-radius: var(--radius-md);
+      background: #f0f9ff;
+      border-left: 4px solid var(--primary);
+      border-top: 1px solid #bae6fd;
+      border-right: 1px solid #bae6fd;
+      border-bottom: 1px solid #bae6fd;
+      font-size: 0.92rem;
+      color: var(--text-primary);
+    }
+
+    .explanation-box.visible {
+      display: block;
+      animation: fadeSlideIn 0.25s ease;
+    }
+
+    .explanation-title {
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 0 0 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .explanation-body {
+      margin: 0;
+      white-space: pre-line;
+      color: var(--text-secondary);
+    }
+
+    /* =========================================================
+       STICKY NAVIGATION SIDEBAR (1 - 50)
+       ========================================================= */
+    .navigator-sidebar {
+      position: sticky;
+      top: 1.15rem;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 1.15rem;
+      border: 1.5px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+      max-height: calc(100vh - 2.3rem);
+      overflow-y: auto;
+      z-index: 20;
+    }
+
+    @media (max-width: 980px) {
+      .navigator-sidebar {
+        position: static;
+        max-height: none;
+        order: -1;
+      }
+    }
+
+    .nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.65rem;
+    }
+
+    .nav-title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .nav-progress-text {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: var(--bg-accent-soft);
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-full);
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-subtle);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-bottom: 0.85rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--teal));
+      transition: width 0.25s ease;
+    }
+
+    .nav-legend {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      border: 1px solid transparent;
+    }
+
+    .dot-unanswered { background: #f1f5f9; border-color: #cbd5e1; }
+    .dot-answered { background: #0284c7; }
+    .dot-correct { background: #16a34a; }
+    .dot-wrong { background: #dc2626; }
+
+    .nav-filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .filter-chip {
+      flex: 1 1 auto;
+      padding: 0.32rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: #f8fafc;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .filter-chip.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: 0.32rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 980px) {
+      .nav-grid {
+        grid-template-columns: repeat(10, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+
+    .nav-num-btn {
+      aspect-ratio: 1 / 1;
+      min-height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #f8fafc;
+      color: var(--text-primary);
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: transform 0.12s ease, background-color 0.15s ease;
+    }
+
+    .nav-num-btn:hover {
+      transform: scale(1.06);
+      border-color: var(--primary);
+    }
+
+    .nav-num-btn.is-answered {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary-dark);
+    }
+
+    .nav-num-btn.is-correct {
+      background: var(--success-border);
+      color: #ffffff;
+      border-color: #15803d;
+    }
+
+    .nav-num-btn.is-wrong {
+      background: var(--danger-border);
+      color: #ffffff;
+      border-color: #b91c1c;
+    }
+
+    .nav-num-btn.is-unanswered-graded {
+      background: var(--warning-bg);
+      color: var(--warning-text);
+      border-color: var(--warning-border);
+    }
+
+    .nav-num-btn.filtered-out {
+      opacity: 0.22;
+    }
+
+    /* =========================================================
+       ACTION BUTTONS (SUBMIT, RESET, JUMP)
+       ========================================================= */
+    .nav-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 0.78rem 1rem;
+      border-radius: var(--radius-md);
+      border: none;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.94rem;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(2, 132, 199, 0.28);
+      transition: filter 0.15s ease, transform 0.12s ease;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      width: 100%;
+      padding: 0.68rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-subtle);
+      border-color: var(--primary);
+    }
+
+    .shuffle-toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 0.15rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .shuffle-toggle-row input {
+      accent-color: var(--primary);
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       BOTTOM ACTION BAR & MESSAGE TOAST
+       ========================================================= */
+    .bottom-submit-bar {
+      margin-top: 1.5rem;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      border: 1.5px solid var(--border-color);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bottom-submit-bar .btn-group-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .bottom-submit-bar .btn-primary,
+    .bottom-submit-bar .btn-secondary {
+      width: auto;
+      padding: 0.72rem 1.25rem;
+    }
+
+    .toast-message {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 0.7rem 1.2rem;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      z-index: 100;
+      max-width: 92vw;
+      text-align: center;
+    }
+
+    .toast-message.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .hidden-by-filter {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- =========================================================
+       TOP HEADER
+       ========================================================= -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M10 4H18M12 4V10.5L6.2 20.4C5.4 21.8 6.4 23.5 8 23.5H20C21.6 23.5 22.6 21.8 21.8 20.4L16 10.5V4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8.5 17.5C11.5 16.5 16.5 18.5 19.5 17.5" stroke="#99f6e4" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="13" cy="20.5" r="1.2" fill="#fde047"/>
+            <circle cx="16" cy="19.5" r="1" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">Latihan Soal IPA SMP Kelas 7</h1>
+          <p class="brand-subtitle">Bab 1: Hakikat Sains &amp; Metode Ilmiah • Bab 2: Zat &amp; Perubahannya • Bab 3: Suhu, Kalor &amp; Pemuaian</p>
+        </div>
+      </div>
+      <div class="header-stats">
+        <span class="pill-badge">50 Soal Pilihan Ganda</span>
+        <span class="pill-badge">Mode Offline Mandiri</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       MAIN CONTENT GRID
+       ========================================================= -->
+  <main class="main-container">
+    <section class="questions-column" aria-label="Daftar Soal Latihan">
+      <!-- Score Summary Banner (Muncul setelah Submit) -->
+      <div id="scoreBanner" class="score-banner" role="region" aria-live="polite" aria-label="Ringkasan Hasil Latihan">
+        <div class="score-header">
+          <h2 class="score-heading">Hasil Evaluasi Latihan IPA</h2>
+          <span id="gradeBadge" class="score-grade-tag"></span>
+        </div>
+        <div class="score-grid">
+          <div class="score-card highlight">
+            <div class="score-card-label">Nilai Akhir</div>
+            <div id="finalScoreVal" class="score-card-value">0</div>
+          </div>
+          <div class="score-card correct">
+            <div class="score-card-label">Jawaban Benar</div>
+            <div id="correctCountVal" class="score-card-value">0</div>
+          </div>
+          <div class="score-card wrong">
+            <div class="score-card-label">Jawaban Salah</div>
+            <div id="wrongCountVal" class="score-card-value">0</div>
+          </div>
+          <div class="score-card unanswered">
+            <div class="score-card-label">Tidak Terjawab</div>
+            <div id="unansweredCountVal" class="score-card-value">50</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tempat render 50 soal oleh JavaScript -->
+      <div id="questionsContainer"></div>
+
+      <!-- Tombol Submit & Reset di bagian bawah daftar soal -->
+      <div class="bottom-submit-bar">
+        <div>
+          <strong style="display:block; color:var(--text-primary);">Selesai mengerjakan latihan?</strong>
+          <span id="bottomStatusHint" style="font-size:0.86rem; color:var(--text-muted);">Periksa kembali nomor soal pada panel navigasi sebelum mengumpulkan.</span>
+        </div>
+        <div class="btn-group-inline">
+          <button type="button" id="bottomSubmitBtn" class="btn-primary" onclick="submitQuiz()">Submit / Kumpulkan Jawaban</button>
+          <button type="button" id="bottomResetBtn" class="btn-secondary" onclick="resetQuiz()">Ulangi Latihan / Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STICKY NAVIGATION PANEL (NOMOR 1 - 50)
+         ========================================================= -->
+    <aside class="navigator-sidebar" aria-label="Navigasi Nomor Soal">
+      <div class="nav-header">
+        <h2 class="nav-title">Navigasi Soal (1–50)</h2>
+        <span id="answeredCounterBadge" class="nav-progress-text">0 / 50 Dijawab</span>
+      </div>
+
+      <div class="progress-bar-track" aria-hidden="true">
+        <div id="progressBarFill" class="progress-bar-fill"></div>
+      </div>
+
+      <div class="nav-legend">
+        <div class="legend-item"><span class="legend-dot dot-unanswered"></span>Belum dijawab</div>
+        <div class="legend-item"><span class="legend-dot dot-answered"></span>Sudah dijawab</div>
+        <div class="legend-item"><span class="legend-dot dot-correct"></span>Benar (hasil)</div>
+        <div class="legend-item"><span class="legend-dot dot-wrong"></span>Salah (hasil)</div>
+      </div>
+
+      <div class="nav-filter-row" role="group" aria-label="Filter nomor soal">
+        <button type="button" class="filter-chip active" data-filter="all" onclick="setNavigatorFilter('all')">Semua</button>
+        <button type="button" class="filter-chip" data-filter="unanswered" onclick="setNavigatorFilter('unanswered')">Belum</button>
+        <button type="button" class="filter-chip" data-filter="answered" onclick="setNavigatorFilter('answered')">Terjawab</button>
+        <button type="button" id="filterWrongBtn" class="filter-chip" data-filter="wrong" onclick="setNavigatorFilter('wrong')" style="display:none;">Salah</button>
+      </div>
+
+      <div id="navGrid" class="nav-grid"></div>
+
+      <div class="nav-actions">
+        <button type="button" id="sidebarSubmitBtn" class="btn-primary" onclick="submitQuiz()">Submit / Kumpulkan Jawaban</button>
+        <button type="button" id="sidebarResetBtn" class="btn-secondary" onclick="resetQuiz()">Ulangi Latihan / Reset</button>
+        <label class="shuffle-toggle-row">
+          <input type="checkbox" id="reshuffleToggle" checked />
+          <span>Acak ulang urutan opsi A–D saat reset</span>
+        </label>
+      </div>
+    </aside>
+  </main>
+
+  <div id="toastBox" class="toast-message" role="status" aria-live="polite"></div>
+
+  <!-- =========================================================
+       BANK SOAL (50 SOAL BAB 1 - BAB 3) & LOGIKA APLIKASI
+       ========================================================= -->
+  <script>
+    /**
+     * Bank 50 Soal IPA SMP Kelas 7 (Bab 1, Bab 2, Bab 3).
+     * Setiap item menyimpan:
+     * - id: nomor soal (1..50)
+     * - bab: label bab/topik
+     * - text: teks pertanyaan
+     * - svg: ilustrasi inline SVG (opsional, digunakan pada soal yang relevan)
+     * - svgCaption: keterangan ilustrasi
+     * - options: array 4 pilihan jawaban (salah satu ditandai correct: true)
+     * - explanation: pembahasan rinci langkah demi langkah
+     */
+    const QUESTION_BANK = [
+      // ==================== BAB 1: HAKIKAT ILMU SAINS DAN METODE ILMIAH (SOAL 1-17) ====================
+      {
+        id: 1,
+        bab: "Bab 1 • Hakikat Sains",
+        text: "Cabang ilmu sains yang secara khusus mempelajari tentang interaksi timbal balik antara makhluk hidup dengan lingkungannya disebut ....",
+        options: [
+          { text: "Ekologi", correct: true },
+          { text: "Vulkanologi", correct: false },
+          { text: "Entomologi", correct: false },
+          { text: "Astronomi", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah Ekologi.\n• Ekologi mempelajari hubungan timbal balik antara organisme (makhluk hidup) dan lingkungannya.\n• Vulkanologi mempelajari gunung berapi (cabang Geologi).\n• Entomologi mempelajari serangga (cabang Biologi).\n• Astronomi mempelajari benda-benda langit dan alam semesta."
+      },
+      {
+        id: 2,
+        bab: "Bab 1 • Cabang Sains",
+        text: "Seorang ilmuwan meneliti jenis-jenis lumut kerak serta perubahan lapisan batuan sedimen di lereng pegunungan. Cabang ilmu sains yang paling sesuai dengan penelitian tersebut adalah ....",
+        options: [
+          { text: "Botani dan Geologi", correct: true },
+          { text: "Zoologi dan Astronomi", correct: false },
+          { text: "Mikrobiologi dan Kimia Organik", correct: false },
+          { text: "Optika dan Seismologi", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah Botani dan Geologi.\n• Penelitian tumbuhan/lumut termasuk dalam cabang Botani (bagian dari Biologi).\n• Penelitian lapisan batuan dan struktur Bumi termasuk dalam Geologi.\n• Pilihan lain tidak sesuai dengan objek penelitian tumbuhan dan batuan pegunungan."
+      },
+      {
+        id: 3,
+        bab: "Bab 1 • Keselamatan Lab",
+        text: "Perhatikan simbol peringatan laboratorium berikut! Makna simbol tersebut dan tindakan keselamatan yang tepat adalah ....",
+        svg: `<svg viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simbol zat korosif di laboratorium">
+          <rect x="18" y="12" width="324" height="130" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <polygon points="105,24 152,77 105,130 58,77" fill="#fef08a" stroke="#ca8a04" stroke-width="3"/>
+          <!-- Tetesan cairan ke tangan dan permukaan -->
+          <path d="M98 44 L103 55 L93 55 Z" fill="#dc2626"/>
+          <path d="M113 46 L118 57 L108 57 Z" fill="#dc2626"/>
+          <!-- Tangan -->
+          <path d="M76 86 Q88 82 97 86 L102 92 L76 94 Z" fill="#f59e0b" stroke="#78350f" stroke-width="1.5"/>
+          <!-- Permukaan logam/balok -->
+          <rect x="103" y="96" width="24" height="8" rx="2" fill="#64748b" stroke="#1e293b" stroke-width="1.5"/>
+          <path d="M100 62 Q101 74 95 83" stroke="#dc2626" stroke-width="2" fill="none" stroke-dasharray="2,2"/>
+          <path d="M115 64 Q116 78 113 94" stroke="#dc2626" stroke-width="2" fill="none" stroke-dasharray="2,2"/>
+          <!-- Label kanan -->
+          <text x="172" y="56" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#b91c1c">CORROSIVE (KOROSIF)</text>
+          <text x="172" y="78" font-family="system-ui, sans-serif" font-size="12" fill="#334155">Dapat merusak jaringan kulit,</text>
+          <text x="172" y="95" font-family="system-ui, sans-serif" font-size="12" fill="#334155">mata, dan bahan logam.</text>
+          <text x="172" y="116" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#0f766e">Wajib pakai sarung tangan &amp; jas lab.</text>
+        </svg>`,
+        svgCaption: "Ilustrasi simbol bahaya zat korosif dan panduan keselamatan kerja di laboratorium IPA.",
+        options: [
+          { text: "Zat bersifat korosif; gunakan sarung tangan pelindung dan hindari kontak dengan kulit", correct: true },
+          { text: "Zat mudah meledak; simpan di dekat nyala api pembakar spirtus agar cepat menguap", correct: false },
+          { text: "Bahan radioaktif; buang sisa larutan asam pekat langsung ke tempat sampah kertas", correct: false },
+          { text: "Zat beracun; cicipi sedikit larutan untuk memastikan kepekatannya sebelum diukur", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah zat bersifat korosif; gunakan sarung tangan pelindung dan hindari kontak dengan kulit.\n• Simbol korosif menunjukkan cairan yang dapat merusak jaringan hidup (kulit/mata) serta mengikis logam atau kain.\n• Menaruh dekat api, membuang sembarangan, atau mencicipi zat kimia merupakan pelanggaran berat keselamatan laboratorium."
+      },
+      {
+        id: 4,
+        bab: "Bab 1 • Metode Ilmiah",
+        text: "Urutan langkah metode ilmiah yang paling tepat saat seorang siswa melakukan penyelidikan IPA adalah ....",
+        options: [
+          { text: "Pengamatan → Rumusan masalah/hipotesis → Rancangan & eksperimen → Data → Kesimpulan", correct: true },
+          { text: "Kesimpulan → Pengumpulan data → Hipotesis → Pengamatan → Eksperimen", correct: false },
+          { text: "Eksperimen → Kesimpulan → Pengamatan → Menentukan variabel → Hipotesis", correct: false },
+          { text: "Hipotesis → Kesimpulan → Pengamatan → Menyajikan tabel → Eksperimen", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah Pengamatan → Rumusan masalah/hipotesis → Rancangan & eksperimen → Data → Kesimpulan.\n• Penyelidikan ilmiah diawali dengan observasi/pengamatan fenomena alam, merumuskan masalah dan hipotesis, merancang serta melakukan percobaan, mengolah data, lalu menarik kesimpulan."
+      },
+      {
+        id: 5,
+        bab: "Bab 1 • Variabel Percobaan",
+        text: "Rani meneliti pengaruh jumlah pupuk urea (0 g, 5 g, 10 g, 15 g) terhadap pertambahan tinggi tanaman kacang hijau dengan jenis pot, media tanam, dan intensitas cahaya yang sama. Variabel bebas pada percobaan tersebut adalah ....",
+        options: [
+          { text: "Jumlah pupuk urea yang diberikan", correct: true },
+          { text: "Pertambahan tinggi tanaman kacang hijau", correct: false },
+          { text: "Jenis pot dan media tanam yang digunakan", correct: false },
+          { text: "Intensitas cahaya matahari di sekitar pot", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah jumlah pupuk urea yang diberikan.\n• Variabel bebas adalah faktor yang sengaja diubah/divariasikan oleh peneliti (0 g, 5 g, 10 g, 15 g pupuk urea).\n• Variabel terikat adalah hasil yang diukur (pertambahan tinggi tanaman).\n• Variabel kontrol adalah faktor yang dijaga tetap sama (jenis pot, media tanam, cahaya)."
+      },
+      {
+        id: 6,
+        bab: "Bab 1 • Besaran & Satuan SI",
+        text: "Kelompok besaran berikut yang seluruhnya termasuk besaran pokok beserta satuan Sistem Internasional (SI) yang benar adalah ....",
+        options: [
+          { text: "Panjang (meter), massa (kilogram), waktu (sekon), suhu (kelvin)", correct: true },
+          { text: "Kecepatan (m/s), gaya (newton), volume (liter), massa (gram)", correct: false },
+          { text: "Luas (m²), waktu (menit), suhu (celcius), kuat arus (ampere)", correct: false },
+          { text: "Massa jenis (kg/m³), panjang (cm), jumlah zat (mol), waktu (jam)", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah Panjang (meter), massa (kilogram), waktu (sekon), suhu (kelvin).\n• Satuan SI besaran pokok: panjang = meter (m), massa = kilogram (kg), waktu = sekon/detik (s), suhu = kelvin (K), kuat arus = ampere (A), intensitas cahaya = kandela (cd), jumlah zat = mol.\n• Kecepatan, gaya, volume, luas, dan massa jenis adalah besaran turunan."
+      },
+      {
+        id: 7,
+        bab: "Bab 1 • Satuan Baku & Tidak Baku",
+        text: "Mengapa para ilmuwan menggunakan satuan baku (seperti meter dan kilogram) dalam pengukuran ilmiah dibandingkan satuan tidak baku (seperti jengkal atau depa)?",
+        options: [
+          { text: "Nilai pengukurannya tetap/konsisten dan berlaku sama secara internasional", correct: true },
+          { text: "Satuan tidak baku selalu menghasilkan angka yang lebih besar daripada satuan baku", correct: false },
+          { text: "Satuan baku hanya dapat digunakan untuk mengukur benda yang sangat kecil", correct: false },
+          { text: "Pengukuran dengan jengkal membutuhkan alat ukur yang lebih mahal dan rumit", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah nilai pengukurannya tetap/konsisten dan berlaku sama secara internasional.\n• Jengkal atau depa bergantung pada ukuran tubuh orang yang mengukur sehingga hasilnya berbeda-beda.\n• Satuan baku memiliki standar yang disepakati bersama sehingga data percobaan dapat diuji ulang secara akurat di mana saja."
+      },
+      {
+        id: 8,
+        bab: "Bab 1 • Kesalahan Paralaks",
+        text: "Perhatikan gambar pembacaan skala gelas ukur berikut! Posisi mata yang menyebabkan kesalahan paralaks dan cara membaca skala yang benar ditunjukkan oleh ....",
+        svg: `<svg viewBox="0 0 380 185" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi kesalahan paralaks pada gelas ukur">
+          <rect x="12" y="10" width="356" height="165" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Gelas ukur -->
+          <path d="M135 32 L135 148 Q135 156 143 156 L187 156 Q195 156 195 148 L195 32" fill="#f8fafc" stroke="#1e293b" stroke-width="2.2"/>
+          <!-- Cairan (meniskus cekung di sekitar 60 mL) -->
+          <path d="M136 86 Q165 93 194 86 L194 148 Q194 154 187 154 L143 154 Q136 154 136 148 Z" fill="#7dd3fc" opacity="0.7"/>
+          <!-- Garis skala -->
+          <line x1="136" y1="56" x2="152" y2="56" stroke="#334155" stroke-width="1.5"/>
+          <text x="155" y="60" font-family="system-ui, sans-serif" font-size="11" fill="#334155">70</text>
+          <line x1="136" y1="88" x2="154" y2="88" stroke="#0f172a" stroke-width="2"/>
+          <text x="157" y="92" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">60</text>
+          <line x1="136" y1="120" x2="152" y2="120" stroke="#334155" stroke-width="1.5"/>
+          <text x="155" y="124" font-family="system-ui, sans-serif" font-size="11" fill="#334155">50</text>
+          <!-- Mata Posisi A (atas) -->
+          <ellipse cx="275" cy="54" rx="14" ry="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/>
+          <circle cx="274" cy="54" r="4" fill="#d97706"/>
+          <text x="295" y="58" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#b45309">Posisi A</text>
+          <line x1="260" y1="56" x2="165" y2="88" stroke="#dc2626" stroke-width="1.4" stroke-dasharray="4,3"/>
+          <!-- Mata Posisi B (sejajar meniskus bawah) -->
+          <ellipse cx="275" cy="88" rx="14" ry="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/>
+          <circle cx="274" cy="88" r="4" fill="#16a34a"/>
+          <text x="295" y="92" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#15803d">Posisi B (Benar)</text>
+          <line x1="260" y1="88" x2="165" y2="88" stroke="#16a34a" stroke-width="1.8"/>
+          <!-- Mata Posisi C (bawah) -->
+          <ellipse cx="275" cy="124" rx="14" ry="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/>
+          <circle cx="274" cy="124" r="4" fill="#d97706"/>
+          <text x="295" y="128" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#b45309">Posisi C</text>
+          <line x1="260" y1="122" x2="165" y2="88" stroke="#dc2626" stroke-width="1.4" stroke-dasharray="4,3"/>
+          <text x="28" y="34" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#0369a1">Gelas Ukur (mL)</text>
+        </svg>`,
+        svgCaption: "Posisi mata sejajar dasar meniskus cekung (Posisi B) menghindari kesalahan paralaks.",
+        options: [
+          { text: "Posisi A dan C menimbulkan kesalahan paralaks; mata harus sejajar dasar meniskus cekung (Posisi B)", correct: true },
+          { text: "Posisi A adalah yang paling tepat karena melihat dari atas memudahkan melihat garis skala", correct: false },
+          { text: "Kesalahan paralaks hanya terjadi jika gelas ukur terbuat dari kaca bening", correct: false },
+          { text: "Posisi C paling tepat karena meniskus cekung selalu dibaca pada bagian lengkung teratas", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah Posisi A dan C menimbulkan kesalahan paralaks; mata harus sejajar dasar meniskus cekung (Posisi B).\n• Kesalahan paralaks terjadi ketika garis pandang mata tidak tegak lurus/tidak sejajar dengan permukaan zat cair dan skala alat ukur.\n• Untuk cairan yang membentuk meniskus cekung (seperti air), pembacaan yang tepat dilakukan sejajar dengan bagian terendah/dasar meniskus."
+      },
+      {
+        id: 9,
+        bab: "Bab 1 • Alat Laboratorium",
+        text: "Alat laboratorium IPA yang paling tepat digunakan untuk mengukur volume zat cair secara lebih teliti dengan skala terukur pada dindingnya adalah ....",
+        options: [
+          { text: "Gelas ukur", correct: true },
+          { text: "Neraca tiga lengan", correct: false },
+          { text: "Pembakar spirtus", correct: false },
+          { text: "Termometer batang", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah gelas ukur.\n• Gelas ukur dirancang khusus dengan garis skala volume (biasanya dalam mL atau cm³) untuk mengukur volume cairan.\n• Neraca digunakan untuk mengukur massa, pembakar spirtus untuk memanaskan zat, dan termometer untuk mengukur suhu."
+      },
+      {
+        id: 10,
+        bab: "Bab 1 • Konversi Satuan Panjang",
+        text: "Panjang sebuah pita percobaan adalah 2,5 meter. Jika dinyatakan dalam satuan sentimeter (cm), panjang pita tersebut adalah ....",
+        options: [
+          { text: "250 cm", correct: true },
+          { text: "25 cm", correct: false },
+          { text: "0,25 cm", correct: false },
+          { text: "2.500 cm", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 250 cm.\n• Diketahui: panjang = 2,5 m.\n• Dalam tangga satuan panjang, dari meter (m) ke sentimeter (cm) turun 2 langkah (m → dm → cm), sehingga dikalikan 100.\n• Perhitungan: 2,5 m × 100 = 250 cm."
+      },
+      {
+        id: 11,
+        bab: "Bab 1 • Konversi Satuan Massa",
+        text: "Sebuah kantong gula pasir memiliki massa 750 gram. Nyatakan massa gula tersebut dalam satuan kilogram (kg)!",
+        options: [
+          { text: "0,75 kg", correct: true },
+          { text: "7,5 kg", correct: false },
+          { text: "0,075 kg", correct: false },
+          { text: "75 kg", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 0,75 kg.\n• Diketahui: massa = 750 g.\n• Dari gram (g) ke kilogram (kg) naik 3 tangga satuan (g → dag → hg → kg), sehingga dibagi 1.000.\n• Perhitungan: 750 g ÷ 1.000 = 0,75 kg."
+      },
+      {
+        id: 12,
+        bab: "Bab 1 • Konversi Satuan Waktu",
+        text: "Sebuah reaksi kimia berlangsung selama 3 menit 15 sekon. Berapa total waktu reaksi tersebut dalam satuan sekon (s)?",
+        options: [
+          { text: "195 sekon", correct: true },
+          { text: "315 sekon", correct: false },
+          { text: "180 sekon", correct: false },
+          { text: "135 sekon", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 195 sekon.\n• 1 menit = 60 sekon.\n• 3 menit = 3 × 60 sekon = 180 sekon.\n• Total waktu = 180 sekon + 15 sekon = 195 sekon."
+      },
+      {
+        id: 13,
+        bab: "Bab 1 • Konversi Satuan Luas",
+        text: "Luas permukaan meja praktikum adalah 0,8 m². Jika dinyatakan dalam satuan cm², luas permukaan meja tersebut adalah ....",
+        options: [
+          { text: "8.000 cm²", correct: true },
+          { text: "800 cm²", correct: false },
+          { text: "80.000 cm²", correct: false },
+          { text: "80 cm²", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 8.000 cm².\n• Pada satuan luas (persegi), setiap turun 1 tangga dikalikan 100.\n• Dari m² ke cm² turun 2 tangga (m² → dm² → cm²), sehingga dikalikan 100 × 100 = 10.000.\n• Perhitungan: 0,8 m² × 10.000 = 8.000 cm²."
+      },
+      {
+        id: 14,
+        bab: "Bab 1 • Konversi Satuan Volume",
+        text: "Sebuah botol minuman berlabel isi bersih 1,5 liter. Volume air di dalam botol tersebut sama dengan ....",
+        options: [
+          { text: "1.500 cm³", correct: true },
+          { text: "150 cm³", correct: false },
+          { text: "0,15 cm³", correct: false },
+          { text: "15.000 cm³", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 1.500 cm³.\n• Diketahui: 1 liter = 1 dm³ = 1.000 cm³ (dan 1 mL = 1 cm³).\n• Perhitungan: 1,5 liter × 1.000 cm³/liter = 1.500 cm³."
+      },
+      {
+        id: 15,
+        bab: "Bab 1 • Pengukuran Volume Benda",
+        text: "Perhatikan pengukuran volume batu kecil menggunakan gelas ukur pada gambar berikut! Volume batu tersebut adalah ....",
+        svg: `<svg viewBox="0 0 380 185" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pengukuran volume batu menggunakan gelas ukur">
+          <rect x="12" y="10" width="356" height="165" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Gelas Ukur 1 (Sebelum) -->
+          <rect x="65" y="34" width="66" height="114" rx="6" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
+          <rect x="67" y="96" width="62" height="50" rx="4" fill="#bae6fd"/>
+          <line x1="67" y1="96" x2="82" y2="96" stroke="#0284c7" stroke-width="2"/>
+          <text x="85" y="100" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0369a1">40 mL</text>
+          <text x="98" y="164" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#334155">Sebelum batu</text>
+
+          <!-- Panah -->
+          <path d="M155 96 L210 96" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="210,91 220,96 210,101" fill="#0d9488"/>
+
+          <!-- Gelas Ukur 2 (Sesudah) -->
+          <rect x="242" y="34" width="66" height="114" rx="6" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
+          <rect x="244" y="74" width="62" height="72" rx="4" fill="#bae6fd"/>
+          <!-- Batu di dasar -->
+          <polygon points="258,136 272,120 292,125 296,141 268,144" fill="#64748b" stroke="#1e293b" stroke-width="1.5"/>
+          <line x1="244" y1="74" x2="259" y2="74" stroke="#0284c7" stroke-width="2"/>
+          <text x="262" y="78" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0369a1">65 mL</text>
+          <text x="275" y="164" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#334155">Setelah batu masuk</text>
+        </svg>`,
+        svgCaption: "Selisih volume air sebelum dan sesudah batu tenggelam menunjukkan volume batu.",
+        options: [
+          { text: "25 cm³", correct: true },
+          { text: "105 cm³", correct: false },
+          { text: "40 cm³", correct: false },
+          { text: "65 cm³", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 25 cm³.\n• Volume air awal (V₁) = 40 mL.\n• Volume air + batu (V₂) = 65 mL.\n• Volume batu = V₂ − V₁ = 65 mL − 40 mL = 25 mL.\n• Karena 1 mL = 1 cm³, maka volume batu = 25 cm³."
+      },
+      {
+        id: 16,
+        bab: "Bab 1 • Pengukuran Volume Benda",
+        text: "Sebuah gelas ukur mula-mula berisi air sebanyak 80 mL. Kemudian dimasukkan sebuah baut logam tak beraturan sehingga permukaan air naik menjadi 112 mL. Berapa volume baut logam tersebut dalam satuan m³?",
+        options: [
+          { text: "0,000032 m³ (3,2 × 10⁻⁵ m³)", correct: true },
+          { text: "0,0032 m³ (3,2 × 10⁻³ m³)", correct: false },
+          { text: "0,032 m³ (3,2 × 10⁻² m³)", correct: false },
+          { text: "32 m³", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 0,000032 m³ (3,2 × 10⁻⁵ m³).\n• Volume baut = 112 mL − 80 mL = 32 mL = 32 cm³.\n• Konversi cm³ ke m³: 1 m³ = 1.000.000 cm³ (10⁶ cm³), jadi dibagi 1.000.000.\n• Perhitungan: 32 ÷ 1.000.000 = 0,000032 m³ = 3,2 × 10⁻⁵ m³."
+      },
+      {
+        id: 17,
+        bab: "Bab 1 • Pengukuran Volume Benda",
+        text: "Dalam percobaan mengukur volume kerikil menggunakan gelas ukur, kerikil harus terendam seluruhnya dan tidak boleh ada gelembung udara yang menempel agar ....",
+        options: [
+          { text: "Volume air yang terdesak benar-benar sama dengan volume kerikil", correct: true },
+          { text: "Massa jenis air menjadi lebih besar daripada kerikil", correct: false },
+          { text: "Kerikil dapat melayang di permukaan air", correct: false },
+          { text: "Skala gelas ukur berubah menjadi satuan liter", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah volume air yang terdesak benar-benar sama dengan volume kerikil.\n• Jika kerikil tidak terendam seluruhnya atau ada gelembung udara terperangkap, kenaikan permukaan air tidak mewakili seluruh volume benda padat tersebut."
+      },
+
+      // ==================== BAB 2: ZAT DAN PERUBAHANNYA (SOAL 18-34) ====================
+      {
+        id: 18,
+        bab: "Bab 2 • Wujud Zat & Partikel",
+        text: "Perhatikan model susunan partikel zat berikut! Susunan partikel yang menunjukkan zat padat, zat cair, dan gas secara berurutan adalah ....",
+        svg: `<svg viewBox="0 0 380 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Model partikel zat padat, cair, dan gas">
+          <rect x="12" y="10" width="356" height="130" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Kotak 1: Padat -->
+          <rect x="26" y="22" width="96" height="82" rx="6" fill="#eff6ff" stroke="#0284c7" stroke-width="1.5"/>
+          <g fill="#0284c7">
+            <circle cx="44" cy="40" r="6.5"/><circle cx="60" cy="40" r="6.5"/><circle cx="76" cy="40" r="6.5"/><circle cx="92" cy="40" r="6.5"/>
+            <circle cx="44" cy="56" r="6.5"/><circle cx="60" cy="56" r="6.5"/><circle cx="76" cy="56" r="6.5"/><circle cx="92" cy="56" r="6.5"/>
+            <circle cx="44" cy="72" r="6.5"/><circle cx="60" cy="72" r="6.5"/><circle cx="76" cy="72" r="6.5"/><circle cx="92" cy="72" r="6.5"/>
+            <circle cx="44" cy="88" r="6.5"/><circle cx="60" cy="88" r="6.5"/><circle cx="76" cy="88" r="6.5"/><circle cx="92" cy="88" r="6.5"/>
+          </g>
+          <text x="74" y="122" font-family="system-ui, sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">Model I</text>
+
+          <!-- Kotak 2: Cair -->
+          <rect x="142" y="22" width="96" height="82" rx="6" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.5"/>
+          <g fill="#0d9488">
+            <circle cx="158" cy="52" r="6.5"/><circle cx="176" cy="48" r="6.5"/><circle cx="195" cy="54" r="6.5"/><circle cx="215" cy="50" r="6.5"/>
+            <circle cx="164" cy="70" r="6.5"/><circle cx="184" cy="68" r="6.5"/><circle cx="204" cy="72" r="6.5"/><circle cx="222" cy="69" r="6.5"/>
+            <circle cx="156" cy="88" r="6.5"/><circle cx="175" cy="87" r="6.5"/><circle cx="196" cy="89" r="6.5"/><circle cx="216" cy="87" r="6.5"/>
+          </g>
+          <text x="190" y="122" font-family="system-ui, sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">Model II</text>
+
+          <!-- Kotak 3: Gas -->
+          <rect x="258" y="22" width="96" height="82" rx="6" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+          <g fill="#d97706">
+            <circle cx="274" cy="36" r="6"/><circle cx="316" cy="34" r="6"/><circle cx="340" cy="52" r="6"/>
+            <circle cx="288" cy="62" r="6"/><circle cx="312" cy="76" r="6"/><circle cx="272" cy="88" r="6"/><circle cx="338" cy="90" r="6"/>
+          </g>
+          <text x="306" y="122" font-family="system-ui, sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">Model III</text>
+        </svg>`,
+        svgCaption: "Perbandingan jarak antarpartikel dan keteraturan susunan partikel pada zat padat, cair, dan gas.",
+        options: [
+          { text: "Model I (padat), Model II (cair), dan Model III (gas)", correct: true },
+          { text: "Model II (padat), Model I (cair), dan Model III (gas)", correct: false },
+          { text: "Model I (padat), Model III (cair), dan Model II (gas)", correct: false },
+          { text: "Model III (padat), Model II (cair), dan Model I (gas)", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah Model I (padat), Model II (cair), dan Model III (gas).\n• Zat padat (Model I): partikel tersusun rapat dan teratur, gaya tarik antarpartikel sangat kuat.\n• Zat cair (Model II): partikel berdekatan namun kurang teratur dan dapat saling bergeser.\n• Zat gas (Model III): partikel berjauhan dan bergerak bebas ke segala arah."
+      },
+      {
+        id: 19,
+        bab: "Bab 2 • Sifat Wujud Zat",
+        text: "Sifat yang dimiliki oleh zat cair namun tidak dimiliki oleh zat padat adalah ....",
+        options: [
+          { text: "Bentuk berubah mengikuti wadahnya, tetapi volumenya tetap", correct: true },
+          { text: "Bentuk dan volume selalu tetap meskipun dipindahkan", correct: false },
+          { text: "Sangat mudah dimampatkan sehingga volumenya mengecil drastis", correct: false },
+          { text: "Partikelnya diam di tempat tanpa memiliki energi gerak", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah bentuk berubah mengikuti wadahnya, tetapi volumenya tetap.\n• Zat cair mengalir dan menyesuaikan bentuk wadahnya karena partikelnya dapat bergeser, tetapi jarak antarpartikelnya masih berdekatan sehingga volume relatif tetap."
+      },
+      {
+        id: 20,
+        bab: "Bab 2 • Perubahan Wujud Zat",
+        text: "Kapur barus (kamper) yang diletakkan terbuka di lemari lama-kelamaan mengecil dan habis tanpa meninggalkan cairan. Peristiwa tersebut dinamakan ....",
+        options: [
+          { text: "Menyublim", correct: true },
+          { text: "Mengembun", correct: false },
+          { text: "Membeku", correct: false },
+          { text: "Mencair", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah menyublim.\n• Menyublim adalah perubahan wujud zat dari padat langsung menjadi gas (contoh: kapur barus, es kering/dry ice).\n• Mengembun: gas menjadi cair; membeku: cair menjadi padat; mencair: padat menjadi cair."
+      },
+      {
+        id: 21,
+        bab: "Bab 2 • Grafik Perubahan Wujud",
+        text: "Perhatikan grafik pemanasan es menjadi air hingga uap air berikut! Bagian grafik yang menunjukkan proses perubahan wujud mencair/melebur adalah ....",
+        svg: `<svg viewBox="0 0 380 175" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafik pemanasan es menjadi uap air">
+          <rect x="12" y="10" width="356" height="155" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Sumbu -->
+          <line x1="68" y1="26" x2="68" y2="138" stroke="#1e293b" stroke-width="2"/>
+          <line x1="68" y1="138" x2="345" y2="138" stroke="#1e293b" stroke-width="2"/>
+          <text x="22" y="84" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a" transform="rotate(-90 22 84)">Suhu (°C)</text>
+          <text x="206" y="156" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#0f172a">Kalor / Waktu Pemanasan</text>
+
+          <!-- Garis suhu acuan -->
+          <line x1="64" y1="108" x2="215" y2="108" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+          <text x="42" y="112" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#334155">0°C</text>
+          <line x1="64" y1="48" x2="325" y2="48" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+          <text x="34" y="52" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#334155">100°C</text>
+
+          <!-- Kurva -->
+          <polyline points="82,130 125,108 188,108 255,48 318,48" fill="none" stroke="#0284c7" stroke-width="3" stroke-linejoin="round"/>
+          <!-- Sorotan bagian P-Q (125,108 ke 188,108) -->
+          <line x1="125" y1="108" x2="188" y2="108" stroke="#dc2626" stroke-width="4.5"/>
+          <circle cx="125" cy="108" r="4" fill="#dc2626"/>
+          <circle cx="188" cy="108" r="4" fill="#dc2626"/>
+          <text x="156" y="123" font-family="system-ui, sans-serif" font-size="11" font-weight="800" text-anchor="middle" fill="#dc2626">P — Q</text>
+          <text x="220" y="76" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#0f766e">Q — R</text>
+          <text x="286" y="39" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#b45309">R — S</text>
+        </svg>`,
+        svgCaption: "Bagian datar P—Q pada suhu 0°C menunjukkan proses melebur (es menjadi air).",
+        options: [
+          { text: "Bagian P—Q pada suhu tetap 0°C", correct: true },
+          { text: "Bagian sebelum titik P pada suhu di bawah 0°C", correct: false },
+          { text: "Bagian Q—R saat suhu naik dari 0°C ke 100°C", correct: false },
+          { text: "Bagian R—S pada suhu mendidih 100°C", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah bagian P—Q pada suhu tetap 0°C.\n• Selama proses melebur/mencair (P—Q), kalor yang diserap digunakan untuk melepaskan ikatan partikel padat menjadi cair sehingga suhu tetap pada titik lebur (0°C untuk air murni).\n• Bagian R—S pada suhu 100°C adalah proses mendidih/menguap."
+      },
+      {
+        id: 22,
+        bab: "Bab 2 • Perubahan Wujud Zat",
+        text: "Uap air panas yang menyentuh tutup gelas yang lebih dingin berubah menjadi butiran-butiran air. Perubahan wujud ini disebut ....",
+        options: [
+          { text: "Mengembun (melepaskan kalor)", correct: true },
+          { text: "Menguap (menyerap kalor)", correct: false },
+          { text: "Menyublim (melepaskan kalor)", correct: false },
+          { text: "Membeku (menyerap kalor)", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah mengembun (melepaskan kalor).\n• Mengembun adalah perubahan wujud gas menjadi cair yang disertai pelepasan kalor ke lingkungan.\n• Partikel gas kehilangan energi panas sehingga bergerak lebih lambat dan saling mendekat membentuk cairan."
+      },
+      {
+        id: 23,
+        bab: "Bab 2 • Perubahan Fisika & Kimia",
+        text: "Peristiwa berikut yang termasuk perubahan kimia (menghasilkan zat baru dengan sifat berbeda) adalah ....",
+        options: [
+          { text: "Kertas dibakar menjadi abu dan asap", correct: true },
+          { text: "Es batu dibiarkan di suhu ruang hingga mencair", correct: false },
+          { text: "Lilin dipanaskan hingga meleleh lalu mendingin", correct: false },
+          { text: "Garam dilarutkan ke dalam air hangat", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah kertas dibakar menjadi abu dan asap.\n• Pembakaran kertas merupakan reaksi kimia yang menghasilkan zat baru (abu, karbon dioksida, uap air) dan tidak dapat kembali menjadi kertas semula.\n• Mencairnya es, melelehnya lilin, dan melarutnya garam adalah perubahan fisika."
+      },
+      {
+        id: 24,
+        bab: "Bab 2 • Ciri Perubahan Kimia",
+        text: "Nasi yang dibiarkan beberapa hari menjadi basi, berbau asam, dan berlendir. Gejala ini menunjukkan terjadinya perubahan kimia karena ....",
+        options: [
+          { text: "Terbentuk zat baru akibat aktivitas mikroorganisme dan reaksi kimia", correct: true },
+          { text: "Hanya terjadi perubahan bentuk tanpa mengubah susunan zat", correct: false },
+          { text: "Massa nasi menyusut karena menguapnya air saja", correct: false },
+          { text: "Nasi mengalami pembekuan akibat suhu udara", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah terbentuk zat baru akibat aktivitas mikroorganisme dan reaksi kimia.\n• Ciri-ciri perubahan kimia antara lain timbulnya bau baru, perubahan rasa/warna, terbentuknya gas atau endapan, serta tidak mudah dikembalikan ke wujud semula."
+      },
+      {
+        id: 25,
+        bab: "Bab 2 • Massa Jenis",
+        text: "Rumus untuk menghitung massa jenis (ρ) suatu zat adalah ....",
+        options: [
+          { text: "ρ = m / V (massa dibagi volume)", correct: true },
+          { text: "ρ = m × V (massa dikali volume)", correct: false },
+          { text: "ρ = V / m (volume dibagi massa)", correct: false },
+          { text: "ρ = m × g × h", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah ρ = m / V (massa dibagi volume).\n• Massa jenis (ρ, dibaca rho) menyatakan kerapatan zat, yaitu perbandingan antara massa zat (m) dan volume zat (V).\n• Satuan SI massa jenis adalah kg/m³, dan sering juga digunakan g/cm³."
+      },
+      {
+        id: 26,
+        bab: "Bab 2 • Hitung Massa Jenis",
+        text: "Sebuah balok aluminium memiliki massa 270 gram dan volume 100 cm³. Massa jenis balok aluminium tersebut adalah ....",
+        options: [
+          { text: "2,7 g/cm³", correct: true },
+          { text: "0,37 g/cm³", correct: false },
+          { text: "27.000 g/cm³", correct: false },
+          { text: "170 g/cm³", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 2,7 g/cm³.\n• Diketahui: m = 270 g, V = 100 cm³.\n• Rumus: ρ = m / V.\n• Perhitungan: ρ = 270 g ÷ 100 cm³ = 2,7 g/cm³."
+      },
+      {
+        id: 27,
+        bab: "Bab 2 • Hitung Massa Jenis",
+        text: "Sebuah bongkahan logam memiliki massa 1,2 kg dan volume 150 cm³. Berapa massa jenis logam tersebut dalam satuan g/cm³?",
+        options: [
+          { text: "8 g/cm³", correct: true },
+          { text: "0,125 g/cm³", correct: false },
+          { text: "180 g/cm³", correct: false },
+          { text: "8.000 g/cm³", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 8 g/cm³.\n• Samakan satuan massa ke gram: m = 1,2 kg = 1,2 × 1.000 g = 1.200 g.\n• Volume: V = 150 cm³.\n• Perhitungan: ρ = m / V = 1.200 g ÷ 150 cm³ = 8 g/cm³."
+      },
+      {
+        id: 28,
+        bab: "Bab 2 • Hitung Massa Benda",
+        text: "Minyak goreng memiliki massa jenis 0,8 g/cm³. Jika kamu menuangkan minyak goreng tersebut sebanyak 250 cm³ ke dalam gelas kimia, massa minyak goreng itu adalah ....",
+        options: [
+          { text: "200 gram", correct: true },
+          { text: "312,5 gram", correct: false },
+          { text: "250,8 gram", correct: false },
+          { text: "20 gram", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 200 gram.\n• Diketahui: ρ = 0,8 g/cm³, V = 250 cm³.\n• Dari ρ = m / V, diperoleh m = ρ × V.\n• Perhitungan: m = 0,8 g/cm³ × 250 cm³ = 200 gram."
+      },
+      {
+        id: 29,
+        bab: "Bab 2 • Hitung Volume Benda",
+        text: "Sebuah balok es bermassa 450 gram memiliki massa jenis 0,9 g/cm³. Volume balok es tersebut adalah ....",
+        options: [
+          { text: "500 cm³", correct: true },
+          { text: "405 cm³", correct: false },
+          { text: "0,002 cm³", correct: false },
+          { text: "450,9 cm³", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 500 cm³.\n• Diketahui: m = 450 g, ρ = 0,9 g/cm³.\n• Dari ρ = m / V, diperoleh V = m / ρ.\n• Perhitungan: V = 450 g ÷ 0,9 g/cm³ = 500 cm³."
+      },
+      {
+        id: 30,
+        bab: "Bab 2 • Tenggelam & Mengapung",
+        text: "Perhatikan susunan tiga cairan yang tidak saling bercampur dan benda di dalamnya pada gambar berikut! Urutan massa jenis cairan dari yang terbesar ke terkecil adalah ....",
+        svg: `<svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Susunan lapisan cairan dan benda berdasarkan massa jenis">
+          <rect x="12" y="10" width="356" height="160" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Tabung -->
+          <rect x="75" y="24" width="120" height="132" rx="8" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
+          <!-- Lapisan atas: Minyak -->
+          <rect x="77" y="34" width="116" height="38" fill="#fef08a"/>
+          <text x="135" y="57" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#854d0e">Cairan X (Atas)</text>
+          <!-- Lapisan tengah: Air -->
+          <rect x="77" y="72" width="116" height="40" fill="#7dd3fc"/>
+          <text x="135" y="96" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#0369a1">Cairan Y (Tengah)</text>
+          <!-- Lapisan bawah: Sirup/Gliserin -->
+          <rect x="77" y="112" width="116" height="42" rx="0" fill="#c084fc"/>
+          <text x="135" y="137" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#4c1d95">Cairan Z (Bawah)</text>
+
+          <!-- Benda kecil -->
+          <circle cx="172" cy="52" r="7" fill="#f97316" stroke="#7c2d12" stroke-width="1.2"/>
+          <rect x="92" cy="84" y="84" width="14" height="14" rx="2" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
+          <circle cx="172" cy="134" r="7" fill="#334155" stroke="#0f172a" stroke-width="1.2"/>
+
+          <!-- Keterangan kanan -->
+          <text x="216" y="54" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#334155">Kerapatan (massa jenis):</text>
+          <text x="216" y="78" font-family="system-ui, sans-serif" font-size="11.5" fill="#4c1d95">• Paling rapat di bawah (Z)</text>
+          <text x="216" y="100" font-family="system-ui, sans-serif" font-size="11.5" fill="#0369a1">• Sedang di tengah (Y)</text>
+          <text x="216" y="122" font-family="system-ui, sans-serif" font-size="11.5" fill="#854d0e">• Paling ringan di atas (X)</text>
+        </svg>`,
+        svgCaption: "Zat cair dengan massa jenis lebih besar berada di lapisan paling bawah.",
+        options: [
+          { text: "Cairan Z > Cairan Y > Cairan X", correct: true },
+          { text: "Cairan X > Cairan Y > Cairan Z", correct: false },
+          { text: "Cairan Y > Cairan Z > Cairan X", correct: false },
+          { text: "Cairan X = Cairan Y = Cairan Z", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah Cairan Z > Cairan Y > Cairan X.\n• Zat cair yang tidak bercampur akan tersusun bertingkat: cairan dengan massa jenis paling besar berada di bagian paling bawah (Z), sedangkan yang massa jenisnya paling kecil berada di bagian paling atas (X)."
+      },
+      {
+        id: 31,
+        bab: "Bab 2 • Tenggelam & Mengapung",
+        text: "Massa jenis air murni adalah 1,0 g/cm³. Sebuah balok kayu memiliki massa 300 gram dan volume 400 cm³. Jika balok kayu tersebut dimasukkan ke dalam air murni, keadaannya adalah ....",
+        options: [
+          { text: "Mengapung, karena massa jenis kayu (0,75 g/cm³) lebih kecil dari air (1,0 g/cm³)", correct: true },
+          { text: "Tenggelam, karena massa jenis kayu (1,33 g/cm³) lebih besar dari air", correct: false },
+          { text: "Tenggelam, karena volume kayu lebih besar dari 100 cm³", correct: false },
+          { text: "Selalu melayang di dasar wadah karena terbuat dari kayu", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah mengapung, karena massa jenis kayu (0,75 g/cm³) lebih kecil dari air (1,0 g/cm³).\n• Hitung massa jenis kayu: ρ = m / V = 300 g ÷ 400 cm³ = 0,75 g/cm³.\n• Karena ρ kayu (0,75 g/cm³) < ρ air (1,0 g/cm³), maka balok kayu mengapung."
+      },
+      {
+        id: 32,
+        bab: "Bab 2 • Tenggelam & Mengapung",
+        text: "Kapal laut yang terbuat dari baja (massa jenis baja ~7,8 g/cm³) dapat mengapung di laut karena ....",
+        options: [
+          { text: "Rongga udara di badan kapal memperbesar volume total sehingga massa jenis rata-rata kapal lebih kecil dari air laut", correct: true },
+          { text: "Air laut tidak memiliki gaya apung pada benda logam", correct: false },
+          { text: "Massa jenis baja berubah menjadi 0,5 g/cm³ saat terkena air laut", correct: false },
+          { text: "Kapal laut tidak memiliki berat ketika berada di atas air", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah rongga udara di badan kapal memperbesar volume total sehingga massa jenis rata-rata kapal lebih kecil dari air laut.\n• Walaupun baja memiliki massa jenis lebih besar dari air, bentuk kapal yang berongga membuat volume totalnya besar sehingga massa jenis keseluruhan kapal (massa total dibagi volume total) lebih kecil dari massa jenis air laut."
+      },
+      {
+        id: 33,
+        bab: "Bab 2 • Massa Jenis",
+        text: "Dua buah kubus terbuat dari bahan yang sama (besi). Kubus A memiliki volume 20 cm³ dan kubus B memiliki volume 60 cm³. Perbandingan massa jenis kubus A dan kubus B adalah ....",
+        options: [
+          { text: "1 : 1 (sama besar)", correct: true },
+          { text: "1 : 3", correct: false },
+          { text: "3 : 1", correct: false },
+          { text: "20 : 60", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 1 : 1 (sama besar).\n• Massa jenis adalah sifat khas suatu zat/materi pada suhu dan tekanan tertentu.\n• Meskipun kubus B lebih besar (massa dan volumenya lebih besar), perbandingannya (m / V) tetap sama dengan kubus A karena keduanya terbuat dari zat yang sama."
+      },
+      {
+        id: 34,
+        bab: "Bab 2 • Perubahan Wujud & Partikel",
+        text: "Saat es mencair menjadi air, energi kalor yang diserap berfungsi untuk ....",
+        options: [
+          { text: "Memperkuat getaran partikel sehingga ikatan antarpartikel melemah dan partikel lebih bebas bergerak", correct: true },
+          { text: "Menghentikan gerak partikel agar partikel diam beraturan", correct: false },
+          { text: "Mengubah partikel air menjadi partikel gas secara langsung", correct: false },
+          { text: "Menghilangkan massa partikel zat padat", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah memperkuat getaran partikel sehingga ikatan antarpartikel melemah dan partikel lebih bebas bergerak.\n• Penambahan kalor meningkatkan energi partikel padat sehingga ikatan yang mengikatnya menjadi longgar dan terbentuk zat cair."
+      },
+
+      // ==================== BAB 3: SUHU, KALOR DAN PEMUAIAN (SOAL 35-50) ====================
+      {
+        id: 35,
+        bab: "Bab 3 • Konsep Suhu",
+        text: "Pengertian suhu yang paling tepat dalam ilmu pengetahuan alam adalah ....",
+        options: [
+          { text: "Tingkat derajat panas atau dinginnya suatu benda", correct: true },
+          { text: "Jumlah total energi panas yang berpindah antar-benda", correct: false },
+          { text: "Pertambahan panjang benda akibat pemanasan", correct: false },
+          { text: "Massa zat cair yang berada di dalam termometer", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah tingkat derajat panas atau dinginnya suatu benda.\n• Suhu menunjukkan derajat panas/dingin (berkaitan dengan rata-rata energi kinetik partikel), sedangkan kalor adalah energi panas yang berpindah akibat perbedaan suhu."
+      },
+      {
+        id: 36,
+        bab: "Bab 3 • Aliran Kalor",
+        text: "Ketika sebuah sendok logam yang dingin dicelupkan ke dalam secangkir teh panas, kalor akan mengalir ....",
+        options: [
+          { text: "Dari teh panas ke sendok logam hingga tercapai keseimbangan suhu", correct: true },
+          { text: "Dari sendok logam ke teh panas karena logam bersifat konduktor", correct: false },
+          { text: "Bolak-balik secara acak tanpa arah tertentu", correct: false },
+          { text: "Tidak mengalir karena suhu zat cair selalu tetap", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah dari teh panas ke sendok logam hingga tercapai keseimbangan suhu.\n• Secara alami, kalor selalu mengalir dari benda bersuhu lebih tinggi (teh panas) ke benda bersuhu lebih rendah (sendok dingin) sampai keduanya memiliki suhu yang sama."
+      },
+      {
+        id: 37,
+        bab: "Bab 3 • Konversi Suhu (°C ke °R)",
+        text: "Suhu air hangat hasil pengukuran termometer Celcius menunjukkan 40°C. Berapa suhu air tersebut jika diukur dengan skala Reamur (°R)?",
+        options: [
+          { text: "32°R", correct: true },
+          { text: "50°R", correct: false },
+          { text: "72°R", correct: false },
+          { text: "104°R", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 32°R.\n• Perbandingan skala Celcius : Reamur : Fahrenheit (di atas titik beku) = 5 : 4 : 9.\n• Rumus: T(°R) = (4/5) × T(°C).\n• Perhitungan: (4/5) × 40°C = 32°R."
+      },
+      {
+        id: 38,
+        bab: "Bab 3 • Konversi Suhu (°C ke °F)",
+        text: "Sebuah ruangan ber-AC memiliki suhu 25°C. Berapa suhu ruangan tersebut dalam skala Fahrenheit (°F)?",
+        options: [
+          { text: "77°F", correct: true },
+          { text: "45°F", correct: false },
+          { text: "57°F", correct: false },
+          { text: "68°F", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 77°F.\n• Titik tetap bawah Fahrenheit adalah 32°F, sedangkan titik tetap atasnya 212°F (selisih 180 bagian dibanding 100 bagian Celcius, rasio 9/5).\n• Rumus: T(°F) = (9/5 × °C) + 32.\n• Perhitungan: (9/5 × 25) + 32 = 45 + 32 = 77°F."
+      },
+      {
+        id: 39,
+        bab: "Bab 3 • Konversi Suhu (°C ke K)",
+        text: "Suhu suatu larutan percobaan adalah 27°C. Berapa nilai suhu larutan tersebut dalam satuan Kelvin (K)?",
+        options: [
+          { text: "300 K", correct: true },
+          { text: "246 K", correct: false },
+          { text: "273 K", correct: false },
+          { text: "80,6 K", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 300 K.\n• Hubungan skala Kelvin dan Celcius: T(K) = T(°C) + 273.\n• Perhitungan: 27 + 273 = 300 K."
+      },
+      {
+        id: 40,
+        bab: "Bab 3 • Konversi Suhu (°F ke °C)",
+        text: "Sebuah termometer Fahrenheit menunjukkan angka 113°F. Jika dikonversikan ke skala Celcius, nilainya adalah ....",
+        options: [
+          { text: "45°C", correct: true },
+          { text: "81°C", correct: false },
+          { text: "63°C", correct: false },
+          { text: "203°C", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 45°C.\n• Rumus: T(°C) = (5/9) × (T(°F) − 32).\n• Perhitungan: (5/9) × (113 − 32) = (5/9) × 81 = 5 × 9 = 45°C."
+      },
+      {
+        id: 41,
+        bab: "Bab 3 • Definisi Kalor",
+        text: "Satu kalori didefinisikan sebagai jumlah energi kalor yang diperlukan untuk ....",
+        options: [
+          { text: "Menaikkan suhu 1 gram air sebesar 1°C", correct: true },
+          { text: "Menguapkan seluruh air sebanyak 1 kilogram", correct: false },
+          { text: "Menurunkan suhu 1 kg besi sebesar 10°C", correct: false },
+          { text: "Mencairkan es bermassa 100 gram", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah menaikkan suhu 1 gram air sebesar 1°C.\n• Definisi standar kalor: 1 kalori adalah kalor yang dibutuhkan untuk menaikkan suhu 1 gram air sebesar 1°C (sekitar 4,184 Joule atau dibulatkan 4,2 Joule)."
+      },
+      {
+        id: 42,
+        bab: "Bab 3 • Hitung Kalor (Q = m·c·ΔT)",
+        text: "Berapa kalor yang diperlukan untuk memanaskan 200 gram air dari suhu 20°C menjadi 70°C? (Kalor jenis air c = 4,2 J/g°C)",
+        options: [
+          { text: "42.000 Joule (42 kJ)", correct: true },
+          { text: "8.400 Joule", correct: false },
+          { text: "58.800 Joule", correct: false },
+          { text: "16.800 Joule", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 42.000 Joule (42 kJ).\n• Diketahui: m = 200 g, c = 4,2 J/g°C, ΔT = 70°C − 20°C = 50°C.\n• Rumus: Q = m × c × ΔT.\n• Perhitungan: Q = 200 × 4,2 × 50 = 840 × 50 = 42.000 Joule = 42 kJ."
+      },
+      {
+        id: 43,
+        bab: "Bab 3 • Hitung Kalor (Q = m·c·ΔT)",
+        text: "Sebuah potong tembaga bermassa 500 gram menyerap kalor sebesar 7.800 Joule sehingga suhunya naik sebesar 40°C. Kalor jenis tembaga tersebut adalah ....",
+        options: [
+          { text: "0,39 J/g°C", correct: true },
+          { text: "3,9 J/g°C", correct: false },
+          { text: "15,6 J/g°C", correct: false },
+          { text: "0,039 J/g°C", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 0,39 J/g°C.\n• Diketahui: Q = 7.800 J, m = 500 g, ΔT = 40°C.\n• Dari Q = m × c × ΔT, diperoleh c = Q / (m × ΔT).\n• Perhitungan: c = 7.800 / (500 × 40) = 7.800 / 20.000 = 0,39 J/g°C."
+      },
+      {
+        id: 44,
+        bab: "Bab 3 • Hitung Kalor (Q = m·c·ΔT)",
+        text: "Air bermassa 0,5 kg memiliki kalor jenis 4.200 J/kg°C. Jika air tersebut dipanaskan dari 30°C hingga mencapai suhu akhir 80°C, kalor yang diserap adalah ....",
+        options: [
+          { text: "105.000 Joule (105 kJ)", correct: true },
+          { text: "63.000 Joule", correct: false },
+          { text: "168.000 Joule", correct: false },
+          { text: "21.000 Joule", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah 105.000 Joule (105 kJ).\n• Diketahui: m = 0,5 kg, c = 4.200 J/kg°C, ΔT = 80°C − 30°C = 50°C.\n• Perhitungan: Q = 0,5 × 4.200 × 50 = 2.100 × 50 = 105.000 Joule = 105 kJ."
+      },
+      {
+        id: 45,
+        bab: "Bab 3 • Kalor Jenis Zat",
+        text: "Minyak goreng memiliki kalor jenis lebih kecil daripada air. Jika minyak goreng dan air yang massanya sama diberi kalor yang sama besar, maka ....",
+        options: [
+          { text: "Kenaikan suhu minyak goreng lebih cepat/lebih besar daripada air", correct: true },
+          { text: "Kenaikan suhu air lebih cepat daripada minyak goreng", correct: false },
+          { text: "Suhu keduanya tidak akan pernah berubah", correct: false },
+          { text: "Minyak goreng selalu mendidih pada suhu 0°C", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah kenaikan suhu minyak goreng lebih cepat/lebih besar daripada air.\n• Dari ΔT = Q / (m × c), untuk m dan Q yang sama, zat dengan kalor jenis (c) lebih kecil akan mengalami kenaikan suhu (ΔT) yang lebih besar."
+      },
+      {
+        id: 46,
+        bab: "Bab 3 • Pemuaian Zat",
+        text: "Pemuaian adalah peristiwa bertambahnya ukuran suatu benda (panjang, luas, atau volume) akibat ....",
+        options: [
+          { text: "Kenaikan suhu (penambahan energi kalor)", correct: true },
+          { text: "Penurunan suhu secara drastis", correct: false },
+          { text: "Berkurangnya massa jenis zat menjadi nol", correct: false },
+          { text: "Hilangnya seluruh partikel zat padat", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah kenaikan suhu (penambahan energi kalor).\n• Ketika suhu naik, getaran partikel bertambah dan jarak rata-rata antarpartikel sedikit menjauh sehingga ukuran benda memuai."
+      },
+      {
+        id: 47,
+        bab: "Bab 3 • Keping Bimetal",
+        text: "Perhatikan gambar keping bimetal (logam A dan logam B dikeling menjadi satu) yang dipanaskan berikut! Jika logam A memuai lebih besar daripada logam B, arah lengkungan bimetal saat dipanaskan adalah ....",
+        svg: `<svg viewBox="0 0 380 175" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi keping bimetal saat dipanaskan">
+          <rect x="12" y="10" width="356" height="155" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Sebelum dipanaskan -->
+          <text x="102" y="34" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle" fill="#334155">Sebelum Dipanaskan</text>
+          <rect x="52" y="64" width="100" height="12" rx="2" fill="#f59e0b" stroke="#78350f" stroke-width="1.2"/>
+          <rect x="52" y="76" width="100" height="12" rx="2" fill="#64748b" stroke="#1e293b" stroke-width="1.2"/>
+          <text x="102" y="59" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle" fill="#b45309">Logam A (muai besar)</text>
+          <text x="102" y="103" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle" fill="#334155">Logam B (muai kecil)</text>
+
+          <!-- Panah pemanasan -->
+          <path d="M174 76 L204 76" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="204,71 214,76 204,81" fill="#dc2626"/>
+          <text x="189" y="64" font-family="system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#dc2626">Panaskan</text>
+
+          <!-- Sesudah dipanaskan (melengkung ke arah Logam B, jadi cembung ke atas / melengkung ke bawah) -->
+          <text x="286" y="34" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle" fill="#334155">Sesudah Dipanaskan</text>
+          <!-- Busur luar (Logam A lebih panjang) -->
+          <path d="M234 62 Q286 106 338 62" fill="none" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
+          <!-- Busur dalam (Logam B lebih pendek) -->
+          <path d="M238 57 Q286 96 334 57" fill="none" stroke="#64748b" stroke-width="10" stroke-linecap="round"/>
+          <text x="286" y="116" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle" fill="#0f172a">Melengkung ke arah Logam B</text>
+        </svg>`,
+        svgCaption: "Logam dengan koefisien muai lebih besar berada di sisi luar lengkungan saat dipanaskan.",
+        options: [
+          { text: "Melengkung ke arah logam B (bagian luar ditempati logam A yang memuai lebih panjang)", correct: true },
+          { text: "Melengkung ke arah logam A yang memuai lebih besar", correct: false },
+          { text: "Tetap lurus sempurna karena kedua logam menyatu", correct: false },
+          { text: "Menyusut memendek ke arah kiri tanpa melengkung", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah melengkung ke arah logam B (bagian luar ditempati logam A yang memuai lebih panjang).\n• Karena pemuaian logam A lebih besar daripada logam B, panjang sisi logam A bertambah lebih banyak sehingga berada di sisi busur luar dan bimetal melengkung ke arah logam B."
+      },
+      {
+        id: 48,
+        bab: "Bab 3 • Penerapan Pemuaian",
+        text: "Celah antar-sambungan pada rel kereta api dan kabel listrik yang dipasang agak kendur bertujuan untuk ....",
+        options: [
+          { text: "Mencegah rel melengkung dan kabel putus akibat pemuaian/penyusutan suhu", correct: true },
+          { text: "Mempercepat laju kereta api saat melewati tikungan", correct: false },
+          { text: "Mengurangi massa jenis logam penyusun rel dan kabel", correct: false },
+          { text: "Menghilangkan pengaruh kalor matahari pada siang hari", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah mencegah rel melengkung dan kabel putus akibat pemuaian/penyusutan suhu.\n• Celah pada rel memberi ruang saat besi memuai pada siang hari yang panas, sedangkan kabel yang kendur mencegah tarikan putus saat menyusut pada malam/cuaca dingin."
+      },
+      {
+        id: 49,
+        bab: "Bab 3 • Pemuaian Zat Cair",
+        text: "Prinsip kerja termometer zat cair (seperti alkohol atau raksa) memanfaatkan sifat ....",
+        options: [
+          { text: "Zat cair memuai secara teratur ketika menerima kalor (suhu naik)", correct: true },
+          { text: "Zat cair membeku seketika ketika suhunya naik", correct: false },
+          { text: "Massa jenis zat cair selalu lebih kecil dari udara", correct: false },
+          { text: "Zat cair tidak pernah berubah volumenya pada berbagai suhu", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah zat cair memuai secara teratur ketika menerima kalor (suhu naik).\n• Ketika suhu naik, zat cair dalam reservoir memuai dan naik ke pipa kapiler sehingga dapat dibaca pada skala termometer."
+      },
+      {
+        id: 50,
+        bab: "Bab 3 • Pemuaian & Kalor",
+        text: "Tutup botol logam yang macet sering kali lebih mudah dibuka setelah dialiri air panas beberapa saat. Hal ini terjadi karena ....",
+        options: [
+          { text: "Tutup logam memuai lebih cepat/lebih besar sehingga longgar terhadap mulut botol", correct: true },
+          { text: "Air panas mengecilkan ukuran mulut botol kaca secara permanen", correct: false },
+          { text: "Gaya gesek menjadi tak terhingga setelah dipanaskan", correct: false },
+          { text: "Udara di dalam botol berubah menjadi zat padat", correct: false }
+        ],
+        explanation: "Jawaban yang tepat adalah tutup logam memuai lebih cepat/lebih besar sehingga longgar terhadap mulut botol.\n• Pemanasan menyebabkan tutup logam memuai (bertambah diameternya) sehingga celah antara tutup dan botol menjadi lebih longgar dan mudah diputar/dibuka."
+      }
+    ];
+
+    /* =========================================================
+       STATE & DOM REFERENCES
+       ========================================================= */
+    const state = {
+      // Menyimpan urutan opsi yang telah diacak untuk tiap soal:
+      // renderedOptions[questionId] = [ { text, correct, originalIndex }, ... ]
+      renderedOptions: {},
+      // Jawaban terpilih user: userAnswers[questionId] = optionIndexInRendered (0..3)
+      userAnswers: {},
+      // Status apakah kuis sudah dikumpulkan
+      submitted: false,
+      // Filter navigasi: 'all' | 'unanswered' | 'answered' | 'wrong'
+      navFilter: 'all'
+    };
+
+    const LETTERS = ['A', 'B', 'C', 'D'];
+
+    const questionsContainer = document.getElementById('questionsContainer');
+    const navGrid = document.getElementById('navGrid');
+    const scoreBanner = document.getElementById('scoreBanner');
+    const toastBox = document.getElementById('toastBox');
+
+    /* =========================================================
+       UTILITY FUNCTIONS
+       ========================================================= */
+    function showToast(message) {
+      toastBox.textContent = message;
+      toastBox.classList.add('show');
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+        toastBox.classList.remove('show');
+      }, 2800);
+    }
+
+    /**
+     * Mengacak array menggunakan algoritma Fisher-Yates.
+     * Memastikan kunci jawaban tersebar merata dan tidak monoton.
+     */
+    function shuffleArray(arr) {
+      const copy = arr.map((item, idx) => ({ ...item, originalIndex: idx }));
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    /**
+     * Menginisialisasi atau mengacak ulang pilihan jawaban untuk semua 50 soal.
+     * Jika reshuffle = false, menjaga urutan opsi saat ini.
+     */
+    function prepareOptions(shouldShuffle = true) {
+      QUESTION_BANK.forEach((q) => {
+        if (shouldShuffle || !state.renderedOptions[q.id]) {
+          state.renderedOptions[q.id] = shuffleArray(q.options);
+        }
+      });
+    }
+
+    /* =========================================================
+       RENDERING QUESTIONS & STICKY NAVIGATOR
+       ========================================================= */
+    function renderAllQuestions() {
+      questionsContainer.innerHTML = '';
+
+      QUESTION_BANK.forEach((q) => {
+        const card = document.createElement('article');
+        card.className = 'question-card';
+        card.id = `question-card-${q.id}`;
+        card.setAttribute('data-qid', q.id);
+
+        const userChoice = state.userAnswers[q.id];
+        if (userChoice !== undefined && !state.submitted) {
+          card.classList.add('answered-card');
+        }
+
+        let statusBadgeHtml = '';
+        if (state.submitted) {
+          const opts = state.renderedOptions[q.id];
+          if (userChoice === undefined) {
+            card.classList.add('result-unanswered');
+            statusBadgeHtml = `<span class="q-status-pill unanswered">Tidak Terjawab</span>`;
+          } else if (opts[userChoice] && opts[userChoice].correct) {
+            card.classList.add('result-correct');
+            statusBadgeHtml = `<span class="q-status-pill correct">Benar</span>`;
+          } else {
+            card.classList.add('result-wrong');
+            statusBadgeHtml = `<span class="q-status-pill wrong">Salah</span>`;
+          }
+        }
+
+        const svgHtml = q.svg
+          ? `<div class="svg-illustration-box">
+               ${q.svg}
+               ${q.svgCaption ? `<div class="svg-caption">${q.svgCaption}</div>` : ''}
+             </div>`
+          : '';
+
+        const optsList = state.renderedOptions[q.id] || q.options;
+        const optionsHtml = optsList
+          .map((opt, idx) => {
+            const letter = LETTERS[idx] || String(idx + 1);
+            let btnClasses = ['option-btn'];
+
+            if (userChoice === idx) {
+              btnClasses.push('selected');
+            }
+
+            if (state.submitted) {
+              if (opt.correct) {
+                btnClasses.push('opt-correct-reveal');
+              } else if (userChoice === idx && !opt.correct) {
+                btnClasses.push('opt-wrong-selected');
+              }
+            }
+
+            const disabledAttr = state.submitted ? 'disabled' : '';
+            return `
+              <button
+                type="button"
+                class="${btnClasses.join(' ')}"
+                data-qid="${q.id}"
+                data-opt-idx="${idx}"
+                ${disabledAttr}
+                onclick="selectOption(${q.id}, ${idx})"
+              >
+                <span class="option-letter">${letter}</span>
+                <span class="option-text">${opt.text}</span>
+              </button>
+            `;
+          })
+          .join('');
+
+        const expVisibleClass = state.submitted ? 'visible' : '';
+        const explanationHtml = `
+          <div id="explanation-${q.id}" class="explanation-box ${expVisibleClass}">
+            <h3 class="explanation-title">Pembahasan Soal No. ${q.id}</h3>
+            <p class="explanation-body">${q.explanation}</p>
+          </div>
+        `;
+
+        card.innerHTML = `
+          <div class="question-meta">
+            <span class="q-number-badge">Soal ${q.id}</span>
+            <span class="q-topic-badge">${q.bab}</span>
+            ${statusBadgeHtml}
+          </div>
+          <p class="question-text">${q.text}</p>
+          ${svgHtml}
+          <div class="options-list">${optionsHtml}</div>
+          ${explanationHtml}
+        `;
+
+        questionsContainer.appendChild(card);
+      });
+
+      applyNavigatorFilter();
+    }
+
+    function renderNavigatorGrid() {
+      navGrid.innerHTML = '';
+
+      QUESTION_BANK.forEach((q) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'nav-num-btn';
+        btn.id = `nav-btn-${q.id}`;
+        btn.textContent = q.id;
+        btn.setAttribute('aria-label', `Lompat ke soal nomor ${q.id}`);
+        btn.onclick = () => jumpToQuestion(q.id);
+
+        const userChoice = state.userAnswers[q.id];
+        if (!state.submitted) {
+          if (userChoice !== undefined) {
+            btn.classList.add('is-answered');
+          }
+        } else {
+          const opts = state.renderedOptions[q.id];
+          if (userChoice === undefined) {
+            btn.classList.add('is-unanswered-graded');
+          } else if (opts[userChoice] && opts[userChoice].correct) {
+            btn.classList.add('is-correct');
+          } else {
+            btn.classList.add('is-wrong');
+          }
+        }
+
+        navGrid.appendChild(btn);
+      });
+
+      updateProgressSummary();
+      applyNavigatorFilter();
+    }
+
+    function updateProgressSummary() {
+      const total = QUESTION_BANK.length;
+      const answeredCount = Object.keys(state.userAnswers).length;
+      const badge = document.getElementById('answeredCounterBadge');
+      const bar = document.getElementById('progressBarFill');
+      const hint = document.getElementById('bottomStatusHint');
+
+      badge.textContent = `${answeredCount} / ${total} Dijawab`;
+      const pct = Math.round((answeredCount / total) * 100);
+      bar.style.width = `${pct}%`;
+
+      if (!state.submitted) {
+        const sisa = total - answeredCount;
+        hint.textContent =
+          sisa === 0
+            ? 'Semua 50 soal telah terjawab. Tekan tombol Submit untuk melihat nilai dan pembahasan.'
+            : `Masih ada ${sisa} soal yang belum dijawab. Anda tetap dapat mengumpulkan kapan saja.`;
+      } else {
+        hint.textContent = 'Latihan telah dikumpulkan. Pembahasan lengkap tersedia di bawah setiap soal.';
+      }
+    }
+
+    /* =========================================================
+       INTERACTION HANDLERS
+       ========================================================= */
+    function selectOption(questionId, optionIndex) {
+      if (state.submitted) return;
+
+      state.userAnswers[questionId] = optionIndex;
+
+      // Perbarui tampilan opsi pada kartu soal terkait tanpa me-render ulang seluruh halaman
+      const card = document.getElementById(`question-card-${questionId}`);
+      if (card) {
+        card.classList.add('answered-card');
+        const buttons = card.querySelectorAll('.option-btn');
+        buttons.forEach((btn, idx) => {
+          btn.classList.toggle('selected', idx === optionIndex);
+        });
+      }
+
+      const navBtn = document.getElementById(`nav-btn-${questionId}`);
+      if (navBtn) {
+        navBtn.classList.add('is-answered');
+      }
+
+      updateProgressSummary();
+      applyNavigatorFilter();
+    }
+
+    function jumpToQuestion(questionId) {
+      const card = document.getElementById(`question-card-${questionId}`);
+      if (card) {
+        // Jika soal sedang tersembunyi oleh filter, kembalikan filter ke 'all' agar terlihat
+        if (card.classList.contains('hidden-by-filter')) {
+          setNavigatorFilter('all');
+        }
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showToast(`Menuju soal nomor ${questionId}`);
+      }
+    }
+
+    function setNavigatorFilter(filterName) {
+      state.navFilter = filterName;
+      document.querySelectorAll('.filter-chip').forEach((chip) => {
+        chip.classList.toggle('active', chip.getAttribute('data-filter') === filterName);
+      });
+      applyNavigatorFilter();
+    }
+
+    function applyNavigatorFilter() {
+      const f = state.navFilter;
+
+      QUESTION_BANK.forEach((q) => {
+        const card = document.getElementById(`question-card-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const userChoice = state.userAnswers[q.id];
+        const isAnswered = userChoice !== undefined;
+        let isWrong = false;
+
+        if (state.submitted) {
+          const opts = state.renderedOptions[q.id];
+          isWrong = !isAnswered || !(opts[userChoice] && opts[userChoice].correct);
+        }
+
+        let matches = true;
+        if (f === 'unanswered') {
+          matches = !isAnswered;
+        } else if (f === 'answered') {
+          matches = isAnswered;
+        } else if (f === 'wrong' && state.submitted) {
+          matches = isWrong;
+        }
+
+        if (card) {
+          card.classList.toggle('hidden-by-filter', !matches);
+        }
+        if (navBtn) {
+          navBtn.classList.toggle('filtered-out', !matches);
+        }
+      });
+    }
+
+    function submitQuiz() {
+      if (state.submitted) {
+        scoreBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showToast('Jawaban sudah dinilai. Lihat ringkasan skor di atas.');
+        return;
+      }
+
+      let correctCount = 0;
+      let wrongCount = 0;
+      let unansweredCount = 0;
+
+      QUESTION_BANK.forEach((q) => {
+        const userChoice = state.userAnswers[q.id];
+        const opts = state.renderedOptions[q.id];
+        if (userChoice === undefined) {
+          unansweredCount++;
+        } else if (opts[userChoice] && opts[userChoice].correct) {
+          correctCount++;
+        } else {
+          wrongCount++;
+        }
+      });
+
+      const totalQuestions = QUESTION_BANK.length;
+      const finalScore = Math.round((correctCount / totalQuestions) * 100);
+
+      state.submitted = true;
+
+      // Tampilkan tombol filter 'Salah' pada panel navigasi
+      const filterWrongBtn = document.getElementById('filterWrongBtn');
+      if (filterWrongBtn) {
+        filterWrongBtn.style.display = 'inline-block';
+      }
+
+      // Isi banner skor
+      document.getElementById('finalScoreVal').textContent = finalScore;
+      document.getElementById('correctCountVal').textContent = correctCount;
+      document.getElementById('wrongCountVal').textContent = wrongCount;
+      document.getElementById('unansweredCountVal').textContent = unansweredCount;
+
+      const gradeBadge = document.getElementById('gradeBadge');
+      if (finalScore >= 85) {
+        gradeBadge.textContent = 'Sangat Baik (Predikat A)';
+        gradeBadge.style.background = '#dcfce7';
+        gradeBadge.style.color = '#14532d';
+      } else if (finalScore >= 70) {
+        gradeBadge.textContent = 'Baik (Predikat B)';
+        gradeBadge.style.background = '#e0f2fe';
+        gradeBadge.style.color = '#0369a1';
+      } else if (finalScore >= 55) {
+        gradeBadge.textContent = 'Cukup — Perlu Latihan Lagi';
+        gradeBadge.style.background = '#fef3c7';
+        gradeBadge.style.color = '#78350f';
+      } else {
+        gradeBadge.textContent = 'Perlu Pendalaman Materi';
+        gradeBadge.style.background = '#fee2e2';
+        gradeBadge.style.color = '#7f1d1d';
+      }
+
+      scoreBanner.classList.add('visible');
+
+      renderAllQuestions();
+      renderNavigatorGrid();
+
+      scoreBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showToast(`Nilai akhir kamu: ${finalScore} (${correctCount} benar dari ${totalQuestions} soal)`);
+    }
+
+    function resetQuiz() {
+      const shouldReshuffle = document.getElementById('reshuffleToggle').checked;
+      state.userAnswers = {};
+      state.submitted = false;
+      state.navFilter = 'all';
+
+      document.querySelectorAll('.filter-chip').forEach((chip) => {
+        chip.classList.toggle('active', chip.getAttribute('data-filter') === 'all');
+      });
+
+      const filterWrongBtn = document.getElementById('filterWrongBtn');
+      if (filterWrongBtn) {
+        filterWrongBtn.style.display = 'none';
+      }
+
+      scoreBanner.classList.remove('visible');
+      prepareOptions(shouldReshuffle);
+      renderAllQuestions();
+      renderNavigatorGrid();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast(
+        shouldReshuffle
+          ? 'Latihan direset dan urutan pilihan A–D telah diacak ulang.'
+          : 'Latihan telah direset ke kondisi awal.'
+      );
+    }
+
+    /* =========================================================
+       INITIALIZATION ON PAGE LOAD
+       ========================================================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        prepareOptions(true);
+        renderAllQuestions();
+        renderNavigatorGrid();
+      } catch (err) {
+        questionsContainer.innerHTML = `
+          <div class="question-card result-wrong">
+            <h3>Terjadi kendala saat memuat soal</h3>
+            <p>${err && err.message ? err.message : 'Silakan muat ulang halaman.'}</p>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>

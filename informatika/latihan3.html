@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latihan Soal Informatika SMP Kelas VII - Semester 1 (Set 3)</title>
+  <style>
+    /* =====================================================================
+       VARIABEL TEMA & GAYA MANDIRI OFFLINE (TANPA KETERGANTUNGAN CDN)
+       ===================================================================== */
+    :root {
+      --bg-canvas: #eef3f8;
+      --bg-surface: #ffffff;
+      --bg-muted: #f8fafc;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --text-faint: #64748b;
+      --line-soft: #e2e8f0;
+      --line-strong: #cbd5e1;
+      --brand: #1e3a8a;
+      --brand-bright: #2563eb;
+      --brand-hover: #1d4ed8;
+      --brand-tint: #eff6ff;
+      --ok: #15803d;
+      --ok-bg: #f0fdf4;
+      --ok-line: #86efac;
+      --bad: #b91c1c;
+      --bad-bg: #fef2f2;
+      --bad-line: #fca5a5;
+      --warn: #b45309;
+      --warn-bg: #fffbeb;
+      --warn-line: #fcd34d;
+      --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-float: 0 8px 24px rgba(15, 23, 42, 0.09);
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 16px;
+      --font-ui: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-ui);
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      line-height: 1.55;
+    }
+
+    /* =====================================================================
+       HEADER RINGKAS
+       ===================================================================== */
+    .app-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 58%, #2563eb 100%);
+      color: #ffffff;
+      padding: 18px 16px;
+      box-shadow: var(--shadow-float);
+    }
+
+    .app-header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .app-title {
+      margin: 0;
+      font-size: clamp(1.12rem, 2.3vw, 1.55rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .app-subtitle {
+      margin: 4px 0 0;
+      font-size: 0.88rem;
+      color: #dbeafe;
+    }
+
+    .header-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: var(--r-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      min-height: 42px;
+      transition: background-color 0.15s ease, transform 0.1s ease, border-color 0.15s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-submit {
+      background-color: #ffffff;
+      color: var(--brand);
+      border-color: #ffffff;
+    }
+
+    .btn-submit:hover {
+      background-color: #eff6ff;
+    }
+
+    .btn-primary {
+      background-color: var(--brand-bright);
+      color: #ffffff;
+      border-color: var(--brand-bright);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brand-hover);
+    }
+
+    .btn-secondary {
+      background-color: #ffffff;
+      color: var(--text-main);
+      border-color: var(--line-strong);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-muted);
+    }
+
+    .btn-ghost {
+      background-color: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.32);
+    }
+
+    .btn-ghost:hover {
+      background-color: rgba(255, 255, 255, 0.24);
+    }
+
+    /* =====================================================================
+       TATA LETAK DUA KOLOM: AREA SOAL + PANEL NOMOR TETAP (STICKY)
+       ===================================================================== */
+    .quiz-shell {
+      max-width: 1280px;
+      margin: 20px auto 52px;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 312px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Kotak Pesan Non-Blocking */
+    .alert-banner {
+      display: none;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      border-radius: var(--r-sm);
+      background-color: var(--warn-bg);
+      border: 1px solid var(--warn-line);
+      color: var(--warn);
+      font-size: 0.9rem;
+      font-weight: 600;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .alert-banner.visible {
+      display: flex;
+    }
+
+    .alert-dismiss {
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 0 6px;
+    }
+
+    /* =====================================================================
+       RINGKASAN SKOR SETELAH SUBMIT
+       ===================================================================== */
+    .result-card {
+      display: none;
+      background-color: var(--bg-surface);
+      border: 2px solid var(--brand-bright);
+      border-radius: var(--r-lg);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-float);
+    }
+
+    .result-card.visible {
+      display: block;
+    }
+
+    .result-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .result-kicker {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--brand-bright);
+    }
+
+    .result-score {
+      font-size: clamp(1.9rem, 4vw, 2.65rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-top: 2px;
+    }
+
+    .result-note {
+      margin-top: 4px;
+      font-size: 0.94rem;
+      color: var(--text-sub);
+    }
+
+    .result-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(90px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .metric-box {
+      padding: 12px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--line-soft);
+      text-align: center;
+    }
+
+    .metric-box.m-correct {
+      background-color: var(--ok-bg);
+      border-color: var(--ok-line);
+      color: var(--ok);
+    }
+
+    .metric-box.m-wrong {
+      background-color: var(--bad-bg);
+      border-color: var(--bad-line);
+      color: var(--bad);
+    }
+
+    .metric-box.m-blank {
+      background-color: var(--warn-bg);
+      border-color: var(--warn-line);
+      color: var(--warn);
+    }
+
+    .metric-num {
+      display: block;
+      font-size: 1.45rem;
+      font-weight: 800;
+    }
+
+    .metric-lbl {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    /* =====================================================================
+       KARTU SOAL & PILIHAN GANDA
+       ===================================================================== */
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .q-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-md);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+      scroll-margin-top: 16px;
+    }
+
+    .q-card.state-correct {
+      border-color: var(--ok-line);
+      background-color: #fcfdfb;
+    }
+
+    .q-card.state-wrong {
+      border-color: var(--bad-line);
+      background-color: #fffcfc;
+    }
+
+    .q-card.state-blank {
+      border-color: var(--warn-line);
+    }
+
+    .q-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .q-number {
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--brand);
+    }
+
+    .q-badge {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background-color: var(--bg-muted);
+      color: var(--text-sub);
+      border: 1px solid var(--line-soft);
+    }
+
+    .q-text {
+      margin: 0 0 14px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-main);
+      white-space: pre-line;
+    }
+
+    /* Ilustrasi SVG */
+    .svg-box {
+      margin: 0 0 16px;
+      padding: 12px;
+      background-color: var(--bg-muted);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .svg-box svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .svg-sub {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+      text-align: center;
+    }
+
+    /* Opsi Jawaban */
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .option-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 11px 14px;
+      border: 1.5px solid var(--line-soft);
+      border-radius: var(--r-sm);
+      background-color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.14s ease, border-color 0.14s ease;
+    }
+
+    .option-row:hover {
+      background-color: var(--bg-muted);
+      border-color: #93c5fd;
+    }
+
+    .option-row input[type="radio"] {
+      margin-top: 3px;
+      width: 17px;
+      height: 17px;
+      accent-color: var(--brand-bright);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .option-row.chosen {
+      background-color: var(--brand-tint);
+      border-color: var(--brand-bright);
+    }
+
+    .opt-key {
+      font-weight: 700;
+      color: var(--text-sub);
+      min-width: 20px;
+    }
+
+    .opt-label-text {
+      flex: 1;
+      font-size: 0.96rem;
+    }
+
+    .option-row.opt-correct-key {
+      background-color: var(--ok-bg);
+      border-color: var(--ok);
+      color: var(--ok);
+      font-weight: 600;
+    }
+
+    .option-row.opt-correct-key .opt-key {
+      color: var(--ok);
+    }
+
+    .option-row.opt-wrong-pick {
+      background-color: var(--bad-bg);
+      border-color: var(--bad);
+      color: var(--bad);
+    }
+
+    .option-row.opt-wrong-pick .opt-key {
+      color: var(--bad);
+    }
+
+    /* Pembahasan Lengkap per Soal */
+    .solution-box {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: var(--r-sm);
+      border-left: 4px solid var(--brand-bright);
+      background-color: var(--bg-muted);
+      font-size: 0.92rem;
+    }
+
+    .solution-box.visible {
+      display: block;
+    }
+
+    .solution-box.sol-ok {
+      border-left-color: var(--ok);
+      background-color: var(--ok-bg);
+    }
+
+    .solution-box.sol-bad {
+      border-left-color: var(--bad);
+      background-color: var(--bad-bg);
+    }
+
+    .solution-box.sol-blank {
+      border-left-color: var(--warn);
+      background-color: var(--warn-bg);
+    }
+
+    .solution-heading {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .solution-detail {
+      margin: 0;
+      color: var(--text-main);
+    }
+
+    /* Panel Submit di Bawah */
+    .footer-submit-box {
+      margin-top: 24px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-md);
+      padding: 18px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .footer-progress {
+      font-size: 0.92rem;
+      color: var(--text-sub);
+    }
+
+    /* =====================================================================
+       PANEL SAMPING TETAP (STICKY) DAFTAR NOMOR 1 - 50
+       ===================================================================== */
+    .sticky-panel {
+      position: sticky;
+      top: 16px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-md);
+      padding: 16px;
+      box-shadow: var(--shadow-float);
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
+    }
+
+    .sticky-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .sticky-title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .sticky-count {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background-color: var(--brand-tint);
+      color: var(--brand-bright);
+    }
+
+    .bar-track {
+      width: 100%;
+      height: 8px;
+      background-color: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--brand-bright);
+      transition: width 0.2s ease;
+    }
+
+    .legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .legend-entry {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      border: 1px solid #cbd5e1;
+      display: inline-block;
+    }
+
+    .dot.answered {
+      background-color: var(--brand-bright);
+      border-color: var(--brand-bright);
+    }
+
+    .dot.correct {
+      background-color: var(--ok);
+      border-color: var(--ok);
+    }
+
+    .dot.wrong {
+      background-color: var(--bad);
+      border-color: var(--bad);
+    }
+
+    .num-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .num-tile {
+      height: 36px;
+      border-radius: 7px;
+      border: 1px solid var(--line-soft);
+      background-color: #ffffff;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.14s ease;
+    }
+
+    .num-tile:hover {
+      border-color: var(--brand-bright);
+      background-color: var(--brand-tint);
+    }
+
+    .num-tile.tile-answered {
+      background-color: var(--brand-bright);
+      border-color: var(--brand-bright);
+      color: #ffffff;
+    }
+
+    .num-tile.tile-ok {
+      background-color: var(--ok);
+      border-color: var(--ok);
+      color: #ffffff;
+    }
+
+    .num-tile.tile-bad {
+      background-color: var(--bad);
+      border-color: var(--bad);
+      color: #ffffff;
+    }
+
+    .num-tile.tile-blank {
+      background-color: var(--warn-bg);
+      border-color: var(--warn);
+      color: var(--warn);
+    }
+
+    .sticky-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* =====================================================================
+       RESPONSIVITAS MOBILE & TABLET
+       ===================================================================== */
+    @media (max-width: 960px) {
+      .quiz-shell {
+        grid-template-columns: 1fr;
+      }
+
+      /* Bar ringkas tetap (sticky) di bagian atas layar kecil */
+      .sticky-panel {
+        position: sticky;
+        top: 6px;
+        z-index: 30;
+        max-height: none;
+        overflow-y: visible;
+        padding: 12px;
+        order: -1;
+      }
+
+      .num-nav-grid {
+        grid-template-columns: repeat(10, 1fr);
+        gap: 5px;
+        margin-bottom: 10px;
+      }
+
+      .num-tile {
+        height: 30px;
+        font-size: 0.78rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .q-card {
+        padding: 15px;
+      }
+
+      .result-metrics {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Langsung Halaman Soal -->
+  <header class="app-header">
+    <div class="app-header-inner">
+      <div>
+        <h1 class="app-title">Latihan Soal Informatika SMP Kelas VII - Semester 1 (Set 3)</h1>
+        <p class="app-subtitle">50 Soal Pilihan Ganda (Bab 1–3 &amp; Surel) • Mode Latihan Offline Mandiri</p>
+      </div>
+      <div class="header-controls">
+        <button type="button" class="btn btn-submit" id="btnSubmitTop">Kumpulkan / Submit Jawaban</button>
+        <button type="button" class="btn btn-ghost" id="btnResetTop">Ulangi Latihan (Acak Ulang)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="quiz-shell">
+    <section aria-label="Daftar Soal Pilihan Ganda">
+      <div class="alert-banner" id="alertBanner" role="alert">
+        <span id="alertText"></span>
+        <button type="button" class="alert-dismiss" id="btnCloseAlert" aria-label="Tutup pesan">&times;</button>
+      </div>
+
+      <!-- Ringkasan Skor Setelah Submit -->
+      <div class="result-card" id="resultCard" aria-live="polite">
+        <div class="result-head">
+          <div>
+            <div class="result-kicker">Hasil Kumpulan Jawaban</div>
+            <div class="result-score" id="scoreDisplay">0 / 100</div>
+            <div class="result-note" id="scoreSummaryNote">-</div>
+          </div>
+          <button type="button" class="btn btn-secondary" id="btnResetFromResult">Ulangi Latihan (Acak Ulang)</button>
+        </div>
+        <div class="result-metrics">
+          <div class="metric-box m-correct">
+            <span class="metric-num" id="numCorrect">0</span>
+            <span class="metric-lbl">Jawaban Benar</span>
+          </div>
+          <div class="metric-box m-wrong">
+            <span class="metric-num" id="numWrong">0</span>
+            <span class="metric-lbl">Jawaban Salah</span>
+          </div>
+          <div class="metric-box m-blank">
+            <span class="metric-num" id="numBlank">0</span>
+            <span class="metric-lbl">Tidak Terjawab</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 50 Kartu Soal -->
+      <div class="question-list" id="questionList"></div>
+
+      <!-- Tombol Submit di Bagian Bawah -->
+      <div class="footer-submit-box">
+        <div class="footer-progress" id="footerProgress">
+          Terjawab: <strong>0</strong> dari <strong>50</strong> soal.
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-secondary" id="btnResetBottom">Ulangi Latihan (Acak Ulang)</button>
+          <button type="button" class="btn btn-primary" id="btnSubmitBottom">Kumpulkan / Submit Jawaban</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel Samping Tetap (Sticky) Nomor 1 sampai 50 -->
+    <aside class="sticky-panel" aria-label="Daftar Nomor Soal 1 sampai 50">
+      <div class="sticky-head">
+        <h2 class="sticky-title">Nomor Soal (1–50)</h2>
+        <span class="sticky-count" id="stickyCount">0 / 50</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" id="progressFill"></div>
+      </div>
+      <div class="legend-bar" id="legendBar">
+        <span class="legend-entry"><span class="dot"></span> Belum</span>
+        <span class="legend-entry"><span class="dot answered"></span> Sudah</span>
+      </div>
+      <div class="num-nav-grid" id="numNavGrid"></div>
+      <div class="sticky-actions">
+        <button type="button" class="btn btn-primary" id="btnSubmitSide">Kumpulkan / Submit Jawaban</button>
+        <button type="button" class="btn btn-secondary" id="btnResetSide">Ulangi Latihan (Acak Ulang)</button>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    /**
+     * =========================================================================
+     * SET 3: 50 SOAL BARU INFORMATIKA SMP KELAS VII SEMESTER 1
+     * Cakupan:
+     * - Soal 1–12 : Bab 1 (Informatika, Pilar, Masyarakat 5.0, Keterampilan Generik)
+     * - Soal 13–26: Bab 2 (Berpikir Komputasional, Algoritma, Optimasi Penjadwalan,
+     *                Struktur Data List, Kata Rahasia, Representasi Data, Peminjaman Ruang, Kayu)
+     * - Soal 27–38: Bab 3 TIK (GUI/CLI/VUI, Folder/File/Ekstensi/Windows, Peramban & Search Engine)
+     * - Soal 39–50: Materi Surel (POP3/IMAP, To/Cc/Bcc, Subject/Body/Compose/Sent,
+     *                Reply/Forward, Etika Surel Formal, Gagal Kirim / Address Not Found / Spam / Penuh)
+     * =========================================================================
+     */
+    const SET_3_QUESTIONS = [
+      // ==================== BAB 1: INFORMATIKA & KETERAMPILAN GENERIK (1-12) ====================
+      {
+        id: 1,
+        bab: "Bab 1 • Hakikat Informatika",
+        text: "Dalam kurikulum Informatika SMP Kelas VII, tujuan utama mempelajari Informatika bukan sekadar mahir mengoperasikan satu program aplikasi, melainkan...",
+        svg: null,
+        options: [
+          "Membentuk cara berpikir komputasional serta memahami prinsip dan perancangan sistem komputasi yang bertahan lama",
+          "Menghafalkan seluruh tombol pintas pada satu merek komputer tertentu saja",
+          "Menggantikan pelajaran bahasa, matematika, dan seni dengan mengetik di komputer",
+          "Melatih kecepatan mengetik cepat tanpa memahami isi atau logika informasi"
+        ],
+        answer: "Membentuk cara berpikir komputasional serta memahami prinsip dan perancangan sistem komputasi yang bertahan lama",
+        explanation: "Jawaban benar karena Informatika menekankan cara berpikir komputasional dan prinsip dasar sistem komputasi yang langgeng meskipun perangkat lunak berganti. Pilihan lain terlalu sempit karena hanya menekankan hafalan aplikasi, mengganti mapel lain, atau mengetik tanpa logika."
+      },
+      {
+        id: 2,
+        bab: "Bab 1 • Elemen Pengetahuan",
+        text: "Perhatikan skema elemen pengetahuan Informatika berikut. Elemen 'Analisis Data (AD)' dan 'Algoritma dan Pemrograman (AP)' berada di bawah payung...",
+        svg: `<svg width="340" height="118" viewBox="0 0 340 118" role="img" aria-label="Skema Elemen Pengetahuan Informatika">
+          <polygon points="170,8 40,44 300,44" fill="#15803d"/>
+          <text x="170" y="34" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="bold">TIK (Atap Rumah)</text>
+          <rect x="48" y="47" width="244" height="20" fill="#86efac"/>
+          <text x="170" y="61" text-anchor="middle" fill="#052e16" font-size="10" font-weight="bold">PRAKTIKA LINTAS BIDANG (PLB)</text>
+          <rect x="52" y="70" width="44" height="22" rx="3" fill="#2563eb"/><text x="74" y="85" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">SK</text>
+          <rect x="101" y="70" width="44" height="22" rx="3" fill="#93c5fd"/><text x="123" y="85" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="bold">JKI</text>
+          <rect x="150" y="70" width="44" height="22" rx="3" fill="#dcfce7"/><text x="172" y="85" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="bold">AD</text>
+          <rect x="199" y="70" width="44" height="22" rx="3" fill="#ef4444"/><text x="221" y="85" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">AP</text>
+          <rect x="248" y="70" width="44" height="22" rx="3" fill="#16a34a"/><text x="270" y="85" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">DSI</text>
+          <rect x="40" y="95" width="260" height="18" fill="#fde047"/>
+          <text x="170" y="108" text-anchor="middle" fill="#1e293b" font-size="9.5" font-weight="bold">BERPIKIR KOMPUTASIONAL (BK)</text>
+        </svg>`,
+        options: [
+          "Praktika Lintas Bidang (PLB) dan TIK sebagai atap, dengan fondasi Berpikir Komputasional (BK)",
+          "Jaringan Komputer dan Internet (JKI) saja tanpa melibatkan berpikir komputasional",
+          "Dampak Sosial Informatika (DSI) yang berdiri terpisah dari sistem komputasi",
+          "Perangkat keras penyimpanan eksternal saja"
+        ],
+        answer: "Praktika Lintas Bidang (PLB) dan TIK sebagai atap, dengan fondasi Berpikir Komputasional (BK)",
+        explanation: "Jawaban benar karena dalam rumah pengetahuan Informatika, AD dan AP merupakan pilar yang dinaungi PLB dan atap TIK serta ditopang Berpikir Komputasional. Pilihan lain salah karena memisahkan pilar dari fondasi BK atau mereduksinya menjadi perangkat keras."
+      },
+      {
+        id: 3,
+        bab: "Bab 1 • Masyarakat 5.0",
+        text: "Contoh aktivitas sehari-hari siswa SMP yang mencerminkan kehidupan di era Masyarakat 5.0 (perpaduan dunia fisik dan dunia siber) adalah...",
+        svg: null,
+        options: [
+          "Belajar di kelas tatap muka sambil mengakses materi pelajaran, diskusi daring, atau mengumpulkan tugas digital melalui internet",
+          "Menolak seluruh bentuk komunikasi elektronik dan hanya berkirim pesan melalui surat pos",
+          "Menggunakan komputer hanya untuk mematikan lampu ruangan tanpa jaringan data",
+          "Hanya membaca buku cetak di perpustakaan tanpa pernah berinteraksi di ruang digital"
+        ],
+        answer: "Belajar di kelas tatap muka sambil mengakses materi pelajaran, diskusi daring, atau mengumpulkan tugas digital melalui internet",
+        explanation: "Jawaban benar karena Masyarakat 5.0 mengintegrasikan dunia fisik dan dunia maya/siber dalam kegiatan nyata seperti belajar dan berkolaborasi. Pilihan lain menggambarkan kondisi pra-digital atau fungsi yang tidak sesuai."
+      },
+      {
+        id: 4,
+        bab: "Bab 1 • Keterampilan Generik",
+        text: "Mengapa 'keterampilan generik' sangat ditekankan pada Bab 1 bersama mata pelajaran lain di sekolah?",
+        svg: null,
+        options: [
+          "Karena keterampilan seperti kerja sama, perencanaan kerja, dan komunikasi hasil berguna lintas mata pelajaran dan kehidupan sehari-hari",
+          "Karena keterampilan generik hanya dipakai saat ulangan praktik komputer saja",
+          "Karena siswa tidak perlu menyusun rencana kerja jika sudah punya buku catatan",
+          "Karena kerja sama tim membuat penilaian individu menjadi tidak perlu"
+        ],
+        answer: "Karena keterampilan seperti kerja sama, perencanaan kerja, dan komunikasi hasil berguna lintas mata pelajaran dan kehidupan sehari-hari",
+        explanation: "Jawaban benar karena keterampilan generik bersifat umum dan lintas bidang (kerja tim, manajemen waktu/perencanaan, komunikasi). Pilihan lain keliru karena membatasi manfaatnya hanya pada satu situasi atau meniadakan perencanaan."
+      },
+      {
+        id: 5,
+        bab: "Bab 1 • Strategi Kerja Tim",
+        text: "Perhatikan ilustrasi pembagian 6 siswa (Ali, Badu, Cici, Deni, Elon, Fadlan) pada beberapa tugas berikut. Jika satu orang ditugaskan merangkap banyak bagian berat sendirian sementara anggota lain menganggur, masalah yang terjadi adalah...",
+        svg: `<svg width="340" height="84" viewBox="0 0 340 84" role="img" aria-label="Ilustrasi Ketimpangan Beban Kerja Tim">
+          <rect x="14" y="14" width="144" height="56" rx="7" fill="#fef2f2" stroke="#dc2626"/>
+          <text x="86" y="34" text-anchor="middle" font-size="10" font-weight="bold" fill="#991b1b">Beban Tidak Merata</text>
+          <text x="86" y="52" text-anchor="middle" font-size="9" fill="#7f1d1d">1 orang kewalahan, lain pasif</text>
+          <rect x="182" y="14" width="144" height="56" rx="7" fill="#f0fdf4" stroke="#16a34a"/>
+          <text x="254" y="34" text-anchor="middle" font-size="10" font-weight="bold" fill="#166534">Beban Berkeadilan</text>
+          <text x="254" y="52" text-anchor="middle" font-size="9" fill="#14532d">Terbagi sesuai porsi &amp; peran</text>
+        </svg>`,
+        options: [
+          "Terjadi kelelahan/hambatan pada anggota yang menanggung beban berlebih dan target kelompok terancam molor",
+          "Tugas kelompok justru selesai lebih cepat karena satu orang memegang kendali penuh tanpa bantuan",
+          "Keadilan pembagian tugas tidak berpengaruh pada hasil kerja tim",
+          "Peran pemeriksa/koordinator menjadi tidak dibutuhkan"
+        ],
+        answer: "Terjadi kelelahan/hambatan pada anggota yang menanggung beban berlebih dan target kelompok terancam molor",
+        explanation: "Jawaban benar karena ketimpangan beban kerja menurunkan efisiensi dan ketepatan waktu tim. Pilihan lain salah karena mengabaikan prinsip keadilan dan kolaborasi dalam kerja kelompok."
+      },
+      {
+        id: 6,
+        bab: "Bab 1 • Peran dalam Tim",
+        text: "Dalam sebuah kelompok kerja, anggota yang bertugas mengoordinasikan jalannya diskusi, memantau jadwal, dan memastikan setiap bagian tugas berjalan sesuai rencana disebut...",
+        svg: null,
+        options: [
+          "Ketua/koordinator kelompok",
+          "Penonton pasif",
+          "Pengganda file tanpa peran",
+          "Penghapus catatan akhir"
+        ],
+        answer: "Ketua/koordinator kelompok",
+        explanation: "Jawaban benar karena koordinator/ketua kelompok mengarahkan jalannya kerja sama dan memantau ketercapaian tugas. Pilihan lain bukan peran produktif dalam kerja tim."
+      },
+      {
+        id: 7,
+        bab: "Bab 1 • Infografis",
+        text: "Unsur utama yang membedakan infografis yang informatif dengan sekadar poster hiasan adalah...",
+        svg: null,
+        options: [
+          "Penyajian data, fakta, atau informasi pokok yang terstruktur secara visual sehingga pembaca mudah memahami pesan inti",
+          "Penggunaan banyak stiker dan warna terang tanpa data atau pesan jelas",
+          "Penulisan teks sepanjang tiga halaman penuh dengan huruf kecil",
+          "Tidak mencantumkan judul maupun sumber informasi"
+        ],
+        answer: "Penyajian data, fakta, atau informasi pokok yang terstruktur secara visual sehingga pembaca mudah memahami pesan inti",
+        explanation: "Jawaban benar karena infografis mengomunikasikan informasi/data secara ringkas dan terstruktur lewat visual. Pilihan lain keliru karena mengabaikan kejelasan informasi, keterbacaan, atau sumber."
+      },
+      {
+        id: 8,
+        bab: "Bab 1 • Infografis & Aksesibilitas",
+        text: "Mengapa dalam perancangan infografis disarankan tidak mengandalkan perbedaan warna saja (misalnya hanya merah vs hijau) untuk membedakan kategori penting?",
+        svg: null,
+        options: [
+          "Agar pembaca dengan kondisi buta warna tetap dapat membedakan informasi melalui label, bentuk, ikon, atau kontras yang jelas",
+          "Karena warna merah dan hijau dilarang dalam perangkat lunak desain",
+          "Agar infografis hanya bisa dibaca menggunakan kaca pembesar",
+          "Karena perbedaan warna membuat ukuran file menjadi terlalu besar"
+        ],
+        answer: "Agar pembaca dengan kondisi buta warna tetap dapat membedakan informasi melalui label, bentuk, ikon, atau kontras yang jelas",
+        explanation: "Jawaban benar karena menggabungkan label/ikon/kontras membantu pembaca buta warna menafsirkan data dengan akurat. Pilihan lain tidak berdasar secara teknis maupun desain aksesibilitas."
+      },
+      {
+        id: 9,
+        bab: "Bab 1 • Bahan Presentasi",
+        text: "Ciri penulisan teks pada slide presentasi yang baik sesuai materi Keterampilan Generik adalah...",
+        svg: null,
+        options: [
+          "Ditulis dalam bentuk butir-butir kata kunci singkat dan jelas dengan ukuran huruf yang mudah dibaca dari jarak jauh",
+          "Menyalin seluruh paragraf buku paket secara utuh ke dalam satu slide",
+          "Menggunakan jenis huruf dekoratif yang sulit dibaca dan ukuran sangat kecil",
+          "Mengisi setiap slide dengan kalimat panjang tanpa spasi atau jeda visual"
+        ],
+        answer: "Ditulis dalam bentuk butir-butir kata kunci singkat dan jelas dengan ukuran huruf yang mudah dibaca dari jarak jauh",
+        explanation: "Jawaban benar karena slide presentasi berfungsi sebagai penopang visual berbasis poin/kata kunci yang terbaca jelas. Pilihan lain membuat slide padat, sulit dibaca, dan mengalihkan fokus audiens."
+      },
+      {
+        id: 10,
+        bab: "Bab 1 • Sikap Presentasi",
+        text: "Saat menyampaikan presentasi di depan kelas, kontak mata dengan audiens dan artikulasi yang jelas bermanfaat untuk...",
+        svg: null,
+        options: [
+          "Menjaga perhatian audiens serta memastikan pesan lisan terdengar dan dipahami dengan baik",
+          "Membuat audiens merasa terintimidasi agar tidak mengajukan pertanyaan",
+          "Menggantikan kebutuhan memahami materi yang dipresentasikan",
+          "Mempercepat durasi bicara secepat mungkin agar segera selesai"
+        ],
+        answer: "Menjaga perhatian audiens serta memastikan pesan lisan terdengar dan dipahami dengan baik",
+        explanation: "Jawaban benar karena kontak mata dan artikulasi jelas membangun komunikasi dua arah yang efektif. Pilihan lain keliru karena mengabaikan tujuan komunikasi presentasi."
+      },
+      {
+        id: 11,
+        bab: "Bab 1 • Pengelolaan Catatan",
+        text: "Manfaat membiasakan memberi identitas (nama, kelas, tanggal/topik, nomor lembar) pada setiap lembaran kerja lepasan (loose leaf) adalah...",
+        svg: null,
+        options: [
+          "Memudahkan penyusunan, pencarian kembali, dan pengarsipan catatan saat dibutuhkan di kemudian hari",
+          "Membuat kertas mudah robek saat dimasukkan ke dalam map",
+          "Menghindari kebutuhan menyusun catatan secara runtut",
+          "Membatasi catatan hanya untuk satu pertemuan saja"
+        ],
+        answer: "Memudahkan penyusunan, pencarian kembali, dan pengarsipan catatan saat dibutuhkan di kemudian hari",
+        explanation: "Jawaban benar karena identitas yang rapi mendukung keteraturan arsip/folder catatan. Pilihan lain tidak logis atau bertentangan dengan pengorganisasian dokumen."
+      },
+      {
+        id: 12,
+        bab: "Bab 1 • Keterkaitan Bidang",
+        text: "Dalam menyelesaikan masalah sehari-hari menggunakan pendekatan Informatika, langkah yang tepat setelah memahami persoalan adalah...",
+        svg: null,
+        options: [
+          "Merancang solusi/algoritma secara sistematis, mengujinya, dan mengevaluasi hasilnya",
+          "Langsung menebak jawaban akhir tanpa menganalisis langkah atau syarat masalah",
+          "Mengabaikan kendala waktu maupun alat yang tersedia",
+          "Menyalin hasil orang lain tanpa memahami cara kerjanya"
+        ],
+        answer: "Merancang solusi/algoritma secara sistematis, mengujinya, dan mengevaluasi hasilnya",
+        explanation: "Jawaban benar karena pemecahan masalah komputasional melibatkan perancangan langkah, pengujian, dan evaluasi. Pilihan lain mengabaikan nalar sistematis dan pengujian."
+      },
+
+      // ==================== BAB 2: BERPIKIR KOMPUTASIONAL (13-26) ====================
+      {
+        id: 13,
+        bab: "Bab 2 • Efisien & Efektif",
+        text: "Dua siswa diminta menghitung jumlah seluruh buku di rak (ada 4 rak × 15 buku). Siswa A langsung mengalikan 4 × 15 = 60 dalam hitungan detik, sedangkan Siswa B menghitung satu per satu dari 1 sampai 60 selama 10 menit. Keduanya sama-sama memperoleh hasil benar (60), namun...",
+        svg: null,
+        options: [
+          "Keduanya efektif (hasilnya tepat 60 buku), tetapi cara Siswa A lebih efisien karena menghemat waktu dan tenaga",
+          "Cara Siswa B lebih efisien karena memakan waktu lebih lama",
+          "Cara Siswa A tidak efektif karena tidak menghitung satu per satu",
+          "Keduanya tidak efisien maupun tidak efektif"
+        ],
+        answer: "Keduanya efektif (hasilnya tepat 60 buku), tetapi cara Siswa A lebih efisien karena menghemat waktu dan tenaga",
+        explanation: "Jawaban benar karena efektif berarti mencapai hasil yang diinginkan (60 buku), sedangkan efisien berarti mencapai hasil dengan waktu/tenaga lebih hemat (perkalian). Pilihan lain tertukar dalam memaknai efektif dan efisien."
+      },
+      {
+        id: 14,
+        bab: "Bab 2 • Algoritma Gelang",
+        text: "Perhatikan skema gelang manik-manik dengan urutan M → H → K → B lalu kembali ke M selama 4 warna tersedia. Jika tersedia masing-masing 6 manik Merah, Hijau, Kuning, dan Biru, berapakah total manik yang terpasang pada siklus penuh?",
+        svg: `<svg width="340" height="74" viewBox="0 0 340 74" role="img" aria-label="Siklus Manik M H K B">
+          <circle cx="52" cy="36" r="17" fill="#ef4444"/><text x="52" y="41" text-anchor="middle" fill="#fff" font-weight="bold">M</text>
+          <circle cx="114" cy="36" r="17" fill="#22c55e"/><text x="114" y="41" text-anchor="middle" fill="#fff" font-weight="bold">H</text>
+          <circle cx="176" cy="36" r="17" fill="#eab308"/><text x="176" y="41" text-anchor="middle" fill="#0f172a" font-weight="bold">K</text>
+          <circle cx="238" cy="36" r="17" fill="#3b82f6"/><text x="238" y="41" text-anchor="middle" fill="#fff" font-weight="bold">B</text>
+          <text x="295" y="40" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a8a">× 6 siklus</text>
+        </svg>`,
+        options: [
+          "24 manik-manik (6 siklus lengkap × 4 warna)",
+          "6 manik-manik",
+          "10 manik-manik",
+          "12 manik-manik"
+        ],
+        answer: "24 manik-manik (6 siklus lengkap × 4 warna)",
+        explanation: "Jawaban benar karena tiap warna berjumlah 6 buah sehingga terbentuk 6 siklus lengkap (M-H-K-B), masing-masing 4 manik: 6 × 4 = 24 manik. Pilihan lain salah karena tidak mengalikan jumlah siklus dengan 4 warna per siklus."
+      },
+      {
+        id: 15,
+        bab: "Bab 2 • Syarat & Algoritma",
+        text: "Dalam algoritma sehari-hari, pernyataan 'Jika lampu lalu lintas berwarna merah, maka kendaraan berhenti di belakang garis marka' menunjukkan...",
+        svg: null,
+        options: [
+          "Percabangan/aturan kondisi yang mengaitkan keadaan tertentu dengan tindakan yang harus dilakukan",
+          "Perulangan tanpa henti yang tidak pernah memeriksa kondisi",
+          "Penyimpanan data ke dalam folder bernama .jpg",
+          "Penggantian aturan lalu lintas secara acak setiap detik"
+        ],
+        answer: "Percabangan/aturan kondisi yang mengaitkan keadaan tertentu dengan tindakan yang harus dilakukan",
+        explanation: "Jawaban benar karena aturan 'jika kondisi terpenuhi, maka lakukan aksi' adalah dasar logika kondisi dalam algoritma. Pilihan lain tidak menggambarkan aturan kondisi tersebut."
+      },
+      {
+        id: 16,
+        bab: "Bab 2 • Optimasi Penjadwalan",
+        text: "Perhatikan diagram penjadwalan berikut: mencuci baju di mesin cuci butuh 40 menit dan menjemur butuh 15 menit; menyapu lantai butuh 20 menit. Agar waktu total paling singkat, urutan yang tepat adalah...",
+        svg: `<svg width="340" height="82" viewBox="0 0 340 82" role="img" aria-label="Diagram Penjadwalan Paralel">
+          <rect x="14" y="14" width="160" height="24" rx="5" fill="#dbeafe" stroke="#2563eb"/>
+          <text x="94" y="30" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e3a8a">Mesin Cuci (0–40 mnt)</text>
+          <rect x="174" y="14" width="66" height="24" rx="5" fill="#dcfce7" stroke="#16a34a"/>
+          <text x="207" y="30" text-anchor="middle" font-size="9" font-weight="bold" fill="#166534">Jemur (15m)</text>
+          <rect x="14" y="46" width="85" height="24" rx="5" fill="#fef9c3" stroke="#ca8a04"/>
+          <text x="56" y="62" text-anchor="middle" font-size="9" font-weight="bold" fill="#713f12">Sapu (20 mnt)</text>
+        </svg>`,
+        options: [
+          "Menyalakan mesin cuci terlebih dahulu, lalu menyapu lantai saat mesin bekerja, dan menjemur setelah cucian selesai (total 55 menit)",
+          "Menyapu lantai dulu, baru menyalakan mesin cuci setelah sapu selesai, lalu menjemur (total 75 menit)",
+          "Menjemur pakaian sebelum mesin cuci dinyalakan",
+          "Menunggu seluruh pekerjaan lain selesai sebelum menekan tombol mulai mesin cuci"
+        ],
+        answer: "Menyalakan mesin cuci terlebih dahulu, lalu menyapu lantai saat mesin bekerja, dan menjemur setelah cucian selesai (total 55 menit)",
+        explanation: "Jawaban benar karena menyapu (20 menit) dilakukan paralel saat mesin cuci berjalan (40 menit), sehingga total waktu hanya 40 + 15 = 55 menit. Pilihan lain lebih lama (75 menit) atau tidak masuk akal secara urutan."
+      },
+      {
+        id: 17,
+        bab: "Bab 2 • Optimasi Ember",
+        text: "Terdapat 2 pancuran air dan 3 ember kosong. Mengisi 1 ember sampai penuh memerlukan 1 jam (60 menit). Jika pengisian per ember boleh dilakukan bertahap, berapa bagian/pecahan isi masing-masing ember pada akhir 30 menit pertama jika 2 pancuran dipakai merata ke Ember 1 dan Ember 2?",
+        svg: null,
+        options: [
+          "Ember 1 terisi 1/2 bagian dan Ember 2 terisi 1/2 bagian (Ember 3 masih 0)",
+          "Ember 1, Ember 2, dan Ember 3 masing-masing terisi penuh",
+          "Ember 1 terisi 1/4 bagian dan Ember 2 terisi 3/4 bagian",
+          "Ketiga ember masing-masing terisi 1/2 bagian"
+        ],
+        answer: "Ember 1 terisi 1/2 bagian dan Ember 2 terisi 1/2 bagian (Ember 3 masih 0)",
+        explanation: "Jawaban benar karena 1 pancuran mengisi 1 ember penuh dalam 60 menit, sehingga dalam 30 menit (setengah jam) masing-masing pancuran mengisi 1/2 ember. Pilihan lain tidak sesuai debit waktu 30 menit atau jumlah pancuran."
+      },
+      {
+        id: 18,
+        bab: "Bab 2 • Optimasi Ember",
+        text: "Pada kasus 3 ember dan 2 pancuran (1 ember penuh = 60 menit), jika pada 30 menit kedua Pancuran A menyelesaikan sisa 1/2 Ember 1 sementara Pancuran B mengisi 1/2 Ember 3, kondisi akhir menit ke-60 adalah...",
+        svg: null,
+        options: [
+          "Ember 1 sudah penuh, Ember 2 berisi 1/2, dan Ember 3 berisi 1/2 (lalu 30 menit ketiga menyelesaikan Ember 2 dan Ember 3)",
+          "Ketiga ember sudah penuh seluruhnya pada menit ke-60",
+          "Belum ada satu pun ember yang terisi air",
+          "Ember 1 kosong kembali karena airnya tumpah"
+        ],
+        answer: "Ember 1 sudah penuh, Ember 2 berisi 1/2, dan Ember 3 berisi 1/2 (lalu 30 menit ketiga menyelesaikan Ember 2 dan Ember 3)",
+        explanation: "Jawaban benar karena total air yang mengalir selama 60 menit dengan 2 pancuran setara 2 ember penuh: Ember 1 penuh (1), Ember 2 setengah (0,5), dan Ember 3 setengah (0,5), sehingga tersisa 1 ember lagi untuk 30 menit berikutnya."
+      },
+      {
+        id: 19,
+        bab: "Bab 2 • Struktur Data List",
+        text: "Manakah di antara kumpulan data berikut yang paling sesuai disajikan sebagai daftar terurut (ordered list) berdasarkan waktu kejadian?",
+        svg: null,
+        options: [
+          "Jadwal pelajaran harian dari jam ke-1 sampai jam ke-8",
+          "Jenis sayuran yang dibeli di pasar tanpa aturan urutan",
+          "Warna kelereng di dalam kantong yang diaduk acak",
+          "Kumpulan bintang di langit yang diamati tanpa urutan"
+        ],
+        answer: "Jadwal pelajaran harian dari jam ke-1 sampai jam ke-8",
+        explanation: "Jawaban benar karena jadwal jam pelajaran memiliki urutan waktu yang bermakna dari awal hingga akhir. Pilihan lain merupakan contoh kumpulan item yang urutannya tidak mengikat atau tidak teratur."
+      },
+      {
+        id: 20,
+        bab: "Bab 2 • Struktur Data List",
+        text: "Dalam struktur data list, jika sebuah daftar berisi [Apel, Jeruk, Mangga, Pisang], elemen yang berada pada urutan kedua adalah...",
+        svg: null,
+        options: [
+          "Jeruk",
+          "Apel",
+          "Mangga",
+          "Pisang"
+        ],
+        answer: "Jeruk",
+        explanation: "Jawaban benar karena pada urutan biasa (mulai dari posisi ke-1: Apel, ke-2: Jeruk, ke-3: Mangga, ke-4: Pisang), posisi kedua adalah Jeruk. Pilihan lain berada di urutan ke-1, ke-3, atau ke-4."
+      },
+      {
+        id: 21,
+        bab: "Bab 2 • Kata Rahasia",
+        text: "Perhatikan dua kartu kata rahasia berikut: Kartu 1 memiliki huruf atas 'R' dan bawah 'A' (artinya A sebelum R); Kartu 2 memiliki huruf atas 'K' dan bawah 'R' (artinya R sebelum K). Urutan huruf dari awal ke akhir adalah...",
+        svg: `<svg width="320" height="104" viewBox="0 0 320 104" role="img" aria-label="Dua Kartu Kata Rahasia Berantai">
+          <rect x="42" y="10" width="84" height="82" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect x="42" y="10" width="84" height="15" fill="#0f172a"/>
+          <text x="84" y="48" text-anchor="middle" font-size="19" font-weight="bold" fill="#0f172a">R</text>
+          <text x="84" y="78" text-anchor="middle" font-size="19" font-weight="bold" fill="#0f172a">A</text>
+          <rect x="194" y="10" width="84" height="82" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect x="194" y="10" width="84" height="15" fill="#0f172a"/>
+          <text x="236" y="48" text-anchor="middle" font-size="19" font-weight="bold" fill="#0f172a">K</text>
+          <text x="236" y="78" text-anchor="middle" font-size="19" font-weight="bold" fill="#0f172a">R</text>
+        </svg>`,
+        options: [
+          "A → R → K",
+          "K → R → A",
+          "R → A → K",
+          "A → K → R"
+        ],
+        answer: "A → R → K",
+        explanation: "Jawaban benar karena aturan kartu menetapkan huruf bawah sebelum huruf atas: Kartu 1 memberi A sebelum R, dan Kartu 2 memberi R sebelum K, sehingga rantai urutannya A → R → K. Pilihan lain melanggar aturan bawah-sebelum-atas atau sambungan hurufnya."
+      },
+      {
+        id: 22,
+        bab: "Bab 2 • Kata Rahasia",
+        text: "Mengapa pada teka-teki kartu kata rahasia terdapat kotak hitam di bagian atas kartu?",
+        svg: null,
+        options: [
+          "Sebagai penanda orientasi posisi atas dan bawah kartu agar siswa tidak salah membaca arah huruf",
+          "Untuk menutupi huruf yang harus dihapus dari jawaban",
+          "Sebagai tanda bahwa kartu tersebut tidak boleh digunakan",
+          "Untuk menunjukkan bahwa semua huruf di kartu berjumlah genap"
+        ],
+        answer: "Sebagai penanda orientasi posisi atas dan bawah kartu agar siswa tidak salah membaca arah huruf",
+        explanation: "Jawaban benar karena kotak hitam di atas menunjukkan orientasi kartu sehingga posisi 'atas' dan 'bawah' jelas. Pilihan lain keliru karena kotak hitam bukan penghapus huruf atau tanda kartu batal."
+      },
+      {
+        id: 23,
+        bab: "Bab 2 • Representasi Data",
+        text: "Jika kita ingin mencatat status kehadiran siswa di kelas secara sederhana dengan dua nilai saja (Hadir = 1, Tidak Hadir = 0), pendekatan tersebut merupakan contoh...",
+        svg: null,
+        options: [
+          "Representasi data dengan dua kemungkinan (biner)",
+          "Pengolahan gambar vektor tiga dimensi",
+          "Pengiriman surel melalui protokol IMAP",
+          "Pencarian halaman web menggunakan PageRank"
+        ],
+        answer: "Representasi data dengan dua kemungkinan (biner)",
+        explanation: "Jawaban benar karena memetakan dua kondisi (hadir/tidak hadir) ke dua simbol/nilai adalah representasi biner. Pilihan lain berasal dari topik berbeda di luar representasi dua kondisi."
+      },
+      {
+        id: 24,
+        bab: "Bab 2 • Peminjaman Ruang",
+        text: "Zoro mencatat peminjaman ruang kelas pada hari Senin dan Selasa dengan tanda (***) untuk ruang yang dipinjam. Jika Ruang D bertanda (***) pada Selasa tetapi tidak bertanda pada Senin, artinya...",
+        svg: null,
+        options: [
+          "Ruang D kosong pada hari Senin dan dipinjam pada hari Selasa",
+          "Ruang D dipinjam pada hari Senin dan hari Selasa",
+          "Ruang D tidak dipinjam pada hari Senin maupun Selasa",
+          "Ruang D rusak sehingga tidak bisa dipakai sepanjang minggu"
+        ],
+        answer: "Ruang D kosong pada hari Senin dan dipinjam pada hari Selasa",
+        explanation: "Jawaban benar karena ketiadaan tanda (***) di hari Senin berarti tidak dipinjam pada hari itu, sedangkan tanda (***) di hari Selasa berarti dipinjam pada hari Selasa. Pilihan lain tidak sesuai tanda catatan."
+      },
+      {
+        id: 25,
+        bab: "Bab 2 • Peminjaman Ruang",
+        text: "Dalam mencari daftar ruang yang tidak pernah dipinjam pada hari Senin maupun hari Selasa dari sekumpulan ruang kelas, operasi logika yang dilakukan adalah...",
+        svg: null,
+        options: [
+          "Mengambil ruang-ruang yang tidak muncul pada daftar pinjaman Senin sekaligus tidak muncul pada daftar pinjaman Selasa",
+          "Menjumlahkan seluruh ruang yang bertanda bintang pada kedua hari",
+          "Memilih ruang yang hanya dipinjam pada hari Senin saja",
+          "Menghapus ruang yang tidak memiliki tanda bintang"
+        ],
+        answer: "Mengambil ruang-ruang yang tidak muncul pada daftar pinjaman Senin sekaligus tidak muncul pada daftar pinjaman Selasa",
+        explanation: "Jawaban benar karena ruang yang tidak dipinjam di kedua hari adalah ruang di luar gabungan pinjaman Senin dan Selasa. Pilihan lain justru mencari ruang yang terpinjam atau membuang data yang diperlukan."
+      },
+      {
+        id: 26,
+        bab: "Bab 2 • Berbagi Batang Kayu",
+        text: "Kibo memiliki 1 batang kayu 10 cm dan ingin memotongnya menjadi ukuran 4 cm dan 3 cm. Jika 1 potongan 4 cm sudah diambil (sisa kayu 6 cm), berapa potongan 3 cm maksimal yang bisa didapat dari sisa kayu tersebut?",
+        svg: `<svg width="320" height="72" viewBox="0 0 320 72" role="img" aria-label="Sisa Kayu 6 cm Menjadi Dua Potongan 3 cm">
+          <rect x="20" y="18" width="110" height="24" rx="4" fill="#fde68a" stroke="#92400e" stroke-width="2"/>
+          <text x="75" y="34" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#78350f">Potong 4 cm</text>
+          <rect x="136" y="18" width="82" height="24" rx="4" fill="#bbf7d0" stroke="#15803d" stroke-width="2"/>
+          <text x="177" y="34" text-anchor="middle" font-size="10" font-weight="bold" fill="#14532d">Sisa 3 cm</text>
+          <rect x="224" y="18" width="82" height="24" rx="4" fill="#bbf7d0" stroke="#15803d" stroke-width="2"/>
+          <text x="265" y="34" text-anchor="middle" font-size="10" font-weight="bold" fill="#14532d">Sisa 3 cm</text>
+        </svg>`,
+        options: [
+          "2 potongan berukuran 3 cm (3 + 3 = 6 cm)",
+          "1 potongan berukuran 3 cm",
+          "3 potongan berukuran 3 cm",
+          "0 potongan berukuran 3 cm"
+        ],
+        answer: "2 potongan berukuran 3 cm (3 + 3 = 6 cm)",
+        explanation: "Jawaban benar karena kayu 10 cm dikurangi 4 cm menyisakan 6 cm, yang pas dibagi menjadi 2 potongan masing-masing 3 cm. Pilihan lain salah karena tidak tepat membagi sisa 6 cm."
+      },
+
+      // ==================== BAB 3: TIK — GUI/CLI/VUI, FOLDER/FILE, PERAMBAN & SEARCH (27-38) ====================
+      {
+        id: 27,
+        bab: "Bab 3 • Antarmuka Pengguna",
+        text: "Ketika pengguna berbicara langsung kepada asisten digital di gawai (misalnya meminta menyetel alarm atau menanyakan cuaca) tanpa mengetik maupun menyentuh ikon, antarmuka yang digunakan adalah...",
+        svg: null,
+        options: [
+          "Voice User Interface (VUI)",
+          "Graphical User Interface (GUI)",
+          "Command Line Interface (CLI)",
+          "File Explorer"
+        ],
+        answer: "Voice User Interface (VUI)",
+        explanation: "Jawaban benar karena interaksi berbasis suara disebut Voice User Interface (VUI). GUI memakai ikon grafis, CLI memakai ketikan perintah teks, dan File Explorer adalah pengelola berkas."
+      },
+      {
+        id: 28,
+        bab: "Bab 3 • Antarmuka CLI",
+        text: "Keunggulan utama antarmuka berbasis baris perintah (Command Line Interface / CLI) bagi pengguna tingkat lanjut adalah...",
+        svg: null,
+        options: [
+          "Dapat menjalankan perintah atau otomatisasi tugas tertentu secara cepat dan langsung melalui teks perintah",
+          "Selalu menampilkan gambar berwarna dan animasi otomatis tanpa perintah",
+          "Tidak pernah mengalami kesalahan meskipun salah mengetik huruf",
+          "Hanya bisa digunakan tanpa sistem operasi"
+        ],
+        answer: "Dapat menjalankan perintah atau otomatisasi tugas tertentu secara cepat dan langsung melalui teks perintah",
+        explanation: "Jawaban benar karena CLI memungkinkan eksekusi perintah langsung dan skrip/otomatisasi bagi pengguna yang menguasai sintaksnya. Pilihan lain tidak sesuai sifat CLI."
+      },
+      {
+        id: 29,
+        bab: "Bab 3 • Pohon Folder",
+        text: "Perhatikan diagram pohon folder berikut. Jika berkas 'Laporan_IPA.docx' berada di dalam subfolder 'IPA' yang berada di dalam folder 'Tugas_Kelas_7', jalur hierarkinya dari atas ke bawah adalah...",
+        svg: `<svg width="330" height="106" viewBox="0 0 330 106" role="img" aria-label="Hierarki Folder Tugas Kelas 7 ke IPA ke File">
+          <rect x="16" y="10" width="130" height="22" rx="4" fill="#fef3c7" stroke="#d97706"/>
+          <text x="81" y="25" text-anchor="middle" font-size="10" font-weight="bold" fill="#78350f">Tugas_Kelas_7</text>
+          <line x1="42" y1="32" x2="42" y2="52" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="42" y1="52" x2="68" y2="52" stroke="#64748b" stroke-width="1.5"/>
+          <rect x="68" y="41" width="90" height="22" rx="4" fill="#fef9c3" stroke="#ca8a04"/>
+          <text x="113" y="56" text-anchor="middle" font-size="10" font-weight="bold" fill="#713f12">IPA</text>
+          <line x1="94" y1="63" x2="94" y2="83" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="94" y1="83" x2="120" y2="83" stroke="#64748b" stroke-width="1.5"/>
+          <rect x="120" y="72" width="145" height="22" rx="4" fill="#eff6ff" stroke="#2563eb"/>
+          <text x="192" y="87" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">Laporan_IPA.docx</text>
+        </svg>`,
+        options: [
+          "Tugas_Kelas_7 → IPA → Laporan_IPA.docx",
+          "Laporan_IPA.docx → Tugas_Kelas_7 → IPA",
+          "IPA → Tugas_Kelas_7 → Laporan_IPA.docx",
+          "Tugas_Kelas_7 → Laporan_IPA.docx → IPA"
+        ],
+        answer: "Tugas_Kelas_7 → IPA → Laporan_IPA.docx",
+        explanation: "Jawaban benar karena 'Tugas_Kelas_7' adalah folder induk, 'IPA' adalah subfolder di dalamnya, dan 'Laporan_IPA.docx' adalah file di dalam subfolder 'IPA'. Pilihan lain membalik urutan induk dan anak folder/file."
+      },
+      {
+        id: 30,
+        bab: "Bab 3 • Ekstensi File",
+        text: "Mengapa kita tidak disarankan mengubah atau menghapus ekstensi file (bagian setelah tanda titik, seperti .docx atau .pptx) secara sembarangan?",
+        svg: null,
+        options: [
+          "Karena ekstensi menandakan format/jenis file sehingga sistem operasi dan aplikasi tahu program mana yang sesuai untuk membukanya",
+          "Karena ekstensi menentukan kapasitas baterai laptop secara langsung",
+          "Karena menghapus ekstensi membuat ukuran file menjadi 0 byte",
+          "Karena file tanpa ekstensi otomatis terhapus dari hard disk"
+        ],
+        answer: "Karena ekstensi menandakan format/jenis file sehingga sistem operasi dan aplikasi tahu program mana yang sesuai untuk membukanya",
+        explanation: "Jawaban benar karena ekstensi mengidentifikasi tipe/format file agar aplikasi yang tepat dapat membukanya. Pilihan lain tidak berkaitan dengan fungsi ekstensi file."
+      },
+      {
+        id: 31,
+        bab: "Bab 3 • Pengelolaan File Windows",
+        text: "Di File Explorer Windows, jika ingin menata tampilan file agar berkelompok berdasarkan jenisnya (misalnya dokumen, gambar, video), opsi yang digunakan pada menu View adalah...",
+        svg: null,
+        options: [
+          "Group by (lalu pilih Type)",
+          "Paste shortcut",
+          "Empty Recycle Bin",
+          "Add to Favorites"
+        ],
+        answer: "Group by (lalu pilih Type)",
+        explanation: "Jawaban benar karena 'Group by' di menu View mengelompokkan file berdasarkan kriteria seperti Type. Pilihan lain berfungsi menempelkan item, mengosongkan keranjang sampah, atau menandai pintasan."
+      },
+      {
+        id: 32,
+        bab: "Bab 3 • Pengelolaan File Windows",
+        text: "Saat memindahkan file dari satu folder ke folder lain menggunakan Cut (Ctrl-X) lalu Paste (Ctrl-V), apa yang terjadi pada file di folder asal?",
+        svg: null,
+        options: [
+          "File berpindah ke folder tujuan dan tidak lagi berada di folder asal",
+          "File tetap ada di folder asal dan tidak muncul di folder tujuan",
+          "File terhapus permanen tanpa masuk ke folder tujuan",
+          "Nama file otomatis berubah menjadi ekstensi .exe"
+        ],
+        answer: "File berpindah ke folder tujuan dan tidak lagi berada di folder asal",
+        explanation: "Jawaban benar karena Cut memindahkan (bukan menggandakan) file ke lokasi tujuan. Jika ingin file tetap ada di folder asal sekaligus ada salinannya di folder lain, digunakan Copy (Ctrl-C) lalu Paste (Ctrl-V)."
+      },
+      {
+        id: 33,
+        bab: "Bab 3 • Peramban Web",
+        text: "Perhatikan tombol navigasi peramban berikut. Jika kamu baru saja mengeklik sebuah tautan dan ingin kembali ke halaman web sebelumnya, tombol yang ditekan adalah...",
+        svg: `<svg width="330" height="68" viewBox="0 0 330 68" role="img" aria-label="Tombol Back dan Forward Peramban">
+          <rect x="24" y="14" width="120" height="40" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="84" y="39" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a8a">← Back</text>
+          <rect x="186" y="14" width="120" height="40" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+          <text x="246" y="39" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155">Forward →</text>
+        </svg>`,
+        options: [
+          "Back",
+          "Forward",
+          "Refresh",
+          "Bookmark"
+        ],
+        answer: "Back",
+        explanation: "Jawaban benar karena tombol Back membawa kembali ke halaman web yang dikunjungi sebelumnya. Forward maju ke halaman setelahnya, Refresh memuat ulang halaman, dan Bookmark menyimpan markah halaman."
+      },
+      {
+        id: 34,
+        bab: "Bab 3 • Fitur Peramban",
+        text: "Manakah yang merupakan contoh perangkat lunak peramban (web browser) yang umum digunakan untuk menjelajah situs web?",
+        svg: null,
+        options: [
+          "Google Chrome, Microsoft Edge, Mozilla Firefox, dan Safari",
+          "Microsoft Word, Excel, PowerPoint, dan Notepad",
+          "Windows Explorer, Finder, dan Terminal",
+          "Gmail, Outlook, dan Yahoo Mail"
+        ],
+        answer: "Google Chrome, Microsoft Edge, Mozilla Firefox, dan Safari",
+        explanation: "Jawaban benar karena Chrome, Edge, Firefox, dan Safari adalah aplikasi peramban web. Pilihan lain berisi aplikasi perkantoran, pengelola file/terminal, atau layanan surel."
+      },
+      {
+        id: 35,
+        bab: "Bab 3 • Mesin Pencari",
+        text: "Perhatikan ilustrasi hasil pencarian pada mesin pencari berikut. Mengapa tautan dari situs resmi lembaga/pemerintah atau sumber kredibel perlu diutamakan saat mencari informasi pelajaran atau kesehatan?",
+        svg: `<svg width="340" height="84" viewBox="0 0 340 84" role="img" aria-label="Ilustrasi Hasil Pencarian Mesin Pencari">
+          <rect x="14" y="12" width="312" height="26" rx="13" fill="#ffffff" stroke="#94a3b8"/>
+          <text x="28" y="29" font-size="9.5" fill="#334155">🔍  "cara menjaga kebersihan lingkungan sekolah"</text>
+          <rect x="14" y="44" width="150" height="30" rx="5" fill="#f0fdf4" stroke="#16a34a"/>
+          <text x="89" y="63" text-anchor="middle" font-size="9" font-weight="bold" fill="#166534">Sumber Resmi Kredibel</text>
+          <rect x="176" y="44" width="150" height="30" rx="5" fill="#fef2f2" stroke="#ef4444"/>
+          <text x="251" y="63" text-anchor="middle" font-size="9" font-weight="bold" fill="#991b1b">Sumber Tidak Jelas / Hoaks</text>
+        </svg>`,
+        options: [
+          "Karena situs resmi dan kredibel lebih terverifikasi kebenarannya sehingga mengurangi risiko informasi menyesatkan atau hoaks",
+          "Karena semua situs tidak resmi di internet selalu memberikan informasi paling akurat",
+          "Karena mesin pencari melarang membuka situs selain milik pemerintah",
+          "Karena situs resmi tidak memiliki alamat URL"
+        ],
+        answer: "Karena situs resmi dan kredibel lebih terverifikasi kebenarannya sehingga mengurangi risiko informasi menyesatkan atau hoaks",
+        explanation: "Jawaban benar karena memilah sumber tepercaya menjaga akurasi informasi di era konten buatan pengguna yang beragam. Pilihan lain keliru dan berisiko menyesatkan."
+      },
+      {
+        id: 36,
+        bab: "Bab 3 • Kata Kunci Pencarian",
+        text: "Jika kamu mencari informasi tentang 'langkah membuat infografis yang baik', manakah kata kunci pencarian yang lebih terarah daripada sekadar mengetikkan satu kata 'gambar'?",
+        svg: null,
+        options: [
+          "cara membuat infografis yang baik",
+          "gambar",
+          "a",
+          "tekan enter"
+        ],
+        answer: "cara membuat infografis yang baik",
+        explanation: "Jawaban benar karena frasa yang lebih spesifik mengarahkan mesin pencari pada topik infografis yang dimaksud. Kata tunggal 'gambar' terlalu luas dan umum."
+      },
+      {
+        id: 37,
+        bab: "Bab 3 • PageRank",
+        text: "Pada mesin pencari Google, algoritma PageRank berkaitan dengan...",
+        svg: null,
+        options: [
+          "Penentuan peringkat/urutan kepentingan halaman web dalam hasil pencarian",
+          "Pengaturan kecerahan layar monitor komputer",
+          "Pemformatan hard disk menjadi folder kosong",
+          "Penghapusan seluruh folder Sent pada surel"
+        ],
+        answer: "Penentuan peringkat/urutan kepentingan halaman web dalam hasil pencarian",
+        explanation: "Jawaban benar karena PageRank mengukur pentingnya halaman web untuk menentukan peringkat hasil pencarian Google. Pilihan lain tidak berhubungan dengan algoritma PageRank."
+      },
+      {
+        id: 38,
+        bab: "Bab 3 • Tab & Jendela Peramban",
+        text: "Saat membuka beberapa halaman web sekaligus dalam satu jendela peramban agar mudah berpindah antar-halaman, fitur yang digunakan adalah...",
+        svg: null,
+        options: [
+          "Tab (tabulasi halaman) pada peramban",
+          "Recycle Bin",
+          "Keyboard numerik",
+          "Folder Bcc"
+        ],
+        answer: "Tab (tabulasi halaman) pada peramban",
+        explanation: "Jawaban benar karena tab memungkinkan beberapa halaman web terbuka berdampingan dalam satu jendela peramban. Pilihan lain bukan fitur tabulasi halaman web."
+      },
+
+      // ==================== BAB 3 BAGIAN D: SUREL / EMAIL (39-50) ====================
+      {
+        id: 39,
+        bab: "Bab 3 • Protokol Surel",
+        text: "Perhatikan diagram pengiriman dan penerimaan surel berikut. Protokol komunikasi yang digunakan dalam layanan surel seperti yang dibahas pada buku paket Bab 3 adalah...",
+        svg: `<svg width="340" height="90" viewBox="0 0 340 90" role="img" aria-label="Diagram Protokol Surel POP3 dan IMAP">
+          <rect x="14" y="18" width="96" height="52" rx="7" fill="#eff6ff" stroke="#2563eb"/>
+          <text x="62" y="40" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">Pengirim</text>
+          <text x="62" y="56" text-anchor="middle" font-size="8.5" fill="#334155">Kirim Surel</text>
+          <rect x="122" y="14" width="96" height="60" rx="7" fill="#f0fdf4" stroke="#16a34a"/>
+          <text x="170" y="36" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#166534">Server Surel</text>
+          <text x="170" y="51" text-anchor="middle" font-size="8.5" fill="#15803d">POP3 / IMAP</text>
+          <text x="170" y="64" text-anchor="middle" font-size="8" fill="#14532d">Mailbox</text>
+          <rect x="230" y="18" width="96" height="52" rx="7" fill="#fef9c3" stroke="#ca8a04"/>
+          <text x="278" y="40" text-anchor="middle" font-size="10" font-weight="bold" fill="#713f12">Penerima</text>
+          <text x="278" y="56" text-anchor="middle" font-size="8.5" fill="#854d0e">Baca di Inbox</text>
+        </svg>`,
+        options: [
+          "Post Office Protocol (POP3) atau Internet Message Access Protocol (IMAP)",
+          "USB atau HDMI",
+          "PNG atau MP3",
+          "CLI atau VUI"
+        ],
+        answer: "Post Office Protocol (POP3) atau Internet Message Access Protocol (IMAP)",
+        explanation: "Jawaban benar karena POP3 dan IMAP adalah protokol komunikasi yang digunakan pada layanan surel. Pilihan lain merupakan standar koneksi perangkat keras, format berkas media, atau jenis antarmuka."
+      },
+      {
+        id: 40,
+        bab: "Bab 3 • To, Cc, dan Bcc",
+        text: "Perhatikan skema pengiriman surel berikut: Andi menulis alamat tujuan utama di 'To', menuliskan alamat Rina di 'Cc', dan menuliskan alamat Dina di 'Bcc'. Pernyataan yang tepat mengenai visibilitas alamat penerima adalah...",
+        svg: `<svg width="340" height="92" viewBox="0 0 340 92" role="img" aria-label="Skema To Cc Bcc">
+          <rect x="16" y="10" width="308" height="22" rx="4" fill="#eff6ff" stroke="#2563eb"/>
+          <text x="26" y="25" font-size="9.5" fill="#1e3a8a"><tspan font-weight="bold">To:</tspan> Penerima utama pesan</text>
+          <rect x="16" y="36" width="308" height="22" rx="4" fill="#f0fdf4" stroke="#16a34a"/>
+          <text x="26" y="51" font-size="9.5" fill="#166534"><tspan font-weight="bold">Cc:</tspan> Tembusan terlihat oleh penerima lain</text>
+          <rect x="16" y="62" width="308" height="22" rx="4" fill="#fef2f2" stroke="#dc2626"/>
+          <text x="26" y="77" font-size="9.5" fill="#991b1b"><tspan font-weight="bold">Bcc:</tspan> Tembusan tersembunyi dari penerima lain</text>
+        </svg>`,
+        options: [
+          "Alamat Dina (pada Bcc) disembunyikan dari penerima lain, sedangkan alamat pada To dan Cc tampak sesuai aturan tembusan",
+          "Alamat Dina (pada Bcc) justru paling mencolok terlihat oleh semua orang",
+          "Kolom Cc tidak mengirimkan salinan surel sama sekali",
+          "Kolom To hanya boleh diisi satu kata tanpa tanda '@'"
+        ],
+        answer: "Alamat Dina (pada Bcc) disembunyikan dari penerima lain, sedangkan alamat pada To dan Cc tampak sesuai aturan tembusan",
+        explanation: "Jawaban benar karena Bcc (Blind Carbon Copy) menyembunyikan alamat penerima tembusan dari penerima lain, sedangkan Cc (Carbon Copy) mengirimkan tembusan yang terlihat. Pilihan lain keliru mengenai fungsi Bcc, Cc, atau format alamat surel."
+      },
+      {
+        id: 41,
+        bab: "Bab 3 • Compose, Subject, Body, Sent",
+        text: "Saat membuat surel baru di layanan email, bagian 'Subject' diisi dengan...",
+        svg: null,
+        options: [
+          "Judul atau topik ringkas yang menggambarkan isi surel",
+          "Kata sandi rahasia akun surel pengirim",
+          "Daftar file yang sudah dihapus permanen",
+          "Alamat situs web mesin pencari"
+        ],
+        answer: "Judul atau topik ringkas yang menggambarkan isi surel",
+        explanation: "Jawaban benar karena Subject adalah kolom judul/topik surel. Pilihan lain tidak sesuai dengan fungsi kolom Subject."
+      },
+      {
+        id: 42,
+        bab: "Bab 3 • Compose & Sent",
+        text: "Langkah yang tepat untuk memulai menulis surel baru dan kemudian mengecek apakah surel tersebut sudah terkirim adalah...",
+        svg: null,
+        options: [
+          "Klik Compose untuk menulis dan mengirim, lalu buka folder Sent untuk memeriksa surel yang telah terkirim",
+          "Klik Spam untuk menulis surel baru, lalu tutup peramban",
+          "Klik Reply pada pesan kosong, lalu hapus folder Inbox",
+          "Mengetik alamat surel di address bar peramban tanpa membuka layanan surel"
+        ],
+        answer: "Klik Compose untuk menulis dan mengirim, lalu buka folder Sent untuk memeriksa surel yang telah terkirim",
+        explanation: "Jawaban benar karena Compose digunakan membuat surel baru dan Sent memuat surel yang sudah terkirim. Pilihan lain tidak sesuai alur kerja surel."
+      },
+      {
+        id: 43,
+        bab: "Bab 3 • Reply & Forward",
+        text: "Jika guru mengirimkan surel tugas ke kotak masuk (Inbox) kamu dan kamu ingin mengirimkan jawaban langsung kepada guru tersebut, fitur yang digunakan adalah...",
+        svg: null,
+        options: [
+          "Reply",
+          "Forward",
+          "Drafts",
+          "Spam"
+        ],
+        answer: "Reply",
+        explanation: "Jawaban benar karena Reply digunakan untuk membalas surel kepada pengirimnya. Forward meneruskan surel ke pihak lain, Drafts menyimpan konsep, dan Spam menandai pesan sampah."
+      },
+      {
+        id: 44,
+        bab: "Bab 3 • Meneruskan Surel",
+        text: "Perbedaan fungsi antara 'Reply' dan 'Forward' setelah membuka sebuah surel di Inbox adalah...",
+        svg: null,
+        options: [
+          "Reply mengirimkan balasan kepada pengirim surel, sedangkan Forward meneruskan isi surel tersebut ke alamat penerima lain",
+          "Reply meneruskan surel ke orang ketiga, sedangkan Forward menghapus surel dari Inbox",
+          "Reply hanya bisa dipakai untuk surel berlampiran gambar, sedangkan Forward untuk teks saja",
+          "Keduanya tidak dapat dilakukan setelah membuka surel"
+        ],
+        answer: "Reply mengirimkan balasan kepada pengirim surel, sedangkan Forward meneruskan isi surel tersebut ke alamat penerima lain",
+        explanation: "Jawaban benar karena Reply membalas ke pengirim dan Forward meneruskan ke penerima lain. Pilihan lain memutarbalikkan fungsi atau membatasinya secara tidak tepat."
+      },
+      {
+        id: 45,
+        bab: "Bab 3 • Etika Surel Resmi",
+        text: "Contoh kalimat pembuka pada badan surel (body) permohonan izin tidak masuk sekolah kepada wali kelas yang paling sesuai dengan etika komunikasi resmi adalah...",
+        svg: null,
+        options: [
+          "\"Dengan hormat, perkenalkan saya Bima dari kelas VII A. Melalui surel ini saya memohon izin tidak masuk sekolah karena...\"",
+          "\"Oi bu, hari ini sy ga msuk skolah ya, thx.\"",
+          "\"SURAT IZIN TIDAK MASUK SEKOLAH TITIK.\"",
+          "\"Cek email ini cepetan dibales ya.\""
+        ],
+        answer: "\"Dengan hormat, perkenalkan saya Bima dari kelas VII A. Melalui surel ini saya memohon izin tidak masuk sekolah karena...\"",
+        explanation: "Jawaban benar karena menggunakan bahasa formal, sopan, dan menyebutkan identitas jelas sebagaimana dianjurkan pada materi Surel. Pilihan lain memakai singkatan tidak baku, huruf kapital memaksa, atau nada kurang sopan."
+      },
+      {
+        id: 46,
+        bab: "Bab 3 • Etika Bahasa Surel",
+        text: "Mengapa menulis surel formal kepada guru atau instansi sebaiknya menghindari singkatan-singkatan tidak baku seperti pada percakapan chat?",
+        svg: null,
+        options: [
+          "Karena komunikasi resmi memerlukan bahasa yang sopan, baku, dan jelas agar tidak menimbulkan salah tafsir",
+          "Karena layanan surel otomatis menolak huruf vokal yang dihilangkan",
+          "Karena singkatan chat hanya bisa dibaca oleh komputer server",
+          "Karena bahasa formal membuat surel tidak perlu memiliki subjek"
+        ],
+        answer: "Karena komunikasi resmi memerlukan bahasa yang sopan, baku, dan jelas agar tidak menimbulkan salah tafsir",
+        explanation: "Jawaban benar karena bahasa formal dan jelas menjaga kesantunan serta ketepatan makna dalam korespondensi resmi. Pilihan lain bukan alasan teknis atau etika yang tepat."
+      },
+      {
+        id: 47,
+        bab: "Bab 3 • Gagal Kirim: Salah Alamat",
+        text: "Ketika kamu mengirim surel ke wali kelas tetapi salah mengetikkan satu huruf pada alamat tujuannya sehingga muncul pesan gagal kirim / 'Address not found', tindakan yang tepat adalah...",
+        svg: `<svg width="330" height="72" viewBox="0 0 330 72" role="img" aria-label="Pesan Gagal Kirim Address Not Found">
+          <rect x="16" y="14" width="298" height="44" rx="7" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="165" y="34" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#991b1b">Address not found / Alamat tidak ditemukan</text>
+          <text x="165" y="49" text-anchor="middle" font-size="9" fill="#b91c1c">Periksa ejaan alamat surel penerima lalu kirim ulang</text>
+        </svg>`,
+        options: [
+          "Memeriksa kembali ejaan alamat surel penerima secara teliti, memperbaikinya, lalu mengirimkan ulang surel tersebut",
+          "Membiarkannya saja dan menganggap surel sudah pasti diterima oleh wali kelas",
+          "Menghapus akun surel sendiri dan membuat alamat baru setiap kali salah ketik",
+          "Menyalahkan tombol Send karena rusak"
+        ],
+        answer: "Memeriksa kembali ejaan alamat surel penerima secara teliti, memperbaikinya, lalu mengirimkan ulang surel tersebut",
+        explanation: "Jawaban benar karena kesalahan pengetikan alamat tujuan menyebabkan pesan tidak dapat diarahkan ke mailbox yang benar, sehingga perlu diperiksa dan dikirim ulang. Pilihan lain tidak menyelesaikan masalah."
+      },
+      {
+        id: 48,
+        bab: "Bab 3 • Folder Spam / Junk",
+        text: "Jika surel yang kamu kirimkan ternyata masuk ke folder Spam atau Junk di sisi penerima, langkah yang dianjurkan agar surel berikutnya dapat masuk ke Inbox adalah...",
+        svg: null,
+        options: [
+          "Meminta penerima menambahkan alamat surel kita ke daftar kontaknya (atau menandainya bukan spam)",
+          "Mengirimkan surel yang sama berulang kali dengan judul kosong",
+          "Mengganti nama domain server surel penerima",
+          "Menghapus folder Sent pada akun kita"
+        ],
+        answer: "Meminta penerima menambahkan alamat surel kita ke daftar kontaknya (atau menandainya bukan spam)",
+        explanation: "Jawaban benar karena menambahkan alamat pengirim ke kontak penerima membantu surel berikutnya dikenali dan masuk ke Inbox. Pilihan lain justru memperburuk atau tidak mengatasi masalah filter spam."
+      },
+      {
+        id: 49,
+        bab: "Bab 3 • Mailbox Penuh & Ukuran Surel",
+        text: "Selain salah alamat dan masuk folder Spam/Junk, surel juga bisa gagal masuk ke mailbox penerima apabila...",
+        svg: null,
+        options: [
+          "Mailbox penerima sudah penuh atau ukuran surel/lampiran melebihi batas maksimum",
+          "Pengirim menuliskan salam pembuka 'Dengan hormat'",
+          "Penerima membuka surel melalui peramban web di komputer",
+          "Surel dikirim pada siang hari di hari kerja"
+        ],
+        answer: "Mailbox penerima sudah penuh atau ukuran surel/lampiran melebihi batas maksimum",
+        explanation: "Jawaban benar karena berdasarkan materi Surel di Bab 3, surel masuk jika ukuran tidak melebihi batas maksimum dan mailbox penerima tidak penuh. Pilihan lain merupakan hal normal yang tidak menghalangi masuknya surel."
+      },
+      {
+        id: 50,
+        bab: "Bab 3 • Anatomi & Verifikasi Surel",
+        text: "Sebelum menekan tombol Send pada surel permohonan izin sekolah, pemeriksaan terakhir yang paling tepat dilakukan adalah...",
+        svg: null,
+        options: [
+          "Memastikan alamat penerima (To/Cc) benar, Subject jelas, isi pesan (body) sopan dan lengkap, serta tidak ada salah ketik",
+          "Mengosongkan kolom Subject dan tidak membaca ulang isi pesan",
+          "Menulis kata sandi akun di bagian akhir badan surel",
+          "Menekan tombol hapus alih-alih tombol kirim"
+        ],
+        answer: "Memastikan alamat penerima (To/Cc) benar, Subject jelas, isi pesan (body) sopan dan lengkap, serta tidak ada salah ketik",
+        explanation: "Jawaban benar karena mengecek alamat tujuan, subjek, isi pesan, dan ketelitian penulisan sebelum mengirim mencegah kesalahan alamat maupun salah tafsir. Pilihan lain ceroboh atau membahayakan keamanan akun."
+      }
+    ];
+
+    // =========================================================================
+    // STATE APLIKASI & PENGACAKAN OPSI DINAMIS
+    // =========================================================================
+    const OPTION_KEYS = ["A", "B", "C", "D"];
+    let activeQuestions = [];
+    let userSelections = {};
+    let hasSubmitted = false;
+
+    const questionList = document.getElementById("questionList");
+    const numNavGrid = document.getElementById("numNavGrid");
+    const stickyCount = document.getElementById("stickyCount");
+    const progressFill = document.getElementById("progressFill");
+    const footerProgress = document.getElementById("footerProgress");
+    const legendBar = document.getElementById("legendBar");
+    const resultCard = document.getElementById("resultCard");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const scoreSummaryNote = document.getElementById("scoreSummaryNote");
+    const numCorrect = document.getElementById("numCorrect");
+    const numWrong = document.getElementById("numWrong");
+    const numBlank = document.getElementById("numBlank");
+    const alertBanner = document.getElementById("alertBanner");
+    const alertText = document.getElementById("alertText");
+
+    /**
+     * Mengacak array dengan algoritma Fisher-Yates.
+     */
+    function shuffleChoices(list) {
+      const arr = list.slice();
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function showAlert(msg) {
+      alertText.textContent = msg;
+      alertBanner.classList.add("visible");
+      alertBanner.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function hideAlert() {
+      alertBanner.classList.remove("visible");
+    }
+
+    /**
+     * Mengacak ulang urutan opsi A, B, C, D untuk setiap soal setiap kali dimuat atau direset.
+     */
+    function initShuffledQuestions() {
+      activeQuestions = SET_3_QUESTIONS.map((q) => {
+        const shuffled = shuffleChoices(q.options);
+        const keyIndex = shuffled.indexOf(q.answer);
+        return {
+          ...q,
+          shuffledOptions: shuffled,
+          correctLetter: OPTION_KEYS[keyIndex] || "A"
+        };
+      });
+    }
+
+    /**
+     * Merender seluruh 50 soal dan 50 tombol navigasi nomor pada panel tetap.
+     */
+    function renderQuizView() {
+      questionList.innerHTML = "";
+      numNavGrid.innerHTML = "";
+
+      activeQuestions.forEach((q) => {
+        const card = document.createElement("article");
+        card.className = "q-card";
+        card.id = `q-card-${q.id}`;
+        card.setAttribute("aria-label", `Soal nomor ${q.id}`);
+
+        const top = document.createElement("div");
+        top.className = "q-top";
+        top.innerHTML = `
+          <span class="q-number">Soal No. ${q.id}</span>
+          <span class="q-badge">${q.bab}</span>
+        `;
+        card.appendChild(top);
+
+        const p = document.createElement("p");
+        p.className = "q-text";
+        p.textContent = q.text;
+        card.appendChild(p);
+
+        if (q.svg) {
+          const svgBox = document.createElement("div");
+          svgBox.className = "svg-box";
+          svgBox.innerHTML = `
+            ${q.svg}
+            <div class="svg-sub">Ilustrasi Soal No. ${q.id}</div>
+          `;
+          card.appendChild(svgBox);
+        }
+
+        const group = document.createElement("div");
+        group.className = "option-group";
+        group.id = `opt-group-${q.id}`;
+
+        q.shuffledOptions.forEach((optVal, idx) => {
+          const letter = OPTION_KEYS[idx] || String(idx + 1);
+          const radioId = `s3_q${q.id}_o${idx}`;
+
+          const row = document.createElement("label");
+          row.className = "option-row";
+          row.htmlFor = radioId;
+          row.dataset.optionVal = optVal;
+          row.dataset.optionLetter = letter;
+
+          const radio = document.createElement("input");
+          radio.type = "radio";
+          radio.name = `set3_q_${q.id}`;
+          radio.id = radioId;
+          radio.value = optVal;
+          radio.checked = userSelections[q.id] === optVal;
+          radio.disabled = hasSubmitted;
+
+          if (radio.checked) {
+            row.classList.add("chosen");
+          }
+
+          radio.addEventListener("change", () => {
+            if (hasSubmitted) return;
+            userSelections[q.id] = optVal;
+            syncChoiceStyle(q.id);
+            syncProgress();
+          });
+
+          const keySpan = document.createElement("span");
+          keySpan.className = "opt-key";
+          keySpan.textContent = `${letter}.`;
+
+          const txtSpan = document.createElement("span");
+          txtSpan.className = "opt-label-text";
+          txtSpan.textContent = optVal;
+
+          row.appendChild(radio);
+          row.appendChild(keySpan);
+          row.appendChild(txtSpan);
+          group.appendChild(row);
+        });
+
+        card.appendChild(group);
+
+        const solBox = document.createElement("div");
+        solBox.className = "solution-box";
+        solBox.id = `sol-box-${q.id}`;
+        card.appendChild(solBox);
+
+        questionList.appendChild(card);
+
+        const tile = document.createElement("button");
+        tile.type = "button";
+        tile.className = "num-tile";
+        tile.id = `num-tile-${q.id}`;
+        tile.textContent = q.id;
+        tile.title = `Lompat ke Soal No. ${q.id}`;
+        tile.addEventListener("click", () => {
+          const targetCard = document.getElementById(`q-card-${q.id}`);
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+        numNavGrid.appendChild(tile);
+      });
+
+      syncProgress();
+    }
+
+    function syncChoiceStyle(qId) {
+      const group = document.getElementById(`opt-group-${qId}`);
+      if (!group) return;
+      group.querySelectorAll(".option-row").forEach((row) => {
+        const inp = row.querySelector("input[type='radio']");
+        row.classList.toggle("chosen", Boolean(inp && inp.checked));
+      });
+    }
+
+    function syncProgress() {
+      const total = SET_3_QUESTIONS.length;
+      const done = Object.keys(userSelections).length;
+      const pct = Math.round((done / total) * 100);
+
+      stickyCount.textContent = `${done} / ${total}`;
+      progressFill.style.width = `${pct}%`;
+      footerProgress.innerHTML = `Terjawab: <strong>${done}</strong> dari <strong>${total}</strong> soal.`;
+
+      if (!hasSubmitted) {
+        activeQuestions.forEach((q) => {
+          const tile = document.getElementById(`num-tile-${q.id}`);
+          if (!tile) return;
+          tile.classList.remove("tile-answered", "tile-ok", "tile-bad", "tile-blank");
+          if (userSelections[q.id]) {
+            tile.classList.add("tile-answered");
+          }
+        });
+      }
+    }
+
+    /**
+     * Menghitung skor akhir dan menampilkan pembahasan lengkap untuk setiap soal.
+     */
+    function submitAnswers() {
+      if (hasSubmitted) {
+        resultCard.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      const answeredCount = Object.keys(userSelections).length;
+      if (answeredCount < SET_3_QUESTIONS.length) {
+        showAlert(
+          `Kamu baru menjawab ${answeredCount} dari ${SET_3_QUESTIONS.length} soal. Nilai tetap dihitung dan pembahasan seluruh 50 soal tetap ditampilkan.`
+        );
+      } else {
+        hideAlert();
+      }
+
+      hasSubmitted = true;
+      let correctTotal = 0;
+      let wrongTotal = 0;
+      let blankTotal = 0;
+
+      activeQuestions.forEach((q) => {
+        const card = document.getElementById(`q-card-${q.id}`);
+        const tile = document.getElementById(`num-tile-${q.id}`);
+        const group = document.getElementById(`opt-group-${q.id}`);
+        const solBox = document.getElementById(`sol-box-${q.id}`);
+        const picked = userSelections[q.id];
+
+        let pickedLetter = "-";
+        group.querySelectorAll("input[type='radio']").forEach((r) => {
+          r.disabled = true;
+        });
+
+        group.querySelectorAll(".option-row").forEach((row) => {
+          const val = row.dataset.optionVal;
+          const letter = row.dataset.optionLetter;
+          row.classList.remove("chosen");
+
+          if (picked && val === picked) {
+            pickedLetter = letter;
+          }
+
+          if (val === q.answer) {
+            row.classList.add("opt-correct-key");
+          } else if (picked && val === picked && val !== q.answer) {
+            row.classList.add("opt-wrong-pick");
+          }
+        });
+
+        card.classList.remove("state-correct", "state-wrong", "state-blank");
+        tile.classList.remove("tile-answered", "tile-ok", "tile-bad", "tile-blank");
+        solBox.classList.remove("sol-ok", "sol-bad", "sol-blank");
+
+        let heading = "";
+        let choiceLine = "";
+
+        if (!picked) {
+          blankTotal++;
+          card.classList.add("state-blank");
+          tile.classList.add("tile-blank");
+          solBox.classList.add("sol-blank");
+          heading = `Belum Terjawab — Kunci Jawaban: ${q.correctLetter}. ${q.answer}`;
+          choiceLine = `Pilihan kamu: tidak ada. Kunci yang benar: <strong>${q.correctLetter}</strong>.`;
+        } else if (picked === q.answer) {
+          correctTotal++;
+          card.classList.add("state-correct");
+          tile.classList.add("tile-ok");
+          solBox.classList.add("sol-ok");
+          heading = `Benar — Pilihan Kamu: ${pickedLetter}. ${q.answer}`;
+          choiceLine = `Pilihan kamu <strong>${pickedLetter}</strong> sudah tepat.`;
+        } else {
+          wrongTotal++;
+          card.classList.add("state-wrong");
+          tile.classList.add("tile-bad");
+          solBox.classList.add("sol-bad");
+          heading = `Kurang Tepat — Pilihan Kamu: ${pickedLetter} | Kunci: ${q.correctLetter}. ${q.answer}`;
+          choiceLine = `Pilihan kamu <strong>${pickedLetter}</strong> (${picked}), sedangkan kunci jawaban yang benar adalah <strong>${q.correctLetter}</strong>.`;
+        }
+
+        solBox.innerHTML = `
+          <div class="solution-heading">${heading}</div>
+          <p class="solution-detail">${choiceLine} ${q.explanation}</p>
+        `;
+        solBox.classList.add("visible");
+      });
+
+      const finalScore = Math.round((correctTotal / SET_3_QUESTIONS.length) * 100);
+      scoreDisplay.textContent = `${finalScore} / 100`;
+      numCorrect.textContent = correctTotal;
+      numWrong.textContent = wrongTotal;
+      numBlank.textContent = blankTotal;
+
+      if (finalScore >= 85) {
+        scoreSummaryNote.textContent = "Sangat baik! Pemahaman kamu pada Bab 1–3, Surel, dan teknik soal buku paket sudah kuat.";
+      } else if (finalScore >= 70) {
+        scoreSummaryNote.textContent = "Bagus! Cermati pembahasan pada soal yang masih kurang tepat lalu ulangi latihan.";
+      } else {
+        scoreSummaryNote.textContent = "Terus berlatih! Baca alasan benar dan salah pada tiap pembahasan lalu coba lagi.";
+      }
+
+      legendBar.innerHTML = `
+        <span class="legend-entry"><span class="dot correct"></span> Benar</span>
+        <span class="legend-entry"><span class="dot wrong"></span> Salah</span>
+        <span class="legend-entry"><span class="dot" style="background:#fffbeb;border-color:#b45309;"></span> Kosong</span>
+      `;
+
+      resultCard.classList.add("visible");
+      resultCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    /**
+     * Mereset jawaban, menyembunyikan hasil & pembahasan, serta mengacak ulang posisi opsi A-D.
+     */
+    function resetPractice() {
+      userSelections = {};
+      hasSubmitted = false;
+      hideAlert();
+      resultCard.classList.remove("visible");
+
+      legendBar.innerHTML = `
+        <span class="legend-entry"><span class="dot"></span> Belum</span>
+        <span class="legend-entry"><span class="dot answered"></span> Sudah</span>
+      `;
+
+      initShuffledQuestions();
+      renderQuizView();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.getElementById("btnSubmitTop").addEventListener("click", submitAnswers);
+    document.getElementById("btnSubmitBottom").addEventListener("click", submitAnswers);
+    document.getElementById("btnSubmitSide").addEventListener("click", submitAnswers);
+
+    document.getElementById("btnResetTop").addEventListener("click", resetPractice);
+    document.getElementById("btnResetBottom").addEventListener("click", resetPractice);
+    document.getElementById("btnResetSide").addEventListener("click", resetPractice);
+    document.getElementById("btnResetFromResult").addEventListener("click", resetPractice);
+    document.getElementById("btnCloseAlert").addEventListener("click", hideAlert);
+
+    initShuffledQuestions();
+    renderQuizView();
+  </script>
+</body>
+</html>

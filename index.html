@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bank Soal SMP Kelas VII — Portal Latihan Interaktif</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --accent: #1d4ed8;
+      --accent-dark: #1e3a8a;
+      --accent-soft: #eff6ff;
+      --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%);
+      color: #ffffff;
+      padding: 44px 20px 68px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      backdrop-filter: blur(6px);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.65rem, 3.2vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #dbeafe;
+      max-width: 680px;
+      font-size: 0.98rem;
+    }
+
+    .main-wrap {
+      margin-top: -36px;
+      padding: 0 20px 64px;
+    }
+
+    .toolbar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .search-box {
+      flex: 1 1 280px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 11px 14px 11px 38px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.94rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
+
+    .stats-pill {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .stats-pill strong {
+      color: var(--accent-dark);
+    }
+
+    .grid-subjects {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 18px;
+    }
+
+    .subject-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 16px 30px -8px rgba(29, 78, 216, 0.14);
+    }
+
+    .subject-card.active {
+      border-color: var(--accent);
+      background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .count-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      border: 1px solid #bfdbfe;
+      white-space: nowrap;
+    }
+
+    .subject-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .subject-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .drawer-panel {
+      display: none;
+      margin-top: 28px;
+      background: var(--surface);
+      border: 1.5px solid #93c5fd;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 20px;
+    }
+
+    .drawer-panel.open {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .drawer-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .drawer-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .drawer-sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .btn-close {
+      background: var(--surface-soft);
+      border: 1px solid #cbd5e1;
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 9px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-close:hover {
+      background: #e2e8f0;
+    }
+
+    .latihan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .latihan-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 18px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--surface-soft);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      transition: all 0.16s ease;
+    }
+
+    .latihan-link:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    .latihan-meta {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px dashed #cbd5e1;
+      color: var(--muted);
+      display: none;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 20px 36px;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="badge">SMP KELAS VII • BANK SOAL ONLINE</div>
+      <h1>Portal Latihan Soal Mata Pelajaran</h1>
+      <p>Pilih mata pelajaran di bawah ini untuk melihat daftar paket latihan yang tersedia dan langsung mulai mengerjakan secara daring.</p>
+    </div>
+  </header>
+
+  <div class="main-wrap">
+    <div class="container">
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Cari mata pelajaran (misal: Bahasa Indonesia, IPA, Matematika)..."
+            aria-label="Cari mata pelajaran"
+          />
+        </div>
+        <div class="stats-pill" id="statsSummary">
+          Memuat data mata pelajaran...
+        </div>
+      </div>
+
+      <section class="grid-subjects" id="subjectsGrid" aria-label="Daftar Mata Pelajaran"></section>
+
+      <div class="empty-state" id="emptyState">
+        Mata pelajaran yang kamu cari tidak ditemukan. Coba kata kunci lain ya.
+      </div>
+
+      <section class="drawer-panel" id="drawerPanel" aria-live="polite">
+        <div class="drawer-header">
+          <div>
+            <h2 class="drawer-title" id="drawerTitle">Pilih Mata Pelajaran</h2>
+            <p class="drawer-sub" id="drawerSub">Daftar latihan yang tersedia</p>
+          </div>
+          <button type="button" class="btn-close" id="closeDrawerBtn">Tutup Daftar</button>
+        </div>
+        <div class="latihan-grid" id="latihanGrid"></div>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    Bank Soal SMP Kelas VII • Dikembangkan untuk latihan mandiri berbasis web.
+  </footer>
+
+  <script>
+    const MATA_PELAJARAN = [
+      {
+        id: "b-indo",
+        nama: "Bahasa Indonesia",
+        folder: "b-indo",
+        icon: "📖",
+        bg: "#dbeafe",
+        deskripsi: "Teks deskripsi, puisi rakyat, cerita fantasi, dan teks prosedur.",
+        files: ["latihan1.html", "latihan2.html", "latihan3.html", "latihan4.html", "latihan5.html"]
+      },
+      {
+        id: "b-inggris",
+        nama: "Bahasa Inggris",
+        folder: "b-inggris",
+        icon: "🌐",
+        bg: "#e0e7ff",
+        deskripsi: "Greetings, introductions, daily routines, dan descriptive texts.",
+        files: ["latihan1.html", "latihan2.html", "latihan3.html"]
+      },
+      {
+        id: "informatika",
+        nama: "Informatika",
+        folder: "informatika",
+        icon: "💻",
+        bg: "#cffafe",
+        deskripsi: "Berpikir komputasional, teknologi informasi, dan sistem komputer.",
+        files: ["latihan1.html", "latihan2.html", "latihan3.html", "latihan4.html", "latihan5.html"]
+      },
+      {
+        id: "ipa",
+        nama: "IPA",
+        folder: "ipa",
+        icon: "🔬",
+        bg: "#dcfce7",
+        deskripsi: "Objek IPA dan pengamatan, klasifikasi makhluk hidup, serta zat.",
+        files: ["latihan1.html", "latihan2.html", "latihan3.html", "latihan4.html", "latihan5.html", "latihan6.html"]
+      },
+      {
+        id: "ips",
+        nama: "IPS",
+        folder: "ips",
+        icon: "🗺️",
+        bg: "#fef3c7",
+        deskripsi: "Ruang dan interaksi antarruang, kehidupan sosial, dan ekonomi.",
+        files: ["latihan1.html", "latihan2.html"]
+      },
+      {
+        id: "matematika",
+        nama: "Matematika",
+        folder: "matematika",
+        icon: "📐",
+        bg: "#fce7f3",
+        deskripsi: "Bilangan bulat, pecahan, bentuk aljabar, dan persamaan linear.",
+        files: ["latihan1.html", "latihan2.html", "latihan3.html", "latihan4.html", "latihan5.html", "latihan6.html"]
+      },
+      {
+        id: "pai",
+        nama: "Pendidikan Agama",
+        folder: "pai",
+        icon: "✨",
+        bg: "#f3e8ff",
+        deskripsi: "Nilai karakter, akhlak mulia, dan pemahaman ajaran pokok.",
+        files: ["latihan1.html", "latihan2.html"]
+      },
+      {
+        id: "pkn",
+        nama: "PKN",
+        folder: "pkn",
+        icon: "⚖️",
+        bg: "#ffedd5",
+        deskripsi: "Pancasila, norma dan keadilan, serta perumusan UUD NRI Tahun 1945.",
+        files: ["latihan1.html", "latihan2.html", "latihan3.html", "latihan4.html", "latihan5.html", "latihan6.html", "latihan7.html"]
+      },
+      {
+        id: "prakarya",
+        nama: "Prakarya",
+        folder: "prakarya",
+        icon: "🛠️",
+        bg: "#f1f5f9",
+        deskripsi: "Kerajinan, rekayasa, budidaya, dan pengolahan bahan pangan.",
+        files: ["latihan1.html", "latihan2.html"]
+      }
+    ];
+
+    const subjectsGrid = document.getElementById("subjectsGrid");
+    const searchInput = document.getElementById("searchInput");
+    const emptyState = document.getElementById("emptyState");
+    const statsSummary = document.getElementById("statsSummary");
+    const drawerPanel = document.getElementById("drawerPanel");
+    const drawerTitle = document.getElementById("drawerTitle");
+    const drawerSub = document.getElementById("drawerSub");
+    const latihanGrid = document.getElementById("latihanGrid");
+    const closeDrawerBtn = document.getElementById("closeDrawerBtn");
+
+    let activeSubjectId = null;
+
+    function formatLabelLatihan(filename) {
+      const clean = filename.replace(/\.html$/i, "");
+      const match = clean.match(/^latihan[-_]?(\d+)$/i);
+      if (match) return `Latihan ${match[1]}`;
+      return clean.replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    function updateSummary() {
+      const totalMapel = MATA_PELAJARAN.length;
+      const totalLatihan = MATA_PELAJARAN.reduce((acc, item) => acc + item.files.length, 0);
+      statsSummary.innerHTML = `<strong>${totalMapel}</strong> Mata Pelajaran • <strong>${totalLatihan}</strong> Paket Latihan`;
+    }
+
+    function renderSubjects(keyword = "") {
+      const q = keyword.trim().toLowerCase();
+      const filtered = MATA_PELAJARAN.filter(
+        m => m.nama.toLowerCase().includes(q) || m.deskripsi.toLowerCase().includes(q)
+      );
+
+      subjectsGrid.innerHTML = "";
+      emptyState.classList.toggle("visible", filtered.length === 0);
+
+      filtered.forEach(item => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `subject-card ${item.id === activeSubjectId ? "active" : ""}`;
+        btn.innerHTML = `
+          <div>
+            <div class="card-top">
+              <div class="icon-box" style="background:${item.bg}">${item.icon}</div>
+              <span class="count-tag">${item.files.length} Latihan</span>
+            </div>
+            <div class="subject-title" style="margin-top:14px">${item.nama}</div>
+            <p class="subject-desc">${item.deskripsi}</p>
+          </div>
+          <div class="card-footer">
+            <span>Lihat Daftar Latihan</span>
+            <span>→</span>
+          </div>
+        `;
+        btn.addEventListener("click", () => openSubjectDrawer(item.id));
+        subjectsGrid.appendChild(btn);
+      });
+    }
+
+    function openSubjectDrawer(id) {
+      const subject = MATA_PELAJARAN.find(m => m.id === id);
+      if (!subject) return;
+
+      activeSubjectId = id;
+      renderSubjects(searchInput.value);
+
+      drawerTitle.textContent = `${subject.icon} ${subject.nama}`;
+      drawerSub.textContent = `Tersedia ${subject.files.length} paket latihan di folder "${subject.folder}/"`;
+      latihanGrid.innerHTML = "";
+
+      subject.files.forEach(file => {
+        const a = document.createElement("a");
+        a.className = "latihan-link";
+        a.href = `${subject.folder}/${file}`;
+        a.innerHTML = `
+          <div>
+            <div>${formatLabelLatihan(file)}</div>
+            <div class="latihan-meta">${file}</div>
+          </div>
+          <span>Buka →</span>
+        `;
+        latihanGrid.appendChild(a);
+      });
+
+      drawerPanel.classList.add("open");
+      drawerPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    closeDrawerBtn.addEventListener("click", () => {
+      drawerPanel.classList.remove("open");
+      activeSubjectId = null;
+      renderSubjects(searchInput.value);
+    });
+
+    searchInput.addEventListener("input", e => {
+      renderSubjects(e.target.value);
+    });
+
+    updateSummary();
+    renderSubjects();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latihan Soal PKN SMP Kelas 7 Semester 1 (50 Soal)</title>
+  <style>
+    /* =========================================================================
+       VARIABEL TEMA & RESET DASAR (100% OFFLINE STANDALONE CSS)
+       ========================================================================= */
+    :root {
+      --bg-page: #f3f6fb;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f8fafc;
+      --bg-accent-soft: #eef2ff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border-color: #cbd5e1;
+      --border-light: #e2e8f0;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --primary-light: #dbeafe;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --success-border: #86efac;
+      --danger: #b91c1c;
+      --danger-bg: #fee2e2;
+      --danger-border: #fca5a5;
+      --warning: #b45309;
+      --warning-bg: #fef3c7;
+      --warning-border: #fcd34d;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 6px 18px rgba(15, 23, 42, 0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.55;
+    }
+
+    /* =========================================================================
+       HEADER RINGKAS DI BAGIAN ATAS HALAMAN SOAL
+       ========================================================================= */
+    .top-header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 60%, #2563eb 100%);
+      color: #ffffff;
+      padding: 18px 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .top-header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand-block h1 {
+      margin: 0;
+      font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-block p {
+      margin: 4px 0 0;
+      font-size: 0.9rem;
+      color: #dbeafe;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.12s ease, background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-submit {
+      background-color: #facc15;
+      color: #1e293b;
+      border-color: #eab308;
+    }
+
+    .btn-submit:hover {
+      background-color: #fde047;
+    }
+
+    .btn-reset {
+      background-color: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-reset:hover {
+      background-color: rgba(255, 255, 255, 0.24);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-subtle);
+    }
+
+    /* =========================================================================
+       TATA LETAK UTAMA: DAFTAR SOAL (KIRI) & PANEL NAVIGASI STICKY (KANAN)
+       ========================================================================= */
+    .main-container {
+      max-width: 1280px;
+      margin: 22px auto 56px;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    /* Panel navigasi nomor soal tetap (sticky) saat di-scroll */
+    .sidebar-nav {
+      position: sticky;
+      top: 16px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-md);
+      z-index: 20;
+    }
+
+    .sidebar-title {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .answered-counter {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      background-color: var(--primary-light);
+      padding: 2px 9px;
+      border-radius: 999px;
+    }
+
+    .sidebar-subtitle {
+      margin: 0 0 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      display: inline-block;
+    }
+
+    .legend-dot.unanswered {
+      background-color: var(--bg-surface);
+    }
+
+    .legend-dot.answered {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .legend-dot.correct {
+      background-color: var(--success);
+      border-color: var(--success);
+    }
+
+    .legend-dot.wrong {
+      background-color: var(--danger);
+      border-color: var(--danger);
+    }
+
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 7px;
+      max-height: 58vh;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .num-btn {
+      height: 36px;
+      border-radius: 7px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .num-btn:hover {
+      border-color: var(--primary);
+      background-color: var(--bg-accent-soft);
+    }
+
+    .num-btn.is-answered {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .num-btn.is-correct {
+      background-color: var(--success);
+      border-color: var(--success);
+      color: #ffffff;
+    }
+
+    .num-btn.is-wrong {
+      background-color: var(--danger);
+      border-color: var(--danger);
+      color: #ffffff;
+    }
+
+    .sidebar-footer-btn {
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    /* =========================================================================
+       KARTU SOAL & OPSI JAWABAN
+       ========================================================================= */
+    .questions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .question-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 18px;
+      transition: border-color 0.2s ease;
+    }
+
+    .question-card.answered-card {
+      border-color: #93c5fd;
+    }
+
+    .question-card.result-correct {
+      border-color: var(--success-border);
+      background-color: #fafffb;
+    }
+
+    .question-card.result-wrong {
+      border-color: var(--danger-border);
+      background-color: #fffafa;
+    }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .q-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--primary);
+    }
+
+    .q-topic {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .question-text {
+      margin: 0 0 14px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* Wadah Ilustrasi Inline SVG di dalam Soal */
+    .svg-illustration-box {
+      margin: 0 0 16px;
+      padding: 12px;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .svg-illustration-box svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .svg-caption {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Pilihan Ganda A, B, C, D */
+    .options-group {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 11px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background-color: var(--bg-surface);
+      cursor: pointer;
+      transition: background-color 0.14s ease, border-color 0.14s ease;
+    }
+
+    .option-label:hover {
+      background-color: var(--bg-accent-soft);
+      border-color: #93c5fd;
+    }
+
+    .option-label input[type="radio"] {
+      margin-top: 3px;
+      accent-color: var(--primary);
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .option-content {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+    }
+
+    .option-key {
+      font-weight: 700;
+      margin-right: 4px;
+      color: var(--text-primary);
+    }
+
+    .option-label.selected-opt {
+      background-color: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .option-label.opt-correct-highlight {
+      background-color: var(--success-bg);
+      border-color: var(--success);
+    }
+
+    .option-label.opt-wrong-highlight {
+      background-color: var(--danger-bg);
+      border-color: var(--danger);
+    }
+
+    /* =========================================================================
+       PEMBAHASAN SETIAP SOAL (MUNCUL SETELAH SUBMIT)
+       ========================================================================= */
+    .explanation-box {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-subtle);
+      font-size: 0.91rem;
+    }
+
+    .explanation-box.visible {
+      display: block;
+    }
+
+    .explanation-header {
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .explanation-header.status-benar {
+      color: var(--success);
+    }
+
+    .explanation-header.status-salah {
+      color: var(--danger);
+    }
+
+    .explanation-body p {
+      margin: 6px 0;
+      color: var(--text-secondary);
+    }
+
+    .explanation-body strong {
+      color: var(--text-primary);
+    }
+
+    /* =========================================================================
+       PANEL HASIL / SKOR AKHIR DI BAGIAN BAWAH HALAMAN SOAL
+       ========================================================================= */
+    .score-result-section {
+      display: none;
+      margin-top: 24px;
+      background-color: var(--bg-surface);
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .score-result-section.visible {
+      display: block;
+    }
+
+    .score-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .score-header h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      color: var(--text-primary);
+    }
+
+    .score-badge {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .score-badge.pass {
+      background-color: var(--success-bg);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+    }
+
+    .score-badge.remedial {
+      background-color: var(--warning-bg);
+      color: var(--warning);
+      border: 1px solid var(--warning-border);
+    }
+
+    .score-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .stat-box {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      margin-top: 4px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .stat-score .stat-value {
+      color: var(--primary);
+    }
+
+    .stat-correct .stat-value {
+      color: var(--success);
+    }
+
+    .stat-wrong .stat-value {
+      color: var(--danger);
+    }
+
+    .stat-unanswered .stat-value {
+      color: var(--warning);
+    }
+
+    .score-message {
+      margin: 0 0 18px;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-accent-soft);
+      color: var(--text-primary);
+      font-size: 0.94rem;
+    }
+
+    .score-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* =========================================================================
+       MODAL KONFIRMASI (PENGGANTI alert/confirm STANDAR)
+       ========================================================================= */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.55);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      max-width: 440px;
+      width: 100%;
+      padding: 22px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+      border: 1px solid var(--border-light);
+    }
+
+    .modal-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.12rem;
+      color: var(--text-primary);
+    }
+
+    .modal-card p {
+      margin: 0 0 18px;
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* =========================================================================
+       RESPONSIVITAS MOBILE & TABLET
+       ========================================================================= */
+    @media (max-width: 960px) {
+      .main-container {
+        grid-template-columns: 1fr;
+      }
+
+      /* Di layar lebih kecil, panel nomor soal tetap menempel di bagian atas saat di-scroll */
+      .sidebar-nav {
+        position: sticky;
+        top: 0;
+        border-radius: 0 0 var(--radius-md) var(--radius-md);
+        padding: 12px 14px;
+        margin: -12px -18px 8px;
+      }
+
+      .number-grid {
+        grid-template-columns: repeat(10, 1fr);
+        max-height: 118px;
+        gap: 5px;
+      }
+
+      .num-btn {
+        height: 30px;
+        font-size: 0.78rem;
+      }
+
+      .score-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .number-grid {
+        grid-template-columns: repeat(8, 1fr);
+      }
+
+      .question-card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER RINGKAS DI BAGIAN ATAS HALAMAN SOAL -->
+  <header class="top-header">
+    <div class="top-header-inner">
+      <div class="brand-block">
+        <h1>Latihan Soal Pendidikan Pancasila (PKN) — SMP Kelas 7 Semester 1</h1>
+        <p>50 Soal Pilihan Ganda • Sejarah Kelahiran &amp; Perumusan Pancasila, Norma &amp; Aturan, serta Keberagaman &amp; NKRI</p>
+      </div>
+      <div class="header-actions">
+        <button type="button" id="btnTopSubmit" class="btn btn-submit">Kumpulkan Jawaban</button>
+        <button type="button" id="btnTopReset" class="btn btn-reset">Ulangi Latihan</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- KONTEN UTAMA: DAFTAR SOAL (KIRI) DAN NAVIGASI NOMOR TETAP (KANAN) -->
+  <main class="main-container">
+    <section aria-label="Daftar 50 Soal Pilihan Ganda">
+      <div id="questionsContainer" class="questions-list"></div>
+
+      <!-- PANEL SKOR AKHIR & PEMBAHASAN RINGKAS DI BAGIAN BAWAH -->
+      <section id="scoreResultSection" class="score-result-section" aria-live="polite">
+        <div class="score-header">
+          <h2>Hasil Latihan Soal PKN</h2>
+          <span id="scoreStatusBadge" class="score-badge"></span>
+        </div>
+
+        <div class="score-stats-grid">
+          <div class="stat-box stat-score">
+            <div id="statNilai" class="stat-value">0</div>
+            <div class="stat-label">Nilai Akhir (0–100)</div>
+          </div>
+          <div class="stat-box stat-correct">
+            <div id="statBenar" class="stat-value">0</div>
+            <div class="stat-label">Jawaban Benar</div>
+          </div>
+          <div class="stat-box stat-wrong">
+            <div id="statSalah" class="stat-value">0</div>
+            <div class="stat-label">Jawaban Salah</div>
+          </div>
+          <div class="stat-box stat-unanswered">
+            <div id="statKosong" class="stat-value">0</div>
+            <div class="stat-label">Belum Dijawab</div>
+          </div>
+        </div>
+
+        <p id="scoreFeedbackMessage" class="score-message"></p>
+
+        <div class="score-actions">
+          <button type="button" id="btnScrollTopQuestions" class="btn btn-primary">Lihat Pembahasan dari Soal No. 1</button>
+          <button type="button" id="btnResultReset" class="btn btn-secondary">Ulangi Latihan / Reset</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- PANEL NAVIGASI NOMOR SOAL POSISI TETAP (STICKY) -->
+    <aside class="sidebar-nav" aria-label="Navigasi Nomor Soal">
+      <div class="sidebar-title">
+        <span>Nomor Soal (1–50)</span>
+        <span id="answeredCounter" class="answered-counter">0 / 50</span>
+      </div>
+      <p class="sidebar-subtitle">Klik nomor untuk melompat ke soal terkait.</p>
+
+      <div class="legend-row">
+        <span class="legend-item"><span class="legend-dot unanswered"></span>Belum</span>
+        <span class="legend-item"><span class="legend-dot answered"></span>Terjawab</span>
+        <span class="legend-item"><span class="legend-dot correct"></span>Benar</span>
+        <span class="legend-item"><span class="legend-dot wrong"></span>Salah</span>
+      </div>
+
+      <div id="numberGrid" class="number-grid"></div>
+
+      <button type="button" id="btnSidebarSubmit" class="btn btn-primary sidebar-footer-btn">
+        Kumpulkan Jawaban
+      </button>
+    </aside>
+  </main>
+
+  <!-- MODAL KONFIRMASI KUSTOM (PENGGANTI window.confirm / window.alert) -->
+  <div id="confirmModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <h3 id="modalTitle">Konfirmasi</h3>
+      <p id="modalMessage"></p>
+      <div class="modal-buttons">
+        <button type="button" id="btnModalCancel" class="btn btn-secondary">Batal</button>
+        <button type="button" id="btnModalConfirm" class="btn btn-primary">Ya, Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       KOLEKSI ILUSTRASI INLINE SVG OFFLINE (SIMBOL PANCASILA & NORMA)
+       ========================================================================= */
+    const SVG_ILLUSTRATIONS = {
+      garuda: `
+        <div class="svg-illustration-box">
+          <svg width="240" height="145" viewBox="0 0 240 145" role="img" aria-label="Ilustrasi Burung Garuda dan Perisai Pancasila">
+            <rect x="4" y="4" width="232" height="137" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+            <!-- Sayap kiri & kanan -->
+            <path d="M96 72 C65 42, 34 45, 20 68 C42 66, 65 74, 92 84 Z" fill="#d97706" stroke="#92400e" stroke-width="2"/>
+            <path d="M144 72 C175 42, 206 45, 220 68 C198 66, 175 74, 148 84 Z" fill="#d97706" stroke="#92400e" stroke-width="2"/>
+            <!-- Badan & kepala -->
+            <ellipse cx="120" cy="78" rx="22" ry="30" fill="#f59e0b" stroke="#92400e" stroke-width="2"/>
+            <circle cx="120" cy="36" r="14" fill="#f59e0b" stroke="#92400e" stroke-width="2"/>
+            <polygon points="115,44 125,44 120,54" fill="#ea580c"/>
+            <circle cx="115" cy="33" r="2.2" fill="#1e293b"/>
+            <circle cx="125" cy="33" r="2.2" fill="#1e293b"/>
+            <!-- Perisai di dada -->
+            <path d="M104 62 L136 62 L136 82 C136 94, 120 102, 120 102 C120 102, 104 94, 104 82 Z" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+            <line x1="120" y1="62" x2="120" y2="101" stroke="#ffffff" stroke-width="1.8"/>
+            <line x1="104" y1="80" x2="136" y2="80" stroke="#ffffff" stroke-width="1.8"/>
+            <polygon points="120,66 122,72 128,72 123,76 125,82 120,78 115,82 117,76 112,72 118,72" fill="#facc15"/>
+            <!-- Pita Bhinneka Tunggal Ika -->
+            <path d="M82 118 Q120 128 158 118 L154 129 Q120 137 86 129 Z" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+            <text x="120" y="126" text-anchor="middle" font-size="7.5" font-weight="bold" fill="#0f172a">BHINNEKA TUNGGAL IKA</text>
+          </svg>
+          <div class="svg-caption">Ilustrasi Garuda Pancasila sebagai lambang negara Indonesia</div>
+        </div>
+      `,
+      rantai: `
+        <div class="svg-illustration-box">
+          <svg width="220" height="120" viewBox="0 0 220 120" role="img" aria-label="Ilustrasi Mata Rantai Sila Kedua Pancasila">
+            <rect x="4" y="4" width="212" height="112" rx="12" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+            <rect x="64" y="34" width="36" height="22" rx="10" fill="none" stroke="#eab308" stroke-width="5"/>
+            <rect x="92" y="48" width="36" height="22" rx="10" fill="none" stroke="#ca8a04" stroke-width="5"/>
+            <rect x="120" y="34" width="36" height="22" rx="10" fill="none" stroke="#eab308" stroke-width="5"/>
+            <circle cx="82" cy="68" r="7" fill="#eab308" stroke="#854d0e" stroke-width="1.5"/>
+            <circle cx="138" cy="68" r="7" fill="#eab308" stroke="#854d0e" stroke-width="1.5"/>
+            <text x="110" y="102" text-anchor="middle" font-size="10" font-weight="bold" fill="#7f1d1d">Simbol Sila Ke-2 Pancasila</text>
+          </svg>
+          <div class="svg-caption">Mata rantai saling berkait menggambarkan hubungan antarmanusia</div>
+        </div>
+      `,
+      beringin: `
+        <div class="svg-illustration-box">
+          <svg width="220" height="125" viewBox="0 0 220 125" role="img" aria-label="Ilustrasi Pohon Beringin Sila Ketiga Pancasila">
+            <rect x="4" y="4" width="212" height="117" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+            <rect x="103" y="64" width="14" height="36" rx="3" fill="#78350f"/>
+            <line x1="88" y1="68" x2="88" y2="96" stroke="#15803d" stroke-width="2"/>
+            <line x1="132" y1="68" x2="132" y2="96" stroke="#15803d" stroke-width="2"/>
+            <ellipse cx="110" cy="46" rx="44" ry="24" fill="#16a34a" stroke="#14532d" stroke-width="2"/>
+            <ellipse cx="86" cy="54" rx="24" ry="15" fill="#22c55e"/>
+            <ellipse cx="134" cy="54" rx="24" ry="15" fill="#22c55e"/>
+            <text x="110" y="112" text-anchor="middle" font-size="10" font-weight="bold" fill="#14532d">Simbol Sila Ke-3 Pancasila</text>
+          </svg>
+          <div class="svg-caption">Pohon beringin yang rindang melambangkan tempat berteduh seluruh rakyat</div>
+        </div>
+      `,
+      banteng: `
+        <div class="svg-illustration-box">
+          <svg width="220" height="125" viewBox="0 0 220 125" role="img" aria-label="Ilustrasi Kepala Banteng Sila Keempat Pancasila">
+            <rect x="4" y="4" width="212" height="117" rx="12" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+            <!-- Tanduk -->
+            <path d="M84 44 C64 34, 62 52, 82 54" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/>
+            <path d="M136 44 C156 34, 158 52, 138 54" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/>
+            <!-- Kepala -->
+            <rect x="82" y="36" width="56" height="54" rx="14" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+            <circle cx="98" cy="55" r="3.5" fill="#ffffff"/>
+            <circle cx="122" cy="55" r="3.5" fill="#ffffff"/>
+            <ellipse cx="110" cy="76" rx="18" ry="10" fill="#334155"/>
+            <circle cx="103" cy="76" r="2.5" fill="#0f172a"/>
+            <circle cx="117" cy="76" r="2.5" fill="#0f172a"/>
+            <text x="110" y="110" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">Simbol Sila Ke-4 Pancasila</text>
+          </svg>
+          <div class="svg-caption">Kepala banteng menggambarkan hewan sosial yang suka berkumpul dan bermusyawarah</div>
+        </div>
+      `,
+      padikapas: `
+        <div class="svg-illustration-box">
+          <svg width="220" height="125" viewBox="0 0 220 125" role="img" aria-label="Ilustrasi Padi dan Kapas Sila Kelima Pancasila">
+            <rect x="4" y="4" width="212" height="117" rx="12" fill="#fefce8" stroke="#fef08a" stroke-width="1.5"/>
+            <!-- Tangkai padi -->
+            <path d="M82 95 Q76 60 88 30" fill="none" stroke="#ca8a04" stroke-width="3"/>
+            <ellipse cx="78" cy="76" rx="7" ry="3.5" transform="rotate(-25 78 76)" fill="#eab308"/>
+            <ellipse cx="86" cy="64" rx="7" ry="3.5" transform="rotate(25 86 64)" fill="#eab308"/>
+            <ellipse cx="80" cy="50" rx="7" ry="3.5" transform="rotate(-25 80 50)" fill="#eab308"/>
+            <ellipse cx="87" cy="38" rx="7" ry="3.5" transform="rotate(25 87 38)" fill="#eab308"/>
+            <!-- Kapas -->
+            <path d="M138 95 Q144 60 132 32" fill="none" stroke="#15803d" stroke-width="3"/>
+            <circle cx="136" cy="52" r="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle cx="132" cy="70" r="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="110" y="112" text-anchor="middle" font-size="10" font-weight="bold" fill="#713f12">Simbol Sila Ke-5 Pancasila</text>
+          </svg>
+          <div class="svg-caption">Padi dan kapas melambangkan kebutuhan dasar pangan dan sandang rakyat</div>
+        </div>
+      `,
+      norma: `
+        <div class="svg-illustration-box">
+          <svg width="230" height="120" viewBox="0 0 230 120" role="img" aria-label="Ilustrasi Norma dan Aturan Tertib">
+            <rect x="4" y="4" width="222" height="112" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <!-- Rambu lalu lintas -->
+            <rect x="46" y="20" width="24" height="62" rx="5" fill="#1e293b"/>
+            <circle cx="58" cy="32" r="6" fill="#ef4444"/>
+            <circle cx="58" cy="51" r="6" fill="#facc15"/>
+            <circle cx="58" cy="70" r="6" fill="#22c55e"/>
+            <rect x="55" y="82" width="6" height="16" fill="#64748b"/>
+            <!-- Buku aturan / kitab norma -->
+            <rect x="116" y="26" width="66" height="62" rx="6" fill="#1d4ed8" stroke="#1e3a8a" stroke-width="2"/>
+            <rect x="124" y="34" width="50" height="46" rx="3" fill="#ffffff"/>
+            <line x1="131" y1="45" x2="167" y2="45" stroke="#94a3b8" stroke-width="2.5"/>
+            <line x1="131" y1="55" x2="167" y2="55" stroke="#94a3b8" stroke-width="2.5"/>
+            <line x1="131" y1="65" x2="156" y2="65" stroke="#94a3b8" stroke-width="2.5"/>
+            <text x="115" y="110" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#334155">Aturan &amp; Norma dalam Kehidupan Bersama</text>
+          </svg>
+          <div class="svg-caption">Norma membantu menciptakan ketertiban dan keadilan di masyarakat</div>
+        </div>
+      `,
+      musyawarah: `
+        <div class="svg-illustration-box">
+          <svg width="230" height="120" viewBox="0 0 230 120" role="img" aria-label="Ilustrasi Musyawarah Mufakat Siswa">
+            <rect x="4" y="4" width="222" height="112" rx="12" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1.5"/>
+            <!-- Meja bulat -->
+            <ellipse cx="115" cy="64" rx="44" ry="18" fill="#93c5fd" stroke="#2563eb" stroke-width="2"/>
+            <!-- Peserta diskusi -->
+            <circle cx="72" cy="46" r="10" fill="#fbbf24" stroke="#92400e" stroke-width="1.5"/>
+            <circle cx="115" cy="36" r="10" fill="#f87171" stroke="#991b1b" stroke-width="1.5"/>
+            <circle cx="158" cy="46" r="10" fill="#34d399" stroke="#065f46" stroke-width="1.5"/>
+            <circle cx="92" cy="82" r="10" fill="#a78bfa" stroke="#5b21b6" stroke-width="1.5"/>
+            <circle cx="138" cy="82" r="10" fill="#fb923c" stroke="#9a3412" stroke-width="1.5"/>
+            <text x="115" y="109" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e3a8a">Bermusyawarah Mencari Mufakat</text>
+          </svg>
+          <div class="svg-caption">Musyawarah menghargai setiap pendapat untuk keputusan bersama</div>
+        </div>
+      `
+    };
+
+    /* =========================================================================
+       DATA 50 SOAL PILIHAN GANDA PKN SMP KELAS 7 / KELAS 1 SEMESTER 1
+       KUNCI JAWABAN DIACAK MERATA ANTARA A, B, C, DAN D (13 A, 13 B, 12 C, 12 D)
+       ========================================================================= */
+    const QUESTIONS = [
+      {
+        id: 1,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Badan yang dibentuk pemerintah pendudukan Jepang pada tanggal 1 Maret 1945 untuk menyelidiki usaha-usaha persiapan kemerdekaan Indonesia adalah ....",
+        options: {
+          A: "BPUPKI (Dokuritsu Junbi Cosakai)",
+          B: "PPKI (Dokuritsu Junbi Inkai)",
+          C: "KNIP (Komite Nasional Indonesia Pusat)",
+          D: "PETA (Pembela Tanah Air)"
+        },
+        answer: "A",
+        explanation: "BPUPKI (Dokuritsu Junbi Cosakai) dibentuk pada 1 Maret 1945 dan diresmikan 29 April 1945 untuk membahas dasar negara dan persiapan kemerdekaan Indonesia. PPKI baru dibentuk setelah sidang BPUPKI selesai pada Agustus 1945, sedangkan KNIP dibentuk setelah proklamasi kemerdekaan."
+      },
+      {
+        id: 2,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Sidang pertama BPUPKI dilaksanakan pada tanggal 29 Mei hingga 1 Juni 1945 dengan agenda utama membahas ....",
+        options: {
+          A: "Pembagian wilayah provinsi Indonesia",
+          B: "Dasar negara Indonesia merdeka",
+          C: "Susunan kabinet pemerintahan pertama",
+          D: "Bendera kebangsaan dan lagu kebangsaan"
+        },
+        answer: "B",
+        explanation: "Sidang pertama BPUPKI (29 Mei–1 Juni 1945) difokuskan untuk merumuskan dasar negara bagi Indonesia merdeka. Pembagian provinsi, susunan kabinet, dan simbol negara dibahas pada tahap berikutnya setelah kemerdekaan."
+      },
+      {
+        id: 3,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Tokoh yang menyampaikan pidato pada tanggal 1 Juni 1945 dan mengusulkan nama 'Pancasila' untuk dasar negara Indonesia merdeka adalah ....",
+        options: {
+          A: "Mr. Muhammad Yamin",
+          B: "Prof. Dr. Mr. Soepomo",
+          C: "Ir. Soekarno",
+          D: "Drs. Moh. Hatta"
+        },
+        answer: "C",
+        explanation: "Pada 1 Juni 1945, Ir. Soekarno menyampaikan pidato mengenai dasar negara dan menamai lima prinsip yang diusulkannya sebagai 'Pancasila'. Tanggal 1 Juni kemudian diperingati sebagai Hari Lahir Pancasila."
+      },
+      {
+        id: 4,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Selain mengusulkan lima asas dasar negara, Ir. Soekarno pada 1 Juni 1945 juga menyampaikan bahwa kelima sila tersebut dapat diperas menjadi 'Trisila' dan diperas lagi menjadi 'Ekasila', yaitu ....",
+        options: {
+          A: "Keadilan sosial",
+          B: "Gotong royong",
+          C: "Kebangsaan Indonesia",
+          D: "Permusyawaratan"
+        },
+        answer: "B",
+        explanation: "Ir. Soekarno menjelaskan bahwa Trisila (Sosio-nasionalisme, Sosio-demokrasi, Ketuhanan yang berkebudayaan) dapat diperas menjadi satu sila inti yang disebut Ekasila, yaitu Gotong Royong."
+      },
+      {
+        id: 5,
+        topic: "Perumusan & Penetapan Pancasila",
+        question: "Panitia Sembilan berhasil menyusun sebuah dokumen bersejarah pada tanggal 22 Juni 1945 yang memuat rumusan dasar negara dan dikenal dengan nama ....",
+        options: {
+          A: "Teks Proklamasi Kemerdekaan",
+          B: "Piagam Jakarta (Jakarta Charter)",
+          C: "Undang-Undang Dasar Sementara",
+          D: "Dekrit Presiden"
+        },
+        answer: "B",
+        explanation: "Panitia Sembilan menghasilkan rumusan dasar negara pada 22 Juni 1945 yang oleh Mr. Muhammad Yamin disebut Piagam Jakarta (Jakarta Charter). Naskah ini kemudian menjadi cikal bakal Pembukaan UUD NRI Tahun 1945."
+      },
+      {
+        id: 6,
+        topic: "Perumusan & Penetapan Pancasila",
+        question: "Siapakah yang memimpin Panitia Sembilan dalam perumusan Piagam Jakarta pada tanggal 22 Juni 1945?",
+        options: {
+          A: "Soekarno",
+          B: "Soepomo",
+          C: "Ki Bagoes Hadikoesoemo",
+          D: "K.H. Wahid Hasyim"
+        },
+        answer: "A",
+        explanation: "Ir. Soekarno bertindak sebagai ketua Panitia Sembilan dengan Drs. Mohammad Hatta sebagai wakil ketua, bersama tujuh anggota lainnya yang mewakili berbagai golongan."
+      },
+      {
+        id: 7,
+        topic: "Perumusan & Penetapan Pancasila",
+        question: "Pada tanggal 18 Agustus 1945, PPKI menetapkan Pancasila sebagai dasar negara yang sah bersamaan dengan pengesahan ....",
+        options: {
+          A: "Sumpah Pemuda",
+          B: "Pembukaan dan Batang Tubuh UUD 1945",
+          C: "Garis-Garis Besar Haluan Negara",
+          D: "Konstitusi Republik Indonesia Serikat"
+        },
+        answer: "B",
+        explanation: "Pada sidang PPKI tanggal 18 Agustus 1945, Pancasila ditetapkan sebagai dasar negara secara konstitusional karena tercantum dalam alinea keempat Pembukaan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 yang disahkan hari itu juga."
+      },
+      {
+        id: 8,
+        topic: "Perumusan & Penetapan Pancasila",
+        question: "Mengapa perubahan kalimat pada sila pertama Piagam Jakarta menjadi 'Ketuhanan Yang Maha Esa' pada 18 Agustus 1945 menunjukkan sikap teladan para pendiri bangsa?",
+        options: {
+          A: "Karena ingin mengikuti kehendak bangsa asing",
+          B: "Karena ingin menghilangkan nilai agama dari kehidupan bernegara",
+          C: "Karena mengutamakan persatuan dan keutuhan bangsa Indonesia yang beragam",
+          D: "Karena menolak peran tokoh agama dalam pemerintahan"
+        },
+        answer: "C",
+        explanation: "Perubahan tersebut dilakukan atas kesadaran bersama para tokoh bangsa demi menjaga persatuan dan keutuhan seluruh rakyat Indonesia yang memiliki beragam agama dan keyakinan, sehingga mencerminkan sikap rela berkorban dan toleransi."
+      },
+      {
+        id: 9,
+        topic: "Perumusan & Penetapan Pancasila",
+        question: "Perhatikan ilustrasi berikut:",
+        illustration: "garuda",
+        options: {
+          A: "Memecah belah keberagaman suku dan budaya daerah",
+          B: "Menjadi pedoman hidup berbangsa dan bernegara serta sumber dari segala sumber hukum",
+          C: "Hanya berlaku bagi warga negara yang tinggal di ibu kota",
+          D: "Menggantikan aturan tata tertib di sekolah dan keluarga"
+        },
+        answer: "B",
+        explanation: "Sebagai dasar negara, Pancasila menjadi landasan penyelenggaraan pemerintahan, pedoman perilaku kehidupan berbangsa dan bernegara, serta sumber dari segala sumber hukum di Indonesia."
+      },
+      {
+        id: 10,
+        topic: "Sejarah Kelahiran Pancasila",
+        question: "Dalam sidang BPUPKI pertama, Prof. Dr. Mr. Soepomo mengemukakan gagasan mengenai paham negara integralistik, yaitu paham bahwa negara ....",
+        options: {
+          A: "Hanya melindungi kepentingan satu golongan tertentu saja",
+          B: "Memisahkan urusan masyarakat dengan pemerintah secara mutlak",
+          C: "Menyatukan seluruh golongan dan lapisan masyarakat dalam satu kesatuan utuh",
+          D: "Mengutamakan kepentingan individu di atas kepentingan bersama"
+        },
+        answer: "C",
+        explanation: "Soepomo menjelaskan paham negara integralistik yang memandang negara sebagai satu kesatuan organis yang mengayomi seluruh lapisan dan golongan rakyat secara selaras, bukan mengutamakan kelompok atau individu semata."
+      },
+      {
+        id: 11,
+        topic: "Nilai-Nilai Pancasila",
+        question: "Perhatikan gambar berikut:",
+        illustration: "rantai",
+        options: {
+          A: "Keadilan sosial bagi seluruh rakyat Indonesia",
+          B: "Kemanusiaan yang adil dan beradab",
+          C: "Persatuan Indonesia",
+          D: "Ketuhanan Yang Maha Esa"
+        },
+        answer: "B",
+        explanation: "Mata rantai berbentuk persegi dan lingkaran yang saling berkaitan pada sila kedua ('Kemanusiaan yang adil dan beradab') melambangkan laki-laki dan perempuan yang saling membutuhkan, bekerja sama, dan saling menghormati martabat kemanusiaan."
+      },
+      {
+        id: 12,
+        topic: "Nilai-Nilai Pancasila",
+        question: "Sikap yang sesuai dengan pengamalan sila kedua Pancasila di lingkungan sekolah adalah ....",
+        options: {
+          A: "Mengejek teman yang mengalami kesulitan belajar",
+          B: "Membantu teman yang terjatuh dan bersikap sopan kepada siapa pun",
+          C: "Hanya mau berteman dengan siswa dari daerah asal yang sama",
+          D: "Memaksakan kehendak saat berdiskusi kelompok"
+        },
+        answer: "B",
+        explanation: "Sila kedua menekankan pengakuan terhadap harkat dan martabat manusia, sikap saling menolong, tenggang rasa, serta perlakuan yang adil dan beradab kepada sesama tanpa membeda-bedakan."
+      },
+      {
+        id: 13,
+        topic: "Nilai-Nilai Pancasila",
+        question: "Perhatikan ilustrasi berikut:",
+        illustration: "beringin",
+        options: {
+          A: "Menumbuhkan sikap cinta tanah air dan menjaga persatuan di tengah perbedaan",
+          B: "Mengutamakan kepentingan pribadi di atas kepentingan umum",
+          C: "Membanggakan suku sendiri dan merendahkan suku lain",
+          D: "Menghindari kerja sama dengan teman yang berbeda agama"
+        },
+        answer: "A",
+        explanation: "Pohon beringin dengan akar gantungnya melambangkan persatuan Indonesia dan tempat berteduh bagi seluruh rakyat. Nilai utamanya adalah persatuan, kerukunan, serta cinta tanah air (nasionalisme)."
+      },
+      {
+        id: 14,
+        topic: "Nilai-Nilai Pancasila",
+        question: "Perhatikan gambar ilustrasi berikut:",
+        illustration: "banteng",
+        options: {
+          A: "Sila pertama tentang kehidupan beragama",
+          B: "Sila kedua tentang kesetaraan manusia",
+          C: "Sila keempat tentang kerakyatan yang dipimpin oleh hikmat kebijaksanaan dalam permusyawaratan/perwakilan",
+          D: "Sila kelima tentang pemerataan kesejahteraan"
+        },
+        answer: "C",
+        explanation: "Kepala banteng merupakan simbol sila keempat Pancasila. Banteng dikenal sebagai hewan yang suka berkumpul dan hidup berkelompok, mencerminkan semangat musyawarah dan demokrasi."
+      },
+      {
+        id: 15,
+        topic: "Nilai-Nilai Pancasila",
+        question: "Perhatikan ilustrasi berikut:",
+        illustration: "padikapas",
+        options: {
+          A: "Pangan dan sandang sebagai kebutuhan pokok menuju kesejahteraan bersama",
+          B: "Keberagaman bahasa daerah di Indonesia",
+          C: "Kewajiban membayar pajak kendaraan bermotor",
+          D: "Pembagian kekuasaan lembaga negara"
+        },
+        answer: "A",
+        explanation: "Padi melambangkan bahan makanan pokok (pangan) dan kapas melambangkan bahan pakaian (sandang). Keduanya menggambarkan cita-cita keadilan sosial dan kesejahteraan bagi seluruh rakyat Indonesia."
+      },
+      {
+        id: 16,
+        topic: "Norma dan Aturan",
+        question: "Norma adalah aturan atau pedoman perilaku yang berlaku dalam kehidupan masyarakat untuk mengatur pergaulan manusia agar tercipta ....",
+        options: {
+          A: "Persaingan bebas tanpa batas",
+          B: "Ketertiban, keamanan, dan keselarasan hidup bersama",
+          C: "Keuntungan bagi satu pihak saja",
+          D: "Kebebasan bertindak tanpa tanggung jawab"
+        },
+        answer: "B",
+        explanation: "Norma berfungsi sebagai pedoman bertingkah laku agar setiap anggota masyarakat saling menghormati hak dan kewajiban, sehingga tercipta ketertiban, keamanan, dan keharmonisan bersama."
+      },
+      {
+        id: 17,
+        topic: "Norma dan Aturan",
+        question: "Perhatikan gambar ilustrasi berikut:",
+        illustration: "norma",
+        options: {
+          A: "Norma kesopanan saja",
+          B: "Norma kesusilaan saja",
+          C: "Norma hukum dan aturan tertulis",
+          D: "Kebiasaan keluarga tanpa sanksi"
+        },
+        answer: "C",
+        explanation: "Rambu lalu lintas dan buku aturan menggambarkan norma hukum yang dibuat oleh lembaga berwenang, bersifat tertulis dan memaksa, serta memiliki sanksi tegas dari negara bagi pelanggarnya."
+      },
+      {
+        id: 18,
+        topic: "Norma dan Aturan",
+        question: "Norma yang bersumber dari hati nurani manusia dan berkaitan dengan baik atau buruknya suatu perbuatan disebut ....",
+        options: {
+          A: "Norma kesusilaan",
+          B: "Norma hukum",
+          C: "Norma adat",
+          D: "Norma agama"
+        },
+        answer: "A",
+        explanation: "Norma kesusilaan bersumber dari suara hati nurani setiap individu untuk membedakan perbuatan baik dan buruk. Pelanggarannya menimbulkan rasa menyesal, malu, atau bersalah dalam diri sendiri."
+      },
+      {
+        id: 19,
+        topic: "Norma dan Aturan",
+        question: "Sanksi bagi pelanggar norma kesusilaan yang paling utama dirasakan oleh pelaku adalah ....",
+        options: {
+          A: "Denda uang oleh polisi",
+          B: "Hukuman penjara bertahun-tahun",
+          C: "Rasa menyesal dan gelisah pada hati nurani",
+          D: "Dikucilkan oleh ketua adat di balai desa"
+        },
+        answer: "C",
+        explanation: "Karena bersumber dari hati nurani, pelanggaran norma kesusilaan (seperti berbohong atau menyontek) membuat batin pelaku merasa bersalah, malu, dan menyesal."
+      },
+      {
+        id: 20,
+        topic: "Norma dan Aturan",
+        question: "Mengucapkan salam ketika bertemu guru, berbicara dengan bahasa yang santun, dan tidak meludah sembarangan di tempat umum merupakan contoh pelaksanaan ....",
+        options: {
+          A: "Norma kesopanan",
+          B: "Norma hukum",
+          C: "Hukum pidana",
+          D: "Peraturan daerah"
+        },
+        answer: "A",
+        explanation: "Norma kesopanan mengatur tata krama dan sopan santun dalam pergaulan masyarakat sehari-hari. Pelanggarannya biasanya mendapat teguran, cibiran, atau dianggap kurang sopan oleh lingkungan sekitar."
+      },
+      {
+        id: 21,
+        topic: "Norma dan Aturan",
+        question: "Norma agama merupakan pedoman hidup yang berasal dari wahyu Tuhan Yang Maha Esa. Contoh perilaku yang sesuai dengan norma agama bagi seorang pelajar adalah ....",
+        options: {
+          A: "Beribadah sesuai keyakinan masing-masing dan menghormati teman yang sedang beribadah",
+          B: "Memaksa teman mengikuti ibadah agama tertentu",
+          C: "Mengganggu teman yang berdoa sebelum makan",
+          D: "Mengabaikan kewajiban ibadah saat ujian berlangsung"
+        },
+        answer: "A",
+        explanation: "Norma agama mendorong manusia untuk taat menjalankan ajaran agamanya sekaligus menghormati kebebasan beribadah pemeluk agama lain. Di lingkungan sekolah, menghormati ibadah teman juga memperkuat kerukunan."
+      },
+      {
+        id: 22,
+        topic: "Norma dan Aturan",
+        question: "Perbedaan utama antara norma hukum dan norma kesopanan terletak pada ....",
+        options: {
+          A: "Norma hukum tidak memiliki sanksi apa pun",
+          B: "Norma kesopanan dibuat oleh lembaga negara dan tertulis di undang-undang",
+          C: "Norma hukum bersifat tegas, memaksa, dan sanksinya dilaksanakan oleh aparat negara",
+          D: "Norma hukum hanya berlaku bagi anak-anak di bawah umur"
+        },
+        answer: "C",
+        explanation: "Norma hukum ditetapkan oleh lembaga yang berwenang, bersifat memaksa, serta memiliki sanksi yang tegas dan nyata (seperti denda, tilang, atau pidana) yang ditegakkan oleh aparat penegak hukum."
+      },
+      {
+        id: 23,
+        topic: "Norma dan Aturan",
+        question: "Aturan adat istiadat yang diwariskan turun-temurun dan dihormati oleh masyarakat di suatu daerah disebut ....",
+        options: {
+          A: "Norma kebiasaan / adat",
+          B: "Undang-undang dasar",
+          C: "Tata tertib lalu lintas",
+          D: "Peraturan menteri"
+        },
+        answer: "A",
+        explanation: "Norma adat (atau kebiasaan yang dilembagakan dalam masyarakat adat) tumbuh dari tradisi turun-temurun di suatu daerah dan ditaati warganya demi menjaga keselarasan adat."
+      },
+      {
+        id: 24,
+        topic: "Norma dan Aturan",
+        question: "Jika setiap warga mematuhi peraturan lalu lintas seperti berhenti saat lampu merah dan memakai helm standar, manfaat langsung yang tercipta adalah ....",
+        options: {
+          A: "Jalan raya menjadi semakin macet",
+          B: "Menurunnya risiko kecelakaan dan terciptanya ketertiban lalu lintas",
+          C: "Pengendara bisa melaju semaunya tanpa aturan",
+          D: "Petugas lalu lintas tidak perlu lagi mengatur jalan"
+        },
+        answer: "B",
+        explanation: "Kepatuhan terhadap aturan lalu lintas melindungi keselamatan pengendara dan pejalan kaki sekaligus menjaga kelancaran serta ketertiban di jalan raya."
+      },
+      {
+        id: 25,
+        topic: "Norma dan Aturan",
+        question: "Di rumah, orang tua membuat kesepakatan jam belajar dan penggunaan gawai bersama anak-anak. Tujuan utama aturan di keluarga tersebut adalah ....",
+        options: {
+          A: "Membatasi anak agar tidak pernah bermain",
+          B: "Menumbuhkan disiplin, tanggung jawab, dan keseimbangan waktu belajar serta istirahat",
+          C: "Membuat anggota keluarga saling bermusuhan",
+          D: "Menghilangkan komunikasi antaranggota keluarga"
+        },
+        answer: "B",
+        explanation: "Aturan di lingkungan keluarga disusun untuk melatih kedisiplinan, mengatur waktu secara seimbang, dan menumbuhkan tanggung jawab setiap anggota keluarga."
+      },
+      {
+        id: 26,
+        topic: "Norma dan Aturan",
+        question: "Tata tertib sekolah dibuat agar kegiatan belajar mengajar berjalan lancar. Sikap yang tepat ketika melihat teman membuang sampah sembarangan di halaman sekolah adalah ....",
+        options: {
+          A: "Ikut membuang sampah di tempat yang sama",
+          B: "Merekam dan menyebarkannya untuk mengejek",
+          C: "Menegurnya dengan sopan dan mengajak membuang sampah pada tempatnya",
+          D: "Mendiamkan saja karena bukan urusan pribadi"
+        },
+        answer: "C",
+        explanation: "Menegur secara santun dan mengajak menjaga kebersihan merupakan bentuk kepedulian terhadap tata tertib serta lingkungan bersama di sekolah."
+      },
+      {
+        id: 27,
+        topic: "Norma dan Aturan",
+        question: "Mengapa norma-norma yang ada dalam masyarakat saling melengkapi satu sama lain?",
+        options: {
+          A: "Karena satu jenis norma saja terkadang belum cukup mengatur seluruh aspek perilaku manusia",
+          B: "Karena norma agama dapat menghapuskan kebutuhan aturan hukum",
+          C: "Karena norma kesopanan selalu bertentangan dengan hati nurani",
+          D: "Karena sanksi norma selalu sama beratnya di setiap situasi"
+        },
+        answer: "A",
+        explanation: "Setiap norma memiliki sumber dan jangkauan yang berbeda—mulai dari hati nurani, pergaulan, agama, hingga hukum negara—sehingga saling melengkapi untuk mengatur kehidupan bersama."
+      },
+      {
+        id: 28,
+        topic: "Norma dan Aturan",
+        question: "Perbuatan mencuri barang milik orang lain melanggar beberapa norma sekaligus, antara lain ....",
+        options: {
+          A: "Norma kesusilaan dan norma hukum",
+          B: "Hanya aturan piket kelas",
+          C: "Aturan permainan olahraga saja",
+          D: "Tata cara berpakaian seragam"
+        },
+        answer: "A",
+        explanation: "Mencuri bertentangan dengan suara hati nurani dan nilai kejujuran (norma kesusilaan) sekaligus melanggar ketentuan hukum yang berlaku di masyarakat dan negara (norma hukum)."
+      },
+      {
+        id: 29,
+        topic: "Musyawarah & Demokrasi",
+        question: "Perhatikan gambar ilustrasi berikut:",
+        illustration: "musyawarah",
+        options: {
+          A: "Memaksakan pendapat sendiri agar selalu menang",
+          B: "Menghargai pendapat orang lain dan mencari kesepakatan bersama",
+          C: "Meninggalkan rapat sebelum keputusan diambil",
+          D: "Menertawakan usulan teman yang berbeda"
+        },
+        answer: "B",
+        explanation: "Musyawarah mengutamakan dialog terbuka, saling menghormati pendapat, dan mencari mufakat demi kepentingan bersama sesuai semangat sila keempat Pancasila."
+      },
+      {
+        id: 30,
+        topic: "Musyawarah & Demokrasi",
+        question: "Dalam rapat pemilihan ketua kelas, terdapat beberapa calon dengan gagasan berbeda. Jika musyawarah mufakat belum mencapai kata sepakat, langkah yang dapat ditempuh secara tertib adalah ....",
+        options: {
+          A: "Membubarkan kelas tanpa hasil",
+          B: "Melakukan pemungutan suara (voting) secara jujur dan menerima hasilnya dengan lapang dada",
+          C: "Menunjuk teman terdekat secara sepihak",
+          D: "Berdebat tanpa batas waktu hingga ada yang marah"
+        },
+        answer: "B",
+        explanation: "Apabila mufakat bulat tidak tercapai setelah bermusyawarah secara wajar, pemungutan suara (voting) yang jujur dan adil menjadi cara demokratis yang sah, dan semua pihak harus menghormati hasilnya."
+      },
+      {
+        id: 31,
+        topic: "Musyawarah & Demokrasi",
+        question: "Setelah keputusan bersama disepakati dalam musyawarah kelas, kewajiban seluruh anggota kelas adalah ....",
+        options: {
+          A: "Melaksanakan keputusan tersebut dengan penuh tanggung jawab",
+          B: "Mengabaikannya jika tidak sesuai keinginan pribadi",
+          C: "Menghalangi teman lain yang menjalankannya",
+          D: "Mengubah isi keputusan tanpa musyawarah"
+        },
+        answer: "A",
+        explanation: "Keputusan musyawarah merupakan kesepakatan bersama sehingga harus dilaksanakan secara konsekuen dan penuh tanggung jawab oleh seluruh peserta."
+      },
+      {
+        id: 32,
+        topic: "Musyawarah & Demokrasi",
+        question: "Ciri utama orang yang berjiwa musyawarah saat berdiskusi adalah ....",
+        options: {
+          A: "Selalu merasa paling benar",
+          B: "Mau mendengarkan pendapat orang lain dengan sabar dan terbuka",
+          C: "Mudah tersinggung ketika diberi masukan",
+          D: "Enggan menyampaikan pendapat yang membangun"
+        },
+        answer: "B",
+        explanation: "Sikap terbuka, mau menyimak argumen orang lain, dan bersedia menerima masukan yang lebih baik merupakan modal penting dalam bermusyawarah."
+      },
+      {
+        id: 33,
+        topic: "Keberagaman & Bhinneka Tunggal Ika",
+        question: "Semboyan 'Bhinneka Tunggal Ika' yang terdapat pada pita cengkeraman Garuda Pancasila berarti ....",
+        options: {
+          A: "Berbeda-beda tetapi tetap satu jua",
+          B: "Semua warga harus seragam tanpa perbedaan",
+          C: "Satu daerah lebih tinggi dari daerah lain",
+          D: "Persatuan hanya ada di satu pulau"
+        },
+        answer: "A",
+        explanation: "'Bhinneka Tunggal Ika' berasal dari bahasa Jawa Kuno yang bermakna 'berbeda-beda tetapi tetap satu jua'. Semboyan ini menegaskan bahwa di tengah keberagaman, bangsa Indonesia tetap satu kesatuan."
+      },
+      {
+        id: 34,
+        topic: "Keberagaman & Bhinneka Tunggal Ika",
+        question: "Indonesia memiliki keragaman suku, bahasa daerah, agama, dan budaya. Sikap yang paling tepat menghadapi keberagaman tersebut adalah ....",
+        options: {
+          A: "Toleransi dan saling menghargai perbedaan",
+          B: "Etnosentrisme yang merendahkan budaya lain",
+          C: "Menutup diri dari pergaulan dengan kelompok lain",
+          D: "Memicu perselisihan atas nama daerah"
+        },
+        answer: "A",
+        explanation: "Keberagaman merupakan kekayaan bangsa. Sikap toleransi, saling menghormati, dan terbuka terhadap perbedaan membantu menjaga kerukunan dan persatuan."
+      },
+      {
+        id: 35,
+        topic: "Keberagaman & Bhinneka Tunggal Ika",
+        question: "Contoh perilaku toleransi antarumat beragama di lingkungan sekitar tempat tinggal adalah ....",
+        options: {
+          A: "Menjaga ketenangan saat tetangga berbeda agama sedang melaksanakan ibadah",
+          B: "Melarang tetangga merayakan hari besar keagamaannya",
+          C: "Membunyikan musik keras-keras di dekat tempat ibadah saat kebaktian atau salat berlangsung",
+          D: "Menolak menyapa tetangga yang berbeda keyakinan"
+        },
+        answer: "A",
+        explanation: "Menjaga ketenangan dan menghormati waktu ibadah pemeluk agama lain merupakan wujud nyata toleransi beragama dalam kehidupan bertetangga."
+      },
+      {
+        id: 36,
+        topic: "Keberagaman & Bhinneka Tunggal Ika",
+        question: "Di sekolah diadakan pentas seni budaya daerah. Salah satu siswa menampilkan tarian daerah lain yang bukan daerah asalnya. Sikap tersebut menunjukkan ....",
+        options: {
+          A: "Kurangnya rasa cinta pada budaya sendiri",
+          B: "Penghargaan dan ketertarikan positif terhadap kekayaan budaya nusantara",
+          C: "Pelanggaran terhadap tata tertib sekolah",
+          D: "Sikap tidak peduli terhadap seni"
+        },
+        answer: "B",
+        explanation: "Mempelajari dan menampilkan seni budaya dari daerah lain menunjukkan keterbukaan serta penghargaan terhadap kekayaan budaya nasional yang beragam."
+      },
+      {
+        id: 37,
+        topic: "Gotong Royong & Kerja Sama",
+        question: "Gotong royong merupakan nilai luhur bangsa Indonesia yang dilakukan dengan cara ....",
+        options: {
+          A: "Bekerja sama secara sukarela untuk tujuan bersama",
+          B: "Mengandalkan satu orang saja untuk menyelesaikan semua tugas",
+          C: "Bekerja hanya jika mendapat imbalan besar",
+          D: "Saling menjatuhkan agar terlihat paling hebat"
+        },
+        answer: "A",
+        explanation: "Gotong royong berarti bekerja bersama-sama, saling membantu, dan bahu-membahu secara sukarela demi mencapai kepentingan atau kesejahteraan bersama."
+      },
+      {
+        id: 38,
+        topic: "Gotong Royong & Kerja Sama",
+        question: "Manfaat kegiatan kerja bakti membersihkan selokan dan lingkungan RT secara bergotong royong adalah ....",
+        options: {
+          A: "Lingkungan menjadi kotor dan rawan banjir",
+          B: "Pekerjaan terasa lebih ringan, lingkungan bersih, dan kerukunan warga semakin kuat",
+          C: "Warga menjadi saling curiga",
+          D: "Waktu libur terbuang tanpa manfaat"
+        },
+        answer: "B",
+        explanation: "Kerja bakti membuat pekerjaan berat terasa lebih ringan dan cepat selesai, menciptakan lingkungan yang sehat, serta mempererat tali silaturahmi antarwarga."
+      },
+      {
+        id: 39,
+        topic: "Gotong Royong & Kerja Sama",
+        question: "Dalam kerja kelompok membersihkan ruang kelas, seorang siswa justru bermain gawai dan tidak mau membantu. Dampak dari sikap tersebut adalah ....",
+        options: {
+          A: "Tugas kelompok menjadi kurang adil dan beban teman lain bertambah",
+          B: "Kelas menjadi otomatis paling bersih di sekolah",
+          C: "Semua anggota kelompok menjadi lebih kompak",
+          D: "Nilai kerja sama kelompok meningkat pesat"
+        },
+        answer: "A",
+        explanation: "Kurangnya tanggung jawab dalam kerja kelompok menyebabkan pembagian tugas tidak seimbang dan membebani anggota lain yang bekerja."
+      },
+      {
+        id: 40,
+        topic: "Hak dan Kewajiban",
+        question: "Dalam kehidupan sehari-hari, hubungan antara hak dan kewajiban yang seimbang berarti ....",
+        options: {
+          A: "Menuntut hak sebanyak-banyaknya tanpa mau melaksanakan kewajiban",
+          B: "Melaksanakan kewajiban terlebih dahulu atau secara seimbang sebelum menuntut hak",
+          C: "Menghapuskan kewajiban bagi seluruh warga negara",
+          D: "Hanya melaksanakan kewajiban saat diawasi"
+        },
+        answer: "B",
+        explanation: "Hak dan kewajiban tidak dapat dipisahkan. Setiap orang perlu memenuhi kewajibannya agar hak dirinya dan hak orang lain dapat terpenuhi secara adil."
+      },
+      {
+        id: 41,
+        topic: "Hak dan Kewajiban",
+        question: "Sebagai seorang siswa SMP, hak yang diperoleh di sekolah antara lain adalah ....",
+        options: {
+          A: "Mendapatkan pengajaran dan bimbingan dari guru serta menggunakan fasilitas belajar sesuai aturan",
+          B: "Membolos pelajaran kapan saja tanpa izin",
+          C: "Merusak fasilitas sekolah tanpa sanksi",
+          D: "Menentukan nilai rapor sendiri"
+        },
+        answer: "A",
+        explanation: "Siswa berhak memperoleh pendidikan, bimbingan belajar, serta memanfaatkan sarana prasarana sekolah dengan tertib sesuai ketentuan yang berlaku."
+      },
+      {
+        id: 42,
+        topic: "Hak dan Kewajiban",
+        question: "Kewajiban seorang pelajar di rumah yang mendukung keberhasilan belajar di sekolah adalah ....",
+        options: {
+          A: "Membantu pekerjaan ringan di rumah, belajar teratur, dan menghormati orang tua",
+          B: "Bermain gim sepanjang malam hingga lupa waktu belajar",
+          C: "Menyembunyikan surat pemberitahuan dari sekolah",
+          D: "Membantah nasihat orang tua dengan kasar"
+        },
+        answer: "A",
+        explanation: "Menghormati orang tua, membantu tugas rumah sesuai kemampuan, dan mengatur waktu belajar merupakan kewajiban pelajar di lingkungan keluarga."
+      },
+      {
+        id: 43,
+        topic: "Hak dan Kewajiban",
+        question: "Jika setiap warga negara melaksanakan kewajibannya membayar pajak tepat waktu sesuai ketentuan, maka negara dapat ....",
+        options: {
+          A: "Membiayai pembangunan fasilitas umum, pendidikan, kesehatan, dan pelayanan publik",
+          B: "Menghentikan seluruh layanan masyarakat",
+          C: "Menghapuskan peraturan perundang-undangan",
+          D: "Menggunakan dana publik hanya untuk kepentingan pribadi pejabat"
+        },
+        answer: "A",
+        explanation: "Pajak merupakan salah satu sumber penerimaan negara yang digunakan untuk membiayai pembangunan infrastruktur, fasilitas pendidikan, layanan kesehatan, dan kepentingan umum."
+      },
+      {
+        id: 44,
+        topic: "NKRI & Wilayah Nusantara",
+        question: "Bentuk negara Indonesia berdasarkan Pasal 1 ayat (1) Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 adalah ....",
+        options: {
+          A: "Negara Kesatuan yang berbentuk Republik",
+          B: "Negara Serikat (Federal)",
+          C: "Negara Kerajaan (Monarki)",
+          D: "Negara Bagian"
+        },
+        answer: "A",
+        explanation: "Pasal 1 ayat (1) UUD NRI Tahun 1945 menegaskan bahwa 'Negara Indonesia ialah Negara Kesatuan, yang berbentuk Republik'."
+      },
+      {
+        id: 45,
+        topic: "NKRI & Wilayah Nusantara",
+        question: "Indonesia dikenal sebagai negara kepulauan terbesar di dunia. Wilayah darat dan perairannya terbentang dari Sabang sampai Merauke dan dari Miangas sampai Pulau Rote. Hal ini menunjukkan bahwa ....",
+        options: {
+          A: "Menjaga keutuhan wilayah NKRI merupakan tanggung jawab bersama seluruh warga negara",
+          B: "Wilayah perbatasan hanya menjadi urusan penduduk perbatasan saja",
+          C: "Pulau-pulau kecil tidak perlu diperhatikan kelestariannya",
+          D: "Keberagaman geografis menghalangi persatuan bangsa"
+        },
+        answer: "A",
+        explanation: "Luasnya wilayah kepulauan Indonesia menuntut rasa persatuan, kepedulian, dan tanggung jawab bersama seluruh warga negara untuk menjaga keutuhan dan kedaulatan NKRI."
+      },
+      {
+        id: 46,
+        topic: "NKRI & Wilayah Nusantara",
+        question: "Wawasan Nusantara memandang wilayah Indonesia sebagai satu kesatuan politik, ekonomi, sosial budaya, serta pertahanan dan keamanan. Tujuan utama pandangan ini adalah ....",
+        options: {
+          A: "Memecah wilayah negara menjadi bagian yang saling terpisah",
+          B: "Mewujudkan persatuan dan kesatuan bangsa di tengah keragaman wilayah",
+          C: "Mengutamakan satu pulau dan mengabaikan pulau lainnya",
+          D: "Menghilangkan identitas daerah"
+        },
+        answer: "B",
+        explanation: "Wawasan Nusantara bertujuan menumbuhkan kesadaran bahwa seluruh wilayah dan rakyat Indonesia merupakan satu kesatuan utuh sehingga persatuan nasional tetap terjaga."
+      },
+      {
+        id: 47,
+        topic: "Perumusan & Penetapan Pancasila",
+        question: "Sikap yang patut diteladani dari para tokoh perumus Pancasila dalam sidang BPUPKI dan PPKI adalah ....",
+        options: {
+          A: "Mengutamakan kepentingan bangsa dan negara di atas kepentingan pribadi maupun golongan",
+          B: "Memaksakan usulan sendiri tanpa mau berdiskusi",
+          C: "Mudah menyerah ketika menghadapi perbedaan pendapat",
+          D: "Menunda-nunda musyawarah demi keuntungan pribadi"
+        },
+        answer: "A",
+        explanation: "Para pendiri bangsa menunjukkan semangat persatuan, jiwa besar, dan keikhlasan menempatkan kepentingan bangsa di atas kepentingan pribadi maupun kelompok."
+      },
+      {
+        id: 48,
+        topic: "Norma dan Aturan",
+        question: "Mengapa seseorang yang melanggar aturan sekolah perlu menerima konsekuensi atau sanksi yang wajar dan mendidik?",
+        options: {
+          A: "Untuk mempermalukan siswa di depan umum",
+          B: "Agar siswa menyadari kesalahannya, memperbaiki sikap, dan disiplin mematuhi aturan",
+          C: "Supaya siswa merasa dendam kepada guru",
+          D: "Agar peraturan sekolah menjadi tidak jelas"
+        },
+        answer: "B",
+        explanation: "Sanksi yang mendidik bertujuan menyadarkan pelanggar atas perbuatannya, membina tanggung jawab, serta menjaga ketertiban bersama agar tidak terulang."
+      },
+      {
+        id: 49,
+        topic: "Keberagaman & Bhinneka Tunggal Ika",
+        question: "Contoh perilaku yang dapat merusak persatuan dan kesatuan di lingkungan sekolah maupun media sosial adalah ....",
+        options: {
+          A: "Menyebarkan berita bohong (hoaks) dan ujaran kebencian yang memicu pertengkaran",
+          B: "Mengajak teman berdiskusi dengan santun tentang pelajaran",
+          C: "Mengucapkan selamat hari raya kepada teman yang merayakan",
+          D: "Ikut serta dalam kegiatan bakti sosial sekolah"
+        },
+        answer: "A",
+        explanation: "Menyebarkan hoaks atau ujaran kebencian dapat menimbulkan kesalahpahaman, perpecahan, dan permusuhan, sehingga harus dihindari oleh pelajar yang bijak."
+      },
+      {
+        id: 50,
+        topic: "Nilai-Nilai Pancasila",
+        question: "Bagaimana cara terbaik seorang siswa SMP Kelas 7 mengamalkan nilai-nilai Pancasila dalam kehidupan sehari-hari?",
+        options: {
+          A: "Menghafalkan bunyi sila Pancasila saja tanpa menerapkannya",
+          B: "Menerapkannya secara nyata melalui sikap jujur, disiplin, toleran, peduli, dan gemar bermusyawarah",
+          C: "Menerapkannya hanya saat pelajaran PKN berlangsung",
+          D: "Menunggu orang lain bersikap baik terlebih dahulu"
+        },
+        answer: "B",
+        explanation: "Pancasila bukan sekadar untuk dihafalkan, melainkan diwujudkan melalui kebiasaan positif sehari-hari seperti kejujuran, kedisiplinan, toleransi, kepedulian sosial, dan musyawarah."
+      }
+    ];
+
+    /* =========================================================================
+       STATE APLIKASI
+       ========================================================================= */
+    const state = {
+      userAnswers: {}, // { [questionId]: "A" | "B" | "C" | "D" }
+      isSubmitted: false,
+      pendingAction: null
+    };
+
+    /* =========================================================================
+       REFERENSI ELEMEN DOM
+       ========================================================================= */
+    const questionsContainer = document.getElementById("questionsContainer");
+    const numberGrid = document.getElementById("numberGrid");
+    const answeredCounter = document.getElementById("answeredCounter");
+    const scoreResultSection = document.getElementById("scoreResultSection");
+    const scoreStatusBadge = document.getElementById("scoreStatusBadge");
+    const statNilai = document.getElementById("statNilai");
+    const statBenar = document.getElementById("statBenar");
+    const statSalah = document.getElementById("statSalah");
+    const statKosong = document.getElementById("statKosong");
+    const scoreFeedbackMessage = document.getElementById("scoreFeedbackMessage");
+
+    const confirmModal = document.getElementById("confirmModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMessage = document.getElementById("modalMessage");
+    const btnModalCancel = document.getElementById("btnModalCancel");
+    const btnModalConfirm = document.getElementById("btnModalConfirm");
+
+    /* =========================================================================
+       FUNGSI RENDER SOAL & PANEL NOMOR
+       ========================================================================= */
+    function renderQuestions() {
+      const fragment = document.createDocumentFragment();
+
+      QUESTIONS.forEach((q) => {
+        const card = document.createElement("article");
+        card.className = "question-card";
+        card.id = `question-card-${q.id}`;
+
+        const illustrationHtml = q.illustration && SVG_ILLUSTRATIONS[q.illustration]
+          ? SVG_ILLUSTRATIONS[q.illustration]
+          : "";
+
+        const optionKeys = ["A", "B", "C", "D"];
+        const optionsHtml = optionKeys.map((key) => {
+          const inputId = `q${q.id}_opt${key}`;
+          return `
+            <label class="option-label" id="label-q${q.id}-${key}" for="${inputId}">
+              <input
+                type="radio"
+                id="${inputId}"
+                name="question_${q.id}"
+                value="${key}"
+                data-qid="${q.id}"
+              />
+              <span class="option-content">
+                <span class="option-key">${key}.</span>${escapeHtml(q.options[key])}
+              </span>
+            </label>
+          `;
+        }).join("");
+
+        card.innerHTML = `
+          <div class="question-meta">
+            <span class="q-badge">Soal Nomor ${q.id}</span>
+            <span class="q-topic">${escapeHtml(q.topic)}</span>
+          </div>
+          <p class="question-text">${escapeHtml(q.question)}</p>
+          ${illustrationHtml}
+          <div class="options-group" role="radiogroup" aria-label="Pilihan jawaban soal nomor ${q.id}">
+            ${optionsHtml}
+          </div>
+          <div id="explanation-q${q.id}" class="explanation-box" aria-live="polite"></div>
+        `;
+
+        fragment.appendChild(card);
+      });
+
+      questionsContainer.innerHTML = "";
+      questionsContainer.appendChild(fragment);
+
+      // Pasang event listener perubahan pilihan jawaban
+      questionsContainer.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.addEventListener("change", handleOptionChange);
+      });
+    }
+
+    function renderNumberGrid() {
+      const fragment = document.createDocumentFragment();
+
+      QUESTIONS.forEach((q) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "num-btn";
+        btn.id = `nav-btn-${q.id}`;
+        btn.textContent = String(q.id);
+        btn.setAttribute("aria-label", `Lompat ke soal nomor ${q.id}`);
+        btn.addEventListener("click", () => {
+          const targetCard = document.getElementById(`question-card-${q.id}`);
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+        fragment.appendChild(btn);
+      });
+
+      numberGrid.innerHTML = "";
+      numberGrid.appendChild(fragment);
+    }
+
+    /* =========================================================================
+       HANDLER INTERAKSI PILIHAN & STATUS NAVIGASI
+       ========================================================================= */
+    function handleOptionChange(event) {
+      if (state.isSubmitted) {
+        // Jika sudah disubmit, cegah perubahan langsung dan kembalikan pilihan sesuai state
+        syncRadioInputsFromState();
+        return;
+      }
+
+      const qid = Number(event.target.dataset.qid);
+      const selectedValue = event.target.value;
+      state.userAnswers[qid] = selectedValue;
+
+      updateOptionHighlight(qid);
+      updateProgressUI();
+    }
+
+    function updateOptionHighlight(qid) {
+      const selectedVal = state.userAnswers[qid];
+      ["A", "B", "C", "D"].forEach((key) => {
+        const label = document.getElementById(`label-q${qid}-${key}`);
+        if (label) {
+          label.classList.toggle("selected-opt", selectedVal === key);
+        }
+      });
+    }
+
+    function updateProgressUI() {
+      const total = QUESTIONS.length;
+      const answeredCount = Object.keys(state.userAnswers).length;
+      answeredCounter.textContent = `${answeredCount} / ${total}`;
+
+      QUESTIONS.forEach((q) => {
+        const card = document.getElementById(`question-card-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const isAns = Boolean(state.userAnswers[q.id]);
+
+        if (card) {
+          card.classList.toggle("answered-card", !state.isSubmitted && isAns);
+        }
+
+        if (navBtn && !state.isSubmitted) {
+          navBtn.classList.toggle("is-answered", isAns);
+        }
+      });
+    }
+
+    function syncRadioInputsFromState() {
+      QUESTIONS.forEach((q) => {
+        const chosen = state.userAnswers[q.id];
+        ["A", "B", "C", "D"].forEach((key) => {
+          const radio = document.getElementById(`q${q.id}_opt${key}`);
+          if (radio) {
+            radio.checked = chosen === key;
+            radio.disabled = state.isSubmitted;
+          }
+        });
+      });
+    }
+
+    /* =========================================================================
+       PENILAIAN OTOMATIS, SKOR AKHIR & PEMBAHASAN SETIAP SOAL
+       ========================================================================= */
+    function requestSubmit() {
+      if (state.isSubmitted) {
+        scoreResultSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      const answeredCount = Object.keys(state.userAnswers).length;
+      const unansweredCount = QUESTIONS.length - answeredCount;
+
+      if (unansweredCount > 0) {
+        openModal(
+          "Masih Ada Soal Belum Dijawab",
+          `Terdapat ${unansweredCount} soal yang belum Anda jawab dari total ${QUESTIONS.length} soal. Apakah Anda tetap ingin mengumpulkan jawaban sekarang?`,
+          executeSubmit
+        );
+      } else {
+        openModal(
+          "Kumpulkan Jawaban Latihan?",
+          "Setelah dikumpulkan, skor akhir dan pembahasan lengkap untuk setiap soal akan langsung ditampilkan.",
+          executeSubmit
+        );
+      }
+    }
+
+    function executeSubmit() {
+      state.isSubmitted = true;
+      syncRadioInputsFromState();
+
+      let correctCount = 0;
+      let wrongCount = 0;
+      let unansweredCount = 0;
+
+      QUESTIONS.forEach((q) => {
+        const userChoice = state.userAnswers[q.id] || null;
+        const isCorrect = userChoice === q.answer;
+        const card = document.getElementById(`question-card-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const expBox = document.getElementById(`explanation-q${q.id}`);
+
+        // Bersihkan kelas status sebelumnya
+        card.classList.remove("answered-card", "result-correct", "result-wrong");
+        navBtn.classList.remove("is-answered", "is-correct", "is-wrong");
+
+        ["A", "B", "C", "D"].forEach((key) => {
+          const optLabel = document.getElementById(`label-q${q.id}-${key}`);
+          optLabel.classList.remove("selected-opt", "opt-correct-highlight", "opt-wrong-highlight");
+          if (key === q.answer) {
+            optLabel.classList.add("opt-correct-highlight");
+          } else if (userChoice === key && !isCorrect) {
+            optLabel.classList.add("opt-wrong-highlight");
+          }
+        });
+
+        let statusText = "";
+        let statusClass = "";
+
+        if (isCorrect) {
+          correctCount += 1;
+          card.classList.add("result-correct");
+          navBtn.classList.add("is-correct");
+          statusText = `Jawaban Anda BENAR (${userChoice})`;
+          statusClass = "status-benar";
+        } else {
+          if (!userChoice) {
+            unansweredCount += 1;
+          }
+          wrongCount += 1;
+          card.classList.add("result-wrong");
+          navBtn.classList.add("is-wrong");
+          statusText = userChoice
+            ? `Jawaban Anda KURANG TEPAT (${userChoice}) — Kunci: ${q.answer}`
+            : `Belum Dijawab — Kunci Jawaban: ${q.answer}`;
+          statusClass = "status-salah";
+        }
+
+        const userChoiceLabel = userChoice
+          ? `${userChoice}. ${escapeHtml(q.options[userChoice])}`
+          : "Tidak dijawab";
+        const correctChoiceLabel = `${q.answer}. ${escapeHtml(q.options[q.answer])}`;
+
+        expBox.innerHTML = `
+          <div class="explanation-header ${statusClass}">${statusText}</div>
+          <div class="explanation-body">
+            <p><strong>Jawaban Anda:</strong> ${userChoiceLabel}</p>
+            <p><strong>Kunci Jawaban Benar:</strong> ${correctChoiceLabel}</p>
+            <p><strong>Pembahasan:</strong> ${escapeHtml(q.explanation)}</p>
+          </div>
+        `;
+        expBox.classList.add("visible");
+      });
+
+      const finalScore = Math.round((correctCount / QUESTIONS.length) * 100);
+
+      statNilai.textContent = String(finalScore);
+      statBenar.textContent = String(correctCount);
+      statSalah.textContent = String(wrongCount);
+      statKosong.textContent = String(unansweredCount);
+
+      if (finalScore >= 75) {
+        scoreStatusBadge.textContent = "Tercapai / Sangat Baik";
+        scoreStatusBadge.className = "score-badge pass";
+        scoreFeedbackMessage.textContent =
+          `Hebat! Nilai Anda ${finalScore} dari 100. Pemahaman Anda terhadap materi Pendidikan Pancasila Kelas 7 Semester 1 sudah sangat baik. Silakan baca pembahasan pada setiap soal untuk memperkuat pemahaman.`;
+      } else {
+        scoreStatusBadge.textContent = "Perlu Penguatan Materi";
+        scoreStatusBadge.className = "score-badge remedial";
+        scoreFeedbackMessage.textContent =
+          `Nilai Anda ${finalScore} dari 100. Jangan berkecil hati! Pelajari pembahasan pada setiap soal yang masih salah atau belum terjawab, lalu coba ulangi latihan kembali.`;
+      }
+
+      scoreResultSection.classList.add("visible");
+      scoreResultSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    /* =========================================================================
+       RESET / ULANGI LATIHAN
+       ========================================================================= */
+    function requestReset() {
+      openModal(
+        "Ulangi Latihan dari Awal?",
+        "Semua jawaban yang telah dipilih, skor akhir, dan pembahasan akan dihapus agar Anda bisa mengerjakan ulang 50 soal.",
+        executeReset
+      );
+    }
+
+    function executeReset() {
+      state.userAnswers = {};
+      state.isSubmitted = false;
+
+      scoreResultSection.classList.remove("visible");
+
+      QUESTIONS.forEach((q) => {
+        const card = document.getElementById(`question-card-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const expBox = document.getElementById(`explanation-q${q.id}`);
+
+        card.classList.remove("answered-card", "result-correct", "result-wrong");
+        navBtn.classList.remove("is-answered", "is-correct", "is-wrong");
+
+        expBox.classList.remove("visible", "status-benar", "status-salah");
+        expBox.innerHTML = "";
+
+        ["A", "B", "C", "D"].forEach((key) => {
+          const radio = document.getElementById(`q${q.id}_opt${key}`);
+          const label = document.getElementById(`label-q${q.id}-${key}`);
+          if (radio) {
+            radio.checked = false;
+            radio.disabled = false;
+          }
+          if (label) {
+            label.classList.remove("selected-opt", "opt-correct-highlight", "opt-wrong-highlight");
+          }
+        });
+      });
+
+      updateProgressUI();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* =========================================================================
+       MODAL KONFIRMASI KUSTOM
+       ========================================================================= */
+    function openModal(title, message, onConfirmCallback) {
+      modalTitle.textContent = title;
+      modalMessage.textContent = message;
+      state.pendingAction = onConfirmCallback;
+      confirmModal.classList.add("open");
+    }
+
+    function closeModal() {
+      confirmModal.classList.remove("open");
+      state.pendingAction = null;
+    }
+
+    /* =========================================================================
+       UTILITAS KEAMANAN TEKS (ESCAPE HTML)
+       ========================================================================= */
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    /* =========================================================================
+       INISIALISASI APLIKASI
+       ========================================================================= */
+    function initApp() {
+      renderQuestions();
+      renderNumberGrid();
+      updateProgressUI();
+
+      document.getElementById("btnTopSubmit").addEventListener("click", requestSubmit);
+      document.getElementById("btnSidebarSubmit").addEventListener("click", requestSubmit);
+      document.getElementById("btnTopReset").addEventListener("click", requestReset);
+      document.getElementById("btnResultReset").addEventListener("click", requestReset);
+
+      document.getElementById("btnScrollTopQuestions").addEventListener("click", () => {
+        const firstCard = document.getElementById("question-card-1");
+        if (firstCard) {
+          firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+
+      btnModalCancel.addEventListener("click", closeModal);
+      btnModalConfirm.addEventListener("click", () => {
+        const action = state.pendingAction;
+        closeModal();
+        if (typeof action === "function") {
+          action();
+        }
+      });
+
+      confirmModal.addEventListener("click", (e) => {
+        if (e.target === confirmModal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && confirmModal.classList.contains("open")) {
+          closeModal();
+        }
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", initApp);
+  </script>
+</body>
+</html>

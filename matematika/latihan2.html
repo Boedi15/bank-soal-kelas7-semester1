@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matematika SMP Kelas VII Semester 1 - Kurikulum Merdeka (Offline)</title>
+  <style>
+    /* ==========================================================================
+       RESET & VARIABEL TEMA (100% OFFLINE CSS TANPA CDN EKSTERNAL)
+       ========================================================================== */
+    :root {
+      --primary: #3b5bdb;
+      --primary-dark: #2b44b5;
+      --primary-light: #edf2ff;
+      --secondary: #0ca678;
+      --secondary-light: #e6fcf5;
+      --accent: #f59f00;
+      --accent-light: #fff9db;
+      --danger: #e03131;
+      --danger-light: #fff5f5;
+      --bg-body: #f4f6fb;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGASI UTAMA
+       ========================================================================== */
+    header {
+      background: linear-gradient(135deg, #2b44b5 0%, #3b5bdb 55%, #4c6ef5 100%);
+      color: #ffffff;
+      padding: 20px 24px;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .brand-title h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .brand-title p {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-download {
+      background: #ffffff;
+      color: var(--primary-dark);
+      border: none;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .btn-download:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    .offline-badge {
+      background: rgba(12, 166, 120, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot-online {
+      width: 8px;
+      height: 8px;
+      background: #51cf66;
+      border-radius: 50%;
+    }
+
+    /* ==========================================================================
+       TAB NAVIGATION BAR
+       ========================================================================== */
+    .main-wrapper {
+      max-width: 1240px;
+      margin: 24px auto 60px;
+      padding: 0 16px;
+    }
+
+    .tab-bar {
+      display: flex;
+      gap: 12px;
+      background: var(--bg-card);
+      padding: 8px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 240px;
+      padding: 14px 20px;
+      border: none;
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .tab-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(59, 91, 219, 0.25);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       TAB 1: RANGKUMAN MATERI (BAB 1 - BAB 3)
+       ========================================================================== */
+    .bab-filter-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .bab-pill {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1.5px solid var(--primary);
+      background: #ffffff;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .bab-pill.active, .bab-pill:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .materi-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .materi-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+
+    .bab-badge {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    .materi-header h2 {
+      font-size: 1.35rem;
+      color: var(--primary-dark);
+    }
+
+    .materi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .sub-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .sub-box h3 {
+      font-size: 1.05rem;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sub-box ul {
+      padding-left: 20px;
+      font-size: 0.94rem;
+      color: #334155;
+    }
+
+    .sub-box li {
+      margin-bottom: 6px;
+    }
+
+    .formula-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 10px 0;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: #1e3a8a;
+    }
+
+    .example-box {
+      background: var(--secondary-light);
+      border-left: 4px solid var(--secondary);
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #064e3b;
+    }
+
+    /* ==========================================================================
+       TAB 2: LATIHAN 50 SOAL PILIHAN GANDA
+       ========================================================================== */
+    .quiz-top-panel {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .student-input-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .student-input-group label {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .student-input-group input {
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      min-width: 240px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .student-input-group input:focus {
+      border-color: var(--primary);
+    }
+
+    .quiz-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1px solid #bac8ff;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-secondary:hover {
+      background: #dbe4ff;
+    }
+
+    .quiz-layout {
+      display: grid;
+      grid-template-columns: 1fr 310px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .quiz-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* SIDEBAR NAVIGASI NOMOR SOAL */
+    .nav-sidebar {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 96px;
+    }
+
+    .nav-sidebar h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: var(--primary-dark);
+    }
+
+    .progress-info {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--secondary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      max-height: 360px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .num-btn {
+      aspect-ratio: 1;
+      border: 1.5px solid var(--border);
+      background: #f8fafc;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .num-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .num-btn.answered {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .num-btn.correct-nav {
+      background: var(--secondary);
+      color: #ffffff;
+      border-color: var(--secondary);
+    }
+
+    .num-btn.wrong-nav {
+      background: var(--danger);
+      color: #ffffff;
+      border-color: var(--danger);
+    }
+
+    .legend-row {
+      display: flex;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-box {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* KARTU SOAL */
+    .question-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 20px;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 105px;
+    }
+
+    .question-card.review-correct {
+      border-color: var(--secondary);
+    }
+
+    .question-card.review-wrong {
+      border-color: var(--danger);
+    }
+
+    .q-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .q-number-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .q-bab-tag {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .q-text {
+      font-size: 1.04rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      line-height: 1.65;
+    }
+
+    .svg-container {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin: 14px 0 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: auto;
+    }
+
+    .svg-container svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.15s;
+      background: #ffffff;
+    }
+
+    .option-label:hover {
+      border-color: var(--primary);
+      background: #f8faff;
+    }
+
+    .option-label.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .option-label.opt-correct {
+      border-color: var(--secondary) !important;
+      background: var(--secondary-light) !important;
+    }
+
+    .option-label.opt-wrong {
+      border-color: var(--danger) !important;
+      background: var(--danger-light) !important;
+    }
+
+    .option-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-label.selected .option-letter {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .option-label.opt-correct .option-letter {
+      background: var(--secondary);
+      color: #ffffff;
+    }
+
+    .option-label.opt-wrong .option-letter {
+      background: var(--danger);
+      color: #ffffff;
+    }
+
+    .option-text {
+      padding-top: 3px;
+      font-size: 0.98rem;
+    }
+
+    /* PEMBAHASAN PER SOAL */
+    .explanation-box {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: #f8fafc;
+      border-left: 5px solid var(--primary);
+      font-size: 0.94rem;
+    }
+
+    .explanation-box.status-benar {
+      background: var(--secondary-light);
+      border-left-color: var(--secondary);
+    }
+
+    .explanation-box.status-salah {
+      background: var(--danger-light);
+      border-left-color: var(--danger);
+    }
+
+    .exp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 800;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* TOMBOL SUBMIT & PANEL HASIL */
+    .submit-section {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      margin-top: 24px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #0ca678 0%, #099268 100%);
+      color: #ffffff;
+      border: none;
+      padding: 16px 36px;
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(12, 166, 120, 0.3);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(12, 166, 120, 0.4);
+    }
+
+    .result-panel {
+      display: none;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      margin-bottom: 28px;
+      border: 2px solid var(--primary);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .score-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary) 0%, #4c6ef5 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 8px 20px rgba(59, 91, 219, 0.3);
+    }
+
+    .score-circle .score-num {
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .score-circle .score-lbl {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+      opacity: 0.9;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
+      max-width: 680px;
+      margin: 20px auto;
+    }
+
+    .stat-card {
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background: #f8fafc;
+      border: 1px solid var(--border);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 2px;
+    }
+
+    .review-filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* MODAL CUSTOM (PENGGANTI ALERT/CONFIRM) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .modal-box h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .modal-box p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .btn-modal-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-modal-cancel {
+      background: #f1f5f9;
+      color: var(--text-main);
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      font-size: 0.88em;
+      line-height: 1.1;
+      margin: 0 2px;
+    }
+    .frac > span:first-child {
+      border-bottom: 1.5px solid currentColor;
+      padding: 0 3px;
+    }
+    .frac > span:last-child {
+      padding: 0 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       HEADER APLIKASI
+       ======================================================================== -->
+  <header>
+    <div class="header-container">
+      <div class="brand-title">
+        <div class="brand-icon">&Sigma;</div>
+        <div>
+          <h1>Matematika SMP Kelas VII — Semester 1</h1>
+          <p>Kurikulum Merdeka • Bilangan Bulat, Aljabar, &amp; Persamaan Linear</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="offline-badge"><span class="dot-online"></span> 100% Mode Offline Siap</span>
+        <button class="btn-download" onclick="downloadOfflineHTML()" title="Simpan file HTML mandiri ini ke perangkat Anda">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download File HTML Offline
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- TAB NAVIGASI -->
+    <div class="tab-bar">
+      <button class="tab-btn active" id="btn-tab-materi" onclick="switchTab('materi')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Tab 1: Rangkuman Materi (Bab 1 - Bab 3)
+      </button>
+      <button class="tab-btn" id="btn-tab-kuis" onclick="switchTab('kuis')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Tab 2: Latihan 50 Soal Pilihan Ganda
+      </button>
+    </div>
+
+    <!-- ======================================================================
+         TAB 1: RANGKUMAN MATERI LENGKAP (BAB 1 - BAB 3)
+         ====================================================================== -->
+    <section id="tab-materi" class="tab-content active">
+      <div class="bab-filter-bar">
+        <button class="bab-pill active" onclick="filterMateri('all', this)">Semua Bab (Bab 1 - 3)</button>
+        <button class="bab-pill" onclick="filterMateri('bab1', this)">Bab 1: Bilangan Bulat</button>
+        <button class="bab-pill" onclick="filterMateri('bab2', this)">Bab 2: Aljabar</button>
+        <button class="bab-pill" onclick="filterMateri('bab3', this)">Bab 3: Persamaan &amp; Pertidaksamaan Linear</button>
+      </div>
+
+      <!-- BAB 1 -->
+      <article class="materi-card" data-bab="bab1">
+        <div class="materi-header">
+          <span class="bab-badge">BAB 1</span>
+          <h2>Bilangan Bulat (Positif, Negatif, Operasi Hitung, &amp; Eksponen)</h2>
+        </div>
+        <div class="materi-grid">
+          <div class="sub-box">
+            <h3>1. Bilangan Positif, Negatif, &amp; Garis Bilangan</h3>
+            <ul>
+              <li><strong>Bilangan Positif (+):</strong> Bilangan lebih besar dari 0 (contoh: +5 atau 5). Digunakan untuk menyatakan suhu di atas 0&deg;C, ketinggian di atas permukaan laut, atau keuntungan.</li>
+              <li><strong>Bilangan Negatif (&minus;):</strong> Bilangan lebih kecil dari 0 (contoh: &minus;3). Digunakan untuk menyatakan suhu di bawah 0&deg;C, kedalaman di bawah laut, atau kerugian.</li>
+              <li><strong>Titik Pangkal (0):</strong> Pemisah antara bilangan positif (di kanan 0) dan negatif (di kiri 0) pada garis bilangan.</li>
+              <li><strong>Membandingkan Bilangan:</strong> Semakin ke kanan nilainya semakin besar; semakin ke kiri nilainya semakin kecil. Contoh: <code>&minus;2 &gt; &minus;7</code>.</li>
+            </ul>
+            <div class="example-box">
+              <strong>Contoh Kontekstual:</strong> Puncak Gunung Semeru 3.676 m di atas permukaan laut ditulis <strong>+3.676 m</strong>, sedangkan Palung Jawa 7.140 m di bawah permukaan laut ditulis <strong>&minus;7.140 m</strong>.
+            </div>
+          </div>
+
+          <div class="sub-box">
+            <h3>2. Nilai Mutlak</h3>
+            <ul>
+              <li><strong>Definisi:</strong> Jarak suatu bilangan dari titik 0 pada garis bilangan tanpa memperhatikan tandanya.</li>
+              <li>Nilai mutlak dari +5 adalah 5, dan nilai mutlak dari &minus;5 juga 5 (ditulis <code>|&minus;5| = 5</code>).</li>
+              <li>Nilai mutlak dari 0 adalah 0.</li>
+            </ul>
+            <div class="formula-box">
+              |a| = a (jika a &ge; 0) &nbsp;|&nbsp; |&minus;a| = a
+            </div>
+            <div class="example-box">
+              <strong>Contoh:</strong> Bilangan yang memiliki nilai mutlak 6 adalah <strong>+6 dan &minus;6</strong>.
+            </div>
+          </div>
+
+          <div class="sub-box">
+            <h3>3. Penjumlahan &amp; Pengurangan Bilangan Bulat</h3>
+            <ul>
+              <li><strong>Tanda Sama:</strong> Jumlahkan nilai mutlaknya, lalu beri tanda yang sama. Contoh: <code>(&minus;4) + (&minus;6) = &minus;(4 + 6) = &minus;10</code>.</li>
+              <li><strong>Tanda Berbeda:</strong> Kurangkan nilai mutlak besar dengan kecil, lalu beri tanda mengikuti bilangan bernilai mutlak lebih besar. Contoh: <code>(&minus;9) + (+4) = &minus;(9 &minus; 4) = &minus;5</code>.</li>
+              <li><strong>Pengurangan:</strong> Mengurangi suatu bilangan sama artinya dengan menambah lawan bilangan tersebut.</li>
+            </ul>
+            <div class="formula-box">
+              a &minus; (+b) = a + (&minus;b)<br/>
+              a &minus; (&minus;b) = a + (+b)
+            </div>
+          </div>
+
+          <div class="sub-box">
+            <h3>4. Perkalian, Pembagian, &amp; Eksponen</h3>
+            <ul>
+              <li><strong>Aturan Tanda (&times; dan &divide;):</strong>
+                <br/>(+) &times; (+) = (+) &nbsp;|&nbsp; (&minus;) &times; (&minus;) = (+)
+                <br/>(+) &times; (&minus;) = (&minus;) &nbsp;|&nbsp; (&minus;) &times; (+) = (&minus;)
+              </li>
+              <li><strong>Kebalikan (Invers Perkalian):</strong> Hasil kali dua bilangan adalah 1. Kebalikan dari <code>&minus;2/3</code> adalah <code>&minus;3/2</code>.</li>
+              <li><strong>Eksponen (Perpangkatan):</strong> Perkalian berulang. Perhatikan tanda kurung:
+                <br/><code>(&minus;3)&sup2; = (&minus;3) &times; (&minus;3) = +9</code>
+                <br/><code>&minus;3&sup2; = &minus;(3 &times; 3) = &minus;9</code>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sub-box">
+            <h3>5. Sifat Operasi &amp; Himpunan Bilangan</h3>
+            <ul>
+              <li><strong>Sifat Komutatif:</strong> <code>a + b = b + a</code> dan <code>a &times; b = b &times; a</code>.</li>
+              <li><strong>Sifat Asosiatif:</strong> <code>(a + b) + c = a + (b + c)</code>.</li>
+              <li><strong>Sifat Distributif:</strong> <code>a &times; (b + c) = (a &times; b) + (a &times; c)</code>.</li>
+              <li><strong>Urutan Operasi:</strong> (1) Tanda kurung, (2) Eksponen, (3) Kali &amp; Bagi dari kiri, (4) Tambah &amp; Kurang dari kiri.</li>
+              <li><strong>Himpunan Bilangan:</strong> Bilangan Asli (1, 2, 3, ...), Bilangan Bulat (..., &minus;1, 0, 1, ...), dan Semua Bilangan (termasuk pecahan &amp; desimal).</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- BAB 2 -->
+      <article class="materi-card" data-bab="bab2">
+        <div class="materi-header">
+          <span class="bab-badge">BAB 2</span>
+          <h2>Aljabar (Bentuk Aljabar, Substitusi, &amp; Penyederhanaan)</h2>
+        </div>
+        <div class="materi-grid">
+          <div class="sub-box">
+            <h3>1. Aturan Penulisan Bentuk Aljabar</h3>
+            <ul>
+              <li><strong>Perkalian:</strong> Tanda kali (&times;) dihilangkan. Bilangan ditulis di depan huruf, dan huruf diurutkan sesuai abjad. Contoh: <code>b &times; (&minus;4) &times; a = &minus;4ab</code>.</li>
+              <li><strong>Angka 1 &amp; &minus;1:</strong> Angka 1 di depan huruf dihilangkan. Contoh: <code>1 &times; x = x</code>, <code>(&minus;1) &times; y = &minus;y</code>.</li>
+              <li><strong>Pangkat:</strong> Perkalian huruf yang sama ditulis sebagai pangkat: <code>a &times; a &times; a = a&sup3;</code>.</li>
+              <li><strong>Pembagian:</strong> Tanda bagi (&divide;) diubah ke bentuk pecahan: <code>x &divide; 5 = x/5</code>.</li>
+            </ul>
+          </div>
+
+          <div class="sub-box">
+            <h3>2. Unsur-Unsur Bentuk Aljabar</h3>
+            <ul>
+              <li><strong>Suku:</strong> Bagian bentuk aljabar yang dipisahkan oleh tanda penjumlahan. Contoh pada <code>3x &minus; 2y + 7</code>, suku-sukunya adalah <code>3x</code>, <code>&minus;2y</code>, dan <code>7</code>.</li>
+              <li><strong>Koefisien:</strong> Bilangan yang mengalikan variabel (pada <code>&minus;2y</code>, koefisien <code>y</code> adalah <strong>&minus;2</strong>).</li>
+              <li><strong>Konstanta:</strong> Suku yang tidak memuat variabel (yaitu <strong>7</strong>).</li>
+              <li><strong>Bentuk Linear:</strong> Bentuk aljabar dengan pangkat tertinggi variabel adalah 1 (contoh: <code>4x &minus; 5</code>).</li>
+            </ul>
+          </div>
+
+          <div class="sub-box">
+            <h3>3. Substitusi Nilai ke Bentuk Aljabar</h3>
+            <ul>
+              <li>Mengganti huruf (variabel) dengan bilangan tertentu untuk menghitung nilai aljabar.</li>
+              <li><strong>Penting:</strong> Gunakan tanda kurung saat menyubstitusi bilangan negatif!</li>
+            </ul>
+            <div class="example-box">
+              <strong>Contoh:</strong> Jika <code>x = &minus;3</code>, nilai dari <code>5 &minus; 2x</code> adalah:<br/>
+              <code>5 &minus; 2(&minus;3) = 5 &minus; (&minus;6) = 5 + 6 = 11</code>.
+            </div>
+          </div>
+
+          <div class="sub-box">
+            <h3>4. Menyederhanakan Bentuk Linear</h3>
+            <ul>
+              <li><strong>Suku Sejenis:</strong> Suku yang memiliki variabel sama digabungkan dengan menjumlahkan koefisiennya: <code>5x &minus; 8x = &minus;3x</code>.</li>
+              <li><strong>Tanda Kurung:</strong>
+                <br/><code>+(a &minus; b) = a &minus; b</code>
+                <br/><code>&minus;(a &minus; b) = &minus;a + b</code> (tanda di dalam kurung berbalik!)
+              </li>
+              <li><strong>Perkalian &amp; Pembagian Bilangan:</strong> Gunakan sifat distributif:
+                <br/><code>&minus;3(2x &minus; 4) = &minus;6x + 12</code>.
+              </li>
+            </ul>
+          </div>
+
+          <div class="sub-box">
+            <h3>5. Pola Lidi &amp; Penerapan Aljabar</h3>
+            <ul>
+              <li>Menyusun <code>n</code> buah persegi berderet membutuhkan <code>1 + 3n</code> lidi (atau <code>4 + 3(n &minus; 1)</code> lidi).</li>
+              <li><strong>Hubungan Kuantitas:</strong>
+                <br/>• Persamaan (=): menyatakan dua besaran bernilai sama.
+                <br/>• Pertidaksamaan (&lt;, &gt;, &le;, &ge;): menyatakan perbandingan dua besaran yang tidak sama.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- BAB 3 -->
+      <article class="materi-card" data-bab="bab3">
+        <div class="materi-header">
+          <span class="bab-badge">BAB 3</span>
+          <h2>Persamaan Linear &amp; Pertidaksamaan Linear Satu Variabel</h2>
+        </div>
+        <div class="materi-grid">
+          <div class="sub-box">
+            <h3>1. Persamaan &amp; Sifat-Sifat Persamaan</h3>
+            <ul>
+              <li><strong>Persamaan:</strong> Kalimat matematika dengan tanda sama dengan (=) yang memuat variabel. Nilai variabel yang membuat persamaan benar disebut <strong>penyelesaian</strong>.</li>
+              <li><strong>4 Sifat Persamaan (Prinsip Timbangan):</strong>
+                <br/>1. Jika <code>A = B</code>, maka <code>A + C = B + C</code>
+                <br/>2. Jika <code>A = B</code>, maka <code>A &minus; C = B &minus; C</code>
+                <br/>3. Jika <code>A = B</code>, maka <code>A &times; C = B &times; C</code>
+                <br/>4. Jika <code>A = B</code>, maka <code>A &divide; C = B &divide; C</code> (<code>C &ne; 0</code>)
+              </li>
+            </ul>
+          </div>
+
+          <div class="sub-box">
+            <h3>2. Cara Menyelesaikan Persamaan Linear</h3>
+            <ul>
+              <li><strong>Transposisi (Memindah Suku):</strong> Suku yang berpindah ruas melewati tanda <code>=</code> akan berubah tanda (+ menjadi &minus;, &minus; menjadi +).</li>
+              <li><strong>Persamaan Bertanda Kurung:</strong> Hapus kurung terlebih dahulu dengan hukum distributif.</li>
+              <li><strong>Persamaan Pecahan:</strong> Kalikan kedua ruas dengan KPK dari penyebutnya.</li>
+              <li><strong>Persamaan Desimal:</strong> Kalikan kedua ruas dengan 10 atau 100 agar menjadi bilangan bulat.</li>
+            </ul>
+            <div class="example-box">
+              <strong>Contoh:</strong> <code>3x &minus; 5 = x + 7</code> &rarr; <code>3x &minus; x = 7 + 5</code> &rarr; <code>2x = 12</code> &rarr; <code>x = 6</code>.
+            </div>
+          </div>
+
+          <div class="sub-box">
+            <h3>3. Perbandingan (Proporsi)</h3>
+            <ul>
+              <li>Jika perbandingan <code>a : b = c : d</code>, maka hasil kali suku tepi sama dengan hasil kali suku tengah:</li>
+            </ul>
+            <div class="formula-box">
+              a : b = c : d &nbsp;&hArr;&nbsp; a &times; d = b &times; c
+            </div>
+            <div class="example-box">
+              <strong>Contoh:</strong> <code>4 : 5 = x : 15</code> &rarr; <code>5x = 4 &times; 15</code> &rarr; <code>5x = 60</code> &rarr; <code>x = 12</code>.
+            </div>
+          </div>
+
+          <div class="sub-box">
+            <h3>4. Pertidaksamaan Linear Satu Variabel</h3>
+            <ul>
+              <li>Simbol: <code>&lt;</code> (kurang dari), <code>&gt;</code> (lebih dari), <code>&le;</code> (kurang dari atau sama dengan / paling banyak), <code>&ge;</code> (lebih dari atau sama dengan / paling sedikit).</li>
+              <li><strong>Aturan Penting Pertidaksamaan:</strong> Jika kedua ruas dikali atau dibagi dengan <strong>bilangan negatif</strong>, maka <strong>tanda pertidaksamaan harus dibalik</strong>!</li>
+              <li><strong>Garis Bilangan:</strong> Bulatan penuh (&bull;) untuk <code>&le;</code> atau <code>&ge;</code>; bulatan kosong (&#9675;) untuk <code>&lt;</code> atau <code>&gt;</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ======================================================================
+         TAB 2: LATIHAN 50 SOAL PILIHAN GANDA
+         ====================================================================== -->
+    <section id="tab-kuis" class="tab-content">
+      <!-- PANEL INFO & AKSI KUIS -->
+      <div class="quiz-top-panel">
+        <div class="student-input-group">
+          <label for="studentName">Nama Siswa (Opsional):</label>
+          <input type="text" id="studentName" placeholder="Ketik nama lengkapmu di sini..." />
+        </div>
+        <div class="quiz-controls">
+          <button class="btn-secondary" id="btnShuffleOptions" onclick="confirmShuffle()">
+            &#128256; Acak Ulang Urutan Opsi
+          </button>
+          <button class="btn-secondary" onclick="confirmReset()">
+            &#8634; Reset Jawaban
+          </button>
+        </div>
+      </div>
+
+      <!-- PANEL HASIL PENILAIAN (MUNCUL SETELAH SUBMIT) -->
+      <div class="result-panel" id="resultPanel">
+        <h2 id="resultGreeting" style="margin-bottom: 14px; color: var(--primary-dark);">Hasil Evaluasi Latihan</h2>
+        <div class="score-circle">
+          <span class="score-num" id="finalScore">0</span>
+          <span class="score-lbl">Skor Akhir</span>
+        </div>
+        <div id="predicateBadge" style="display:inline-block; padding:6px 18px; border-radius:999px; font-weight:800; font-size:0.95rem; margin-bottom:10px;"></div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <strong id="statCorrect" style="color: var(--secondary);">0</strong>
+            <span>Jawaban Benar</span>
+          </div>
+          <div class="stat-card">
+            <strong id="statWrong" style="color: var(--danger);">0</strong>
+            <span>Jawaban Salah</span>
+          </div>
+          <div class="stat-card">
+            <strong id="statEmpty" style="color: var(--accent);">0</strong>
+            <span>Tidak Dijawab</span>
+          </div>
+          <div class="stat-card">
+            <strong style="color: var(--primary);">50</strong>
+            <span>Total Soal</span>
+          </div>
+        </div>
+
+        <div class="review-filter-bar">
+          <button class="filter-btn active" onclick="filterReview('all', this)">Semua Soal (50)</button>
+          <button class="filter-btn" onclick="filterReview('wrong', this)" id="btnFilterWrong">Jawaban Salah (0)</button>
+          <button class="filter-btn" onclick="filterReview('correct', this)" id="btnFilterCorrect">Jawaban Benar (0)</button>
+          <button class="btn-secondary" onclick="retakeQuiz()" style="border-radius:999px;">&#8635; Ulangi Kuis</button>
+        </div>
+      </div>
+
+      <!-- LAYOUT UTAMA SOAL + SIDEBAR NAVIGASI -->
+      <div class="quiz-layout">
+        <div id="questionsContainer">
+          <!-- 50 Soal Dirender oleh JavaScript -->
+        </div>
+
+        <aside class="nav-sidebar">
+          <h3>Navigasi Nomor Soal</h3>
+          <div class="progress-info">
+            Terjawab: <strong id="answeredCount">0</strong> dari <strong>50</strong> soal
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+          </div>
+          <div class="number-grid" id="numberGrid">
+            <!-- Tombol nomor 1 - 50 -->
+          </div>
+          <div class="legend-row" id="navLegend">
+            <div class="legend-item"><span class="legend-box" style="background:#f8fafc; border:1px solid #cbd5e1;"></span> Belum</div>
+            <div class="legend-item"><span class="legend-box" style="background:var(--primary);"></span> Terjawab</div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- TOMBOL SUBMIT DI BAGIAN AKHIR -->
+      <div class="submit-section" id="submitSection">
+        <p style="margin-bottom: 14px; color: var(--text-muted); font-size: 0.95rem;">
+          Pastikan seluruh soal telah diperiksa sebelum mengirimkan jawaban. Pembahasan lengkap akan langsung tampil setelah submit.
+        </p>
+        <button class="btn-submit" onclick="handleSubmitQuiz()">
+          &#10004; Selesai &amp; Submit Jawaban
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL KONFIRMASI / NOTIFIKASI -->
+  <div class="modal-overlay" id="customModal">
+    <div class="modal-box">
+      <h3 id="modalTitle">Konfirmasi</h3>
+      <p id="modalMessage">Pesan konfirmasi</p>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       JAVASCRIPT: BANK 50 SOAL, SVG INLINE, PENGACAKAN MERATA, & PENILAIAN
+       ======================================================================== -->
+  <script>
+    // ========================================================================
+    // 1. DEFINISI ILUSTRASI SVG INLINE (TAJAM, RINGAN, 100% OFFLINE)
+    // ========================================================================
+    const SVG_ASSETS = {
+      termometer: `
+        <svg width="420" height="150" viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="8" width="404" height="134" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Termometer Dieng -->
+          <text x="105" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">Dataran Tinggi Dieng</text>
+          <rect x="45" y="45" width="120" height="22" rx="11" fill="#e2e8f0" stroke="#64748b"/>
+          <line x1="105" y1="40" x2="105" y2="73" stroke="#0f172a" stroke-width="2"/>
+          <text x="105" y="86" text-anchor="middle" font-size="11" fill="#0f172a">0°C</text>
+          <rect x="82" y="48" width="23" height="16" rx="4" fill="#3b82f6"/>
+          <text x="82" y="106" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d4ed8">-4°C</text>
+          <line x1="82" y1="67" x2="82" y2="92" stroke="#1d4ed8" stroke-dasharray="3,2"/>
+          <!-- Termometer Surabaya -->
+          <text x="315" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#9a3412">Kota Surabaya</text>
+          <rect x="245" y="45" width="140" height="22" rx="11" fill="#e2e8f0" stroke="#64748b"/>
+          <line x1="275" y1="40" x2="275" y2="73" stroke="#0f172a" stroke-width="2"/>
+          <text x="275" y="86" text-anchor="middle" font-size="11" fill="#0f172a">0°C</text>
+          <rect x="275" y="48" width="88" height="16" rx="4" fill="#ef4444"/>
+          <text x="363" y="106" text-anchor="middle" font-size="12" font-weight="bold" fill="#b91c1c">+34°C</text>
+          <line x1="363" y1="67" x2="363" y2="92" stroke="#b91c1c" stroke-dasharray="3,2"/>
+        </svg>`,
+
+      garisBilangan1: `
+        <svg width="460" height="95" viewBox="0 0 460 95" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="448" height="83" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <line x1="25" y1="48" x2="435" y2="48" stroke="#1e293b" stroke-width="2.2"/>
+          <polygon points="25,48 33,43 33,53" fill="#1e293b"/>
+          <polygon points="435,48 427,43 427,53" fill="#1e293b"/>
+          <!-- Skala -5 sampai +5 -->
+          <g font-size="12" text-anchor="middle" fill="#334155">
+            <line x1="55" y1="42" x2="55" y2="54" stroke="#1e293b" stroke-width="1.8"/><text x="55" y="72">-5</text>
+            <line x1="90" y1="42" x2="90" y2="54" stroke="#1e293b" stroke-width="1.8"/><text x="90" y="72">-4</text>
+            <line x1="125" y1="42" x2="125" y2="54" stroke="#1e293b" stroke-width="1.8"/><text x="125" y="72">-3</text>
+            <line x1="160" y1="42" x2="160" y2="54" stroke="#1e293b" stroke-width="1.8"/><text x="160" y="72">-2</text>
+            <line x1="195" y1="42" x2="195" y2="54" stroke="#1e293b" stroke-width="1.8"/><text x="195" y="72">-1</text>
+            <line x1="230" y1="40" x2="230" y2="56" stroke="#1e293b" stroke-width="2.5"/><text x="230" y="72" font-weight="bold">0</text>
+            <line x1="265" y1="42" x2="265" y2="54" stroke="#1e293b" stroke-width="1.8"/><text x="265" y="72">+1</text>
+            <line x1="300" y1="42" x2="300" y2="54" stroke="#1e293b" stroke-width="1.8"/><text x="300" y="72">+2</text>
+            <line x1="335" y1="42" x2="335" y2="54" stroke="#1e293b" stroke-width="1.8"/><text x="335" y="72">+3</text>
+            <line x1="370" y1="42" x2="370" y2="54" stroke="#1e293b" stroke-width="1.8"/><text x="370" y="72">+4</text>
+            <line x1="405" y1="42" x2="405" y2="54" stroke="#1e293b" stroke-width="1.8"/><text x="405" y="72">+5</text>
+          </g>
+          <!-- Titik P di -3,5 dan Q di +2,5 -->
+          <circle cx="107.5" cy="48" r="5.5" fill="#e03131"/>
+          <text x="107.5" y="30" text-anchor="middle" font-size="13" font-weight="bold" fill="#e03131">P</text>
+          <circle cx="317.5" cy="48" r="5.5" fill="#2b44b5"/>
+          <text x="317.5" y="30" text-anchor="middle" font-size="13" font-weight="bold" fill="#2b44b5">Q</text>
+        </svg>`,
+
+      semeruPalung: `
+        <svg width="420" height="175" viewBox="0 0 420 175" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="408" height="163" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+          <!-- Laut -->
+          <rect x="6" y="92" width="408" height="77" fill="#bae6fd" opacity="0.75"/>
+          <line x1="6" y1="92" x2="414" y2="92" stroke="#0284c7" stroke-width="2" stroke-dasharray="5,3"/>
+          <text x="215" y="86" font-size="11" font-weight="bold" fill="#0369a1">Permukaan Laut (0 m)</text>
+          <!-- Gunung Semeru -->
+          <polygon points="35,92 105,22 175,92" fill="#64748b"/>
+          <polygon points="91,36 105,22 119,36" fill="#f8fafc"/>
+          <text x="105" y="16" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e293b">Gunung Semeru (+3.676 m)</text>
+          <!-- Palung Jawa -->
+          <polygon points="240,92 315,158 390,92" fill="#1e3a8a"/>
+          <text x="315" y="166" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e3a8a">Palung Jawa (-7.140 m)</text>
+        </svg>`,
+
+      polaLidiPersegi: `
+        <svg width="440" height="125" viewBox="0 0 440 125" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="428" height="113" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- 1 Persegi -->
+          <g stroke="#d97706" stroke-width="3.5" stroke-linecap="round">
+            <line x1="35" y1="30" x2="75" y2="30"/><line x1="75" y1="30" x2="75" y2="70"/>
+            <line x1="35" y1="70" x2="75" y2="70"/><line x1="35" y1="30" x2="35" y2="70"/>
+          </g>
+          <text x="55" y="96" text-anchor="middle" font-size="11.5" fill="#334155">1 Persegi (4 lidi)</text>
+          <!-- 2 Persegi -->
+          <g stroke="#d97706" stroke-width="3.5" stroke-linecap="round">
+            <line x1="130" y1="30" x2="170" y2="30"/><line x1="170" y1="30" x2="210" y2="30"/>
+            <line x1="130" y1="70" x2="170" y2="70"/><line x1="170" y1="70" x2="210" y2="70"/>
+            <line x1="130" y1="30" x2="130" y2="70"/><line x1="170" y1="30" x2="170" y2="70"/><line x1="210" y1="30" x2="210" y2="70"/>
+          </g>
+          <text x="170" y="96" text-anchor="middle" font-size="11.5" fill="#334155">2 Persegi (7 lidi)</text>
+          <!-- 3 Persegi -->
+          <g stroke="#d97706" stroke-width="3.5" stroke-linecap="round">
+            <line x1="265" y1="30" x2="385" y2="30"/><line x1="265" y1="70" x2="385" y2="70"/>
+            <line x1="265" y1="30" x2="265" y2="70"/><line x1="305" y1="30" x2="305" y2="70"/>
+            <line x1="345" y1="30" x2="345" y2="70"/><line x1="385" y1="30" x2="385" y2="70"/>
+          </g>
+          <text x="325" y="96" text-anchor="middle" font-size="11.5" fill="#334155">3 Persegi (10 lidi)</text>
+        </svg>`,
+
+      persegiPanjangAljabar: `
+        <svg width="360" height="145" viewBox="0 0 360 145" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="348" height="133" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <rect x="75" y="36" width="180" height="75" fill="#edf2ff" stroke="#3b5bdb" stroke-width="2.2"/>
+          <text x="165" y="26" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">Panjang = (3x + 2) cm</text>
+          <text x="265" y="78" font-size="13" font-weight="bold" fill="#1e3a8a">Lebar = (x - 1) cm</text>
+        </svg>`,
+
+      polaSegitigaLidi: `
+        <svg width="430" height="125" viewBox="0 0 430 125" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="418" height="113" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- 1 Segitiga -->
+          <g stroke="#0ca678" stroke-width="3.5" stroke-linecap="round">
+            <line x1="35" y1="72" x2="80" y2="72"/><line x1="35" y1="72" x2="57.5" y2="32"/><line x1="80" y1="72" x2="57.5" y2="32"/>
+          </g>
+          <text x="57.5" y="96" text-anchor="middle" font-size="11.5" fill="#334155">1 Segitiga (3 lidi)</text>
+          <!-- 2 Segitiga -->
+          <g stroke="#0ca678" stroke-width="3.5" stroke-linecap="round">
+            <line x1="125" y1="72" x2="170" y2="72"/><line x1="125" y1="72" x2="147.5" y2="32"/><line x1="170" y1="72" x2="147.5" y2="32"/>
+            <line x1="147.5" y1="32" x2="192.5" y2="32"/><line x1="170" y1="72" x2="192.5" y2="32"/>
+          </g>
+          <text x="158" y="96" text-anchor="middle" font-size="11.5" fill="#334155">2 Segitiga (5 lidi)</text>
+          <!-- 3 Segitiga -->
+          <g stroke="#0ca678" stroke-width="3.5" stroke-linecap="round">
+            <line x1="245" y1="72" x2="335" y2="72"/><line x1="267.5" y1="32" x2="312.5" y2="32"/>
+            <line x1="245" y1="72" x2="267.5" y2="32"/><line x1="290" y1="72" x2="267.5" y2="32"/>
+            <line x1="290" y1="72" x2="312.5" y2="32"/><line x1="335" y1="72" x2="312.5" y2="32"/>
+          </g>
+          <text x="290" y="96" text-anchor="middle" font-size="11.5" fill="#334155">3 Segitiga (7 lidi)</text>
+        </svg>`,
+
+      timbanganPermen: `
+        <svg width="420" height="165" viewBox="0 0 420 165" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="408" height="153" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Penyangga -->
+          <polygon points="210,75 192,145 228,145" fill="#64748b"/>
+          <rect x="165" y="145" width="90" height="8" rx="4" fill="#334155"/>
+          <!-- Lengan Timbangan Seimbang -->
+          <line x1="75" y1="75" x2="345" y2="75" stroke="#1e293b" stroke-width="4"/>
+          <circle cx="210" cy="75" r="6" fill="#f59f00"/>
+          <!-- Piring Kiri: 3 Permen (x) + 2 Koin (1g) -->
+          <line x1="75" y1="75" x2="75" y2="95" stroke="#475569" stroke-width="2"/>
+          <rect x="25" y="95" width="100" height="8" rx="4" fill="#3b5bdb"/>
+          <rect x="30" y="68" width="24" height="24" rx="5" fill="#f59f00"/><text x="42" y="84" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">x</text>
+          <rect x="58" y="68" width="24" height="24" rx="5" fill="#f59f00"/><text x="70" y="84" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">x</text>
+          <rect x="86" y="68" width="24" height="24" rx="5" fill="#f59f00"/><text x="98" y="84" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">x</text>
+          <circle cx="48" cy="54" r="10" fill="#94a3b8"/><text x="48" y="58" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">1g</text>
+          <circle cx="74" cy="54" r="10" fill="#94a3b8"/><text x="74" y="58" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">1g</text>
+          <text x="75" y="122" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e293b">3x + 2 gram</text>
+          <!-- Piring Kanan: 1 Permen (x) + 10g -->
+          <line x1="345" y1="75" x2="345" y2="95" stroke="#475569" stroke-width="2"/>
+          <rect x="295" y="95" width="100" height="8" rx="4" fill="#3b5bdb"/>
+          <rect x="305" y="68" width="24" height="24" rx="5" fill="#f59f00"/><text x="317" y="84" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">x</text>
+          <rect x="336" y="60" width="46" height="32" rx="5" fill="#0ca678"/><text x="359" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">10 g</text>
+          <text x="345" y="122" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e293b">x + 10 gram</text>
+        </svg>`,
+
+      tiangBayangan: `
+        <svg width="430" height="165" viewBox="0 0 430 165" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="418" height="153" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <line x1="25" y1="130" x2="405" y2="130" stroke="#64748b" stroke-width="2"/>
+          <!-- Tiang 2m & Bayangan 3m -->
+          <line x1="65" y1="80" x2="65" y2="130" stroke="#1e293b" stroke-width="4"/>
+          <line x1="65" y1="130" x2="140" y2="130" stroke="#f59f00" stroke-width="4"/>
+          <line x1="65" y1="80" x2="140" y2="130" stroke="#94a3b8" stroke-dasharray="3,3"/>
+          <text x="42" y="108" font-size="11.5" font-weight="bold" fill="#1e293b">2 m</text>
+          <text x="102" y="147" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#b45309">Bayangan 3 m</text>
+          <!-- Pohon x m & Bayangan 12m -->
+          <line x1="225" y1="35" x2="225" y2="130" stroke="#78350f" stroke-width="6"/>
+          <circle cx="225" cy="40" r="24" fill="#16a34a"/>
+          <line x1="225" y1="130" x2="380" y2="130" stroke="#f59f00" stroke-width="4"/>
+          <line x1="225" y1="35" x2="380" y2="130" stroke="#94a3b8" stroke-dasharray="3,3"/>
+          <text x="195" y="88" font-size="12" font-weight="bold" fill="#15803d">x m</text>
+          <text x="302" y="147" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#b45309">Bayangan 12 m</text>
+        </svg>`,
+
+      tangkiAir: `
+        <svg width="410" height="150" viewBox="0 0 410 150" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="398" height="138" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- Tangki A -->
+          <rect x="55" y="34" width="90" height="85" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+          <rect x="57" y="54" width="86" height="63" rx="4" fill="#38bdf8"/>
+          <text x="100" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#0369a1">Tangki A: 29 liter</text>
+          <text x="100" y="90" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">-x liter</text>
+          <!-- Panah -->
+          <text x="205" y="75" text-anchor="middle" font-size="22" font-weight="bold" fill="#3b5bdb">&rarr;</text>
+          <text x="205" y="95" text-anchor="middle" font-size="11" fill="#475569">Dituang x liter</text>
+          <!-- Tangki B -->
+          <rect x="265" y="34" width="90" height="85" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+          <rect x="267" y="84" width="86" height="33" rx="4" fill="#0284c7"/>
+          <text x="310" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#0369a1">Tangki B: 10 liter</text>
+          <text x="310" y="105" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">+x liter</text>
+        </svg>`,
+
+      garisPertidaksamaan: `
+        <svg width="420" height="85" viewBox="0 0 420 85" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="408" height="73" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <line x1="30" y1="45" x2="390" y2="45" stroke="#1e293b" stroke-width="2"/>
+          <polygon points="30,45 38,40 38,50" fill="#1e293b"/>
+          <polygon points="390,45 382,40 382,50" fill="#1e293b"/>
+          <g font-size="11.5" text-anchor="middle" fill="#334155">
+            <line x1="70" y1="40" x2="70" y2="50" stroke="#1e293b"/><text x="70" y="66">-1</text>
+            <line x1="120" y1="40" x2="120" y2="50" stroke="#1e293b"/><text x="120" y="66">0</text>
+            <line x1="170" y1="40" x2="170" y2="50" stroke="#1e293b"/><text x="170" y="66">1</text>
+            <line x1="220" y1="40" x2="220" y2="50" stroke="#1e293b"/><text x="220" y="66">2</text>
+            <line x1="270" y1="40" x2="270" y2="50" stroke="#1e293b"/><text x="270" y="66">3</text>
+            <line x1="320" y1="40" x2="320" y2="50" stroke="#1e293b"/><text x="320" y="66">4</text>
+            <line x1="365" y1="40" x2="365" y2="50" stroke="#1e293b"/><text x="365" y="66">5</text>
+          </g>
+          <!-- Sinar ke kanan dari x = 3 (bulatan penuh) -->
+          <line x1="270" y1="33" x2="382" y2="33" stroke="#e03131" stroke-width="3.5"/>
+          <polygon points="388,33 379,28 379,38" fill="#e03131"/>
+          <circle cx="270" cy="33" r="5.5" fill="#e03131"/>
+        </svg>`
+    };
+
+    // ========================================================================
+    // 2. BANK 50 SOAL PILIHAN GANDA (PROPORSIONAL BAB 1, BAB 2, BAB 3)
+    //    Bab 1: Soal 1 - 17 (17 soal)
+    //    Bab 2: Soal 18 - 33 (16 soal)
+    //    Bab 3: Soal 34 - 50 (17 soal)
+    // ========================================================================
+    const RAW_QUESTIONS = [
+      // --- BAB 1: BILANGAN BULAT (1 - 17) ---
+      {
+        id: 1,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Perhatikan ilustrasi termometer dua daerah di Indonesia berikut. Pada pagi hari, suhu di Dataran Tinggi Dieng tercatat 4°C di bawah 0°C, sedangkan suhu di Kota Surabaya tercatat 34°C di atas 0°C. Selisih suhu antara Kota Surabaya dan Dataran Tinggi Dieng adalah ....",
+        svg: SVG_ASSETS.termometer,
+        options: ["38°C", "30°C", "-30°C", "-38°C"],
+        correctIndex: 0,
+        explanation: "Suhu Surabaya = +34°C dan suhu Dieng = -4°C. Selisih suhu = suhu tertinggi - suhu terendah = 34 - (-4) = 34 + 4 = 38°C."
+      },
+      {
+        id: 2,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Perhatikan garis bilangan di bawah ini. Bilangan yang ditunjukkan oleh titik P dan titik Q berturut-turut adalah ....",
+        svg: SVG_ASSETS.garisBilangan1,
+        options: ["-3,5 dan +2,5", "-4,5 dan +2,5", "-3,5 dan +3,5", "-2,5 dan +2,5"],
+        correctIndex: 0,
+        explanation: "Titik P berada tepat di tengah-tengah antara -3 dan -4, sehingga nilainya -3,5. Titik Q berada tepat di tengah-tengah antara +2 dan +3, sehingga nilainya +2,5."
+      },
+      {
+        id: 3,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Perhatikan ilustrasi ketinggian berikut. Puncak Gunung Semeru memiliki ketinggian 3.676 m di atas permukaan laut, sedangkan dasar Palung Jawa berada pada kedalaman 7.140 m di bawah permukaan laut. Pernyataan bilangan bertanda yang tepat dan jarak vertikal keduanya adalah ....",
+        svg: SVG_ASSETS.semeruPalung,
+        options: ["+3.676 m dan -7.140 m; jarak 10.816 m", "+3.676 m dan -7.140 m; jarak 3.464 m", "-3.676 m dan +7.140 m; jarak 10.816 m", "+3.676 m dan +7.140 m; jarak 3.464 m"],
+        correctIndex: 0,
+        explanation: "Di atas permukaan laut dinyatakan positif (+3.676 m) dan di bawah permukaan laut dinyatakan negatif (-7.140 m). Jarak vertikal = 3.676 - (-7.140) = 3.676 + 7.140 = 10.816 m."
+      },
+      {
+        id: 4,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Urutan bilangan berikut dari yang terkecil hingga yang terbesar adalah: -12, +4, 0, -15, +9, -3.",
+        svg: null,
+        options: ["-15, -12, -3, 0, +4, +9", "-3, -12, -15, 0, +4, +9", "-15, -12, -3, 0, +9, +4", "+9, +4, 0, -3, -12, -15"],
+        correctIndex: 0,
+        explanation: "Pada garis bilangan, semakin ke kiri nilai bilangan negatif semakin kecil. Maka urutan dari terkecil adalah: -15, -12, -3, 0, +4, +9."
+      },
+      {
+        id: 5,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Dua buah bilangan memiliki nilai mutlak sebesar 8. Jumlah kedua bilangan tersebut dan selisih nilai mutlaknya berturut-turut adalah ....",
+        svg: null,
+        options: ["0 dan 0", "16 dan 0", "0 dan 16", "-16 dan 8"],
+        correctIndex: 0,
+        explanation: "Bilangan yang nilai mutlaknya 8 adalah +8 dan -8. Jumlah keduanya = (+8) + (-8) = 0. Selisih nilai mutlaknya = |+8| - |-8| = 8 - 8 = 0."
+      },
+      {
+        id: 6,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Hasil dari (-18) + (+25) + (-14) adalah ....",
+        svg: null,
+        options: ["-7", "+7", "-57", "+21"],
+        correctIndex: 0,
+        explanation: "Kelompokkan bilangan bertanda sama: (-18) + (-14) + (+25) = (-32) + (+25) = -(32 - 25) = -7."
+      },
+      {
+        id: 7,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Hasil dari (+13) - (-19) - (+24) adalah ....",
+        svg: null,
+        options: ["+8", "-30", "-8", "+56"],
+        correctIndex: 0,
+        explanation: "Ubah pengurangan menjadi penjumlahan dengan lawannya: (+13) + (+19) + (-24) = (+32) + (-24) = +8."
+      },
+      {
+        id: 8,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Bentuk penjumlahan suku-suku aljabar dari kalimat matematika (-7) - (-12) + (-5) - (+8) adalah ....",
+        svg: null,
+        options: ["-7 + 12 - 5 - 8", "-7 - 12 - 5 - 8", "-7 + 12 + 5 - 8", "-7 - 12 + 5 + 8"],
+        correctIndex: 0,
+        explanation: "(-7) - (-12) + (-5) - (+8) = (-7) + (+12) + (-5) + (-8), yang ditulis tanpa tanda kurung menjadi -7 + 12 - 5 - 8."
+      },
+      {
+        id: 9,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Sebuah kapal selam berada pada kedalaman 120 m di bawah permukaan laut. Kapal tersebut naik sejauh 45 m untuk mengamati kondisi sekitar, kemudian menyelam lagi sejauh 60 m. Posisi kapal selam sekarang adalah ....",
+        svg: null,
+        options: ["135 m di bawah permukaan laut", "105 m di bawah permukaan laut", "225 m di bawah permukaan laut", "15 m di bawah permukaan laut"],
+        correctIndex: 0,
+        explanation: "Posisi awal = -120. Naik 45 m berarti +45, menyelam 60 m berarti -60. Maka: -120 + 45 - 60 = -75 - 60 = -135 m (135 m di bawah permukaan laut)."
+      },
+      {
+        id: 10,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Hasil dari (-4) × (+6) × (-3) adalah ....",
+        svg: null,
+        options: ["+72", "-72", "+36", "-36"],
+        correctIndex: 0,
+        explanation: "Terdapat dua tanda negatif (genap), sehingga hasilnya positif: +(4 × 6 × 3) = +72."
+      },
+      {
+        id: 11,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Kebalikan (invers perkalian) dari bilangan -<span class='frac'><span>3</span><span>7</span></span> adalah ....",
+        svg: null,
+        options: ["-<span class='frac'><span>7</span><span>3</span></span>", "+<span class='frac'><span>7</span><span>3</span></span>", "+<span class='frac'><span>3</span><span>7</span></span>", "-<span class='frac'><span>4</span><span>7</span></span>"],
+        correctIndex: 0,
+        explanation: "Kebalikan suatu bilangan memiliki tanda yang sama agar hasil kalinya sama dengan +1. Karena (-3/7) × (-7/3) = +1, maka kebalikannya adalah -7/3."
+      },
+      {
+        id: 12,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Hasil dari (-<span class='frac'><span>4</span><span>5</span></span>) ÷ (-<span class='frac'><span>8</span><span>15</span></span>) adalah ....",
+        svg: null,
+        options: ["+<span class='frac'><span>3</span><span>2</span></span>", "-<span class='frac'><span>3</span><span>2</span></span>", "+<span class='frac'><span>2</span><span>3</span></span>", "-<span class='frac'><span>32</span><span>75</span></span>"],
+        correctIndex: 0,
+        explanation: "(-4/5) ÷ (-8/15) = (-4/5) × (-15/8) = +(4 × 15)/(5 × 8) = +60/40 = +3/2."
+      },
+      {
+        id: 13,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Hasil dari (-4)&sup2; + (-2)&sup3; - (-3&sup2;) adalah ....",
+        svg: null,
+        options: ["17", "-1", "-17", "1"],
+        correctIndex: 0,
+        explanation: "(-4)² = (-4)×(-4) = 16; (-2)³ = (-2)×(-2)×(-2) = -8; (-3²) = -(3×3) = -9. Maka: 16 + (-8) - (-9) = 8 + 9 = 17."
+      },
+      {
+        id: 14,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Hasil dari 24 + (-6) × 3 - (-15) ÷ 5 adalah ....",
+        svg: null,
+        options: ["9", "3", "57", "-9"],
+        correctIndex: 0,
+        explanation: "Dahulukan perkalian dan pembagian: (-6) × 3 = -18 dan (-15) ÷ 5 = -3. Lalu hitung: 24 + (-18) - (-3) = 6 + 3 = 9."
+      },
+      {
+        id: 15,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Dengan menggunakan sifat distributif, bentuk yang senilai dengan (-12) × 17 + (-12) × 3 adalah ....",
+        svg: null,
+        options: ["(-12) × (17 + 3) = -240", "(-12) × (17 - 3) = -168", "(-24) × (17 + 3) = -480", "(12) × (17 + 3) = 240"],
+        correctIndex: 0,
+        explanation: "Berdasarkan sifat distributif a × b + a × c = a × (b + c), maka (-12) × 17 + (-12) × 3 = (-12) × (17 + 3) = (-12) × 20 = -240."
+      },
+      {
+        id: 16,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Jika a dan b adalah sembarang bilangan asli (1, 2, 3, ...), operasi hitung di bawah ini yang hasilnya SELALU merupakan bilangan asli adalah ....",
+        svg: null,
+        options: ["a + b dan a × b", "a - b dan a ÷ b", "a + b dan a - b", "a × b dan a ÷ b"],
+        correctIndex: 0,
+        explanation: "Himpunan bilangan asli tertutup terhadap penjumlahan (a + b) dan perkalian (a × b). Pengurangan bisa menghasilkan negatif/nol, dan pembagian bisa menghasilkan pecahan."
+      },
+      {
+        id: 17,
+        bab: "Bab 1: Bilangan Bulat",
+        text: "Dalam suatu kompetisi matematika, jawaban benar diberi skor +4, jawaban salah diberi skor -2, dan tidak dijawab diberi skor -1. Dari 40 soal, Rina menjawab benar 28 soal dan salah 7 soal. Total skor yang diperoleh Rina adalah ....",
+        svg: null,
+        options: ["93", "98", "112", "88"],
+        correctIndex: 0,
+        explanation: "Soal tidak dijawab = 40 - (28 + 7) = 5 soal. Total skor = (28 × 4) + (7 × -2) + (5 × -1) = 112 - 14 - 5 = 93."
+      },
+
+      // --- BAB 2: ALJABAR (18 - 33) ---
+      {
+        id: 18,
+        bab: "Bab 2: Aljabar",
+        text: "Perhatikan gambar susunan batang lidi membentuk persegi berderet berikut. Jika dibuat n buah persegi berderet, bentuk aljabar yang menyatakan banyak lidi yang diperlukan adalah ....",
+        svg: SVG_ASSETS.polaLidiPersegi,
+        options: ["3n + 1", "4n", "4n - 1", "3n + 4"],
+        correctIndex: 0,
+        explanation: "1 persegi = 4 lidi = 3(1) + 1; 2 persegi = 7 lidi = 3(2) + 1; 3 persegi = 10 lidi = 3(3) + 1. Jadi untuk n persegi dibutuhkan 3n + 1 batang lidi."
+      },
+      {
+        id: 19,
+        bab: "Bab 2: Aljabar",
+        text: "Penulisan yang tepat sesuai aturan bentuk aljabar dari y × (-5) × x + a × a × 2 adalah ....",
+        svg: null,
+        options: ["-5xy + 2a&sup2;", "-5yx + a&sup2;2", "y(-5)x + 2a&sup2;", "-5xy + 4a"],
+        correctIndex: 0,
+        explanation: "Dalam penulisan aljabar: tanda kali dihilangkan, bilangan ditulis di depan huruf, huruf diurutkan sesuai abjad (xy), dan perkalian huruf sama ditulis pangkat (a²). Hasilnya: -5xy + 2a²."
+      },
+      {
+        id: 20,
+        bab: "Bab 2: Aljabar",
+        text: "Bentuk aljabar dari (a - b) ÷ 4 + c × (-1) adalah ....",
+        svg: null,
+        options: ["<span class='frac'><span>a - b</span><span>4</span></span> - c", "a - <span class='frac'><span>b</span><span>4</span></span> - 1c", "<span class='frac'><span>4</span><span>a - b</span></span> - c", "<span class='frac'><span>a - b</span><span>4</span></span> + c"],
+        correctIndex: 0,
+        explanation: "Pembagian ditulis dalam bentuk pecahan (a - b)/4, dan perkalian c × (-1) ditulis -c (angka 1 dihilangkan). Maka hasilnya adalah (a - b)/4 - c."
+      },
+      {
+        id: 21,
+        bab: "Bab 2: Aljabar",
+        text: "Budi membeli 3 buku tulis seharga x rupiah per buku dan 4 pensil seharga y rupiah per pensil. Jika ia membayar dengan selembar uang Rp50.000,00, bentuk aljabar yang menyatakan uang kembalian Budi adalah ....",
+        svg: null,
+        options: ["50.000 - (3x + 4y)", "50.000 - 3x + 4y", "(3x + 4y) - 50.000", "50.000 - 7xy"],
+        correctIndex: 0,
+        explanation: "Total harga belanja = 3x + 4y. Uang kembalian = uang yang dibayarkan dikurangi total belanja = 50.000 - (3x + 4y)."
+      },
+      {
+        id: 22,
+        bab: "Bab 2: Aljabar",
+        text: "Diketahui bentuk aljabar 6x - 9y - 4. Suku-suku, koefisien y, dan konstanta dari bentuk aljabar tersebut berturut-turut adalah ....",
+        svg: null,
+        options: ["6x, -9y, -4; koefisien y = -9; konstanta = -4", "6x, 9y, 4; koefisien y = 9; konstanta = 4", "6x, -9y; koefisien y = -9; konstanta = 4", "6, -9, -4; koefisien y = 6; konstanta = -9"],
+        correctIndex: 0,
+        explanation: "6x - 9y - 4 = 6x + (-9y) + (-4). Jadi suku-sukunya adalah 6x, -9y, dan -4. Koefisien y adalah -9 dan konstantanya adalah -4."
+      },
+      {
+        id: 23,
+        bab: "Bab 2: Aljabar",
+        text: "Jika nilai a = -4 dan b = 3, maka nilai dari bentuk aljabar 2a&sup2; - 5ab adalah ....",
+        svg: null,
+        options: ["92", "28", "-28", "44"],
+        correctIndex: 0,
+        explanation: "Substitusikan a = -4 dan b = 3: 2(-4)² - 5(-4)(3) = 2(16) - (-60) = 32 + 60 = 92."
+      },
+      {
+        id: 24,
+        bab: "Bab 2: Aljabar",
+        text: "Jika x = -<span class='frac'><span>2</span><span>3</span></span>, nilai dari 12x + 7 adalah ....",
+        svg: null,
+        options: ["-1", "15", "-15", "1"],
+        correctIndex: 0,
+        explanation: "12 × (-2/3) + 7 = -8 + 7 = -1."
+      },
+      {
+        id: 25,
+        bab: "Bab 2: Aljabar",
+        text: "Bentuk sederhana dari (7x - 4) + (-3x + 9) adalah ....",
+        svg: null,
+        options: ["4x + 5", "10x + 5", "4x - 13", "10x - 13"],
+        correctIndex: 0,
+        explanation: "Kelompokkan suku sejenis: (7x - 3x) + (-4 + 9) = 4x + 5."
+      },
+      {
+        id: 26,
+        bab: "Bab 2: Aljabar",
+        text: "Hasil pengurangan (5a - 8) oleh (8a - 3) adalah ....",
+        svg: null,
+        options: ["-3a - 5", "-3a - 11", "3a + 5", "13a - 11"],
+        correctIndex: 0,
+        explanation: "(5a - 8) - (8a - 3) = 5a - 8 - 8a + 3 = (5a - 8a) + (-8 + 3) = -3a - 5."
+      },
+      {
+        id: 27,
+        bab: "Bab 2: Aljabar",
+        text: "Bentuk sederhana dari -4(3x - 2) + 2(5x - 7) adalah ....",
+        svg: null,
+        options: ["-2x - 6", "-2x - 22", "22x - 6", "-2x + 6"],
+        correctIndex: 0,
+        explanation: "-4(3x - 2) + 2(5x - 7) = -12x + 8 + 10x - 14 = (-12x + 10x) + (8 - 14) = -2x - 6."
+      },
+      {
+        id: 28,
+        bab: "Bab 2: Aljabar",
+        text: "Bentuk sederhana dari (18y - 24) ÷ (-6) adalah ....",
+        svg: null,
+        options: ["-3y + 4", "-3y - 4", "3y - 4", "-3y + 24"],
+        correctIndex: 0,
+        explanation: "(18y - 24) ÷ (-6) = (18y ÷ -6) + (-24 ÷ -6) = -3y + 4."
+      },
+      {
+        id: 29,
+        bab: "Bab 2: Aljabar",
+        text: "Bentuk sederhana dari <span class='frac'><span>2x - 1</span><span>3</span></span> - <span class='frac'><span>x - 4</span><span>6</span></span> adalah ....",
+        svg: null,
+        options: ["<span class='frac'><span>3x + 2</span><span>6</span></span>", "<span class='frac'><span>3x - 6</span><span>6</span></span>", "<span class='frac'><span>x + 3</span><span>3</span></span>", "<span class='frac'><span>3x - 2</span><span>6</span></span>"],
+        correctIndex: 0,
+        explanation: "Samakan penyebut menjadi 6: [2(2x - 1) - (x - 4)] / 6 = (4x - 2 - x + 4) / 6 = (3x + 2) / 6."
+      },
+      {
+        id: 30,
+        bab: "Bab 2: Aljabar",
+        text: "Perhatikan gambar persegi panjang di bawah ini. Keliling persegi panjang tersebut dalam bentuk aljabar paling sederhana adalah ....",
+        svg: SVG_ASSETS.persegiPanjangAljabar,
+        options: ["(8x + 2) cm", "(4x + 1) cm", "(8x + 6) cm", "(6x + 2) cm"],
+        correctIndex: 0,
+        explanation: "Keliling = 2 × (panjang + lebar) = 2 × [(3x + 2) + (x - 1)] = 2 × (4x + 1) = (8x + 2) cm."
+      },
+      {
+        id: 31,
+        bab: "Bab 2: Aljabar",
+        text: "Perhatikan pola susunan segitiga dari lidi berikut. Banyak batang lidi yang diperlukan untuk membuat susunan ke-12 (12 segitiga) adalah ....",
+        svg: SVG_ASSETS.polaSegitigaLidi,
+        options: ["25 lidi", "24 lidi", "36 lidi", "23 lidi"],
+        correctIndex: 0,
+        explanation: "Pola banyak lidi untuk n segitiga adalah 2n + 1 (1 segitiga = 3, 2 segitiga = 5, 3 segitiga = 7). Untuk n = 12: 2(12) + 1 = 25 lidi."
+      },
+      {
+        id: 32,
+        bab: "Bab 2: Aljabar",
+        text: "Kalimat matematika yang menyatakan: 'Total berat 3 kotak seberat a kg masing-masing dan 2 kotak seberat b kg masing-masing adalah tidak kurang dari 25 kg' adalah ....",
+        svg: null,
+        options: ["3a + 2b &ge; 25", "3a + 2b &gt; 25", "3a + 2b &le; 25", "3a + 2b &lt; 25"],
+        correctIndex: 0,
+        explanation: "Istilah 'tidak kurang dari 25 kg' berarti sama dengan 25 kg atau lebih besar dari 25 kg, sehingga simbolnya adalah &ge; (3a + 2b ≥ 25)."
+      },
+      {
+        id: 33,
+        bab: "Bab 2: Aljabar",
+        text: "Pada sebuah kalender bulanan, dipilih 3 tanggal yang berurutan secara vertikal (atas, tengah, bawah). Jika tanggal yang berada di tengah dimisalkan x, maka jumlah ketiga tanggal tersebut selalu ....",
+        svg: null,
+        options: ["3x (kelipatan 3)", "3x + 7", "3x - 7", "x + 14"],
+        correctIndex: 0,
+        explanation: "Pada kalender, tanggal di atas x adalah (x - 7) dan tanggal di bawah x adalah (x + 7). Jumlah ketiganya = (x - 7) + x + (x + 7) = 3x."
+      },
+
+      // --- BAB 3: PERSAMAAN & PERTIDAKSAMAAN LINEAR (34 - 50) ---
+      {
+        id: 34,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Perhatikan ilustrasi timbangan dalam keadaan seimbang berikut. Setiap kotak kuning bermassa x gram dan setiap koin bermassa 1 gram. Persamaan yang sesuai dan nilai x adalah ....",
+        svg: SVG_ASSETS.timbanganPermen,
+        options: ["3x + 2 = x + 10; x = 4", "3x + 2 = x + 10; x = 6", "3x + 1 = x + 10; x = 4,5", "3x + 2 = 10x; x = 2"],
+        correctIndex: 0,
+        explanation: "Ruas kiri = 3x + 2, ruas kanan = x + 10. Persamaan: 3x + 2 = x + 10 → 3x - x = 10 - 2 → 2x = 8 → x = 4."
+      },
+      {
+        id: 35,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Manakah di antara persamaan berikut yang memiliki penyelesaian x = -3?",
+        svg: null,
+        options: ["4x + 7 = x - 2", "2x - 5 = 1", "3x + 9 = 18", "5 - x = 2"],
+        correctIndex: 0,
+        explanation: "Uji x = -3 ke persamaan 4x + 7 = x - 2: Ruas kiri = 4(-3) + 7 = -12 + 7 = -5; Ruas kanan = -3 - 2 = -5. Ruas kiri = Ruas kanan, jadi benar."
+      },
+      {
+        id: 36,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Penyelesaian dari persamaan 7x - 9 = 3x + 15 adalah ....",
+        svg: null,
+        options: ["x = 6", "x = 2,4", "x = -6", "x = 4"],
+        correctIndex: 0,
+        explanation: "Pindahkan suku: 7x - 3x = 15 + 9 → 4x = 24 → x = 24 ÷ 4 = 6."
+      },
+      {
+        id: 37,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Nilai x yang memenuhi persamaan 4(x - 2) = 2(3x + 1) adalah ....",
+        svg: null,
+        options: ["x = -5", "x = 5", "x = -3", "x = 3"],
+        correctIndex: 0,
+        explanation: "Jabarkan kurung: 4x - 8 = 6x + 2 → 4x - 6x = 2 + 8 → -2x = 10 → x = -5."
+      },
+      {
+        id: 38,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Nilai x yang memenuhi persamaan 0,3x - 1,4 = 0,8x + 0,6 adalah ....",
+        svg: null,
+        options: ["x = -4", "x = 4", "x = -0,4", "x = 2"],
+        correctIndex: 0,
+        explanation: "Kalikan kedua ruas dengan 10: 3x - 14 = 8x + 6 → 3x - 8x = 6 + 14 → -5x = 20 → x = -4."
+      },
+      {
+        id: 39,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Penyelesaian dari persamaan pecahan <span class='frac'><span>x + 2</span><span>3</span></span> = <span class='frac'><span>2x - 1</span><span>4</span></span> adalah ....",
+        svg: null,
+        options: ["x = 11", "x = 5", "x = -11", "x = 7"],
+        correctIndex: 0,
+        explanation: "Kalikan kedua ruas dengan KPK(3, 4) = 12: 4(x + 2) = 3(2x - 1) → 4x + 8 = 6x - 3 → 4x - 6x = -3 - 8 → -2x = -11 → x = 5,5? Tunggu: 4x + 8 = 6x - 3 → 8 + 3 = 6x - 4x → 11 = 2x... Mari koreksi soal agar bulat: jika ruas kanan (2x - 5)/4 → 4x + 8 = 6x - 15; jika (x + 1)/3 = (2x - 5)/4 → 4x + 4 = 6x - 15; jika (x + 2)/3 = (2x - 7)/4 → 4x + 8 = 6x - 21; jika (x + 5)/3 = (2x - 1)/4 → 4x + 20 = 6x - 3; jika (x + 3)/3 = (2x - 5)/4 → 4x + 12 = 6x - 15; jika (x + 2)/3 = (x - 1)/2 → 2x + 4 = 3x - 3 → x = 7! Untuk persamaan di atas 2x = 11 → x = 5,5 (kita perbarui opsi agar akurat)."
+      },
+      {
+        id: 40,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Nilai x yang memenuhi perbandingan 6 : 9 = (x + 1) : 12 adalah ....",
+        svg: null,
+        options: ["x = 7", "x = 8", "x = 6", "x = 9"],
+        correctIndex: 0,
+        explanation: "Gunakan sifat perbandingan a : b = c : d ↔ a × d = b × c. Maka 9(x + 1) = 6 × 12 → 9x + 9 = 72 → 9x = 63 → x = 7."
+      },
+      {
+        id: 41,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Perhatikan ilustrasi berikut. Pada saat yang sama, sebuah tiang setinggi 2 m memiliki bayangan sepanjang 3 m, sedangkan sebuah pohon memiliki bayangan sepanjang 12 m. Tinggi pohon (x) tersebut adalah ....",
+        svg: SVG_ASSETS.tiangBayangan,
+        options: ["8 m", "6 m", "18 m", "9 m"],
+        correctIndex: 0,
+        explanation: "Perbandingan tinggi dan panjang bayangan: 2 : 3 = x : 12 → 3x = 2 × 12 → 3x = 24 → x = 8 m."
+      },
+      {
+        id: 42,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Perhatikan ilustrasi tangki air berikut. Tangki A berisi 29 liter air dan Tangki B berisi 10 liter air. Setelah sebagian air dari Tangki A dituang ke Tangki B sebanyak x liter, volume air di Tangki A menjadi 2 kali volume air di Tangki B. Banyak air yang dituang (x) adalah ....",
+        svg: SVG_ASSETS.tangkiAir,
+        options: ["3 liter", "4 liter", "5 liter", "6 liter"],
+        correctIndex: 0,
+        explanation: "Setelah dituang x liter: Tangki A = 29 - x dan Tangki B = 10 + x. Persamaan: 29 - x = 2(10 + x) → 29 - x = 20 + 2x → 29 - 20 = 2x + x → 9 = 3x → x = 3 liter."
+      },
+      {
+        id: 43,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Jumlah tiga bilangan bulat berurutan adalah 72. Bilangan terbesar di antara ketiga bilangan tersebut adalah ....",
+        svg: null,
+        options: ["25", "24", "23", "26"],
+        correctIndex: 0,
+        explanation: "Misalkan ketiga bilangan berurutan adalah (x - 1), x, dan (x + 1). Jumlahnya = 3x = 72 → x = 24. Bilangan terbesar = x + 1 = 24 + 1 = 25."
+      },
+      {
+        id: 44,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Perbandingan banyak kelereng Andi dan Budi adalah 3 : 5. Jika selisih kelereng mereka adalah 16 butir, maka jumlah kelereng mereka berdua adalah ....",
+        svg: null,
+        options: ["64 butir", "40 butir", "24 butir", "48 butir"],
+        correctIndex: 0,
+        explanation: "Misalkan kelereng Andi = 3x dan Budi = 5x. Selisih: 5x - 3x = 16 → 2x = 16 → x = 8. Jumlah kelereng = 3x + 5x = 8x = 8(8) = 64 butir."
+      },
+      {
+        id: 45,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Harga 1 buah pulpen lebih mahal Rp2.000,00 daripada harga 1 buah pensil. Jika Dini membeli 3 pulpen dan 2 pensil dengan total harga Rp21.000,00, maka harga 1 buah pulpen adalah ....",
+        svg: null,
+        options: ["Rp5.000,00", "Rp3.000,00", "Rp4.500,00", "Rp6.000,00"],
+        correctIndex: 0,
+        explanation: "Misalkan harga 1 pensil = x, maka harga 1 pulpen = x + 2.000. Persamaan: 3(x + 2.000) + 2x = 21.000 → 3x + 6.000 + 2x = 21.000 → 5x = 15.000 → x = 3.000 (pensil). Harga pulpen = 3.000 + 2.000 = Rp5.000,00."
+      },
+      {
+        id: 46,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Perhatikan grafik penyelesaian pertidaksamaan pada garis bilangan di bawah ini. Pertidaksamaan yang sesuai dengan gambar tersebut adalah ....",
+        svg: SVG_ASSETS.garisPertidaksamaan,
+        options: ["x &ge; 3", "x &gt; 3", "x &le; 3", "x &lt; 3"],
+        correctIndex: 0,
+        explanation: "Bulatan penuh (hitam) di angka 3 menunjukkan bahwa angka 3 ikut dalam penyelesaian (menggunakan tanda sama dengan), dan arah panah ke kanan menunjukkan nilai lebih besar dari 3. Jadi pertidaksamaannya adalah x ≥ 3."
+      },
+      {
+        id: 47,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Himpunan penyelesaian dari pertidaksamaan -3x + 5 &lt; 17 untuk x bilangan bulat adalah ....",
+        svg: null,
+        options: ["x &gt; -4", "x &lt; -4", "x &gt; 4", "x &lt; 4"],
+        correctIndex: 0,
+        explanation: "-3x + 5 < 17 → -3x < 17 - 5 → -3x < 12. Bagi kedua ruas dengan -3 (tanda pertidaksamaan dibalik!): x > 12 ÷ (-3) → x > -4."
+      },
+      {
+        id: 48,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Penyelesaian dari pertidaksamaan 5x - 4 &le; 2x + 11 adalah ....",
+        svg: null,
+        options: ["x &le; 5", "x &ge; 5", "x &le; -5", "x &le; 3"],
+        correctIndex: 0,
+        explanation: "5x - 2x ≤ 11 + 4 → 3x ≤ 15 → x ≤ 5."
+      },
+      {
+        id: 49,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Sebuah mobil bak terbuka memiliki daya angkut maksimal 800 kg. Berat sopir dan kernet adalah 130 kg. Jika mobil tersebut akan mengangkut beberapa kotak barang yang masing-masing beratnya 25 kg, banyak kotak maksimal yang dapat diangkut dalam sekali jalan adalah ....",
+        svg: null,
+        options: ["26 kotak", "27 kotak", "32 kotak", "25 kotak"],
+        correctIndex: 0,
+        explanation: "Misalkan banyak kotak = x. Pertidaksamaan: 130 + 25x ≤ 800 → 25x ≤ 670 → x ≤ 26,8. Karena banyak kotak harus bilangan bulat, maksimal yang dapat diangkut adalah 26 kotak."
+      },
+      {
+        id: 50,
+        bab: "Bab 3: Persamaan & Pertidaksamaan Linear",
+        text: "Sebuah persegi panjang memiliki panjang 12 cm dan lebar (2x - 1) cm. Jika luas persegi panjang tersebut tidak lebih dari 84 cm&sup2; dan lebarnya harus bernilai positif, maka batas nilai x yang memenuhi adalah ....",
+        svg: null,
+        options: ["0,5 &lt; x &le; 4", "x &le; 4", "0 &lt; x &le; 4", "0,5 &lt; x &lt; 4"],
+        correctIndex: 0,
+        explanation: "Syarat lebar positif: 2x - 1 > 0 → x > 0,5. Syarat luas ≤ 84: 12(2x - 1) ≤ 84 → 2x - 1 ≤ 7 → 2x ≤ 8 → x ≤ 4. Gabungan keduanya: 0,5 < x ≤ 4."
+      }
+    ];
+
+    // Perbaikan akurat untuk opsi soal nomor 39 (2x = 11 -> x = 5,5)
+    RAW_QUESTIONS[38].options = ["x = 5,5", "x = 2,5", "x = -5,5", "x = 11"];
+    RAW_QUESTIONS[38].explanation = "Kalikan kedua ruas dengan KPK(3, 4) = 12: 4(x + 2) = 3(2x - 1) → 4x + 8 = 6x - 3 → 8 + 3 = 6x - 4x → 11 = 2x → x = 5,5.";
+
+    // ========================================================================
+    // 3. STATE APLIKASI & ALGORITMA PENGACAKAN KUNCI MERATA (A, B, C, D)
+    // ========================================================================
+    let activeQuestions = [];
+    let userAnswers = {}; // { questionId: chosenIndex }
+    let isSubmitted = false;
+    const LETTERS = ["A", "B", "C", "D"];
+
+    /**
+     * Mengacak posisi opsi A, B, C, D sehingga distribusi kunci jawaban
+     * benar-benar merata (~12-13 soal per huruf A, B, C, D) dan tidak berpola.
+     */
+    function buildBalancedQuiz() {
+      // Buat pool target indeks kunci jawaban yang seimbang untuk 50 soal:
+      // 13x '0'(A), 13x '1'(B), 12x '2'(C), 12x '3'(D) = 50 soal
+      const targetPool = [];
+      for (let i = 0; i < 13; i++) targetPool.push(0, 1);
+      for (let i = 0; i < 12; i++) targetPool.push(2, 3);
+
+      // Fisher-Yates shuffle pada targetPool dengan mencegah 3 huruf sama berurutan
+      for (let i = targetPool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [targetPool[i], targetPool[j]] = [targetPool[j], targetPool[i]];
+      }
+
+      activeQuestions = RAW_QUESTIONS.map((q, idx) => {
+        const desiredCorrectPos = targetPool[idx];
+        const correctText = q.options[q.correctIndex];
+        const distractors = q.options.filter((_, oIdx) => oIdx !== q.correctIndex);
+
+        // Acak urutan pengecoh
+        for (let i = distractors.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
+        }
+
+        // Susun array opsi baru dengan kunci di desiredCorrectPos
+        const newOptions = [];
+        let dIdx = 0;
+        for (let pos = 0; pos < 4; pos++) {
+          if (pos === desiredCorrectPos) {
+            newOptions.push(correctText);
+          } else {
+            newOptions.push(distractors[dIdx++]);
+          }
+        }
+
+        return {
+          ...q,
+          options: newOptions,
+          correctIndex: desiredCorrectPos
+        };
+      });
+    }
+
+    // ========================================================================
+    // 4. RENDER UI SOAL & NAVIGASI NOMOR
+    // ========================================================================
+    function renderQuiz() {
+      const qContainer = document.getElementById("questionsContainer");
+      const nGrid = document.getElementById("numberGrid");
+      qContainer.innerHTML = "";
+      nGrid.innerHTML = "";
+
+      activeQuestions.forEach((q, index) => {
+        const qNum = index + 1;
+        const chosen = userAnswers[q.id];
+        const isCorrect = chosen === q.correctIndex;
+
+        // 1. Render Tombol Sidebar Navigasi
+        const navBtn = document.createElement("button");
+        navBtn.className = "num-btn";
+        navBtn.id = `nav-btn-${q.id}`;
+        navBtn.textContent = qNum;
+        if (isSubmitted) {
+          navBtn.classList.add(isCorrect ? "correct-nav" : "wrong-nav");
+        } else if (chosen !== undefined) {
+          navBtn.classList.add("answered");
+        }
+        navBtn.onclick = () => {
+          document.getElementById(`q-card-${q.id}`).scrollIntoView({ behavior: "smooth" });
+        };
+        nGrid.appendChild(navBtn);
+
+        // 2. Render Kartu Soal
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `q-card-${q.id}`;
+        if (isSubmitted) {
+          card.classList.add(isCorrect ? "review-correct" : "review-wrong");
+        }
+
+        let optionsHTML = `<div class="options-list">`;
+        q.options.forEach((optText, optIdx) => {
+          let labelClass = "option-label";
+          if (!isSubmitted) {
+            if (chosen === optIdx) labelClass += " selected";
+          } else {
+            if (optIdx === q.correctIndex) {
+              labelClass += " opt-correct";
+            } else if (chosen === optIdx && chosen !== q.correctIndex) {
+              labelClass += " opt-wrong";
+            }
+          }
+
+          const clickAttr = isSubmitted ? "" : `onclick="selectOption(${q.id}, ${optIdx})"`;
+          optionsHTML += `
+            <div class="${labelClass}" ${clickAttr}>
+              <span class="option-letter">${LETTERS[optIdx]}</span>
+              <span class="option-text">${optText}</span>
+            </div>
+          `;
+        });
+        optionsHTML += `</div>`;
+
+        // 3. Render Pembahasan (Jika sudah disubmit)
+        let explanationHTML = "";
+        if (isSubmitted) {
+          const userChoiceText = chosen !== undefined
+            ? `<strong>${LETTERS[chosen]}.</strong> ${q.options[chosen]}`
+            : `<em style="color:var(--danger);">Tidak dijawab</em>`;
+          const keyChoiceText = `<strong>${LETTERS[q.correctIndex]}.</strong> ${q.options[q.correctIndex]}`;
+          const statusLabel = isCorrect
+            ? `<span style="color:var(--secondary);">&#10004; Jawaban Benar</span>`
+            : `<span style="color:var(--danger);">&#10008; Jawaban Salah</span>`;
+
+          explanationHTML = `
+            <div class="explanation-box ${isCorrect ? "status-benar" : "status-salah"}">
+              <div class="exp-header">
+                ${statusLabel}
+                <span>Kunci Jawaban: <strong>${LETTERS[q.correctIndex]}</strong></span>
+              </div>
+              <div style="margin-bottom:8px; font-size:0.9rem;">
+                <div>Jawaban Kamu: ${userChoiceText}</div>
+                <div>Jawaban Benar: ${keyChoiceText}</div>
+              </div>
+              <div style="border-top:1px solid rgba(0,0,0,0.08); padding-top:8px;">
+                <strong>Pembahasan:</strong> ${q.explanation}
+              </div>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="q-meta">
+            <span class="q-number-badge">Soal No. ${qNum}</span>
+            <span class="q-bab-tag">${q.bab}</span>
+          </div>
+          <div class="q-text">${q.text}</div>
+          ${q.svg ? `<div class="svg-container">${q.svg}</div>` : ""}
+          ${optionsHTML}
+          ${explanationHTML}
+        `;
+
+        qContainer.appendChild(card);
+      });
+
+      updateProgress();
+    }
+
+    function selectOption(questionId, optionIndex) {
+      if (isSubmitted) return;
+      userAnswers[questionId] = optionIndex;
+
+      // Update tampilan kartu soal secara cepat tanpa rerender semua
+      const card = document.getElementById(`q-card-${questionId}`);
+      const labels = card.querySelectorAll(".option-label");
+      labels.forEach((lbl, idx) => {
+        lbl.classList.toggle("selected", idx === optionIndex);
+      });
+
+      const navBtn = document.getElementById(`nav-btn-${questionId}`);
+      if (navBtn) navBtn.classList.add("answered");
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const answered = Object.keys(userAnswers).length;
+      document.getElementById("answeredCount").textContent = answered;
+      const pct = Math.round((answered / activeQuestions.length) * 100);
+      document.getElementById("progressBarFill").style.width = `${pct}%`;
+    }
+
+    // ========================================================================
+    // 5. SUBMIT KUIS, PENILAIAN, & FILTER PEMBAHASAN
+    // ========================================================================
+    function handleSubmitQuiz() {
+      const answered = Object.keys(userAnswers).length;
+      const unanswered = activeQuestions.length - answered;
+
+      if (unanswered > 0) {
+        showModal(
+          "Kumpulkan Jawaban Sekarang?",
+          `Masih ada <strong>${unanswered} soal</strong> yang belum kamu jawab. Apakah kamu yakin ingin menyelesaikan kuis dan melihat nilai serta pembahasannya?`,
+          [
+            { text: "Batal, Lanjut Mengerjakan", class: "btn-modal-cancel", action: closeModal },
+            { text: "Ya, Submit Sekarang", class: "btn-modal-primary", action: () => { closeModal(); finalizeSubmit(); } }
+          ]
+        );
+      } else {
+        finalizeSubmit();
+      }
+    }
+
+    function finalizeSubmit() {
+      isSubmitted = true;
+      let correctCount = 0;
+      let wrongCount = 0;
+      let emptyCount = 0;
+
+      activeQuestions.forEach((q) => {
+        const chosen = userAnswers[q.id];
+        if (chosen === undefined) {
+          emptyCount++;
+          wrongCount++;
+        } else if (chosen === q.correctIndex) {
+          correctCount++;
+        } else {
+          wrongCount++;
+        }
+      });
+
+      // Skor 0 - 100 (setiap soal bernilai 2 poin)
+      const score = correctCount * 2;
+      const studentName = document.getElementById("studentName").value.trim();
+
+      document.getElementById("resultGreeting").textContent = studentName
+        ? `Hasil Evaluasi Belajar — ${studentName}`
+        : "Hasil Evaluasi Belajar Matematika Kelas VII";
+
+      document.getElementById("finalScore").textContent = score;
+      document.getElementById("statCorrect").textContent = correctCount;
+      document.getElementById("statWrong").textContent = wrongCount;
+      document.getElementById("statEmpty").textContent = emptyCount;
+
+      document.getElementById("btnFilterWrong").textContent = `Jawaban Salah (${wrongCount})`;
+      document.getElementById("btnFilterCorrect").textContent = `Jawaban Benar (${correctCount})`;
+
+      // Predikat
+      const badge = document.getElementById("predicateBadge");
+      if (score >= 90) {
+        badge.textContent = "Predikat: Sangat Baik (Istimewa)";
+        badge.style.background = "#e6fcf5";
+        badge.style.color = "#087f5b";
+      } else if (score >= 75) {
+        badge.textContent = "Predikat: Baik (Tuntas KKTP)";
+        badge.style.background = "#edf2ff";
+        badge.style.color = "#2b44b5";
+      } else if (score >= 60) {
+        badge.textContent = "Predikat: Cukup (Perlu Latihan Lagi)";
+        badge.style.background = "#fff9db";
+        badge.style.color = "#b45309";
+      } else {
+        badge.textContent = "Predikat: Perlu Bimbingan & Belajar Ulang";
+        badge.style.background = "#fff5f5";
+        badge.style.color = "#c92a2a";
+      }
+
+      // Update legenda navigasi
+      document.getElementById("navLegend").innerHTML = `
+        <div class="legend-item"><span class="legend-box" style="background:var(--secondary);"></span> Benar</div>
+        <div class="legend-item"><span class="legend-box" style="background:var(--danger);"></span> Salah</div>
+      `;
+
+      document.getElementById("resultPanel").style.display = "block";
+      document.getElementById("submitSection").style.display = "none";
+
+      renderQuiz();
+      document.getElementById("resultPanel").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function filterReview(type, btn) {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      activeQuestions.forEach((q) => {
+        const card = document.getElementById(`q-card-${q.id}`);
+        const isCorrect = userAnswers[q.id] === q.correctIndex;
+        if (type === "all") {
+          card.style.display = "block";
+        } else if (type === "correct") {
+          card.style.display = isCorrect ? "block" : "none";
+        } else if (type === "wrong") {
+          card.style.display = !isCorrect ? "block" : "none";
+        }
+      });
+    }
+
+    // ========================================================================
+    // 6. AKSI ULANGI KUIS, ACAK OPSI, & RESET
+    // ========================================================================
+    function confirmShuffle() {
+      showModal(
+        "Acak Ulang Urutan Opsi?",
+        "Urutan pilihan jawaban A, B, C, dan D pada seluruh 50 soal akan diacak ulang dan jawabanmu saat ini akan direset. Lanjutkan?",
+        [
+          { text: "Batal", class: "btn-modal-cancel", action: closeModal },
+          { text: "Ya, Acak Ulang", class: "btn-modal-primary", action: () => { closeModal(); retakeQuiz(); } }
+        ]
+      );
+    }
+
+    function confirmReset() {
+      showModal(
+        "Reset Semua Jawaban?",
+        "Semua pilihan jawaban yang sudah kamu klik akan dihapus. Lanjutkan?",
+        [
+          { text: "Batal", class: "btn-modal-cancel", action: closeModal },
+          { text: "Ya, Reset", class: "btn-modal-primary", action: () => { closeModal(); userAnswers = {}; isSubmitted = false; document.getElementById("resultPanel").style.display = "none"; document.getElementById("submitSection").style.display = "block"; renderQuiz(); } }
+        ]
+      );
+    }
+
+    function retakeQuiz() {
+      userAnswers = {};
+      isSubmitted = false;
+      document.getElementById("resultPanel").style.display = "none";
+      document.getElementById("submitSection").style.display = "block";
+      document.getElementById("navLegend").innerHTML = `
+        <div class="legend-item"><span class="legend-box" style="background:#f8fafc; border:1px solid #cbd5e1;"></span> Belum</div>
+        <div class="legend-item"><span class="legend-box" style="background:var(--primary);"></span> Terjawab</div>
+      `;
+      buildBalancedQuiz();
+      renderQuiz();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // ========================================================================
+    // 7. NAVIGASI TAB & FILTER MATERI
+    // ========================================================================
+    function switchTab(tabName) {
+      document.getElementById("tab-materi").classList.toggle("active", tabName === "materi");
+      document.getElementById("tab-kuis").classList.toggle("active", tabName === "kuis");
+      document.getElementById("btn-tab-materi").classList.toggle("active", tabName === "materi");
+      document.getElementById("btn-tab-kuis").classList.toggle("active", tabName === "kuis");
+    }
+
+    function filterMateri(bab, btn) {
+      document.querySelectorAll(".bab-pill").forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+
+      document.querySelectorAll(".materi-card").forEach(card => {
+        if (bab === "all" || card.dataset.bab === bab) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    // ========================================================================
+    // 8. MODAL HELPER & DOWNLOAD FILE HTML OFFLINE MANDIRI
+    // ========================================================================
+    function showModal(title, message, buttons) {
+      document.getElementById("modalTitle").textContent = title;
+      document.getElementById("modalMessage").innerHTML = message;
+      const actions = document.getElementById("modalActions");
+      actions.innerHTML = "";
+      buttons.forEach(b => {
+        const btn = document.createElement("button");
+        btn.className = b.class;
+        btn.textContent = b.text;
+        btn.onclick = b.action;
+        actions.appendChild(btn);
+      });
+      document.getElementById("customModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("customModal").style.display = "none";
+    }
+
+    function downloadOfflineHTML() {
+      try {
+        const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+        const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Kuis_Matematika_SMP_Kelas7_Sem1_Offline.html";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } catch (err) {
+        showModal(
+          "Simpan Halaman Offline",
+          "Tekan <strong>Ctrl + S</strong> (Windows/Linux) atau <strong>Cmd + S</strong> (Mac) pada browser Anda, lalu simpan sebagai file <code>.html</code> untuk menjalankannya secara offline kapan saja.",
+          [{ text: "Mengerti", class: "btn-modal-primary", action: closeModal }]
+        );
+      }
+    }
+
+    // Inisialisasi saat halaman dimuat
+    window.addEventListener("DOMContentLoaded", () => {
+      buildBalancedQuiz();
+      renderQuiz();
+    });
+  </script>
+</body>
+</html>

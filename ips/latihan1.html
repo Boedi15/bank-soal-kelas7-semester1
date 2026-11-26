@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latihan Soal ASAS IPS Kelas VII Semester 1 (100 Soal)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Smooth scrolling & subtle visual refinements */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+    /* Custom scrollbar for 100-number navigator on desktop */
+    .nav-grid-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .nav-grid-scroll::-webkit-scrollbar-track {
+      background: #f8fafc;
+      border-radius: 9999px;
+    }
+    .nav-grid-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .nav-grid-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .question-card {
+      scroll-margin-top: 88px;
+    }
+    .svg-illustration-box svg {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-800 antialiased">
+
+  <!-- Top Compact Quiz Bar -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded-xl bg-brand-700 text-white flex items-center justify-center font-extrabold text-sm shrink-0 shadow-sm">
+          IPS
+        </div>
+        <div class="min-w-0">
+          <h1 class="text-sm sm:text-base font-bold text-slate-900 truncate">
+            ASAS IPS Kelas VII (Semester Ganjil) — 100 Soal
+          </h1>
+          <p class="text-xs text-slate-500 truncate">
+            Kurikulum Merdeka • Keluarga, Ruang &amp; Waktu, Sosialisasi, Lingkungan, Praaksara &amp; Ekonomi
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-4">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold text-slate-700">
+          Terjawab: <span id="headerAnsweredCount" class="text-brand-700 font-bold">0</span>/100
+        </div>
+        <button
+          id="topSubmitBtn"
+          type="button"
+          onclick="handleSubmitClick()"
+          class="px-4 py-2 rounded-xl bg-brand-700 hover:bg-brand-800 active:scale-[0.99] text-white text-xs sm:text-sm font-semibold shadow-sm transition cursor-pointer"
+        >
+          Selesaikan &amp; Nilai
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace: Questions on Left, Sticky/Fixed Navigator on Right -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+    <!-- Score & Result Banner (Hidden until submitted) -->
+    <section id="resultSummaryPanel" class="hidden mb-6 rounded-2xl bg-white border-2 border-brand-600 shadow-md p-5 sm:p-6">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+        <div>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-brand-100 text-brand-800 mb-2">
+            HASIL EVALUASI ASAS IPS KELAS VII
+          </span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+            Nilai Akhir Kamu: <span id="finalScoreText" class="text-brand-700">0</span>
+            <span id="predicateBadge" class="ml-2 inline-block align-middle text-xs sm:text-sm font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800"></span>
+          </h2>
+          <p id="resultMessageText" class="text-sm text-slate-600 mt-1">
+            Pembahasan lengkap setiap soal kini terbuka di bawah. Periksa kembali jawabanmu dan pelajari penjelasannya.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2.5 sm:gap-4 shrink-0">
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl px-3.5 py-2.5 text-center">
+            <div class="text-xs font-semibold text-emerald-700">Benar</div>
+            <div id="correctCountText" class="text-lg sm:text-2xl font-extrabold text-emerald-700">0</div>
+          </div>
+          <div class="bg-rose-50 border border-rose-200 rounded-xl px-3.5 py-2.5 text-center">
+            <div class="text-xs font-semibold text-rose-700">Salah</div>
+            <div id="wrongCountText" class="text-lg sm:text-2xl font-extrabold text-rose-700">0</div>
+          </div>
+          <div class="bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-center">
+            <div class="text-xs font-semibold text-slate-600">Kosong</div>
+            <div id="unansweredCountText" class="text-lg sm:text-2xl font-extrabold text-slate-700">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap gap-2 text-xs">
+          <button
+            type="button"
+            onclick="filterQuestions('all')"
+            class="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition cursor-pointer"
+          >
+            Semua Soal (100)
+          </button>
+          <button
+            type="button"
+            onclick="filterQuestions('wrong')"
+            class="px-3 py-1.5 rounded-lg bg-rose-100 text-rose-800 font-semibold hover:bg-rose-200 transition cursor-pointer"
+          >
+            Hanya Salah / Kosong
+          </button>
+          <button
+            type="button"
+            onclick="filterQuestions('correct')"
+            class="px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-800 font-semibold hover:bg-emerald-200 transition cursor-pointer"
+          >
+            Hanya Benar
+          </button>
+        </div>
+
+        <button
+          type="button"
+          onclick="resetQuiz()"
+          class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs sm:text-sm font-bold shadow-sm transition cursor-pointer"
+        >
+          Ulangi Kuis &amp; Acak Ulang
+        </button>
+      </div>
+    </section>
+
+    <!-- Confirmation Notice Modal/Box (Non-alert fallback when unanswered questions exist) -->
+    <div id="confirmSubmitBox" class="hidden mb-6 rounded-2xl bg-amber-50 border border-amber-300 p-4 sm:p-5 shadow-sm">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="text-sm text-amber-950">
+          <p class="font-bold">Masih ada <span id="unansweredWarningCount">0</span> soal yang belum dijawab.</p>
+          <p class="text-amber-800 mt-0.5">Kamu tetap bisa mengumpulkan sekarang atau melengkapi soal yang kosong terlebih dahulu.</p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button
+            type="button"
+            onclick="hideConfirmBox()"
+            class="px-3.5 py-2 rounded-xl bg-white border border-amber-300 text-amber-900 text-xs sm:text-sm font-semibold hover:bg-amber-100 transition cursor-pointer"
+          >
+            Lanjut Jawab
+          </button>
+          <button
+            type="button"
+            onclick="finalizeSubmission()"
+            class="px-4 py-2 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs sm:text-sm font-semibold transition cursor-pointer"
+          >
+            Tetap Kumpulkan
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row items-start gap-6">
+      <!-- Left / Main Column: 100 Questions -->
+      <div id="questionsContainer" class="w-full lg:flex-1 min-w-0 space-y-5">
+        <!-- Populated dynamically via JavaScript -->
+      </div>
+
+      <!-- Right Column: Sticky / Fixed Question Navigator (1 - 100) -->
+      <aside class="w-full lg:w-80 xl:w-88 shrink-0 lg:sticky lg:top-20 z-20">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+          <div class="flex items-center justify-between gap-2 pb-3 border-b border-slate-100">
+            <div>
+              <h2 class="text-sm font-bold text-slate-900">Navigasi Nomor Soal</h2>
+              <p class="text-xs text-slate-500">Klik nomor untuk melompat ke soal</p>
+            </div>
+            <span id="sidebarProgressText" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700">
+              0 / 100
+            </span>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden mt-3 mb-3">
+            <div id="progressBarFill" class="h-full bg-brand-600 transition-all duration-300" style="width: 0%;"></div>
+          </div>
+
+          <!-- Legend -->
+          <div id="legendBox" class="flex flex-wrap gap-x-3 gap-y-1.5 text-[11px] text-slate-600 mb-3">
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded bg-slate-100 border border-slate-300 inline-block"></span> Belum
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded bg-brand-600 inline-block"></span> Terjawab
+            </span>
+            <span id="legendCorrect" class="hidden items-center gap-1.5">
+              <span class="w-3 h-3 rounded bg-emerald-600 inline-block"></span> Benar
+            </span>
+            <span id="legendWrong" class="hidden items-center gap-1.5">
+              <span class="w-3 h-3 rounded bg-rose-600 inline-block"></span> Salah
+            </span>
+          </div>
+
+          <!-- Grid of 100 Numbers -->
+          <div id="questionNavGrid" class="grid grid-cols-10 sm:grid-cols-10 lg:grid-cols-10 gap-1.5 max-h-64 lg:max-h-[calc(100vh-275px)] overflow-y-auto nav-grid-scroll pr-0.5">
+            <!-- Populated dynamically via JavaScript -->
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2">
+            <button
+              id="sidebarSubmitBtn"
+              type="button"
+              onclick="handleSubmitClick()"
+              class="w-full py-2.5 px-4 rounded-xl bg-brand-700 hover:bg-brand-800 active:scale-[0.99] text-white text-sm font-bold shadow-sm transition cursor-pointer"
+            >
+              Selesaikan &amp; Lihat Nilai
+            </button>
+            <button
+              type="button"
+              onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+              class="w-full py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition cursor-pointer"
+            >
+              Kembali ke Atas
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    /**
+     * =========================================================================
+     * INLINE SVG VISUAL LIBRARY (100% Offline, Kemendikbudristek Kelas VII)
+     * =========================================================================
+     */
+    const SVG_ART = {
+      familyTree: `
+        <svg viewBox="0 0 600 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bagan silsilah keluarga tiga generasi">
+          <rect x="0" y="0" width="600" height="210" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Bagan Silsilah Keluarga (Kaitan Manusia, Waktu &amp; Ruang)</text>
+          <!-- Gen 1 -->
+          <rect x="95" y="40" width="140" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="165" y="56" text-anchor="middle" font-size="10" font-weight="700" fill="#1e3a8a">Kakek &amp; Nenek (Pihak Ayah)</text>
+          <text x="165" y="69" text-anchor="middle" font-size="9" fill="#1e40af">Masa Lalu (1960-an)</text>
+
+          <rect x="365" y="40" width="140" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="435" y="56" text-anchor="middle" font-size="10" font-weight="700" fill="#1e3a8a">Kakek &amp; Nenek (Pihak Ibu)</text>
+          <text x="435" y="69" text-anchor="middle" font-size="9" fill="#1e40af">Masa Lalu (1965-an)</text>
+
+          <!-- Connectors Gen 1 to Gen 2 -->
+          <line x1="165" y1="76" x2="165" y2="96" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="165" y1="96" x2="220" y2="96" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="220" y1="96" x2="220" y2="112" stroke="#64748b" stroke-width="1.5"/>
+
+          <line x1="435" y1="76" x2="435" y2="96" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="435" y1="96" x2="380" y2="96" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="380" y1="96" x2="380" y2="112" stroke="#64748b" stroke-width="1.5"/>
+
+          <!-- Gen 2 -->
+          <rect x="150" y="112" width="130" height="34" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+          <text x="215" y="127" text-anchor="middle" font-size="10" font-weight="700" fill="#0c4a6e">Ayah</text>
+          <text x="215" y="139" text-anchor="middle" font-size="9" fill="#0369a1">Keluarga Inti</text>
+
+          <rect x="320" y="112" width="130" height="34" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+          <text x="385" y="127" text-anchor="middle" font-size="10" font-weight="700" fill="#0c4a6e">Ibu</text>
+          <text x="385" y="139" text-anchor="middle" font-size="9" fill="#0369a1">Keluarga Inti</text>
+
+          <!-- Marriage line & Gen 3 -->
+          <line x1="280" y1="129" x2="320" y2="129" stroke="#0284c7" stroke-width="2"/>
+          <line x1="300" y1="129" x2="300" y2="158" stroke="#64748b" stroke-width="1.5"/>
+
+          <rect x="215" y="158" width="170" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="300" y="174" text-anchor="middle" font-size="10" font-weight="700" fill="#14532d">Anak (Peserta Didik Kelas VII)</text>
+          <text x="300" y="187" text-anchor="middle" font-size="9" fill="#15803d">Generasi Masa Kini</text>
+        </svg>
+      `,
+      timeZones: `
+        <svg viewBox="0 0 600 205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pembagian zona waktu Indonesia WIB WITA WIT">
+          <rect x="0" y="0" width="600" height="205" rx="12" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+          <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#0c4a6e">Pembagian Zona Waktu Indonesia (Selisih Tiap Zona = 1 Jam)</text>
+
+          <!-- WIB -->
+          <rect x="28" y="42" width="170" height="118" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="113" y="65" text-anchor="middle" font-size="14" font-weight="800" fill="#1e3a8a">WIB</text>
+          <text x="113" y="83" text-anchor="middle" font-size="10" font-weight="600" fill="#1d4ed8">Waktu Indonesia Barat</text>
+          <text x="113" y="103" text-anchor="middle" font-size="10" fill="#1e293b">GMT +7</text>
+          <text x="113" y="121" text-anchor="middle" font-size="9" fill="#475569">Sumatra, Jawa, Kalbar,</text>
+          <text x="113" y="133" text-anchor="middle" font-size="9" fill="#475569">Kalteng (Pusat: 105° BT)</text>
+          <text x="113" y="149" text-anchor="middle" font-size="10" font-weight="700" fill="#1e3a8a">Misal: 07.00 WIB</text>
+
+          <!-- WITA -->
+          <rect x="215" y="42" width="170" height="118" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+          <text x="300" y="65" text-anchor="middle" font-size="14" font-weight="800" fill="#0c4a6e">WITA</text>
+          <text x="300" y="83" text-anchor="middle" font-size="10" font-weight="600" fill="#0369a1">Waktu Indonesia Tengah</text>
+          <text x="300" y="103" text-anchor="middle" font-size="10" fill="#1e293b">GMT +8</text>
+          <text x="300" y="121" text-anchor="middle" font-size="9" fill="#475569">Sulawesi, Bali, NTB, NTT,</text>
+          <text x="300" y="133" text-anchor="middle" font-size="9" fill="#475569">Kaltim, Kalsel, Kaltara (120° BT)</text>
+          <text x="300" y="149" text-anchor="middle" font-size="10" font-weight="700" fill="#0c4a6e">Misal: 08.00 WITA</text>
+
+          <!-- WIT -->
+          <rect x="402" y="42" width="170" height="118" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="487" y="65" text-anchor="middle" font-size="14" font-weight="800" fill="#14532d">WIT</text>
+          <text x="487" y="83" text-anchor="middle" font-size="10" font-weight="600" fill="#15803d">Waktu Indonesia Timur</text>
+          <text x="487" y="103" text-anchor="middle" font-size="10" fill="#1e293b">GMT +9</text>
+          <text x="487" y="121" text-anchor="middle" font-size="9" fill="#475569">Maluku dan Papua</text>
+          <text x="487" y="133" text-anchor="middle" font-size="9" fill="#475569">(Pusat: 135° BT)</text>
+          <text x="487" y="149" text-anchor="middle" font-size="10" font-weight="700" fill="#14532d">Misal: 09.00 WIT</text>
+
+          <text x="300" y="184" text-anchor="middle" font-size="10" font-weight="600" fill="#334155">Semakin ke timur, waktu semakin cepat (1° bujur = 4 menit; 15° bujur = 1 jam).</text>
+        </svg>
+      `,
+      mapScale: `
+        <svg viewBox="0 0 600 195" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi skala peta dan komponen peta">
+          <rect x="0" y="0" width="600" height="195" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Ilustrasi Skala Peta: Skala 1 : 250.000</text>
+
+          <!-- Map box -->
+          <rect x="35" y="40" width="230" height="130" rx="8" fill="#e2e8f0" stroke="#475569" stroke-width="1.5"/>
+          <circle cx="75" cy="95" r="7" fill="#2563eb"/>
+          <text x="75" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#1e3a8a">Kota A</text>
+
+          <circle cx="220" cy="95" r="7" fill="#dc2626"/>
+          <text x="220" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#991b1b">Kota B</text>
+
+          <line x1="75" y1="95" x2="220" y2="95" stroke="#0f172a" stroke-width="2" stroke-dasharray="5,3"/>
+          <rect x="115" y="72" width="65" height="18" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+          <text x="147.5" y="84" text-anchor="middle" font-size="10" font-weight="700" fill="#0f172a">Jarak = 6 cm</text>
+
+          <!-- Calculation box -->
+          <rect x="290" y="40" width="275" height="130" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+          <text x="306" y="62" font-size="11" font-weight="700" fill="#1e3a8a">Rumus Jarak Sebenarnya (JS):</text>
+          <text x="306" y="82" font-size="10" fill="#334155">JS = Jarak di Peta (JP) × Penyebut Skala</text>
+          <text x="306" y="102" font-size="10" fill="#334155">JS = 6 cm × 250.000 = 1.500.000 cm</text>
+          <text x="306" y="122" font-size="10" font-weight="700" fill="#15803d">1.500.000 cm ÷ 100.000 = 15 km</text>
+
+          <!-- Graphic scale bar -->
+          <rect x="306" y="136" width="40" height="10" fill="#1e293b"/>
+          <rect x="346" y="136" width="40" height="10" fill="#ffffff" stroke="#1e293b"/>
+          <rect x="386" y="136" width="40" height="10" fill="#1e293b"/>
+          <text x="306" y="158" font-size="9" fill="#334155">0</text>
+          <text x="346" y="158" font-size="9" fill="#334155">2,5</text>
+          <text x="386" y="158" font-size="9" fill="#334155">5 km</text>
+        </svg>
+      `,
+      regionalInteraction: `
+        <svg viewBox="0 0 600 185" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interaksi antarwilayah desa dan kota">
+          <rect x="0" y="0" width="600" height="185" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+          <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Aliran Interaksi Antarwilayah (Desa &amp; Kota)</text>
+
+          <!-- Village -->
+          <rect x="30" y="45" width="185" height="115" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="122.5" y="68" text-anchor="middle" font-size="12" font-weight="800" fill="#14532d">Wilayah Desa</text>
+          <text x="122.5" y="88" text-anchor="middle" font-size="10" fill="#166534">• Bahan pangan &amp; hasil bumi</text>
+          <text x="122.5" y="106" text-anchor="middle" font-size="10" fill="#166534">• Tenaga kerja</text>
+          <text x="122.5" y="124" text-anchor="middle" font-size="10" fill="#166534">• Lahan &amp; udara relatif asri</text>
+
+          <!-- City -->
+          <rect x="385" y="45" width="185" height="115" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="477.5" y="68" text-anchor="middle" font-size="12" font-weight="800" fill="#1e3a8a">Wilayah Kota</text>
+          <text x="477.5" y="88" text-anchor="middle" font-size="10" fill="#1d4ed8">• Barang industri &amp; teknologi</text>
+          <text x="477.5" y="106" text-anchor="middle" font-size="10" fill="#1d4ed8">• Pasar &amp; fasilitas pendidikan</text>
+          <text x="477.5" y="124" text-anchor="middle" font-size="10" fill="#1d4ed8">• Layanan kesehatan &amp; jasa</text>
+
+          <!-- Arrows -->
+          <line x1="215" y1="82" x2="385" y2="82" stroke="#15803d" stroke-width="2.5"/>
+          <polygon points="385,82 375,77 375,87" fill="#15803d"/>
+          <text x="300" y="75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#15803d">Pangan, Sayur, Tenaga Kerja</text>
+
+          <line x1="385" y1="124" x2="215" y2="124" stroke="#1d4ed8" stroke-width="2.5"/>
+          <polygon points="215,124 225,119 225,129" fill="#1d4ed8"/>
+          <text x="300" y="142" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1d4ed8">Produk Pabrik, Informasi, Uang</text>
+        </svg>
+      `,
+      prehistoricTools: `
+        <svg viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perkembangan alat zaman praaksara">
+          <rect x="0" y="0" width="600" height="190" rx="12" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+          <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#78350f">Perkembangan Peninggalan Masa Praaksara Indonesia</text>
+
+          <!-- Paleolithikum -->
+          <rect x="24" y="42" width="128" height="126" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+          <text x="88" y="60" text-anchor="middle" font-size="10" font-weight="800" fill="#92400e">Paleolithikum</text>
+          <polygon points="88,70 112,108 64,108" fill="#a8a29e" stroke="#57534e" stroke-width="1.5"/>
+          <text x="88" y="126" text-anchor="middle" font-size="9" font-weight="600" fill="#44403c">Kapak Perimbas</text>
+          <text x="88" y="140" text-anchor="middle" font-size="8.5" fill="#78716c">(Masih kasar, nomaden)</text>
+
+          <!-- Mesolithikum -->
+          <rect x="164" y="42" width="128" height="126" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+          <text x="228" y="60" text-anchor="middle" font-size="10" font-weight="800" fill="#92400e">Mesolithikum</text>
+          <circle cx="228" cy="90" r="18" fill="#e7e5e4" stroke="#78716c" stroke-width="1.5"/>
+          <circle cx="223" cy="86" r="3" fill="#a8a29e"/>
+          <circle cx="234" cy="94" r="3" fill="#a8a29e"/>
+          <text x="228" y="126" text-anchor="middle" font-size="9" font-weight="600" fill="#44403c">Kjokkenmoddinger</text>
+          <text x="228" y="140" text-anchor="middle" font-size="8.5" fill="#78716c">(Abris sous roche, semi)</text>
+
+          <!-- Neolithikum -->
+          <rect x="304" y="42" width="128" height="126" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+          <text x="368" y="60" text-anchor="middle" font-size="10" font-weight="800" fill="#92400e">Neolithikum</text>
+          <rect x="348" y="74" width="40" height="32" rx="4" fill="#cbd5e1" stroke="#334155" stroke-width="1.5"/>
+          <text x="368" y="126" text-anchor="middle" font-size="9" font-weight="600" fill="#44403c">Kapak Persegi</text>
+          <text x="368" y="140" text-anchor="middle" font-size="8.5" fill="#78716c">(Diasah halus, menetap)</text>
+
+          <!-- Perundagian -->
+          <rect x="444" y="42" width="132" height="126" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+          <text x="510" y="60" text-anchor="middle" font-size="10" font-weight="800" fill="#92400e">Perundagian</text>
+          <circle cx="510" cy="90" r="16" fill="none" stroke="#b45309" stroke-width="4"/>
+          <text x="510" y="126" text-anchor="middle" font-size="9" font-weight="600" fill="#44403c">Nekara &amp; Perhiasan</text>
+          <text x="510" y="140" text-anchor="middle" font-size="8.5" fill="#78716c">(Logam / perunggu)</text>
+        </svg>
+      `,
+      infiltrationWell: `
+        <svg viewBox="0 0 600 185" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi sumur resapan dan pelestarian air tanah">
+          <rect x="0" y="0" width="600" height="185" rx="12" fill="#ecfeff" stroke="#a5f3fc" stroke-width="1.5"/>
+          <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#164e63">Sumur Resapan: Menambah Cadangan Air Tanah &amp; Mencegah Genangan</text>
+
+          <!-- Surface & Soil Layers -->
+          <rect x="25" y="65" width="550" height="22" fill="#86efac"/>
+          <text x="40" y="80" font-size="9.5" font-weight="700" fill="#14532d">Permukaan Tanah / Taman</text>
+
+          <rect x="25" y="87" width="550" height="45" fill="#fde68a"/>
+          <text x="40" y="113" font-size="9.5" font-weight="600" fill="#78350f">Lapisan Tanah &amp; Pasir Penyaring</text>
+
+          <rect x="25" y="132" width="550" height="38" fill="#bae6fd"/>
+          <text x="40" y="155" font-size="10" font-weight="700" fill="#0369a1">Akuifer / Cadangan Air Tanah Bersih</text>
+
+          <!-- Well shaft -->
+          <rect x="360" y="55" width="56" height="98" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+          <line x1="388" y1="38" x2="388" y2="142" stroke="#0284c7" stroke-width="2.5" stroke-dasharray="4,3"/>
+          <polygon points="388,148 383,138 393,138" fill="#0284c7"/>
+          <text x="485" y="106" text-anchor="middle" font-size="10" font-weight="700" fill="#0c4a6e">Air hujan meresap</text>
+          <text x="485" y="119" text-anchor="middle" font-size="9.5" fill="#0369a1">mengisi air tanah</text>
+        </svg>
+      `,
+      priorityScale: `
+        <svg viewBox="0 0 600 185" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Piramida skala prioritas kebutuhan">
+          <rect x="0" y="0" width="600" height="185" rx="12" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.5"/>
+          <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">Urutan Skala Prioritas Kebutuhan Pelajar</text>
+
+          <!-- Tier 1: Top -->
+          <polygon points="220,42 380,42 405,74 195,74" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="300" y="62" text-anchor="middle" font-size="10" font-weight="800" fill="#991b1b">1. Sangat Mendesak &amp; Pokok</text>
+
+          <!-- Tier 2: Middle -->
+          <polygon points="195,78 405,78 435,112 165,112" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="300" y="99" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">2. Penting &amp; Menunjang Belajar</text>
+
+          <!-- Tier 3: Bottom -->
+          <polygon points="165,116 435,116 470,152 130,152" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="300" y="138" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">3. Bisa Ditunda / Sekunder &amp; Tersier</text>
+
+          <text x="300" y="172" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5b21b6">Disusun berdasarkan tingkat urgensi, kemampuan ekonomi, dan dampak masa depan.</text>
+        </svg>
+      `
+    };
+
+    /**
+     * =========================================================================
+     * 100 MULTIPLE-CHOICE QUESTIONS BANK (SMP KELAS VII - SEMESTER GANJIL)
+     * Covers:
+     * - Keluarga & Keluarga Inti, Silsilah, Unsur Sejarah (Manusia, Waktu, Ruang)
+     * - Lokasi Absolut & Relatif, Letak Geografis/Astronomis/Geologis, Zona Waktu
+     * - Cuaca & Iklim, Komponen & Fungsi Peta (Termasuk Perhitungan Skala)
+     * - Sejarah Lisan, Mitos, Legenda, Dongeng
+     * - Makhluk Sosial & Ekonomi Bermoral
+     * - Sosialisasi (Primer, Sekunder, Tahap Piaget: Sensorimotor, Praoperasional,
+     *   Operasional Konkret, Operasional Formal)
+     * - Nilai (Material, Vital, Kerohanian) & Norma (Agama, Kesusilaan, Kesopanan, Hukum)
+     * - Interaksi Antarwilayah (Desa-Kota, Keterhubungan & Keterkaitan Ruang)
+     * - Kebutuhan (Primer/Sekunder/Tersier, Sekarang/Masa Depan/Mendesak/Sepanjang Waktu,
+     *   Jasmani/Rohani, Individu/Kelompok), Skala Prioritas
+     * - Alat Pemuas Kebutuhan (Bebas/Ekonomis/Illith, Substitusi/Komplementer,
+     *   Produksi/Konsumsi, Mentah/Setengah Jadi/Jadi)
+     * - Pencemaran Lingkungan (Udara, Air, Tanah), Sumur Resapan, Bioremediasi, Pelestarian
+     * - Syarat Interaksi Sosial (Kontak & Komunikasi), Bentuk Asosiatif & Disosiatif,
+     *   Guncangan Budaya (Culture Shock)
+     * - Zaman Geologi (Arkaekum, Paleozoikum, Mesozoikum, Neozoikum)
+     * - Zaman Praaksara (Paleolithikum, Mesolithikum, Neolithikum, Perundagian) & Peninggalan
+     * - Asal-Usul Leluhur (Out of Yunnan, Out of Taiwan, Paleo-Melanosoid,
+     *   Hubungan Makassar-Australia, Bugis, Dayak)
+     * - Pembangunan Berkelanjutan (SDGs 4 Pilar: Sosial, Ekonomi, Lingkungan, Hukum/Tata Kelola)
+     * - Kelangkaan (Faktor, Dampak, Pencegahan), Masalah Pokok Ekonomi (What, How, For Whom),
+     *   Tindakan Ekonomi Bermoral & Jujur
+     * =========================================================================
+     */
+    const RAW_QUESTIONS = [
+      // 1 - 10: Keluarga, Silsilah, Unsur Sejarah & Lokasi
+      {
+        id: 1,
+        topic: "Keluarga & Silsilah",
+        question: "Keluarga inti (nuclear family) dalam kajian IPS Kelas VII terdiri atas ....",
+        options: [
+          "Ayah, ibu, dan anak-anak yang belum menikah dalam satu rumah tangga",
+          "Kakek, nenek, paman, bibi, sepupu, serta seluruh kerabat jauh",
+          "Kepala desa, perangkat desa, dan seluruh warga satu RW",
+          "Guru wali kelas, kepala sekolah, dan teman sebaya di sekolah"
+        ],
+        answerIndex: 0,
+        explanation: "Keluarga inti terdiri atas ayah, ibu, dan anak (kandung maupun adopsi) yang hidup bersama sebagai unit sosial terkecil dan terdekat bagi individu."
+      },
+      {
+        id: 2,
+        topic: "Unsur Sejarah",
+        svg: SVG_ART.familyTree,
+        question: "Perhatikan bagan silsilah keluarga di atas. Penelusuran silsilah keluarga menggambarkan keterkaitan tiga unsur utama dalam sejarah, yaitu ....",
+        options: [
+          "Manusia, waktu, dan ruang",
+          "Modal, tenaga kerja, dan konsumen",
+          "Lintang, bujur, dan ketinggian tempat",
+          "Cuaca, musim, dan tekanan udara"
+        ],
+        answerIndex: 0,
+        explanation: "Dalam ilmu sejarah, setiap peristiwa selalu berkaitan dengan manusia (pelaku/pengalaman), waktu (kapan peristiwa/generasi terjadi), dan ruang (tempat peristiwa berlangsung)."
+      },
+      {
+        id: 3,
+        topic: "Keluarga & Sejarah",
+        question: "Cerita orang tua atau kakek-nenek tentang pengalaman merantau dari daerah asal ke kota tempat tinggal sekarang menunjukkan unsur 'waktu' dan 'ruang' karena ....",
+        options: [
+          "Ada perpindahan tempat tinggal (ruang) pada periode kehidupan tertentu (waktu)",
+          "Cerita tersebut hanya berlaku untuk satu orang saja tanpa pengaruh lingkungan",
+          "Peristiwa merantau selalu terjadi di luar negeri setiap tahun",
+          "Waktu dan ruang tidak memengaruhi kehidupan keluarga modern"
+        ],
+        answerIndex: 0,
+        explanation: "Perpindahan tempat tinggal dari daerah asal ke tempat baru menunjukkan dimensi ruang, sedangkan rentang tahun atau masa kehidupan menunjukkan dimensi waktu."
+      },
+      {
+        id: 4,
+        topic: "Lokasi Absolut & Relatif",
+        question: "Letak suatu tempat yang bersifat tetap dan dinyatakan dengan garis lintang serta garis bujur disebut ....",
+        options: [
+          "Lokasi absolut",
+          "Lokasi relatif",
+          "Lokasi strategis",
+          "Lokasi musiman"
+        ],
+        answerIndex: 0,
+        explanation: "Lokasi absolut adalah letak tetap suatu objek di permukaan Bumi berdasarkan sistem koordinat garis lintang (LU/LS) dan garis bujur (BT/BB)."
+      },
+      {
+        id: 5,
+        topic: "Lokasi Absolut & Relatif",
+        question: "Sebuah rumah berada di dekat pasar tradisional dan terminal angkutan umum sehingga mudah diakses pembeli, tetapi cukup ramai pada siang hari. Pernyataan tersebut menggambarkan ....",
+        options: [
+          "Lokasi relatif yang memengaruhi nilai dan kondisi lingkungan sekitar tempat tinggal",
+          "Lokasi absolut yang diukur menggunakan satuan derajat bujur timur",
+          "Batas wilayah administrasi pemerintahan suatu kabupaten",
+          "Perubahan iklim tahunan akibat angin muson"
+        ],
+        answerIndex: 0,
+        explanation: "Lokasi relatif ditentukan oleh posisi suatu tempat terhadap objek atau lingkungan di sekitarnya serta dapat berubah nilainya seiring perkembangan sarana dan prasarana."
+      },
+      {
+        id: 6,
+        topic: "Letak Astronomis Indonesia",
+        question: "Secara astronomis, wilayah Indonesia terletak antara ....",
+        options: [
+          "6° LU – 11° LS dan 95° BT – 141° BT",
+          "23,5° LU – 23,5° LS dan 100° BB – 120° BT",
+          "0° – 15° LU dan 75° BT – 110° BT",
+          "10° LS – 25° LS dan 110° BT – 150° BT"
+        ],
+        answerIndex: 0,
+        explanation: "Letak astronomis Indonesia berada pada 6° Lintang Utara – 11° Lintang Selatan dan 95° Bujur Timur – 141° Bujur Timur."
+      },
+      {
+        id: 7,
+        topic: "Dampak Letak Astronomis",
+        question: "Letak astronomis Indonesia yang berada di sekitar garis khatulistiwa menyebabkan Indonesia beriklim tropis dengan ciri ....",
+        options: [
+          "Suhu udara relatif hangat sepanjang tahun serta memiliki dua musim utama (kemarau dan hujan)",
+          "Mengalami empat musim yang jelas setiap tiga bulan (semi, panas, gugur, dingin)",
+          "Suhu udara sangat dingin sepanjang tahun dan tertutup salju abadi",
+          "Siang hari berlangsung selama 24 jam penuh pada bulan Juni"
+        ],
+        answerIndex: 0,
+        explanation: "Wilayah tropis di sekitar ekuator menerima penyinaran matahari sepanjang tahun sehingga suhunya hangat dan umumnya mengalami musim kemarau serta musim penghujan."
+      },
+      {
+        id: 8,
+        topic: "Letak Geografis Indonesia",
+        question: "Secara geografis, Indonesia berada di antara dua benua dan dua samudra, yaitu ....",
+        options: [
+          "Benua Asia dan Benua Australia, serta Samudra Hindia dan Samudra Pasifik",
+          "Benua Eropa dan Benua Afrika, serta Samudra Atlantik dan Samudra Arktik",
+          "Benua Asia dan Benua Amerika, serta Samudra Pasifik dan Samudra Atlantik",
+          "Benua Australia dan Antartika, serta Samudra Hindia dan Samudra Selatan"
+        ],
+        answerIndex: 0,
+        explanation: "Letak geografis Indonesia diapit oleh Benua Asia dan Benua Australia serta berada di antara Samudra Hindia dan Samudra Pasifik."
+      },
+      {
+        id: 9,
+        topic: "Letak Geologis Indonesia",
+        question: "Secara geologis, Indonesia dilalui oleh pertemuan tiga lempeng tektonik utama dunia, yaitu Lempeng Indo-Australia, Lempeng Eurasia, dan ....",
+        options: [
+          "Lempeng Pasifik",
+          "Lempeng Antartika",
+          "Lempeng Nazca",
+          "Lempeng Karibia"
+        ],
+        answerIndex: 0,
+        explanation: "Indonesia terletak pada pertemuan tiga lempeng besar: Lempeng Indo-Australia, Lempeng Eurasia, dan Lempeng Pasifik, serta berada pada jalur Sirkum Pasifik dan Sirkum Mediterania."
+      },
+      {
+        id: 10,
+        topic: "Zona Waktu Indonesia",
+        svg: SVG_ART.timeZones,
+        question: "Berdasarkan bagan zona waktu di atas, jika di Jakarta (WIB) pukul 07.00 pagi, maka di Makassar (WITA) dan Jayapura (WIT) secara berturut-turut pukul ....",
+        options: [
+          "08.00 WITA dan 09.00 WIT",
+          "06.00 WITA dan 07.00 WIT",
+          "07.00 WITA dan 08.00 WIT",
+          "09.00 WITA dan 10.00 WIT"
+        ],
+        answerIndex: 0,
+        explanation: "Selisih waktu antar-zona di Indonesia adalah 1 jam. Jika WIB pukul 07.00, maka WITA lebih cepat 1 jam (08.00) dan WIT lebih cepat 2 jam dari WIB (09.00)."
+      },
+
+      // 11 - 20: Zona Waktu, Cuaca/Iklim, Peta & Skala, Sejarah Lisan
+      {
+        id: 11,
+        topic: "Zona Waktu Indonesia",
+        question: "Setiap selisih garis bujur sebesar 15° menghasilkan perbedaan waktu standar sebesar ....",
+        options: [
+          "1 jam",
+          "15 menit",
+          "30 menit",
+          "4 jam"
+        ],
+        answerIndex: 0,
+        explanation: "Bumi berotasi 360° dalam 24 jam, sehingga setiap 15° bujur setara dengan 1 jam (1° bujur = 4 menit)."
+      },
+      {
+        id: 12,
+        topic: "Cuaca & Iklim",
+        question: "Perbedaan utama antara cuaca dan iklim terletak pada ....",
+        options: [
+          "Cakupan wilayah dan jangka waktu pengamatannya",
+          "Jenis alat pengukur kecepatan angin saja",
+          "Keberadaan awan di atmosfer bagian atas",
+          "Jumlah penduduk yang tinggal di wilayah tersebut"
+        ],
+        answerIndex: 0,
+        explanation: "Cuaca adalah kondisi atmosfer pada wilayah sempit dan waktu singkat (harian/jam-jaman), sedangkan iklim merupakan rata-rata kondisi cuaca pada wilayah luas dalam waktu lama (bertahun-tahun)."
+      },
+      {
+        id: 13,
+        topic: "Angin Muson",
+        question: "Angin muson barat yang bertiup dari Benua Asia menuju Benua Australia melewati Samudra Hindia umumnya membawa banyak uap air sehingga menyebabkan ....",
+        options: [
+          "Musim penghujan di sebagian besar wilayah Indonesia",
+          "Musim kemarau panjang di seluruh pulau besar",
+          "Badai salju di wilayah pegunungan tropis",
+          "Hilangnya curah hujan selama enam bulan penuh"
+        ],
+        answerIndex: 0,
+        explanation: "Angin muson barat melewati lautan luas (Samudra Hindia dan Laut Cina Selatan) sehingga sarat uap air dan memicu musim hujan di Indonesia."
+      },
+      {
+        id: 14,
+        topic: "Komponen Peta",
+        question: "Komponen peta yang berfungsi menjelaskan arti dari simbol, warna, atau tanda khusus yang digunakan pada peta disebut ....",
+        options: [
+          "Legenda",
+          "Inset peta",
+          "Garis astronomis",
+          "Tahun pembuatan peta"
+        ],
+        answerIndex: 0,
+        explanation: "Legenda memuat keterangan simbol-simbol (titik, garis, area/warna) agar pembaca peta dapat menafsirkan kenampakan alam maupun buatan dengan tepat."
+      },
+      {
+        id: 15,
+        topic: "Komponen Peta",
+        question: "Peta kecil tambahan yang disisipkan pada bagian sudut peta utama untuk menunjukkan posisi daerah yang dipetakan terhadap wilayah yang lebih luas disebut ....",
+        options: [
+          "Inset",
+          "Skala grafis",
+          "Lettering",
+          "Orientasi arah"
+        ],
+        answerIndex: 0,
+        explanation: "Inset adalah peta sisipan yang membantu menunjukkan lokasi relatif atau memperjelas wilayah tertentu yang tidak tercakup rinci di peta utama."
+      },
+      {
+        id: 16,
+        topic: "Skala Peta",
+        svg: SVG_ART.mapScale,
+        question: "Perhatikan ilustrasi skala peta di atas. Jika jarak dua kota pada peta berskala 1 : 250.000 adalah 6 cm, jarak sebenarnya kedua kota tersebut adalah ....",
+        options: [
+          "15 km",
+          "1,5 km",
+          "150 km",
+          "25 km"
+        ],
+        answerIndex: 0,
+        explanation: "Jarak sebenarnya = 6 cm × 250.000 = 1.500.000 cm. Karena 1 km = 100.000 cm, maka 1.500.000 ÷ 100.000 = 15 km."
+      },
+      {
+        id: 17,
+        topic: "Skala Peta",
+        question: "Jarak sebenarnya antara Kota X dan Kota Y adalah 40 km. Jika digambar pada peta dengan skala 1 : 1.000.000, maka jarak keduanya pada peta adalah ....",
+        options: [
+          "4 cm",
+          "40 cm",
+          "0,4 cm",
+          "10 cm"
+        ],
+        answerIndex: 0,
+        explanation: "40 km = 4.000.000 cm. Jarak pada peta = 4.000.000 cm ÷ 1.000.000 = 4 cm."
+      },
+      {
+        id: 18,
+        topic: "Fungsi Peta",
+        question: "Menurut konsep kartografi dalam IPS Kelas VII, salah satu fungsi utama peta adalah ....",
+        options: [
+          "Menunjukkan posisi atau lokasi relatif suatu tempat serta jarak dan luas di permukaan Bumi",
+          "Menggantikan seluruh fungsi sensus penduduk setiap tahun",
+          "Menentukan harga jual rumah secara mutlak tanpa faktor sosial",
+          "Mengubah arah rotasi Bumi sesuai keinginan pengguna"
+        ],
+        answerIndex: 0,
+        explanation: "Peta berfungsi menunjukkan lokasi/posisi suatu ruang, memperlihatkan ukuran/jarak/luas, serta menggambarkan bentuk kenampakan di permukaan Bumi."
+      },
+      {
+        id: 19,
+        topic: "Sejarah Lisan & Folklor",
+        question: "Cerita rakyat yang diwariskan secara turun-temurun melalui tuturan lisan dan sering memuat tokoh hewan yang dapat berbicara serta mengandung pesan moral disebut ....",
+        options: [
+          "Fabel (bagian dari dongeng)",
+          "Mitos penciptaan dewa",
+          "Legenda asal-usul danau",
+          "Dokumen arsip resmi"
+        ],
+        answerIndex: 0,
+        explanation: "Dongeng merupakan cerita rakyat yang tidak dianggap benar-benar terjadi; fabel adalah bentuk dongeng yang bertokohkan hewan berperilaku seperti manusia dengan pesan moral."
+      },
+      {
+        id: 20,
+        topic: "Sejarah Lisan & Folklor",
+        question: "Cerita rakyat yang dikaitkan dengan asal-usul terjadinya suatu tempat atau kenampakan alam tertentu (seperti asal-usul gunung atau telaga) digolongkan sebagai ....",
+        options: [
+          "Legenda",
+          "Biografi resmi",
+          "Laporan statistik",
+          "Kronik astronomi"
+        ],
+        answerIndex: 0,
+        explanation: "Legenda adalah cerita rakyat yang dianggap pernah terjadi oleh masyarakat pemiliknya dan sering dikaitkan dengan asal-usul tempat, tokoh, atau peristiwa lokal."
+      },
+
+      // 21 - 30: Makhluk Sosial, Sosialisasi & Tahap Piaget, Nilai & Norma
+      {
+        id: 21,
+        topic: "Makhluk Sosial",
+        question: "Manusia disebut sebagai makhluk sosial (zoon politikon) karena ....",
+        options: [
+          "Selalu membutuhkan kerja sama dan interaksi dengan manusia lain untuk bertahan hidup dan berkembang",
+          "Mampu memenuhi seluruh kebutuhan hidupnya sendiri tanpa bantuan orang lain",
+          "Hanya tinggal di daerah terpencil yang jauh dari masyarakat",
+          "Tidak memiliki aturan atau norma dalam pergaulan sehari-hari"
+        ],
+        answerIndex: 0,
+        explanation: "Sejak lahir hingga akhir hayat, manusia berinteraksi dan bergantung pada orang lain dalam memenuhi kebutuhan fisik, emosional, sosial, dan budaya."
+      },
+      {
+        id: 22,
+        topic: "Sosialisasi Primer & Sekunder",
+        question: "Proses penanaman nilai dan norma pertama kali yang diterima seorang anak di lingkungan keluarga disebut ....",
+        options: [
+          "Sosialisasi primer",
+          "Sosialisasi sekunder",
+          "Resosialisasi paksa",
+          "Asimilasi budaya"
+        ],
+        answerIndex: 0,
+        explanation: "Sosialisasi primer berlangsung pada tahap awal kehidupan anak di dalam keluarga inti sebagai agen sosialisasi pertama."
+      },
+      {
+        id: 23,
+        topic: "Agen Sosialisasi Sekunder",
+        question: "Ketika siswa SMP belajar disiplin waktu upacara, bekerja kelompok, dan menaati tata tertib sekolah, ia sedang mengalami sosialisasi sekunder melalui agen ....",
+        options: [
+          "Sekolah / lembaga pendidikan",
+          "Keluarga inti di rumah",
+          "Kelompok kekerabatan darah",
+          "Lingkungan rahim ibu"
+        ],
+        answerIndex: 0,
+        explanation: "Sekolah merupakan agen sosialisasi sekunder yang mengajarkan aturan formal, keterampilan akademis, kerja sama, dan tanggung jawab sosial."
+      },
+      {
+        id: 24,
+        topic: "Tahap Perkembangan Piaget",
+        question: "Menurut tahapan perkembangan kognitif Jean Piaget dalam materi sosialisasi IPS Kelas VII, anak usia 7–11 tahun berada pada tahap ....",
+        options: [
+          "Operasional konkret",
+          "Sensorimotor",
+          "Praoperasional",
+          "Operasional formal"
+        ],
+        answerIndex: 0,
+        explanation: "Tahap operasional konkret (7–11 tahun) ditandai kemampuan berpikir logis terhadap objek atau kejadian konkret/nyata, seperti klasifikasi dan konservasi."
+      },
+      {
+        id: 25,
+        topic: "Tahap Perkembangan Piaget",
+        question: "Kemampuan berpikir abstrak, menalar hipotesis, dan mempertimbangkan berbagai kemungkinan secara logis mulai berkembang pada tahap ....",
+        options: [
+          "Operasional formal (sekitar usia 12–15 tahun ke atas)",
+          "Sensorimotor (0–2 tahun)",
+          "Praoperasional (2–7 tahun)",
+          "Bayi baru lahir (0–6 bulan)"
+        ],
+        answerIndex: 0,
+        explanation: "Pada tahap operasional formal (12–15 tahun), remaja mulai mampu berpikir abstrak, sistematis, dan kritis tanpa harus bergantung pada benda konkret."
+      },
+      {
+        id: 26,
+        topic: "Nilai Sosial",
+        question: "Menurut Prof. Notonegoro, nilai yang berguna bagi kehidupan jasmani manusia—seperti makanan sehat, pakaian, dan tempat tinggal—disebut ....",
+        options: [
+          "Nilai material",
+          "Nilai kerohanian",
+          "Nilai estetik semata",
+          "Nilai religi"
+        ],
+        answerIndex: 0,
+        explanation: "Nilai material adalah segala sesuatu yang berguna bagi unsur fisik/jasmani manusia."
+      },
+      {
+        id: 27,
+        topic: "Nilai Sosial",
+        question: "Buku pelajaran, alat tulis, dan obat-obatan yang sangat diperlukan seseorang untuk menjalankan aktivitas dan menunjang kelangsungan hidupnya merupakan contoh ....",
+        options: [
+          "Nilai vital",
+          "Nilai material",
+          "Nilai kerohanian",
+          "Nilai komoditas"
+        ],
+        answerIndex: 0,
+        explanation: "Nilai vital adalah segala sesuatu yang berguna bagi manusia untuk dapat mengadakan kegiatan atau beraktivitas dalam hidupnya."
+      },
+      {
+        id: 28,
+        topic: "Norma Sosial",
+        question: "Mengucapkan salam saat bertemu guru, mengetuk pintu sebelum masuk ruangan, dan berbicara sopan kepada orang yang lebih tua merupakan contoh ....",
+        options: [
+          "Norma kesopanan",
+          "Norma hukum",
+          "Norma agama",
+          "Norma adat istiadat pidana"
+        ],
+        answerIndex: 0,
+        explanation: "Norma kesopanan bersumber dari tata pergaulan masyarakat tentang kepantasan dan sopan santun; pelanggarannya biasanya mendapat teguran atau cemoohan sosial."
+      },
+      {
+        id: 29,
+        topic: "Norma Sosial",
+        question: "Norma yang bersumber dari aturan tertulis atau perundang-undangan yang dibuat oleh lembaga berwenang dan memiliki sanksi tegas berupa denda atau pidana adalah ....",
+        options: [
+          "Norma hukum",
+          "Norma kesusilaan",
+          "Norma kesopanan",
+          "Norma kebiasaan"
+        ],
+        answerIndex: 0,
+        explanation: "Norma hukum bersifat memaksa, tegas, dan ditetapkan oleh negara/lembaga berwenang dengan sanksi yang jelas bagi pelanggarnya."
+      },
+      {
+        id: 30,
+        topic: "Norma Kesusilaan",
+        question: "Rasa menyesal dan bersalah yang muncul dari suara hati nurani ketika seseorang berbohong kepada temannya berkaitan erat dengan ....",
+        options: [
+          "Norma kesusilaan",
+          "Norma hukum lalu lintas",
+          "Norma adat perkawinan",
+          "Norma ekonomi pasar"
+        ],
+        answerIndex: 0,
+        explanation: "Norma kesusilaan bersumber dari hati nurani manusia untuk membedakan baik dan buruk; pelanggarannya menimbulkan rasa bersalah atau penyesalan batin."
+      },
+
+      // 31 - 40: Interaksi Antarwilayah Desa-Kota & Kebutuhan Manusia
+      {
+        id: 31,
+        topic: "Interaksi Antarwilayah",
+        svg: SVG_ART.regionalInteraction,
+        question: "Berdasarkan ilustrasi interaksi desa dan kota di atas, aliran barang yang paling tepat dikirim dari wilayah pedesaan ke perkotaan adalah ....",
+        options: [
+          "Sayuran segar, beras, dan bahan pangan hasil pertanian",
+          "Mesin pabrik berteknologi tinggi dan suku cadang elektronik",
+          "Layanan rumah sakit rujukan nasional dan universitas",
+          "Pusat perkantoran perdagangan saham internasional"
+        ],
+        answerIndex: 0,
+        explanation: "Wilayah desa umumnya berperan sebagai penghasil bahan pangan, hasil pertanian/perkebunan, serta tenaga kerja bagi kota, sedangkan kota memasok barang industri dan jasa."
+      },
+      {
+        id: 32,
+        topic: "Interaksi Antarwilayah",
+        question: "Salah satu dampak positif interaksi desa dan kota bagi masyarakat desa adalah ....",
+        options: [
+          "Meningkatnya akses informasi, pendidikan, dan pemasaran hasil pertanian",
+          "Berkurangnya seluruh lahan pertanian menjadi kawasan industri",
+          "Hilangnya budaya gotong royong dan kekerabatan warga",
+          "Meningkatnya kemacetan lalu lintas di pusat kota"
+        ],
+        answerIndex: 0,
+        explanation: "Interaksi desa-kota mempermudah pemasaran produk desa, memperluas akses pendidikan dan informasi, serta membuka peluang usaha."
+      },
+      {
+        id: 33,
+        topic: "Kebutuhan Menurut Intensitas",
+        question: "Makanan bergizi, air minum bersih, pakaian layak, dan tempat tinggal termasuk dalam jenis kebutuhan ....",
+        options: [
+          "Primer",
+          "Sekunder",
+          "Tersier",
+          "Mewah"
+        ],
+        answerIndex: 0,
+        explanation: "Kebutuhan primer (pokok) adalah kebutuhan dasar yang harus dipenuhi untuk mempertahankan kelangsungan hidup manusia."
+      },
+      {
+        id: 34,
+        topic: "Kebutuhan Sekunder & Tersier",
+        question: "Sepeda, meja belajar, dan gawai penunjang sekolah setelah kebutuhan pokok terpenuhi tergolong kebutuhan sekunder, sedangkan perhiasan mewah dan mobil sport mahal tergolong ....",
+        options: [
+          "Kebutuhan tersier",
+          "Kebutuhan primer",
+          "Kebutuhan mendesak",
+          "Kebutuhan sepanjang waktu"
+        ],
+        answerIndex: 0,
+        explanation: "Kebutuhan tersier adalah kebutuhan barang/jasa mewah yang umumnya dipenuhi setelah kebutuhan primer dan sekunder terpenuhi."
+      },
+      {
+        id: 35,
+        topic: "Kebutuhan Menurut Waktu",
+        question: "Menyiapkan payung saat langit mendung atau meminum obat ketika sakit termasuk kebutuhan menurut waktu yang bersifat ....",
+        options: [
+          "Mendesak",
+          "Masa yang akan datang",
+          "Sepanjang waktu",
+          "Tahunan"
+        ],
+        answerIndex: 0,
+        explanation: "Kebutuhan mendesak adalah kebutuhan yang kemunculannya tiba-tiba dan harus segera dipenuhi untuk mengatasi keadaan darurat."
+      },
+      {
+        id: 36,
+        topic: "Kebutuhan Menurut Waktu",
+        question: "Menabung uang saku atau mengikuti asuransi pendidikan untuk persiapan kuliah beberapa tahun lagi merupakan contoh kebutuhan ....",
+        options: [
+          "Masa yang akan datang",
+          "Sekarang",
+          "Mendesak",
+          "Jasmani sesaat"
+        ],
+        answerIndex: 0,
+        explanation: "Kebutuhan masa yang akan datang adalah kebutuhan yang pemenuhannya direncanakan atau dibutuhkan pada waktu mendatang."
+      },
+      {
+        id: 37,
+        topic: "Kebutuhan Sepanjang Waktu",
+        question: "Belajar, menuntut ilmu, dan beribadah yang dilakukan sejak masa kanak-kanak hingga dewasa menggambarkan kebutuhan menurut waktu berupa ....",
+        options: [
+          "Kebutuhan sepanjang waktu",
+          "Kebutuhan mendesak",
+          "Kebutuhan sekunder",
+          "Kebutuhan insidental"
+        ],
+        answerIndex: 0,
+        explanation: "Kebutuhan sepanjang waktu adalah kebutuhan yang berlangsung terus-menerus sepanjang hidup manusia."
+      },
+      {
+        id: 38,
+        topic: "Kebutuhan Jasmani & Rohani",
+        question: "Berolahraga, tidur cukup, dan makan teratur memenuhi kebutuhan jasmani, sedangkan rekreasi, beribadah, dan mendengarkan musik menenangkan memenuhi kebutuhan ....",
+        options: [
+          "Rohani",
+          "Primer fisik",
+          "Barang bebas",
+          "Modal produksi"
+        ],
+        answerIndex: 0,
+        explanation: "Kebutuhan rohani berkaitan dengan ketenangan batin, perasaan, moral, estetika, dan spiritualitas manusia."
+      },
+      {
+        id: 39,
+        topic: "Kebutuhan Individu & Kelompok",
+        question: "Jembatan penyeberangan, taman kota, jalan raya, dan rumah sakit umum merupakan contoh kebutuhan ....",
+        options: [
+          "Kelompok (kolektif)",
+          "Individu semata",
+          "Tersier pribadi",
+          "Barang illith"
+        ],
+        answerIndex: 0,
+        explanation: "Kebutuhan kelompok/kolektif dimanfaatkan bersama-sama oleh banyak orang demi kepentingan umum."
+      },
+      {
+        id: 40,
+        topic: "Skala Prioritas",
+        svg: SVG_ART.priorityScale,
+        question: "Berdasarkan piramida skala prioritas di atas, jika uang saku terbatas, tindakan paling tepat yang dilakukan siswa adalah ....",
+        options: [
+          "Mendahulukan kebutuhan pokok dan perlengkapan sekolah yang penting sebelum membeli mainan atau jajanan berlebih",
+          "Menghabiskan seluruh uang untuk membeli barang trendi agar terlihat sama dengan teman",
+          "Mengabaikan kebutuhan makan siang demi membeli aksesori gawai",
+          "Membeli barang secara impulsif tanpa mencatat pengeluaran"
+        ],
+        answerIndex: 0,
+        explanation: "Skala prioritas menempatkan kebutuhan paling mendesak dan penting di urutan teratas sesuai kemampuan sumber daya yang dimiliki."
+      },
+
+      // 41 - 50: Alat Pemuas Kebutuhan
+      {
+        id: 41,
+        topic: "Barang Bebas & Ekonomis",
+        question: "Udara segar di pegunungan yang tersedia melimpah tanpa perlu pengorbanan uang disebut barang bebas, sedangkan air minum kemasan yang diproduksi dan dijual disebut ....",
+        options: [
+          "Barang ekonomis",
+          "Barang illith",
+          "Barang bebas",
+          "Barang konsumsi akhir"
+        ],
+        answerIndex: 0,
+        explanation: "Barang ekonomis jumlahnya terbatas dibandingkan kebutuhan manusia sehingga untuk memperolehnya diperlukan pengorbanan (uang, waktu, atau tenaga)."
+      },
+      {
+        id: 42,
+        topic: "Barang Illith",
+        question: "Air sungai yang meluap dan menimbulkan banjir bandang hingga merusak rumah warga merupakan contoh ....",
+        options: [
+          "Barang illith",
+          "Barang substitusi",
+          "Barang komplementer",
+          "Barang setengah jadi"
+        ],
+        answerIndex: 0,
+        explanation: "Barang illith adalah benda yang jika jumlahnya berlebihan atau berada pada situasi yang tidak tepat justru mendatangkan kerugian dan bencana bagi manusia."
+      },
+      {
+        id: 43,
+        topic: "Barang Substitusi",
+        question: "Jika harga beras naik, sebagian keluarga beralih mengonsumsi jagung atau singkong sebagai makanan pokok. Hubungan beras dan jagung tersebut termasuk ....",
+        options: [
+          "Barang substitusi (pengganti)",
+          "Barang komplementer (pelengkap)",
+          "Barang bebas",
+          "Barang modal"
+        ],
+        answerIndex: 0,
+        explanation: "Barang substitusi adalah barang yang dapat saling menggantikan fungsinya dalam memenuhi kebutuhan yang sama."
+      },
+      {
+        id: 44,
+        topic: "Barang Komplementer",
+        question: "Sepeda motor akan berfungsi optimal jika dilengkapi bahan bakar minyak (BBM). Hubungan antara sepeda motor dan BBM merupakan contoh ....",
+        options: [
+          "Barang komplementer (pelengkap)",
+          "Barang substitusi (pengganti)",
+          "Barang bebas",
+          "Barang mentah"
+        ],
+        answerIndex: 0,
+        explanation: "Barang komplementer adalah barang yang penggunaannya saling melengkapi agar dapat memberikan manfaat."
+      },
+      {
+        id: 45,
+        topic: "Barang Produksi & Konsumsi",
+        question: "Mesin jahit yang digunakan penjahit untuk membuat pakaian siap jual tergolong barang produksi, sedangkan roti yang langsung dimakan pembeli tergolong ....",
+        options: [
+          "Barang konsumsi",
+          "Barang mentah",
+          "Barang illith",
+          "Barang bebas"
+        ],
+        answerIndex: 0,
+        explanation: "Barang konsumsi digunakan langsung untuk memenuhi kebutuhan hidup, sedangkan barang produksi (barang modal) digunakan untuk menghasilkan barang atau jasa lain."
+      },
+      {
+        id: 46,
+        topic: "Tahap Proses Produksi",
+        question: "Kapas yang dipanen dari kebun disebut bahan mentah, benang hasil pintalan kapas disebut bahan setengah jadi, sedangkan kain tenun siap pakai disebut ....",
+        options: [
+          "Barang jadi",
+          "Barang illith",
+          "Barang bebas",
+          "Barang substitusi"
+        ],
+        answerIndex: 0,
+        explanation: "Barang jadi adalah barang hasil akhir proses pengolahan yang sudah siap digunakan untuk memenuhi kebutuhan konsumen."
+      },
+      {
+        id: 47,
+        topic: "Barang Setengah Jadi",
+        question: "Tepung terigu yang masih perlu diolah menjadi roti atau kue oleh pembuat kue merupakan contoh ....",
+        options: [
+          "Barang setengah jadi",
+          "Barang bebas",
+          "Barang illith",
+          "Barang konsumsi akhir"
+        ],
+        answerIndex: 0,
+        explanation: "Barang setengah jadi telah melalui tahap pengolahan tertentu tetapi masih memerlukan proses lanjutan sebelum menjadi barang jadi."
+      },
+      {
+        id: 48,
+        topic: "Kegunaan Barang",
+        question: "Kayu gelondongan di hutan yang diolah menjadi meja dan kursi belajar menunjukkan peningkatan kegunaan ....",
+        options: [
+          "Bentuk (form utility)",
+          "Waktu (time utility)",
+          "Kepemilikan (ownership utility)",
+          "Bebas (free utility)"
+        ],
+        answerIndex: 0,
+        explanation: "Kegunaan bentuk muncul ketika suatu barang diubah bentuk fisiknya sehingga lebih bermanfaat bagi manusia."
+      },
+      {
+        id: 49,
+        topic: "Kegunaan Barang",
+        question: "Pasir sungai yang diangkut truk dari daerah sungai ke lokasi pembangunan gedung menunjukkan peningkatan kegunaan ....",
+        options: [
+          "Tempat (place utility)",
+          "Bentuk (form utility)",
+          "Illith (illith utility)",
+          "Ritus (ritual utility)"
+        ],
+        answerIndex: 0,
+        explanation: "Kegunaan tempat terjadi ketika suatu barang dipindahkan ke lokasi yang lebih membutuhkan sehingga nilainya meningkat."
+      },
+      {
+        id: 50,
+        topic: "Kegunaan Barang",
+        question: "Jaket tebal yang lebih banyak dibutuhkan dan bernilai guna tinggi saat musim hujan atau cuaca dingin menunjukkan kegunaan ....",
+        options: [
+          "Waktu (time utility)",
+          "Bentuk (form utility)",
+          "Tempat (place utility)",
+          "Illith (illith utility)"
+        ],
+        answerIndex: 0,
+        explanation: "Kegunaan waktu terjadi ketika suatu barang dimanfaatkan pada saat yang tepat sehingga manfaatnya terasa maksimal."
+      },
+
+      // 51 - 60: Pencemaran Lingkungan, Sumur Resapan, Bioremediasi & Pelestarian
+      {
+        id: 51,
+        topic: "Pencemaran Udara",
+        question: "Asap kendaraan bermotor, pembakaran sampah terbuka, dan emisi pabrik yang berlebihan dapat menyebabkan pencemaran udara yang berdampak pada ....",
+        options: [
+          "Gangguan saluran pernapasan (ISPA) dan pemanasan global",
+          "Meningkatnya kesuburan tanah secara alami",
+          "Bertambahnya jumlah air bersih di akuifer",
+          "Hilangnya seluruh aktivitas transportasi darat"
+        ],
+        answerIndex: 0,
+        explanation: "Zat pencemar udara seperti karbon monoksida, nitrogen oksida, dan partikulat halus dapat memicu gangguan pernapasan dan memperparah pemanasan global."
+      },
+      {
+        id: 52,
+        topic: "Pencemaran Air",
+        question: "Pembuangan limbah cair rumah tangga, detergen berlebih, dan limbah industri langsung ke sungai tanpa pengolahan mengakibatkan ....",
+        options: [
+          "Tercemarnya sumber air, matinya organisme air, dan kesulitan air bersih",
+          "Meningkatnya kejernihan air sungai sepanjang tahun",
+          "Bertambahnya populasi ikan secara pesat",
+          "Terbentuknya hutan bakau di hulu sungai"
+        ],
+        answerIndex: 0,
+        explanation: "Limbah cair dan sampah yang mencemari sungai menurunkan kualitas air, meracuni ekosistem perairan, dan membahayakan kesehatan warga."
+      },
+      {
+        id: 53,
+        topic: "Pencemaran Tanah",
+        question: "Penimbunan sampah plastik non-biodegradable serta penggunaan pupuk kimia dan pestisida secara berlebihan terus-menerus dapat memicu ....",
+        options: [
+          "Pencemaran tanah dan menurunnya daya dukung lahan",
+          "Terbentuknya lapisan ozon baru di permukaan tanah",
+          "Bertambahnya kandungan oksigen murni di udara",
+          "Berhentinya siklus hidrologi di Bumi"
+        ],
+        answerIndex: 0,
+        explanation: "Sampah plastik sulit terurai dan residu bahan kimia berbahaya merusak struktur, kesuburan, serta mikroorganisme menguntungkan di dalam tanah."
+      },
+      {
+        id: 54,
+        topic: "Sumur Resapan",
+        svg: SVG_ART.infiltrationWell,
+        question: "Berdasarkan gambar sumur resapan di atas, manfaat utama pembuatan sumur resapan di lingkungan permukiman adalah ....",
+        options: [
+          "Menampung air hujan agar meresap ke tanah, menambah cadangan air tanah, dan mengurangi genangan",
+          "Mengubah air limbah beracun menjadi minyak bumi",
+          "Menghilangkan kebutuhan menanam pohon di halaman",
+          "Menutup seluruh aliran drainase kota secara permanen"
+        ],
+        answerIndex: 0,
+        explanation: "Sumur resapan membantu air hujan meresap ke dalam tanah sehingga menambah cadangan air tanah dan menekan potensi banjir/genangan permukaan."
+      },
+      {
+        id: 55,
+        topic: "Bioremediasi",
+        question: "Pemanfaatan mikroorganisme (seperti bakteri atau jamur tertentu) atau tumbuhan untuk mengurai dan membersihkan zat pencemar lingkungan disebut ....",
+        options: [
+          "Bioremediasi",
+          "Eutrofikasi",
+          "Deforestasi",
+          "Abrasi"
+        ],
+        answerIndex: 0,
+        explanation: "Bioremediasi adalah teknik pemulihan lingkungan tercemar dengan memanfaatkan organisme hidup (mikroba/tumbuhan) untuk menguraikan polutan menjadi zat yang lebih aman."
+      },
+      {
+        id: 56,
+        topic: "Prinsip 3R",
+        question: "Memilih membawa tas belanja kain sendiri dan menggunakan botol minum isi ulang untuk mengurangi sampah plastik merupakan penerapan prinsip ....",
+        options: [
+          "Reduce (mengurangi) dan Reuse (menggunakan kembali)",
+          "Deforestasi dan eksploitasi",
+          "Reklamasi dan urbanisasi",
+          "Inflasi dan deflasi"
+        ],
+        answerIndex: 0,
+        explanation: "Mengurangi penggunaan kemasan sekali pakai (reduce) serta memakai kembali wadah yang masih layak (reuse) adalah langkah nyata pengurangan sampah."
+      },
+      {
+        id: 57,
+        topic: "Pelestarian Lingkungan",
+        question: "Penanaman kembali hutan yang gundul (reboisasi) dan pembuatan terasering di lereng bukit bertujuan untuk ....",
+        options: [
+          "Mencegah erosi, tanah longsor, dan menjaga tata air serta keanekaragaman hayati",
+          "Mempercepat pengikisan lapisan tanah atas saat hujan",
+          "Mengurangi daerah resapan air di pegunungan",
+          "Memperluas lahan tandus secara sengaja"
+        ],
+        answerIndex: 0,
+        explanation: "Reboisasi dan terasering memperkuat struktur tanah, memperlambat aliran permukaan, mencegah longsor/erosi, serta menjaga kelestarian ekosistem."
+      },
+      {
+        id: 58,
+        topic: "Dampak Alih Fungsi Lahan",
+        question: "Mengubah daerah resapan air dan ruang terbuka hijau secara berlebihan menjadi bangunan beton tanpa pengaturan drainase dapat meningkatkan risiko ....",
+        options: [
+          "Banjir saat musim hujan dan kekeringan saat musim kemarau",
+          "Ketersediaan air tanah melimpah sepanjang tahun",
+          "Suhu udara kota menjadi jauh lebih sejuk tanpa pepohonan",
+          "Suburnya seluruh lahan pertanian di sekitar kota"
+        ],
+        answerIndex: 0,
+        explanation: "Berkurangnya tutupan vegetasi dan area resapan membuat air hujan langsung mengalir di permukaan (rawan banjir) dan cadangan air tanah berkurang (rawan kekeringan)."
+      },
+      {
+        id: 59,
+        topic: "Etika Lingkungan",
+        question: "Sikap menghargai seluruh komponen lingkungan dan menyadari bahwa manusia adalah bagian dari ekosistem disebut ....",
+        options: [
+          "Etika lingkungan / sikap peduli lingkungan",
+          "Sikap konsumtif berlebihan",
+          "Sikap apatis sosial",
+          "Sikap egoisme sempit"
+        ],
+        answerIndex: 0,
+        explanation: "Etika lingkungan menuntun manusia bersikap bijak, bertanggung jawab, dan berkelanjutan dalam memanfaatkan alam."
+      },
+      {
+        id: 60,
+        topic: "Pengelolaan Sampah",
+        question: "Memisahkan sampah organik (sisa makanan, daun kering) dengan sampah anorganik (plastik, kaleng, kaca) sejak dari rumah memudahkan ....",
+        options: [
+          "Pengolahan kompos dan daur ulang limbah secara lebih efektif",
+          "Penumpukan sampah bercampur di pinggir jalan",
+          "Pencemaran air sumur warga",
+          "Pemborosan biaya pengangkutan sampah"
+        ],
+        answerIndex: 0,
+        explanation: "Pemilahan sampah sejak sumbernya memudahkan sampah organik diolah menjadi kompos dan sampah anorganik didaur ulang."
+      },
+
+      // 61 - 70: Syarat & Bentuk Interaksi Sosial, Guncangan Budaya
+      {
+        id: 61,
+        topic: "Syarat Interaksi Sosial",
+        question: "Dua syarat utama agar interaksi sosial dapat berlangsung adalah ....",
+        options: [
+          "Kontak sosial dan komunikasi",
+          "Persaingan dan pertikaian terbuka",
+          "Kekayaan materi dan jabatan tinggi",
+          "Persamaan usia dan asal daerah"
+        ],
+        answerIndex: 0,
+        explanation: "Interaksi sosial tidak dapat terjadi tanpa kontak sosial (hubungan/aksi saling bertemu atau melalui media) dan komunikasi (penyampaian serta penafsiran pesan)."
+      },
+      {
+        id: 62,
+        topic: "Kontak Sosial",
+        question: "Mengirim pesan suara, berdiskusi lewat telepon, atau berkirim surat kepada teman di luar kota merupakan contoh kontak sosial ....",
+        options: [
+          "Tidak langsung (sekunder melalui media)",
+          "Langsung (primer bertatap muka)",
+          "Negatif bermusuhan",
+          "Sepihak tanpa tanggapan"
+        ],
+        answerIndex: 0,
+        explanation: "Kontak sosial tidak langsung terjadi melalui perantara atau media komunikasi seperti telepon, pesan digital, surat, atau perantara pihak ketiga."
+      },
+      {
+        id: 63,
+        topic: "Komunikasi Sosial",
+        question: "Seorang guru menjelaskan materi pelajaran di depan kelas dan siswa mengangguk, bertanya, serta menjawab pertanyaan guru. Unsur penting yang terjadi adalah ....",
+        options: [
+          "Komunikasi dua arah (ada pengirim pesan, pesan, media, penerima, dan umpan balik)",
+          "Kontak fisik paksa tanpa makna",
+          "Konflik terbuka antarwarga",
+          "Isolasi sosial total"
+        ],
+        answerIndex: 0,
+        explanation: "Komunikasi efektif ditandai adanya pesan yang disampaikan dan direspons (umpan balik/feedback) sehingga terjadi saling pengertian."
+      },
+      {
+        id: 64,
+        topic: "Interaksi Asosiatif: Kerja Sama",
+        question: "Warga RT bersama-sama membersihkan selokan dan menanam pohon menjelang musim hujan merupakan bentuk interaksi asosiatif berupa ....",
+        options: [
+          "Kerja sama (gotong royong)",
+          "Kompetisi tidak sehat",
+          "Kontravensi",
+          "Pertikaian (konflik)"
+        ],
+        answerIndex: 0,
+        explanation: "Kerja sama adalah usaha bersama antara individu atau kelompok untuk mencapai tujuan bersama yang saling menguntungkan; di Indonesia dikenal sebagai gotong royong."
+      },
+      {
+        id: 65,
+        topic: "Interaksi Asosiatif: Akomodasi",
+        question: "Dua kelompok siswa yang sempat berbeda pendapat akhirnya bersepakat berdamai dengan bantuan guru BK sebagai penengah. Proses tersebut menunjukkan ....",
+        options: [
+          "Akomodasi (mediasi/penyelesaian perbedaan)",
+          "Persaingan (kompetisi)",
+          "Kontravensi",
+          "Konflik terbuka"
+        ],
+        answerIndex: 0,
+        explanation: "Akomodasi adalah upaya meredakan ketegangan atau menyelesaikan pertentangan agar tercapai keseimbangan dan kesepakatan bersama."
+      },
+      {
+        id: 66,
+        topic: "Interaksi Asosiatif: Asimilasi",
+        question: "Pembauran dua kebudayaan berbeda yang disertai hilangnya ciri khas masing-masing budaya asli sehingga membentuk kebudayaan baru disebut ....",
+        options: [
+          "Asimilasi",
+          "Konflik",
+          "Kontravensi",
+          "Disintegrasi"
+        ],
+        answerIndex: 0,
+        explanation: "Asimilasi adalah proses sosial lanjutan yang ditandai usaha mengurangi perbedaan antarindividu/kelompok dan menyatukan sikap serta pandangan menjadi kebudayaan baru."
+      },
+      {
+        id: 67,
+        topic: "Interaksi Disosiatif: Kompetisi",
+        question: "Para peserta lomba cerdas cermat berusaha meraih nilai tertinggi secara sportif sesuai aturan perlombaan. Perilaku tersebut termasuk interaksi disosiatif berupa ....",
+        options: [
+          "Persaingan (kompetisi)",
+          "Akomodasi",
+          "Kerja sama",
+          "Asimilasi"
+        ],
+        answerIndex: 0,
+        explanation: "Kompetisi adalah perjuangan berbagai pihak untuk mencapai tujuan atau penghargaan tertentu tanpa menggunakan kekerasan atau melanggar aturan."
+      },
+      {
+        id: 68,
+        topic: "Interaksi Disosiatif: Kontravensi",
+        question: "Sikap tidak senang yang disembunyikan, sindiran halus, atau penolakan diam-diam terhadap suatu rencana sebelum menjadi konflik terbuka disebut ....",
+        options: [
+          "Kontravensi",
+          "Asimilasi",
+          "Kooptasi",
+          "Kompromi"
+        ],
+        answerIndex: 0,
+        explanation: "Kontravensi berada di antara persaingan dan pertentangan, ditandai rasa tidak suka yang disembunyikan, sikap menolak, atau penentangan terselubung."
+      },
+      {
+        id: 69,
+        topic: "Interaksi Disosiatif: Konflik",
+        question: "Pertentangan terbuka antara dua pihak yang disertai usaha saling menjatuhkan atau memaksakan kehendak disebut ....",
+        options: [
+          "Konflik (pertikaian)",
+          "Kerja sama",
+          "Akomodasi",
+          "Akulturasi"
+        ],
+        answerIndex: 0,
+        explanation: "Konflik atau pertikaian adalah proses sosial disosiatif ketika individu atau kelompok berusaha memenuhi tujuannya dengan menentang pihak lawan."
+      },
+      {
+        id: 70,
+        topic: "Guncangan Budaya (Culture Shock)",
+        question: "Rasa cemas, bingung, atau kagok yang dialami seseorang ketika berpindah ke lingkungan budaya baru yang memiliki kebiasaan, bahasa, atau aturan berbeda disebut ....",
+        options: [
+          "Guncangan budaya (culture shock)",
+          "Skala prioritas",
+          "Nilai material",
+          "Zaman Arkaekum"
+        ],
+        answerIndex: 0,
+        explanation: "Guncangan budaya (culture shock) terjadi saat individu menghadapi perbedaan norma dan kebiasaan baru yang belum dikenal sehingga perlu waktu beradaptasi."
+      },
+
+      // 71 - 80: Zaman Geologi & Zaman Praaksara
+      {
+        id: 71,
+        topic: "Zaman Geologi",
+        question: "Zaman tertua dalam sejarah perkembangan Bumi yang ditandai kulit Bumi masih sangat panas dan belum ditemukan tanda-tanda kehidupan adalah ....",
+        options: [
+          "Zaman Arkaekum",
+          "Zaman Paleozoikum",
+          "Zaman Mesozoikum",
+          "Zaman Neozoikum"
+        ],
+        answerIndex: 0,
+        explanation: "Zaman Arkaekum (Arkeozoikum) merupakan zaman tertua (sekitar 2,5 miliar tahun lalu) ketika Bumi baru terbentuk, sangat panas, dan belum ada kehidupan."
+      },
+      {
+        id: 72,
+        topic: "Zaman Geologi",
+        question: "Zaman kehidupan purba tua yang mulai muncul makhluk hidup bersel satu, hewan invertebrata, ikan, amfibi, dan tumbuhan paku disebut ....",
+        options: [
+          "Zaman Paleozoikum",
+          "Zaman Mesozoikum",
+          "Zaman Arkaekum",
+          "Zaman Holosen"
+        ],
+        answerIndex: 0,
+        explanation: "Paleozoikum berarti zaman kehidupan purba tua, ditandai munculnya organisme sederhana, ikan, amfibi, dan hewan bertulang belakang awal."
+      },
+      {
+        id: 73,
+        topic: "Zaman Geologi",
+        question: "Zaman kehidupan pertengahan yang sering disebut sebagai zaman reptil raksasa (seperti dinosaurus) adalah ....",
+        options: [
+          "Zaman Mesozoikum",
+          "Zaman Arkaekum",
+          "Zaman Paleozoikum",
+          "Zaman Megalitikum"
+        ],
+        answerIndex: 0,
+        explanation: "Mesozoikum (zaman sekunder/pertengahan) dikenal dengan perkembangan pesat reptil besar seperti dinosaurus serta munculnya mamalia awal dan tumbuhan berbunga."
+      },
+      {
+        id: 74,
+        topic: "Zaman Geologi",
+        question: "Zaman kehidupan baru yang terbagi atas zaman Tersier dan Kuarter serta menjadi masa munculnya jenis manusia purba dan manusia modern adalah ....",
+        options: [
+          "Zaman Neozoikum (Kenozoikum)",
+          "Zaman Arkaekum",
+          "Zaman Paleozoikum",
+          "Zaman Mesolithikum"
+        ],
+        answerIndex: 0,
+        explanation: "Zaman Neozoikum (zaman kehidupan baru) terdiri atas kala Tersier dan Kuarter; pada kala Kuarter (Pleistosen dan Holosen) muncul manusia purba dan manusia modern."
+      },
+      {
+        id: 75,
+        topic: "Zaman Praaksara",
+        svg: SVG_ART.prehistoricTools,
+        question: "Berdasarkan ilustrasi masa praaksara di atas, masa ketika manusia menggunakan alat-alat batu yang masih kasar (seperti kapak perimbas) dan hidup berpindah-pindah (nomaden) adalah ....",
+        options: [
+          "Zaman Paleolithikum (zaman batu tua)",
+          "Zaman Perundagian (zaman logam)",
+          "Zaman Modern",
+          "Zaman Sejarah Tulisan"
+        ],
+        answerIndex: 0,
+        explanation: "Pada zaman Paleolithikum, peralatan batu masih dibuat secara kasar/belah, manusia hidup nomaden, berburu, dan mengumpulkan makanan (food gathering)."
+      },
+      {
+        id: 76,
+        topic: "Zaman Mesolithikum",
+        question: "Bukti kehidupan manusia masa Mesolithikum (zaman batu madya) berupa tumpukan sampah kulit kerang dan siput yang menggunung di tepi pantai disebut ....",
+        options: [
+          "Kjokkenmoddinger",
+          "Dolmen",
+          "Menhir",
+          "Sarkofagus"
+        ],
+        answerIndex: 0,
+        explanation: "Kjokkenmoddinger (dari bahasa Denmark: kjokken = dapur, modding = sampah) adalah tumpukan kulit kerang/siput sisa makanan manusia purba di pantai, selain gua payung (abris sous roche)."
+      },
+      {
+        id: 77,
+        topic: "Zaman Neolithikum",
+        question: "Perubahan besar pada masa Neolithikum (zaman batu muda) yang ditandai perkakas batu yang sudah diasah halus, hidup menetap, serta mulai bercocok tanam dan beternak disebut ....",
+        options: [
+          "Revolusi kebudayaan / food producing",
+          "Kehidupan nomaden murni",
+          "Zaman tanpa alat",
+          "Masa perdagangan global modern"
+        ],
+        answerIndex: 0,
+        explanation: "Masa Neolithikum menandai peralihan dari food gathering ke food producing (bercocok tanam dan beternak), alat batu diasah halus (kapak persegi dan kapak lonjong), serta hidup menetap."
+      },
+      {
+        id: 78,
+        topic: "Peninggalan Neolithikum",
+        question: "Kapak persegi banyak ditemukan di Indonesia bagian barat (seperti Sumatra, Jawa, dan Bali), sedangkan kapak lonjong banyak ditemukan di wilayah ....",
+        options: [
+          "Indonesia bagian timur (seperti Papua, Maluku, dan Sulawesi)",
+          "Kutub Utara dan Kutub Selatan",
+          "Eropa Barat saja",
+          "Padang pasir Sahara"
+        ],
+        answerIndex: 0,
+        explanation: "Dalam persebaran alat Neolithikum di Indonesia, kapak persegi dominan di barat dan kapak lonjong banyak ditemukan di kawasan timur seperti Papua dan Maluku."
+      },
+      {
+        id: 79,
+        topic: "Zaman Perundagian",
+        question: "Masa ketika masyarakat praaksara telah menguasai teknik peleburan logam dan memiliki keahlian khusus (undagi) untuk membuat nekara, kapak corong, dan perhiasan perunggu disebut ....",
+        options: [
+          "Zaman Perundagian",
+          "Zaman Paleolithikum",
+          "Zaman Arkaekum",
+          "Zaman Batu Kasar"
+        ],
+        answerIndex: 0,
+        explanation: "Zaman Perundagian merupakan masa kemahiran teknik logam (perunggu dan besi) dengan pembagian kerja berdasarkan keterampilan khusus."
+      },
+      {
+        id: 80,
+        topic: "Peninggalan Megalitikum",
+        question: "Bangunan batu besar berupa tugu batu tunggal yang didirikan sebagai sarana pemujaan arwah nenek moyang pada tradisi megalitikum disebut ....",
+        options: [
+          "Menhir",
+          "Kjokkenmoddinger",
+          "Kapak genggam",
+          "Pebble"
+        ],
+        answerIndex: 0,
+        explanation: "Menhir adalah tiang atau tugu batu tegak yang didirikan sebagai tanda peringatan atau tempat pemujaan roh leluhur."
+      },
+
+      // 81 - 90: Asal-Usul Leluhur Bangsa Indonesia & Pembangunan Berkelanjutan (SDGs)
+      {
+        id: 81,
+        topic: "Asal-Usul Leluhur",
+        question: "Teori 'Out of Yunnan' menyatakan bahwa asal-usul nenek moyang bangsa Indonesia berasal dari wilayah ....",
+        options: [
+          "Yunnan (Cina Selatan) yang bermigrasi melalui jalur sungai besar menuju Asia Tenggara dan Kepulauan Indonesia",
+          "Benua Antartika yang mencair pada zaman es",
+          "Kepulauan Hawaii di Samudra Pasifik tengah",
+          "Pegunungan Alpen di Eropa"
+        ],
+        answerIndex: 0,
+        explanation: "Menurut hipotesis Out of Yunnan, nenek moyang bangsa Indonesia berasal dari kawasan Yunnan di Asia daratan dan bermigrasi ke kepulauan di selatan."
+      },
+      {
+        id: 82,
+        topic: "Asal-Usul Leluhur",
+        question: "Penutur bahasa Austronesia yang bermigrasi dari Pulau Formosa (Taiwan) ke Filipina lalu menyebar ke Indonesia dan Pasifik dijelaskan dalam teori ....",
+        options: [
+          "Out of Taiwan",
+          "Zaman Arkaekum",
+          "Teori Kelangkaan",
+          "Teori Nilai Vital"
+        ],
+        answerIndex: 0,
+        explanation: "Teori Out of Taiwan menjelaskan persebaran penutur bahasa Austronesia dari Taiwan ke selatan menuju Filipina, Indonesia, dan kawasan Pasifik."
+      },
+      {
+        id: 83,
+        topic: "Ras & Migrasi Leluhur",
+        question: "Kelompok penghuni awal yang datang lebih dulu ke Kepulauan Indonesia sebelum gelombang Proto-Melayu dan Deutro-Melayu serta memiliki ciri kulit gelap dan tubuh relatif tinggi adalah ....",
+        options: [
+          "Paleo-Melanosoid",
+          "Bangsa Viking",
+          "Suku bangsa Eropa Utara",
+          "Penduduk asli Kutub"
+        ],
+        answerIndex: 0,
+        explanation: "Ras Paleo-Melanosoid merupakan salah satu kelompok penghuni awal di kawasan Nusantara dan Melanesia sebelum kedatangan gelombang Melayu."
+      },
+      {
+        id: 84,
+        topic: "Hubungan Makassar - Australia",
+        question: "Interaksi pelaut dan pedagang Makassar (Sulawesi Selatan) dengan masyarakat pesisir utara Australia (seperti Arnhem Land) pada masa lalu terjalin terutama dalam aktivitas ....",
+        options: [
+          "Pelayaran, perdagangan, dan pencarian teripang",
+          "Penambangan batu bara modern dengan kapal tanker",
+          "Pembangunan jalur kereta api lintas benua",
+          "Peluncuran satelit luar angkasa"
+        ],
+        answerIndex: 0,
+        explanation: "Pelaut Makassar sejak lama berlayar memanfaatkan angin muson ke pantai utara Australia untuk mencari teripang dan berinteraksi dagang serta budaya dengan warga lokal."
+      },
+      {
+        id: 85,
+        topic: "Kearifan & Pelayaran Nusantara",
+        question: "Keahlian melaut dan berlayar antarpulau yang kuat sejak masa lalu menjadi ciri khas yang sangat lekat dengan budaya maritim suku bangsa seperti ....",
+        options: [
+          "Bugis dan Makassar",
+          "Masyarakat padang pasir",
+          "Penduduk lingkar kutub",
+          "Masyarakat pegunungan salju"
+        ],
+        answerIndex: 0,
+        explanation: "Suku Bugis dan Makassar dikenal memiliki tradisi pelayaran niaga antarpulau yang luas dengan perahu tradisional Nusantara."
+      },
+      {
+        id: 86,
+        topic: "Kebudayaan Nusantara",
+        question: "Di pedalaman Kalimantan (seperti rumah panjang lamin/betang dan tradisi lisan/adat), masyarakat adat Dayak memiliki kekayaan budaya yang selaras dengan ....",
+        options: [
+          "Kearifan lokal, kehidupan komunal, dan kelestarian hutan hujan tropis",
+          "Kehidupan gurun pasir yang tandus tanpa pepohonan",
+          "Musim salju sepanjang tahun di kutub",
+          "Penghapusan seluruh adat istiadat lokal"
+        ],
+        answerIndex: 0,
+        explanation: "Masyarakat Dayak di Kalimantan memiliki tradisi adat, rumah panjang komunal, serta kearifan lokal yang erat kaitannya dengan lingkungan hutan dan sungai."
+      },
+      {
+        id: 87,
+        topic: "Pembangunan Berkelanjutan (SDGs)",
+        question: "Pembangunan berkelanjutan (Sustainable Development Goals / SDGs) bertujuan memenuhi kebutuhan generasi sekarang tanpa ....",
+        options: [
+          "Mengurangi kemampuan generasi mendatang untuk memenuhi kebutuhannya sendiri",
+          "Memperhatikan kelestarian lingkungan hidup sama sekali",
+          "Mengukur kesejahteraan sosial dan ekonomi masyarakat",
+          "Menjaga keadilan antarwilayah"
+        ],
+        answerIndex: 0,
+        explanation: "Inti pembangunan berkelanjutan adalah menyelaraskan kebutuhan masa kini dengan kelestarian sumber daya bagi generasi masa depan."
+      },
+      {
+        id: 88,
+        topic: "4 Pilar SDGs",
+        question: "Dalam kerangka pembangunan berkelanjutan (SDGs), empat pilar utama yang saling menopang adalah ....",
+        options: [
+          "Pilar Pembangunan Sosial, Pembangunan Ekonomi, Pembangunan Lingkungan, dan Tata Kelola / Hukum",
+          "Pilar Pertanian, Pertambangan, Perikanan, dan Pariwisata saja",
+          "Pilar Transportasi, Komunikasi, Hiburan, dan Mode",
+          "Pilar Barat, Timur, Utara, dan Selatan"
+        ],
+        answerIndex: 0,
+        explanation: "SDGs ditopang oleh empat pilar utama: Sosial, Ekonomi, Lingkungan, serta Hukum dan Tata Kelola."
+      },
+      {
+        id: 89,
+        topic: "Pilar Lingkungan SDGs",
+        question: "Menjaga ketersediaan air bersih, melindungi ekosistem darat dan laut, serta mengendalikan perubahan iklim merupakan perwujudan pilar SDGs di bidang ....",
+        options: [
+          "Lingkungan",
+          "Hiburan semata",
+          "Spekulasi keuangan",
+          "Perluasan polusi"
+        ],
+        answerIndex: 0,
+        explanation: "Pilar lingkungan SDGs berfokus pada keberlanjutan ekosistem, air bersih, energi bersih, dan mitigasi kerusakan lingkungan."
+      },
+      {
+        id: 90,
+        topic: "Pilar Sosial SDGs",
+        question: "Menjamin akses pendidikan berkualitas yang merata, kesehatan yang baik, dan pengentasan kemiskinan bagi seluruh warga merupakan bagian dari pilar ....",
+        options: [
+          "Sosial",
+          "Pencemaran limbah",
+          "Penebangan liar",
+          "Pemborosan energi"
+        ],
+        answerIndex: 0,
+        explanation: "Pilar sosial SDGs menekankan kualitas hidup manusia seperti pendidikan, kesehatan, kesetaraan, dan pengurangan kemiskinan."
+      },
+
+      // 91 - 100: Kelangkaan, Masalah Pokok Ekonomi, Tindakan Ekonomi Bermoral & Jujur
+      {
+        id: 91,
+        topic: "Pengertian Kelangkaan",
+        question: "Dalam ilmu ekonomi, kelangkaan (scarcity) terjadi karena ....",
+        options: [
+          "Kebutuhan dan keinginan manusia yang tidak terbatas dihadapkan pada ketersediaan alat pemuas kebutuhan yang terbatas",
+          "Semua barang di dunia tersedia secara gratis dan tidak terbatas",
+          "Jumlah penduduk menurun drastis hingga tidak ada konsumen",
+          "Harga barang selalu turun tanpa biaya produksi"
+        ],
+        answerIndex: 0,
+        explanation: "Kelangkaan adalah kondisi ketimpangan antara kebutuhan manusia yang cenderung tidak terbatas dengan sumber daya/alat pemuas kebutuhan yang terbatas."
+      },
+      {
+        id: 92,
+        topic: "Faktor Penyebab Kelangkaan",
+        question: "Bencana alam seperti banjir bandang, gempa bumi, atau kekeringan panjang dapat menyebabkan kelangkaan karena ....",
+        options: [
+          "Merusak sarana produksi, lahan pertanian, dan infrastruktur distribusi barang",
+          "Menambah jumlah sumber daya alam siap pakai secara instan",
+          "Menghilangkan kebutuhan pangan warga terdampak",
+          "Membuat proses pemulihan ekonomi tidak memerlukan biaya"
+        ],
+        answerIndex: 0,
+        explanation: "Bencana alam merusak sumber daya, lahan, dan fasilitas produksi/distribusi sehingga pasokan barang dan jasa terganggu dan menjadi langka."
+      },
+      {
+        id: 93,
+        topic: "Faktor Penyebab Kelangkaan",
+        question: "Pertumbuhan penduduk yang terus meningkat pesat sementara ketersediaan lahan dan sumber daya alam terbatas akan memicu ....",
+        options: [
+          "Tekanan kebutuhan yang semakin besar dan potensi kelangkaan sumber daya",
+          "Kelebihan lahan kosong yang tidak terpakai sama sekali",
+          "Menurunnya kebutuhan pangan dan papan secara otomatis",
+          "Hilangnya seluruh masalah ekonomi"
+        ],
+        answerIndex: 0,
+        explanation: "Bertambahnya jumlah penduduk meningkatkan permintaan pangan, air, papan, dan lapangan kerja, sedangkan sumber daya alam jumlahnya terbatas."
+      },
+      {
+        id: 94,
+        topic: "Dampak Kelangkaan",
+        question: "Salah satu dampak langsung yang sering muncul akibat kelangkaan suatu barang pokok di pasar adalah ....",
+        options: [
+          "Kenaikan harga barang dan munculnya antrean atau kesulitan memperoleh barang tersebut",
+          "Penurunan harga hingga di bawah biaya produksi",
+          "Melimpahnya barang secara cuma-cuma di setiap toko",
+          "Hilangnya minat masyarakat untuk bekerja"
+        ],
+        answerIndex: 0,
+        explanation: "Ketika pasokan barang langka sementara permintaan tetap tinggi, harga cenderung naik dan masyarakat kesulitan mendapatkannya."
+      },
+      {
+        id: 95,
+        topic: "Upaya Mencegah Kelangkaan",
+        question: "Langkah tepat untuk mencegah dan mengatasi kelangkaan sumber daya di kehidupan sehari-hari adalah ....",
+        options: [
+          "Menghemat penggunaan energi/air, menyusun skala prioritas, dan mengembangkan sumber daya alternatif",
+          "Membeli barang secara berlebihan saat terjadi isu kelangkaan (panic buying)",
+          "Menebang hutan secara membabi buta",
+          "Membuang bahan makanan layak konsumsi"
+        ],
+        answerIndex: 0,
+        explanation: "Kelangkaan dapat ditekan melalui efisiensi/penghematan, pengelolaan berkelanjutan, penyusunan skala prioritas, dan inovasi bahan pengganti/alternatif."
+      },
+      {
+        id: 96,
+        topic: "Masalah Pokok Ekonomi (What)",
+        question: "Dalam masalah pokok ekonomi modern, pertanyaan 'What' (barang dan jasa apa yang akan diproduksi dan berapa jumlahnya) berkaitan dengan ....",
+        options: [
+          "Jenis dan kuantitas produk yang perlu dibuat sesuai kebutuhan masyarakat",
+          "Teknik mesin atau tenaga kerja yang dipakai pabrik",
+          "Siapa yang berhak menikmati hasil produksi",
+          "Nama merek dagang di luar negeri"
+        ],
+        answerIndex: 0,
+        explanation: "Masalah 'What' menentukan barang dan jasa apa saja yang harus diproduksi serta seberapa banyak jumlahnya agar sesuai kebutuhan."
+      },
+      {
+        id: 97,
+        topic: "Masalah Pokok Ekonomi (How)",
+        question: "Pertanyaan 'How' (bagaimana cara memproduksi barang dan jasa) membahas tentang ....",
+        options: [
+          "Pemilihan teknologi, bahan baku, tenaga kerja, dan proses produksi yang paling efisien",
+          "Penetapan harga jual di toko ritel saja",
+          "Target pembeli berdasarkan usia konsumen",
+          "Jumlah hari libur karyawan"
+        ],
+        answerIndex: 0,
+        explanation: "Masalah 'How' berkaitan dengan bagaimana sumber daya dikombinasikan menggunakan metode atau teknologi tertentu secara efisien dan ramah lingkungan."
+      },
+      {
+        id: 98,
+        topic: "Masalah Pokok Ekonomi (For Whom)",
+        question: "Pertanyaan 'For Whom' (untuk siapa barang dan jasa diproduksi) berkaitan dengan ....",
+        options: [
+          "Distribusi dan siapa saja kelompok masyarakat yang menjadi sasaran serta menikmati hasil produksi",
+          "Bentuk kemasan produk di gudang",
+          "Suhu ruang penyimpanan bahan baku",
+          "Rumus kimia bahan pewarna"
+        ],
+        answerIndex: 0,
+        explanation: "Masalah 'For Whom' menjawab untuk siapa barang/jasa dihasilkan dan bagaimana pendistribusiannya agar tepat sasaran."
+      },
+      {
+        id: 99,
+        topic: "Tindakan Ekonomi Bermoral",
+        question: "Seorang pedagang tidak menimbun barang kebutuhan pokok saat harga naik, tidak mencampur takaran, dan menjual produk yang aman dikonsumsi. Sikap ini mencerminkan ....",
+        options: [
+          "Tindakan ekonomi bermoral dan beretika",
+          "Spekulasi merugikan masyarakat",
+          "Kecurangan demi keuntungan sesaat",
+          "Pelanggaran norma sosial"
+        ],
+        answerIndex: 0,
+        explanation: "Tindakan ekonomi bermoral mengutamakan kejujuran, keadilan, tanggung jawab sosial, dan kepatuhan pada aturan/etika, bukan sekadar mencari untung besar dengan merugikan orang lain."
+      },
+      {
+        id: 100,
+        topic: "Kejujuran dalam Ekonomi",
+        question: "Mengapa kejujuran sangat penting dalam aktivitas ekonomi (seperti jual beli, pencatatan keuangan, dan usaha bersama)?",
+        options: [
+          "Menumbuhkan kepercayaan antar pelaku ekonomi sehingga transaksi berjalan adil, aman, dan berkelanjutan",
+          "Membuat pembeli tidak perlu memeriksa kualitas barang",
+          "Menghapus kebutuhan akan aturan dan etika",
+          "Membuat harga barang selalu sama di setiap tempat"
+        ],
+        answerIndex: 0,
+        explanation: "Kejujuran membangun kepercayaan (trust) antara penjual, pembeli, dan mitra usaha sehingga kerja sama ekonomi menjadi sehat dan berkelanjutan."
+      }
+    ];
+
+    /**
+     * =========================================================================
+     * QUIZ STATE & RANDOMIZATION ENGINE
+     * =========================================================================
+     */
+    let preparedQuestions = [];
+    let userAnswers = {}; // { [questionId]: optionIndex (0..3 in shuffled order) }
+    let isSubmitted = false;
+    let currentFilter = 'all';
+
+    /**
+     * Fisher-Yates shuffle returning a new shuffled array
+     */
+    function shuffleArray(arr) {
+      const copy = arr.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    /**
+     * Prepares all 100 questions with randomized option orders (A, B, C, D)
+     * while tracking which option is genuinely correct.
+     */
+    function buildPreparedQuestions() {
+      return RAW_QUESTIONS.map((q) => {
+        const indexedOptions = q.options.map((text, idx) => ({
+          text,
+          isCorrect: idx === q.answerIndex
+        }));
+        const shuffled = shuffleArray(indexedOptions);
+        const newCorrectIndex = shuffled.findIndex((item) => item.isCorrect);
+
+        return {
+          id: q.id,
+          topic: q.topic,
+          svg: q.svg || null,
+          question: q.question,
+          options: shuffled.map((item) => item.text),
+          correctIndex: newCorrectIndex,
+          explanation: q.explanation
+        };
+      });
+    }
+
+    const LETTERS = ['A', 'B', 'C', 'D'];
+
+    /**
+     * Renders the 100 question cards and the 100-button sticky navigator
+     */
+    function renderQuiz() {
+      const container = document.getElementById('questionsContainer');
+      const navGrid = document.getElementById('questionNavGrid');
+      container.innerHTML = '';
+      navGrid.innerHTML = '';
+
+      preparedQuestions.forEach((q, index) => {
+        const qNum = index + 1;
+        const selectedIdx = userAnswers[q.id];
+        const hasAnswered = typeof selectedIdx === 'number';
+
+        // Determine filter visibility after submission
+        let hiddenByFilter = false;
+        if (isSubmitted && currentFilter !== 'all') {
+          const isCorrect = hasAnswered && selectedIdx === q.correctIndex;
+          if (currentFilter === 'correct' && !isCorrect) hiddenByFilter = true;
+          if (currentFilter === 'wrong' && isCorrect) hiddenByFilter = true;
+        }
+
+        // Card border styling post-submission
+        let cardClasses = 'question-card bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 transition';
+        if (hiddenByFilter) {
+          cardClasses += ' hidden';
+        }
+        if (isSubmitted) {
+          if (hasAnswered && selectedIdx === q.correctIndex) {
+            cardClasses = cardClasses.replace('border-slate-200', 'border-emerald-300');
+          } else {
+            cardClasses = cardClasses.replace('border-slate-200', 'border-rose-300');
+          }
+        }
+
+        const card = document.createElement('article');
+        card.id = `question-${qNum}`;
+        card.className = cardClasses;
+
+        // Top badge row
+        let statusPill = '';
+        if (isSubmitted) {
+          if (!hasAnswered) {
+            statusPill = `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-200 text-slate-700">Tidak Dijawab</span>`;
+          } else if (selectedIdx === q.correctIndex) {
+            statusPill = `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">Benar</span>`;
+          } else {
+            statusPill = `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800">Salah</span>`;
+          }
+        }
+
+        // Optional SVG illustration block
+        const svgBlock = q.svg
+          ? `<div class="svg-illustration-box my-4 p-2.5 rounded-xl bg-slate-50 border border-slate-200">${q.svg}</div>`
+          : '';
+
+        // Options HTML
+        const optionsHtml = q.options.map((optText, optIdx) => {
+          const letter = LETTERS[optIdx];
+          const isSelected = selectedIdx === optIdx;
+          const isCorrectOption = optIdx === q.correctIndex;
+
+          let btnClass = 'w-full text-left flex items-start gap-3 p-3.5 rounded-xl border transition ';
+          let badgeClass = 'w-7 h-7 rounded-lg flex items-center justify-center text-xs font-extrabold shrink-0 ';
+
+          if (!isSubmitted) {
+            if (isSelected) {
+              btnClass += 'bg-brand-50 border-brand-600 text-brand-950 ring-1 ring-brand-600 cursor-pointer';
+              badgeClass += 'bg-brand-700 text-white';
+            } else {
+              btnClass += 'bg-white border-slate-200 hover:border-brand-400 hover:bg-slate-50 text-slate-800 cursor-pointer';
+              badgeClass += 'bg-slate-100 text-slate-700';
+            }
+          } else {
+            btnClass += 'cursor-default ';
+            if (isCorrectOption) {
+              btnClass += 'bg-emerald-50 border-emerald-500 text-emerald-950 font-medium';
+              badgeClass += 'bg-emerald-600 text-white';
+            } else if (isSelected && !isCorrectOption) {
+              btnClass += 'bg-rose-50 border-rose-500 text-rose-950';
+              badgeClass += 'bg-rose-600 text-white';
+            } else {
+              btnClass += 'bg-slate-50/70 border-slate-200 text-slate-600';
+              badgeClass += 'bg-slate-200 text-slate-600';
+            }
+          }
+
+          return `
+            <button
+              type="button"
+              ${isSubmitted ? 'disabled' : `onclick="selectOption(${q.id}, ${optIdx})"`}
+              class="${btnClass}"
+              aria-pressed="${isSelected}"
+            >
+              <span class="${badgeClass}">${letter}</span>
+              <span class="text-sm sm:text-[15px] leading-relaxed pt-0.5">${escapeHtml(optText)}</span>
+            </button>
+          `;
+        }).join('');
+
+        // Explanation panel (visible after submission)
+        let explanationHtml = '';
+        if (isSubmitted) {
+          const userChoiceLabel = hasAnswered
+            ? `${LETTERS[selectedIdx]}. ${escapeHtml(q.options[selectedIdx])}`
+            : 'Belum menjawab';
+          const correctChoiceLabel = `${LETTERS[q.correctIndex]}. ${escapeHtml(q.options[q.correctIndex])}`;
+          const isRight = hasAnswered && selectedIdx === q.correctIndex;
+
+          explanationHtml = `
+            <div class="mt-4 p-4 rounded-xl border ${isRight ? 'bg-emerald-50/70 border-emerald-200' : 'bg-amber-50/80 border-amber-200'}">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                <span class="text-xs font-extrabold uppercase tracking-wide ${isRight ? 'text-emerald-800' : 'text-amber-900'}">
+                  Pembahasan Soal No. ${qNum}
+                </span>
+                <span class="text-xs font-semibold text-slate-700">
+                  Jawaban Kamu: <strong class="${isRight ? 'text-emerald-700' : 'text-rose-700'}">${userChoiceLabel}</strong>
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-800 mb-1.5">
+                <strong>Kunci Jawaban:</strong> <span class="text-emerald-800 font-bold">${correctChoiceLabel}</span>
+              </p>
+              <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                ${escapeHtml(q.explanation)}
+              </p>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="inline-flex items-center justify-center px-3 py-1 rounded-lg bg-brand-700 text-white text-xs font-extrabold">
+                Soal ${qNum}
+              </span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 text-xs font-semibold">
+                ${escapeHtml(q.topic)}
+              </span>
+            </div>
+            ${statusPill}
+          </div>
+
+          <p class="text-sm sm:text-base font-semibold text-slate-900 leading-relaxed">
+            ${escapeHtml(q.question)}
+          </p>
+
+          ${svgBlock}
+
+          <div class="mt-4 space-y-2.5">
+            ${optionsHtml}
+          </div>
+
+          ${explanationHtml}
+        `;
+
+        container.appendChild(card);
+
+        // Build sidebar navigator button (1..100)
+        const navBtn = document.createElement('button');
+        navBtn.type = 'button';
+        navBtn.textContent = qNum;
+        navBtn.onclick = () => jumpToQuestion(qNum);
+
+        let navClass = 'h-8 rounded-lg text-xs font-bold flex items-center justify-center transition cursor-pointer ';
+        if (!isSubmitted) {
+          if (hasAnswered) {
+            navClass += 'bg-brand-600 text-white hover:bg-brand-700';
+          } else {
+            navClass += 'bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200';
+          }
+        } else {
+          if (hasAnswered && selectedIdx === q.correctIndex) {
+            navClass += 'bg-emerald-600 text-white hover:bg-emerald-700';
+          } else {
+            navClass += 'bg-rose-600 text-white hover:bg-rose-700';
+          }
+        }
+        navBtn.className = navClass;
+        navGrid.appendChild(navBtn);
+      });
+
+      updateProgressCounters();
+    }
+
+    /**
+     * Handles selecting an answer option before submission
+     */
+    function selectOption(questionId, optionIndex) {
+      if (isSubmitted) return;
+      userAnswers[questionId] = optionIndex;
+      hideConfirmBox();
+      renderQuiz();
+    }
+
+    /**
+     * Smoothly scrolls to a specific question number
+     */
+    function jumpToQuestion(qNum) {
+      const target = document.getElementById(`question-${qNum}`);
+      if (target) {
+        if (target.classList.contains('hidden')) {
+          currentFilter = 'all';
+          renderQuiz();
+          setTimeout(() => {
+            document.getElementById(`question-${qNum}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 30);
+        } else {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    /**
+     * Updates answered counter & progress bar
+     */
+    function updateProgressCounters() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = preparedQuestions.length;
+      const pct = Math.round((answeredCount / total) * 100);
+
+      document.getElementById('headerAnsweredCount').textContent = answeredCount;
+      document.getElementById('sidebarProgressText').textContent = `${answeredCount} / ${total}`;
+      document.getElementById('progressBarFill').style.width = `${pct}%`;
+    }
+
+    /**
+     * Checks whether unanswered questions remain; shows inline confirmation if so
+     */
+    function handleSubmitClick() {
+      if (isSubmitted) {
+        document.getElementById('resultSummaryPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+
+      const answeredCount = Object.keys(userAnswers).length;
+      const unanswered = preparedQuestions.length - answeredCount;
+
+      if (unanswered > 0) {
+        document.getElementById('unansweredWarningCount').textContent = unanswered;
+        const box = document.getElementById('confirmSubmitBox');
+        box.classList.remove('hidden');
+        box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        finalizeSubmission();
+      }
+    }
+
+    function hideConfirmBox() {
+      document.getElementById('confirmSubmitBox').classList.add('hidden');
+    }
+
+    /**
+     * Calculates score, updates result summary, reveals all explanations & right/wrong indicators
+     */
+    function finalizeSubmission() {
+      hideConfirmBox();
+      isSubmitted = true;
+      currentFilter = 'all';
+
+      let correct = 0;
+      let wrong = 0;
+      let unanswered = 0;
+
+      preparedQuestions.forEach((q) => {
+        const ans = userAnswers[q.id];
+        if (typeof ans !== 'number') {
+          unanswered++;
+        } else if (ans === q.correctIndex) {
+          correct++;
+        } else {
+          wrong++;
+        }
+      });
+
+      const score = Math.round((correct / preparedQuestions.length) * 100);
+
+      let predicate = 'Perlu Belajar Lagi';
+      let badgeClasses = 'ml-2 inline-block align-middle text-xs sm:text-sm font-bold px-3 py-1 rounded-full ';
+      if (score >= 90) {
+        predicate = 'Sangat Baik (A)';
+        badgeClasses += 'bg-emerald-100 text-emerald-800';
+      } else if (score >= 75) {
+        predicate = 'Baik (B)';
+        badgeClasses += 'bg-brand-100 text-brand-800';
+      } else if (score >= 60) {
+        predicate = 'Cukup (C)';
+        badgeClasses += 'bg-amber-100 text-amber-800';
+      } else {
+        predicate = 'Perlu Latihan Lagi (D)';
+        badgeClasses += 'bg-rose-100 text-rose-800';
+      }
+
+      document.getElementById('finalScoreText').textContent = score;
+      const badgeEl = document.getElementById('predicateBadge');
+      badgeEl.textContent = predicate;
+      badgeEl.className = badgeClasses;
+
+      document.getElementById('correctCountText').textContent = correct;
+      document.getElementById('wrongCountText').textContent = wrong;
+      document.getElementById('unansweredCountText').textContent = unanswered;
+
+      // Show post-submission legend items
+      document.getElementById('legendCorrect').classList.remove('hidden');
+      document.getElementById('legendCorrect').classList.add('inline-flex');
+      document.getElementById('legendWrong').classList.remove('hidden');
+      document.getElementById('legendWrong').classList.add('inline-flex');
+
+      const summaryPanel = document.getElementById('resultSummaryPanel');
+      summaryPanel.classList.remove('hidden');
+
+      renderQuiz();
+      summaryPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /**
+     * Filters questions post-submission ('all', 'correct', 'wrong')
+     */
+    function filterQuestions(mode) {
+      if (!isSubmitted) return;
+      currentFilter = mode;
+      renderQuiz();
+    }
+
+    /**
+     * Resets answers, reshuffles option positions, and restores initial quiz state
+     */
+    function resetQuiz() {
+      userAnswers = {};
+      isSubmitted = false;
+      currentFilter = 'all';
+      preparedQuestions = buildPreparedQuestions();
+
+      document.getElementById('resultSummaryPanel').classList.add('hidden');
+      document.getElementById('confirmSubmitBox').classList.add('hidden');
+      document.getElementById('legendCorrect').classList.add('hidden');
+      document.getElementById('legendCorrect').classList.remove('inline-flex');
+      document.getElementById('legendWrong').classList.add('hidden');
+      document.getElementById('legendWrong').classList.remove('inline-flex');
+
+      renderQuiz();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /**
+     * Safely escapes HTML characters in dynamic strings
+     */
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Initialize quiz immediately on load
+    preparedQuestions = buildPreparedQuestions();
+    renderQuiz();
+  </script>
+</body>
+</html>

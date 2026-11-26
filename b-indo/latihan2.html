@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latihan Soal Bahasa Indonesia SMP Kelas 7 - Semester 1</title>
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & VARIABLES (OFFLINE SELF-CONTAINED CSS)
+       ========================================================================== */
+    :root {
+      --bg-page: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-subtle: #f8fafc;
+      --text-main: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --primary-border: #bfdbfe;
+      --success: #16a34a;
+      --success-bg: #f0fdf4;
+      --success-border: #86efac;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+      --danger-border: #fca5a5;
+      --warning: #d97706;
+      --warning-bg: #fffbeb;
+      --warning-border: #fde68a;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    body {
+      min-height: 100vh;
+      padding-bottom: 4rem;
+    }
+
+    /* ==========================================================================
+       HEADER BAR (COMPACT, NO SUMMARY PAGE)
+       ========================================================================== */
+    .top-bar {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      color: #ffffff;
+      padding: 1rem 1.5rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      z-index: 20;
+    }
+
+    .top-bar-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .brand-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .brand-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .status-pill {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       MAIN LAYOUT (QUESTIONS + STICKY SIDEBAR)
+       ========================================================================== */
+    .main-container {
+      max-width: 1320px;
+      margin: 1.5rem auto 0;
+      padding: 0 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr 310px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* ==========================================================================
+       SCORE BANNER (HIDDEN UNTIL SUBMITTED)
+       ========================================================================== */
+    .score-card {
+      display: none;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-md);
+      border: 2px solid var(--primary-border);
+      animation: fadeIn 0.35s ease;
+    }
+
+    .score-card.visible {
+      display: block;
+    }
+
+    .score-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .score-circle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .score-badge-big {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      border: 4px solid var(--primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .score-badge-big .num {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .score-badge-big .lbl {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .score-details h2 {
+      font-size: 1.35rem;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .score-details p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .score-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .stat-box {
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      border: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+    }
+
+    .stat-box.correct {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success);
+    }
+
+    .stat-box.wrong {
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+      color: var(--danger);
+    }
+
+    .stat-val {
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    /* ==========================================================================
+       QUESTION CARDS
+       ========================================================================== */
+    .questions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .question-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      scroll-margin-top: 1.25rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .question-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .question-card.answered {
+      border-left: 5px solid var(--primary);
+    }
+
+    .question-card.eval-correct {
+      border: 1.5px solid var(--success-border);
+      border-left: 6px solid var(--success);
+    }
+
+    .question-card.eval-wrong {
+      border: 1.5px solid var(--danger-border);
+      border-left: 6px solid var(--danger);
+    }
+
+    .q-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .q-number-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .q-topic-tag {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .q-status-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+    }
+
+    .q-status-badge.correct {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+    }
+
+    .q-status-badge.wrong {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid var(--danger-border);
+    }
+
+    /* Illustration Box */
+    .illustration-box {
+      margin: 0.75rem 0 1rem;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .illustration-box svg {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      border-radius: var(--radius-sm);
+      display: block;
+    }
+
+    .illustration-caption {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* Reading Passage / Quote Box */
+    .passage-box {
+      background: #f8fafc;
+      border-left: 4px solid #64748b;
+      padding: 0.9rem 1.1rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 1rem;
+      font-size: 0.96rem;
+      color: #1e293b;
+      white-space: pre-line;
+    }
+
+    .passage-box.poem {
+      font-family: Georgia, "Times New Roman", serif;
+      background: #fffbeb;
+      border-left-color: #d97706;
+      line-height: 1.75;
+    }
+
+    .q-text {
+      font-size: 1.03rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+    }
+
+    /* Options List */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      width: 100%;
+      text-align: left;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.96rem;
+      color: var(--text-main);
+      transition: all 0.15s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background: var(--bg-subtle);
+      border-color: #94a3b8;
+    }
+
+    .option-btn.selected {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: #1e3a8a;
+      font-weight: 500;
+    }
+
+    .option-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      color: var(--text-secondary);
+      margin-top: 1px;
+    }
+
+    .option-btn.selected .option-letter {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    /* Post-submit Option States */
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn.opt-correct {
+      background: var(--success-bg) !important;
+      border-color: var(--success) !important;
+      color: #14532d !important;
+      font-weight: 600;
+    }
+
+    .option-btn.opt-correct .option-letter {
+      background: var(--success) !important;
+      border-color: var(--success) !important;
+      color: #ffffff !important;
+    }
+
+    .option-btn.opt-wrong {
+      background: var(--danger-bg) !important;
+      border-color: var(--danger) !important;
+      color: #7f1d1d !important;
+    }
+
+    .option-btn.opt-wrong .option-letter {
+      background: var(--danger) !important;
+      border-color: var(--danger) !important;
+      color: #ffffff !important;
+    }
+
+    /* Explanation Box (Shown after submit) */
+    .explanation-box {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem 1.15rem;
+      border-radius: var(--radius-md);
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      font-size: 0.92rem;
+      color: #0c4a6e;
+    }
+
+    .explanation-box.visible {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #0369a1;
+    }
+
+    /* ==========================================================================
+       STICKY SIDEBAR (FIXED WHILE SCROLLING)
+       ========================================================================== */
+    .sidebar-sticky {
+      position: sticky;
+      top: 1.25rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      max-height: calc(100vh - 2.5rem);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .sidebar-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .progress-text {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-page);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 0.9rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.85rem;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .legend-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+    }
+
+    .legend-dot.done {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .legend-dot.correct {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .legend-dot.wrong {
+      background: var(--danger);
+      border-color: var(--danger);
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.45rem;
+      overflow-y: auto;
+      padding-right: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .nav-num-btn {
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .nav-num-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .nav-num-btn.answered {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .nav-num-btn.nav-correct {
+      background: var(--success) !important;
+      border-color: var(--success) !important;
+      color: #ffffff !important;
+    }
+
+    .nav-num-btn.nav-wrong {
+      background: var(--danger) !important;
+      border-color: var(--danger) !important;
+      color: #ffffff !important;
+    }
+
+    /* Action Buttons */
+    .btn-primary {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.99);
+    }
+
+    .btn-secondary {
+      padding: 0.7rem 1.15rem;
+      background: var(--bg-card);
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-light);
+    }
+
+    .bottom-submit-wrap {
+      margin-top: 1.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bottom-submit-wrap p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .bottom-submit-wrap .btn-primary {
+      max-width: 340px;
+      margin: 0 auto;
+      font-size: 1.02rem;
+      padding: 0.95rem 1.5rem;
+    }
+
+    /* ==========================================================================
+       CUSTOM MODAL DIALOG (NO alert() OR confirm())
+       ========================================================================== */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      backdrop-filter: blur(2px);
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      max-width: 440px;
+      width: 100%;
+      padding: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+    }
+
+    .modal-box h3 {
+      font-size: 1.18rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .modal-box p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.65rem;
+    }
+
+    .btn-ghost {
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-confirm {
+      padding: 0.65rem 1.15rem;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN (MOBILE & TABLET)
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .main-container {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar-sticky {
+        position: static;
+        max-height: none;
+        order: -1;
+      }
+
+      .nav-grid {
+        grid-template-columns: repeat(10, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .nav-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .question-card {
+        padding: 1.15rem;
+      }
+
+      .score-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <div class="brand-title">
+        <span>Latihan Soal Bahasa Indonesia</span>
+        <span class="brand-badge">SMP Kelas 7 • Semester 1</span>
+      </div>
+      <div class="status-pill" id="headerProgress">Terjawab: 0 / 50</div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="main-container">
+    <!-- LEFT COLUMN: SCORE CARD + 50 QUESTIONS -->
+    <div>
+      <!-- SCORE RESULT BANNER (APPEARS AFTER SUBMIT) -->
+      <section class="score-card" id="scoreCard" aria-live="polite">
+        <div class="score-header">
+          <div class="score-circle-wrap">
+            <div class="score-badge-big">
+              <span class="num" id="finalScoreNum">0</span>
+              <span class="lbl">Nilai</span>
+            </div>
+            <div class="score-details">
+              <h2 id="scorePredicate">Hasil Latihan</h2>
+              <p id="scoreMessage">Periksa pembahasan di setiap nomor soal di bawah ini untuk mempelajari jawaban yang benar.</p>
+            </div>
+          </div>
+          <button type="button" class="btn-secondary" id="btnRetryTop">↻ Ulangi Latihan (Acak Ulang)</button>
+        </div>
+
+        <div class="score-stats">
+          <div class="stat-box correct">
+            <div class="stat-val" id="statCorrect">0</div>
+            <div class="stat-label">Jawaban Benar</div>
+          </div>
+          <div class="stat-box wrong">
+            <div class="stat-val" id="statWrong">0</div>
+            <div class="stat-label">Jawaban Salah / Kosong</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">50</div>
+            <div class="stat-label">Total Soal</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUESTIONS LIST CONTAINER -->
+      <div class="questions-list" id="questionsContainer"></div>
+
+      <!-- BOTTOM SUBMIT SECTION -->
+      <div class="bottom-submit-wrap" id="bottomSubmitWrap">
+        <p id="bottomHintText">Pastikan seluruh 50 soal telah dijawab sebelum menekan tombol selesai.</p>
+        <button type="button" class="btn-primary" id="btnSubmitBottom">Selesai &amp; Lihat Nilai</button>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: STICKY NAVIGATION PANEL -->
+    <aside class="sidebar-sticky" aria-label="Navigasi Nomor Soal">
+      <div class="sidebar-header">
+        <h3>Navigasi Soal</h3>
+        <span class="progress-text" id="sidebarProgressText">0/50</span>
+      </div>
+
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+
+      <div class="legend-row" id="legendRow">
+        <span class="legend-item"><span class="legend-dot"></span> Belum</span>
+        <span class="legend-item"><span class="legend-dot done"></span> Dijawab</span>
+      </div>
+
+      <div class="nav-grid" id="navGrid"></div>
+
+      <button type="button" class="btn-primary" id="btnSubmitSidebar">Selesai &amp; Lihat Nilai</button>
+    </aside>
+  </main>
+
+  <!-- CUSTOM CONFIRMATION MODAL -->
+  <div class="modal-backdrop" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <h3 id="modalTitle">Konfirmasi Pengumpulan Jawaban</h3>
+      <p id="modalBodyText">Masih ada soal yang belum dijawab. Apakah kamu yakin ingin menyelesaikan latihan sekarang?</p>
+      <div class="modal-actions">
+        <button type="button" class="btn-ghost" id="btnModalCancel">Kembali Mengerjakan</button>
+        <button type="button" class="btn-confirm" id="btnModalConfirm">Ya, Lihat Nilai</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       INLINE SVG ILLUSTRATIONS (100% OFFLINE EDUCATIONAL VECTOR GRAPHICS)
+       ========================================================================== */
+    const ILLUSTRATIONS = {
+      pantai: {
+        caption: "Ilustrasi suasana Pantai Parangtritis menjelang senja.",
+        svg: `<svg viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="skySunset" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f97316"/>
+              <stop offset="55%" stop-color="#fbbf24"/>
+              <stop offset="100%" stop-color="#fef08a"/>
+            </linearGradient>
+            <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0284c7"/>
+              <stop offset="100%" stop-color="#0369a1"/>
+            </linearGradient>
+          </defs>
+          <rect width="480" height="120" fill="url(#skySunset)"/>
+          <circle cx="240" cy="105" r="34" fill="#fffbeb" opacity="0.95"/>
+          <path d="M0 112 Q120 106 240 112 T480 112 L480 162 L0 162 Z" fill="url(#seaGrad)"/>
+          <path d="M40 132 Q90 128 140 132 M280 142 Q340 138 400 142 M150 150 Q210 146 270 150" stroke="#bae6fd" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M0 158 Q180 148 480 164 L480 210 L0 210 Z" fill="#fde68a"/>
+          <path d="M0 158 Q180 148 480 164" stroke="#ffffff" stroke-width="4" fill="none" opacity="0.8"/>
+          <path d="M62 210 Q56 150 42 110" stroke="#78350f" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M42 110 Q15 98 5 114 M42 110 Q25 84 8 88 M42 110 Q52 82 76 92 M42 110 Q72 102 82 118" stroke="#15803d" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        </svg>`
+      },
+      candi: {
+        caption: "Ilustrasi kemegahan Candi Borobudur yang tersusun dari batu andesit bertingkat.",
+        svg: `<svg viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="210" fill="#e0f2fe"/>
+          <circle cx="85" cy="45" r="22" fill="#fde047"/>
+          <path d="M0 155 Q120 130 240 150 T480 145 L480 210 L0 210 Z" fill="#86efac"/>
+          <rect x="70" y="155" width="340" height="24" rx="3" fill="#64748b"/>
+          <rect x="105" y="133" width="270" height="22" rx="3" fill="#78716c"/>
+          <rect x="140" y="112" width="200" height="21" rx="3" fill="#87817c"/>
+          <rect x="175" y="92" width="130" height="20" rx="3" fill="#94a3b8"/>
+          <path d="M212 92 C212 62, 268 62, 268 92 Z" fill="#57534e"/>
+          <rect x="236" y="45" width="8" height="22" fill="#57534e"/>
+          <path d="M165 92 C165 78, 183 78, 183 92 Z M297 92 C297 78, 315 78, 315 92 Z" fill="#475569"/>
+          <rect x="0" y="179" width="480" height="31" fill="#4ade80"/>
+        </svg>`
+      },
+      kuliner: {
+        caption: "Ilustrasi semangkuk soto hangat dengan kepulan uap dan irisan jeruk nipis.",
+        svg: `<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="200" fill="#fff7ed"/>
+          <rect x="0" y="145" width="480" height="55" fill="#fed7aa"/>
+          <ellipse cx="240" cy="158" rx="115" ry="18" fill="#fdba74"/>
+          <path d="M145 100 C145 162, 335 162, 335 100 Z" fill="#0284c7"/>
+          <ellipse cx="240" cy="100" rx="95" ry="20" fill="#fef08a" stroke="#e0f2fe" stroke-width="4"/>
+          <circle cx="215" cy="98" r="10" fill="#84cc16"/>
+          <circle cx="262" cy="102" r="12" fill="#f97316"/>
+          <ellipse cx="240" cy="95" rx="22" ry="7" fill="#fef9c3"/>
+          <path d="M200 72 Q192 55 202 38 M240 68 Q232 50 242 32 M278 72 Q270 55 280 38" stroke="#94a3b8" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>`
+      },
+      hiperbola: {
+        caption: "Ilustrasi hiperbola: semangat belajar yang membara menembus batas langit.",
+        svg: `<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="200" fill="#1e1b4b"/>
+          <circle cx="90" cy="40" r="2.5" fill="#fde047"/><circle cx="410" cy="35" r="3" fill="#fde047"/>
+          <circle cx="360" cy="70" r="2" fill="#ffffff"/><circle cx="140" cy="80" r="2" fill="#ffffff"/>
+          <path d="M240 25 L262 85 L325 85 L274 122 L292 180 L240 144 L188 180 L206 122 L155 85 L218 85 Z" fill="#f59e0b" stroke="#fef08a" stroke-width="3"/>
+          <rect x="205" y="102" width="70" height="44" rx="6" fill="#ffffff"/>
+          <line x1="240" y1="102" x2="240" y2="146" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="214" y1="115" x2="233" y2="115" stroke="#64748b" stroke-width="2.5"/>
+          <line x1="247" y1="115" x2="266" y2="115" stroke="#64748b" stroke-width="2.5"/>
+        </svg>`
+      },
+      pantunGajah: {
+        caption: "Ilustrasi kiasan dalam puisi rakyat: gajah dan kancil di tepi rimba.",
+        svg: `<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="200" fill="#ecfdf5"/>
+          <rect x="0" y="155" width="480" height="45" fill="#86efac"/>
+          <rect x="55" y="65" width="22" height="95" fill="#92400e"/>
+          <circle cx="66" cy="58" r="42" fill="#16a34a"/>
+          <ellipse cx="220" cy="115" rx="52" ry="38" fill="#94a3b8"/>
+          <circle cx="272" cy="105" r="26" fill="#94a3b8"/>
+          <path d="M294 112 Q318 115 312 142 Q308 150 298 144" stroke="#94a3b8" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <rect x="185" y="140" width="14" height="24" rx="4" fill="#64748b"/>
+          <rect x="242" y="140" width="14" height="24" rx="4" fill="#64748b"/>
+          <circle cx="278" cy="100" r="3" fill="#0f172a"/>
+          <ellipse cx="385" cy="138" rx="22" ry="14" fill="#d97706"/>
+          <circle cx="406" cy="128" r="10" fill="#d97706"/>
+          <rect x="372" y="148" width="5" height="16" fill="#b45309"/>
+          <rect x="394" y="148" width="5" height="16" fill="#b45309"/>
+        </svg>`
+      },
+      portalFantasi: {
+        caption: "Ilustrasi gerbang portal cahaya misterius di tengah hutan pinus berkabut.",
+        svg: `<svg viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="210" fill="#0f172a"/>
+          <polygon points="75,185 110,70 145,185" fill="#1e293b"/>
+          <polygon points="335,185 375,65 415,185" fill="#1e293b"/>
+          <ellipse cx="240" cy="115" rx="68" ry="82" fill="#312e81" stroke="#818cf8" stroke-width="5"/>
+          <ellipse cx="240" cy="115" rx="48" ry="62" fill="#4f46e5" stroke="#c7d2fe" stroke-width="3" stroke-dasharray="8 6"/>
+          <ellipse cx="240" cy="115" rx="26" ry="38" fill="#e0e7ff"/>
+          <circle cx="155" cy="60" r="3" fill="#a5b4fc"/><circle cx="325" cy="55" r="3.5" fill="#a5b4fc"/>
+          <rect x="0" y="182" width="480" height="28" fill="#020617"/>
+        </svg>`
+      },
+      nagaFantasi: {
+        caption: "Ilustrasi tokoh naga bersayap perak penjaga puncak menara kristal.",
+        svg: `<svg viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="210" fill="#1e1b4b"/>
+          <polygon points="180,210 210,115 270,115 300,210" fill="#334155"/>
+          <polygon points="240,55 215,115 265,115" fill="#38bdf8" opacity="0.85"/>
+          <path d="M210 110 Q135 65 110 105 Q155 115 195 125 Z" fill="#94a3b8"/>
+          <path d="M270 110 Q345 65 370 105 Q325 115 285 125 Z" fill="#94a3b8"/>
+          <circle cx="240" cy="105" r="16" fill="#cbd5e1"/>
+          <circle cx="235" cy="102" r="2.5" fill="#ef4444"/><circle cx="245" cy="102" r="2.5" fill="#ef4444"/>
+        </svg>`
+      },
+      latarMalam: {
+        caption: "Ilustrasi suasana malam purnama yang sunyi di sebuah desa tua.",
+        svg: `<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="200" fill="#090d16"/>
+          <circle cx="385" cy="48" r="26" fill="#fef9c3"/>
+          <circle cx="70" cy="35" r="2" fill="#ffffff"/><circle cx="150" cy="55" r="2" fill="#ffffff"/><circle cx="260" cy="30" r="2.5" fill="#ffffff"/>
+          <polygon points="120,150 175,105 230,150" fill="#334155"/>
+          <rect x="135" y="150" width="80" height="40" fill="#1e293b"/>
+          <rect x="165" y="162" width="18" height="18" fill="#fbbf24"/>
+          <rect x="0" y="185" width="480" height="15" fill="#0f172a"/>
+        </svg>`
+      },
+      cuciTangan: {
+        caption: "Ilustrasi urutan langkah mencuci tangan pakai sabun yang benar.",
+        svg: `<svg viewBox="0 0 480 185" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="185" fill="#f0f9ff"/>
+          <g transform="translate(20,22)">
+            <rect width="100" height="135" rx="10" fill="#ffffff" stroke="#bae6fd" stroke-width="2"/>
+            <text x="50" y="24" text-anchor="middle" font-size="12" font-weight="bold" fill="#0284c7">1. Basahi</text>
+            <path d="M50 42 C40 60, 60 60, 50 42 Z" fill="#38bdf8"/>
+            <ellipse cx="50" cy="95" rx="22" ry="14" fill="#fed7aa"/>
+          </g>
+          <g transform="translate(133,22)">
+            <rect width="100" height="135" rx="10" fill="#ffffff" stroke="#bae6fd" stroke-width="2"/>
+            <text x="50" y="24" text-anchor="middle" font-size="12" font-weight="bold" fill="#0284c7">2. Sabuni</text>
+            <rect x="32" y="55" width="36" height="22" rx="6" fill="#f472b6"/>
+            <circle cx="35" cy="95" r="7" fill="#e0f2fe"/><circle cx="52" cy="92" r="9" fill="#e0f2fe"/><circle cx="66" cy="98" r="6" fill="#e0f2fe"/>
+          </g>
+          <g transform="translate(246,22)">
+            <rect width="100" height="135" rx="10" fill="#ffffff" stroke="#bae6fd" stroke-width="2"/>
+            <text x="50" y="24" text-anchor="middle" font-size="12" font-weight="bold" fill="#0284c7">3. Bilas</text>
+            <path d="M35 48 L35 82 M50 45 L50 85 M65 48 L65 82" stroke="#0ea5e9" stroke-width="3" stroke-linecap="round"/>
+            <ellipse cx="50" cy="102" rx="22" ry="13" fill="#fed7aa"/>
+          </g>
+          <g transform="translate(359,22)">
+            <rect width="100" height="135" rx="10" fill="#ffffff" stroke="#bae6fd" stroke-width="2"/>
+            <text x="50" y="24" text-anchor="middle" font-size="12" font-weight="bold" fill="#0284c7">4. Keringkan</text>
+            <rect x="30" y="52" width="40" height="52" rx="4" fill="#fde047" stroke="#eab308" stroke-width="2"/>
+          </g>
+        </svg>`
+      },
+      origami: {
+        caption: "Ilustrasi langkah melipat kertas origami menjadi bentuk perahu.",
+        svg: `<svg viewBox="0 0 480 185" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="185" fill="#fefce8"/>
+          <g transform="translate(25,25)">
+            <rect width="125" height="130" rx="10" fill="#ffffff" stroke="#fde047" stroke-width="2"/>
+            <rect x="32" y="35" width="60" height="60" fill="#60a5fa"/>
+            <line x1="32" y1="65" x2="92" y2="65" stroke="#ffffff" stroke-width="2" stroke-dasharray="4 3"/>
+            <text x="62" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#854d0e">Lipat Dua</text>
+          </g>
+          <g transform="translate(177,25)">
+            <rect width="125" height="130" rx="10" fill="#ffffff" stroke="#fde047" stroke-width="2"/>
+            <polygon points="62,32 28,88 96,88" fill="#3b82f6"/>
+            <text x="62" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#854d0e">Lipat Segitiga</text>
+          </g>
+          <g transform="translate(330,25)">
+            <rect width="125" height="130" rx="10" fill="#ffffff" stroke="#fde047" stroke-width="2"/>
+            <polygon points="22,72 102,72 86,95 38,95" fill="#2563eb"/>
+            <polygon points="62,40 42,72 82,72" fill="#93c5fd"/>
+            <text x="62" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#854d0e">Bentuk Perahu</text>
+          </g>
+        </svg>`
+      },
+      tehManis: {
+        caption: "Ilustrasi proses menyeduh teh hangat dengan air mendidih dalam cangkir.",
+        svg: `<svg viewBox="0 0 480 185" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="185" fill="#f8fafc"/>
+          <rect x="195" y="75" width="85" height="75" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
+          <path d="M280 90 C305 90, 305 130, 280 130" fill="none" stroke="#94a3b8" stroke-width="4"/>
+          <rect x="200" y="95" width="75" height="50" rx="6" fill="#b45309" opacity="0.85"/>
+          <line x1="238" y1="55" x2="238" y2="108" stroke="#cbd5e1" stroke-width="2"/>
+          <rect x="226" y="102" width="24" height="28" rx="3" fill="#78350f"/>
+          <path d="M135 55 L178 72 L172 82 L130 65 Z" fill="#64748b"/>
+          <path d="M178 77 Q205 82 215 100" stroke="#38bdf8" stroke-width="3.5" fill="none" stroke-dasharray="5 3"/>
+        </svg>`
+      }
+    };
+
+    /* ==========================================================================
+       BANK 50 SOAL BAHASA INDONESIA SMP KELAS 7 SEMESTER 1 (SESUAI 42 KISI-KISI)
+       ========================================================================== */
+    const QUESTIONS_BANK = [
+      // 1. TEKS DESKRIPSI
+      {
+        id: 1,
+        kisi: "Teks Deskripsi",
+        passage: "Tongkonan adalah rumah adat masyarakat Toraja. Tongkonan berasal dari kata 'tongkon' yang artinya duduk bersama-sama. Suku Toraja yang memiliki rumah adat ini pegunungan yang berbatasan dengan Kabupaten Enrekang, Sulawesi Selatan. Rumah adat ini merupakan salah satu ikon suku Toraja selain upacara pemakamannya.",
+        question: "Berdasarkan isinya, kutipan teks tersebut termasuk jenis teks deskripsi karena ....",
+        options: [
+          "menggambarkan objek tertentu secara rinci sehingga pembaca seolah-olah dapat melihat dan mengenalnya",
+          "menceritakan urutan peristiwa sejarah berdirinya suku Toraja secara kronologis",
+          "menjelaskan langkah-langkah cara membangun rumah adat suku Toraja",
+          "berisi pendapat penulis untuk mengajak pembaca berwisata ke Sulawesi Selatan"
+        ],
+        answerIndex: 0,
+        explanation: "Teks deskripsi bertujuan melukiskan atau menggambarkan suatu objek (dalam hal ini rumah adat Tongkonan) secara terperinci sehingga pembaca seolah-olah melihat, mendengar, atau merasakan langsung objek yang digambarkan."
+      },
+      // 2. TOPIK TEKS DESKRIPSI
+      {
+        id: 2,
+        kisi: "Topik Teks Deskripsi",
+        illustration: "candi",
+        passage: "Candi Borobudur merupakan candi Buddha terbesar di dunia yang terletak di Magelang, Jawa Tengah. Bangunan megah ini tersusun dari jutaan balok batu andesit yang disusun tanpa menggunakan perekat semen. Pada dinding-dindingnya terdapat ribuan panel relief yang menceritakan kisah kehidupan Sang Buddha.",
+        question: "Topik utama yang dibahas dalam kutipan teks deskripsi di atas adalah ....",
+        options: [
+          "keunikan arsitektur dan kemegahan Candi Borobudur",
+          "sejarah penyebaran agama Buddha di Pulau Jawa",
+          "cara pembuatan batu andesit oleh masyarakat Magelang",
+          "jumlah wisatawan yang berkunjung ke Jawa Tengah"
+        ],
+        answerIndex: 0,
+        explanation: "Topik teks deskripsi adalah pokok pembicaraan atau objek utama yang sedang dideskripsikan. Seluruh kalimat pada paragraf tersebut berfokus pada kemegahan dan susunan bangunan Candi Borobudur."
+      },
+      // 3. PANCA INDRA DALAM TEKS DESKRIPSI
+      {
+        id: 3,
+        kisi: "Panca Indra dalam Teks Deskripsi",
+        illustration: "pantai",
+        passage: "(1) Kemolekan Pantai Parangtritis serasa sempurna di sore hari.\n(2) Langit berubah warna menjadi jingga keemasan berpadu dengan birunya air laut.\n(3) Deburan ombak terdengar bersahut-sahutan memecah sunyi di bibir pantai.\n(4) Semilir angin laut terasa sejuk menyapu kulit wajah.",
+        question: "Kalimat yang melibatkan cerapan pancaindra pendengaran ditunjukkan oleh nomor ....",
+        options: [
+          "(3)",
+          "(1)",
+          "(2)",
+          "(4)"
+        ],
+        answerIndex: 0,
+        explanation: "Kalimat (3) memuat frasa 'Deburan ombak terdengar bersahut-sahutan', yang secara langsung melibatkan indra pendengaran (telinga). Kalimat (2) melibatkan penglihatan, sedangkan kalimat (4) melibatkan indra peraba (kulit)."
+      },
+      // 4. STRUKTUR IDENTIFIKASI
+      {
+        id: 4,
+        kisi: "Struktur Identifikasi",
+        passage: "Tari Saman merupakan salah satu tarian tradisional yang berasal dari Suku Gayo, Provinsi Aceh. Tarian ini biasanya ditampilkan untuk merayakan peristiwa-peristiwa penting dalam adat. Pada tahun 2011, UNESCO menetapkan Tari Saman sebagai Daftar Representatif Budaya Takbenda Warisan Manusia.",
+        question: "Dalam struktur teks deskripsi, kutipan paragraf tersebut merupakan bagian ....",
+        options: [
+          "identifikasi (gambaran umum)",
+          "deskripsi bagian",
+          "simpulan atau kesan",
+          "orientasi dan komplikasi"
+        ],
+        answerIndex: 0,
+        explanation: "Bagian identifikasi (gambaran umum) berisi pengenalan nama objek yang dideskripsikan, lokasi/asal-usulnya, serta pernyataan umum mengenai objek tersebut sebelum masuk ke rincian bagian."
+      },
+      // 5. TEMA TEKS DESKRIPSI
+      {
+        id: 5,
+        kisi: "Tema Teks Deskripsi",
+        passage: "Taman Nasional Komodo merupakan habitat asli satwa purba komodo yang hanya ada di Indonesia. Selain menjadi rumah bagi reptil raksasa tersebut, kawasan kepulauan di Nusa Tenggara Timur ini juga menyimpan keindahan alam bawah laut dengan terumbu karang warna-warni yang masih sangat alami.",
+        question: "Tema yang tepat untuk kutipan teks deskripsi tersebut adalah ....",
+        options: [
+          "keindahan alam dan kekayaan fauna Indonesia",
+          "pelestarian budaya dan kesenian tradisional",
+          "perkembangan pariwisata modern di perkotaan",
+          "kehidupan nelayan di pesisir pantai"
+        ],
+        answerIndex: 0,
+        explanation: "Paragraf tersebut membahas habitat satwa komodo (fauna) dan keindahan terumbu karang bawah laut (alam), sehingga tema yang paling sesuai adalah keindahan alam dan kekayaan fauna Indonesia."
+      },
+      // 6. STRUKTUR IDENTIFIKASI (SOAL KE-2 SESUAI KISI)
+      {
+        id: 6,
+        kisi: "Struktur Identifikasi",
+        question: "Informasi yang paling tepat dituliskan pada bagian identifikasi dalam teks deskripsi tentang 'Sekolahku' adalah ....",
+        options: [
+          "nama sekolah, lokasi alamatnya, serta gambaran umum lingkungan sekolah secara keseluruhan",
+          "rincian warna cat dinding ruang kelas 7A dan jumlah meja kursi di dalamnya",
+          "aroma masakan di kantin sekolah saat jam istirahat pertama berlangsung",
+          "rasa bangga dan harapan penulis agar sekolahnya semakin berprestasi di masa depan"
+        ],
+        answerIndex: 0,
+        explanation: "Bagian identifikasi memperkenalkan identitas dasar objek (nama, letak/lokasi, gambaran umum). Rincian ruang kelas dan aroma kantin masuk ke deskripsi bagian, sedangkan rasa bangga masuk ke simpulan/kesan."
+      },
+      // 7. INFORMASI TERSURAT
+      {
+        id: 7,
+        kisi: "Informasi Tersurat",
+        illustration: "kuliner",
+        passage: "Soto Banjar adalah soto khas suku Banjar di Kalimantan Selatan. Bahan utama soto ini adalah daging ayam yang disuwir-suwir dengan aroma harum rempah-rempah seperti kayu manis, biji pala, dan cengkih. Soto Banjar biasanya disajikan bersama ketupat, perkedel kentang, irisan telur rebus, serta perasan jeruk nipis.",
+        question: "Informasi tersurat yang sesuai dengan isi teks tersebut adalah ....",
+        options: [
+          "Soto Banjar menggunakan bahan utama daging ayam suwir dan disajikan bersama ketupat",
+          "Soto Banjar berasal dari Kalimantan Timur dan menggunakan bahan utama daging sapi",
+          "Bumbu utama Soto Banjar hanyalah cabai merah dan bawang putih tanpa rempah",
+          "Soto Banjar selalu disajikan dengan nasi putih hangat dan kerupuk udang"
+        ],
+        answerIndex: 0,
+        explanation: "Informasi tersurat adalah informasi yang tertulis secara eksplisit (jelas) di dalam teks. Pada kalimat kedua dan ketiga tertulis jelas bahwa bahan utamanya daging ayam suwir dan disajikan bersama ketupat."
+      },
+      // 8. KATA DEPAN
+      {
+        id: 8,
+        kisi: "Kata Depan",
+        question: "Penulisan kata depan 'di' yang tepat sesuai kaidah ejaan bahasa Indonesia terdapat pada kalimat ....",
+        options: [
+          "Wisatawan mancanegara banyak berfoto di sekitar area candi.",
+          "Keindahan pantai itu sangat dikagumi oleh para pengunjung.",
+          "Batu-batu karang tersebut disusun rapi sepanjang tepi taman.",
+          "Pemandangan matahari terbit dapat disaksikan dari puncak bukit."
+        ],
+        answerIndex: 0,
+        explanation: "Kata depan 'di' ditulis terpisah apabila menunjukkan tempat/arah ('di sekitar'). Sementara pada kata 'dikagumi', 'disusun', dan 'disaksikan', 'di-' berfungsi sebagai awalan (imbuhan) kata kerja pasif sehingga harus ditulis serangkai."
+      },
+      // 9. CIRI TEKS DESKRIPSI
+      {
+        id: 9,
+        kisi: "Ciri Teks Deskripsi",
+        question: "Berikut ini yang merupakan ciri kebahasaan teks deskripsi adalah ....",
+        options: [
+          "banyak menggunakan kata sifat untuk mengonkretkan gambaran objek",
+          "menggunakan banyak kalimat perintah dan larangan bagi pembaca",
+          "menggunakan konjungsi kronologis seperti kemudian, lalu, dan setelah itu",
+          "menggunakan bahasa kiasan yang terikat oleh jumlah baris dan rima"
+        ],
+        answerIndex: 0,
+        explanation: "Teks deskripsi banyak menggunakan kata sifat (adjektiva) dan kata khusus untuk memperjelas sifat/keadaan objek (misalnya: jernih, megah, harum, sejuk) agar tergambar konkret di benak pembaca."
+      },
+      // 10. MAJAS PERSONIFIKASI
+      {
+        id: 10,
+        kisi: "Majas Personifikasi",
+        passage: "Perhatikan kalimat berikut:\n'Angin pantai berbisik lembut membelai dedaunan kelapa yang menari-nari di tepi muara.'",
+        question: "Kalimat tersebut menggunakan majas personifikasi karena ....",
+        options: [
+          "mengumpamakan benda mati (angin dan dedaunan) seolah-olah dapat berperilaku seperti manusia",
+          "melebih-lebihkan keadaan alam hingga melampaui batas kenyataan yang masuk akal",
+          "membandingkan dua hal berbeda secara langsung dengan kata penghubung 'seperti'",
+          "menegaskan maksud dengan cara mengulang kata yang sama berkali-kali"
+        ],
+        answerIndex: 0,
+        explanation: "Majas personifikasi adalah gaya bahasa yang melekatkan sifat atau perilaku manusia (berbisik, membelai, menari-nari) kepada benda mati atau makhluk bukan manusia."
+      },
+      // 11. MAJAS HIPERBOLA
+      {
+        id: 11,
+        kisi: "Majas Hiperbola",
+        illustration: "hiperbola",
+        question: "Kalimat di bawah ini yang mengandung majas hiperbola adalah ....",
+        options: [
+          "Semangat belajar siswa kelas tujuh membara hingga menembus langit ketujuh.",
+          "Suara gemericik air sungai terdengar jernih di sela-sela bebatuan.",
+          "Bunga mawar di halaman sekolah mulai mekar pada pagi hari.",
+          "Ayah membaca koran sambil menikmati secangkir kopi hangat."
+        ],
+        answerIndex: 0,
+        explanation: "Majas hiperbola adalah gaya bahasa yang mengandung pernyataan yang dibesar-besarkan atau dilebih-lebihkan dari kenyataan sebenarnya ('membara hingga menembus langit ketujuh')."
+      },
+      // 12. CIRI & SYARAT PANTUN
+      {
+        id: 12,
+        kisi: "Ciri & Syarat Pantun",
+        question: "Berikut ini yang merupakan syarat dan ciri utama pantun adalah ....",
+        options: [
+          "satu bait terdiri atas empat larik, bersajak a-b-a-b, dan setiap larik terdiri atas 8–12 suku kata",
+          "satu bait terdiri atas dua larik, bersajak a-a, dan berisi hubungan sebab akibat",
+          "satu bait terdiri atas empat larik, bersajak a-a-a-a, dan seluruh lariknya merupakan isi",
+          "tidak terikat oleh jumlah baris, jumlah suku kata, maupun persamaan bunyi akhir"
+        ],
+        answerIndex: 0,
+        explanation: "Ciri dan syarat pantun meliputi: (1) tiap bait terdiri atas 4 larik/baris, (2) tiap larik terdiri atas 8–12 suku kata, (3) berpola rima silang a-b-a-b, serta (4) larik 1–2 sampiran dan larik 3–4 isi."
+      },
+      // 13. SAMPIRAN, ISI DAN RIMA PANTUN
+      {
+        id: 13,
+        kisi: "Sampiran, Isi dan Rima Pantun",
+        passage: "Jalan-jalan ke Kota Blitar,\nJangan lupa membeli sukun.\nJika kamu ingin pintar,\nBelajarlah dengan tekun.",
+        question: "Pernyataan yang tepat mengenai struktur sampiran, isi, dan rima pantun di atas adalah ....",
+        options: [
+          "larik 1–2 merupakan sampiran, larik 3–4 merupakan isi, dan berpola rima a-b-a-b",
+          "larik 1–2 merupakan isi, larik 3–4 merupakan sampiran, dan berpola rima a-a-b-b",
+          "seluruh larik merupakan isi nasihat dengan pola rima akhir a-a-a-a",
+          "larik 1 dan 3 adalah sampiran, sedangkan larik 2 dan 4 adalah isi pantun"
+        ],
+        answerIndex: 0,
+        explanation: "Pada pantun tersebut, dua larik pertama ('Jalan-jalan... / Jangan lupa...') adalah sampiran untuk mengantar rima (-tar / -kun), sedangkan dua larik terakhir ('Jika kamu... / Belajarlah...') adalah isi pantun."
+      },
+      // 14. URUTAN LARIK PANTUN
+      {
+        id: 14,
+        kisi: "Urutan Larik Pantun",
+        passage: "Cermati larik-larik pantun yang diacak berikut:\n(1) Agar hidupmu tidak merugi.\n(2) Pergi ke pasar membeli talas,\n(3) Janganlah kamu bersikap malas,\n(4) Talas dibeli di dekat tugu.",
+        question: "Urutan larik yang tepat agar membentuk sebuah pantun yang padu adalah ....",
+        options: [
+          "(2) - (4) - (3) - (1)",
+          "(2) - (3) - (4) - (1)",
+          "(3) - (1) - (2) - (4)",
+          "(4) - (2) - (1) - (3)"
+        ],
+        answerIndex: 0,
+        explanation: "Sampiran diletakkan di awal dengan rima -las dan -gu: (2) Pergi ke pasar membeli talas (-las), (4) Talas dibeli di dekat tugu (-gu). Kemudian diikuti isi dengan rima yang sama: (3) Janganlah kamu bersikap malas (-las), (1) Agar hidupmu tidak merugi (-gi)."
+      },
+      // 15. MAKNA ATAU AMANAT PANTUN
+      {
+        id: 15,
+        kisi: "Makna atau Amanat Pantun",
+        passage: "Kayu cendana di atas batu,\nSudah diikat dibawa pulang.\nAdat dunia memang begitu,\nBenda yang buruk memang terbuang.",
+        question: "Amanat yang terkandung dalam pantun tersebut adalah ....",
+        options: [
+          "kita harus selalu berbuat baik dan memiliki perilaku terpuji agar dihargai dalam pergaulan",
+          "kita harus mengumpulkan kayu cendana yang mahal agar menjadi kaya raya",
+          "benda yang sudah rusak sebaiknya langsung dibuang ke tempat sampah",
+          "setiap orang yang merantau harus membawa oleh-oleh saat pulang"
+        ],
+        answerIndex: 0,
+        explanation: "Isi pantun ('Adat dunia memang begitu / Benda yang buruk memang terbuang') merupakan kiasan bahwa dalam kehidupan bermasyarakat, perilaku atau sifat yang buruk akan dijauhi orang, sehingga kita harus menjaga kebaikan diri."
+      },
+      // 16. NASIHAT DALAM GURINDAM
+      {
+        id: 16,
+        kisi: "Nasihat dalam Gurindam",
+        passage: "Kurang pikir kurang siasat,\nTentu dirimu kelak tersesat.",
+        question: "Nasihat yang disampaikan dalam kutipan gurindam tersebut adalah ....",
+        options: [
+          "kita harus berpikir matang dan penuh pertimbangan sebelum bertindak agar tidak salah langkah",
+          "kita tidak boleh bepergian jauh tanpa membawa peta penunjuk jalan",
+          "orang yang sering tersesat sebaiknya meminta bantuan teman",
+          "berpikir terlalu lama hanya akan menghambat pekerjaan kita"
+        ],
+        answerIndex: 0,
+        explanation: "Gurindam tersebut mengingatkan bahwa jika seseorang bertindak terburu-buru tanpa pemikiran dan perencanaan yang matang ('kurang pikir kurang siasat'), akibatnya ia akan mengalami kerugian atau salah arah ('tersesat')."
+      },
+      // 17. CIRI ATAU STRUKTUR GURINDAM
+      {
+        id: 17,
+        kisi: "Ciri atau Struktur Gurindam",
+        passage: "Apabila terpelihara mata,\nSedikitlah cita-cita.",
+        question: "Ciri struktur yang membedakan gurindam di atas dengan pantun adalah ....",
+        options: [
+          "terdiri atas dua larik per bait, bersajak a-a, dan larik pertama menjadi syarat bagi larik kedua",
+          "terdiri atas empat larik per bait dengan sampiran pada dua larik pertama",
+          "bersajak a-b-a-b dan seluruh lariknya berisi cerita kepahlawanan",
+          "tidak memiliki persamaan bunyi di akhir larik dan berbentuk prosa"
+        ],
+        answerIndex: 0,
+        explanation: "Gurindam adalah puisi rakyat yang terdiri atas 2 larik dalam sebait, berpola rima a-a, dan memiliki hubungan sebab-akibat atau syarat-jawaban antara larik pertama dan larik kedua."
+      },
+      // 18. SAMPIRAN PANTUN
+      {
+        id: 18,
+        kisi: "Sampiran Pantun",
+        passage: "..................................................\n..................................................\nKalau ingin menjadi juara,\nRajin-rajinlah membaca buku.",
+        question: "Sampiran yang paling tepat untuk melengkapi pantun tersebut adalah ....",
+        options: [
+          "Terbang tinggi burung dara,\nHinggap sebentar di dahan jambu.",
+          "Pergi berlibur ke Pulau Bali,\nMembeli oleh-oleh kain kebaya.",
+          "Buah mangga rasanya manis,\nDipetik ayah di pagi hari.",
+          "Air mengalir ke arah hilir,\nIkan berenang di dalam kolam."
+        ],
+        answerIndex: 0,
+        explanation: "Isi pantun berakhir dengan bunyi '-ra' (juara) dan '-ku' (buku). Sampiran yang rimanya sesuai adalah 'Terbang tinggi burung dara (-ra) / Hinggap sebentar di dahan jambu (-bu)'."
+      },
+      // 19. URUTAN LARIK PANTUN (SOAL KE-2 SESUAI KISI)
+      {
+        id: 19,
+        kisi: "Urutan Larik Pantun",
+        passage: "Perhatikan larik-larik acak berikut:\n(1) Hormatilah ayah beserta ibu,\n(2) Supaya hidup mendapat berkah.\n(3) Pagi hari minum jamu,\n(4) Jamu diminum di atas sajadah.",
+        question: "Susunan larik yang benar untuk membentuk pantun nasihat adalah ....",
+        options: [
+          "(3) - (4) - (1) - (2)",
+          "(1) - (2) - (3) - (4)",
+          "(3) - (1) - (4) - (2)",
+          "(4) - (3) - (2) - (1)"
+        ],
+        answerIndex: 0,
+        explanation: "Urutan yang tepat adalah larik (3) berakhir '-mu', larik (4) berakhir '-dah', dilanjutkan isi pada larik (1) berakhir '-bu', dan larik (2) berakhir '-kah' sehingga membentuk pola rima a-b-a-b."
+      },
+      // 20. TEMA SYAIR
+      {
+        id: 20,
+        kisi: "Tema Syair",
+        passage: "Wahai ananda dengarlah madah,\nJanganlah engkau berbuat salah,\nKepada Tuhan berserah pasrah,\nSupaya hidup beroleh berkah.",
+        question: "Tema yang terkandung dalam kutipan syair tersebut adalah ....",
+        options: [
+          "keagamaan dan nasihat ketakwaan kepada Tuhan",
+          "percintaan dan kerinduan kepada kampung halaman",
+          "sejarah peperangan kerajaan di masa lampau",
+          "kejenakaan dan hiburan di waktu senggang"
+        ],
+        answerIndex: 0,
+        explanation: "Kata-kata seperti 'madah' (nasihat), 'jangan berbuat salah', 'kepada Tuhan berserah pasrah', dan 'beroleh berkah' menunjukkan tema keagamaan dan nasihat moral."
+      },
+      // 21. MAKNA UNGKAPAN ATAU KIASAN
+      {
+        id: 21,
+        kisi: "Makna Ungkapan atau Kiasan",
+        illustration: "pantunGajah",
+        passage: "Gajah mati meninggalkan gading,\nHarimau mati meninggalkan belang,\nManusia mati meninggalkan nama.",
+        question: "Makna ungkapan 'meninggalkan nama' pada kutipan puisi lama tersebut adalah ....",
+        options: [
+          "jasa dan perbuatan baik seseorang akan selalu dikenang meskipun ia telah tiada",
+          "setiap manusia wajib menuliskan nama lengkapnya di batu nisan",
+          "manusia memiliki kedudukan yang lebih tinggi daripada hewan buas",
+          "harta benda yang ditinggalkan orang tua harus dibagi secara adil"
+        ],
+        answerIndex: 0,
+        explanation: "Ungkapan 'meninggalkan nama' bermakna kiasan bahwa kenangan tentang kebaikan, budi pekerti, dan jasa seseorang akan tetap hidup di ingatan masyarakat setelah orang tersebut meninggal dunia."
+      },
+      // 22. BAHASA KIASAN
+      {
+        id: 22,
+        kisi: "Bahasa Kiasan",
+        passage: "Ilmu itu pelita hati,\nMenerangi jalan di malam kelam.",
+        question: "Kata 'pelita hati' pada kutipan puisi rakyat tersebut merupakan bahasa kiasan yang bermakna ....",
+        options: [
+          "petunjuk atau penerang pikiran agar manusia mampu membedakan hal yang benar dan salah",
+          "lampu minyak tradisional yang dinyalakan di dalam rumah saat listrik padam",
+          "perasaan sedih yang mendalam ketika menghadapi ujian sekolah",
+          "hadiah berharga yang diberikan guru kepada siswa berprestasi"
+        ],
+        answerIndex: 0,
+        explanation: "Secara kias, 'pelita' (lampu penerang) diibaratkan sebagai ilmu pengetahuan yang menerangi batin dan akal budi manusia dari kebodohan ('malam kelam')."
+      },
+      // 23. AMANAT SYAIR
+      {
+        id: 23,
+        kisi: "Amanat Syair",
+        passage: "Ilmu dituntut tiada jemu,\nUntuk bekal di masa depanmu,\nJanganlah malas menuntut ilmu,\nAgar berguna bagi bangsamu.",
+        question: "Amanat yang ingin disampaikan penyair melalui syair tersebut adalah ....",
+        options: [
+          "generasi muda harus tekun dan tidak mudah bosan menuntut ilmu demi masa depan dan bangsa",
+          "menuntut ilmu cukup dilakukan saat masih duduk di bangku sekolah dasar saja",
+          "ilmu pengetahuan hanya berguna untuk mencari pekerjaan di luar negeri",
+          "kita boleh berhenti belajar apabila sudah merasa pandai"
+        ],
+        answerIndex: 0,
+        explanation: "Amanat syair tersebut mengajak pembaca agar gigih menuntut ilmu tanpa rasa jemu sebagai bekal masa depan serta agar bermanfaat bagi bangsa dan negara."
+      },
+      // 24. CIRI UMUM CERITA FANTASI
+      {
+        id: 24,
+        kisi: "Ciri Umum Cerita Fantasi",
+        question: "Ciri utama yang membedakan cerita fantasi dengan cerita fiksi realistis (seperti cerpen kehidupan sehari-hari) adalah ....",
+        options: [
+          "mengandung unsur keajaiban, kemisteriusan, dan keanehan yang tidak mungkin terjadi di dunia nyata",
+          "seluruh tokoh, latar tempat, dan peristiwanya benar-benar terjadi sesuai catatan sejarah",
+          "tidak memiliki alur cerita dan hanya berisi informasi faktual hasil penelitian",
+          "selalu menggunakan bahasa daerah dan tidak memiliki amanat cerita"
+        ],
+        answerIndex: 0,
+        explanation: "Ciri khas cerita fantasi adalah adanya ide cerita yang terbuka dan penuh daya khayal, mengandung keajaiban/kesaktian/keanehan yang melampaui logika dunia nyata."
+      },
+      // 25. STRUKTUR CERITA FANTASI
+      {
+        id: 25,
+        kisi: "Struktur Cerita Fantasi",
+        question: "Urutan struktur teks cerita fantasi yang tepat dari awal hingga akhir adalah ....",
+        options: [
+          "orientasi – komplikasi – resolusi",
+          "identifikasi – deskripsi bagian – simpulan",
+          "tujuan – langkah-langkah – penutup",
+          "pernyataan umum – deretan penjelas – interpretasi"
+        ],
+        answerIndex: 0,
+        explanation: "Struktur teks cerita fantasi terdiri atas tiga bagian utama: Orientasi (pengenalan tokoh, latar, dan watak), Komplikasi (munculnya masalah hingga puncak konflik), dan Resolusi (penyelesaian masalah)."
+      },
+      // 26. KEAJAIBAN DALAM CERITA FANTASI
+      {
+        id: 26,
+        kisi: "Keajaiban dalam Cerita Fantasi",
+        illustration: "nagaFantasi",
+        passage: "Begitu Arka menyentuh batu kristal biru di puncak menara, tubuhnya tiba-tiba melayang ringan di udara. Seekor naga bersayap perak muncul dari balik awan dan menyapanya dengan bahasa manusia yang fasih.",
+        question: "Unsur keajaiban yang tampak pada kutipan cerita fantasi tersebut adalah ....",
+        options: [
+          "tubuh tokoh melayang saat menyentuh kristal dan naga bersayap perak dapat berbicara bahasa manusia",
+          "Arka mendaki puncak menara pada siang hari yang cerah",
+          "awan putih bergerak perlahan tertiup angin pegunungan",
+          "Arka merasa kagum melihat pemandangan dari ketinggian menara"
+        ],
+        answerIndex: 0,
+        explanation: "Keajaiban dalam cerita fantasi adalah peristiwa atau kemampuan di luar nalar dunia nyata, yaitu batu kristal yang membuat manusia melayang dan makhluk mitologi naga yang fasih berbicara bahasa manusia."
+      },
+      // 27. ORIENTASI
+      {
+        id: 27,
+        kisi: "Orientasi",
+        passage: "Di sebuah negeri bernama Awan Biru, hiduplah seorang gadis kecil bernama Lira yang memiliki sepasang sepatu kaca pemberian neneknya. Lira dikenal sebagai anak yang pemberani dan gemar membantu makhluk-makhluk hutan di sekitar rumahnya.",
+        question: "Kutipan teks tersebut merupakan bagian orientasi karena berisi ....",
+        options: [
+          "pengenalan nama tokoh, watak tokoh, serta latar tempat awal cerita",
+          "puncak pertikaian antara Lira dan penyihir jahat dari negeri seberang",
+          "penyelesaian masalah setelah sepatu kaca milik Lira berhasil ditemukan",
+          "pesan moral yang disampaikan pengarang pada akhir kisah"
+        ],
+        answerIndex: 0,
+        explanation: "Bagian orientasi berfungsi memperkenalkan tokoh utama (Lira), sifat/wataknya (pemberani, suka membantu), dan latar tempat awal cerita (Negeri Awan Biru)."
+      },
+      // 28. LATAR TEMPAT
+      {
+        id: 28,
+        kisi: "Latar Tempat",
+        illustration: "portalFantasi",
+        passage: "Raka melangkah perlahan memasuki gerbang portal cahaya yang berdiri tegak di tengah hutan pinus berkabut. Dalam sekejap, ia sudah berpindah ke sebuah perpustakaan raksasa yang buku-bukunya terbang melayang di langit-langit ruangan.",
+        question: "Latar tempat yang tergambar pada kutipan cerita fantasi tersebut adalah ....",
+        options: [
+          "hutan pinus berkabut dan sebuah perpustakaan raksasa",
+          "halaman sekolah dan ruang laboratorium komputer",
+          "tepi pantai berpasir putih dan dermaga nelayan",
+          "stasiun kereta api bawah tanah dan pasar tradisional"
+        ],
+        answerIndex: 0,
+        explanation: "Latar tempat menunjukkan lokasi terjadinya peristiwa dalam cerita, yakni dimulai di tengah hutan pinus berkabut lalu berpindah ke sebuah perpustakaan raksasa."
+      },
+      // 29. SUDUT PANDANG
+      {
+        id: 29,
+        kisi: "Sudut Pandang",
+        passage: "Aku menggenggam erat kompas tua peninggalan Kakek. Jarum kompas itu berputar cepat menuju arah utara, membuat jantungku berdebar kencang. Aku pun memberanikan diri melangkah masuk ke lorong waktu tersebut.",
+        question: "Sudut pandang yang digunakan pengarang dalam kutipan cerita tersebut adalah ....",
+        options: [
+          "sudut pandang orang pertama pelaku utama",
+          "sudut pandang orang ketiga serba tahu",
+          "sudut pandang orang kedua pelaku sampingan",
+          "sudut pandang orang ketiga sebagai pengamat"
+        ],
+        answerIndex: 0,
+        explanation: "Penggunaan kata ganti 'aku' (dan akhiran '-ku' pada jantungku) yang menjadi pusat peristiwa menunjukkan bahwa pengarang menggunakan sudut pandang orang pertama pelaku utama."
+      },
+      // 30. LATAR SUASANA
+      {
+        id: 30,
+        kisi: "Latar Suasana",
+        passage: "Petir menyambar-nyambar membelah langit gelap. Langkah kaki raksasa batu terdengar mengguncang tanah, membuat Naya dan teman-temannya berlari terengah-engah mencari tempat berlindung di balik reruntuhan benteng.",
+        question: "Latar suasana yang tergambar dalam kutipan cerita tersebut adalah ....",
+        options: [
+          "menegangkan dan mencekam",
+          "haru dan menyedihkan",
+          "riang gembira dan penuh tawa",
+          "damai dan menenteramkan"
+        ],
+        answerIndex: 0,
+        explanation: "Gambaran petir menyambar, tanah berguncang oleh langkah raksasa batu, dan tokoh yang berlari menyelamatkan diri menciptakan suasana yang menegangkan dan mencekam."
+      },
+      // 31. LATAR WAKTU
+      {
+        id: 31,
+        kisi: "Latar Waktu",
+        illustration: "latarMalam",
+        passage: "Tepat ketika jarum jam menunjukkan pukul dua belas malam di bawah sinar bulan purnama, pintu kayu tua di ujung desa itu terbuka dengan sendirinya.",
+        question: "Latar waktu yang terdapat pada kutipan cerita tersebut adalah ....",
+        options: [
+          "pukul dua belas malam saat bulan purnama",
+          "menjelang matahari terbit di pagi hari",
+          "siang hari yang terik di tengah musim kemarau",
+          "sore hari ketika matahari mulai terbenam"
+        ],
+        answerIndex: 0,
+        explanation: "Keterangan 'pukul dua belas malam di bawah sinar bulan purnama' secara eksplisit menunjukkan latar waktu terjadinya peristiwa tersebut."
+      },
+      // 32. KALIMAT PERINTAH
+      {
+        id: 32,
+        kisi: "Kalimat Perintah",
+        passage: "Perhatikan petikan dialog dalam cerita fantasi berikut:\n\"Cepat nyalakan obor kristal itu sebelum kabut hitam menyelimuti seluruh lembah!\" seru Panglima Elang kepada para prajuritnya.",
+        question: "Kalimat yang diucapkan Panglima Elang tersebut termasuk jenis kalimat perintah karena ....",
+        options: [
+          "bertujuan meminta atau menyuruh orang lain melakukan suatu tindakan dan diakhiri tanda seru (!)",
+          "berisi pertanyaan yang memerlukan jawaban dari para prajurit",
+          "menyampaikan berita atau informasi tentang keadaan cuaca di lembah",
+          "mengungkapkan rasa kekaguman terhadap keindahan obor kristal"
+        ],
+        answerIndex: 0,
+        explanation: "Kalimat perintah (imperatif) digunakan untuk menyuruh, meminta, atau memerintah lawan bicara melakukan sesuatu ('Cepat nyalakan obor kristal itu...') dan ditandai intonasi perintah atau tanda seru (!)."
+      },
+      // 33. PENGERTIAN ATAU TUJUAN TEKS PROSEDUR
+      {
+        id: 33,
+        kisi: "Pengertian atau Tujuan Teks Prosedur",
+        question: "Tujuan utama penulisan teks prosedur adalah ....",
+        options: [
+          "memberikan panduan langkah demi langkah cara membuat, melakukan, atau menggunakan sesuatu secara tepat",
+          "menggambarkan keindahan suatu tempat wisata secara terperinci kepada pembaca",
+          "menghibur pembaca melalui kisah khayalan yang penuh keajaiban",
+          "meyakinkan pembaca agar menyetujui pendapat penulis tentang suatu masalah"
+        ],
+        answerIndex: 0,
+        explanation: "Teks prosedur adalah teks yang berisi tujuan dan langkah-langkah berurutan untuk memandu pembaca membuat sesuatu, melakukan suatu kegiatan, atau mengoperasikan alat dengan benar."
+      },
+      // 34. TUJUAN TEKS PROSEDUR (SOAL KE-2 SESUAI KISI)
+      {
+        id: 34,
+        kisi: "Tujuan Teks Prosedur",
+        passage: "Menjaga kebersihan tangan merupakan kebiasaan sederhana yang sangat efektif mencegah masuknya kuman penyakit ke dalam tubuh. Agar kuman benar-benar hilang, ikutilah panduan mencuci tangan pakai sabun berikut ini dengan saksama.",
+        question: "Berdasarkan paragraf pengantar tersebut, tujuan teks prosedur yang akan disajikan adalah memandu pembaca untuk ....",
+        options: [
+          "melakukan langkah-langkah mencuci tangan pakai sabun secara tepat agar terhindar dari kuman",
+          "membuat sabun cair antiseptik dari bahan-bahan alami di rumah",
+          "mengobati penyakit kulit akibat alergi bahan kimia sabun",
+          "memilih merek sabun cuci tangan yang paling harum di pasaran"
+        ],
+        answerIndex: 0,
+        explanation: "Paragraf tersebut menjelaskan tujuan teks prosedur yaitu memandu cara melakukan kegiatan mencuci tangan pakai sabun dengan benar untuk mencegah kuman penyakit."
+      },
+      // 35. TUJUAN ATAU CARA MELAKUKAN SESUATU
+      {
+        id: 35,
+        kisi: "Tujuan atau Cara Melakukan Sesuatu",
+        illustration: "cuciTangan",
+        question: "Berdasarkan ilustrasi empat langkah mencuci tangan di atas, tindakan yang harus dilakukan tepat setelah menggosok tangan dengan sabun adalah ....",
+        options: [
+          "membilas kedua tangan dengan air bersih yang mengalir hingga busa sabun hilang",
+          "membasahi telapak tangan dengan air bersih sebelum mengambil sabun",
+          "mengeringkan tangan menggunakan handuk bersih atau tisu",
+          "mengoleskan losion pelembap pada telapak tangan"
+        ],
+        answerIndex: 0,
+        explanation: "Sesuai urutan langkah pada ilustrasi: (1) Basahi tangan, (2) Sabuni tangan, (3) Bilas dengan air bersih, (4) Keringkan. Jadi, setelah menyabuni tangan, langkah berikutnya adalah membilas."
+      },
+      // 36. URUTAN LANGKAH PROSEDUR
+      {
+        id: 36,
+        kisi: "Urutan Langkah Prosedur",
+        passage: "Cermati langkah-langkah membuat jus mangga yang diacak berikut:\n(1) Nyalakan blender dan haluskan hingga lembut.\n(2) Kupas buah mangga yang sudah matang, lalu potong daging buahnya berbentuk dadu.\n(3) Tuangkan jus mangga ke dalam gelas saji dan siap dinikmati.\n(4) Masukkan potongan mangga, air matang, dan sedikit madu ke dalam tabung blender.",
+        question: "Urutan langkah-langkah membuat jus mangga yang tepat adalah ....",
+        options: [
+          "(2) - (4) - (1) - (3)",
+          "(2) - (1) - (4) - (3)",
+          "(4) - (2) - (1) - (3)",
+          "(1) - (2) - (4) - (3)"
+        ],
+        answerIndex: 0,
+        explanation: "Urutan logis pembuatan jus mangga adalah mengupas dan memotong buah terlebih dahulu (2), memasukkannya ke blender bersama bahan lain (4), menghaluskannya (1), lalu menuangkannya ke gelas (3)."
+      },
+      // 37. KALIMAT PERINTAH
+      {
+        id: 37,
+        kisi: "Kalimat Perintah",
+        question: "Kalimat perintah (imperatif) yang paling tepat digunakan dalam teks prosedur memasak adalah ....",
+        options: [
+          "Aduk adonan secara perlahan hingga tercampur rata dan tidak menggumpal!",
+          "Adonan sebaiknya diaduk oleh ibu ketika sudah dimasukkan ke dalam wadah.",
+          "Mengapa adonan kue tersebut harus diaduk secara perlahan?",
+          "Adonan kue yang telah tercampur rata terlihat sangat lembut."
+        ],
+        answerIndex: 0,
+        explanation: "Kalimat perintah dalam teks prosedur ditandai oleh penggunaan kata kerja dasar atau berimbuhan -kan/-i ('Aduk adonan...') yang secara langsung memerintahkan tindakan yang harus dilakukan."
+      },
+      // 38. URUTAN LANGKAH-LANGKAH (SOAL KE-2 SESUAI KISI)
+      {
+        id: 38,
+        kisi: "Urutan Langkah-Langkah",
+        illustration: "origami",
+        passage: "Perhatikan urutan langkah membuat perahu kertas berikut:\n(1) Siapkan selembar kertas origami berbentuk persegi.\n(2) Lipat kertas menjadi dua bagian sama besar membentuk persegi panjang.\n(3) ........................................................................................................\n(4) Buka bagian tengah lipatan bawah dan tarik kedua ujungnya hingga membentuk perahu.",
+        question: "Kalimat yang tepat untuk melengkapi urutan langkah nomor (3) sesuai ilustrasi di atas adalah ....",
+        options: [
+          "Lipat kedua sudut atas ke arah garis tengah sehingga membentuk bangun segitiga.",
+          "Gunting seluruh bagian tepi kertas menjadi potongan-potongan kecil.",
+          "Warnai permukaan kertas menggunakan cat air lalu jemur di bawah sinar matahari.",
+          "Remas kertas origami hingga membentuk bulatan padat seperti bola."
+        ],
+        answerIndex: 0,
+        explanation: "Sesuai ilustrasi tahapan tengah pembuatan perahu kertas, setelah melipat kertas menjadi dua, kedua sisi atas dilipat ke tengah membentuk bangun segitiga sebelum ditarik menjadi bentuk perahu."
+      },
+      // 39. KETERANGAN CARA
+      {
+        id: 39,
+        kisi: "Keterangan Cara",
+        passage: "Perhatikan kalimat berikut:\n'Rebuslah singkong yang telah dikupas dengan api sedang selama 20 menit hingga empuk.'",
+        question: "Kata atau frasa yang berfungsi sebagai keterangan cara pada kalimat prosedur tersebut adalah ....",
+        options: [
+          "dengan api sedang",
+          "singkong yang telah dikupas",
+          "selama 20 menit",
+          "rebuslah singkong"
+        ],
+        answerIndex: 0,
+        explanation: "Keterangan cara menjelaskan bagaimana suatu tindakan dilakukan dan umumnya ditandai dengan kata penghubung 'dengan' atau 'secara' ('dengan api sedang'). Sementara 'selama 20 menit' adalah keterangan waktu."
+      },
+      // 40. LANGKAH PENUTUP PROSEDUR
+      {
+        id: 40,
+        kisi: "Langkah Penutup Prosedur",
+        passage: "Setelah adonan bolu kukus matang sempurna, angkat cetakan dari panci pengukus menggunakan sarung tangan anti panas. Diamkan beberapa saat hingga uap panasnya berkurang, lalu keluarkan kue dari cetakan dan sajikan di atas piring.",
+        question: "Dalam struktur teks prosedur, paragraf tersebut merupakan bagian penutup karena berisi ....",
+        options: [
+          "tahap akhir penyajian hasil dan ucapan selamat menikmati atau penegasan selesainya kegiatan",
+          "daftar bahan dan takaran gramasi tepung terigu yang diperlukan",
+          "penjelasan mengenai sejarah asal-usul kue bolu kukus tradisional",
+          "peringatan awal sebelum menyalakan kompor gas di dapur"
+        ],
+        answerIndex: 0,
+        explanation: "Bagian penutup (langkah akhir) dalam teks prosedur berisi penyelesaian akhir dari rangkaian langkah (penyajian hasil) dan sering disertai saran penyajian atau ucapan selamat mencoba."
+      },
+      // 41. KELENGKAPAN LANGKAH-LANGKAH
+      {
+        id: 41,
+        kisi: "Kelengkapan Langkah-Langkah",
+        illustration: "tehManis",
+        passage: "Cara Menyeduh Teh Hangat:\n1. Siapkan cangkir bersih dan masukkan satu kantong teh celup ke dalamnya.\n2. Tuangkan air panas yang baru mendidih ke dalam cangkir.\n3. [.......................................................................................................]\n4. Angkat kantong teh celup, tambahkan gula sesuai selera, lalu aduk hingga larut.",
+        question: "Kalimat yang tepat untuk melengkapi bagian rumpang pada langkah nomor 3 adalah ....",
+        options: [
+          "Celup-celupkan kantong teh selama 2–3 menit hingga air berubah warna menjadi kecokelatan.",
+          "Masukkan es batu sebanyak-banyaknya sebelum kantong teh dicelupkan ke cangkir.",
+          "Buang kantong teh yang masih kering langsung ke tempat sampah.",
+          "Cuci cangkir menggunakan sabun pencuci piring hingga bersih."
+        ],
+        answerIndex: 0,
+        explanation: "Setelah air panas dituangkan ke cangkir berisi kantong teh (langkah 2) dan sebelum kantong teh diangkat (langkah 4), langkah yang hilang adalah mencelup-celupkan kantong teh agar sari teh larut dalam air."
+      },
+      // 42. TUJUAN PROSEDUR
+      {
+        id: 42,
+        kisi: "Tujuan Prosedur",
+        passage: "Cermati kutipan langkah-langkah berikut:\n1. Siapkan botol plastik bekas ukuran 1,5 liter yang sudah dicuci bersih.\n2. Potong bagian tengah botol menggunakan gunting atau cutter secara hati-hati.\n3. Buatlah beberapa lubang kecil di bagian dasar botol sebagai saluran resapan air.\n4. Cat bagian luar botol sesuai selera, lalu isi dengan tanah subur dan bibit tanaman hias.",
+        question: "Tujuan teks prosedur berdasarkan rangkaian langkah-langkah tersebut adalah ....",
+        options: [
+          "cara membuat pot tanaman hias dari botol plastik bekas",
+          "cara mendaur ulang sampah kertas menjadi buku catatan",
+          "cara menanam pohon mangga di lahan perkebunan luas",
+          "cara membersihkan botol minum agar terhindar dari bakteri"
+        ],
+        answerIndex: 0,
+        explanation: "Dari bahan (botol plastik bekas, tanah subur, bibit tanaman hias) dan langkah (memotong botol, melubangi dasar untuk resapan air, mengecat), dapat disimpulkan tujuannya adalah membuat pot tanaman dari botol bekas."
+      },
+      // 43. PENGUATAN: CIRI KEBAHASAAN TEKS DESKRIPSI (KATA KHUSUS)
+      {
+        id: 43,
+        kisi: "Ciri Teks Deskripsi",
+        question: "Dalam teks deskripsi, penggunaan kata khusus bertujuan untuk memperjelas gambaran objek. Manakah kelompok kata berikut yang merupakan kata khusus dari kata umum 'indah'?",
+        options: [
+          "elok, molek, menawan, permai",
+          "melihat, memandang, melirik, menatap",
+          "membawa, menjinjing, memikul, menggendong",
+          "berjalan, berlari, melompat, merangkak"
+        ],
+        answerIndex: 0,
+        explanation: "Kata 'elok', 'molek', 'menawan', dan 'permai' merupakan kata-kata khusus (hiponim/variasi makna yang lebih spesifik) dari kata sifat umum 'indah'."
+      },
+      // 44. PENGUATAN: DESKRIPSI BAGIAN & PANCA INDRA PENGECAPAN
+      {
+        id: 44,
+        kisi: "Panca Indra dalam Teks Deskripsi",
+        passage: "Saat kuah rendang itu menyentuh lidah, perpaduan rasa gurih santan kelapa dan pedas rempah pilihan langsung terasa nikmat dan kaya bumbu.",
+        question: "Kutipan kalimat deskripsi tersebut memanfaatkan cerapan pancaindra ....",
+        options: [
+          "pengecapan",
+          "penglihatan",
+          "pendengaran",
+          "penciuman"
+        ],
+        answerIndex: 0,
+        explanation: "Frasa 'menyentuh lidah' serta deskripsi 'rasa gurih santan dan pedas rempah' menunjukkan penggunaan indra pengecapan (lidah)."
+      },
+      // 45. PENGUATAN: PERBEDAAN PANTUN, GURINDAM, DAN SYAIR
+      {
+        id: 45,
+        kisi: "Ciri & Syarat Pantun",
+        question: "Perbedaan mendasar antara pantun dan syair terletak pada ....",
+        options: [
+          "pantun berpola rima a-b-a-b dengan sampiran dan isi, sedangkan syair berpola rima a-a-a-a dan seluruh lariknya adalah isi",
+          "pantun terdiri atas dua larik per bait, sedangkan syair terdiri atas empat larik per bait",
+          "pantun berasal dari sastra Arab, sedangkan syair berasal dari sastra daerah Betawi",
+          "pantun tidak memiliki aturan suku kata, sedangkan syair wajib terdiri atas 20 suku kata per baris"
+        ],
+        answerIndex: 0,
+        explanation: "Baik pantun maupun syair terdiri atas 4 larik per bait. Perbedaannya: pantun bersajak a-b-a-b (larik 1–2 sampiran, 3–4 isi), sedangkan syair bersajak a-a-a-a dan keempat lariknya merupakan isi."
+      },
+      // 46. PENGUATAN: GURINDAM (HUBUNGAN SEBAB AKIBAT)
+      {
+        id: 46,
+        kisi: "Nasihat dalam Gurindam",
+        passage: "Barang siapa mengenal yang tersebut,\nTahulah ia makna takut.",
+        question: "Maksud dari larik kedua 'Tahulah ia makna takut' dalam kutipan Gurindam Dua Belas karya Raja Ali Haji tersebut adalah ....",
+        options: [
+          "orang yang mengenal Tuhannya akan senantiasa takut dan berhati-hati untuk berbuat dosa",
+          "seseorang akan merasa ketakutan apabila berjalan sendirian di tempat gelap",
+          "kita harus merasa takut kepada pemimpin yang berkuasa di negeri",
+          "rasa takut membuat manusia tidak berani mencoba hal-hal baru"
+        ],
+        answerIndex: 0,
+        explanation: "Dalam Gurindam Dua Belas pasal pertama, 'mengenal yang tersebut' merujuk pada mengenal Allah (Tuhan). Orang yang benar-benar mengenal Tuhannya akan memiliki rasa takwa (takut melanggar larangan-Nya)."
+      },
+      // 47. PENGUATAN: RESOLUSI CERITA FANTASI
+      {
+        id: 47,
+        kisi: "Struktur Cerita Fantasi",
+        passage: "Akhirnya, dengan menggabungkan kekuatan tiga kristal elemen, Dara berhasil mematahkan kutukan penyihir bayangan. Kerajaan Kristal kembali bermandikan cahaya matahari, dan seluruh penduduk bersorak gembira menyambut kedamaian.",
+        question: "Dalam struktur teks cerita fantasi, kutipan tersebut termasuk bagian ....",
+        options: [
+          "resolusi",
+          "orientasi",
+          "komplikasi",
+          "identifikasi"
+        ],
+        answerIndex: 0,
+        explanation: "Bagian resolusi ditandai dengan terpecahkannya konflik/masalah utama (kutukan berhasil dipatahkan dan kerajaan kembali damai)."
+      },
+      // 48. PENGUATAN: CERITA FANTASI TOTAL VS IRISAN
+      {
+        id: 48,
+        kisi: "Ciri Umum Cerita Fantasi",
+        passage: "Cerita mengisahkan seorang anak SMP bernama Bimo yang menemukan pintu rahasia di balik rak buku perpustakaan sekolahnya di Jakarta. Pintu itu membawanya ke dunia paralel tempat hewan-hewan dapat berbicara.",
+        question: "Berdasarkan kesesuaiannya dengan kehidupan nyata, cerita tersebut termasuk jenis cerita fantasi ....",
+        options: [
+          "fantasi irisan, karena masih menggunakan nama tempat yang ada di dunia nyata (Jakarta) berpadu dengan unsur khayalan",
+          "fantasi total, karena seluruh nama tokoh, kota, dan objeknya tidak ada di dunia nyata",
+          "biografi tokoh, karena menceritakan kisah nyata seorang pelajar di Jakarta",
+          "teks laporan hasil observasi tentang perpustakaan sekolah"
+        ],
+        answerIndex: 0,
+        explanation: "Cerita fantasi irisan memadukan unsur fantasi (dunia paralel, hewan berbicara) dengan unsur nyata yang dikenal pembaca (sekolah di Jakarta). Jika semuanya rekaan tanpa unsur nyata, disebut fantasi total."
+      },
+      // 49. PENGUATAN: PENGGUNAAN KATA PENGHUBUNG URUTAN DALAM TEKS PROSEDUR
+      {
+        id: 49,
+        kisi: "Urutan Langkah Prosedur",
+        passage: "Kupas bawang merah dan bawang putih, [....] iris tipis-tipis sebelum ditumis di atas wajan.",
+        question: "Konjungsi (kata penghubung) temporal yang tepat untuk melengkapi kalimat prosedur tersebut adalah ....",
+        options: [
+          "kemudian",
+          "tetapi",
+          "padahal",
+          "seandainya"
+        ],
+        answerIndex: 0,
+        explanation: "Teks prosedur banyak menggunakan konjungsi temporal (penunjuk urutan waktu/langkah) seperti 'kemudian', 'lalu', 'selanjutnya', dan 'setelah itu'."
+      },
+      // 50. PENGUATAN: KALIMAT SARAN / LARANGAN DALAM TEKS PROSEDUR
+      {
+        id: 50,
+        kisi: "Kelengkapan Langkah-Langkah",
+        passage: "Perhatikan kalimat dalam teks prosedur berikut:\n'Jangan mencabut kabel stopkontak dalam keadaan tangan masih basah agar terhindar dari sengatan listrik!'",
+        question: "Fungsi kalimat tersebut dalam teks prosedur adalah sebagai ....",
+        options: [
+          "kalimat larangan untuk menjaga keselamatan pengguna saat melakukan langkah prosedur",
+          "kalimat pembuka untuk menarik minat pembaca",
+          "keterangan alat dan bahan yang harus dibeli",
+          "kalimat penutup yang menandakan kegiatan telah selesai"
+        ],
+        answerIndex: 0,
+        explanation: "Selain kalimat perintah, teks prosedur sering memuat kalimat larangan (ditandai kata 'jangan' atau 'hindari') untuk mencegah kesalahan atau bahaya selama proses berlangsung."
+      }
+    ];
+
+    /* ==========================================================================
+       STATE & SHUFFLE UTILITIES
+       ========================================================================== */
+    let activeQuestions = [];
+    let userAnswers = {}; // { questionId: selectedShuffledOptionIndex }
+    let isSubmitted = false;
+
+    const LETTERS = ["A", "B", "C", "D"];
+
+    // Fisher-Yates Shuffle Algorithm
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // Prepare questions with shuffled options so answer keys are randomized every load/reset
+    function prepareShuffledQuestions() {
+      return QUESTIONS_BANK.map((q) => {
+        const indexedOptions = q.options.map((optText, idx) => ({
+          text: optText,
+          isCorrect: idx === q.answerIndex
+        }));
+        const shuffled = shuffleArray(indexedOptions);
+        const correctShuffledIndex = shuffled.findIndex((item) => item.isCorrect);
+
+        return {
+          ...q,
+          shuffledOptions: shuffled.map((item) => item.text),
+          correctShuffledIndex
+        };
+      });
+    }
+
+    /* ==========================================================================
+       DOM RENDERING
+       ========================================================================== */
+    const questionsContainer = document.getElementById("questionsContainer");
+    const navGrid = document.getElementById("navGrid");
+    const headerProgress = document.getElementById("headerProgress");
+    const sidebarProgressText = document.getElementById("sidebarProgressText");
+    const progressBarFill = document.getElementById("progressBarFill");
+    const legendRow = document.getElementById("legendRow");
+    const scoreCard = document.getElementById("scoreCard");
+    const bottomSubmitWrap = document.getElementById("bottomSubmitWrap");
+
+    function renderAll() {
+      questionsContainer.innerHTML = "";
+      navGrid.innerHTML = "";
+
+      activeQuestions.forEach((q, idx) => {
+        const num = idx + 1;
+
+        // 1. Render Sidebar Navigation Button
+        const navBtn = document.createElement("button");
+        navBtn.type = "button";
+        navBtn.className = "nav-num-btn";
+        navBtn.id = `nav-btn-${q.id}`;
+        navBtn.textContent = num;
+        navBtn.setAttribute("aria-label", `Ke soal nomor ${num}`);
+        navBtn.addEventListener("click", () => {
+          const targetEl = document.getElementById(`question-${q.id}`);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+        navGrid.appendChild(navBtn);
+
+        // 2. Render Question Card
+        const card = document.createElement("article");
+        card.className = "question-card";
+        card.id = `question-${q.id}`;
+
+        // Meta Header
+        let metaHTML = `
+          <div class="q-meta">
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+              <span class="q-number-tag">Soal ${num}</span>
+              <span class="q-topic-tag">${q.kisi}</span>
+            </div>
+            <span class="q-status-badge" id="status-badge-${q.id}" style="display:none;"></span>
+          </div>
+        `;
+
+        // Optional SVG Illustration
+        let illustrationHTML = "";
+        if (q.illustration && ILLUSTRATIONS[q.illustration]) {
+          const illus = ILLUSTRATIONS[q.illustration];
+          illustrationHTML = `
+            <div class="illustration-box">
+              ${illus.svg}
+              <div class="illustration-caption">${illus.caption}</div>
+            </div>
+          `;
+        }
+
+        // Optional Reading Passage / Poem
+        let passageHTML = "";
+        if (q.passage) {
+          const isPoem = q.kisi.toLowerCase().includes("pantun") ||
+                         q.kisi.toLowerCase().includes("gurindam") ||
+                         q.kisi.toLowerCase().includes("syair") ||
+                         q.kisi.toLowerCase().includes("kiasan");
+          passageHTML = `<div class="passage-box ${isPoem ? "poem" : ""}">${q.passage}</div>`;
+        }
+
+        // Question Stem
+        const questionHTML = `<div class="q-text">${q.question}</div>`;
+
+        // Options Buttons
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options-grid";
+        optionsDiv.id = `options-${q.id}`;
+
+        q.shuffledOptions.forEach((optText, optIdx) => {
+          const optBtn = document.createElement("button");
+          optBtn.type = "button";
+          optBtn.className = "option-btn";
+          optBtn.dataset.qid = q.id;
+          optBtn.dataset.optIdx = optIdx;
+          optBtn.innerHTML = `
+            <span class="option-letter">${LETTERS[optIdx]}</span>
+            <span>${optText}</span>
+          `;
+          optBtn.addEventListener("click", () => handleSelectOption(q.id, optIdx));
+          optionsDiv.appendChild(optBtn);
+        });
+
+        // Explanation Box (Revealed on Submit)
+        const explanationHTML = `
+          <div class="explanation-box" id="explanation-${q.id}">
+            <div class="explanation-title">💡 Pembahasan (Kunci Jawaban: ${LETTERS[q.correctShuffledIndex]})</div>
+            <p>${q.explanation}</p>
+          </div>
+        `;
+
+        card.innerHTML = metaHTML + illustrationHTML + passageHTML + questionHTML;
+        card.appendChild(optionsDiv);
+        card.insertAdjacentHTML("beforeend", explanationHTML);
+
+        questionsContainer.appendChild(card);
+      });
+
+      updateProgressUI();
+    }
+
+    function handleSelectOption(questionId, optIdx) {
+      if (isSubmitted) return;
+
+      userAnswers[questionId] = optIdx;
+
+      // Update Option Button Styling
+      const optionsContainer = document.getElementById(`options-${questionId}`);
+      const buttons = optionsContainer.querySelectorAll(".option-btn");
+      buttons.forEach((btn, idx) => {
+        if (idx === optIdx) {
+          btn.classList.add("selected");
+        } else {
+          btn.classList.remove("selected");
+        }
+      });
+
+      // Mark Card & Sidebar Button as Answered
+      const card = document.getElementById(`question-${questionId}`);
+      card.classList.add("answered");
+
+      const navBtn = document.getElementById(`nav-btn-${questionId}`);
+      navBtn.classList.add("answered");
+
+      updateProgressUI();
+    }
+
+    function updateProgressUI() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = activeQuestions.length;
+      const pct = Math.round((answeredCount / total) * 100);
+
+      headerProgress.textContent = `Terjawab: ${answeredCount} / ${total}`;
+      sidebarProgressText.textContent = `${answeredCount}/${total}`;
+      progressBarFill.style.width = `${pct}%`;
+    }
+
+    /* ==========================================================================
+       SUBMISSION & EVALUATION LOGIC
+       ========================================================================== */
+    const confirmModal = document.getElementById("confirmModal");
+    const modalBodyText = document.getElementById("modalBodyText");
+    const btnModalCancel = document.getElementById("btnModalCancel");
+    const btnModalConfirm = document.getElementById("btnModalConfirm");
+
+    function initiateSubmit() {
+      if (isSubmitted) return;
+
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = activeQuestions.length;
+
+      if (answeredCount < total) {
+        const remaining = total - answeredCount;
+        modalBodyText.textContent = `Kamu baru menjawab ${answeredCount} dari ${total} soal (masih ada ${remaining} soal yang belum dijawab). Apakah kamu yakin ingin menyelesaikan latihan dan melihat nilai sekarang?`;
+        confirmModal.classList.add("open");
+      } else {
+        evaluateQuiz();
+      }
+    }
+
+    btnModalCancel.addEventListener("click", () => {
+      confirmModal.classList.remove("open");
+    });
+
+    btnModalConfirm.addEventListener("click", () => {
+      confirmModal.classList.remove("open");
+      evaluateQuiz();
+    });
+
+    function evaluateQuiz() {
+      isSubmitted = true;
+      let correctCount = 0;
+      let wrongCount = 0;
+
+      // Update Legend in Sidebar
+      legendRow.innerHTML = `
+        <span class="legend-item"><span class="legend-dot correct"></span> Benar</span>
+        <span class="legend-item"><span class="legend-dot wrong"></span> Salah</span>
+      `;
+
+      activeQuestions.forEach((q) => {
+        const chosenIdx = userAnswers[q.id];
+        const isCorrect = chosenIdx === q.correctShuffledIndex;
+
+        if (isCorrect) {
+          correctCount++;
+        } else {
+          wrongCount++;
+        }
+
+        const card = document.getElementById(`question-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const statusBadge = document.getElementById(`status-badge-${q.id}`);
+        const explanationBox = document.getElementById(`explanation-${q.id}`);
+        const optionBtns = document.querySelectorAll(`#options-${q.id} .option-btn`);
+
+        // Lock options & highlight correct vs user's wrong choice
+        optionBtns.forEach((btn, idx) => {
+          btn.disabled = true;
+          if (idx === q.correctShuffledIndex) {
+            btn.classList.add("opt-correct");
+          } else if (idx === chosenIdx && !isCorrect) {
+            btn.classList.add("opt-wrong");
+          }
+        });
+
+        // Update Card & Sidebar Status
+        statusBadge.style.display = "inline-block";
+        if (isCorrect) {
+          card.classList.add("eval-correct");
+          navBtn.classList.add("nav-correct");
+          statusBadge.className = "q-status-badge correct";
+          statusBadge.textContent = "✓ Jawaban Benar";
+        } else {
+          card.classList.add("eval-wrong");
+          navBtn.classList.add("nav-wrong");
+          statusBadge.className = "q-status-badge wrong";
+          statusBadge.textContent = chosenIdx === undefined ? "✕ Tidak Dijawab" : "✕ Jawaban Salah";
+        }
+
+        // Show detailed explanation
+        explanationBox.classList.add("visible");
+      });
+
+      // Calculate Final Score (Scale 0 - 100)
+      const score = Math.round((correctCount / activeQuestions.length) * 100);
+      document.getElementById("finalScoreNum").textContent = score;
+      document.getElementById("statCorrect").textContent = correctCount;
+      document.getElementById("statWrong").textContent = wrongCount;
+
+      // Predicate & Encouragement Message
+      const predicateEl = document.getElementById("scorePredicate");
+      const messageEl = document.getElementById("scoreMessage");
+
+      if (score >= 90) {
+        predicateEl.textContent = "Sangat Memuaskan (Predikat A) 🌟";
+        messageEl.textContent = "Luar biasa! Pemahamanmu tentang Teks Deskripsi, Puisi Rakyat, Cerita Fantasi, dan Teks Prosedur sudah sangat matang.";
+      } else if (score >= 75) {
+        predicateEl.textContent = "Baik & Tuntas (Predikat B) 👍";
+        messageEl.textContent = "Kerja bagus! Kamu sudah melampaui kriteria ketuntasan. Simak pembahasan pada soal yang masih keliru agar semakin sempurna.";
+      } else if (score >= 60) {
+        predicateEl.textContent = "Cukup Baik (Predikat C) 📚";
+        messageEl.textContent = "Terus berlatih! Pelajari kembali pembahasan di bawah setiap nomor soal untuk memperkuat pemahaman materimu.";
+      } else {
+        predicateEl.textContent = "Perlu Latihan Lagi 💪";
+        messageEl.textContent = "Jangan menyerah! Baca dengan teliti pembahasan pada setiap soal, lalu klik 'Ulangi Latihan' untuk mencoba kembali.";
+      }
+
+      // Show Score Card & Hide Submit Buttons
+      scoreCard.classList.add("visible");
+      bottomSubmitWrap.style.display = "none";
+
+      const btnSubmitSidebar = document.getElementById("btnSubmitSidebar");
+      btnSubmitSidebar.textContent = "↻ Ulangi Latihan (Acak Ulang)";
+      btnSubmitSidebar.onclick = resetQuiz;
+
+      // Smooth scroll to top to view score banner
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function resetQuiz() {
+      isSubmitted = false;
+      userAnswers = {};
+      activeQuestions = prepareShuffledQuestions();
+
+      scoreCard.classList.remove("visible");
+      bottomSubmitWrap.style.display = "block";
+
+      legendRow.innerHTML = `
+        <span class="legend-item"><span class="legend-dot"></span> Belum</span>
+        <span class="legend-item"><span class="legend-dot done"></span> Dijawab</span>
+      `;
+
+      const btnSubmitSidebar = document.getElementById("btnSubmitSidebar");
+      btnSubmitSidebar.textContent = "Selesai & Lihat Nilai";
+      btnSubmitSidebar.onclick = initiateSubmit;
+
+      renderAll();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Attach Main Event Listeners
+    document.getElementById("btnSubmitBottom").addEventListener("click", initiateSubmit);
+    document.getElementById("btnSubmitSidebar").addEventListener("click", initiateSubmit);
+    document.getElementById("btnRetryTop").addEventListener("click", resetQuiz);
+
+    // Initialize Application on Load
+    activeQuestions = prepareShuffledQuestions();
+    renderAll();
+  </script>
+</body>
+</html>

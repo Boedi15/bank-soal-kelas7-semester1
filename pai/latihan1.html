@@ -1,0 +1,2959 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Interaktif PAI SMP Kelas VII — Bab 1 s.d. 5 (100 Soal)</title>
+  <style>
+    /* =========================================================
+       DESIGN TOKENS & RESET (OFFLINE STANDALONE)
+       ========================================================= */
+    :root {
+      --bg-page: #f3f6fb;
+      --bg-surface: #ffffff;
+      --bg-soft: #f8fafc;
+      --bg-accent-soft: #ecfdf5;
+      --bg-warn-soft: #fffbeb;
+      --bg-err-soft: #fef2f2;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-light: #64748b;
+      --primary: #0f766e;       /* Teal islami modern */
+      --primary-dark: #115e59;
+      --primary-light: #ccfbf1;
+      --secondary: #1e3a8a;     /* Biru tua edukatif */
+      --accent: #d97706;        /* Amber hangat */
+      --success: #15803d;
+      --danger: #b91c1c;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 14px 34px rgba(15, 23, 42, 0.12);
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --font-sans: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-arabic: "Traditional Arabic", "Scheherazade New", "Geeza Pro", "Amiri", "Noto Naskh Arabic", Tahoma, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: linear-gradient(160deg, #eef4f8 0%, #f8fafc 45%, #eefbf7 100%);
+      color: var(--text-main);
+      line-height: 1.65;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* =========================================================
+       TOP HEADER BAR
+       ========================================================= */
+    .top-header {
+      background: linear-gradient(120deg, #0f766e 0%, #0d9488 55%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 20px 24px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      z-index: 20;
+    }
+
+    .header-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand-block h1 {
+      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-block p {
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 4px;
+    }
+
+    .header-stats {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* =========================================================
+       MAIN LAYOUT (QUESTIONS LEFT + FIXED SIDEBAR RIGHT)
+       ========================================================= */
+    .main-container {
+      max-width: 1360px;
+      margin: 24px auto 64px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .questions-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    /* =========================================================
+       SCORE & RESULT SUMMARY BANNER (HIDDEN UNTIL SUBMIT)
+       ========================================================= */
+    .result-banner {
+      display: none;
+      background: var(--bg-surface);
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      animation: fadeSlideUp 0.35s ease;
+    }
+
+    .result-banner.active {
+      display: block;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .score-circle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .score-badge {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      flex-shrink: 0;
+    }
+
+    .score-badge .score-num {
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .score-badge .score-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0.9;
+    }
+
+    .result-title-box h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .result-title-box p {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      margin-top: 4px;
+    }
+
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .breakdown-card {
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+    }
+
+    .breakdown-card.correct {
+      background: var(--bg-accent-soft);
+      border-color: #86efac;
+    }
+
+    .breakdown-card.wrong {
+      background: var(--bg-err-soft);
+      border-color: #fca5a5;
+    }
+
+    .breakdown-card.unanswered {
+      background: var(--bg-warn-soft);
+      border-color: #fcd34d;
+    }
+
+    .breakdown-card .b-num {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .breakdown-card .b-txt {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .chapter-mini-scores {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px;
+    }
+
+    .chapter-score-chip {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: 0.82rem;
+    }
+
+    .chapter-score-chip strong {
+      display: block;
+      color: var(--primary-dark);
+      margin-bottom: 2px;
+    }
+
+    /* =========================================================
+       BAB SECTION DIVIDER
+       ========================================================= */
+    .bab-divider {
+      background: linear-gradient(90deg, #0f766e 0%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 16px 22px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .bab-divider h2 {
+      font-size: 1.08rem;
+      font-weight: 800;
+    }
+
+    .bab-divider span {
+      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+    }
+
+    /* =========================================================
+       QUESTION CARD
+       ========================================================= */
+    .question-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 20px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .question-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-md);
+    }
+
+    .question-card.state-correct {
+      border-color: #22c55e;
+      background: linear-gradient(180deg, #ffffff 0%, #f6fef9 100%);
+    }
+
+    .question-card.state-wrong {
+      border-color: #ef4444;
+      background: linear-gradient(180deg, #ffffff 0%, #fff8f8 100%);
+    }
+
+    .question-card.state-unanswered {
+      border-color: #f59e0b;
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf5 100%);
+    }
+
+    .q-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .q-number-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 0.84rem;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+    }
+
+    .q-bab-tag {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .q-prompt {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      white-space: pre-line;
+    }
+
+    .arabic-box {
+      font-family: var(--font-arabic);
+      font-size: 1.55rem;
+      line-height: 2.15;
+      text-align: right;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-right: 4px solid var(--primary);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      margin: 10px 0 16px;
+      color: #0f172a;
+    }
+
+    /* SVG Illustration Frame */
+    .svg-illustration-wrap {
+      margin: 12px 0 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .svg-illustration-wrap svg {
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      border-radius: var(--radius-sm);
+      display: block;
+    }
+
+    .svg-caption {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* Options List */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 15px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      user-select: none;
+    }
+
+    .option-item:hover {
+      border-color: var(--primary);
+      background: #f0fdfa;
+    }
+
+    .option-item.selected {
+      border-color: var(--primary);
+      background: #e6fffa;
+      box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.14);
+    }
+
+    .option-item.disabled {
+      cursor: default;
+    }
+
+    .option-item.opt-correct-reveal {
+      border-color: #16a34a !important;
+      background: #dcfce7 !important;
+      color: #14532d;
+      font-weight: 600;
+    }
+
+    .option-item.opt-wrong-reveal {
+      border-color: #dc2626 !important;
+      background: #fee2e2 !important;
+      color: #7f1d1d;
+    }
+
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .option-item.selected .opt-letter {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .option-item.opt-correct-reveal .opt-letter {
+      background: #16a34a;
+      color: #ffffff;
+    }
+
+    .option-item.opt-wrong-reveal .opt-letter {
+      background: #dc2626;
+      color: #ffffff;
+    }
+
+    .opt-text {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+
+    .opt-text[dir="rtl"] {
+      font-family: var(--font-arabic);
+      font-size: 1.35rem;
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    /* Explanation Box (Shown after submit) */
+    .explanation-box {
+      display: none;
+      margin-top: 16px;
+      padding: 15px 18px;
+      border-radius: var(--radius-md);
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 5px solid var(--secondary);
+      font-size: 0.92rem;
+    }
+
+    .explanation-box.visible {
+      display: block;
+      animation: fadeSlideUp 0.25s ease;
+    }
+
+    .exp-status-line {
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .exp-status-line.is-correct {
+      color: var(--success);
+    }
+
+    .exp-status-line.is-wrong {
+      color: var(--danger);
+    }
+
+    .exp-status-line.is-unanswered {
+      color: var(--accent);
+    }
+
+    .exp-keys {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+
+    .exp-body {
+      color: var(--text-main);
+      line-height: 1.65;
+    }
+
+    /* =========================================================
+       BOTTOM ACTION BAR IN MAIN COLUMN
+       ========================================================= */
+    .bottom-submit-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 12px 22px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.12s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+    }
+
+    .btn-secondary {
+      background: #1e3a8a;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+    }
+
+    .btn-secondary:hover {
+      background: #172554;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1.5px solid var(--border-strong);
+    }
+
+    .btn-outline:hover {
+      background: #f8fafc;
+      border-color: var(--primary);
+    }
+
+    /* =========================================================
+       FIXED / STICKY SIDE NAVIGATION PANEL (1-100)
+       ========================================================= */
+    .sidebar-column {
+      position: relative;
+    }
+
+    .fixed-nav-panel {
+      position: fixed;
+      top: 20px;
+      right: max(20px, calc((100vw - 1360px) / 2 + 20px));
+      width: 330px;
+      max-height: calc(100vh - 40px);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      z-index: 30;
+    }
+
+    .nav-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+
+    .nav-panel-header h3 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .nav-progress-text {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+    }
+
+    .nav-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+    }
+
+    .legend-dot.answered {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .legend-dot.correct {
+      background: #16a34a;
+      border-color: #16a34a;
+    }
+
+    .legend-dot.wrong {
+      background: #dc2626;
+      border-color: #dc2626;
+    }
+
+    .legend-dot.unanswered-post {
+      background: #f59e0b;
+      border-color: #f59e0b;
+    }
+
+    .nav-bab-jump {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    .bab-jump-btn {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      padding: 5px 2px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .bab-jump-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .nav-grid-scroll {
+      overflow-y: auto;
+      padding-right: 4px;
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+      flex: 1;
+      min-height: 140px;
+    }
+
+    .nav-num-btn {
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: var(--text-main);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s ease;
+    }
+
+    .nav-num-btn:hover {
+      border-color: var(--primary);
+      transform: scale(1.06);
+    }
+
+    .nav-num-btn.is-answered {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .nav-num-btn.is-correct {
+      background: #16a34a;
+      border-color: #16a34a;
+      color: #ffffff;
+    }
+
+    .nav-num-btn.is-wrong {
+      background: #dc2626;
+      border-color: #dc2626;
+      color: #ffffff;
+    }
+
+    .nav-num-btn.is-unanswered-post {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+
+    .nav-panel-footer {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-panel-footer .btn {
+      padding: 10px 14px;
+      font-size: 0.86rem;
+      width: 100%;
+    }
+
+    /* Toast / Notice Bar (No alert()) */
+    .notice-toast {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: #fffbeb;
+      border: 1px solid #f59e0b;
+      color: #78350f;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .notice-toast.show {
+      display: block;
+    }
+
+    /* =========================================================
+       RESPONSIVE DESIGN FOR TABLET & MOBILE
+       ========================================================= */
+    @media (max-width: 1120px) {
+      .main-container {
+        grid-template-columns: minmax(0, 1fr);
+        padding-bottom: 110px;
+      }
+
+      .sidebar-column {
+        display: none;
+      }
+
+      /* Mobile bottom-docked compact navigator */
+      .mobile-nav-bar {
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(8px);
+        border-top: 1px solid var(--border-strong);
+        box-shadow: 0 -6px 20px rgba(15, 23, 42, 0.12);
+        padding: 10px 14px;
+        z-index: 40;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .mobile-drawer {
+        display: none;
+        position: fixed;
+        bottom: 66px;
+        left: 12px;
+        right: 12px;
+        max-height: 62vh;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+        padding: 14px;
+        z-index: 45;
+        flex-direction: column;
+      }
+
+      .mobile-drawer.open {
+        display: flex;
+      }
+
+      .mobile-drawer .nav-grid-scroll {
+        grid-template-columns: repeat(10, 1fr);
+      }
+    }
+
+    .mobile-nav-bar,
+    .mobile-drawer {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .question-card {
+        padding: 16px;
+      }
+
+      .breakdown-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .arabic-box {
+        font-size: 1.32rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- TOP HEADER -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand-block">
+        <h1>
+          <span>📘</span>
+          <span>Kuis PAI Kelas VII SMP (Bab 1–5)</span>
+        </h1>
+        <p>Latihan Mandiri 100 Soal Pilihan Ganda • Materi Semester 1 (Al-Qur'an &amp; Sunah s.d. Peradaban Damaskus)</p>
+      </div>
+      <div class="header-stats">
+        <div class="stat-pill" id="headerAnsweredCount">Terjawab: 0 / 100</div>
+        <div class="stat-pill" id="headerModeBadge">Mode: Mengerjakan</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT GRID -->
+  <main class="main-container">
+    <!-- LEFT COLUMN: QUESTIONS & RESULTS -->
+    <section class="questions-column" id="questionsColumn">
+      <!-- RESULT SUMMARY BANNER (APPEARS AFTER SUBMIT) -->
+      <div class="result-banner" id="resultBanner" aria-live="polite">
+        <div class="result-top">
+          <div class="score-circle-wrap">
+            <div class="score-badge">
+              <span class="score-num" id="finalScoreNum">0</span>
+              <span class="score-label">Nilai</span>
+            </div>
+            <div class="result-title-box">
+              <h2 id="resultHeadline">Hasil Pengerjaan Kuis</h2>
+              <p id="resultSubtext">Lihat rincian jawaban benar, salah, serta pembahasan lengkap di tiap soal.</p>
+            </div>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px;">
+            <button type="button" class="btn btn-secondary" id="btnRetryTop">🔄 Ulangi Kuis (Acak Ulang)</button>
+          </div>
+        </div>
+
+        <div class="breakdown-grid">
+          <div class="breakdown-card correct">
+            <div class="b-num" id="countCorrect">0</div>
+            <div class="b-txt">Jawaban Benar</div>
+          </div>
+          <div class="breakdown-card wrong">
+            <div class="b-num" id="countWrong">0</div>
+            <div class="b-txt">Jawaban Salah</div>
+          </div>
+          <div class="breakdown-card unanswered">
+            <div class="b-num" id="countUnanswered">100</div>
+            <div class="b-txt">Belum Dijawab</div>
+          </div>
+        </div>
+
+        <div class="chapter-mini-scores" id="chapterScoreGrid"></div>
+      </div>
+
+      <!-- DYNAMIC QUESTIONS CONTAINER -->
+      <div id="questionsContainer" style="display:flex; flex-direction:column; gap:20px;"></div>
+
+      <!-- BOTTOM SUBMIT ACTION BOX -->
+      <div class="bottom-submit-card" id="bottomActionCard">
+        <div>
+          <strong style="font-size:1.02rem; display:block;">Sudah selesai mengerjakan 100 soal?</strong>
+          <span style="font-size:0.88rem; color:var(--text-muted);" id="bottomProgressNote">
+            Kamu baru menjawab 0 dari 100 soal. Kamu tetap bisa mengumpulkan kapan saja.
+          </span>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+          <button type="button" class="btn btn-outline" id="btnResetSelection">Kosongkan Pilihan</button>
+          <button type="button" class="btn btn-primary" id="btnSubmitBottom">✅ Kumpulkan / Submit Jawaban</button>
+          <button type="button" class="btn btn-secondary" id="btnRetryBottom" style="display:none;">🔄 Ulangi Kuis (Acak Ulang)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: FIXED SIDE NAVIGATION PANEL (DESKTOP) -->
+    <aside class="sidebar-column">
+      <div class="fixed-nav-panel" id="desktopNavPanel">
+        <div class="nav-panel-header">
+          <h3>Navigasi Soal (1–100)</h3>
+          <span class="nav-progress-text" id="navAnsweredBadge">0/100</span>
+        </div>
+
+        <div class="nav-legend">
+          <span class="legend-item"><span class="legend-dot"></span> Belum</span>
+          <span class="legend-item"><span class="legend-dot answered"></span> Terjawab</span>
+          <span class="legend-item"><span class="legend-dot correct"></span> Benar</span>
+          <span class="legend-item"><span class="legend-dot wrong"></span> Salah</span>
+          <span class="legend-item"><span class="legend-dot unanswered-post"></span> Kosong</span>
+        </div>
+
+        <div class="nav-bab-jump" title="Lompat cepat ke awal bab">
+          <button type="button" class="bab-jump-btn" data-jump-q="1">Bab 1</button>
+          <button type="button" class="bab-jump-btn" data-jump-q="21">Bab 2</button>
+          <button type="button" class="bab-jump-btn" data-jump-q="41">Bab 3</button>
+          <button type="button" class="bab-jump-btn" data-jump-q="61">Bab 4</button>
+          <button type="button" class="bab-jump-btn" data-jump-q="81">Bab 5</button>
+        </div>
+
+        <div class="nav-grid-scroll" id="desktopNavGrid"></div>
+
+        <div class="notice-toast" id="navNoticeToast"></div>
+
+        <div class="nav-panel-footer">
+          <button type="button" class="btn btn-primary" id="btnSubmitSide">✅ Kumpulkan Jawaban</button>
+          <button type="button" class="btn btn-secondary" id="btnRetrySide" style="display:none;">🔄 Ulangi Kuis (Acak Ulang)</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- MOBILE EXPANDABLE NAV DRAWER -->
+  <div class="mobile-drawer" id="mobileNavDrawer">
+    <div class="nav-panel-header">
+      <h3>Daftar Nomor Soal (1–100)</h3>
+      <button type="button" id="btnCloseMobileDrawer" style="background:#f1f5f9; border:none; border-radius:8px; padding:4px 10px; font-weight:700; cursor:pointer;">✕ Tutup</button>
+    </div>
+    <div class="nav-bab-jump">
+      <button type="button" class="bab-jump-btn" data-jump-q="1">Bab 1</button>
+      <button type="button" class="bab-jump-btn" data-jump-q="21">Bab 2</button>
+      <button type="button" class="bab-jump-btn" data-jump-q="41">Bab 3</button>
+      <button type="button" class="bab-jump-btn" data-jump-q="61">Bab 4</button>
+      <button type="button" class="bab-jump-btn" data-jump-q="81">Bab 5</button>
+    </div>
+    <div class="nav-grid-scroll" id="mobileNavGrid"></div>
+  </div>
+
+  <!-- MOBILE BOTTOM DOCKED BAR -->
+  <div class="mobile-nav-bar">
+    <button type="button" class="btn btn-outline" id="btnToggleMobileDrawer" style="padding:10px 14px; font-size:0.85rem;">
+      🔢 Nomor (<span id="mobileAnsweredSpan">0/100</span>)
+    </button>
+    <button type="button" class="btn btn-primary" id="btnSubmitMobile" style="padding:10px 16px; font-size:0.85rem; flex:1; max-width:210px;">
+      ✅ Kumpulkan
+    </button>
+    <button type="button" class="btn btn-secondary" id="btnRetryMobile" style="padding:10px 12px; font-size:0.85rem; display:none;">
+      🔄 Ulang
+    </button>
+  </div>
+
+  <script>
+    /* =========================================================================
+       1. SVG EDUCATIONAL ILLUSTRATIONS (OFFLINE EMBEDDED ARTWORK)
+       Inspired by PAI Kelas VII Bab 1-5 visual themes:
+       - mushaf_hadis: Mushaf Al-Qur'an & Kitab Hadis terbuka
+       - doa_ujian: Siswa SMP belajar & berdoa memohon ilmu/bantuan Allah
+       - banjir_tolong: Ilustrasi bantuan musibah/banjir & kepedulian sosial
+       - salat_azan: Ilustrasi panggilan azan, masjid, dan kekhusyukan salat
+       - sujud_syukur: Ilustrasi siswa bersujud syukur atas prestasi/nikmat
+       - damaskus_peradaban: Ilustrasi kubah/arsitektur klasik Damaskus & manuskrip
+       ========================================================================= */
+    const SVG_ART = {
+      mushaf_hadis: `
+        <svg viewBox="0 0 420 150" role="img" aria-label="Ilustrasi Mushaf Al-Qur'an dan Kitab Hadis">
+          <rect x="0" y="0" width="420" height="150" rx="12" fill="#ecfdf5"/>
+          <circle cx="360" cy="34" r="22" fill="#fde68a" opacity="0.85"/>
+          <!-- Meja baca / rehal -->
+          <path d="M90 128 L210 112 L330 128 L322 136 L210 122 L98 136 Z" fill="#92400e"/>
+          <!-- Halaman kiri -->
+          <path d="M105 42 Q158 34 210 46 L210 114 Q158 104 105 112 Z" fill="#ffffff" stroke="#0f766e" stroke-width="2.5"/>
+          <!-- Halaman kanan -->
+          <path d="M210 46 Q262 34 315 42 L315 112 Q262 104 210 114 Z" fill="#ffffff" stroke="#0f766e" stroke-width="2.5"/>
+          <!-- Hiasan garis kaligrafi & ornamen -->
+          <rect x="122" y="56" width="70" height="6" rx="3" fill="#99f6e4"/>
+          <rect x="122" y="70" width="60" height="5" rx="2.5" fill="#cbd5e1"/>
+          <rect x="122" y="82" width="66" height="5" rx="2.5" fill="#cbd5e1"/>
+          <rect x="228" y="56" width="70" height="6" rx="3" fill="#fde68a"/>
+          <rect x="228" y="70" width="64" height="5" rx="2.5" fill="#cbd5e1"/>
+          <rect x="228" y="82" width="58" height="5" rx="2.5" fill="#cbd5e1"/>
+          <circle cx="210" cy="78" r="10" fill="#0f766e"/>
+          <circle cx="210" cy="78" r="5" fill="#fef08a"/>
+          <text x="210" y="24" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f766e">Al-Qur'an &amp; Hadis: Pedoman Hidup Muslim</text>
+        </svg>`,
+
+      doa_ujian: `
+        <svg viewBox="0 0 420 150" role="img" aria-label="Ilustrasi siswa berdoa dan belajar">
+          <rect x="0" y="0" width="420" height="150" rx="12" fill="#eff6ff"/>
+          <!-- Buku catatan -->
+          <rect x="42" y="84" width="74" height="44" rx="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+          <line x1="52" y1="98" x2="104" y2="98" stroke="#93c5fd" stroke-width="2.5"/>
+          <line x1="52" y1="110" x2="96" y2="110" stroke="#cbd5e1" stroke-width="2.5"/>
+          <!-- Karakter siswa berdoa -->
+          <circle cx="210" cy="52" r="20" fill="#fed7aa" stroke="#7c2d12" stroke-width="2"/>
+          <!-- Kopiah / kerudung aksen -->
+          <path d="M192 46 Q210 26 228 46 Z" fill="#0f766e"/>
+          <!-- Mata & senyum -->
+          <circle cx="203" cy="53" r="2" fill="#1e293b"/>
+          <circle cx="217" cy="53" r="2" fill="#1e293b"/>
+          <path d="M205 60 Q210 65 215 60" fill="none" stroke="#7c2d12" stroke-width="2" stroke-linecap="round"/>
+          <!-- Baju -->
+          <path d="M184 74 Q210 68 236 74 L242 128 L178 128 Z" fill="#1e3a8a"/>
+          <!-- Tangan menengadah berdoa -->
+          <path d="M186 92 Q168 82 174 68" fill="none" stroke="#fed7aa" stroke-width="7" stroke-linecap="round"/>
+          <path d="M234 92 Q252 82 246 68" fill="none" stroke="#fed7aa" stroke-width="7" stroke-linecap="round"/>
+          <!-- Bintang ilmu -->
+          <polygon points="335,34 339,44 350,45 342,52 344,63 335,57 326,63 328,52 320,45 331,44" fill="#f59e0b"/>
+          <text x="210" y="20" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e3a8a">Ikhtiar Belajar &amp; Doa: Allah Maha Mengetahui</text>
+        </svg>`,
+
+      banjir_tolong: `
+        <svg viewBox="0 0 420 150" role="img" aria-label="Ilustrasi kepedulian saat banjir dan musibah">
+          <rect x="0" y="0" width="420" height="150" rx="12" fill="#f0fdf4"/>
+          <!-- Awan & hujan -->
+          <ellipse cx="95" cy="40" rx="28" ry="13" fill="#94a3b8"/>
+          <line x1="82" y1="56" x2="77" y2="70" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="96" y1="56" x2="91" y2="70" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="110" y1="56" x2="105" y2="70" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Rumah sederhana -->
+          <polygon points="180,68 215,44 250,68" fill="#b45309"/>
+          <rect x="188" y="68" width="54" height="36" fill="#fef3c7" stroke="#92400e" stroke-width="2"/>
+          <rect x="208" y="80" width="14" height="24" fill="#78350f"/>
+          <!-- Genangan air -->
+          <path d="M20 112 Q70 104 120 112 T220 112 T320 112 T400 112 L400 150 L20 150 Z" fill="#38bdf8" opacity="0.65"/>
+          <!-- Kotak bantuan -->
+          <rect x="285" y="76" width="48" height="34" rx="4" fill="#fbbf24" stroke="#92400e" stroke-width="2"/>
+          <line x1="309" y1="76" x2="309" y2="110" stroke="#92400e" stroke-width="2"/>
+          <line x1="285" y1="93" x2="333" y2="93" stroke="#92400e" stroke-width="2"/>
+          <text x="245" y="22" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#15803d">Saling Menolong &amp; Yakin Pertolongan Allah</text>
+        </svg>`,
+
+      salat_azan: `
+        <svg viewBox="0 0 420 150" role="img" aria-label="Ilustrasi masjid, azan, dan salat">
+          <rect x="0" y="0" width="420" height="150" rx="12" fill="#f0fdfa"/>
+          <!-- Kubah masjid -->
+          <path d="M155 82 Q210 26 265 82 Z" fill="#0f766e"/>
+          <line x1="210" y1="24" x2="210" y2="38" stroke="#d97706" stroke-width="3"/>
+          <circle cx="210" cy="21" r="4" fill="#d97706"/>
+          <!-- Badan masjid -->
+          <rect x="145" y="82" width="130" height="48" rx="4" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+          <!-- Menara -->
+          <rect x="115" y="54" width="22" height="76" rx="3" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+          <path d="M113 54 Q126 32 139 54 Z" fill="#0d9488"/>
+          <!-- Gelombang suara azan -->
+          <path d="M86 44 Q74 58 86 72" fill="none" stroke="#d97706" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M74 36 Q56 58 74 80" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Pintu -->
+          <path d="M198 130 L198 100 Q210 90 222 100 L222 130 Z" fill="#115e59"/>
+          <text x="235" y="20" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#115e59">Salat Tiang Agama &amp; Zikir Mengingat Allah</text>
+        </svg>`,
+
+      sujud_syukur: `
+        <svg viewBox="0 0 420 150" role="img" aria-label="Ilustrasi bersujud syukur dan meraih prestasi">
+          <rect x="0" y="0" width="420" height="150" rx="12" fill="#fffbeb"/>
+          <!-- Lantai / sajadah -->
+          <rect x="50" y="114" width="320" height="10" rx="5" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
+          <!-- Posisi sujud -->
+          <path d="M130 112 Q165 72 225 76 L265 112" fill="none" stroke="#0f766e" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="276" cy="102" r="14" fill="#fed7aa" stroke="#7c2d12" stroke-width="2"/>
+          <path d="M264 96 Q276 82 288 96 Z" fill="#0f766e"/>
+          <!-- Cahaya syukur & medali/bintang -->
+          <circle cx="115" cy="46" r="18" fill="#fef08a"/>
+          <polygon points="115,34 118,42 127,43 120,49 122,57 115,52 108,57 110,49 103,43 112,42" fill="#d97706"/>
+          <text x="235" y="22" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#92400e">Sujud Syukur, Sahwi, &amp; Tilawah Mengagungkan Allah</text>
+        </svg>`,
+
+      damaskus_peradaban: `
+        <svg viewBox="0 0 420 150" role="img" aria-label="Ilustrasi arsitektur klasik Damaskus dan kejayaan ilmu">
+          <rect x="0" y="0" width="420" height="150" rx="12" fill="#eef2ff"/>
+          <!-- Latar gunung / bukit -->
+          <path d="M0 110 Q95 72 190 106 T420 96 L420 150 L0 150 Z" fill="#c7d2fe" opacity="0.65"/>
+          <!-- Kubah & arkade Damaskus -->
+          <path d="M145 78 Q210 22 275 78 Z" fill="#1e3a8a"/>
+          <rect x="130" y="78" width="160" height="46" rx="4" fill="#ffffff" stroke="#1e3a8a" stroke-width="2"/>
+          <!-- Lengkungan gerbang -->
+          <path d="M150 124 L150 96 Q165 84 180 96 L180 124" fill="#e0e7ff" stroke="#1e3a8a" stroke-width="1.8"/>
+          <path d="M195 124 L195 92 Q210 78 225 92 L225 124" fill="#e0e7ff" stroke="#1e3a8a" stroke-width="1.8"/>
+          <path d="M240 124 L240 96 Q255 84 270 96 L270 124" fill="#e0e7ff" stroke="#1e3a8a" stroke-width="1.8"/>
+          <text x="210" y="20" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e3a8a">Damaskus: Pusat Peradaban Bani Umayyah (661–750 M)</text>
+        </svg>`
+    };
+
+    /* =========================================================================
+       2. BANK 100 SOAL (20 SOAL PER BAB x 5 BAB)
+       Each item:
+       - id: 1..100
+       - bab: 1..5
+       - babTitle: string
+       - prompt: string
+       - arabic: optional string (RTL)
+       - svg: optional key from SVG_ART
+       - svgCaption: optional string
+       - options: array of 4 strings (will be shuffled each session)
+       - answer: exact string matching one of options
+       - explanation: detailed explanation in friendly Indonesian for SMP Class 7
+       ========================================================================= */
+    const QUESTIONS_BANK = [
+      // =====================================================================
+      // BAB 1: AL-QUR'AN DAN SUNAH SEBAGAI PEDOMAN HIDUP (SOAL 1 - 20)
+      // =====================================================================
+      {
+        id: 1, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        svg: "mushaf_hadis",
+        svgCaption: "Al-Qur'an dan Sunah/Hadis merupakan dua pedoman utama umat Islam.",
+        prompt: "Dalam Q.S. an-Nisa'/4: 59, umat Islam diperintahkan untuk taat kepada Allah Swt., taat kepada Rasul-Nya, dan ulil amri di antara mereka. Jika terjadi perbedaan pendapat atau perselisihan, kepada apakah urusan tersebut harus dikembalikan?",
+        options: [
+          "Kepada Allah (Al-Qur'an) dan Rasul (Sunah)-Nya",
+          "Kepada pendapat tokoh masyarakat setempat saja",
+          "Kepada kebiasaan turun-temurun yang bertentangan dengan syariat",
+          "Kepada keputusan mayoritas tanpa melihat dalil"
+        ],
+        answer: "Kepada Allah (Al-Qur'an) dan Rasul (Sunah)-Nya",
+        explanation: "Sesuai Q.S. an-Nisa'/4: 59, apabila terjadi perselisihan di antara manusia, maka kembalikanlah perkara itu kepada Allah (Al-Qur'an) dan Rasul (Sunah/Hadis) jika kamu benar-benar beriman kepada Allah dan hari kemudian."
+      },
+      {
+        id: 2, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        arabic: "وَمَآ أَنزَلْنَا عَلَيْكَ ٱلْكِتَٰبَ إِلَّا لِتُبَيِّنَ لَهُمُ ٱلَّذِى ٱخْتَلَفُوا۟ فِيهِ ۙ وَهُدًى وَرَحْمَةً لِّقَوْمٍ يُؤْمِنُونَ",
+        prompt: "Potongan ayat di atas merupakan bagian dari Q.S. an-Nahl/16: 64. Salah satu tujuan diturunkannya Al-Qur'an kepada Nabi Muhammad saw. menurut ayat tersebut adalah...",
+        options: [
+          "Menjelaskan kepada manusia apa yang mereka perselisihkan, serta menjadi petunjuk dan rahmat",
+          "Menggantikan seluruh bahasa daerah yang ada di muka bumi",
+          "Menjadi bacaan khusus pada hari-hari besar saja tanpa diamalkan",
+          "Membatasi ilmu pengetahuan hanya pada satu bidang tertentu"
+        ],
+        answer: "Menjelaskan kepada manusia apa yang mereka perselisihkan, serta menjadi petunjuk dan rahmat",
+        explanation: "Dalam Q.S. an-Nahl/16: 64 ditegaskan bahwa Al-Qur'an diturunkan agar Nabi Muhammad saw. menjelaskan hal-hal yang diperselisihkan manusia serta menjadi huda (petunjuk) dan rahmah (rahmat/kasih sayang) bagi kaum yang beriman."
+      },
+      {
+        id: 3, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Secara bahasa, kata Al-Qur'an berasal dari kata kerja qara'a yang berarti...",
+        options: [
+          "Membaca atau menghimpun/mengumpulkan",
+          "Menulis atau menyalin kitab",
+          "Menyampaikan atau mengutus",
+          "Menghafal atau menjaga"
+        ],
+        answer: "Membaca atau menghimpun/mengumpulkan",
+        explanation: "Secara etimologi (bahasa), Al-Qur'an berasal dari kata qara'a yang berarti membaca, dan juga bermakna menghimpun atau mengumpulkan karena ia menghimpun berbagai kisah, hukum, ayat, dan surah di dalamnya."
+      },
+      {
+        id: 4, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Secara istilah, Al-Qur'an adalah kalamullah (firman Allah Swt.) yang diturunkan kepada Nabi Muhammad saw. melalui perantara Malaikat Jibril, yang membacanya bernilai ibadah, dimulai dari surah al-Fatihah dan diakhiri dengan surah...",
+        options: [
+          "An-Nas",
+          "Al-Baqarah",
+          "Al-Ikhlas",
+          "An-Naba'"
+        ],
+        answer: "An-Nas",
+        explanation: "Susunan mushaf Al-Qur'an dimulai dari Surah al-Fatihah (surah ke-1) dan ditutup dengan Surah an-Nas (surah ke-114)."
+      },
+      {
+        id: 5, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Segala sesuatu yang disandarkan kepada Nabi Muhammad saw., baik berupa perkataan, perbuatan, ketetapan (taqrir), maupun sifat fisik dan akhlak beliau, disebut...",
+        options: [
+          "Hadis",
+          "Ijtihad",
+          "Ijmak",
+          "Qiyas"
+        ],
+        answer: "Hadis",
+        explanation: "Dalam ilmu hadis, segala perkataan, perbuatan, ketetapan, atau sifat yang disandarkan kepada Nabi Muhammad saw. dikenal sebagai hadis."
+      },
+      {
+        id: 6, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Secara bahasa, kata 'Sunah' memiliki arti...",
+        options: [
+          "Jalan atau cara yang biasa ditempuh (baik maupun buruk)",
+          "Catatan sejarah para sahabat",
+          "Kumpulan fatwa para ulama",
+          "Perjanjian damai antar suku"
+        ],
+        answer: "Jalan atau cara yang biasa ditempuh (baik maupun buruk)",
+        explanation: "Secara bahasa, sunah berarti jalan atau kebiasaan/cara yang ditempuh. Dalam istilah syariat, sunah merujuk pada jalan/teladan yang dicontohkan Nabi Muhammad saw. dalam agama."
+      },
+      {
+        id: 7, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Apa perbedaan umum antara istilah 'Khabar' dan 'Asar' dalam kajian ilmu hadis?",
+        options: [
+          "Khabar mencakup berita dari Nabi maupun selain Nabi, sedangkan asar umumnya merujuk pada perkataan/perbuatan sahabat atau tabi'in",
+          "Khabar hanya berupa ayat Al-Qur'an, sedangkan asar berupa doa harian",
+          "Khabar tidak boleh diriwayatkan, sedangkan asar wajib dihafal",
+          "Khabar hanya berasal dari tabi'in, sedangkan asar dari malaikat"
+        ],
+        answer: "Khabar mencakup berita dari Nabi maupun selain Nabi, sedangkan asar umumnya merujuk pada perkataan/perbuatan sahabat atau tabi'in",
+        explanation: "Khabar memiliki cakupan luas untuk berita/riwayat (dari Nabi saw., sahabat, atau pihak lain), sementara asar sering digunakan ulama untuk menyebut riwayat, perkataan, atau perbuatan sahabat dan tabi'in."
+      },
+      {
+        id: 8, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Ketika Nabi Muhammad saw. membiarkan dan menyetujui suatu perbuatan yang dilakukan sahabat di hadapan beliau atau yang beliau ketahui tanpa melarangnya, hal tersebut termasuk bagian dari...",
+        options: [
+          "Sunah/Hadis Taqririyah (ketetapan)",
+          "Sunah/Hadis Qauliyah (perkataan)",
+          "Sunah/Hadis Fi'liyah (perbuatan)",
+          "Sunah/Hadis Hammiyah (keinginan)"
+        ],
+        answer: "Sunah/Hadis Taqririyah (ketetapan)",
+        explanation: "Hadis taqririyah adalah ketetapan atau persetujuan Nabi Muhammad saw. atas perkataan maupun perbuatan sahabat yang menunjukkan bahwa hal tersebut diperbolehkan."
+      },
+      {
+        id: 9, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Dalam Al-Qur'an terdapat perintah 'Aqimush-shalah' (dirikanlah salat), namun tata cara rinci salat dijelaskan oleh Nabi Muhammad saw. melalui sabda dan praktik beliau. Fungsi hadis yang demikian disebut...",
+        options: [
+          "Bayan at-Tafsir",
+          "Bayan an-Nasakh",
+          "Bayan at-Taqrir",
+          "Bayan at-Tamtsil"
+        ],
+        answer: "Bayan at-Tafsir",
+        explanation: "Bayan at-Tafsir berfungsi menjelaskan atau merinci makna ayat Al-Qur'an yang masih bersifat global/umum, seperti merinci tata cara salat, zakat, dan haji."
+      },
+      {
+        id: 10, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Fungsi hadis yang memperkuat dan menegaskan kembali hukum atau ketentuan yang sudah terdapat dalam Al-Qur'an disebut...",
+        options: [
+          "Bayan at-Taqrir",
+          "Bayan at-Tasyri'",
+          "Bayan an-Nasakh",
+          "Bayan at-Takhsis"
+        ],
+        answer: "Bayan at-Taqrir",
+        explanation: "Bayan at-Taqrir (atau Bayan al-Muakkid) adalah fungsi hadis yang menguatkan dan meneguhkan kembali kandungan hukum yang telah disebutkan dalam Al-Qur'an."
+      },
+      {
+        id: 11, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Hadis yang menetapkan suatu hukum atau aturan syariat tertentu yang belum disebutkan secara rinci dalam Al-Qur'an (misalnya keharaman memakai sutra dan emas bagi laki-laki umat Islam) merupakan contoh fungsi...",
+        options: [
+          "Bayan at-Tasyri'",
+          "Bayan at-Taqrir",
+          "Bayan al-Ijmali",
+          "Bayan al-Bayan"
+        ],
+        answer: "Bayan at-Tasyri'",
+        explanation: "Bayan at-Tasyri' adalah fungsi hadis dalam mewujudkan atau menetapkan hukum syariat baru yang pokoknya tidak dirinci secara khusus dalam Al-Qur'an."
+      },
+      {
+        id: 12, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Dalam kajian ulumul hadis, fungsi hadis yang menjelaskan adanya penghapusan/penggantian hukum syariat terdahulu yang datang belakangan disebut...",
+        options: [
+          "Bayan an-Nasakh",
+          "Bayan at-Tafsir",
+          "Bayan at-Taqrir",
+          "Bayan at-Tasyri'"
+        ],
+        answer: "Bayan an-Nasakh",
+        explanation: "Bayan an-Nasakh merujuk pada penjelasan mengenai nasakh (penggantian/penghapusan hukum tertentu dengan ketentuan yang datang kemudian sesuai dalil dan kaidah ilmu syariat)."
+      },
+      {
+        id: 13, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Dalam kisah perjalanan menuntut ilmu Imam asy-Syafi'i, sikap utama yang patut kita teladani sebagai pelajar SMP adalah...",
+        options: [
+          "Sungguh-sungguh menghafal, memahami, dan menghormati guru serta ilmu sejak usia muda",
+          "Cepat merasa puas setelah membaca satu buku saja",
+          "Menunda belajar sampai dewasa karena masih muda",
+          "Mengabaikan adab saat berdiskusi"
+        ],
+        answer: "Sungguh-sungguh menghafal, memahami, dan menghormati guru serta ilmu sejak usia muda",
+        explanation: "Imam asy-Syafi'i dikenal sangat tekun menuntut ilmu sejak kecil, memiliki daya ingat kuat, menghormati guru-gurunya (seperti Imam Malik), dan terus menyempurnakan keilmuannya."
+      },
+      {
+        id: 14, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        arabic: "ٱلشَّمْسُ",
+        prompt: "Perhatikan lafal bergaris bawah/tertulis di atas: ٱلشَّمْسُ. Hukum bacaan Alif Lam pada kata tersebut adalah...",
+        options: [
+          "Alif Lam Syamsiyyah",
+          "Alif Lam Qamariyyah",
+          "Idgham Bighunnah",
+          "Iqlab"
+        ],
+        answer: "Alif Lam Syamsiyyah",
+        explanation: "Kata ٱلشَّمْسُ diawali dengan Alif Lam yang bertemu huruf Syin (ش), salah satu huruf syamsiyyah. Bunyi 'lam'-nya lebur ke dalam huruf 'syin' yang bertasydid."
+      },
+      {
+        id: 15, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        arabic: "ٱلْقَمَرُ",
+        prompt: "Lafal ٱلْقَمَرُ memiliki hukum bacaan Alif Lam Qamariyyah karena...",
+        options: [
+          "Huruf 'lam' berharakat sukun dan bertemu huruf Qaf (ق) serta dibaca jelas",
+          "Huruf 'lam' dihilangkan tulisannya saat dibaca",
+          "Huruf Qaf dibaca dengung selama dua harakat",
+          "Kata tersebut tidak memiliki huruf alif"
+        ],
+        answer: "Huruf 'lam' berharakat sukun dan bertemu huruf Qaf (ق) serta dibaca jelas",
+        explanation: "Alif Lam Qamariyyah ditandai dengan huruf lam sukun (الْ) yang bertemu salah satu dari 14 huruf qamariyyah (seperti ا ب غ ح ج ك و خ ف ع ق ي م هـ) dan dibaca jelas (izhar)."
+      },
+      {
+        id: 16, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Manakah pasangan kata berikut yang keduanya mengandung bacaan Alif Lam Syamsiyyah?",
+        options: [
+          "ٱلرَّحْمٰنُ dan ٱلنُّورُ",
+          "ٱلْكِتٰبُ dan ٱلْبَلَدُ",
+          "ٱلْحَكِيمُ dan ٱلْمَلِكُ",
+          "ٱلْعَلِيمُ dan ٱلْغَفُورُ"
+        ],
+        answer: "ٱلرَّحْمٰنُ dan ٱلنُّورُ",
+        explanation: "Huruf Ra' (ر) dan Nun (ن) termasuk huruf syamsiyyah sehingga dibaca idgham syamsi (lebur dan bertasydid). Sementara kaf, ba, ha, mim, 'ain, ghain adalah huruf qamariyyah."
+      },
+      {
+        id: 17, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Manakah pasangan kata berikut yang keduanya mengandung bacaan Alif Lam Qamariyyah?",
+        options: [
+          "ٱلْحَقُّ dan ٱلْأَرْضُ",
+          "ٱلصَّلَاةُ dan ٱلزَّكَاةُ",
+          "ٱلطَّيِّبَاتُ dan ٱلثَّمَرَاتُ",
+          "ٱلدِّينُ dan ٱلسَّلَامُ"
+        ],
+        answer: "ٱلْحَقُّ dan ٱلْأَرْضُ",
+        explanation: "Huruf Ha (ح) dan Hamzah/Alif (أ) termasuk huruf qamariyyah, sehingga lam sukun dibaca jelas (izhhar qamari)."
+      },
+      {
+        id: 18, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Apa ciri utama yang membedakan Al-Qur'an dari hadis qudsi maupun hadis nabawi?",
+        options: [
+          "Lafal dan maknanya langsung dari Allah Swt., terjaga keasliannya, dan membacanya bernilai ibadah",
+          "Hanya berisi kisah para nabi sebelum Nabi Muhammad saw.",
+          "Ditulis oleh para sahabat setelah Nabi wafat tanpa wahyu",
+          "Tidak boleh dibaca ketika salat"
+        ],
+        answer: "Lafal dan maknanya langsung dari Allah Swt., terjaga keasliannya, dan membacanya bernilai ibadah",
+        explanation: "Al-Qur'an adalah mukjizat yang lafal sekaligus maknanya wahyu Allah Swt., terpelihara keasliannya, dan setiap huruf yang dibaca berpahala ibadah."
+      },
+      {
+        id: 19, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Seorang siswa menemukan perbedaan pendapat teman-temannya saat mengerjakan tugas kelompok. Sikap yang mencerminkan pengamalan Q.S. an-Nisa'/4: 59 adalah...",
+        options: [
+          "Bermusyawarah dengan santun dan merujuk pada aturan yang benar serta nilai kebaikan",
+          "Memaksakan kehendak sendiri karena merasa paling benar",
+          "Marah dan meninggalkan kelompok tanpa diskusi",
+          "Mencari-cari kesalahan orang lain"
+        ],
+        answer: "Bermusyawarah dengan santun dan merujuk pada aturan yang benar serta nilai kebaikan",
+        explanation: "Mengembalikan persoalan kepada pedoman yang benar, menjaga adab, dan mencari solusi terbaik merupakan wujud sikap islami ketika menghadapi perbedaan."
+      },
+      {
+        id: 20, bab: 1, babTitle: "Bab 1: Al-Qur'an dan Sunah sebagai Pedoman Hidup",
+        prompt: "Mengapa umat Islam menjadikan Al-Qur'an dan Sunah sebagai pedoman hidup yang tidak terpisahkan?",
+        options: [
+          "Karena Sunah menjelaskan dan menerapkan pedoman Al-Qur'an dalam praktik kehidupan nyata",
+          "Karena Al-Qur'an tidak memuat aturan akhlak sama sekali",
+          "Karena Sunah lebih tinggi kedudukannya daripada Al-Qur'an",
+          "Karena keduanya hanya berlaku untuk zaman dahulu"
+        ],
+        answer: "Karena Sunah menjelaskan dan menerapkan pedoman Al-Qur'an dalam praktik kehidupan nyata",
+        explanation: "Al-Qur'an adalah sumber utama dan pertama, sedangkan Sunah menjadi penjelas, penguat, dan contoh penerapan praktis ajaran Al-Qur'an."
+      },
+
+      // =====================================================================
+      // BAB 2: MENELADAN NAMA DAN SIFAT ALLAH UNTUK KEBAIKAN HIDUP (SOAL 21 - 40)
+      // =====================================================================
+      {
+        id: 21, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        svg: "doa_ujian",
+        svgCaption: "Menyadari ilmu Allah yang luas mendorong kita rajin belajar dan jujur.",
+        prompt: "Berapa jumlah Asmaul Husna (nama-nama terbaik milik Allah Swt.) yang terkenal dalam ajaran Islam?",
+        options: [
+          "99 nama",
+          "25 nama",
+          "10 nama",
+          "114 nama"
+        ],
+        answer: "99 nama",
+        explanation: "Asmaul Husna yang populer dan diriwayatkan dalam hadis berjumlah 99 nama yang indah dan agung."
+      },
+      {
+        id: 22, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        arabic: "وَلِلَّهِ ٱلْأَسْمَآءُ ٱلْحُسْنَىٰ فَٱدْعُوهُ بِهَا",
+        prompt: "Potongan Q.S. al-A'raf/7: 180 di atas memerintahkan kita untuk...",
+        options: [
+          "Berdoa kepada Allah dengan menyebut Asmaul Husna",
+          "Menghitung bintang di langit pada malam hari",
+          "Menyamakan nama Allah dengan makhluk ciptaan-Nya",
+          "Menyembunyikan nama-nama Allah dari anak-anak"
+        ],
+        answer: "Berdoa kepada Allah dengan menyebut Asmaul Husna",
+        explanation: "Q.S. al-A'raf/7: 180 mengajarkan bahwa Allah memiliki Asmaul Husna, maka bermohonlah/berdoalah kepada-Nya dengan nama-nama yang indah tersebut."
+      },
+      {
+        id: 23, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Asmaul Husna 'Al-'Alim' memiliki makna bahwa Allah Swt. adalah...",
+        options: [
+          "Maha Mengetahui segala sesuatu, baik yang tampak maupun yang tersembunyi",
+          "Maha Mendengar setiap bisikan dan suara",
+          "Maha Melihat segala sesuatu meski sekecil zarah",
+          "Maha Teliti dan Maha Waspada terhadap hal-hal terperinci"
+        ],
+        answer: "Maha Mengetahui segala sesuatu, baik yang tampak maupun yang tersembunyi",
+        explanation: "Al-'Alim berarti Maha Mengetahui. Ilmu Allah meliputi segala sesuatu secara menyeluruh, termasuk isi hati dan perkara yang tidak diketahui manusia."
+      },
+      {
+        id: 24, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Dalam Q.S. al-An'am/6: 59 disebutkan bahwa kunci-kunci yang ghaib ada pada sisi Allah, tidak ada yang mengetahuinya kecuali Dia, dan Dia mengetahui apa yang ada di daratan dan di lautan. Ayat ini menguatkan sifat...",
+        options: [
+          "Al-'Alim (Maha Mengetahui)",
+          "Ar-Razzaq (Maha Pemberi Rezeki)",
+          "Al-Malik (Maha Merajai)",
+          "Al-Quddus (Maha Suci)"
+        ],
+        answer: "Al-'Alim (Maha Mengetahui)",
+        explanation: "Q.S. al-An'am/6: 59 menegaskan luasnya ilmu Allah Swt. yang meliputi hal ghaib serta segala yang ada di darat maupun di laut, bahkan sehelai daun yang jatuh."
+      },
+      {
+        id: 25, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Asmaul Husna 'Al-Khabir' memiliki arti...",
+        options: [
+          "Maha Teliti / Maha Mengetahui hal-hal yang tersembunyi secara mendalam",
+          "Maha Perkasa yang tidak terkalahkan",
+          "Maha Pengampun atas segala dosa",
+          "Maha Pemberi petunjuk jalan lurus"
+        ],
+        answer: "Maha Teliti / Maha Mengetahui hal-hal yang tersembunyi secara mendalam",
+        explanation: "Al-Khabir berarti Maha Waspada/Maha Teliti yang mengetahui rincian dan hakikat terdalam dari setiap perbuatan dan keadaan makhluk."
+      },
+      {
+        id: 26, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        arabic: "أَلَا يَعْلَمُ مَنْ خَلَقَ وَهُوَ ٱللَّطِيفُ ٱلْخَبِيرُ",
+        prompt: "Ayat Q.S. al-Mulk/67: 14 di atas menunjukkan bahwa Allah yang menciptakan tentu mengetahui ciptaan-Nya, dan Dia bersifat...",
+        options: [
+          "Al-Latif dan Al-Khabir",
+          "As-Salam dan Al-Mu'min",
+          "Al-Ghaffar dan Al-Wahhab",
+          "Al-Fattah dan Al-Qabidh"
+        ],
+        answer: "Al-Latif dan Al-Khabir",
+        explanation: "Q.S. al-Mulk/67: 14 menutup dengan 'Wa huwal-lathiful-khabir', menegaskan kelembutan dan ketelitian Allah yang mengetahui segala ciptaan-Nya."
+      },
+      {
+        id: 27, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Asmaul Husna 'As-Sami'' mengandung makna bahwa Allah Swt. adalah...",
+        options: [
+          "Maha Mendengar segala suara, doa, dan perkataan tanpa terhalang jarak maupun waktu",
+          "Maha Melihat seluruh gerak-gerik makhluk",
+          "Maha Menciptakan langit dan bumi",
+          "Maha Bijaksana dalam menetapkan hukum"
+        ],
+        answer: "Maha Mendengar segala suara, doa, dan perkataan tanpa terhalang jarak maupun waktu",
+        explanation: "As-Sami' berarti Maha Mendengar. Pendengaran Allah sempurna dan tidak terbatas oleh jarak, keramaian, atau pelannya suara."
+      },
+      {
+        id: 28, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        arabic: "وَإِذَا سَأَلَكَ عِبَادِى عَنِّى فَإِنِّى قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ ٱلدَّاعِ إِذَا دَعَانِ",
+        prompt: "Potongan Q.S. al-Baqarah/2: 186 di atas memberikan ketenangan kepada kita bahwa Allah Swt. itu...",
+        options: [
+          "Dekat dan mengabulkan doa orang yang memohon apabila ia berdoa kepada-Nya",
+          "Hanya mendengar doa jika diucapkan dengan suara sangat keras",
+          "Jauh dari hamba yang sedang mengalami kesulitan",
+          "Hanya mengabulkan permintaan orang kaya saja"
+        ],
+        answer: "Dekat dan mengabulkan doa orang yang memohon apabila ia berdoa kepada-Nya",
+        explanation: "Q.S. al-Baqarah/2: 186 menegaskan kedekatan Allah dengan hamba-Nya serta kesediaan-Nya mendengar dan memperkenankan doa."
+      },
+      {
+        id: 29, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Asmaul Husna 'Al-Bashir' berarti Allah Swt. adalah...",
+        options: [
+          "Maha Melihat segala sesuatu, sekecil apa pun dan di mana pun berada",
+          "Maha Pengasih kepada seluruh makhluk",
+          "Maha Memelihara keselamatan hamba",
+          "Maha Adil dalam membalas amal"
+        ],
+        answer: "Maha Melihat segala sesuatu, sekecil apa pun dan di mana pun berada",
+        explanation: "Al-Bashir berarti Maha Melihat. Penglihatan Allah meliputi seluruh wujud yang tampak maupun tersembunyi, di gelap malam maupun terang benderang."
+      },
+      {
+        id: 30, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        arabic: "إِنَّ ٱللَّهَ بِمَا تَعْمَلُونَ بَصِيرٌ",
+        prompt: "Potongan ayat seperti dalam Q.S. al-Baqarah/2: 110 & 137 yang berbunyi 'Innallaha bima ta'maluna bashir' artinya...",
+        options: [
+          "Sesungguhnya Allah Maha Melihat apa yang kamu kerjakan",
+          "Sesungguhnya Allah Maha Mengampuni segala dosa",
+          "Sesungguhnya Allah Maha Menciptakan segala sesuatu",
+          "Sesungguhnya Allah Maha Pemberi petunjuk"
+        ],
+        answer: "Sesungguhnya Allah Maha Melihat apa yang kamu kerjakan",
+        explanation: "Kalimat tersebut mengingatkan bahwa setiap amal dan perbuatan manusia berada dalam penglihatan Allah Swt."
+      },
+      {
+        id: 31, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        arabic: "إِنَّهُۥ هُوَ ٱلسَّمِيعُ ٱلْبَصِيرُ",
+        prompt: "Dalam Q.S. al-Isra'/17: 1 terdapat ungkapan 'Innahu huwas-sami'ul-bashir' yang menegaskan bahwa Allah...",
+        options: [
+          "Maha Mendengar lagi Maha Melihat",
+          "Maha Esa lagi Maha Perkasa",
+          "Maha Suci lagi Maha Mulia",
+          "Maha Pengampun lagi Maha Penyayang"
+        ],
+        answer: "Maha Mendengar lagi Maha Melihat",
+        explanation: "As-Sami' al-Bashir menggabungkan makna Maha Mendengar dan Maha Melihat, menjadi pengingat kuat akan pengawasan dan kedekatan Allah Swt."
+      },
+      {
+        id: 32, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        svg: "banjir_tolong",
+        svgCaption: "Saat tertimpa kesulitan atau musibah, umat Islam tetap ikhtiar, bersabar, dan saling menolong.",
+        prompt: "Dalam kisah pasangan suami istri yang tertimpa masa sulit/kelaparan pada materi pelajaran, sikap utama yang patut dicontoh adalah...",
+        options: [
+          "Tetap menjaga kejujuran, saling menguatkan, berdoa, dan bertawakal kepada Allah",
+          "Berputus asa dan menyalahkan keadaan tanpa berusaha",
+          "Mengambil hak orang lain secara sembunyi-sembunyi",
+          "Menyebarkan keluh kesah yang memecah belah"
+        ],
+        answer: "Tetap menjaga kejujuran, saling menguatkan, berdoa, dan bertawakal kepada Allah",
+        explanation: "Ujian ekonomi atau kelaparan menguji keimanan dan akhlak. Menjaga amanah, berdoa, dan saling mendukung adalah cerminan keteguhan iman."
+      },
+      {
+        id: 33, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Dalam Q.S. al-An'am/6: 80, Nabi Ibrahim a.s. berhujah/berdialog dengan kaumnya yang menyembah berhala karena menyadari bahwa berhala tidak dapat memberi manfaat atau mudarat. Pelajaran pokoknya adalah...",
+        options: [
+          "Hanya Allah Swt. yang layak disembah dan dimintai pertolongan",
+          "Segala benda di alam boleh disembah asal indah",
+          "Debat harus dilakukan dengan kasar dan merendahkan",
+          "Akhlak tidak diperlukan ketika berdakwah"
+        ],
+        answer: "Hanya Allah Swt. yang layak disembah dan dimintai pertolongan",
+        explanation: "Sikap kritis dan tauhid Nabi Ibrahim a.s. dalam Q.S. al-An'am/6: 80 menegaskan bahwa tauhid murni hanya kepada Allah Swt., Pencipta dan Pengatur alam semesta."
+      },
+      {
+        id: 34, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Bagaimana cara meneladan sifat Al-'Alim dalam kehidupan sehari-hari seorang pelajar SMP?",
+        options: [
+          "Rajin belajar, mencari ilmu bermanfaat, dan tidak menyontek saat ulangan",
+          "Merasa sudah paling pintar sehingga enggan bertanya",
+          "Menyembunyikan ilmu yang dimiliki agar tidak tersaingi",
+          "Belajar hanya ketika akan diperiksa guru"
+        ],
+        answer: "Rajin belajar, mencari ilmu bermanfaat, dan tidak menyontek saat ulangan",
+        explanation: "Meneladan Al-'Alim dilakukan dengan semangat menuntut ilmu, bersikap jujur karena yakin Allah mengetahui segala perbuatan, serta mengamalkan ilmu."
+      },
+      {
+        id: 35, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Seorang siswa berhati-hati dalam berbicara dan menulis komentar di media sosial karena meyakini Allah Maha Mendengar dan Maha Mengetahui. Perilaku ini meneladan sifat...",
+        options: [
+          "As-Sami' dan Al-'Alim",
+          "Al-Qahhar dan Al-Jabbar",
+          "Al-Muhyi dan Al-Mumit",
+          "Ad-Darr dan An-Nafi'"
+        ],
+        answer: "As-Sami' dan Al-'Alim",
+        explanation: "Keyakinan bahwa Allah mendengar setiap ucapan dan mengetahui apa yang kita tulis mendorong kita menjaga lisan dan tulisan agar selalu santun dan benar."
+      },
+      {
+        id: 36, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Meneladan sifat Al-Khabir dalam mengerjakan tugas sekolah tampak pada perilaku...",
+        options: [
+          "Mengerjakan tugas dengan teliti, memeriksa kembali hasilnya, dan tidak terburu-buru asal selesai",
+          "Menyalin pekerjaan teman tanpa membaca isinya",
+          "Mengabaikan petunjuk soal karena ingin cepat",
+          "Membiarkan kesalahan berulang tanpa diperbaiki"
+        ],
+        answer: "Mengerjakan tugas dengan teliti, memeriksa kembali hasilnya, dan tidak terburu-buru asal selesai",
+        explanation: "Al-Khabir menginspirasi kita untuk bersikap teliti, cermat, dan penuh perhatian terhadap detail dalam setiap tanggung jawab."
+      },
+      {
+        id: 37, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Meneladan sifat Al-Bashir saat tidak ada orang lain yang melihat di sekitar kita diwujudkan dengan cara...",
+        options: [
+          "Tetap berbuat baik dan menjauhi perbuatan tercela karena Allah selalu melihat",
+          "Berbuat baik hanya jika ada kamera atau guru yang mengawasi",
+          "Membuang sampah sembarangan saat sepi",
+          "Mengambil barang teman jika tidak ada saksi"
+        ],
+        answer: "Tetap berbuat baik dan menjauhi perbuatan tercela karena Allah selalu melihat",
+        explanation: "Kesadaran akan Al-Bashir menumbuhkan muraqabah (merasa selalu diawasi Allah), sehingga kejujuran dan kebaikan tetap terjaga meski sendiri."
+      },
+      {
+        id: 38, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Apa manfaat utama memahami dan mengamalkan Asmaul Husna bagi kepribadian seorang remaja?",
+        options: [
+          "Membentuk akhlak mulia, menumbuhkan rasa tenang, dan memperkuat keimanan",
+          "Membuat seseorang menjadi sombong karena merasa paling tahu",
+          "Menjadikan seseorang malas berusaha karena pasrah tanpa ikhtiar",
+          "Membuat kita meremehkan perbuatan dosa kecil"
+        ],
+        answer: "Membentuk akhlak mulia, menumbuhkan rasa tenang, dan memperkuat keimanan",
+        explanation: "Memahami Asmaul Husna menuntun kita berakhlak terpuji, berdoa dengan penuh harap, serta menjaga diri dari perbuatan yang dilarang Allah."
+      },
+      {
+        id: 39, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Ketika teman curhat tentang masalahnya, kita mendengarkan dengan penuh perhatian dan tidak mengejeknya. Sikap ini selaras dengan penghayatan terhadap nama Allah...",
+        options: [
+          "As-Sami'",
+          "Al-Mutakabbir",
+          "Al-Qabidh",
+          "Al-Muntaqim"
+        ],
+        answer: "As-Sami'",
+        explanation: "Menghayati As-Sami' melatih kita menjadi pendengar yang baik, empatik, dan menjaga rahasia serta perasaan orang lain."
+      },
+      {
+        id: 40, bab: 2, babTitle: "Bab 2: Meneladan Nama dan Sifat Allah untuk Kebaikan Hidup",
+        prompt: "Mengapa kita dilarang menamai atau menyamakan sifat Allah dengan sifat makhluk yang serba terbatas?",
+        options: [
+          "Karena tidak ada sesuatu pun yang setara atau menyerupai Allah Swt.",
+          "Karena nama-nama Allah hanya boleh diucapkan dalam hati saja",
+          "Karena makhluk memiliki pengetahuan yang lebih luas",
+          "Karena sifat Allah berubah-ubah setiap hari"
+        ],
+        answer: "Karena tidak ada sesuatu pun yang setara atau menyerupai Allah Swt.",
+        explanation: "Allah Swt. Maha Sempurna dan Maha Tinggi, tidak ada satu pun makhluk yang setara dengan-Nya (laisa kamitslihi syai'un)."
+      },
+
+      // =====================================================================
+      // BAB 3: MENGHADIRKAN SALAT DAN ZIKIR DALAM KEHIDUPAN (SOAL 41 - 60)
+      // =====================================================================
+      {
+        id: 41, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        svg: "salat_azan",
+        svgCaption: "Salat dan zikir mengikat hati seorang muslim agar tetap terjaga dalam ketaatan.",
+        prompt: "Secara bahasa, kata 'salat' berarti...",
+        options: [
+          "Doa",
+          "Puasa",
+          "Sedekah",
+          "Perjalanan"
+        ],
+        answer: "Doa",
+        explanation: "Secara etimologi (bahasa), salat berarti doa. Secara istilah, salat adalah ibadah yang terdiri atas perkataan dan perbuatan tertentu yang dimulai dengan takbiratul ihram dan diakhiri dengan salam."
+      },
+      {
+        id: 42, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Dalam hadis Nabi Muhammad saw., salat diibaratkan sebagai...",
+        options: [
+          "Tiang agama; barang siapa mendirikannya maka ia menegakkan agama",
+          "Pakaian harian yang boleh dilepas kapan saja",
+          "Amalan sunah yang hanya dikerjakan saat luang",
+          "Syarat sahnya berwudu saja"
+        ],
+        answer: "Tiang agama; barang siapa mendirikannya maka ia menegakkan agama",
+        explanation: "Salat adalah tiang agama. Sebagaimana tiang menopang bangunan, salat menopang tegaknya agama dalam diri seorang muslim."
+      },
+      {
+        id: 43, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        arabic: "إِنَّ ٱلصَّلَوٰةَ تَنْهَىٰ عَنِ ٱلْفَحْشَآءِ وَٱلْمُنكَرِ",
+        prompt: "Potongan Q.S. al-'Ankabut/29: 45 di atas menjelaskan bahwa salat yang benar dapat mencegah pelakunya dari...",
+        options: [
+          "Perbuatan keji (fahsya') dan mungkar",
+          "Rasa lapar dan dahaga sepanjang hari",
+          "Kewajiban mencari nafkah dan belajar",
+          "Keharusan bersikap ramah kepada tetangga"
+        ],
+        answer: "Perbuatan keji (fahsya') dan mungkar",
+        explanation: "Salat yang dikerjakan dengan penuh penghayatan akan mencegah seseorang dari perbuatan keji (sangat buruk) dan mungkar (ditolak akal sehat dan syariat)."
+      },
+      {
+        id: 44, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        arabic: "حَٰفِظُوا۟ عَلَى ٱلصَّلَوَٰتِ وَٱلصَّلَوٰةِ ٱلْوُسْطَىٰ وَقُومُوا۟ لِلَّهِ قَٰنِتِينَ",
+        prompt: "Ayat Q.S. al-Baqarah/2: 238 di atas memerintahkan umat Islam untuk...",
+        options: [
+          "Memelihara semua salat (dan salat wustha) serta berdiri karena Allah dengan khusyuk/taat",
+          "Meninggalkan salat ketika sedang sibuk bekerja",
+          "Menunda salat hingga lewat waktunya",
+          "Melaksanakan salat hanya pada hari Jumat"
+        ],
+        answer: "Memelihara semua salat (dan salat wustha) serta berdiri karena Allah dengan khusyuk/taat",
+        explanation: "Q.S. al-Baqarah/2: 238 menekankan pentingnya menjaga ketepatan waktu dan kesinambungan salat fardu serta khusyuk (qunut/taat) kepada Allah."
+      },
+      {
+        id: 45, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Dalam Q.S. al-Ma'un/107: 4–7, peringatan keras diberikan kepada orang-orang yang lalai dalam salatnya dan bersifat riya', yaitu...",
+        options: [
+          "Ingin dilihat/dipuji orang lain serta enggan memberikan bantuan/kebutuhan yang bermanfaat (al-ma'un)",
+          "Rajin bersedekah kepada anak yatim dan fakir miskin",
+          "Selalu bersegera memenuhi panggilan azan",
+          "Menjaga kekhusyukan setiap waktu salat"
+        ],
+        answer: "Ingin dilihat/dipuji orang lain serta enggan memberikan bantuan/kebutuhan yang bermanfaat (al-ma'un)",
+        explanation: "Q.S. al-Ma'un mengecam orang yang lalai dari hakikat salat, berbuat riya' (pamer), dan enggan menolong sesama."
+      },
+      {
+        id: 46, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        arabic: "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱتَّقُوا۟ ٱللَّهَ حَقَّ تُقَاتِهِۦ وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ",
+        prompt: "Pesan utama dalam Q.S. Ali 'Imran/3: 102 di atas adalah...",
+        options: [
+          "Bertakwalah kepada Allah dengan sebenar-benar takwa dan janganlah mati kecuali dalam keadaan muslim",
+          "Utamakan harta benda di atas segalanya",
+          "Bersikaplah sombong apabila memiliki kelebihan",
+          "Tinggalkan ibadah saat berada di perantauan"
+        ],
+        answer: "Bertakwalah kepada Allah dengan sebenar-benar takwa dan janganlah mati kecuali dalam keadaan muslim",
+        explanation: "Q.S. Ali 'Imran/3: 102 mengajak orang beriman untuk bertakwa sebenar-benar takwa dan istikamah dalam keislaman hingga akhir hayat."
+      },
+      {
+        id: 47, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Secara bahasa, kata 'zikir' berarti...",
+        options: [
+          "Mengingat atau menyebut",
+          "Melupakan atau mengabaikan",
+          "Berlari atau bergegas",
+          "Menghitung harta"
+        ],
+        answer: "Mengingat atau menyebut",
+        explanation: "Secara bahasa, zikir berarti mengingat, menyebut, atau menuturkan. Dalam Islam, zikir adalah mengingat Allah Swt. dalam hati, lisan, maupun perbuatan."
+      },
+      {
+        id: 48, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        arabic: "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱذْكُرُوا۟ ٱللَّهَ ذِكْرًا كَثِيرًا",
+        prompt: "Potongan Q.S. al-Ahzab/33: 41 di atas menganjurkan orang beriman untuk...",
+        options: [
+          "Berdzikir kepada Allah dengan zikir yang sebanyak-banyaknya",
+          "Berdzikir hanya sekali dalam sebulan",
+          "Membatasi ingat kepada Allah hanya saat tertimpa musibah",
+          "Mengganti zikir dengan perdebatan"
+        ],
+        answer: "Berdzikir kepada Allah dengan zikir yang sebanyak-banyaknya",
+        explanation: "Q.S. al-Ahzab/33: 41 menyerukan agar kaum mukmin memperbanyak zikir mengingat Allah Swt. dalam berbagai keadaan."
+      },
+      {
+        id: 49, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Zikir dapat dilakukan melalui tiga cara berikut, kecuali...",
+        options: [
+          "Dengan berbohong agar orang lain percaya",
+          "Dengan hati (tadabbur, khusyuk, dan menghadirkan kebesaran Allah)",
+          "Dengan lisan/ucapan (tasbih, tahmid, takbir, tahlil, istighfar)",
+          "Dengan perbuatan/amal saleh yang sesuai syariat"
+        ],
+        answer: "Dengan berbohong agar orang lain percaya",
+        explanation: "Zikir mencakup zikir bil-qalbi (hati), zikir bil-lisan (lisan), dan zikir bil-jawarih/amal (perbuatan baik). Berbohong tentu bertentangan dengan zikir dan akhlak Islam."
+      },
+      {
+        id: 50, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        arabic: "سُبْحَانَ اللَّهِ",
+        prompt: "Lafal 'Subhanallah' merupakan bacaan...",
+        options: [
+          "Tasbih (menyucikan Allah Swt.)",
+          "Tahmid (memuji Allah Swt.)",
+          "Takbir (mengagungkan Allah Swt.)",
+          "Tahlil (mengesakan Allah Swt.)"
+        ],
+        answer: "Tasbih (menyucikan Allah Swt.)",
+        explanation: "Tasbih adalah bacaan 'Subhanallah' yang bermakna menyucikan Allah Swt. dari segala kekurangan dan sifat yang tidak layak bagi-Nya."
+      },
+      {
+        id: 51, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        arabic: "الْحَمْدُ لِلَّهِ",
+        prompt: "Lafal 'Alhamdulillah' merupakan bacaan...",
+        options: [
+          "Tahmid (segala puji bagi Allah Swt.)",
+          "Tasbih (menyucikan Allah Swt.)",
+          "Tahlil (mengesakan Allah Swt.)",
+          "Hauqalah (tiada daya dan upaya selain dari Allah)"
+        ],
+        answer: "Tahmid (segala puji bagi Allah Swt.)",
+        explanation: "Tahmid adalah bacaan 'Alhamdulillah' yang berarti segala puji hanya milik Allah Swt. atas segala nikmat dan kebaikan-Nya."
+      },
+      {
+        id: 52, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        arabic: "اللَّهُ أَكْبَرُ",
+        prompt: "Lafal 'Allahu Akbar' merupakan bacaan...",
+        options: [
+          "Takbir (Allah Maha Besar)",
+          "Tahmid (Allah Maha Terpuji)",
+          "Tasbih (Maha Suci Allah)",
+          "Istighfar (aku memohon ampun kepada Allah)"
+        ],
+        answer: "Takbir (Allah Maha Besar)",
+        explanation: "Takbir adalah bacaan 'Allahu Akbar' yang menegaskan bahwa Allah Swt. Maha Besar dan Maha Agung di atas segala sesuatu."
+      },
+      {
+        id: 53, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ",
+        prompt: "Lafal 'La ilaha illallah' merupakan bacaan...",
+        options: [
+          "Tahlil (tiada tuhan yang berhak disembah selain Allah)",
+          "Tahmid (segala puji bagi Allah)",
+          "Tasbih (Maha Suci Allah)",
+          "Istirja' (sesungguhnya kami milik Allah)"
+        ],
+        answer: "Tahlil (tiada tuhan yang berhak disembah selain Allah)",
+        explanation: "Tahlil adalah kalimat tauhid 'La ilaha illallah' yang menyatakan keesaan Allah Swt. sebagai satu-satunya ilah yang berhak disembah."
+      },
+      {
+        id: 54, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Dalam kisah keteladanan 'Urwah bin Zubair r.a., beliau tetap teguh dan khusyuk beribadah kepada Allah meskipun menghadapi ujian berat pada kakinya. Hikmah yang dapat kita ambil adalah...",
+        options: [
+          "Kekhusyukan dan kedekatan kepada Allah memberi kekuatan batin saat menghadapi ujian hidup",
+          "Ujian berat membuat ibadah tidak perlu dilakukan lagi",
+          "Kekhusyukan hanya bisa dicapai saat tidak ada masalah sama sekali",
+          "Mengeluh berlebihan adalah cara terbaik menyelesaikan masalah"
+        ],
+        answer: "Kekhusyukan dan kedekatan kepada Allah memberi kekuatan batin saat menghadapi ujian hidup",
+        explanation: "Kisah 'Urwah bin Zubair r.a. menunjukkan ketabahan luar biasa dan ketergantungan penuh kepada Allah Swt. di tengah cobaan."
+      },
+      {
+        id: 55, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Dalam kisah keteladanan Khubaib bin 'Adi r.a. ketika berada dalam tawanan musuh, beliau tetap menjaga salat dan mengingat Allah dengan tenang. Hal ini menunjukkan bahwa...",
+        options: [
+          "Salat dan zikir dapat menenangkan jiwa serta meneguhkan pendirian seorang muslim dalam situasi apa pun",
+          "Zikir hanya boleh dilakukan di dalam masjid besar saja",
+          "Keadaan tertekan menghapus kewajiban mengingat Allah",
+          "Keberanian hanya berasal dari kekuatan fisik semata"
+        ],
+        answer: "Salat dan zikir dapat menenangkan jiwa serta meneguhkan pendirian seorang muslim dalam situasi apa pun",
+        explanation: "Khubaib bin 'Adi r.a. meneladankan ketenangan hati, tawakal, dan istikamah beribadah meski berada dalam kondisi sulit."
+      },
+      {
+        id: 56, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Apa arti 'istikamah' dalam menjaga salat dan zikir?",
+        options: [
+          "Konsisten, terus-menerus, dan berkelanjutan dalam kebaikan tidak hanya sesekali",
+          "Mengerjakan ibadah hanya saat sedang rajin atau mood bagus",
+          "Mengubah-ubah waktu salat sesuai keinginan pribadi",
+          "Berhenti berzikir setelah lulus ujian"
+        ],
+        answer: "Konsisten, terus-menerus, dan berkelanjutan dalam kebaikan tidak hanya sesekali",
+        explanation: "Istikamah berarti teguh pendirian dan konsisten menjalankan amal saleh secara berkesinambungan."
+      },
+      {
+        id: 57, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Mengapa seseorang yang rajin salat tetapi masih suka menyakiti teman atau berbohong belum mewujudkan hikmah salat secara optimal?",
+        options: [
+          "Karena salat belum meresap ke hati dan akhlak sehingga belum mencegah perbuatan tercela",
+          "Karena salat tidak berpengaruh pada perilaku sehari-hari",
+          "Karena berbohong diperbolehkan setelah salat",
+          "Karena hikmah salat hanya berlaku bagi orang dewasa"
+        ],
+        answer: "Karena salat belum meresap ke hati dan akhlak sehingga belum mencegah perbuatan tercela",
+        explanation: "Salat yang berkualitas akan melatih disiplin, kejujuran, dan kasih sayang, sehingga mencegah pelakunya dari perilaku keji dan mungkar."
+      },
+      {
+        id: 58, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Membaca 'Alhamdulillah' setelah menerima nilai bagus atau bantuan dari teman merupakan contoh zikir yang menumbuhkan sikap...",
+        options: [
+          "Syukur dan rendah hati",
+          "Sombong dan meremehkan orang lain",
+          "Iri hati dan dengki",
+          "Malas berusaha lagi"
+        ],
+        answer: "Syukur dan rendah hati",
+        explanation: "Mengucapkan tahmid (Alhamdulillah) mengingatkan bahwa nikmat dan keberhasilan berasal dari karunia Allah Swt. serta peran orang-orang di sekitar kita."
+      },
+      {
+        id: 59, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Saat mendengar suara azan berkumandang ketika sedang asyik bermain gawai, tindakan yang paling tepat dilakukan siswa muslim adalah...",
+        options: [
+          "Segera menghentikan permainan, menjawab azan, berwudu, dan bersiap salat",
+          "Mengabaikan azan hingga permainan selesai larut malam",
+          "Mematikan suara azan karena merasa terganggu",
+          "Menunda salat sampai besok pagi"
+        ],
+        answer: "Segera menghentikan permainan, menjawab azan, berwudu, dan bersiap salat",
+        explanation: "Menyambut panggilan azan dengan segera bersiap salat adalah wujud ketaatan dan pengelolaan waktu yang baik."
+      },
+      {
+        id: 60, bab: 3, babTitle: "Bab 3: Menghadirkan Salat dan Zikir dalam Kehidupan",
+        prompt: "Bagaimana hubungan antara salat dan zikir dalam kehidupan sehari-hari?",
+        options: [
+          "Salat adalah bentuk ibadah utama yang di dalamnya sarat dengan zikir, doa, dan tilawah, sementara zikir menjaga ingatan kepada Allah di luar salat",
+          "Salat dan zikir adalah dua hal yang saling bertentangan",
+          "Zikir hanya boleh dilakukan setelah salat Subuh saja",
+          "Salat tidak mengandung unsur zikir sama sekali"
+        ],
+        answer: "Salat adalah bentuk ibadah utama yang di dalamnya sarat dengan zikir, doa, dan tilawah, sementara zikir menjaga ingatan kepada Allah di luar salat",
+        explanation: "Salat memuat bacaan zikir dan doa, sedangkan zikir setelah salat dan sepanjang hari menjaga hati tetap terhubung dengan Allah Swt."
+      },
+
+      // =====================================================================
+      // BAB 4: MENGAGUNGKAN ALLAH SWT. DENGAN TUNDUK PADA PERINTAH-NYA (SOAL 61 - 80)
+      // =====================================================================
+      {
+        id: 61, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        svg: "sujud_syukur",
+        svgCaption: "Sujud syukur, sujud sahwi, dan sujud tilawah menunjukkan ketundukan hamba kepada Allah.",
+        prompt: "Sujud yang dilakukan seseorang karena memperoleh nikmat luar biasa atau terhindar dari bahaya/musibah disebut...",
+        options: [
+          "Sujud syukur",
+          "Sujud sahwi",
+          "Sujud tilawah",
+          "Sujud rukun salat"
+        ],
+        answer: "Sujud syukur",
+        explanation: "Sujud syukur adalah sujud yang dilakukan di luar salat sebagai ungkapan terima kasih kepada Allah Swt. atas nikmat yang datang atau bahaya yang dihindarkan."
+      },
+      {
+        id: 62, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Sujud yang dilakukan karena lupa atau ragu-ragu mengenai jumlah rakaat atau meninggalkan sunah ab'ad dalam salat disebut...",
+        options: [
+          "Sujud sahwi",
+          "Sujud syukur",
+          "Sujud tilawah",
+          "Sujud tahiyat"
+        ],
+        answer: "Sujud sahwi",
+        explanation: "Sujud sahwi adalah sujud dua kali yang dilakukan karena lupa/keliru dalam pelaksanaan salat (seperti lupa tasyahud awal atau ragu jumlah rakaat)."
+      },
+      {
+        id: 63, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Sujud yang dilakukan ketika membaca atau mendengar ayat-ayat sajdah dalam Al-Qur'an disebut...",
+        options: [
+          "Sujud tilawah",
+          "Sujud syukur",
+          "Sujud sahwi",
+          "Sujud istikharah"
+        ],
+        answer: "Sujud tilawah",
+        explanation: "Sujud tilawah adalah sujud yang disyariatkan ketika seseorang membaca atau mendengarkan ayat sajdah saat membaca/menyimak Al-Qur'an."
+      },
+      {
+        id: 64, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Pada umumnya menurut jumhur ulama, berapa jumlah ayat sajdah yang terdapat di dalam mushaf Al-Qur'an?",
+        options: [
+          "15 ayat",
+          "5 ayat",
+          "10 ayat",
+          "30 ayat"
+        ],
+        answer: "15 ayat",
+        explanation: "Jumlah ayat sajdah dalam Al-Qur'an yang dikenal luas adalah 15 ayat yang tersebar di beberapa surah (seperti al-A'raf, ar-Ra'd, an-Nahl, al-Isra', Maryam, al-Hajj, al-Furqan, an-Naml, as-Sajdah, Shad, Fussilat, an-Najm, al-Insyiqaq, dan al-'Alaq)."
+      },
+      {
+        id: 65, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Kapan waktu pelaksanaan sujud sahwi menurut tuntunan hadis Nabi Muhammad saw.?",
+        options: [
+          "Sebelum salam atau sesudah salam (bergantung pada riwayat dan keadaan salat)",
+          "Hanya pada waktu dhuha di luar salat",
+          "Satu pekan setelah selesai salat",
+          "Hanya ketika salat Jumat berjamaah"
+        ],
+        answer: "Sebelum salam atau sesudah salam (bergantung pada riwayat dan keadaan salat)",
+        explanation: "Dalam hadis-hadis sahih, sujud sahwi dilakukan dua kali baik sebelum salam maupun setelah salam sebelum meninggalkan tempat salat."
+      },
+      {
+        id: 66, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Bagaimanakah tata cara sederhana melakukan sujud syukur atau sujud tilawah di luar salat?",
+        options: [
+          "Menghadap kiblat, berniat, bertakbir, melakukan satu kali sujud dengan khusyuk, lalu duduk dan mengucapkan salam",
+          "Melakukan rukuk empat kali sebelum sujud",
+          "Membaca qunut panjang sambil berdiri",
+          "Melakukan sujud sebanyak tujuh kali berturut-turut"
+        ],
+        answer: "Menghadap kiblat, berniat, bertakbir, melakukan satu kali sujud dengan khusyuk, lalu duduk dan mengucapkan salam",
+        explanation: "Sujud syukur dan sujud tilawah di luar salat dilakukan dengan menghadap kiblat, berniat, bertakbir, satu kali sujud, membaca doa sujud, lalu bangun/duduk dan salam."
+      },
+      {
+        id: 67, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        arabic: "سَجَدَ وَجْهِيَ لِلَّذِي خَلَقَهُ وَصَوَّرَهُ وَشَقَّ سَمْعَهُ وَبَصَرَهُ بِحَوْلِهِ وَقُوَّتِهِ",
+        prompt: "Doa yang dimulai dengan 'Sajada wajhiya lilladzi khalaqahu wa shawwarahu...' sering diamalkan ketika melakukan...",
+        options: [
+          "Sujud tilawah atau sujud di luar/dalam salat",
+          "Wudu sebelum salat",
+          "Tahiyat akhir",
+          "Azan dan iqamah"
+        ],
+        answer: "Sujud tilawah atau sujud di luar/dalam salat",
+        explanation: "Doa 'Sajada wajhiya...' merupakan doa sujud yang diriwayatkan dari Nabi Muhammad saw. untuk menegaskan tunduknya wajah dan diri kepada Pencipta pendengaran dan penglihatan."
+      },
+      {
+        id: 68, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Hukum melaksanakan sujud syukur dan sujud tilawah menurut mayoritas ulama adalah...",
+        options: [
+          "Sunah muakkad / sunah",
+          "Wajib 'ain bagi semua orang setiap hari",
+          "Makruh tahrim",
+          "Mubah yang tidak berpahala"
+        ],
+        answer: "Sunah muakkad / sunah",
+        explanation: "Sujud syukur dan sujud tilawah hukumnya sunah (dianjurkan berdasarkan contoh dan perintah Nabi Muhammad saw.), bukan rukun wajib salat."
+      },
+      {
+        id: 69, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Dalam kisah Raja Iskandar Zulkarnain (Dzulqarnain) dalam Al-Qur'an, ketika beliau membangun benteng kokoh untuk melindungi masyarakat dari gangguan Ya'juj dan Ma'juj, sikap rendah hati beliau tampak dengan...",
+        options: [
+          "Menyatakan bahwa benteng dan pertolongan itu adalah rahmat dari Allah Swt., bukan semata kehebatan dirinya",
+          "Membanggakan kekuasaan dan kekayaannya di hadapan semua bangsa",
+          "Meminta upeti yang sangat mahal kepada rakyat kecil",
+          "Melupakan bahwa segala sesuatu berada di bawah kehendak Allah"
+        ],
+        answer: "Menyatakan bahwa benteng dan pertolongan itu adalah rahmat dari Allah Swt., bukan semata kehebatan dirinya",
+        explanation: "Dzulqarnain meneladankan kepemimpinan yang adil, amanah, dan tawadhu', dengan mengembalikan segala keberhasilan kepada rahmat Allah Swt."
+      },
+      {
+        id: 70, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Apa hikmah yang diperoleh seseorang yang membiasakan sujud syukur ketika mendapat kabar gembira?",
+        options: [
+          "Terhindar dari sikap sombong dan selalu ingat bahwa nikmat berasal dari Allah",
+          "Merasa tidak perlu lagi berusaha di masa depan",
+          "Menjadikan nikmat sebagai ajang pamer kepada teman",
+          "Menganggap keberhasilan murni hasil diri sendiri"
+        ],
+        answer: "Terhindar dari sikap sombong dan selalu ingat bahwa nikmat berasal dari Allah",
+        explanation: "Sujud syukur menundukkan ego dan menanamkan kesadaran bahwa nikmat adalah anugerah Allah Swt. yang harus disyukuri dengan amal kebaikan."
+      },
+      {
+        id: 71, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Hikmah dari sujud sahwi bagi seorang muslim dalam beribadah adalah...",
+        options: [
+          "Menambal kekurangan akibat lupa dalam salat serta menumbuhkan ketenangan dan ketelitian",
+          "Membolehkan seseorang sengaja meninggalkan rukun salat",
+          "Mengganti kewajiban salat lima waktu",
+          "Menambah jumlah rakaat wajib menjadi dua kali lipat"
+        ],
+        answer: "Menambal kekurangan akibat lupa dalam salat serta menumbuhkan ketenangan dan ketelitian",
+        explanation: "Sujud sahwi menjadi bentuk kasih sayang syariat untuk menutupi kekhilafan yang tidak disengaja saat salat sehingga ibadah tetap sempurna."
+      },
+      {
+        id: 72, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Apa hikmah melakukan sujud tilawah ketika membaca atau mendengar ayat sajdah?",
+        options: [
+          "Menunjukkan ketundukan hati kepada firman Allah serta menghayati makna ayat yang dibaca",
+          "Menunjukkan bahwa pembaca sedang kelelahan membaca Al-Qur'an",
+          "Menandai bahwa bacaan Al-Qur'an harus dihentikan selamanya",
+          "Menggantikan kewajiban berwudu"
+        ],
+        answer: "Menunjukkan ketundukan hati kepada firman Allah serta menghayati makna ayat yang dibaca",
+        explanation: "Sujud tilawah melatih kepekaan rohani dan ketundukan seorang hamba saat menyimak kebesaran Allah dalam ayat-ayat sajdah."
+      },
+      {
+        id: 73, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Seorang siswa tidak sengaja lupa membaca tasyahud awal dan langsung berdiri ke rakaat ketiga saat salat Zuhur. Apa yang sebaiknya ia lakukan?",
+        options: [
+          "Melanjutkan salat hingga akhir lalu melakukan sujud sahwi",
+          "Membatalkan salat dan mengulang dari awal tanpa sebab",
+          "Duduk kembali setelah berdiri tegak sempurna",
+          "Meninggalkan salat karena merasa sudah salah"
+        ],
+        answer: "Melanjutkan salat hingga akhir lalu melakukan sujud sahwi",
+        explanation: "Jika sudah berdiri tegak karena lupa tasyahud awal, dianjurkan meneruskan salat lalu menutupnya dengan sujud sahwi."
+      },
+      {
+        id: 74, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Dalam kisah Dzulqarnain dan kaum yang meminta perlindungan dari gangguan Ya'juj dan Ma'juj, nilai kepemimpinan yang menonjol adalah...",
+        options: [
+          "Melindungi yang lemah, bekerja sama secara adil, dan tetap bertawakal kepada Allah",
+          "Memanfaatkan kesusahan orang lain untuk keuntungan pribadi",
+          "Menolak membantu masyarakat yang meminta pertolongan",
+          "Mengabaikan keselamatan bersama"
+        ],
+        answer: "Melindungi yang lemah, bekerja sama secara adil, dan tetap bertawakal kepada Allah",
+        explanation: "Dzulqarnain menunjukkan kepemimpinan adil dan solutif yang mengutamakan kemaslahatan serta bersandar penuh kepada Allah."
+      },
+      {
+        id: 75, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Manakah situasi berikut yang paling tepat menjadi sebab melakukan sujud syukur?",
+        options: [
+          "Lolos seleksi lomba atau sembuh dari sakit yang cukup lama",
+          "Lupa jumlah rakaat salat Asar",
+          "Membaca ayat sajdah saat tadarus",
+          "Terlambat bangun pagi karena begadang"
+        ],
+        answer: "Lolos seleksi lomba atau sembuh dari sakit yang cukup lama",
+        explanation: "Mendapatkan nikmat atau terbebas dari kesulitan/penyakit merupakan momen tepat untuk bersujud syukur kepada Allah Swt."
+      },
+      {
+        id: 76, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Bagaimana syarat kesucian saat melaksanakan sujud syukur atau sujud tilawah di luar salat?",
+        options: [
+          "Suci dari hadas dan najis, menutup aurat, serta menghadap kiblat",
+          "Boleh tidak menutup aurat selama di kamar sendiri",
+          "Tidak perlu menghadap kiblat meskipun memungkinkan",
+          "Harus dilakukan sambil berjalan"
+        ],
+        answer: "Suci dari hadas dan najis, menutup aurat, serta menghadap kiblat",
+        explanation: "Sujud merupakan ibadah menghadap Allah Swt., sehingga menjaga kesucian badan, pakaian, tempat, menutup aurat, dan menghadap kiblat tetap dijaga."
+      },
+      {
+        id: 77, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Salah satu surah yang di dalamnya terdapat ayat sajdah adalah...",
+        options: [
+          "As-Sajdah (Q.S. as-Sajdah/32: 15)",
+          "Al-Lahab",
+          "Al-Fil",
+          "Al-Kautsar"
+        ],
+        answer: "As-Sajdah (Q.S. as-Sajdah/32: 15)",
+        explanation: "Q.S. as-Sajdah ayat 15 termasuk ayat sajdah yang menggambarkan orang-orang yang apabila diperingatkan dengan ayat-ayat Allah langsung tersungkur sujud dan bertasbih."
+      },
+      {
+        id: 78, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Apa sikap yang keliru ketika seseorang mendapatkan prestasi akademik di sekolah?",
+        options: [
+          "Merendahkan teman yang nilainya belum maksimal dan merasa paling hebat",
+          "Bersyukur kepada Allah dan berterima kasih kepada guru serta orang tua",
+          "Membantu teman yang kesulitan memahami pelajaran",
+          "Tetap rendah hati dan terus belajar"
+        ],
+        answer: "Merendahkan teman yang nilainya belum maksimal dan merasa paling hebat",
+        explanation: "Prestasi harus disyukuri dengan kerendahan hati dan kepedulian sosial, bukan kesombongan atau merendahkan orang lain."
+      },
+      {
+        id: 79, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Makna tunduk pada perintah Allah Swt. bagi seorang pelajar SMP adalah...",
+        options: [
+          "Menerima aturan agama dan kebaikan dengan lapang dada serta berusaha menjalankannya",
+          "Memilih-milih perintah agama yang mudah saja",
+          "Menjalankan ibadah hanya karena takut dimarahi",
+          "Menganggap perintah Allah sebagai beban berat"
+        ],
+        answer: "Menerima aturan agama dan kebaikan dengan lapang dada serta berusaha menjalankannya",
+        explanation: "Ketundukan sejati lahir dari keimanan dan kecintaan kepada Allah Swt., sehingga perintah-Nya dijalankan dengan penuh kesadaran."
+      },
+      {
+        id: 80, bab: 4, babTitle: "Bab 4: Mengagungkan Allah Swt. dengan Tunduk pada Perintah-Nya",
+        prompt: "Mengapa sujud menjadi simbol ketundukan tertinggi seorang hamba di hadapan Allah Swt.?",
+        options: [
+          "Karena bagian tubuh paling terhormat (wajah/dahi) diletakkan paling rendah sejajar dengan tanah di hadapan Sang Pencipta",
+          "Karena sujud adalah gerakan yang paling cepat dilakukan",
+          "Karena sujud hanya dilakukan oleh para nabi saja",
+          "Karena sujud tidak membutuhkan konsentrasi"
+        ],
+        answer: "Karena bagian tubuh paling terhormat (wajah/dahi) diletakkan paling rendah sejajar dengan tanah di hadapan Sang Pencipta",
+        explanation: "Sujud melambangkan kepasrahan dan ketundukan total makhluk di hadapan Allah Yang Maha Tinggi dan Maha Mulia."
+      },
+
+      // =====================================================================
+      // BAB 5: DAMASKUS: PUSAT PERADABAN TIMUR ISLAM (661-750 M) (SOAL 81 - 100)
+      // =====================================================================
+      {
+        id: 81, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        svg: "damaskus_peradaban",
+        svgCaption: "Damaskus menjadi pusat pemerintahan dan peradaban Bani Umayyah pada tahun 661–750 M.",
+        prompt: "Daulah/Khilafah Bani Umayyah di Damaskus berdiri pada tahun 661 M dan berakhir pada tahun 750 M. Pendiri dan khalifah pertamanya adalah...",
+        options: [
+          "Mu'awiyah bin Abu Sufyan",
+          "'Umar bin 'Abd al-'Aziz",
+          "Al-Walid bin 'Abd al-Malik",
+          "Marwan bin Muhammad"
+        ],
+        answer: "Mu'awiyah bin Abu Sufyan",
+        explanation: "Daulah Umayyah di Timur didirikan oleh Mu'awiyah bin Abu Sufyan pada tahun 661 M (41 H) dan memindahkan pusat pemerintahan ke Damaskus."
+      },
+      {
+        id: 82, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Ke mana pusat pemerintahan Islam dipindahkan pada masa berdirinya Bani Umayyah tahun 661 M?",
+        options: [
+          "Dari Madinah ke Damaskus",
+          "Dari Damaskus ke Bagdad",
+          "Dari Mekah ke Kairo",
+          "Dari Kufah ke Cordoba"
+        ],
+        answer: "Dari Madinah ke Damaskus",
+        explanation: "Pada masa Khulafaur Rasyidin pusat pemerintahan berada di Madinah (dan sempat di Kufah pada masa Ali bin Abi Thalib), lalu pada masa Bani Umayyah dipindahkan ke Damaskus."
+      },
+      {
+        id: 83, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Perubahan penting dalam sistem pergantian kepemimpinan pada masa Bani Umayyah dibandingkan masa Khulafaur Rasyidin adalah...",
+        options: [
+          "Sistem kepemimpinan cenderung bersifat turun-temurun (monarki/dinasti)",
+          "Pemilihan khalifah selalu melalui undian acak setiap bulan",
+          "Jabatan khalifah dihapuskan dan diganti dewan kota",
+          "Pemimpin dipilih setiap tahun oleh rakyat di pasar"
+        ],
+        answer: "Sistem kepemimpinan cenderung bersifat turun-temurun (monarki/dinasti)",
+        explanation: "Pada masa Bani Umayyah, suksesi kepemimpinan umumnya berlangsung turun-temurun di lingkungan keluarga/keturunan khalifah."
+      },
+      {
+        id: 84, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Berapa jumlah khalifah Bani Umayyah yang memerintah di Damaskus sejak Mu'awiyah bin Abu Sufyan hingga Marwan bin Muhammad?",
+        options: [
+          "14 khalifah (sekitar 13–14 khalifah dalam catatan sejarah Umayyah Damaskus)",
+          "4 khalifah",
+          "7 khalifah",
+          "25 khalifah"
+        ],
+        answer: "14 khalifah (sekitar 13–14 khalifah dalam catatan sejarah Umayyah Damaskus)",
+        explanation: "Dalam catatan sejarah Bani Umayyah di Damaskus (661–750 M), terdapat 14 khalifah yang memerintah mulai dari Mu'awiyah bin Abu Sufyan hingga Marwan bin Muhammad (khalifah terakhir Umayyah Timur)."
+      },
+      {
+        id: 85, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Khalifah Bani Umayyah yang terkenal dengan kebijakan reformasi administrasi, penyeragaman mata uang dinar/dirham, dan penetapan bahasa Arab sebagai bahasa resmi administrasi negara adalah...",
+        options: [
+          "'Abd al-Malik bin Marwan",
+          "Yazid bin Mu'awiyah",
+          "Al-Walid bin Yazid",
+          "Sulaiman bin 'Abd al-Malik"
+        ],
+        answer: "'Abd al-Malik bin Marwan",
+        explanation: "'Abd al-Malik bin Marwan dikenal sebagai penguat fondasi administrasi negara Bani Umayyah, termasuk menertibkan mata uang dan administrasi pemerintahan."
+      },
+      {
+        id: 86, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Masa pemerintahan al-Walid bin 'Abd al-Malik sering disebut sebagai puncak kemakmuran dan perluasan wilayah Bani Umayyah, di antaranya ditandai dengan...",
+        options: [
+          "Perluasan wilayah hingga ke Afrika Utara, Andalusia (Spanyol), dan India (Sind), serta pembangunan masjid dan fasilitas umum",
+          "Runtuhnya seluruh kota Damaskus akibat perang saudara",
+          "Penghapusan seluruh lembaga pendidikan dan masjid",
+          "Pemindahan ibu kota ke Eropa Timur"
+        ],
+        answer: "Perluasan wilayah hingga ke Afrika Utara, Andalusia (Spanyol), dan India (Sind), serta pembangunan masjid dan fasilitas umum",
+        explanation: "Pada masa al-Walid bin 'Abd al-Malik, wilayah Islam meluas pesat ke barat (Andalusia/Spanyol) dan timur, serta berkembang pesat pembangunan arsitektur dan sosial."
+      },
+      {
+        id: 87, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Siapakah panglima muslim yang memimpin pasukan penaklukan Andalusia (Spanyol) melewati selat yang kemudian dikenal sebagai Selat Gibraltar (Jabal Tariq)?",
+        options: [
+          "Tariq bin Ziyad",
+          "Salahuddin al-Ayyubi",
+          "Khalid bin Walid",
+          "Amr bin al-'Ash"
+        ],
+        answer: "Tariq bin Ziyad",
+        explanation: "Tariq bin Ziyad memimpin pasukan menyeberangi selat antara Afrika Utara dan Semenanjung Iberia pada tahun 711 M; selat tersebut diabadikan dengan nama Jabal Tariq (Gibraltar)."
+      },
+      {
+        id: 88, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Khalifah Bani Umayyah yang terkenal sangat adil, sederhana, dan memperbaiki tata kelola keuangan serta keadilan sosial hingga sering disamakan semangatnya dengan Khulafaur Rasyidin adalah...",
+        options: [
+          "'Umar bin 'Abd al-'Aziz",
+          "Mu'awiyah II",
+          "Hisyam bin 'Abd al-Malik",
+          "Al-Walid bin 'Abd al-Malik"
+        ],
+        answer: "'Umar bin 'Abd al-'Aziz",
+        explanation: "'Umar bin 'Abd al-'Aziz dikenal luas karena kesalehan, keadilan, hidup bersahaja, serta perbaikan administrasi pajak dan kesejahteraan rakyat."
+      },
+      {
+        id: 89, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Siapakah khalifah terakhir Bani Umayyah di Damaskus yang wafat pada masa peralihan kekuasaan ke Bani Abbasiyah tahun 750 M?",
+        options: [
+          "Marwan bin Muhammad",
+          "Mu'awiyah bin Abu Sufyan",
+          "'Abd al-Malik bin Marwan",
+          "Al-Walid bin 'Abd al-Malik"
+        ],
+        answer: "Marwan bin Muhammad",
+        explanation: "Marwan bin Muhammad (Marwan II) adalah khalifah terakhir Daulah Bani Umayyah di Damaskus sebelum kekuasaan beralih kepada Bani Abbasiyah pada 750 M."
+      },
+      {
+        id: 90, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Lembaga/kantor pemerintahan (diwan) pada masa Bani Umayyah yang bertugas mengurus pos, surat-menyurat resmi, dan komunikasi pemerintahan adalah...",
+        options: [
+          "Diwan al-Barid (pos) dan Diwan ar-Rasa'il (persuratan)",
+          "Diwan al-Jund saja yang khusus mengurus musik",
+          "Diwan al-Hisbah yang khusus mengurus peta laut",
+          "Diwan al-Khatam yang khusus mengurus pertanian"
+        ],
+        answer: "Diwan al-Barid (pos) dan Diwan ar-Rasa'il (persuratan)",
+        explanation: "Pada masa Bani Umayyah berkembang berbagai diwan seperti Diwan al-Kharaj (pajak/keuangan), Diwan al-Jund (ketentaraan), Diwan al-Barid (pos/komunikasi), Diwan ar-Rasa'il (persuratan), dan Diwan al-Khatam (cap/arsip resmi)."
+      },
+      {
+        id: 91, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Fungsi utama 'Diwan al-Khatam' pada masa pemerintahan Bani Umayyah adalah...",
+        options: [
+          "Menyegel, mengarsipkan, dan menjaga keaslian surat/dokumen resmi negara agar tidak dipalsukan",
+          "Mengatur jadwal latihan pasukan berkuda",
+          "Memungut zakat hasil panen di desa",
+          "Menyusun syair di istana"
+        ],
+        answer: "Menyegel, mengarsipkan, dan menjaga keaslian surat/dokumen resmi negara agar tidak dipalsukan",
+        explanation: "Diwan al-Khatam bertugas menyalin, menyegel, dan mengarsipkan dokumen resmi negara guna mencegah pemalsuan atau perubahan isi."
+      },
+      {
+        id: 92, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Dalam bidang peradilan dan ketertiban umum pada masa Bani Umayyah, lembaga yang mengawasi pasar, timbangan, takaran, dan ketertiban perilaku di ruang publik dikenal dengan istilah...",
+        options: [
+          "Al-Hisbah",
+          "Al-Kharaj",
+          "Al-Barid",
+          "Al-Qabail"
+        ],
+        answer: "Al-Hisbah",
+        explanation: "Lembaga kehakiman/peradilan pada masa Bani Umayyah meliputi al-qada' (peradilan sengketa), al-hisbah (pengawasan pasar, etika, dan ketertiban umum), serta an-nazar fil-mazalim (pengadilan banding atas ketidakadilan pejabat)."
+      },
+      {
+        id: 93, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Bangunan bersejarah berkubah emas megah di Yerusalem yang dibangun pada masa pemerintahan Khalifah 'Abd al-Malik bin Marwan adalah...",
+        options: [
+          "Dome of the Rock (Qubbat as-Sakhrah)",
+          "Masjid Biru di Istanbul",
+          "Taj Mahal di Agra",
+          "Menara Kembar di Kuala Lumpur"
+        ],
+        answer: "Dome of the Rock (Qubbat as-Sakhrah)",
+        explanation: "Dome of the Rock (Qubbat as-Sakhrah) dibangun pada masa Khalifah 'Abd al-Malik bin Marwan dan menjadi salah satu mahakarya arsitektur Islam awal."
+      },
+      {
+        id: 94, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Masjid Agung di Damaskus (Masjid Umayyah) dan Masjid 'Uqbah di Kairawan merupakan bukti kemajuan di bidang...",
+        options: [
+          "Keagamaan dan arsitektur Islam",
+          "Industri pesawat terbang modern",
+          "Pertambangan batu bara bawah laut",
+          "Perbankan digital modern"
+        ],
+        answer: "Keagamaan dan arsitektur Islam",
+        explanation: "Masjid Agung Damaskus dan Masjid Kairawan menjadi pusat ibadah, kajian keagamaan, sekaligus ikon arsitektur Islam pada masa Bani Umayyah."
+      },
+      {
+        id: 95, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Kegiatan ekonomi pada masa Bani Umayyah tumbuh pesat melalui sektor pertanian, perdagangan, kerajinan, dan penerimaan negara seperti kharaj dan jizyah, yang didukung oleh...",
+        options: [
+          "Keamanan jalur dagang, pembangunan jalan/pos, serta mata uang yang stabil",
+          "Penutupan seluruh pelabuhan dan jalur kafilah",
+          "Penghapusan sistem irigasi dan pertanian",
+          "Pelarangan perdagangan antar wilayah"
+        ],
+        answer: "Keamanan jalur dagang, pembangunan jalan/pos, serta mata uang yang stabil",
+        explanation: "Stabilnya jalur komunikasi (al-barid), keamanan wilayah, serta standarisasi mata uang mendorong kemajuan ekonomi dan perdagangan."
+      },
+      {
+        id: 96, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Dalam bidang keilmuan dan pendidikan pada masa Bani Umayyah, mulai berkembang pengumpulan hadis, tafsir, ilmu bahasa Arab, serta kajian yang dikaitkan dengan tokoh-tokoh seperti Khalid bin Yazid, Ibnu 'Abbas, dan Zaid bin Tsabit. Hal ini menunjukkan...",
+        options: [
+          "Perhatian besar terhadap ilmu agama, bahasa, dan pengetahuan pada masa Umayyah",
+          "Tidak adanya aktivitas ilmiah sama sekali selama 89 tahun",
+          "Ilmu pengetahuan hanya dipelajari oleh satu keluarga saja",
+          "Penghapusan pelajaran membaca dan menulis"
+        ],
+        answer: "Perhatian besar terhadap ilmu agama, bahasa, dan pengetahuan pada masa Umayyah",
+        explanation: "Masa Bani Umayyah menjadi jembatan penting bagi perkembangan ilmu naqli (Al-Qur'an, hadis, fikih, bahasa) dan awal penerjemahan/kajian keilmuan."
+      },
+      {
+        id: 97, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Selain ulama dan ilmuwan, seni sastra dan syair Arab juga berkembang pesat pada masa Bani Umayyah dengan munculnya para penyair terkenal seperti...",
+        options: [
+          "Al-Akhtal, Jarir, dan al-Farazdaq",
+          "Hamka, Chairil Anwar, dan R.A. Kartini",
+          "Ibnu Sina, al-Khawarizmi, dan al-Biruni",
+          "Imam al-Bukhari, Imam Muslim, dan at-Tirmidzi"
+        ],
+        answer: "Al-Akhtal, Jarir, dan al-Farazdaq",
+        explanation: "Al-Akhtal, Jarir, dan al-Farazdaq merupakan penyair ternama pada era Bani Umayyah yang turut mewarnai perkembangan sastra Arab."
+      },
+      {
+        id: 98, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Setelah Daulah Bani Umayyah di Damaskus runtuh pada tahun 750 M dan digantikan oleh Bani Abbasiyah, tokoh Bani Umayyah yang berhasil selamat dan mendirikan pemerintahan Umayyah di Andalusia (Spanyol) adalah...",
+        options: [
+          "'Abd ar-Rahman ad-Dakhil ('Abd ar-Rahman bin Mu'awiyah)",
+          "Harun ar-Rasyid",
+          "Abu al-'Abbas as-Saffah",
+          "Al-Ma'mun"
+        ],
+        answer: "'Abd ar-Rahman ad-Dakhil ('Abd ar-Rahman bin Mu'awiyah)",
+        explanation: "'Abd ar-Rahman bin Mu'awiyah (dikenal sebagai 'Abd ar-Rahman ad-Dakhil / 'Sang Rajawali Quraisy') melanjutkan eksistensi Bani Umayyah di Andalusia (Spanyol)."
+      },
+      {
+        id: 99, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Dalam kisah 'Ashil al-Gifari dan kecintaan kepada tanah air/kampung halaman, pesan yang dapat kita petik adalah...",
+        options: [
+          "Rasa cinta tanah air dan kampung halaman adalah fitrah manusia yang mendorong kita merawat dan memajukan daerah sendiri",
+          "Kampung halaman harus dilupakan dan dibenci setelah merantau",
+          "Cinta tanah air bertentangan dengan ajaran Islam",
+          "Merantau berarti tidak perlu peduli pada kemajuan negeri asal"
+        ],
+        answer: "Rasa cinta tanah air dan kampung halaman adalah fitrah manusia yang mendorong kita merawat dan memajukan daerah sendiri",
+        explanation: "Kisah 'Ashil al-Gifari menggambarkan kerinduan dan keterikatan batin pada tanah air yang sejalan dengan semangat menjaga ketertiban, kedamaian, dan kebaikan negeri."
+      },
+      {
+        id: 100, bab: 5, babTitle: "Bab 5: Damaskus: Pusat Peradaban Timur Islam (661–750 M)",
+        prompt: "Salah satu faktor utama yang menyebabkan melemahnya Daulah Bani Umayyah di Damaskus menjelang tahun 750 M adalah...",
+        options: [
+          "Persaingan perebutan kekuasaan internal, konflik politik/kesukuan, serta menurunnya wibawa pemerintahan pusat",
+          "Wilayah kekuasaan yang terlalu sempit dan tidak memiliki penduduk",
+          "Tidak adanya khalifah yang memerintah selama puluhan tahun",
+          "Seluruh rakyat menolak penggunaan bahasa Arab"
+        ],
+        answer: "Persaingan perebutan kekuasaan internal, konflik politik/kesukuan, serta menurunnya wibawa pemerintahan pusat",
+        explanation: "Konflik internal, ketidakstabilan politik dan suksesi, serta oposisi yang meluas menjadi faktor penting melemahnya Bani Umayyah di Damaskus hingga beralih ke Abbasiyah pada 750 M."
+      }
+    ];
+
+    /* =========================================================================
+       3. STATE MANAGEMENT & SHUFFLE UTILITIES
+       ========================================================================= */
+    const LETTERS = ["A", "B", "C", "D"];
+
+    let sessionQuestions = [];   // Shuffled options per question for current session
+    let userAnswers = {};      // { [questionId]: selectedOptionString }
+    let isSubmitted = false;
+
+    /**
+     * Fisher-Yates shuffle returning a new shuffled array
+     */
+    function shuffleArray(arr) {
+      const copy = arr.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    /**
+     * Build a fresh quiz session where every question's 4 options are shuffled
+     * so answer positions vary every session.
+     */
+    function buildSessionData() {
+      sessionQuestions = QUESTIONS_BANK.map((q) => ({
+        ...q,
+        shuffledOptions: shuffleArray(q.options)
+      }));
+      userAnswers = {};
+      isSubmitted = false;
+    }
+
+    /* =========================================================================
+       4. RENDERING QUESTIONS & NAVIGATION PANELS
+       ========================================================================= */
+    function renderAll() {
+      const container = document.getElementById("questionsContainer");
+      const desktopNav = document.getElementById("desktopNavGrid");
+      const mobileNav = document.getElementById("mobileNavGrid");
+
+      container.innerHTML = "";
+      desktopNav.innerHTML = "";
+      mobileNav.innerHTML = "";
+
+      let currentBab = 0;
+
+      sessionQuestions.forEach((q, index) => {
+        const num = index + 1;
+
+        // Insert Bab Divider at start of each chapter (1, 21, 41, 61, 81)
+        if (q.bab !== currentBab) {
+          currentBab = q.bab;
+          const divider = document.createElement("div");
+          divider.className = "bab-divider";
+          divider.id = `bab-header-${q.bab}`;
+          divider.innerHTML = `
+            <h2>${escapeHtml(q.babTitle)}</h2>
+            <span>Soal No. ${(q.bab - 1) * 20 + 1} – ${q.bab * 20}</span>
+          `;
+          container.appendChild(divider);
+        }
+
+        // Build Question Card
+        const card = document.createElement("article");
+        card.className = "question-card";
+        card.id = `question-card-${num}`;
+
+        let arabicHtml = "";
+        if (q.arabic) {
+          arabicHtml = `<div class="arabic-box" dir="rtl" lang="ar">${escapeHtml(q.arabic)}</div>`;
+        }
+
+        let svgHtml = "";
+        if (q.svg && SVG_ART[q.svg]) {
+          svgHtml = `
+            <div class="svg-illustration-wrap">
+              ${SVG_ART[q.svg]}
+              ${q.svgCaption ? `<div class="svg-caption">${escapeHtml(q.svgCaption)}</div>` : ""}
+            </div>`;
+        }
+
+        // Options HTML
+        const optionsHtml = q.shuffledOptions
+          .map((optText, optIdx) => {
+            const letter = LETTERS[optIdx] || String(optIdx + 1);
+            const isSelected = userAnswers[q.id] === optText;
+            const isArabicOpt = /[\u0600-\u06FF]/.test(optText) && optText.length < 40;
+
+            let extraClasses = [];
+            if (isSelected) extraClasses.push("selected");
+            if (isSubmitted) {
+              extraClasses.push("disabled");
+              if (optText === q.answer) {
+                extraClasses.push("opt-correct-reveal");
+              } else if (isSelected && optText !== q.answer) {
+                extraClasses.push("opt-wrong-reveal");
+              }
+            }
+
+            return `
+              <div
+                class="option-item ${extraClasses.join(" ")}"
+                role="button"
+                tabindex="0"
+                data-qid="${q.id}"
+                data-opt-index="${optIdx}"
+                aria-pressed="${isSelected ? "true" : "false"}"
+              >
+                <span class="opt-letter">${letter}</span>
+                <span class="opt-text" ${isArabicOpt ? 'dir="rtl" lang="ar"' : ""}>${escapeHtml(optText)}</span>
+              </div>`;
+          })
+          .join("");
+
+        // Explanation Box HTML (populated when submitted)
+        const expHtml = `
+          <div class="explanation-box ${isSubmitted ? "visible" : ""}" id="exp-box-${q.id}">
+            <div class="exp-status-line" id="exp-status-${q.id}"></div>
+            <div class="exp-keys" id="exp-keys-${q.id}"></div>
+            <div class="exp-body">${escapeHtml(q.explanation)}</div>
+          </div>`;
+
+        card.innerHTML = `
+          <div class="q-meta">
+            <span class="q-number-badge">Soal No. ${num}</span>
+            <span class="q-bab-tag">${escapeHtml(q.babTitle)}</span>
+          </div>
+          <div class="q-prompt">${escapeHtml(q.prompt)}</div>
+          ${arabicHtml}
+          ${svgHtml}
+          <div class="options-list" id="options-list-${q.id}">${optionsHtml}</div>
+          ${expHtml}
+        `;
+
+        container.appendChild(card);
+
+        // Build Nav Button for Desktop & Mobile
+        const makeNavBtn = (prefix) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "nav-num-btn";
+          btn.id = `${prefix}-nav-btn-${num}`;
+          btn.textContent = String(num);
+          btn.title = `Ke Soal No. ${num}`;
+          btn.addEventListener("click", () => {
+            scrollToQuestion(num);
+            closeMobileDrawer();
+          });
+          return btn;
+        };
+
+        desktopNav.appendChild(makeNavBtn("desk"));
+        mobileNav.appendChild(makeNavBtn("mob"));
+      });
+
+      attachOptionListeners();
+      refreshAllStates();
+    }
+
+    /**
+     * Attach click & keyboard selection listeners to all option items
+     */
+    function attachOptionListeners() {
+      const items = document.querySelectorAll(".option-item");
+      items.forEach((item) => {
+        const handleSelect = () => {
+          if (isSubmitted) return; // Lock answers after submission
+          const qid = Number(item.getAttribute("data-qid"));
+          const optIdx = Number(item.getAttribute("data-opt-index"));
+          const qObj = sessionQuestions.find((x) => x.id === qid);
+          if (!qObj) return;
+
+          const chosenValue = qObj.shuffledOptions[optIdx];
+          userAnswers[qid] = chosenValue;
+
+          // Update visual selection in this question's option list
+          const listEl = document.getElementById(`options-list-${qid}`);
+          if (listEl) {
+            listEl.querySelectorAll(".option-item").forEach((el) => {
+              const idx = Number(el.getAttribute("data-opt-index"));
+              const selected = qObj.shuffledOptions[idx] === chosenValue;
+              el.classList.toggle("selected", selected);
+              el.setAttribute("aria-pressed", selected ? "true" : "false");
+            });
+          }
+
+          hideNavNotice();
+          updateProgressCounters();
+          updateNavButtonsStatus();
+        };
+
+        item.addEventListener("click", handleSelect);
+        item.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleSelect();
+          }
+        });
+      });
+    }
+
+    /**
+     * Refresh visual states for cards, explanations, and nav buttons
+     */
+    function refreshAllStates() {
+      updateProgressCounters();
+      updateNavButtonsStatus();
+
+      if (!isSubmitted) {
+        sessionQuestions.forEach((q, idx) => {
+          const num = idx + 1;
+          const card = document.getElementById(`question-card-${num}`);
+          if (card) {
+            card.classList.remove("state-correct", "state-wrong", "state-unanswered");
+          }
+          const expBox = document.getElementById(`exp-box-${q.id}`);
+          if (expBox) expBox.classList.remove("visible");
+        });
+        return;
+      }
+
+      // Post-submit evaluation & explanation rendering
+      sessionQuestions.forEach((q, idx) => {
+        const num = idx + 1;
+        const card = document.getElementById(`question-card-${num}`);
+        const expBox = document.getElementById(`exp-box-${q.id}`);
+        const expStatus = document.getElementById(`exp-status-${q.id}`);
+        const expKeys = document.getElementById(`exp-keys-${q.id}`);
+
+        const picked = userAnswers[q.id];
+        const pickedIdx = picked !== undefined ? q.shuffledOptions.indexOf(picked) : -1;
+        const pickedLetter = pickedIdx >= 0 ? LETTERS[pickedIdx] : "-";
+
+        const correctIdx = q.shuffledOptions.indexOf(q.answer);
+        const correctLetter = correctIdx >= 0 ? LETTERS[correctIdx] : "";
+
+        if (expBox) expBox.classList.add("visible");
+
+        if (picked === undefined) {
+          if (card) card.classList.add("state-unanswered");
+          if (expStatus) {
+            expStatus.className = "exp-status-line is-unanswered";
+            expStatus.innerHTML = `<span>⚠️ Belum Dijawab</span>`;
+          }
+          if (expKeys) {
+            expKeys.innerHTML = `Jawaban kamu: <strong>Belum memilih</strong> • Kunci jawaban benar: <strong>${correctLetter}. ${escapeHtml(q.answer)}</strong>`;
+          }
+        } else if (picked === q.answer) {
+          if (card) card.classList.add("state-correct");
+          if (expStatus) {
+            expStatus.className = "exp-status-line is-correct";
+            expStatus.innerHTML = `<span>✔ Benar!</span>`;
+          }
+          if (expKeys) {
+            expKeys.innerHTML = `Jawaban kamu: <strong>${pickedLetter}. ${escapeHtml(picked)}</strong> • Kunci jawaban: <strong>${correctLetter}. ${escapeHtml(q.answer)}</strong>`;
+          }
+        } else {
+          if (card) card.classList.add("state-wrong");
+          if (expStatus) {
+            expStatus.className = "exp-status-line is-wrong";
+            expStatus.innerHTML = `<span>✘ Kurang Tepat / Salah</span>`;
+          }
+          if (expKeys) {
+            expKeys.innerHTML = `Jawaban kamu: <strong>${pickedLetter}. ${escapeHtml(picked)}</strong> • Kunci jawaban benar: <strong>${correctLetter}. ${escapeHtml(q.answer)}</strong>`;
+          }
+        }
+      });
+    }
+
+    /**
+     * Update answered counters in header, sidebar, mobile bar, and bottom note
+     */
+    function updateProgressCounters() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = sessionQuestions.length;
+
+      document.getElementById("headerAnsweredCount").textContent = `Terjawab: ${answeredCount} / ${total}`;
+      document.getElementById("navAnsweredBadge").textContent = `${answeredCount}/${total}`;
+      document.getElementById("mobileAnsweredSpan").textContent = `${answeredCount}/${total}`;
+
+      const noteEl = document.getElementById("bottomProgressNote");
+      if (isSubmitted) {
+        noteEl.textContent = "Jawaban sudah dikumpulkan. Pembahasan lengkap tersedia di bawah setiap soal.";
+      } else {
+        noteEl.textContent = `Kamu sudah menjawab ${answeredCount} dari ${total} soal (${total - answeredCount} soal belum terjawab).`;
+      }
+    }
+
+    /**
+     * Update number buttons (1..100) in desktop & mobile panels
+     */
+    function updateNavButtonsStatus() {
+      sessionQuestions.forEach((q, idx) => {
+        const num = idx + 1;
+        const picked = userAnswers[q.id];
+        const isAnswered = picked !== undefined;
+
+        ["desk", "mob"].forEach((prefix) => {
+          const btn = document.getElementById(`${prefix}-nav-btn-${num}`);
+          if (!btn) return;
+          btn.classList.remove("is-answered", "is-correct", "is-wrong", "is-unanswered-post");
+
+          if (!isSubmitted) {
+            if (isAnswered) btn.classList.add("is-answered");
+          } else {
+            if (!isAnswered) {
+              btn.classList.add("is-unanswered-post");
+            } else if (picked === q.answer) {
+              btn.classList.add("is-correct");
+            } else {
+              btn.classList.add("is-wrong");
+            }
+          }
+        });
+      });
+    }
+
+    /* =========================================================================
+       5. SUBMIT / SCORING & RETRY LOGIC
+       ========================================================================= */
+    function handleSubmitQuiz() {
+      if (isSubmitted) {
+        showNavNotice("Jawaban sudah dikumpulkan. Klik 'Ulangi Kuis (Acak Ulang)' untuk mencoba lagi.");
+        return;
+      }
+
+      let correctCount = 0;
+      let wrongCount = 0;
+      let unansweredCount = 0;
+
+      const babStats = {
+        1: { name: "Bab 1", correct: 0, total: 20 },
+        2: { name: "Bab 2", correct: 0, total: 20 },
+        3: { name: "Bab 3", correct: 0, total: 20 },
+        4: { name: "Bab 4", correct: 0, total: 20 },
+        5: { name: "Bab 5", correct: 0, total: 20 }
+      };
+
+      sessionQuestions.forEach((q) => {
+        const picked = userAnswers[q.id];
+        if (picked === undefined) {
+          unansweredCount++;
+        } else if (picked === q.answer) {
+          correctCount++;
+          babStats[q.bab].correct++;
+        } else {
+          wrongCount++;
+        }
+      });
+
+      // Score out of 100 (1 point per correct answer out of 100 questions)
+      const score = Math.round((correctCount / sessionQuestions.length) * 100);
+      isSubmitted = true;
+
+      // Update UI badges & buttons
+      document.getElementById("headerModeBadge").textContent = "Mode: Pembahasan & Nilai";
+      document.getElementById("btnSubmitSide").style.display = "none";
+      document.getElementById("btnSubmitBottom").style.display = "none";
+      document.getElementById("btnSubmitMobile").style.display = "none";
+      document.getElementById("btnResetSelection").style.display = "none";
+
+      document.getElementById("btnRetrySide").style.display = "inline-flex";
+      document.getElementById("btnRetryBottom").style.display = "inline-flex";
+      document.getElementById("btnRetryMobile").style.display = "inline-flex";
+
+      // Populate Result Banner
+      const banner = document.getElementById("resultBanner");
+      banner.classList.add("active");
+
+      document.getElementById("finalScoreNum").textContent = String(score);
+      document.getElementById("countCorrect").textContent = String(correctCount);
+      document.getElementById("countWrong").textContent = String(wrongCount);
+      document.getElementById("countUnanswered").textContent = String(unansweredCount);
+
+      let predicate = "Terus semangat berlatih!";
+      if (score >= 90) {
+        predicate = "Luar biasa! Pemahamanmu sangat mantap.";
+      } else if (score >= 75) {
+        predicate = "Bagus sekali! Tingkatkan lagi pada bagian yang masih keliru.";
+      } else if (score >= 60) {
+        predicate = "Cukup baik! Pelajari kembali pembahasan tiap soal ya.";
+      } else {
+        predicate = "Jangan berkecil hati! Baca pembahasannya lalu coba acak ulang.";
+      }
+
+      document.getElementById("resultHeadline").textContent = `Nilai Akhir Kamu: ${score} / 100`;
+      document.getElementById("resultSubtext").textContent = `${predicate} (${correctCount} benar, ${wrongCount} salah, ${unansweredCount} belum dijawab)`;
+
+      // Chapter breakdown chips
+      const chipGrid = document.getElementById("chapterScoreGrid");
+      chipGrid.innerHTML = Object.values(babStats)
+        .map(
+          (b) => `
+          <div class="chapter-score-chip">
+            <strong>${escapeHtml(b.name)}</strong>
+            <span>Benar: ${b.correct} / ${b.total} soal</span>
+          </div>`
+        )
+        .join("");
+
+      // Re-render cards with full explanations & answer keys
+      renderAll();
+      hideNavNotice();
+
+      // Scroll smoothly to top score banner
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function handleRetryQuiz() {
+      buildSessionData();
+      isSubmitted = false;
+
+      document.getElementById("resultBanner").classList.remove("active");
+      document.getElementById("headerModeBadge").textContent = "Mode: Mengerjakan";
+
+      document.getElementById("btnSubmitSide").style.display = "inline-flex";
+      document.getElementById("btnSubmitBottom").style.display = "inline-flex";
+      document.getElementById("btnSubmitMobile").style.display = "inline-flex";
+      document.getElementById("btnResetSelection").style.display = "inline-flex";
+
+      document.getElementById("btnRetrySide").style.display = "none";
+      document.getElementById("btnRetryBottom").style.display = "none";
+      document.getElementById("btnRetryMobile").style.display = "none";
+
+      renderAll();
+      hideNavNotice();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function handleClearSelections() {
+      if (isSubmitted) return;
+      userAnswers = {};
+      renderAll();
+      showNavNotice("Semua pilihan jawaban telah dikosongkan.");
+    }
+
+    /* =========================================================================
+       6. NAVIGATION & HELPER FUNCTIONS
+       ========================================================================= */
+    function scrollToQuestion(num) {
+      const target = document.getElementById(`question-card-${num}`);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function showNavNotice(msg) {
+      const toast = document.getElementById("navNoticeToast");
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add("show");
+    }
+
+    function hideNavNotice() {
+      const toast = document.getElementById("navNoticeToast");
+      if (!toast) return;
+      toast.textContent = "";
+      toast.classList.remove("show");
+    }
+
+    function closeMobileDrawer() {
+      const drawer = document.getElementById("mobileNavDrawer");
+      if (drawer) drawer.classList.remove("open");
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    /* =========================================================================
+       7. INITIALIZATION
+       ========================================================================= */
+    document.addEventListener("DOMContentLoaded", () => {
+      buildSessionData();
+      renderAll();
+
+      // Bind submit & retry buttons
+      ["btnSubmitSide", "btnSubmitBottom", "btnSubmitMobile"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("click", handleSubmitQuiz);
+      });
+
+      ["btnRetrySide", "btnRetryBottom", "btnRetryTop", "btnRetryMobile"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("click", handleRetryQuiz);
+      });
+
+      const btnReset = document.getElementById("btnResetSelection");
+      if (btnReset) btnReset.addEventListener("click", handleClearSelections);
+
+      // Bab quick-jump buttons
+      document.querySelectorAll("[data-jump-q]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const qNum = Number(btn.getAttribute("data-jump-q"));
+          scrollToQuestion(qNum);
+          closeMobileDrawer();
+        });
+      });
+
+      // Mobile drawer toggle
+      const btnToggleDrawer = document.getElementById("btnToggleMobileDrawer");
+      const btnCloseDrawer = document.getElementById("btnCloseMobileDrawer");
+      const drawer = document.getElementById("mobileNavDrawer");
+
+      if (btnToggleDrawer && drawer) {
+        btnToggleDrawer.addEventListener("click", () => {
+          drawer.classList.toggle("open");
+        });
+      }
+      if (btnCloseDrawer && drawer) {
+        btnCloseDrawer.addEventListener("click", closeMobileDrawer);
+      }
+    });
+  </script>
+</body>
+</html>
